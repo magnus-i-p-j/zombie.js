@@ -1,0 +1,68 @@
+An "immortality vaccine" is created. It really doesn't do much, mostly it just prevents further damage when hurt by shutting down cell functions in a recoverable way; and as a side effect cause mice to live longer. Nevertheless, journalists blow it out of proportion, so politicians use it as a vote-lure and people demand an early release.
+
+<!--
+  M: ...doesn't do much, mostly it just prevents further damage when hurt but shutting down cell functions in a recoverable way...
+  Hmm, I'm guessing that the but should be a by? And how does this work? The tissue is necrotized? That wouldn't be the best of protection but It could help in some cases.
+  U: Being intentionally vague. The protection isn't prefect so some rotting may happen. There is another half to this equation: the medicine that does the recovering. 
+-->
+
+The "Right to live" project is initiated; everyone is supposed to get treatment as soon as possible and research recieves a lot of funding. Small scale human testing is rapidly initiated. There is no shortage of volunteers.
+
+Religious groups become involved: Leaders speak out against immortality, claiming some insane stuff about some fictional character named "God"; while at the same time esuring they get preferential treatment for when the vaccine is ready for widespread use. The consensus is that that, really, immortality is immoral; but if you get it, I want it too!
+
+The Right to live is sabotaged several times, but bombings and murders are just not that effective when going against such vast piles of money. The thing that evetually brings the project down is when the vaccine itself is targeted. A subtle change causes the replication mechanism to unlock. Leading to unlimited mutation in the vaccine. Initially the only effect is that the vaccine can infect non-vaccinated people, but the uncontrolled changes rapidly escalate.
+
+<!-- 
+  M: Is it a terrorist action that causes the vaccine/virus to change or is it just your usual mutation?
+  U: Yes.
+  Useful, I know. Open to interpretation, my thoughts are that sabotage makes the virus able to mutate; random chance does the rest.
+  M:Perhaps start using the word virus instead of vaccine? As in:
+    Initially the only effect is that the virus can infect non-vaccinated people, but the uncontrolled changes rapidly escalate.
+  U: Sure. Later I tried to use the word vaccine for as long as the drug does what it should do, is supposed to do. Then change to virus when unintended side effects set in. BTW: we must have someone mention the zombie apocalypse as "unintended side effects" in a dismissive manner.
+-->
+
+Zombie apokalypse!
+
+The vaccine works by infecting the host cells in the same way a virus does. Essentially the vaccine is a benign virus. When the host cell is intected it will start producing organelles that lie dormant until the cell is damaged, at which time they act to prevent further damage. Note that they do not repair damage in any way; minor damage can be repaired by a living host the same way we normally heal and major damage is survivable if treated. Betsy, one particularly succesful labrat, was autopsied 15 times in total. Would have been more but by then all the scientists were zombies.
+
+<!--
+  M: ...until the cell is damaged, at which time they act to prevent further damage.
+  Hmmm, again some clarification on this subject would be nice.
+  
+  U: I don't know what to say; I'm not a genetherapist.
+  
+  Imagine you are injured in a car accident. Your right leg ripped off, jugular nicked and a really nasty papercut on your right index finger. Normally - you die. With the vaccine... well you die then too but faster...
+
+  The advantage is that modern medicine can revive you. Same theory as cryogenics, only the medical knowhow to revive you exists. Most of it anyway. Certainly some of it. We _can_ revive mice. Well, one mouse: Betsy. Isn't she cute? Most of the scars have healed, and the organs don't fall out that often anymore.
+  
+-->
+
+The zombie infection only affects humans, though it is not impossible for it to mutate to affect another species.
+
+There are several stages to the infection. The first symptom is common cold symptoms, and that only happens in about 30% of the cases. After that comes a period of tiredness as all the enegy is used to manufacture the new organelles. The intensity and length of this period varied greatly, from weeks of minor fatigue to hours of near coma. This is the time when the vaccine should stop; and when the infection takes over. 
+
+Note the variablity and relatively harmless symtoms: You can be asymptomatic for weeks, then lie down an go into a deep sleep and awaken as a ravenous madman. Most actual survivors have some resistance to the virus; many are carriers, but you'd have to eat them for the infection to spread; some are completely immune and _can_ eat the carriers.
+
+First there is the mindless rage and hunger. In this stage a zombie is no tougher than a normal human, although one unaffected by fear, pain or reason. If killed the zombie lies dormant until the second stage manifests. 
+
+A second stage zombie is the "normal" zombie. Slow, can only be killed by a bullet to the brain et cetera. When killed the zombie falls dormant until the next stage. This is the stage people infected after death begin as, and it is the most common.
+
+Stage two-alpha; a first stage zombie that was never killed retains a lot of guile yet still toughens up. Still easier to kill than a normal stage two zed. Think "hunter" with some leadership skills.
+
+Stage three zombies are extremely tough to kill. Staking them to the ground and burning them is recommended, dismemberment before the staking is an optional but recmmended extra. Just remember to stake them to the ground; otherwise they wont stay in the fire.
+
+The short verion is: burn everything and hope we never discover stage four zombies.
+
+Stage two-alpha is not the only special kind of zombie; just the first one I thought about. I will say that I don't want any kind of suicide zombies; the whole background of the disease is "immortality" and I want to keep that theme. Zombies are _hard_ to kill; you cant defeat them just by failing.
+
+A common zombie spends most of the time in a deep state of rest; dead for all intents and purposes, protected against excessive rot and decomposition by the vaccine. Only when disturbed does the zombie activate. This makes exploring dangerous. 
+
+Other zombies will also disturb the sleep, simple brownian motion will cause semi regular zombie attacks to crop up with little warning. 
+
+Stage two-alpha zombies tend to attract other zed; these groups will move travel with purpose. This makes them easier to prepare for; but the attacks are _much_ bigger.
+
+In other words, three different kinds of zombie threat: danger when exporing/scavenging requiring guards, low level threat all the time at the fort requiring guards and massive attacks with warning that requires you to recall parties to help with the defence.
+
+Keep in mind that there is no such thing as a "non-zombie" corpse; even the dead can become infected and the dead have no immunity. An important early concern is permanently neutralizing zeds. Gathering fuel for pyres, making storage units if you can't get enough; that sort of fun stuff. Later you can get better ways to dispose of them. Maybe a giant meatgrinder; I mean what are the odds that a giant pile of minced meat will rise up and devour you? Right? 
+
+One thing we will need to make a descision on is what tone we will have. Lighthearted and fun, in a stomp the head and joke about it kind of way; or bleak and horrible. Or in between, or some ortogonal  or linear combination. Let's just be consistent.
