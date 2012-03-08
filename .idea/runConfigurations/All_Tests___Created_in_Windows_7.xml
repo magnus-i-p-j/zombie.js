@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All Tests - Created in Windows 7" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
+    <setting name="configLocationType" value="CONFIG_FILE" />
+    <setting name="settingsFile" value="F:\Misc\zombie.js\tests\jsTestDriver.conf" />
+    <setting name="serverType" value="INTERNAL" />
+    <RunnerSettings RunnerId="JsTestDriverClientRunner" />
+    <ConfigurationWrapper RunnerId="JsTestDriverClientRunner" />
+    <method />
+  </configuration>
+</component>
