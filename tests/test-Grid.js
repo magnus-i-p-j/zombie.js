@@ -16,5 +16,28 @@ TestCase( 'test Grid', {
         assertSame(nodeIn, nodeOut);
         assertEquals(x, nodeOut.x);
         assertEquals(y, nodeOut.y);
+    },
+
+    'test getting adjacent nodes' : function(){
+        for(var i = -10; i < 10; ++i){
+            for(var j = -10; j < 10; ++j){
+                var node = new z.util.Node();
+                this.grid.setNode(i, j, node);
+            }
+        }
+
+        var x = 3,
+            y = 3;
+        var origin = this.grid.getNode(x,y);
+
+        var actualAdjacent = this.grid.getAdjacent(origin);
+        var exceptedAdjacent =
+            [this.grid.getNode(x - 1, y + 1), this.grid.getNode(x, y + 1),
+             this.grid.getNode(x + 1, y),
+             this.grid.getNode(x + 1, y - 1), this.grid.getNode(x, y - 1),
+             this.grid.getNode(x - 1, y)];
+
+        assertEquals(exceptedAdjacent, actualAdjacent);
     }
+
 });
