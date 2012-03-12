@@ -15,14 +15,24 @@ TestCase( 'test TrivialMap', {
     },
 
 
-
     'test getTile returns a tile': function () {
         var map = new z.engine.TrivialMap();
 
         var tile = map.getTile( 0, 0 );
 
         assertString( tile.terrain );
+    },
+
+    'test getTile updates data': function () {
+        var map = new z.engine.TrivialMap();
+        map.feed( [
+            { x: 1, y: 2, terrain: 'grass' }
+        ] );
+
+        var actual = map.getTile( 1, 2 );
+
+        assertEquals( 'grass', actual.terrain );
     }
 
 
-});
+} );
