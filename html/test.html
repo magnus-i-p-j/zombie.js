@@ -5,13 +5,30 @@
 </head>
 <body>
 
-<script type="text/javascript" src="../js/z.engine.TrivialMap.js"></script>
+<ul data-bind="foreach: mapData">
+    <ul data-bind="foreach: $data">
+        <li>
+            terrain: <span data-bind="text: terrain"> </span>
+        </li>
+    </ul>
+</ul>
+
+<p data-bind="text: qwerty"></p>
+
+<script type="text/javascript" src="../js/engine/z.engine.TrivialMap.js"></script>
+<script type="text/javascript" src="../js/view/z.view.TrivialMapViewModel.js"></script>
+<script type="text/javascript" src="../libs/knockout-2.0.0.debug.js"></script>
+<script type="text/javascript" src="../libs/knockout.mapping-latest.debug.js"></script>
 
 <script type="text/javascript">
   var map = new z.engine.TrivialMap();
   map.feed( [
     { x: 1, y: 2, terrain: 'grass' }
   ] );
+
+  var trivialMapViewModel = new z.view.TrivialMapViewModel(map);
+  trivialMapViewModel.load();
+  ko.applyBindings(trivialMapViewModel);
 
 </script>
 </body>
