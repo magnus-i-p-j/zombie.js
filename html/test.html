@@ -8,7 +8,7 @@
 <div data-bind="foreach: mapData">
     <div>
         <div data-bind="foreach: $data">
-            <div>
+            <div data-bind="attr: { class: terrain }">
                 terrain: <span data-bind="text: terrain"> </span>
             </div>
         </div>
