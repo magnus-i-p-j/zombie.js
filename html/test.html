@@ -5,15 +5,15 @@
 </head>
 <body>
 
-<ul data-bind="foreach: mapData">
-    <li>
-        <ul data-bind="foreach: $data">
-            <li>
+<div data-bind="foreach: mapData">
+    <div>
+        <div data-bind="foreach: $data">
+            <div>
                 terrain: <span data-bind="text: terrain"> </span>
-            </li>
-        </ul>
-    </li>
-</ul>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script type="text/javascript" src="../js/engine/z.engine.TrivialMap.js"></script>
