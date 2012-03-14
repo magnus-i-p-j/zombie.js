@@ -2,17 +2,15 @@
 <html>
 <head>
   <title>Test</title>
+  <link rel="stylesheet" href="../css/map.css"/>
 </head>
 <body>
 
-<div data-bind="foreach: mapData">
-    <div>
-        <div data-bind="foreach: $data">
-            <div data-bind="attr: { class: terrain }">
-                terrain: <span data-bind="text: terrain"> </span>
-            </div>
-        </div>
+<div data-bind="foreach: mapData" class="map">
+  <div data-bind="foreach: $data" class="row">
+    <div data-bind="attr: { class: terrainClass() }">
     </div>
+  </div>
 </div>
 
 
@@ -24,12 +22,17 @@
 <script type="text/javascript">
   var map = new z.engine.TrivialMap();
   map.feed( [
-    { x: 1, y: 2, terrain: 'grass' }
+    { x: 1, y: 2, terrain: 'grass' },
+    { x: 2, y: 2, terrain: 'grass' },
+    { x: 3, y: 2, terrain: 'grass' },
+    { x: 1, y: 3, terrain: 'grass' },
+    { x: 2, y: 3, terrain: 'grass' },
+    { x: 1, y: 4, terrain: 'water' }
   ] );
 
-  var trivialMapViewModel = new z.view.TrivialMapViewModel(map);
+  var trivialMapViewModel = new z.view.TrivialMapViewModel( map );
   trivialMapViewModel.load();
-  ko.applyBindings(trivialMapViewModel);
+  ko.applyBindings( trivialMapViewModel );
 
 </script>
 </body>
