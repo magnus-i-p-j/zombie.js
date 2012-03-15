@@ -43,13 +43,19 @@
 
         tiles.each( function(item, index){
             item.addEvent("click", function(){
-                console.log(item.x + ", " + item.y);
+                console.log(item.id);
             });
         });
 
     });
 
-
+//    z.init = function(){
+//        var model = new z.engine.World();
+//        var map = new z.engine.BoundedMap(world);
+//        var commandHandler = new CommandHandler(world);
+//        var viewModel = new ViewModel(map, commandHandler);
+//        var view = new View(viewModel);
+//    }
 
 </script>
 </body>
