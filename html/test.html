@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>Test</title>
-  <link rel="stylesheet" href="../css/map.css"/>
+    <title>Test</title>
+    <link rel="stylesheet" href="../css/map.css"/>
 </head>
 <body>
 
 <div data-bind="foreach: mapData" class="map">
-  <div data-bind="foreach: $data" class="row">
-    <div data-bind="attr: { class: terrainClass() }">
+    <div data-bind="foreach: $data" class="row">
+        <div data-bind="attr: { class: terrainClass(), id: id()}">
+        </div>
     </div>
-  </div>
 </div>
 
 
@@ -18,21 +18,38 @@
 <script type="text/javascript" src="../js/view/z.view.TrivialMapViewModel.js"></script>
 <script type="text/javascript" src="../libs/knockout-2.0.0.debug.js"></script>
 <script type="text/javascript" src="../libs/knockout.mapping-latest.debug.js"></script>
+<script type="text/javascript" src="../libs/mootools-core-1.4.5-full-nocompat.js"></script>
 
 <script type="text/javascript">
-  var map = new z.engine.TrivialMap();
-  map.feed( [
-    { x: 1, y: 2, terrain: 'grass' },
-    { x: 2, y: 2, terrain: 'grass' },
-    { x: 3, y: 2, terrain: 'grass' },
-    { x: 1, y: 3, terrain: 'grass' },
-    { x: 2, y: 3, terrain: 'grass' },
-    { x: 1, y: 4, terrain: 'water' }
-  ] );
 
-  var trivialMapViewModel = new z.view.TrivialMapViewModel( map );
-  trivialMapViewModel.load();
-  ko.applyBindings( trivialMapViewModel );
+    var map = new z.engine.TrivialMap();
+    map.feed([
+        { x:1, y:2, terrain:'grass' },
+        { x:2, y:2, terrain:'grass' },
+        { x:3, y:2, terrain:'grass' },
+        { x:1, y:3, terrain:'grass' },
+        { x:2, y:3, terrain:'grass' },
+        { x:1, y:4, terrain:'water' }
+    ]);
+
+
+    var trivialMapViewModel = new z.view.TrivialMapViewModel(map);
+    trivialMapViewModel.load();
+    ko.applyBindings(trivialMapViewModel);
+
+    window.addEvent("domready", function(event){
+
+        var tiles = $$("div.row div");
+
+        tiles.each( function(item, index){
+            item.addEvent("click", function(){
+                console.log(item.x + ", " + item.y);
+            });
+        });
+
+    });
+
+
 
 </script>
 </body>

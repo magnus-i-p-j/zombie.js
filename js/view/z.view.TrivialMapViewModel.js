@@ -23,6 +23,9 @@ z.view.TrivialTileViewModel = function ( tile ) {
     this.terrain = ko.observable( tile.terrain );
     this.x = ko.observable();
     this.y = ko.observable();
+    this.id = ko.computed( function () {
+        return self.x() + ";" + self.y();
+    });
     this.terrainClass = ko.computed( function () {
         var mod2 = self.y() % 2;
         var emod2 = ' e' + mod2 + 'mod2';
