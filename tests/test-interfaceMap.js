@@ -30,6 +30,22 @@ var interfaceMap = function ( cls ) {
             var actual = map.getTile( 1, 2 );
 
             assertEquals( 'grass', actual.terrain );
+        },
+        'test getAdjacent': function () {
+            // TODO: fisnish test
+            var map = new TestMap();
+            var c, r, center;
+
+            center = map.getTile( c, r );
+
+            var actualAdjacent = map.getAdjacent( center );
+            var expectedAdjacent = [
+                map.getTile( c - 1, r + 1 ), map.getTile( c, r + 1 ),
+                map.getTile( c + 1, r ),
+                map.getTile( c + 1, r - 1 ), map.getTile( c, r - 1 ),
+                map.getTile( c - 1, r )
+            ];
+            assertEquals( expectedAdjacent, actualAdjacent );
         }
     };
 
@@ -40,4 +56,4 @@ var interfaceMap = function ( cls ) {
     TestCase( 'test ' + fullClass, t );
 };
 
-interfaceMap( 'TrivialMap' );
+interfaceMap( 'BoundedMap' );

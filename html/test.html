@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Test</title>
-    <link rel="stylesheet" href="../css/map.css"/>
+  <title>Test</title>
+  <link rel="stylesheet" href="../css/map.css"/>
 </head>
 <body>
 
 <div data-bind="foreach: mapData" class="map">
-    <div data-bind="foreach: $data" class="row">
-        <div data-bind="attr: { class: terrainClass(), id: id()}">
-        </div>
+  <div data-bind="foreach: $data" class="row">
+    <div data-bind="attr: { class: terrainClass(), id: id()}">
     </div>
+  </div>
 </div>
 
 
@@ -22,40 +22,40 @@
 
 <script type="text/javascript">
 
-    var map = new z.engine.TrivialMap();
-    map.feed([
-        { x:1, y:2, terrain:'grass' },
-        { x:2, y:2, terrain:'grass' },
-        { x:3, y:2, terrain:'grass' },
-        { x:1, y:3, terrain:'grass' },
-        { x:2, y:3, terrain:'grass' },
-        { x:1, y:4, terrain:'water' }
-    ]);
+  var map = new z.engine.TrivialMap();
+  map.feed( [
+    { x: 1, y: 2, terrain: 'grass' },
+    { x: 2, y: 2, terrain: 'grass' },
+    { x: 3, y: 2, terrain: 'grass' },
+    { x: 1, y: 3, terrain: 'grass' },
+    { x: 2, y: 3, terrain: 'grass' },
+    { x: 1, y: 4, terrain: 'water' }
+  ] );
 
 
-    var trivialMapViewModel = new z.view.TrivialMapViewModel(map);
-    trivialMapViewModel.load();
-    ko.applyBindings(trivialMapViewModel);
+  var trivialMapViewModel = new z.view.TrivialMapViewModel( map );
+  trivialMapViewModel.load();
+  ko.applyBindings( trivialMapViewModel );
 
-    window.addEvent("domready", function(event){
+  document.addEvent( "domready", function ( event ) {
 
-        var tiles = $$("div.row div");
+    var tiles = $$( "div.row div" );
 
-        tiles.each( function(item, index){
-            item.addEvent("click", function(){
-                console.log(item.id);
-            });
-        });
+    tiles.each( function ( item, index ) {
+      item.addEvent( "click", function () {
+        console.log( item.id );
+      } );
+    } );
 
-    });
+  } );
 
-//    z.init = function(){
-//        var model = new z.engine.World();
-//        var map = new z.engine.BoundedMap(world);
-//        var commandHandler = new CommandHandler(world);
-//        var viewModel = new ViewModel(map, commandHandler);
-//        var view = new View(viewModel);
-//    }
+  //    z.init = function(){
+  //        var model = new z.engine.World();
+  //        var map = new z.engine.BoundedMap(world);
+  //        var commandHandler = new CommandHandler(world);
+  //        var viewModel = new ViewModel(map, commandHandler);
+  //        var view = new View(viewModel);
+  //    }
 
 </script>
 </body>
