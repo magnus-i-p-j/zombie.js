@@ -9,6 +9,7 @@
     <orderEntry type="library" name="JsTestDriver Assertion Framework" level="application" />
     <orderEntry type="library" name="knockoutjs" level="application" />
     <orderEntry type="library" name="MooTools" level="application" />
+    <orderEntry type="library" name="MooTools-1.4.2" level="application" />
   </component>
 </module>
 
