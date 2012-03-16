@@ -1,5 +1,6 @@
 var interfaceMap = function ( cls ) {
     var TestMap = z.engine[cls];
+    var fullClass = 'z.engine.' + cls;
     var t = {
         'test has method getTiles': function () {
             var map = new TestMap();
@@ -32,11 +33,11 @@ var interfaceMap = function ( cls ) {
         }
     };
 
-    t['test ' + cls + 'exists'] = function () {
+    t['test ' + fullClass + 'exists'] = function () {
         assertFunction( TestMap );
     };
 
-    TestCase( 'test ' + cls, t );
+    TestCase( 'test ' + fullClass, t );
 };
 
 interfaceMap( 'TrivialMap' );
