@@ -14,8 +14,8 @@ TestCase('test Grid', {
         var nodeOut = this.grid.getNode(x, y);
 
         assertSame(nodeIn, nodeOut);
-        assertEquals(x, nodeOut.x);
-        assertEquals(y, nodeOut.y);
+        assertEquals(x, nodeOut.c);
+        assertEquals(y, nodeOut.r);
     },
 
     'test getting adjacent nodes': function () {

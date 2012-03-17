@@ -9,6 +9,9 @@
 <div data-bind="foreach: mapData" class="map">
   <div data-bind="foreach: $data" class="row">
     <div data-bind="attr: { class: terrainClass(), id: id()}">
+      <div class="center_text">
+        (<span data-bind="text: c"></span>, <span data-bind="text: r"></span>)
+      </div>
     </div>
   </div>
 </div>
@@ -23,31 +26,31 @@
 <script type="text/javascript">
 
   var map = new z.engine.TrivialMap();
-  map.feed( [
-    { x: 1, y: 2, terrain: 'grass' },
-    { x: 2, y: 2, terrain: 'grass' },
-    { x: 3, y: 2, terrain: 'grass' },
-    { x: 1, y: 3, terrain: 'grass' },
-    { x: 2, y: 3, terrain: 'grass' },
-    { x: 1, y: 4, terrain: 'water' }
-  ] );
+  map.feed([
+    { c: 1, r: 2, terrain: 'grass' },
+    { c: 2, r: 2, terrain: 'grass' },
+    { c: 3, r: 2, terrain: 'grass' },
+    { c: 1, r: 3, terrain: 'grass' },
+    { c: 2, r: 3, terrain: 'grass' },
+    { c: 1, r: 4, terrain: 'water' }
+  ]);
 
 
-  var trivialMapViewModel = new z.view.TrivialMapViewModel( map );
+  var trivialMapViewModel = new z.view.TrivialMapViewModel(map);
   trivialMapViewModel.load();
-  ko.applyBindings( trivialMapViewModel );
+  ko.applyBindings(trivialMapViewModel);
 
-  document.addEvent( "domready", function ( event ) {
+  document.addEvent("domready", function (event) {
 
-    var tiles = $$( "div.row div" );
+    var tiles = $$("div.row div");
 
-    tiles.each( function ( item, index ) {
-      item.addEvent( "click", function () {
-        console.log( item.id );
-      } );
-    } );
+    tiles.each(function (item, index) {
+      item.addEvent("click", function () {
+        console.log(item.id);
+      });
+    });
 
-  } );
+  });
 
   //    z.init = function(){
   //        var model = new z.engine.World();

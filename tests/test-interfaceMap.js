@@ -24,7 +24,7 @@ var interfaceMap = function (cls) {
         'test getTile updates data': function () {
             var map = new TestMap();
             map.feed([
-                { x: 1, y: 2, terrain: 'grass' }
+                { c: 1, r: 2, terrain: 'grass' }
             ]);
 
             var actual = map.getTile(1, 2);
@@ -35,6 +35,8 @@ var interfaceMap = function (cls) {
             // TODO: fisnish test
             var map = new TestMap();
             var c, r, center;
+            c = 9;
+            r = 2;
 
             center = map.getTile(c, r);
 

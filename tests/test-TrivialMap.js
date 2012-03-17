@@ -26,7 +26,7 @@ TestCase('test TrivialMap', {
     'test getTile updates data': function () {
         var map = new z.engine.TrivialMap();
         map.feed([
-            { x: 1, y: 2, terrain: 'grass' }
+            { c: 1, r: 2, terrain: 'grass' }
         ]);
 
         var actual = map.getTile(1, 2);
