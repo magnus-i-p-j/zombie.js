@@ -4,11 +4,11 @@ z.view = z.view || {};
 z.view.TrivialMapViewModel = function (trivialMap) {
     this.mapData = ko.observableArray();
     this.load = function () {
-        for ( var y = 0; y <= 20; ++y ) {
+        for ( var y = 0; y < 36; ++y ) {
             var row = ko.observableArray();
             row.rowClass = 'e' + y % 2 + 'mod2';
             this.mapData.push(row);
-            for ( var x = 0; x <= 20; ++x ) {
+            for ( var x = 0; x < 70; ++x ) {
                 var tileVM = new z.view.TrivialTileViewModel(trivialMap.getTile(x, y));
                 tileVM.c(x);
                 tileVM.r(y);

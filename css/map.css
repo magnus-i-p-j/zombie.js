@@ -1,6 +1,8 @@
+.map_container { width: 800px; height: 800px; overflow: scroll; }
+
 .map .row { overflow: hidden; width: 10000px; margin-top: -17px; }
 
-.map .tile { width: 72px; height: 72px; float: left; background: no-repeat center center; border: 1px solid transparent; color: #000; text-shadow: 1px 1px 1px #fff; }
+.map .tile { width: 72px; height: 72px; float: left; background: no-repeat center center; border: 1px solid transparent; color: #fff; text-shadow: 1px 1px 1px #000; }
 
 .map .row.e0mod2 { margin-left: 0; }
 

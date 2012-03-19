@@ -6,11 +6,13 @@
 </head>
 <body>
 
-<div data-bind="foreach: mapData" class="map">
-  <div data-bind="foreach: $data" class="row">
-    <div data-bind="attr: { class: terrainClass(), id: id()}">
-      <div class="center_text">
-        (<span data-bind="text: c"></span>, <span data-bind="text: r"></span>)
+<div class="map_container">
+  <div data-bind="foreach: mapData" class="map">
+    <div data-bind="foreach: $data" class="row">
+      <div data-bind="attr: { class: terrainClass(), id: id()}">
+        <div class="center_text">
+          (<span data-bind="text: c"></span>, <span data-bind="text: r"></span>)
+        </div>
       </div>
     </div>
   </div>
@@ -18,22 +20,53 @@
 
 
 <script type="text/javascript" src="../js/engine/z.engine.TrivialMap.js"></script>
+<script type="text/javascript" src="../js/engine/z.engine.StaticWorld.js"></script>
 <script type="text/javascript" src="../js/view/z.view.TrivialMapViewModel.js"></script>
 <script type="text/javascript" src="../libs/knockout-2.0.0.debug.js"></script>
 <script type="text/javascript" src="../libs/knockout.mapping-latest.debug.js"></script>
 <script type="text/javascript" src="../libs/mootools-core-1.4.5-full-nocompat.js"></script>
 
 <script type="text/javascript">
-
+  var source = '' +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwgggggggggggggwwwwwwww\n" +
+      "wwwwwwgggggggggggggggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwgggggggggggggwwwwwwww\n" +
+      "wwwwwwgggggggggggggggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwgggggggggggggwwwwwwww\n" +
+      "wwwwwwgggggggggggggggggggggggggggggggggggwgggwwwwwwwwwwwwwwwwwggwggggggggggwwwwwwww\n" +
+      "wwwwwwgggggggggggggggggggggggggggggggggggwwwgwwwwwwwwwwwwwwwwwgggwgggggggggwwwwwwww\n" +
+      "wwwwwwgggggggggggggggggggggggggggggggggggwwgwwwwwwwwwggwwwwwggggggwggggggggwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwggwwggwwgwwwwwwwwwgwwwggggggggggggggggwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwgggwwwwwwwwwwwgwwwggggwwgggggwgggggggwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwwwwwwgwwwggwwwgggggggggggggwggggggwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwwwwgwggwwwwggwggggggggggggggwgggggwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwwwwwwwgwgwwgwwgggggggggwwwgggwwwggggwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwwwwwwwwgwwgwwwggggggggggggwwwgwwggggwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwwwwwwwwwgwwwwwgggggggggwwwwwwwggwwwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwgggggggggggggggwwwwwwwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwgggggggggggggggwwwwwwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwgggggggggggggggwwwwwwwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwgggggggggggggggwwwwwwwgggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwgggggggggggggggwwwwwwwgggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwww\n" +
+      "wwggggggggggggggggggggggggggggggggwwwwwwwgggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwww\n" +
+      "wwggggggggggggggggggggggggggggggggwwwwwwwgggggggggggggggggggwwwwggwwwwwwwwwwwwwwwww\n" +
+      "wwggggggggggggggggggggggggggggggggwwwwwwwgggggggggggggggggggwwwwwwwwwgwwwwwwwwwwwww\n" +
+      "wwggggggggggggggggggggggggggggggggwwwwwwwgggggggggggggggggggwwwgwwgwgwgwggwgwwwwwww\n" +
+      "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwgggggggggggggggggggwwgwwggggggggggwgwwwwww\n" +
+      "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwgggggggggggggggggggwgwwwggggggggggwwgwwwww\n" +
+      "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwgwwwggggggggggwwwwwwww\n" +
+      "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwgwgwwggggggggggwwwwwwww\n" +
+      "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwgwggggggggggwwwwwwww\n" +
+      "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwgggggggggggwwwwwwww\n" +
+      "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggggggggwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggggggggwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggggggggwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n" +
+      "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
+  var world = new z.engine.StaticWorld(source, 0, 0);
   var map = new z.engine.TrivialMap();
-  map.feed([
-    { c: 1, r: 2, terrain: 'grass' },
-    { c: 2, r: 2, terrain: 'grass' },
-    { c: 3, r: 2, terrain: 'grass' },
-    { c: 1, r: 3, terrain: 'grass' },
-    { c: 2, r: 3, terrain: 'grass' },
-    { c: 1, r: 4, terrain: 'water' }
-  ]);
+  map.feed(world.getData());
 
 
   var trivialMapViewModel = new z.view.TrivialMapViewModel(map);
@@ -41,13 +74,18 @@
   ko.applyBindings(trivialMapViewModel);
 
   document.addEvent("domready", function (event) {
+    var tileRegexp = /.*tile.*/;
 
-    var tiles = $$("div.row div");
+    function clickDelegate(e) {
+      var target = e.target;
+      while ( !tileRegexp.test(target.className) && target !== this ) {
+        target = target.parentNode;
+      }
+      console.log(target.id);
+    }
 
-    tiles.each(function (item, index) {
-      item.addEvent("click", function () {
-        console.log(item.id);
-      });
+    $$(".map").each(function (item, index) {
+      item.addEvent("click", clickDelegate);
     });
 
   });
