@@ -1,0 +1,28 @@
+- draggable map
+- utgenerera karta utan knockout:
+  - rader behöver enmod2 klass
+- världstick
+- commands # händelser som ui:t svarar på
+- characters:
+  - skills
+  - traits
+- byggnader
+- items
+- resources:
+  - ammo
+  - stone
+  - wood
+  - metal
+  - electronics
+  - food
+  - fuels
+- koppla ihop alla entiteter
+- actors
+- view
+- command manager:
+  - projekt
+- zombies:
+  - aktivitets påverkan
+  - zombiebelägring
+  - superz
+- free agents
