@@ -20,14 +20,15 @@ z.util.EventManager = function () {
                 idx = this._subscribedEvents[topic].indexOf(callback);
             }
         },
-        publish:function (topic, source, data) {
+        publish:function (publishedEvent) {
+            var topic = publishedEvent.topic;
             this._initEventQueue(topic);
             var events = this._subscribedEvents[topic].slice(0);
             for (var i in events) {
                 if (events.hasOwnProperty(i)) {
                     var callback = events[i];
                     try {
-                        callback({topic:topic, source:source, data:data});
+                        callback(publishedEvent);
                     } catch (e) {
                         this.log(e);
                     }

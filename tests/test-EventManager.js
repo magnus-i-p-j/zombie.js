@@ -11,9 +11,10 @@ TestCase('test EventManager', {
             called = true;
         };
         var topic = 'this topic';
+        var publishedEvent = new z.util.Event(topic);
 
         this.evm.subscribe(topic, callback);
-        this.evm.publish(topic);
+        this.evm.publish(publishedEvent);
 
         assert(called);
     },
@@ -26,8 +27,8 @@ TestCase('test EventManager', {
         var publishedEvent = new z.util.Event(topic);
 
         this.evm.subscribe(topic, callback);
-        this.evm.publish(topic);
+        this.evm.publish(publishedEvent);
 
-        assert(publishedEvent, incomingEvent);
+        assert(publishedEvent === incomingEvent);
     }
 });
