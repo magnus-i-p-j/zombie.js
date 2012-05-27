@@ -1,8 +1,12 @@
 var z = z || {};
 z.util = z.util || {};
 
-z.util.Event = function (topic, source, data) {
-    this.topic = topic;
-    this.source = source || null;
-    this.data = data || {};
-};
+z.util.Event = new Class({
+
+    initialize: function(source, data){
+        this.source = source || null;
+        this.data = data || {};
+    }
+
+});
+
