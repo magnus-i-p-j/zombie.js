@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Test closure</title>
+</head>
+<body onload="sayHi()">
+<script src="../libs/closure-library/closure/goog/base.js" type="text/javascript"></script>
+<script src="../gen/deps.js" type="text/javascript"></script>
+<script type="text/javascript">
+    goog.require('goog.dom');
+    function sayHi() {
+        var newHeader = goog.dom.createDom('h1', {'style':'background-color:#EEE'},
+                'Hello world!');
+        goog.dom.appendChild(document.body, newHeader);
+    }
+</script>
+</body>
+</html>
