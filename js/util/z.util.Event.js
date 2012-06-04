@@ -9,4 +9,3 @@ z.util.Event = new Class({
     }
 
 });
-

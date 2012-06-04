@@ -17,7 +17,7 @@ function createEventInterfaceTest(namespace, name) {
             var data = {};
             var e = new this.ctor({}, data);
 
-            assert('No data found', data === e.data);
+            assert('No data found', !!data);
         },
         'test that it with no source has null source':function () {
             var e = new this.ctor();
