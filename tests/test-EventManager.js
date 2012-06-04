@@ -16,18 +16,18 @@ TestCase('test EventManager', {
         this.evm.publish(topic);
 
         assert(called);
-    }//,
-//    'test incoming event is published event':function () {
-//        var incomingEvent = null;
-//        var callback = function (e) {
-//            incomingEvent = e;
-//        };
-//        var topic = 'this topic';
-//        var publishedEvent = new z.util.Event(topic);
-//
-//        this.evm.subscribe(topic, callback);
-//        this.evm.publish(topic);
-//
-//        assert(publishedEvent, incomingEvent);
-//    }
+    },
+    'test incoming event is published event':function () {
+        var incomingEvent = null;
+        var callback = function (e) {
+            incomingEvent = e;
+        };
+        var topic = 'this topic';
+        var publishedEvent = new z.util.Event(topic);
+
+        this.evm.subscribe(topic, callback);
+        this.evm.publish(topic);
+
+        assert(publishedEvent, incomingEvent);
+    }
 });
