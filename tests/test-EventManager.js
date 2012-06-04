@@ -28,6 +28,6 @@ TestCase('test EventManager', {
         this.evm.subscribe(topic, callback);
         this.evm.publish(topic);
 
-        assert(publishedEvent, incomingEvent);
+        assert(publishedEvent === incomingEvent);
     }
 });
