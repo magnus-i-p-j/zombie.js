@@ -1,7 +1,6 @@
-var z = z || {};
-z.util = z.util || {};
+goog.provide('z.util.Node');
 
 z.util.Node = function () {
-    this.c = null;
-    this.r = null;
+  this.c = null;
+  this.r = null;
 };

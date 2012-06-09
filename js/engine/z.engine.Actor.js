@@ -1,6 +1,5 @@
-var z = z || {};
-z.engine = z.engine || {};
+goog.provide('z.engine.Actor');
 
-z.engine.Actor = function(){
+z.engine.Actor = function () {
 
 };
