@@ -3,15 +3,17 @@ goog.provide('z.util.EventManager');
 z.util.EventManager = function () {
   return {
     _subscribedEvents:{},
-    _initEventQueue:function (event) {
-      this._subscribedEvents[event] = this._subscribedEvents[event] || [];
+    _initEventQueue:function (topic) {
+      this._subscribedEvents[topic] = this._subscribedEvents[topic] || [];
     },
-    subscribe:function (topic, callback) {
+    subscribe:function (event, callback) {
+      var topic = event.topic;
       this._initEventQueue(topic);
       this.unsubscribe(topic, callback);
       this._subscribedEvents[topic].push(callback);
     },
-    unsubscribe:function (topic, callback) {
+    unsubscribe:function (event, callback) {
+      var topic = event.topic;
       this._initEventQueue(topic);
       var idx = this._subscribedEvents[topic].indexOf(callback);
       while (idx !== -1) {
@@ -20,7 +22,7 @@ z.util.EventManager = function () {
       }
     },
     publish:function (publishedEvent) {
-      var topic = publishedEvent.topic;
+      var topic = publishedEvent.constructor.topic;
       this._initEventQueue(topic);
       var events = this._subscribedEvents[topic].slice(0);
       for (var i in events) {

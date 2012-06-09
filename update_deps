@@ -1,5 +1,5 @@
 #!/bin/bash
-./libs/closure-library/closure/bin/build/depswriter.py --root_with_prefix="js ../" --output_file=gen/deps.js
+./libs/closure-library/closure/bin/build/depswriter.py --root_with_prefix="js ../../../../js/" --output_file=gen/deps.js
 
 cp tests/jsTestDriver.conf.proto.yaml tests/jsTestDriver.conf
 libs/closure-library/closure/bin/build/closurebuilder.py \

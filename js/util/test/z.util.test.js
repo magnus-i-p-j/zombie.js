@@ -1,3 +1,5 @@
+"use strict";
+
 goog.provide('z.util.test');
 
 z.util.test.testInterface = function (namespace, interfaceTest, classes) {
@@ -8,3 +10,4 @@ z.util.test.testInterface = function (namespace, interfaceTest, classes) {
     }
   }
 };
+

@@ -2,5 +2,6 @@ test:
   - "*.js"
 load:
   - ../libs/mootools-core-1.4.5-full-nocompat.js
+  - ../js/mootoolsMutators.js
   - ../libs/knockout-2.0.0.debug.js
 # Crucial, the load key needs to be last, and this comment must be followed by a newline.
