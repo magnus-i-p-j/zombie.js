@@ -6,6 +6,7 @@ goog.addDependency('../../../../js/engine/z.engine.BoundedMap.js', ['z.engine.Bo
 goog.addDependency('../../../../js/engine/z.engine.StaticWorld.js', ['z.engine.StaticWorld'], []);
 goog.addDependency('../../../../js/engine/z.engine.Tile.js', ['z.engine.Tile'], []);
 goog.addDependency('../../../../js/engine/z.engine.TrivialMap.js', ['z.engine.TrivialMap'], []);
+goog.addDependency('../../../../js/facet/z.facet.MapFacet.js', ['z.facet.MapFacet'], []);
 goog.addDependency('../../../../js/util/test/z.util.test.TestEvent.js', ['z.util.test.TestEvent'], []);
 goog.addDependency('../../../../js/util/test/z.util.test.js', ['z.util.test'], []);
 goog.addDependency('../../../../js/util/z.util.Event.js', ['z.util.Event'], []);
@@ -16,4 +17,5 @@ goog.addDependency('../../../../js/util/z.util.Rectangle.js', ['z.util.Rectangle
 goog.addDependency('../../../../js/view/z.view.BoundedMapView.js', ['z.view.BoundedMapView'], []);
 goog.addDependency('../../../../js/view/z.view.BoundedMapViewModel.js', ['z.view.BoundedMapViewModel'], []);
 goog.addDependency('../../../../js/view/z.view.TrivialMapViewModel.js', ['z.view.TrivialMapViewModel'], []);
+goog.addDependency('../../../../js/widget/z.widget.MapWidget.js', ['z.widget.MapWidget'], ['z.facet.MapFacet']);
 goog.addDependency('../../../../js/z.js', ['z'], ['z.util.EventManager']);

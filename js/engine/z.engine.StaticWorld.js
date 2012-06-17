@@ -20,6 +20,7 @@ z.engine.StaticWorld.prototype.getData = function () {
       dataitem = self.parseSourceItem(item);
       dataitem.c = c;
       dataitem.r = r;
+      dataitem.zid = 'zid_tile_' + c + '_' + r;
       data.push(dataitem);
       c += 1;
     }
