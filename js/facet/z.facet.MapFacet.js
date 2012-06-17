@@ -8,7 +8,7 @@ z.facet.MapFacet = function () {
 
 z.facet.MapFacet.prototype.setMap = function () {
   if (this.map) {
-    throw 'Cannot sep map more than once';
+    throw 'Cannot set map more than once';
   } else {
     this.map = true;
   }

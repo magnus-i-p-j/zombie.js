@@ -6,7 +6,7 @@ if (false) {
 
 goog.require('z.util.test');
 
-goog.require('z.engine.Actor');
+goog.require('z.entities.Actor');
 goog.require('z.util.Event');
 goog.require('z.util.EventManager');
 goog.require('z.engine.events.TileFocusEvent');
