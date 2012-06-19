@@ -14,6 +14,7 @@ goog.addDependency('../../../../js/util/z.util.EventManager.js', ['z.util.EventM
 goog.addDependency('../../../../js/util/z.util.Grid.js', ['z.util.Grid'], []);
 goog.addDependency('../../../../js/util/z.util.Node.js', ['z.util.Node'], []);
 goog.addDependency('../../../../js/util/z.util.Rectangle.js', ['z.util.Rectangle'], []);
+goog.addDependency('../../../../js/util/z.util.js', ['z.util'], []);
 goog.addDependency('../../../../js/view/z.view.BoundedMapView.js', ['z.view.BoundedMapView'], []);
 goog.addDependency('../../../../js/view/z.view.BoundedMapViewModel.js', ['z.view.BoundedMapViewModel'], []);
 goog.addDependency('../../../../js/view/z.view.TrivialMapViewModel.js', ['z.view.TrivialMapViewModel'], []);

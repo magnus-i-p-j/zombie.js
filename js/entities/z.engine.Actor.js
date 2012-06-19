@@ -1,5 +1,3 @@
-"use strict";
-
 goog.provide('z.entities.Actor');
 
 z.entities.Actor = function (guid) {

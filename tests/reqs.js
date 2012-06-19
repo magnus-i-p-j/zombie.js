@@ -19,3 +19,4 @@ goog.require('z.engine.Tile');
 goog.require('z.engine.TrivialMap');
 goog.require('z.util.test.TestEvent');
 goog.require('z.widget.MapWidget');
+goog.require('z.util');
