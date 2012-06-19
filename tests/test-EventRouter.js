@@ -1,9 +1,9 @@
-TestCase('test EventManager', {
+TestCase('test EventRouter', {
   setUp:function () {
-    this.evm = z.util.EventManager();
+    this.evm = z.util.EventRouter();
   },
-  'test EventManager exists':function () {
-    assertFunction(z.util.EventManager);
+  'test EventRouter exists':function () {
+    assertFunction(z.util.EventRouter);
   },
   'test notified about subscribed event':function () {
     var called = false;

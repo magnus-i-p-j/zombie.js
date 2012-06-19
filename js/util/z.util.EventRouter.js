@@ -1,6 +1,6 @@
-goog.provide('z.util.EventManager');
+goog.provide('z.util.EventRouter');
 
-z.util.EventManager = function () {
+z.util.EventRouter = function () {
   return {
     _subscribedEvents:{},
     _initEventQueue:function (topic) {

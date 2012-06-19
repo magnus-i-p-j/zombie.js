@@ -8,7 +8,7 @@ goog.require('z.util.test');
 
 goog.require('z.entities.Actor');
 goog.require('z.util.Event');
-goog.require('z.util.EventManager');
+goog.require('z.util.EventRouter');
 goog.require('z.engine.events.TileFocusEvent');
 goog.require('z.util.Grid');
 goog.require('z.util.Node');
