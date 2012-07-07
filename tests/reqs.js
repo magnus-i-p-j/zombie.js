@@ -20,3 +20,4 @@ goog.require('z.util');
 goog.require('z.engine.World');
 goog.require('goog.array');
 goog.require('z.client.GameSession');
+goog.require('z.engine.events.TilesUpdatedEvent');

@@ -4,6 +4,7 @@ goog.addDependency('../../../../js/client/z.client.Client.js', ['z.client.Client
 goog.addDependency('../../../../js/client/z.client.GameSession.js', ['z.client.GameSession'], ['z.engine.World', 'z.util.EventRouter']);
 goog.addDependency('../../../../js/client/z.client.User.js', ['z.client.User'], []);
 goog.addDependency('../../../../js/engine/events/z.engine.events.TileFocusEvent.js', ['z.engine.events.TileFocusEvent'], []);
+goog.addDependency('../../../../js/engine/events/z.engine.events.TilesUpdatedEvent.js', ['z.engine.events.TilesUpdatedEvent'], []);
 goog.addDependency('../../../../js/engine/z.engine.World.js', ['z.engine.World'], ['z.engine.world.EntityFactory']);
 goog.addDependency('../../../../js/engine/z.engine.world.EntityFactory.js', ['z.engine.world.EntityFactory'], ['z.entities.Tile']);
 goog.addDependency('../../../../js/entities/z.entities.Actor.js', ['z.entities.Actor'], []);
