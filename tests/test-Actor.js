@@ -23,11 +23,6 @@ var createActorInterfaceTest = function (namespace, name) {
 
     assert(a.name === inName);
   };
-  testObject['test has worldState'] = function () {
-    var a = new this.ctor('eg9werhty89');
-
-    assertFunction(a.perceiveWorld);
-  };
 
   TestCase("test " + name, testObject);
 };
