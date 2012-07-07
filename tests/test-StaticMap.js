@@ -5,12 +5,6 @@ TestCase('test StaticWorld', {
   setUp:function () {
     this.world = new z.engine.StaticWorld('ggg', 0, 0);
   },
-  'test getData returns a iterable':function () {
-
-    var data = this.world.getData();
-
-    assertFunction(data.each);
-  },
   'test parseSourceItem is a function':function () {
     assertFunction(this.world.parseSourceItem);
   },
@@ -46,7 +40,7 @@ TestCase('test StaticWorld', {
   'test data includes c and r':function () {
     var data = this.world.getData();
 
-    data.each(function (item) {
+    goog.array.forEach(data, function (item) {
       assertNumber(item.c);
       assertNumber(item.r);
     });
@@ -62,7 +56,7 @@ TestCase('test StaticWorld', {
     var data = world.getData();
 
     var found = false;
-    data.each(function (item) {
+    goog.array.forEach(data, function (item) {
       if (item.terrain === 'test') {
         assertNumber('c is number', item.c);
         assertEquals('c is correct', 3, item.c);

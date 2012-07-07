@@ -21,3 +21,4 @@ goog.require('z.util.test.TestEvent');
 goog.require('z.widget.MapWidget');
 goog.require('z.util');
 goog.require('z.engine.World');
+goog.require('goog.array');

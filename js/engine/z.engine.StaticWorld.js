@@ -11,7 +11,7 @@ z.engine.StaticWorld.prototype.getData = function () {
   var self = this;
   var c = this.left;
   var r = this.top;
-  this.source.split('').each(function (item) {
+  goog.array.forEach(this.source.split(''), function (item) {
     var dataitem;
     if (item === '\n') {
       r += 1;

@@ -17,7 +17,7 @@ z.engine.BoundedMap = function () {
   };
   this.feed = function (tileDataIterable) {
     var self = this;
-    tileDataIterable.each(function (item) {
+    goog.array.forEach(tileDataIterable, function (item) {
       self.mapData.setNode(item.c, item.r, { terrain:item.terrain })
     });
   };
