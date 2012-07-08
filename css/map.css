@@ -1,4 +1,14 @@
-.tile { width: 72px; height: 72px; background: no-repeat center center; border: 1px solid transparent; color: #fff; text-shadow: 1px 1px 1px #000; }
+.map_widget { position: absolute; }
+
+.tile {
+    width: 72px;
+    height: 72px;
+    background: no-repeat center center;
+    border: 1px solid transparent;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    position: absolute;
+}
 
 .grass { background-image: url("../img/grass.png"); }
 
@@ -7,3 +17,4 @@
 .unknown { background-image: url("../img/void.png"); }
 
 .tile .center_text { line-height: 72px; text-align: center; vertical-align: middle; }
+
