@@ -1,5 +1,7 @@
 goog.provide('z.engine.world.EntityFactory');
+
 goog.require('z.entities.Tile');
+goog.require('z.util');
 
 z.engine.world.EntityFactory = function (world) {
   this.world = world;

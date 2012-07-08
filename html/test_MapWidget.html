@@ -2,29 +2,20 @@
 <html>
 <head>
     <title>Test/demo of MapWidget</title>
+    <link rel="stylesheet" href="../css/map.css">
 </head>
 <body>
-<div id="map_widget">You might not have script enabled in your browser.</div>
+<div id="z_client">You might not have script enabled in your browser.
+
+</div>
 <script src="../libs/knockout-2.0.0.debug.js"></script>
 <script src="../libs/closure-library/closure/goog/base.js"></script>
 <script src="../gen/deps.js"></script>
 <script>
-    goog.require('z.widget.MapWidget');
-    goog.require('z.engine.StaticWorld');
-    goog.require('z.engine.TrivialMap');
+    goog.require('z');
 </script>
 <script>
-    (function () {
-        var source = '' + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwgggggggggggggwwwwwwww\n" + "wwwwwwgggggggggggggggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwgggggggggggggwwwwwwww\n" + "wwwwwwgggggggggggggggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwgggggggggggggwwwwwwww\n" + "wwwwwwgggggggggggggggggggggggggggggggggggwgggwwwwwwwwwwwwwwwwwggwggggggggggwwwwwwww\n" + "wwwwwwgggggggggggggggggggggggggggggggggggwwwgwwwwwwwwwwwwwwwwwgggwgggggggggwwwwwwww\n" + "wwwwwwgggggggggggggggggggggggggggggggggggwwgwwwwwwwwwggwwwwwggggggwggggggggwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwggwwggwwgwwwwwwwwwgwwwggggggggggggggggwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwgggwwwwwwwwwwwgwwwggggwwgggggwgggggggwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwwwwwwgwwwggwwwgggggggggggggwggggggwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwwwwgwggwwwwggwggggggggggggggwgggggwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwwwwwwwgwgwwgwwgggggggggwwwgggwwwggggwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwwwwwwwwgwwgwwwggggggggggggwwwgwwggggwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwwwwwwwwwgwwwwwgggggggggwwwwwwwggwwwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggwwwwwwwwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwgggggggggggggggwwwwwwwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwgggggggggggggggwwwwwwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwgggggggggggggggwwwwwwwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwgggggggggggggggwwwwwwwgggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwgggggggggggggggwwwwwwwgggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwww\n" + "wwggggggggggggggggggggggggggggggggwwwwwwwgggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwww\n" + "wwggggggggggggggggggggggggggggggggwwwwwwwgggggggggggggggggggwwwwggwwwwwwwwwwwwwwwww\n" + "wwggggggggggggggggggggggggggggggggwwwwwwwgggggggggggggggggggwwwwwwwwwgwwwwwwwwwwwww\n" + "wwggggggggggggggggggggggggggggggggwwwwwwwgggggggggggggggggggwwwgwwgwgwgwggwgwwwwwww\n" + "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwgggggggggggggggggggwwgwwggggggggggwgwwwwww\n" + "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwgggggggggggggggggggwgwwwggggggggggwwgwwwww\n" + "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwgwwwggggggggggwwwwwwww\n" + "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwgwgwwggggggggggwwwwwwww\n" + "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwgwggggggggggwwwwwwww\n" + "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwgggggggggggwwwwwwww\n" + "wwgggggggggggggggggggggggwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggggggggwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggggggggwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwggggggggggwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n" + "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
-        var world = new z.engine.StaticWorld(source, 0, 0);
-        var map = new z.engine.TrivialMap();
-        map.feed(world.getData());
-
-        var mf = new z.facet.MapFacet();
-
-        var mw = new z.widget.MapWidget();
-        mw.claim('map_widget');
-    })();
+    z.init('z_client');
 </script>
 </body>
 </html>

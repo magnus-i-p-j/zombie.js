@@ -1,5 +1,8 @@
 goog.provide('z.engine.World');
+
 goog.require('z.engine.world.EntityFactory');
+goog.require('z.entities.Actor');
+goog.require('goog.array');
 
 /**
  * @constructor

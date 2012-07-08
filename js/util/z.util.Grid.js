@@ -21,8 +21,6 @@ z.util.Grid.width = 500;
 z.util.Grid.height = 500;
 
 z.util.Grid.prototype.setNode = function (x, y, node) {
-  node.c = x;
-  node.r = y;
   this._data[x + this._offsetX][y + this._offsetY] = node;
 };
 
@@ -30,6 +28,6 @@ z.util.Grid.prototype.getNode = function (x, y) {
   return this._data[x + this._offsetX][y + this._offsetY];
 };
 
-z.util.Grid.prototype.getAdjacent = function (node) {
-  return [this.getNode(node.c - 1, node.r + 1), this.getNode(node.c, node.r + 1), this.getNode(node.c + 1, node.r), this.getNode(node.c + 1, node.r - 1), this.getNode(node.c, node.r - 1), this.getNode(node.c - 1, node.r)];
+z.util.Grid.prototype.getAdjacent = function (x, y) {
+  return [];
 };

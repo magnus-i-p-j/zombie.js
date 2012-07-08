@@ -1,26 +1,9 @@
-.map_container { width: 800px; height: 800px; overflow: scroll; }
+.tile { width: 72px; height: 72px; background: no-repeat center center; border: 1px solid transparent; color: #fff; text-shadow: 1px 1px 1px #000; }
 
-.map .row { overflow: hidden; width: 10000px; margin-top: -17px; }
+.grass { background-image: url("../img/grass.png"); }
 
-.map .tile { width: 72px; height: 72px; float: left; background: no-repeat center center; border: 1px solid transparent; color: #fff; text-shadow: 1px 1px 1px #000; }
+.water { background-image: url("../img/water.png"); }
 
-.map .row.e0mod2 { margin-left: 0; }
+.unknown { background-image: url("../img/void.png"); }
 
-.map .row.e1mod2 { margin-left: 36px; }
-
-/* <bad>
-I can't get the previous classes to be output.
-*/
-.map > :nth-child(2n+1) { margin-left: 0; }
-
-.map > :nth-child(2n) { margin-left: 36px; }
-
-/* </bad> */
-
-.map .grass { background-image: url("../img/grass.png"); }
-
-.map .water { background-image: url("../img/water.png"); }
-
-.map .terra_incognita { background-image: url("../img/void.png"); }
-
-.map .tile .center_text { line-height: 72px; text-align: center; vertical-align: middle; }
+.tile .center_text { line-height: 72px; text-align: center; vertical-align: middle; }

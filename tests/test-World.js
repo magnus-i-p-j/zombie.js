@@ -9,7 +9,6 @@ TestCase("test World", {
     var called = false;
     var mockGameSession = {
       worldUpdate:function (worldState) {
-        console.log(worldState);
         called = true;
       }
     };

@@ -37,6 +37,7 @@ z.util.EventRouter = function () {
       }
     },
     log:function (value) {
+      console.log(value);
     }
   };
 };
