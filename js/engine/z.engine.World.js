@@ -16,7 +16,19 @@ z.engine.World = function () {
 
 z.engine.World.prototype.registerGameSession = function (gameSession) {
   this.playerSession = gameSession;
-  gameSession.worldUpdate({tiles:this.tiles});
+  this.playerSession.worldUpdate({tiles:this.tiles});
+};
+
+z.engine.World.prototype.endTurn = function () {
+  this.tick();
+  this.playerSession.worldUpdate({tiles:this.tiles});
+};
+
+z.engine.World.prototype.tick = function () {
+  var x = Math.floor(Math.random() * 21 - 10);
+  var y = Math.floor(Math.random() * 21 - 10);
+  var terrain = ['grass', 'water'][Math.floor(Math.random() * 2)];
+  this.tiles.push(this._entityFactory.createTile(x, y, terrain));
 };
 
 z.engine.World.prototype.generateTiles = function () {

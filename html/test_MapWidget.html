@@ -8,6 +8,7 @@
 <div id="z_client">You might not have script enabled in your browser.
 
 </div>
+<button onclick="endTurn()" style="position: fixed; z-index:59;">End turn</button>
 <script src="../libs/knockout-2.0.0.debug.js"></script>
 <script src="../libs/closure-library/closure/goog/base.js"></script>
 <script src="../gen/deps.js"></script>
@@ -15,7 +16,11 @@
     goog.require('z');
 </script>
 <script>
-    z.init('z_client');
+    var client = z.init('z_client');
+    function endTurn() {
+        // HACK
+        client.session.evr.publish(new z.client.events.EndTurnEvent({}));
+    }
 </script>
 </body>
 </html>

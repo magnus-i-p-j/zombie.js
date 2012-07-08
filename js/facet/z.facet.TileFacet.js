@@ -4,7 +4,8 @@ goog.require('z.client.events.TileUpdatedEvent');
 z.facet.TileFacet = function (map, evr, x, y) {
   this.x = x;
   this.y = y;
-  var tile = map.getTile(x, y);
+  this.map = map;
+  var tile = this.map.getTile(x, y);
   this.terrain = ko.observable(tile.terrain);
   evr.subscribe(z.client.events.TileUpdatedEvent, this.tileUpdatedCallback.bind(this));
 };
