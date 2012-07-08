@@ -4,6 +4,7 @@ if (false) {
   goog.provide('z.testdeps');
 }
 
+goog.require('z');
 goog.require('z.util.test');
 
 goog.require('z.entities.Actor');
