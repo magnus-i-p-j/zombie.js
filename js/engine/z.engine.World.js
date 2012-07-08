@@ -21,9 +21,9 @@ z.engine.World.prototype.registerGameSession = function (gameSession) {
 
 z.engine.World.prototype.generateTiles = function () {
   var self = this;
-  var source = 'wwwggwggwgwggw';
-  var left = 0;
-  var top = 0;
+  var source = 'wwwggwggwgwggw\nggwggwgwgwgwgw\ngwgwgwgwgwgwwww\ngggwgggggwggwgwggwg';
+  var left = -10;
+  var top = -10;
   var c = left;
   var r = top;
   var terrainLookup = {
@@ -43,7 +43,7 @@ z.engine.World.prototype.generateTiles = function () {
     var terrain;
     if (item === '\n') {
       r += 1;
-      c = self.left;
+      c = left;
     } else {
       terrain = parseSourceItem(item);
       self.tiles.push(self._entityFactory.createTile(c, r, terrain));

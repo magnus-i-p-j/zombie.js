@@ -1,5 +1,3 @@
-"use strict";
-
 goog.provide('z.widget.MapWidget');
 
 goog.require('z.facet.MapFacet');
