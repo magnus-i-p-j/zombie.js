@@ -19,7 +19,6 @@ goog.addDependency('../../../../js/util/test/z.util.test.js', ['z.util.test'], [
 goog.addDependency('../../../../js/util/z.util.Event.js', ['z.util.Event'], []);
 goog.addDependency('../../../../js/util/z.util.EventRouter.js', ['z.util.EventRouter'], []);
 goog.addDependency('../../../../js/util/z.util.Grid.js', ['z.util.Grid'], []);
-goog.addDependency('../../../../js/util/z.util.Node.js', ['z.util.Node'], []);
 goog.addDependency('../../../../js/util/z.util.Rectangle.js', ['z.util.Rectangle'], []);
 goog.addDependency('../../../../js/util/z.util.js', ['z.util'], []);
 goog.addDependency('../../../../js/widget/z.widget.MapWidget.js', ['z.widget.MapWidget'], ['z.facet.MapFacet']);

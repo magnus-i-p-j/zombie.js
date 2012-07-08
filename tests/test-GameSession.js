@@ -10,8 +10,6 @@ TestCase("test GameSession", {
     assertFunction(this.gs.worldUpdate);
   },
   'test update world':function () {
-    this.gs.worldUpdate([
-      ['tile', '1', 'grass']
-    ]);
+    this.gs.worldUpdate({tiles:[]});
   }
 });
