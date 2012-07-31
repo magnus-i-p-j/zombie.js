@@ -3,9 +3,10 @@ goog.provide('z.facet.MapFacet');
 goog.require('z.facet.TileFacet');
 goog.require('z.util.Rectangle');
 
-z.facet.MapFacet = function (evr, map, boundingbox) {
+z.facet.MapFacet = function (evr, map, boundingbox, selectedTileFacet) {
   this.evr = evr;
   this.map = map;
+  this.selectedTileFacet = selectedTileFacet;
   this.visibleTiles = ko.observableArray();
   this.offsetX = ko.observable(0);
   this.offsetY = ko.observable(0);
@@ -17,7 +18,7 @@ z.facet.MapFacet.prototype.setBoundingBox = function (boundingbox) {
   this.visibleTiles.removeAll();
   for (var y = boundingbox.bottom; y <= boundingbox.top; y++) {
     for (var x = boundingbox.left; x <= boundingbox.right; x++) {
-      this.visibleTiles.push(new z.facet.TileFacet(this.map, this.evr, x, y));
+      this.visibleTiles.push(new z.facet.TileFacet(this.map, this.evr, x, y, this.selectedTileFacet));
     }
   }
 };
