@@ -2,18 +2,14 @@ goog.provide('z.facet.TileFacet');
 goog.require('z.client.events.TileUpdatedEvent');
 goog.require('z.facet.SelectedTileFacet');
 
-z.facet.TileFacet = function (map, evr, x, y, selectedTileFacet) {
+z.facet.TileFacet = function (map, evr, x, y) {
     this.x = x;
     this.y = y;
     this.map = map;
-    this.selectedTileFacet = selectedTileFacet;
 
     var tile = this.getTile();
 
     this.terrain = ko.observable(tile.terrain);
-    this.isSelected = ko.computed(function () {
-        return this.selectedTileFacet.selectedTile() === this;
-    }, this);
 
     evr.subscribe(z.client.events.TileUpdatedEvent, this.tileUpdatedCallback.bind(this));
 };

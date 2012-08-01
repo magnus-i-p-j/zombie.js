@@ -18,3 +18,4 @@
 
 .tile .center_text { line-height: 72px; text-align: center; vertical-align: middle; }
 
+.focusedTile {z-index: 50; border-color: red;}

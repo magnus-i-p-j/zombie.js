@@ -3,6 +3,7 @@ goog.provide('z.facet.MapFacet');
 goog.require('z.facet.TileFacet');
 goog.require('z.facet.SelectedTileFacet');
 goog.require('z.util.Rectangle');
+goog.require('goog.array');
 
 z.facet.MapFacet = function (evr, map, selectedTileFacet, boundingbox ) {
   this.evr = evr;
@@ -19,7 +20,7 @@ z.facet.MapFacet.prototype.setBoundingBox = function (boundingbox) {
   this.visibleTiles.removeAll();
   for (var y = boundingbox.bottom; y <= boundingbox.top; y++) {
     for (var x = boundingbox.left; x <= boundingbox.right; x++) {
-      this.visibleTiles.push(new z.facet.TileFacet(this.map, this.evr, x, y, this.selectedTileFacet));
+      this.visibleTiles.push(new z.facet.TileFacet(this.map, this.evr, x, y));
     }
   }
 };
@@ -41,4 +42,10 @@ z.facet.MapFacet.prototype.computeScreenPositionY = function (tileFacet) {
 z.facet.MapFacet.prototype.getAdjacent = function (x, y) {
     var adjacent = this.map.getAdjacent(x, y);
     return adjacent;
+}
+
+z.facet.MapFacet.prototype.getTileFacet = function(x, y){
+    return goog.array.find(this.visibleTiles(), function(element){
+        return element.x === x && element.y === y;
+    });
 }
