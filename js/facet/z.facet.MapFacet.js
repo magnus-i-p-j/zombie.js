@@ -1,9 +1,10 @@
 goog.provide('z.facet.MapFacet');
 
 goog.require('z.facet.TileFacet');
+goog.require('z.facet.SelectedTileFacet');
 goog.require('z.util.Rectangle');
 
-z.facet.MapFacet = function (evr, map, boundingbox, selectedTileFacet) {
+z.facet.MapFacet = function (evr, map, selectedTileFacet, boundingbox ) {
   this.evr = evr;
   this.map = map;
   this.selectedTileFacet = selectedTileFacet;
@@ -36,3 +37,8 @@ z.facet.MapFacet.prototype.computeScreenPositionY = function (tileFacet) {
   var screenY = tileFacet.y * ( height + cut ) - this.offsetY();
   return screenY + 'px';
 };
+
+z.facet.MapFacet.prototype.getAdjacent = function (x, y) {
+    var adjacent = this.map.getAdjacent(x, y);
+    return adjacent;
+}

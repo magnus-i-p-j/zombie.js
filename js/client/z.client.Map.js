@@ -4,7 +4,7 @@ goog.require('z.util.Grid');
 goog.require('goog.array');
 goog.require('z.client.events.TileUpdatedEvent');
 goog.require('z.client.events.TilesUpdatedEvent');
-goog.require('z.facet.MapFacet');
+
 
 z.client.Map = function (evr) {
   this.grid = new z.util.Grid();
@@ -30,6 +30,11 @@ z.client.Map.prototype.getTile = function (x, y) {
   return tile;
 };
 
+z.client.Map.prototype.getAdjacent = function (x, y) {
+    var adjacent = this.grid.getAdjacent(x, y);
+    return adjacent;
+}
+
 z.client.Map.prototype.getPlaceholderTile = function (x, y) {
   return {
     terrain:'unknown',
@@ -38,8 +43,3 @@ z.client.Map.prototype.getPlaceholderTile = function (x, y) {
   };
 };
 
-z.client.Map.prototype.getFacet = function (name) {
-  if (name === 'Map') {
-    return new z.facet.MapFacet(this.evr, this);
-  }
-};

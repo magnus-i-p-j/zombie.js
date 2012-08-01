@@ -45,11 +45,12 @@ TestCase('test Grid', {
 
     var actualAdjacent = this.grid.getAdjacent(x, y);
     var expectedAdjacent = [
-      this.grid.getNode(x, y - 1), this.grid.getNode(x + 1, y - 1), this.grid.getNode(x + 1, y), this.grid.getNode(x + 1, y + 1), this.grid.getNode(x, y + 1), this.grid.getNode(x - 1, y)];
+        {x: x, y: y - 1}, {x: x + 1, y: y - 1}, {x: x + 1, y: y}, {x: x + 1, y: y + 1}, {x: x, y: y + 1}, {x: x - 1, y: y}];
 
     assertSame(expectedAdjacent.length, actualAdjacent.length);
     for (i = 0; i < expectedAdjacent.length; i++) {
-      assertSame(expectedAdjacent[i], actualAdjacent[i]);
+      assertEquals(expectedAdjacent[i].x, actualAdjacent[i].x);
+      assertEquals(expectedAdjacent[i].y, actualAdjacent[i].y);
     }
   },
   'test getting adjacent nodes for y = 1':function () {
@@ -65,12 +66,13 @@ TestCase('test Grid', {
 
     var actualAdjacent = this.grid.getAdjacent(x, y);
     var expectedAdjacent = [
-      this.grid.getNode(x - 1, y - 1), this.grid.getNode(x, y - 1), this.grid.getNode(x + 1, y), this.grid.getNode(x, y + 1), this.grid.getNode(x - 1, y + 1), this.grid.getNode(x - 1, y)
+        {x: x - 1, y: y - 1}, {x: x, y: y - 1}, {x: x + 1, y: y}, {x: x, y: y + 1}, {x: x - 1, y: y + 1}, {x: x - 1, y: y}
     ];
 
     assertSame(expectedAdjacent.length, actualAdjacent.length);
     for (i = 0; i < expectedAdjacent.length; i++) {
-      assertSame(expectedAdjacent[i], actualAdjacent[i]);
+      assertSame(expectedAdjacent[i].x, actualAdjacent[i].x);
+      assertSame(expectedAdjacent[i].y, actualAdjacent[i].y);
     }
   }
 

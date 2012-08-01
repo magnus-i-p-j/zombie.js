@@ -37,11 +37,11 @@ z.util.Grid.prototype.getAdjacent = function (x, y) {
   var tiles;
   if (y % 2 === 0) {
     tiles = [
-      this.getNode(x, y - 1), this.getNode(x + 1, y - 1), this.getNode(x + 1, y), this.getNode(x + 1, y + 1), this.getNode(x, y + 1), this.getNode(x - 1, y)
+        {x: x, y: y - 1}, {x: x + 1, y: y - 1}, {x: x + 1, y: y}, {x: x + 1, y: y + 1}, {x: x, y: y + 1}, {x: x - 1, y: y}
     ];
   } else {
     tiles = [
-      this.getNode(x - 1, y - 1), this.getNode(x, y - 1), this.getNode(x + 1, y), this.getNode(x, y + 1), this.getNode(x - 1, y + 1), this.getNode(x - 1, y)
+        {x: x - 1, y: y - 1}, {x: x, y: y - 1}, {x: x + 1, y: y}, {x: x, y: y + 1}, {x: x - 1, y: y + 1}, {x: x - 1, y: y}
     ];
   }
   return tiles;
