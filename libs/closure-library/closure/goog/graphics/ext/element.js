@@ -281,7 +281,7 @@ goog.graphics.ext.Element.prototype.setRight = function(right, opt_chain) {
  * @return {number} The center coordinate of the element, in units of the
  * parent's coordinate system.
  */
-goog.graphics.ext.Element.prototype.getCenter = function() {
+goog.graphics.ext.Element.prototype.getClientCenter = function() {
   return this.xPosition_.getMiddle();
 };
 

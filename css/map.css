@@ -1,4 +1,4 @@
-.map_widget { position: absolute; }
+.map_widget { position: absolute; cursor: default;}
 
 .tile {
     width: 72px;

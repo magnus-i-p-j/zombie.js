@@ -13,7 +13,7 @@ goog.addDependency('../../../../js/engine/z.engine.world.EntityFactory.js', ['z.
 goog.addDependency('../../../../js/entities/z.entities.Actor.js', ['z.entities.Actor'], []);
 goog.addDependency('../../../../js/entities/z.entities.Tile.js', ['z.entities.Tile'], []);
 goog.addDependency('../../../../js/facet/z.facet.MapFacet.js', ['z.facet.MapFacet'], ['goog.array', 'z.facet.SelectedTileFacet', 'z.facet.TileFacet', 'z.util.Rectangle']);
-goog.addDependency('../../../../js/facet/z.facet.SelectedTileFacet.js', ['z.facet.SelectedTileFacet'], []);
+goog.addDependency('../../../../js/facet/z.facet.FocusedTileFacet.js', ['z.facet.SelectedTileFacet'], []);
 goog.addDependency('../../../../js/facet/z.facet.TileFacet.js', ['z.facet.TileFacet'], ['z.client.events.TileUpdatedEvent', 'z.facet.SelectedTileFacet']);
 goog.addDependency('../../../../js/util/test/z.util.test.TestEvent.js', ['z.util.test.TestEvent'], []);
 goog.addDependency('../../../../js/util/test/z.util.test.js', ['z.util.test'], []);

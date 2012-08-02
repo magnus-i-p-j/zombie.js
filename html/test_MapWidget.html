@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<META CHARSET="utf-8">
 <html>
 <head>
     <title>Test/demo of MapWidget</title>
@@ -22,24 +23,6 @@
         client.session.evr.publish(new z.client.events.EndTurnEvent({}));
     }
 
-    function testfunc() {
-        var grid = new z.util.Grid();
-        for (var i = -10; i < 10; ++i) {
-            for (var j = -10; j < 10; ++j) {
-                var node = {};
-                grid.setNode(i, j, node);
-            }
-        }
-
-        var x = 0, y = 0;
-        var origin = grid.getNode(x, y);
-
-        var actualAdjacent = grid.getAdjacent(origin);
-        var expectedAdjacent = [
-            grid.getNode(x, y - 1), grid.getNode(x + 1, y - 1), grid.getNode(x + 1, y), grid.getNode(x + 1, y + 1), grid.getNode(x, y + 1), grid.getNode(x - 1, y)];
-
-    }
 </script>
-<script>testfunc();</script>
 </body>
 </html>

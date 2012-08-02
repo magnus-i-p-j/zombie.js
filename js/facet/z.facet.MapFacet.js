@@ -5,10 +5,10 @@ goog.require('z.facet.SelectedTileFacet');
 goog.require('z.util.Rectangle');
 goog.require('goog.array');
 
-z.facet.MapFacet = function (evr, map, selectedTileFacet, boundingbox ) {
+z.facet.MapFacet = function (evr, map, focusedTileFacet, boundingbox ) {
   this.evr = evr;
   this.map = map;
-  this.selectedTileFacet = selectedTileFacet;
+  this.focusedTileFacet = focusedTileFacet;
   this.visibleTiles = ko.observableArray();
   this.offsetX = ko.observable(0);
   this.offsetY = ko.observable(0);

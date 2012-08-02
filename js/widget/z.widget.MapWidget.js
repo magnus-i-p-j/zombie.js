@@ -23,27 +23,42 @@ z.widget.MapWidget.prototype.template = '' +
         '</div>' +
     '</div>' +
     '</div>' +
-    '<div class="tile focusedTile" data-bind="visible: selectedTileFacet.selected, style: { top: computeScreenPositionY(selectedTileFacet.selected()), left: computeScreenPositionX(selectedTileFacet.selected()) }"></div>' +
+    '<div class="tile focusedTile" data-bind="visible: focusedTileFacet.focused, style: { top: focusedTileFacet.focused() ? computeScreenPositionY(focusedTileFacet.focused()) : 0, left: focusedTileFacet.focused() ? computeScreenPositionX(focusedTileFacet.focused()) : 0 }"></div>' +
 '</div>';
 
 
 z.widget.MapWidget.prototype.claim = function (targetId) {
-    var targetElement = document.getElementById(targetId);
-    targetElement.innerHTML = this.template;
+    this.targetElement = document.getElementById(targetId);
+    this.targetElement.innerHTML = this.template;
 
-    goog.events.listen(targetElement.firstChild, goog.events.EventType.CLICK, this.onTileClicked, true, this);
+    goog.events.listen(this.targetElement.firstChild, goog.events.EventType.CLICK, this.onTileClicked, true, this);
 
-    ko.applyBindings(this.facet, targetElement);
+    goog.events.listen(this.targetElement.firstChild, goog.events.EventType.CONTEXTMENU, this.onTileClicked, true, this);
+
+
+    this.preventDefaults();
+    ko.applyBindings(this.facet, this.targetElement);
 };
 
-z.widget.MapWidget.prototype.onTileClicked = function (e, element) {
+z.widget.MapWidget.prototype.preventDefaults = function () {
+    //Stop trying to drag pictures.
+    goog.events.listen(this.targetElement.firstChild, goog.events.EventType.MOUSEDOWN, goog.events.Event.preventDefault, false);
+    //Prevent standard context menu from showing.
+    goog.events.listen(this.targetElement.firstChild, goog.events.EventType.CONTEXTMENU, goog.events.Event.preventDefault, false);
+};
 
-    if (element === e.currentTarget || !e.target) {
-        goog.events.Event.stopPropagation(e);
-    }
-    else {
+z.widget.MapWidget.prototype.onFocusedTileClicked = function(e){
+    console.log("!");
+}
+
+z.widget.MapWidget.prototype.onTileClicked = function (e, element) {
+    if (element !== e.currentTarget && e.target)  {
         element = element || e.target;
         var classNames = element.className.split(' ');
+        if (goog.array.contains(classNames, 'focusedTile')){
+            var focused = this.facet.focusedTileFacet.focused();
+            element = goog.dom.query('div[data-x = '+ focused.x +'][data-y = ' + focused.y + ']', this.targetElement.firstChild)[0];
+        }
         if (element.dataset.x && element.dataset.y && goog.array.contains(classNames, "tile")) {
             var adjacent = this.facet.getAdjacent(parseInt(element.dataset.x), parseInt(element.dataset.y));
             var elements = goog.array.map(adjacent, function(a){
@@ -59,10 +74,9 @@ z.widget.MapWidget.prototype.onTileClicked = function (e, element) {
             this.onTileClicked(e, element.parentElement);
         }
     }
-
 };
 
-z.widget.MapWidget.prototype.getCenter = function(element){
+z.widget.MapWidget.prototype.getClientCenter = function(element){
     var rect = element.getBoundingClientRect();
     var x = rect.left + rect.width/2;
     var y = rect.bottom - rect.height/2;
@@ -71,13 +85,15 @@ z.widget.MapWidget.prototype.getCenter = function(element){
 
 z.widget.MapWidget.prototype.findClosestElement = function(center, elements){
     var closestElement = elements.pop();
-    var shortestDistance = goog.math.Coordinate.distance(center, this.getCenter(closestElement));
+    var shortestDistance = goog.math.Coordinate.distance(center, this.getClientCenter(closestElement));
     var self = this;
     goog.array.forEach(elements, function(element){
-        var currentDistance = goog.math.Coordinate.distance(center, self.getCenter(element));
-        if(currentDistance < shortestDistance){
-            shortestDistance = currentDistance;
-            closestElement = element;
+        if(element){
+            var currentDistance = goog.math.Coordinate.distance(center, self.getClientCenter(element));
+            if(currentDistance < shortestDistance){
+                shortestDistance = currentDistance;
+                closestElement = element;
+            }
         }
     });
     return closestElement;

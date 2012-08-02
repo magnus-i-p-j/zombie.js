@@ -33,7 +33,7 @@ z.client.Client.prototype.startGame = function (gameId) {
     //Facets
     //TODO: Refactor to a factory?
     //TODO: Should the session really be creating the map and event router? Shouldn't this be injected.?
-    var selectedTileFacet = new z.facet.SelectedTileFacet(this.session.evr, this.session.map);
+    var selectedTileFacet = new z.facet.FocusedTileFacet(this.session.evr, this.session.map);
     var mapFacet = new z.facet.MapFacet(this.session.evr, this.session.map, selectedTileFacet);
     var mapWidget = new z.widget.MapWidget(mapFacet, this.session.evr);
 
