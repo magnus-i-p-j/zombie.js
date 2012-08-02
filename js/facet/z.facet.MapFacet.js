@@ -1,7 +1,7 @@
 goog.provide('z.facet.MapFacet');
 
 goog.require('z.facet.TileFacet');
-goog.require('z.facet.SelectedTileFacet');
+goog.require('z.facet.FocusedTileFacet');
 goog.require('z.util.Rectangle');
 goog.require('goog.array');
 

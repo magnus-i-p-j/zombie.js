@@ -1,6 +1,5 @@
 goog.provide('z.facet.TileFacet');
 goog.require('z.client.events.TileUpdatedEvent');
-goog.require('z.facet.SelectedTileFacet');
 
 z.facet.TileFacet = function (map, evr, x, y) {
     this.x = x;

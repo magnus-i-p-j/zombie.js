@@ -6,6 +6,7 @@ goog.require('goog.dom.query');
 goog.require('goog.math');
 goog.require('goog.math.Coordinate');
 goog.require('z.client.events.TileFocusEvent');
+goog.require('z.client.events.ShowContextMenuEvent');
 
 z.widget.MapWidget = function (facet, evr) {
     this.facet = facet;
@@ -34,6 +35,7 @@ z.widget.MapWidget.prototype.claim = function (targetId) {
     goog.events.listen(this.targetElement.firstChild, goog.events.EventType.CLICK, this.onTileClicked, true, this);
 
     goog.events.listen(this.targetElement.firstChild, goog.events.EventType.CONTEXTMENU, this.onTileClicked, true, this);
+    goog.events.listen(this.targetElement.firstChild, goog.events.EventType.CONTEXTMENU, this.onShowContextMenu, true, this);
 
 
     this.preventDefaults();
@@ -47,31 +49,37 @@ z.widget.MapWidget.prototype.preventDefaults = function () {
     goog.events.listen(this.targetElement.firstChild, goog.events.EventType.CONTEXTMENU, goog.events.Event.preventDefault, false);
 };
 
-z.widget.MapWidget.prototype.onFocusedTileClicked = function(e){
-    console.log("!");
-}
+z.widget.MapWidget.prototype.onTileClicked = function (e) {
+    var element = this.findTileElement(e);
+    if(element){
+        var adjacent = this.facet.getAdjacent(parseInt(element.dataset.x), parseInt(element.dataset.y));
+        var elements = goog.array.map(adjacent, function(a){
+            return goog.dom.query('div[data-x = '+ a.x +'][data-y = ' + a.y + ']', e.currentTarget)[0];
+        });
+        elements.push(element);
 
-z.widget.MapWidget.prototype.onTileClicked = function (e, element) {
+        var selected = this.findClosestElement(new goog.math.Coordinate(e.clientX, e.clientY), elements);
+        console.log(selected.dataset.x + ';' + selected.dataset.y);
+        this.evr.publish(new z.client.events.TileFocusEvent(this, this.facet.getTileFacet(parseInt(selected.dataset.x), parseInt(selected.dataset.y))));
+    }
+};
+
+z.widget.MapWidget.prototype.findTileElement = function(e, element){
     if (element !== e.currentTarget && e.target)  {
         element = element || e.target;
+
         var classNames = element.className.split(' ');
+
         if (goog.array.contains(classNames, 'focusedTile')){
             var focused = this.facet.focusedTileFacet.focused();
             element = goog.dom.query('div[data-x = '+ focused.x +'][data-y = ' + focused.y + ']', this.targetElement.firstChild)[0];
         }
-        if (element.dataset.x && element.dataset.y && goog.array.contains(classNames, "tile")) {
-            var adjacent = this.facet.getAdjacent(parseInt(element.dataset.x), parseInt(element.dataset.y));
-            var elements = goog.array.map(adjacent, function(a){
-                return goog.dom.query('div[data-x = '+ a.x +'][data-y = ' + a.y + ']', e.currentTarget)[0];
-            });
-            elements.push(element);
 
-            var selected = this.findClosestElement(new goog.math.Coordinate(e.clientX, e.clientY), elements);
-            console.log(selected.dataset.x + ';' + selected.dataset.y);
-            this.evr.publish(new z.client.events.TileFocusEvent(this, this.facet.getTileFacet(parseInt(selected.dataset.x), parseInt(selected.dataset.y))));
+        if (element.dataset.x && element.dataset.y && goog.array.contains(classNames, "tile")) {
+            return element;
         }
-        else {
-            this.onTileClicked(e, element.parentElement);
+        else{
+            return this.findTileElement(e, element.parentElement);
         }
     }
 };
@@ -97,4 +105,12 @@ z.widget.MapWidget.prototype.findClosestElement = function(center, elements){
         }
     });
     return closestElement;
+};
+
+z.widget.MapWidget.prototype.onShowContextMenu = function(e){
+    var element = this.findTileElement(e);
+    if(element){
+        var facet = this.facet.getTileFacet(parseInt(element.dataset.x), parseInt(element.dataset.y));
+        this.evr.publish(new z.client.events.ShowContextMenuEvent(this, facet.getTile(), new goog.math.Coordinate(e.clientX, e.clientY)));
+    }
 };
