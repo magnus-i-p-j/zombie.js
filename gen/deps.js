@@ -24,5 +24,5 @@ goog.addDependency('../../../../js/util/z.util.EventRouter.js', ['z.util.EventRo
 goog.addDependency('../../../../js/util/z.util.Grid.js', ['z.util.Grid'], []);
 goog.addDependency('../../../../js/util/z.util.Rectangle.js', ['z.util.Rectangle'], []);
 goog.addDependency('../../../../js/util/z.util.js', ['z.util'], []);
-goog.addDependency('../../../../js/widget/z.widget.MapWidget.js', ['z.widget.MapWidget'], ['goog.dom.query', 'goog.events', 'goog.math', 'goog.math.Coordinate', 'z.client.events.ShowContextMenuEvent', 'z.client.events.TileFocusEvent', 'z.facet.MapFacet']);
+goog.addDependency('../../../../js/widget/z.widget.MapWidget.js', ['z.widget.MapWidget'], ['goog.dom', 'goog.dom.query', 'goog.events', 'goog.math', 'goog.math.Coordinate', 'z.client.events.ShowContextMenuEvent', 'z.client.events.TileFocusEvent', 'z.facet.MapFacet']);
 goog.addDependency('../../../../js/z.js', ['z'], ['z.client.Client']);

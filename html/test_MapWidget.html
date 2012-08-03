@@ -2,26 +2,27 @@
 <META CHARSET="utf-8">
 <html>
 <head>
-    <title>Test/demo of MapWidget</title>
-    <link rel="stylesheet" href="../css/map.css">
+  <title>Test/demo of MapWidget</title>
+  <link rel="stylesheet" href="../css/map.css">
 </head>
 <body>
-<div id="z_client">You might not have script enabled in your browser.
+<div id="z_client">You might not have script enabled in your browser.</div>
 
-</div>
 <button onclick="endTurn()" style="position: fixed; z-index:59;">End turn</button>
-<script src="../libs/knockout-2.0.0.debug.js"></script>
+<script src="../libs/jquery-1.7.2.js"></script>
+<script src="../libs/knockout-2.1.0.debug.js"></script>
+<script src="../libs/koExternalTemplateEngine_all.js"></script>
 <script src="../libs/closure-library/closure/goog/base.js"></script>
 <script src="../gen/deps.js"></script>
 <script>
-    goog.require('z');
+  goog.require('z');
 </script>
 <script>
-    var client = z.init('z_client');
-    function endTurn() {
-        // HACK
-        client.session.evr.publish(new z.client.events.EndTurnEvent({}));
-    }
+  var client = z.init('z_client');
+  function endTurn() {
+    // HACK
+    client.session.evr.publish(new z.client.events.EndTurnEvent({}));
+  }
 
 </script>
 </body>
