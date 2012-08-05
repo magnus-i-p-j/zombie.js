@@ -5,7 +5,7 @@ goog.addDependency('../../../../js/client/events/z.client.events.ShowContextMenu
 goog.addDependency('../../../../js/client/events/z.client.events.TileFocusEvent.js', ['z.client.events.TileFocusEvent'], []);
 goog.addDependency('../../../../js/client/events/z.client.events.TileUpdatedEvent.js', ['z.client.events.TileUpdatedEvent'], []);
 goog.addDependency('../../../../js/client/events/z.client.events.TilesUpdatedEvent.js', ['z.client.events.TilesUpdatedEvent'], []);
-goog.addDependency('../../../../js/client/z.client.Client.js', ['z.client.Client'], ['z.client.GameSession', 'z.client.User', 'z.engine.World', 'z.facet.ContextMenuFacet', 'z.facet.FocusedTileFacet', 'z.facet.MapFacet', 'z.widget.MapWidget']);
+goog.addDependency('../../../../js/client/z.client.Client.js', ['z.client.Client'], ['z.client.GameSession', 'z.client.User', 'z.engine.World', 'z.facet.Gem', 'z.widget.MapWidget']);
 goog.addDependency('../../../../js/client/z.client.GameSession.js', ['z.client.GameSession'], ['z.client.Map', 'z.client.events.EndTurnEvent', 'z.client.events.TilesUpdatedEvent', 'z.engine.World', 'z.util.EventRouter']);
 goog.addDependency('../../../../js/client/z.client.Map.js', ['z.client.Map'], ['goog.array', 'z.client.events.TileUpdatedEvent', 'z.client.events.TilesUpdatedEvent', 'z.util.Grid']);
 goog.addDependency('../../../../js/client/z.client.User.js', ['z.client.User'], []);
@@ -14,8 +14,8 @@ goog.addDependency('../../../../js/engine/z.engine.world.EntityFactory.js', ['z.
 goog.addDependency('../../../../js/entities/z.entities.Actor.js', ['z.entities.Actor'], []);
 goog.addDependency('../../../../js/entities/z.entities.Tile.js', ['z.entities.Tile'], []);
 goog.addDependency('../../../../js/facet/z.facet.ContextMenuFacet.js', ['z.facet.ContextMenuFacet'], ['goog', 'z.entities.Tile']);
-goog.addDependency('../../../../js/facet/z.facet.FocusedTileFacet.js', ['z.facet.FocusedTileFacet'], []);
-goog.addDependency('../../../../js/facet/z.facet.MapFacet.js', ['z.facet.MapFacet'], ['goog.array', 'z.facet.FocusedTileFacet', 'z.facet.TileFacet', 'z.util.Rectangle']);
+goog.addDependency('../../../../js/facet/z.facet.Gem.js', ['z.facet.Gem'], ['z.facet.ContextMenuFacet', 'z.facet.MapFacet']);
+goog.addDependency('../../../../js/facet/z.facet.MapFacet.js', ['z.facet.MapFacet'], ['goog.array', 'z.facet.TileFacet', 'z.util.Rectangle']);
 goog.addDependency('../../../../js/facet/z.facet.TileFacet.js', ['z.facet.TileFacet'], ['z.client.events.TileUpdatedEvent']);
 goog.addDependency('../../../../js/util/test/z.util.test.TestEvent.js', ['z.util.test.TestEvent'], []);
 goog.addDependency('../../../../js/util/test/z.util.test.js', ['z.util.test'], []);
@@ -24,5 +24,5 @@ goog.addDependency('../../../../js/util/z.util.EventRouter.js', ['z.util.EventRo
 goog.addDependency('../../../../js/util/z.util.Grid.js', ['z.util.Grid'], []);
 goog.addDependency('../../../../js/util/z.util.Rectangle.js', ['z.util.Rectangle'], []);
 goog.addDependency('../../../../js/util/z.util.js', ['z.util'], []);
-goog.addDependency('../../../../js/widget/z.widget.MapWidget.js', ['z.widget.MapWidget'], ['goog.dom', 'goog.dom.query', 'goog.events', 'goog.math', 'goog.math.Coordinate', 'z.client.events.ShowContextMenuEvent', 'z.client.events.TileFocusEvent', 'z.facet.MapFacet']);
+goog.addDependency('../../../../js/widget/z.widget.MapWidget.js', ['z.widget.MapWidget'], ['goog.dom', 'goog.dom.query', 'goog.events', 'goog.math', 'goog.math.Coordinate', 'goog.style', 'z.client.events.ShowContextMenuEvent', 'z.client.events.TileFocusEvent']);
 goog.addDependency('../../../../js/z.js', ['z'], ['z.client.Client']);

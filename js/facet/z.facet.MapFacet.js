@@ -1,19 +1,22 @@
 goog.provide('z.facet.MapFacet');
 
 goog.require('z.facet.TileFacet');
-goog.require('z.facet.FocusedTileFacet');
 goog.require('z.util.Rectangle');
 goog.require('goog.array');
 
-z.facet.MapFacet = function (evr, map, focusedTileFacet, boundingbox ) {
+/**
+ * @param {!z.util.EventRouter} evr
+ * @param {!z.client.Map} map
+ * @param {z.util.Rectangle} boundingBox
+ */
+z.facet.MapFacet = function (evr, map, boundingBox) {
   this.evr = evr;
   this.map = map;
-  this.focusedTileFacet = focusedTileFacet;
   this.visibleTiles = ko.observableArray();
-  this.offsetX = ko.observable(0);
-  this.offsetY = ko.observable(0);
-  boundingbox = boundingbox || new z.util.Rectangle(10, 10, -10, -10);
-  this.setBoundingBox(boundingbox);
+  this.offsetX = ko.observable(-10 * 72);
+  this.offsetY = ko.observable(-10 * (72 - 18));
+  boundingBox = boundingBox || new z.util.Rectangle(10, 10, -10, -10);
+  this.setBoundingBox(boundingBox);
 };
 
 z.facet.MapFacet.prototype.setBoundingBox = function (boundingbox) {
@@ -40,12 +43,11 @@ z.facet.MapFacet.prototype.computeScreenPositionY = function (tileFacet) {
 };
 
 z.facet.MapFacet.prototype.getAdjacent = function (x, y) {
-    var adjacent = this.map.getAdjacent(x, y);
-    return adjacent;
-}
+  return this.map.getAdjacent(x, y);
+};
 
-z.facet.MapFacet.prototype.getTileFacet = function(x, y){
-    return goog.array.find(this.visibleTiles(), function(element){
-        return element.x === x && element.y === y;
-    });
-}
+z.facet.MapFacet.prototype.getTileFacet = function (x, y) {
+  return goog.array.find(this.visibleTiles(), function (element) {
+    return element.x === x && element.y === y;
+  });
+};
