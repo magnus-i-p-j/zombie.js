@@ -5,7 +5,7 @@ goog.addDependency('../../../../js/client/events/z.client.events.ShowContextMenu
 goog.addDependency('../../../../js/client/events/z.client.events.TileFocusEvent.js', ['z.client.events.TileFocusEvent'], []);
 goog.addDependency('../../../../js/client/events/z.client.events.TileUpdatedEvent.js', ['z.client.events.TileUpdatedEvent'], []);
 goog.addDependency('../../../../js/client/events/z.client.events.TilesUpdatedEvent.js', ['z.client.events.TilesUpdatedEvent'], []);
-goog.addDependency('../../../../js/client/z.client.Client.js', ['z.client.Client'], ['z.client.GameSession', 'z.client.User', 'z.engine.World', 'z.facet.Gem', 'z.widget.MapWidget']);
+goog.addDependency('../../../../js/client/z.client.Client.js', ['z.client.Client'], ['z.client.GameSession', 'z.client.User', 'z.engine.World', 'z.facet.Gem', 'z.rulebook.Rulebook', 'z.widget.MapWidget']);
 goog.addDependency('../../../../js/client/z.client.GameSession.js', ['z.client.GameSession'], ['z.client.Map', 'z.client.events.EndTurnEvent', 'z.client.events.TilesUpdatedEvent', 'z.engine.World', 'z.util.EventRouter']);
 goog.addDependency('../../../../js/client/z.client.Map.js', ['z.client.Map'], ['goog.array', 'z.client.events.TileUpdatedEvent', 'z.client.events.TilesUpdatedEvent', 'z.util.Grid']);
 goog.addDependency('../../../../js/client/z.client.User.js', ['z.client.User'], []);

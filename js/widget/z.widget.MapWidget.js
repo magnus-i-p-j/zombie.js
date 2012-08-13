@@ -22,7 +22,7 @@ z.widget.MapWidget.prototype.claim = function (targetId) {
 
   goog.events.listen(this.targetElement, goog.events.EventType.CLICK, this.onTileClicked, true, this);
 
-//  goog.events.listen(this.targetElement, goog.events.EventType.CONTEXTMENU, this.onTileClicked, true, this);
+  goog.events.listen(this.targetElement, goog.events.EventType.CONTEXTMENU, this.onTileClicked, true, this);
   goog.events.listen(this.targetElement, goog.events.EventType.CONTEXTMENU, this.onShowContextMenu, true, this);
 
   // Stop trying to drag pictures.

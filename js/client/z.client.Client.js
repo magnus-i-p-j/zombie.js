@@ -1,13 +1,16 @@
 goog.provide('z.client.Client');
 
+goog.require('goog.dom');
 goog.require('z.engine.World');
 goog.require('z.client.User');
 goog.require('z.client.GameSession');
 goog.require('z.widget.MapWidget');
 goog.require('z.facet.Gem');
+goog.require('z.rulebook.Rulebook');
 
 z.client.Client = function (targetId) {
   this.login();
+  this.targetElement = goog.dom.getElement(targetId);
 };
 
 z.client.Client.prototype.run = function () {
@@ -26,11 +29,12 @@ z.client.Client.prototype.login = function () {
 
 z.client.Client.prototype.startGame = function (gameId) {
   gameId = gameId || null;
+  this.rulebook = new z.rulebook.Rulebook();
   this.session = new z.client.GameSession();
 
   //TODO: Refactor to a factory?
   //TODO: Should the session really be creating the map and event router? Shouldn't this be injected.?
-  var gem = new z.facet.Gem(this.session.evr, this.session.map);
+  var gem = new z.facet.Gem(this.session.evr, this.session.map, this.rulebook);
   var mapWidget = new z.widget.MapWidget(this.session.evr, gem);
 
   mapWidget.claim('map');

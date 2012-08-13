@@ -6,4 +6,4 @@ z.rulebook.projects.SpikedPit = function(){
     this.prerequisites = {};
     this.resources = {};
     this.labour = {};
-}
+};

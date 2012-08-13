@@ -6,29 +6,28 @@ goog.require('z.rulebook.Rulebook');
 goog.require("z.rulebook.projects.SpikedPit");
 
 z.facet.ContextMenuFacet = function(evr, rulebook){
-    this.hide();
+    this.visible = ko.observable(false);
     this.projects = ko.observableArray();
+    this.rulebook = rulebook;
     this.registerContextHandlers();
     evr.subscribe(z.client.events.ShowContextMenuEvent, goog.bind(this.showContextMenuCallback, this));
 };
 
 z.facet.ContextMenuFacet.prototype.showContextMenuCallback = function(showContextMenuEvent){
-    var event = showContextMenuEvent;
-
-    var ctx = event.data.context;
+    var ctx = showContextMenuEvent.data.context;
     this.visitor.tryVisit(ctx);
-
-    Show(event.position);
+    if(ctx)
+    this._show(showContextMenuEvent.position);
 };
 
 z.facet.ContextMenuFacet.prototype.registerContextHandlers = function() {
     this.visitor = new z.util.ContextVisitor();
     z.util.ContextVisitor.addVisitHandler(this.visitor, z.entities.Tile, 'Tile', this.getTileActions);
-}
+};
 
 z.facet.ContextMenuFacet.prototype.getTileActions = function(tile){
   var actions = [];
-  var projects = rulebook.PossibleProjects(tile.terrain);
+  var projects = this.rulebook.PossibleProjects(tile.terrain);
   if(projects.length > 0){
     console.log(projects[0]);
     //Create contextmenuitems.
@@ -36,15 +35,15 @@ z.facet.ContextMenuFacet.prototype.getTileActions = function(tile){
   }
 };
 
-z.facet.ContextMenuFacet.prototype.Show = function(position){
+z.facet.ContextMenuFacet.prototype._show = function(position){
     this.position = position;
-    this.show = true;
-}
+    this.visible = true;
+};
 
-z.facet.ContextMenuFacet.prototype.Hide = function(){
+z.facet.ContextMenuFacet.prototype._hide = function(){
     this.show = false;
     this.position = null;
-}
+};
 
 //Visitor
 z.util.ContextVisitor = function(){
@@ -54,7 +53,7 @@ z.util.ContextVisitor.prototype.tryVisit = function(visitee){
     if(visitee['acceptVisitor']){
         visitee.acceptVisitor(this);
     }
-}
+};
 
 z.util.ContextVisitor.addVisitHandler = function(visitor, visitee, name, handler){
     z.util.ContextVisitor.addAcceptor(visitor, visitee, name);
