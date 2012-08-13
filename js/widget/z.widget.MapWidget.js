@@ -90,6 +90,6 @@ z.widget.MapWidget.prototype.onShowContextMenu = function (e) {
   var element = this.findTileElement(e);
   if (element) {
     var facet = this.gem.mapFacet.getTileFacet(parseInt(element.dataset.x), parseInt(element.dataset.y));
-    this.evr.publish(new z.client.events.ShowContextMenuEvent(this, facet.getTile(), new goog.math.Coordinate(e.clientX, e.clientY)));
+    this.evr.publish(new z.client.events.ShowContextMenuEvent(this, [facet], new goog.math.Coordinate(e.clientX, e.clientY)));
   }
 };

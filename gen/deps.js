@@ -5,7 +5,7 @@ goog.addDependency('../../../../js/client/events/z.client.events.ShowContextMenu
 goog.addDependency('../../../../js/client/events/z.client.events.TileFocusEvent.js', ['z.client.events.TileFocusEvent'], []);
 goog.addDependency('../../../../js/client/events/z.client.events.TileUpdatedEvent.js', ['z.client.events.TileUpdatedEvent'], []);
 goog.addDependency('../../../../js/client/events/z.client.events.TilesUpdatedEvent.js', ['z.client.events.TilesUpdatedEvent'], []);
-goog.addDependency('../../../../js/client/z.client.Client.js', ['z.client.Client'], ['z.client.GameSession', 'z.client.User', 'z.engine.World', 'z.facet.Gem', 'z.rulebook.Rulebook', 'z.widget.MapWidget']);
+goog.addDependency('../../../../js/client/z.client.Client.js', ['z.client.Client'], ['goog.dom', 'z.client.GameSession', 'z.client.User', 'z.engine.World', 'z.facet.Gem', 'z.rulebook.Rulebook', 'z.widget.MapWidget']);
 goog.addDependency('../../../../js/client/z.client.GameSession.js', ['z.client.GameSession'], ['z.client.Map', 'z.client.events.EndTurnEvent', 'z.client.events.TilesUpdatedEvent', 'z.engine.World', 'z.util.EventRouter']);
 goog.addDependency('../../../../js/client/z.client.Map.js', ['z.client.Map'], ['goog.array', 'z.client.events.TileUpdatedEvent', 'z.client.events.TilesUpdatedEvent', 'z.util.Grid']);
 goog.addDependency('../../../../js/client/z.client.User.js', ['z.client.User'], []);
@@ -17,6 +17,8 @@ goog.addDependency('../../../../js/facet/z.facet.ContextMenuFacet.js', ['z.facet
 goog.addDependency('../../../../js/facet/z.facet.Gem.js', ['z.facet.Gem'], ['z.facet.ContextMenuFacet', 'z.facet.MapFacet']);
 goog.addDependency('../../../../js/facet/z.facet.MapFacet.js', ['z.facet.MapFacet'], ['goog.array', 'z.facet.TileFacet', 'z.util.Rectangle']);
 goog.addDependency('../../../../js/facet/z.facet.TileFacet.js', ['z.facet.TileFacet'], ['z.client.events.TileUpdatedEvent']);
+goog.addDependency('../../../../js/facet/z.facet.actionFactory.js', ['z.facet.actionFactory'], []);
+goog.addDependency('../../../../js/mugd/ui/mugd.ui.MapScroller.js', ['mugd.ui.MapScroller'], ['goog.events.EventTarget']);
 goog.addDependency('../../../../js/rulebook/projects/z.rulebook.projects.SpikedPit.js', ['z.rulebook.projects.SpikedPit'], []);
 goog.addDependency('../../../../js/rulebook/z.rulebook.Rulebook.js', ['z.rulebook.Rulebook'], ['z.rulebook.projects.SpikedPit']);
 goog.addDependency('../../../../js/util/test/z.util.test.TestEvent.js', ['z.util.test.TestEvent'], []);
