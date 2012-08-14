@@ -35,7 +35,7 @@ z.widget.MapWidget.prototype.onTileClicked = function (e) {
   var element = this.findTileElement(e);
   if (element) {
     var adjacent = this.gem.mapFacet.getAdjacent(parseInt(element.dataset.x), parseInt(element.dataset.y));
-    var elements = goog.array.map(adjacent, function (a) {
+    var gelements = goog.array.map(adjacent, function (a) {
       return goog.dom.query('div[data-x = ' + a.x + '][data-y = ' + a.y + ']', e.currentTarget)[0];
     });
     elements.push(element);
