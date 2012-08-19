@@ -3,6 +3,7 @@ goog.provide('mugd.ui.MapScroller');
 goog.require('goog.events.EventTarget');
 goog.require('goog.events.EventHandler');
 goog.require('goog.style');
+goog.require('goog.dom.query');
 goog.require('goog.math.Coordinate');
 
 /**
@@ -11,16 +12,12 @@ goog.require('goog.math.Coordinate');
  * @extends {goog.events.EventTarget}
  *
  * @param {Element} scrollStarter
- * @param {Element} scrollEnder
  */
-mugd.ui.MapScroller = function (scrollStarter, scrollEnder) {
+mugd.ui.MapScroller = function (scrollStarter) {
   goog.base(this);
   this.scrollStarter = scrollStarter;
-  if (goog.isDef(scrollEnder)) {
-    this.scrollContainer = scrollEnder;
-  } else {
-    this.scrollContainer = scrollStarter;
-  }
+  var queried = goog.dom.query('.scrollable', this.scrollStarter);
+  this.mover = queried[0];
   /**
    * @type {!goog.events.EventHandler}
    * @protected
@@ -28,6 +25,7 @@ mugd.ui.MapScroller = function (scrollStarter, scrollEnder) {
   this.handler = new goog.events.EventHandler(this);
 
   this.handler.listen(this.scrollStarter, goog.events.EventType.MOUSEDOWN, this.mouseDown);
+  this.handler.listen(this.scrollStarter, [goog.events.EventType.MOUSEUP, goog.events.EventType.MOUSEOUT], this.mouseUp);
 };
 
 goog.inherits(mugd.ui.MapScroller, goog.events.EventTarget);
@@ -38,23 +36,39 @@ mugd.ui.MapScroller.prototype.disposeInternal = function () {
   this.scrollStarter = null;
 };
 
+
 mugd.ui.MapScroller.prototype.mouseDown = function (e) {
+  this.startMouse = this.getMousePos(e);
   this.handler.listen(this.scrollStarter, goog.events.EventType.MOUSEMOVE, this.mouseMove);
-  this.handler.listen(this.scrollContainer, [goog.events.EventType.MOUSEUP, goog.events.EventType.MOUSEOUT], this.mouseUp);
-  this.startMouse = new goog.math.Coordinate(e.offsetX, e.offsetY);
-  this.startScroll = new goog.math.Coordinate(this.scrollStarter.scrollLeft, this.scrollStarter.scrollTop);
+  this.startScroll = this.getPos();
   e.preventDefault();
 };
+
 mugd.ui.MapScroller.prototype.mouseUp = function () {
-  this.handler.unlisten(this.scrollContainer, goog.events.EventType.MOUSEMOVE, this.mouseMove);
+  this.handler.unlisten(this.scrollStarter, goog.events.EventType.MOUSEMOVE, this.mouseMove);
 };
+
 mugd.ui.MapScroller.prototype.mouseMove = function (e) {
-  console.log(e.offsetX, e.offsetY);
-  var currentPos = new goog.math.Coordinate(e.offsetX, e.offsetY);
-  var offset = goog.math.Coordinate.difference(this.startMouse, currentPos);
+  var currentMouse = this.getMousePos(e);
+  var offset = goog.math.Coordinate.difference(currentMouse, this.startMouse );
   var newPos = goog.math.Coordinate.sum(offset, this.startScroll);
-  this.scrollStarter.scrollLeft = newPos.x;
-  this.scrollStarter.scrollTop = newPos.y;
+  this.setPos(newPos);
 };
 
+/**
+ * @param {!goog.math.Coordinate} c
+ */
+mugd.ui.MapScroller.prototype.setPos = function (c) {
+  goog.style.setPosition(this.mover, c);
+};
 
+/**
+ * @return {!goog.math.Coordinate}
+ */
+mugd.ui.MapScroller.prototype.getPos = function () {
+  return goog.style.getPosition(this.mover);
+};
+
+mugd.ui.MapScroller.prototype.getMousePos = function (e) {
+  return new goog.math.Coordinate(e.clientX, e.clientY);
+};
