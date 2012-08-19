@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir gen -p
 ./libs/closure-library/closure/bin/build/depswriter.py --root_with_prefix="js ../../../../js/" --output_file=gen/deps.js
 
 cp tests/jsTestDriver.conf.proto.yaml tests/jsTestDriver.conf
