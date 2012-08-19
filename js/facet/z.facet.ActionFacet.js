@@ -1,7 +1,5 @@
 goog.provide('z.facet.ActionFacet');
 
-goog.require('z.facet.Gem');
-
 z.facet.ActionFacet = function (gem, source, action) {
   this.gem = gem;
   this.source = source;
@@ -13,16 +11,16 @@ z.facet.ActionFacet = function (gem, source, action) {
 z.facet.ActionFacet.prototype.start = function () {
   //Gather all information that is needed to complete the action
   //result = ActionResult? -> Can be committed to the world.
-  this.result = action.execute(source);
+  this.result = this.action.execute(this.source);
   if (this.result) {
-    _commit();
+    this._commit();
   }
 };
 
 z.facet.ActionFacet.prototype.redo = function () {
   //redo the action with all the previous choices
   if (this.result) {
-    _commit();
+    this._commit();
   }
 };
 
