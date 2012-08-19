@@ -1,5 +1,7 @@
 goog.provide('z.facet.TileFacet');
+
 goog.require('z.client.events.TileUpdatedEvent');
+goog.require('z.facet.ActionFacet');
 
 z.facet.TileFacet = function (gem, x, y) {
   this.x = x;

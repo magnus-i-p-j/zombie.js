@@ -6,8 +6,9 @@ z.rulebook.Rulebook = function () {
 };
 
 z.rulebook.Rulebook.prototype.possibleActions = function (entity, instance) {
-
+  var actions = [];
   if (entity === 'Tile' && instance.terrain === "grass") {
-    return new z.rulebook.projects.SpikedPit();
+     actions.push(new z.rulebook.projects.SpikedPit());
   }
+  return actions;
 };
