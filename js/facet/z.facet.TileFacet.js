@@ -23,13 +23,11 @@ z.facet.TileFacet.prototype.getTile = function () {
 };
 
 z.facet.TileFacet.prototype.SetPossibleActions = function () {
-  this.possibleActions = ko.observableArray();
   var possibleActions = this.gem.rulebook.possibleActions('Tile', this.getTile());
-  var self = this;
   var actionFacets = goog.array.map(possibleActions, function (action) {
     return new z.facet.ActionFacet(self.gem, self, action)
-  });
-  this.possibleActions.push(actionFacets);
+  }, this);
+  this.possibleActions = ko.observableArray(actionFacets);
 };
 
 z.facet.TileFacet.prototype.tileUpdatedCallback = function (tileUpdatedEvent) {

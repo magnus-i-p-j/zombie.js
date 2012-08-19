@@ -15,7 +15,9 @@ z.facet.ContextMenuFacet = function (gem) {
 z.facet.ContextMenuFacet.prototype.showContextMenuCallback = function (showContextMenuEvent) {
   var ctx = showContextMenuEvent.data.context;
   if (ctx) {
-    console.log(ctx[0].possibleActions()[0].title());
+    if(ctx[0].possibleActions()[0]){
+      console.log(ctx[0].possibleActions()[0].title());
+    }
     this._show(showContextMenuEvent.position);
   }
 };
