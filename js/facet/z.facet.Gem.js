@@ -11,10 +11,16 @@ goog.require('z.facet.ContextMenuFacet');
 z.facet.Gem = function (evr, map, rulebook) {
   this.evr = evr;
   this.contextMenuFacet = new z.facet.ContextMenuFacet(this, rulebook);
+
+  this.rulebook = new z.rulebook.Rulebook();
+
+  //Should we only have a MapFacet here?
+  this.map = map;
   this.mapFacet = new z.facet.MapFacet(this, map);
 
   this.focusedTile = ko.observable();
 
+  //Events
   this.evr.subscribe(z.client.events.TileFocusEvent, this.tileFocusCallback.bind(this));
 };
 

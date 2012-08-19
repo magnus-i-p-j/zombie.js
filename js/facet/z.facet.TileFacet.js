@@ -4,6 +4,7 @@ goog.require('z.client.events.TileUpdatedEvent');
 z.facet.TileFacet = function (gem, x, y) {
   this.x = x;
   this.y = y;
+  this.gem = gem;
   this.map = gem.map;
 
   var tile = this.getTile();
@@ -19,12 +20,12 @@ z.facet.TileFacet.prototype.getTile = function () {
   return this.map.getTile(this.x, this.y);
 };
 
-z.facet.SetPossibleActions = function () {
+z.facet.TileFacet.prototype.SetPossibleActions = function () {
   this.possibleActions = ko.observableArray();
-  var possibleActions = this.gem.rulebook.possibleActions('Tile', tile);
+  var possibleActions = this.gem.rulebook.possibleActions('Tile', this.getTile());
   var self = this;
   var actionFacets = goog.array.map(possibleActions, function (action) {
-    return new z.facet.ActionFacet(gem, this, action)
+    return new z.facet.ActionFacet(self.gem, self, action)
   });
   this.possibleActions.push(actionFacets);
 };
