@@ -9,8 +9,9 @@ goog.require('goog.array');
  * @param {!z.client.Map} map
  * @param {z.util.Rectangle} boundingBox
  */
-z.facet.MapFacet = function (evr, map, boundingBox) {
-  this.evr = evr;
+z.facet.MapFacet = function (gem, map, boundingBox) {
+  this.gem = gem;
+  this.evr = gem.evr;
   this.map = map;
   this.visibleTiles = ko.observableArray();
   this.offsetX = ko.observable(-10 * 72);
@@ -23,7 +24,7 @@ z.facet.MapFacet.prototype.setBoundingBox = function (boundingbox) {
   this.visibleTiles.removeAll();
   for (var y = boundingbox.bottom; y <= boundingbox.top; y++) {
     for (var x = boundingbox.left; x <= boundingbox.right; x++) {
-      this.visibleTiles.push(new z.facet.TileFacet(this.map, this.evr, x, y));
+      this.visibleTiles.push(new z.facet.TileFacet(this.gem, x, y));
     }
   }
 };

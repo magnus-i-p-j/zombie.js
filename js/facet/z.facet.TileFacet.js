@@ -1,25 +1,32 @@
 goog.provide('z.facet.TileFacet');
 goog.require('z.client.events.TileUpdatedEvent');
 
-z.facet.TileFacet = function (map, evr, x, y) {
+z.facet.TileFacet = function (gem, x, y) {
   this.x = x;
   this.y = y;
-  this.map = map;
+  this.map = gem.map;
 
   var tile = this.getTile();
 
   this.terrain = ko.observable(tile.terrain);
 
-  evr.subscribe(z.client.events.TileUpdatedEvent, this.tileUpdatedCallback.bind(this));
+  gem.evr.subscribe(z.client.events.TileUpdatedEvent, this.tileUpdatedCallback.bind(this));
 
-  this.possibleActions = ko.observableArray();
-  var possibleActions = this.gem.rulebook.possibleActions('tile');
-  var actionFacets = goog.array.map(possibleActions, z.facet.actionFactory);
-  this.possibleActions.push(actionFacets);
+  this.SetPossibleActions();
 };
 
 z.facet.TileFacet.prototype.getTile = function () {
   return this.map.getTile(this.x, this.y);
+};
+
+z.facet.SetPossibleActions = function () {
+  this.possibleActions = ko.observableArray();
+  var possibleActions = this.gem.rulebook.possibleActions('Tile', tile);
+  var self = this;
+  var actionFacets = goog.array.map(possibleActions, function (action) {
+    return new z.facet.ActionFacet(gem, this, action)
+  });
+  this.possibleActions.push(actionFacets);
 };
 
 z.facet.TileFacet.prototype.tileUpdatedCallback = function (tileUpdatedEvent) {

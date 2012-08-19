@@ -10,8 +10,8 @@ goog.require('z.facet.ContextMenuFacet');
  */
 z.facet.Gem = function (evr, map, rulebook) {
   this.evr = evr;
-  this.contextMenuFacet = new z.facet.ContextMenuFacet(this.evr, rulebook);
-  this.mapFacet = new z.facet.MapFacet(this.evr, map);
+  this.contextMenuFacet = new z.facet.ContextMenuFacet(this, rulebook);
+  this.mapFacet = new z.facet.MapFacet(this, map);
 
   this.focusedTile = ko.observable();
 
