@@ -6,8 +6,8 @@ z.facet.ActionFacet = function (gem, source, action) {
   this.gem = gem;
   this.source = source;
   this.action = action;
-  this.title = aciton.title;
-  this.description = action.description;
+  this.title =  ko.observable(action.title);
+  this.description = ko.observable(action.description);
 };
 
 z.facet.ActionFacet.prototype.start = function () {
@@ -28,4 +28,5 @@ z.facet.ActionFacet.prototype.redo = function () {
 
 z.facet.ActionFacet.prototype._commit = function () {
   //commit via evr in gem or something else?
+
 };
