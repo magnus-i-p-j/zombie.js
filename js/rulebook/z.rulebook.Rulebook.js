@@ -1,4 +1,4 @@
-bgoog.provide("z.rulebook.Rulebook");
+goog.provide("z.rulebook.Rulebook");
 
 goog.require("z.rulebook.improvements");
 
