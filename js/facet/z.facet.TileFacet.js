@@ -25,7 +25,7 @@ z.facet.TileFacet.prototype.getTile = function () {
 z.facet.TileFacet.prototype.SetPossibleActions = function () {
   var possibleActions = this.gem.rulebook.possibleActions('Tile', this.getTile());
   var actionFacets = goog.array.map(possibleActions, function (action) {
-    return new z.facet.ActionFacet(self.gem, self, action)
+    return new z.facet.ActionFacet(this.gem, this, action)
   }, this);
   this.possibleActions = ko.observableArray(actionFacets);
 };

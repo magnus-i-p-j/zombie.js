@@ -1,14 +1,24 @@
-goog.provide("z.rulebook.Rulebook");
+bgoog.provide("z.rulebook.Rulebook");
 
-goog.require("z.rulebook.projects.SpikedPit");
+goog.require("z.rulebook.improvements");
+
 
 z.rulebook.Rulebook = function () {
 };
 
-z.rulebook.Rulebook.prototype.possibleActions = function (entity, instance) {
-  var actions = [];
-  if (entity === 'Tile' && instance.terrain === "grass") {
-     actions.push(new z.rulebook.projects.SpikedPit());
-  }
+z.rulebook.Rulebook.prototype.GetActionSpecifications = function (entity) {
+  var actions = {};
+  actions['improvements'] =
+    goog.array.filter(z.rulebook.improvements, this.checkPrerequisites(entity));
   return actions;
+};
+
+z.rulebook.Rulebook.prototype.checkPrerequisites = function (entity) {
+  return function (action) {
+    var applicable = false;
+    if(action.prerequisites.hasOwnProperty('entity') ){
+         applicable = action.prerequisites.entity === entity;
+    }
+    return applicable;
+  }
 };
