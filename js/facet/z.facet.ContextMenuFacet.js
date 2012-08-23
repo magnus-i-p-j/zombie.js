@@ -1,5 +1,4 @@
 goog.provide('z.facet.ContextMenuFacet');
-goog.require('goog');
 goog.require('z.entities.Tile');
 goog.require('z.rulebook.Rulebook');
 //Wildcard for require?

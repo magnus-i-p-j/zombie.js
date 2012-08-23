@@ -4,10 +4,9 @@ goog.require('z.client.actions.Action');
 goog.require('z.client.actions.ActionResult');
 
 z.client.actions.ConstructImprovement = function(improvement){
-  z.actions.Action.call(this, improvement);
+  goog.base(this, improvement);
 };
-
-z.client.actions.ConstructImprovement.prototype = new z.actions.Action();
+goog.inherits(z.client.actions.ConstructImprovement, z.client.actions.Action);
 
 z.client.actions.ConstructImprovement.prototype.execute = function(source){
   var result = z.actions.ActionResult(this);
@@ -15,12 +14,13 @@ z.client.actions.ConstructImprovement.prototype.execute = function(source){
 
   //Here we can gather all extra information needed, open additional ui:s etc.
   var target = source;
-  result.target = target;
+  result.target = source;
 
 
 
-  source.acceptResult(source);
-  target.acceptResult(this.improvement);
+  source.acceptResult(result);
+  target.acceptResult(result);
+
   //And result could be something more...
   return result;
 };

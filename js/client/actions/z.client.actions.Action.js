@@ -24,4 +24,5 @@ z.client.action.Action.prototype.canExecute = function(instance){
       }
     }
   }
+  return canExecute;
 };
