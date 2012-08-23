@@ -26,5 +26,4 @@ z.facet.ActionFacet.prototype.redo = function () {
 
 z.facet.ActionFacet.prototype._commit = function () {
   //commit via evr in gem or something else?
-
 };
