@@ -39,4 +39,6 @@ z.client.Client.prototype.startGame = function (gameId) {
 
   mapWidget.claim('map');
   ko.applyBindings(gem, this.targetElement);
+
+
 };

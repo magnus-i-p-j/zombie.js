@@ -1,8 +1,6 @@
 goog.provide('z.facet.ContextMenuFacet');
 goog.require('z.entities.Tile');
 goog.require('z.rulebook.Rulebook');
-//Wildcard for require?
-goog.require("z.rulebook.projects.SpikedPit");
 
 z.facet.ContextMenuFacet = function (gem) {
   this.gem = gem;

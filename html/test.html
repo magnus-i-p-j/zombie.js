@@ -8,7 +8,7 @@
 <div id="scroll_test" ><img
         src="img/test.jpg"
         alt=""
-        class="scrollable">
+        class="scrollable" id="boo">
 </div>
 <script src="../libs/less-1.3.0.min.js"></script>
 <script src="../libs/jquery-1.7.2.js"></script>
@@ -22,7 +22,8 @@
 </script>
 <script>
   var el = goog.dom.getElement('scroll_test');
-  var sc = new mugd.ui.MapScroller(el, document.body);
+  var el2 = goog.dom.getElement('boo');
+  var sc = new mugd.ui.MapScroller(el, el2);
 </script>
 </body>
 </html>

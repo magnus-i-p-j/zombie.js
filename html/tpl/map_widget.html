@@ -1,20 +1,22 @@
-<div class="map_widget" data-bind="with: mapFacet">
-  <div data-bind="foreach: visibleTiles">
-    <div data-bind="attr: { class: terrain() + ' tile', 'data-x': x, 'data-y': y },
+<div class="scrollable" id="map_scroll" >
+  <div class="map_widget" data-bind="with: mapFacet">
+    <div data-bind="foreach: visibleTiles">
+      <div data-bind="attr: { class: terrain() + ' tile', 'data-x': x, 'data-y': y },
       style: {
         top: $parent.computeScreenPositionY($data),
         left: $parent.computeScreenPositionX($data)
       }">
-      <div class="center_text">
-        (<span data-bind="text: x"></span>, <span data-bind="text: y"></span>)
+        <div class="center_text">
+          (<span data-bind="text: x"></span>, <span data-bind="text: y"></span>)
+        </div>
       </div>
     </div>
-  </div>
-  <div class="tile focusedTile"
-       data-bind="visible: $root.focusedTile,
+    <div class="tile focusedTile"
+         data-bind="visible: $root.focusedTile,
         style: {
           top: $root.focusedTile() ? computeScreenPositionY($root.focusedTile()) : 0,
           left: $root.focusedTile() ? computeScreenPositionX($root.focusedTile()) : 0
         }">
+    </div>
   </div>
 </div>

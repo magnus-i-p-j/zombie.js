@@ -1,4 +1,4 @@
-goog.provide('z.client.action.Action');
+goog.provide('z.client.actions.Action');
 
 goog.require('goog.array');
 

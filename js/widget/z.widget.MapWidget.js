@@ -8,6 +8,7 @@ goog.require('goog.math');
 goog.require('goog.math.Coordinate');
 goog.require('z.client.events.TileFocusEvent');
 goog.require('z.client.events.ShowContextMenuEvent');
+goog.require('mugd.ui.MapScroller');
 
 z.widget.MapWidget = function (evr, gem) {
   this.evr = evr;
@@ -25,8 +26,8 @@ z.widget.MapWidget.prototype.claim = function (targetId) {
   goog.events.listen(this.targetElement, goog.events.EventType.CONTEXTMENU, this.onTileClicked, true, this);
   goog.events.listen(this.targetElement, goog.events.EventType.CONTEXTMENU, this.onShowContextMenu, true, this);
 
-  // Stop trying to drag pictures.
-  goog.events.listen(this.targetElement, goog.events.EventType.MOUSEDOWN, goog.events.Event.preventDefault, false);
+  new mugd.ui.MapScroller(this.targetElement, goog.partial(goog.dom.getElement, ['map_scroll']));
+
   // Prevent standard context menu from showing.
   goog.events.listen(this.targetElement, goog.events.EventType.CONTEXTMENU, goog.events.Event.preventDefault, false);
 };

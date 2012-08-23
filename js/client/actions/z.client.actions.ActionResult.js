@@ -1,4 +1,4 @@
-goog.provide('z.actions.ActionResult')
+goog.provide('z.client.actions.ActionResult');
 
 z.actions.ActionResult = function(action){
   this.action = action;
