@@ -13,8 +13,12 @@ z.facet.TileFacet = function (gem, x, y) {
 
   this.terrain = ko.observable(tile.terrain);
 
+  this.actions =
+
   gem.evr.subscribe(z.client.events.TileUpdatedEvent, this.tileUpdatedCallback.bind(this));
 };
+
+
 
 z.facet.TileFacet.prototype.getTile = function () {
   return this.map.getTile(this.x, this.y);

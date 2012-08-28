@@ -1,6 +1,7 @@
 goog.provide('z.facet.ContextMenuFacet');
 goog.require('z.entities.Tile');
 goog.require('z.rulebook.Rulebook');
+goog.require('goog.array')          ;
 
 z.facet.ContextMenuFacet = function (gem) {
   this.gem = gem;
@@ -10,13 +11,26 @@ z.facet.ContextMenuFacet = function (gem) {
 };
 
 z.facet.ContextMenuFacet.prototype.showContextMenuCallback = function (showContextMenuEvent) {
+  this.actions.removeAll();
   var ctx = showContextMenuEvent.data.context;
   if (ctx) {
-    if(ctx[0].possibleActions()[0]){
-      console.log(ctx[0].possibleActions()[0].title());
-    }
+    var specifications = this._getContextualActions(ctx);
+    goog.array.forEach(specifications, function(s){
+      var facet = new z.client.facet.ActionFacet(this.gem, this, s);
+      this.actions.push(facet);
+    } , this);
     this._show(showContextMenuEvent.position);
   }
+};
+
+z.facet.ContextMenuFacet.prototype._getContextualActions = function(ctx){
+  var actions = [];
+  //The rulebook should be exposed via the session. And the session should be accessible globally.
+  var rulebook = this.gem.rulebook;
+  goog.array.forEach(ctx, function(c){
+    actions.concat(rulebook.getActionSpecifications(c));
+  });
+  return actions;
 };
 
 z.facet.ContextMenuFacet.prototype._show = function (position) {

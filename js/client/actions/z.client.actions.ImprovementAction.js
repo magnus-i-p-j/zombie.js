@@ -13,6 +13,7 @@ z.client.actions.ConstructImprovement.prototype.execute = function(source){
   result.source = source;
 
   //Here we can gather all extra information needed, open additional ui:s etc.
+  //Or should this be done somewhere else... How do we decide on the target in other instances?
   var target = source;
   result.target = source;
 

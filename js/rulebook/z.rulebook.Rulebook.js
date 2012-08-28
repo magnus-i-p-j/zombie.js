@@ -6,7 +6,7 @@ goog.require("z.rulebook.improvements");
 z.rulebook.Rulebook = function () {
 };
 
-z.rulebook.Rulebook.prototype.GetActionSpecifications = function (entity) {
+z.rulebook.Rulebook.prototype.getActionSpecifications = function (entity) {
   var actions = {};
   actions['improvements'] =
     goog.array.filter(z.rulebook.improvements, this.checkPrerequisites(entity));

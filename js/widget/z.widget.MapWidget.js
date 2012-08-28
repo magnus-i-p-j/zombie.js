@@ -26,7 +26,7 @@ z.widget.MapWidget.prototype.claim = function (targetId) {
   goog.events.listen(this.targetElement, goog.events.EventType.CONTEXTMENU, this.onTileClicked, true, this);
   goog.events.listen(this.targetElement, goog.events.EventType.CONTEXTMENU, this.onShowContextMenu, true, this);
 
-  new mugd.ui.MapScroller(this.targetElement, goog.partial(goog.dom.getElement, ['map_scroll']));
+  //new mugd.ui.MapScroller(this.targetElement, goog.partial(goog.dom.getElement, ['map_scroll']));
 
   // Prevent standard context menu from showing.
   goog.events.listen(this.targetElement, goog.events.EventType.CONTEXTMENU, goog.events.Event.preventDefault, false);

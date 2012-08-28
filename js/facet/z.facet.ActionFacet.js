@@ -6,6 +6,7 @@ z.facet.ActionFacet = function (gem, source, action) {
   this.action = action;
   this.title =  ko.observable(action.title);
   this.description = ko.observable(action.description);
+  this.enabled = ko.observable(action.canExecute(source));
 };
 
 z.facet.ActionFacet.prototype.start = function () {
@@ -13,17 +14,7 @@ z.facet.ActionFacet.prototype.start = function () {
   //result = ActionResult? -> Can be committed to the world.
   this.result = this.action.execute(this.source);
   if (this.result) {
-    this._commit();
+    this.gem.evr.publish(new z.client.events.ActionExecutedEvent(this, result));
   }
 };
 
-z.facet.ActionFacet.prototype.redo = function () {
-  //redo the action with all the previous choices
-  if (this.result) {
-    this._commit();
-  }
-};
-
-z.facet.ActionFacet.prototype._commit = function () {
-  //commit via evr in gem or something else?
-};
