@@ -3,6 +3,7 @@ goog.provide('z.engine.World');
 goog.require('z.engine.world.EntityFactory');
 goog.require('z.entities.Actor');
 goog.require('goog.array');
+goog.require('mugd.utils.SimplexNoise');
 
 /**
  * @constructor
@@ -32,35 +33,25 @@ z.engine.World.prototype.tick = function () {
 };
 
 z.engine.World.prototype.generateTiles = function () {
-  var self = this;
-  var source = 'wwwggwggwgwggw\nggwggwgwgwgwgw\ngwgwgwgwgwgwwww\ngggwgggggwggwgwggwg';
-  var left = -10;
+  var noise = new mugd.utils.SimplexNoise();
+  var scale = .1;
   var top = -10;
-  var c = left;
-  var r = top;
-  var terrainLookup = {
-    g:'grass',
-    w:'water'
-  };
+  var right = 11;
+  var bottom = 11;
+  var left = -10;
+  var waterLevel = -.2;
+  var hillLevel = .6;
 
-  function parseSourceItem(item) {
-    var terrain = terrainLookup[item];
-    if (!terrain) {
-      terrain = 'unknown';
+  for (var y = top; y < bottom; y++) {
+    for (var x = left; x < right; x++) {
+      var height = noise.noise(x * scale, y * scale);
+      if (height < waterLevel) {
+        this.tiles.push(this._entityFactory.createTile(x, y, 'water'));
+      } else if (height > hillLevel) {
+        this.tiles.push(this._entityFactory.createTile(x, y, 'hill'));
+      } else {
+        this.tiles.push(this._entityFactory.createTile(x, y, 'grass'));
+      }
     }
-    return terrain;
   }
-
-  goog.array.forEach(source.split(''), function (item) {
-    var terrain;
-    if (item === '\n') {
-      r += 1;
-      c = left;
-    } else {
-      terrain = parseSourceItem(item);
-      self.tiles.push(self._entityFactory.createTile(c, r, terrain));
-      c += 1;
-    }
-  });
-
 };
