@@ -23,28 +23,38 @@ mugd.ui.MapScroller = function (scrollSource, getScrollMover) {
    */
   this.handler = new goog.events.EventHandler(this);
 
-  this.handler.listenOnce(this.init, goog.events.EventType.MOUSEDOWN, this.mouseDown);
+  this.handler.listenOnce(this.scrollStarter, goog.events.EventType.MOUSEDOWN, this.init);
 };
+goog.inherits(mugd.ui.MapScroller, goog.events.EventTarget);
 
-mugd.ui.MapScroller.prototype.init = function () {
+/**
+ * @param {!goog.events.Event} e
+ */
+mugd.ui.MapScroller.prototype.init = function (e) {
   this.mover = this.getScrollMover();
-  if ( this.mover ) {
+  if (this.mover) {
     this.handler.listen(this.scrollStarter, goog.events.EventType.MOUSEDOWN, this.mouseDown);
-    this.handler.listen(this.scrollStarter, [goog.events.EventType.MOUSEUP, goog.events.EventType.MOUSEOUT], this.mouseUp);
+    this.handler.listen(this.scrollStarter, goog.events.EventType.MOUSEUP, this.mouseUp);
+    this.handler.listen(this.scrollStarter, goog.events.EventType.MOUSEOUT, this.mouseOut);
+    delete this.getScrollMover;
+    this.mouseDown(e);
   } else {
-    this.handler.listenOnce(this.init, goog.events.EventType.MOUSEDOWN, this.mouseDown);
+    this.handler.listenOnce(this.scrollStarter, goog.events.EventType.MOUSEDOWN, this.init);
   }
 };
 
-goog.inherits(mugd.ui.MapScroller, goog.events.EventTarget);
-
+/**
+ * @inheritDoc
+ */
 mugd.ui.MapScroller.prototype.disposeInternal = function () {
   goog.base(this, 'disposeInternal');
   this.handler.dispose();
   this.scrollStarter = null;
 };
 
-
+/**
+ * @param {!goog.events.Event} e
+ */
 mugd.ui.MapScroller.prototype.mouseDown = function (e) {
   this.startMouse = this.getMousePos(e);
   this.handler.listen(this.scrollStarter, goog.events.EventType.MOUSEMOVE, this.mouseMove);
@@ -56,9 +66,21 @@ mugd.ui.MapScroller.prototype.mouseUp = function () {
   this.handler.unlisten(this.scrollStarter, goog.events.EventType.MOUSEMOVE, this.mouseMove);
 };
 
+/**
+ * @param {!goog.events.Event} e
+ */
+mugd.ui.MapScroller.prototype.mouseOut = function (e) {
+  if (e.currentTarget === e.target) {
+    this.mouseUp();
+  }
+};
+
+/**
+ * @param {!goog.events.Event} e
+ */
 mugd.ui.MapScroller.prototype.mouseMove = function (e) {
   var currentMouse = this.getMousePos(e);
-  var offset = goog.math.Coordinate.difference(currentMouse, this.startMouse );
+  var offset = goog.math.Coordinate.difference(currentMouse, this.startMouse);
   var newPos = goog.math.Coordinate.sum(offset, this.startScroll);
   this.setPos(newPos);
 };

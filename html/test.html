@@ -1,11 +1,12 @@
 <!doctype html>
 <html>
 <head>
+  <META CHARSET="utf-8">
   <title>Test</title>
   <link rel="stylesheet/less" type="text/css" href="../css/test.less">
 </head>
 <body>
-<div id="scroll_test" ><img
+<div id="scroll_test"><img
         src="img/test.jpg"
         alt=""
         class="scrollable" id="boo">
@@ -22,7 +23,7 @@
 </script>
 <script>
   var el = goog.dom.getElement('scroll_test');
-  var el2 = goog.dom.getElement('boo');
+  var el2 = goog.partial(goog.dom.getElement, 'boo');
   var sc = new mugd.ui.MapScroller(el, el2);
 </script>
 </body>
