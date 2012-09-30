@@ -3,6 +3,12 @@ goog.provide('z.facet.TileFacet');
 goog.require('z.client.events.TileUpdatedEvent');
 goog.require('z.facet.ActionFacet');
 
+z.facet.TileFacet.actions = (
+  function(){
+
+  }
+)();
+
 z.facet.TileFacet = function (gem, x, y) {
   this.x = x;
   this.y = y;
@@ -12,9 +18,6 @@ z.facet.TileFacet = function (gem, x, y) {
   var tile = this.getTile();
 
   this.terrain = ko.observable(tile.terrain);
-
-  this.actions =
-
   gem.evr.subscribe(z.client.events.TileUpdatedEvent, this.tileUpdatedCallback.bind(this));
 };
 
