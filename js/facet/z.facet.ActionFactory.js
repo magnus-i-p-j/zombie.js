@@ -1,4 +1,4 @@
-goog.provide('z.facet.actionFactory');
+goog.provide('z.facet.ActionFactory');
 
 z.facet.ActionFactory = function () {
   this._actionCache = new {};

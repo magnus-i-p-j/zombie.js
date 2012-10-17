@@ -2,7 +2,6 @@ goog.provide("z.rulebook.Rulebook");
 
 goog.require("z.rulebook.improvements");
 
-
 z.rulebook.Rulebook = function () {
 };
 

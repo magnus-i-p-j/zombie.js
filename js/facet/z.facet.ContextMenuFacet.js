@@ -11,6 +11,7 @@ z.facet.ContextMenuFacet = function (gem) {
 };
 
 z.facet.ContextMenuFacet.prototype.showContextMenuCallback = function (showContextMenuEvent) {
+  this._hide();
   this.actions.removeAll();
   var ctx = showContextMenuEvent.data.context;
   if (ctx) {
