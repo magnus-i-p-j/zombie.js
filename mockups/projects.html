@@ -27,17 +27,17 @@
     </ul>
   </section>
   <section class="sidebar">
-    <section class="group unemployed">
+    <section class="group all">
       <h1>All</h1>
       <ul class="content" data-bind="foreach: resources">
-        <div data-bind="template: {name:'person-template'}"></div>
+        <li data-bind="template: {name:'person-template'}"></li>
       </ul>
     </section>
     <section class="group unemployed">
       <h1>Unemployed</h1>
       <ul class="content" data-bind="foreach: resources">
       <!-- ko notif: job() -->
-        <div data-bind="template: {name:'person-template', if: ! job()}"></div>
+        <li data-bind="template: {name:'person-template'}"></li>
        <!-- /ko -->
       </ul>
     </section>
