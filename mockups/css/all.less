@@ -1,0 +1,58 @@
+#main { position: relative; border: 2px inset silver; width: 800px; height: 600px; }
+section h1 { font-size: 100%; font-weight: normal; margin: 0; padding: 0; }
+
+@windowWidth: 150px;
+@windowBackground: #fcfdff;
+@windowColor: #000000;
+@windowBorder: 1px solid #c0c0c0;
+@groupBorder: 1px solid #fbdbff;
+@groupTitleHeight: 12px;
+@iconHeight: 30px;
+.window {
+  background: @windowBackground;
+  color: @windowColor;
+  border: @windowBorder;
+  position: absolute;
+  width: @windowWidth;
+  > h1 {
+    text-align: center;
+    border-bottom: @windowBorder;
+  }
+}
+
+.sidebar {
+  background: @windowBackground;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: @windowWidth;
+  border-left: @windowBorder;
+  > h1 {
+    text-align: center;
+    border-bottom: @windowBorder;
+  }
+}
+.content {
+  margin: 5px;
+  padding: 0;
+  list-style: none;
+}
+
+.portrait.icon { max-height: @iconHeight; }
+.name { text-transform: capitalize; }
+.group {
+  margin: @groupTitleHeight / 2 3px;
+  padding: 3px;
+  border: @groupBorder;
+  position: relative;
+  > h1 {
+    position: absolute;
+    top: @groupTitleHeight / -2;
+    font-size: @groupTitleHeight;
+    height: @groupTitleHeight;
+    background: @windowBackground;
+    &:before { content: '⊟';}
+  }
+
+}
