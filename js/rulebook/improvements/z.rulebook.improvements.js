@@ -10,16 +10,17 @@ goog.provide("z.rulebook.improvements");
 //resources:
 //labour:int
 
-z.rulebook.improvements =  [
-    {
-      category: 'improvement',
-      title:'A spiked pit.',
-      description:'A spiked pit. Good for tripping up zombies and nailing them down.',
-      prerequisites:{
-        entity : 'Tile',
-        conditions: { terrain :'grass' }
-      },
-      resources:{},
-      labour:3
-    }
-  ];
+z.rulebook.improvements = [
+  {
+    category:'improvement',
+    title:'A spiked pit.',
+    description:'A spiked pit. Good for tripping up zombies and nailing them down.',
+    prerequisites:{
+      entity:'Tile',
+      conditions:{ terrain:'grass' }
+    },
+    assets:{},
+    labour:3,
+    type:'spiked_pit'
+  }
+];
