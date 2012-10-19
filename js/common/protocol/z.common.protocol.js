@@ -6,9 +6,6 @@ goog.provide('z.common.protocol');
 * }} */
 z.common.protocol.clientEndTurn;
 
-/** @typedef {string} */
-z.util.guid;
-
 /** @typedef {{
 * identifier: (z.util.guid|z.common.protocol.projectParams),
 * resources: z.common.protocol.resource[],

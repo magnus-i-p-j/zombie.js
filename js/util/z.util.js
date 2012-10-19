@@ -169,3 +169,7 @@ z.util.getGuid = function (prefix, separator) {
  * @const
  */
 z.util.EMPTY_GUID = '00000000-0000-0000-0000-000000000000';
+
+
+/** @typedef {string} */
+z.util.guid;
