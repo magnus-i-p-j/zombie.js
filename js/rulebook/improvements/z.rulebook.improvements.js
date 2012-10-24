@@ -21,6 +21,6 @@ z.rulebook.improvements = [
     },
     assets:{},
     labour:3,
-    type:'spiked_pit'
+    type:'spiked_pit_improvement'
   }
 ];

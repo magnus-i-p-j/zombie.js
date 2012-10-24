@@ -2,23 +2,18 @@ goog.provide('z.engine.world.EntityFactory');
 
 goog.require('z.entities.Tile');
 goog.require('z.util');
-
-z.engine.world.EntityFactory = function (world, rulebook) {
-  this.world = world;
-
-  this.Tile = function(guid, x, y, terrain){
-    goog.base(this, guid, x, y, terrain);
-  };
-  goog.inherits(this.Tile, z.entities.Tile);
-  this.Tile.prototype.actionSpecifications = [];
-
+/**
+ * @param {!z.rulebook.Rulebook} rulebook
+ */
+z.engine.world.EntityFactory = function (rulebook) {
+  this.rulebook = rulebook;
 };
 
 z.engine.world.EntityFactory.prototype.createActor = function () {
 };
 
-z.engine.world.EntityFactory.prototype.createTile = function (x, y, terrain) {
-  var tile = new this.Tile(z.util.getGuid(), x, y, terrain);
+z.engine.world.EntityFactory.prototype.createTile = function (terrain, x, y) {
+  var meta = this.rulebook.getMeta(terrain);
 
-  return tile;
+  return new z.entities.Tile(z.util.getGuid(), meta, x, y);
 };

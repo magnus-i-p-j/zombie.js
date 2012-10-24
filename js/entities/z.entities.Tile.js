@@ -1,17 +1,23 @@
 goog.provide('z.entities.Tile');
-goog.require('z.rulebook.Rulebook');
+goog.require('z.entities.Entity');
 
-z.entities.Tile = function (guid, x, y, terrain) {
+/**
+ * @param {!z.utils.guid} guid
+ * @param {!z.rulebook.meta} meta
+ * @param {int} x
+ * @param {int} y
+ * @param {string} terrain
+ */
+z.entities.Tile = function (guid, meta, x, y, terrain) {
+  goog.base(this, guid, meta);
   if (!z.entities.Tile.isCssRegex.test(terrain)) {
     throw { name:'Not a css class' };
   }
   this.terrain = terrain;
   this.x = x;
   this.y = y;
-  this.guid = guid;
 };
-
-z.entities.Tile.prototype.actions = [];
+goog.inherits(z.entities.Tile, z.entities.Entity);
 
 z.entities.Tile.isCssRegex = /^[_a-zA-Z]+[_a-zA-Z0-9-]*$/;
 

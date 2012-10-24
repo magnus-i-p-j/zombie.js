@@ -15,6 +15,8 @@ z.rulebook.meta;
  */
 z.rulebook.category = {
   IMPROVEMENT: 'improvement',
-  TERRAIN: 'terrain'
+  TERRAIN: 'terrain',
+  ITEM: 'item',
+  CHARACTER: 'character'
 };
 
