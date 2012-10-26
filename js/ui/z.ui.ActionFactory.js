@@ -1,8 +1,15 @@
 goog.provide('z.facet.ActionFactory');
 
 z.facet.ActionFactory = function () {
-  this._actionCache = new {};
+  this._actionDict = {};
 };
+
+/**
+ * @param {z.rulebook.meta} meta
+ */
+z.facet.ActionFactory.prototype.getActions = function(meta){
+
+}
 
 z.facet.ActionFactory.prototype.CreateAction = function(specification){
   var action;

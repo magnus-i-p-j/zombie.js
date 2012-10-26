@@ -960,7 +960,7 @@ goog.locale.nativeNameConstants = {
                 'gay': 'Gayo',
                 'gba': 'Gbaya',
                 'gd': 'Scottish Gaelic',
-                'gem': 'Germanic Language',
+                "_gem": 'Germanic Language',
                 'gez': '\u130d\u12d5\u12dd\u129b',
                 'gil': 'Gilbertese',
                 'gl': 'galego',

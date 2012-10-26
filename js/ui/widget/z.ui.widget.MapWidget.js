@@ -12,7 +12,7 @@ goog.require('mugd.ui.MapScroller');
 
 z.widget.MapWidget = function (evr, gem) {
   this.evr = evr;
-  this.gem = gem;
+  this._gem = gem;
 };
 
 z.widget.MapWidget.prototype.template = 'map_widget';
@@ -35,7 +35,7 @@ z.widget.MapWidget.prototype.claim = function (targetId) {
 z.widget.MapWidget.prototype.onTileClicked = function (e) {
   var element = this.findTileElement(e);
   if (element) {
-    var adjacent = this.gem.mapFacet.getAdjacent(parseInt(element.dataset.x), parseInt(element.dataset.y));
+    var adjacent = this._gem.mapFacet.getAdjacent(parseInt(element.dataset.x), parseInt(element.dataset.y));
     var elements = goog.array.map(adjacent, function (a) {
       return goog.dom.query('div[data-x = ' + a.x + '][data-y = ' + a.y + ']', e.currentTarget)[0];
     });
@@ -43,7 +43,7 @@ z.widget.MapWidget.prototype.onTileClicked = function (e) {
 
     var selected = this.findClosestElement(new goog.math.Coordinate(e.clientX, e.clientY), elements);
 
-    this.evr.publish(new z.client.events.TileFocusEvent(this, this.gem.mapFacet.getTileFacet(parseInt(selected.dataset.x), parseInt(selected.dataset.y))));
+    this.evr.publish(new z.client.events.TileFocusEvent(this, this._gem.mapFacet.getTileFacet(parseInt(selected.dataset.x), parseInt(selected.dataset.y))));
   }
 };
 
@@ -52,7 +52,7 @@ z.widget.MapWidget.prototype.findTileElement = function (e, element) {
     element = element || e.target;
 
     if (goog.dom.classes.has(element, 'focusedTile')) {
-      var focused = this.gem.focusedTile();
+      var focused = this._gem.focusedTile();
       element = goog.dom.query('div[data-x = ' + focused.x + '][data-y = ' + focused.y + ']', this.targetElement.firstChild)[0];
     }
 
@@ -90,7 +90,7 @@ z.widget.MapWidget.prototype.findClosestElement = function (center, elements) {
 z.widget.MapWidget.prototype.onShowContextMenu = function (e) {
   var element = this.findTileElement(e);
   if (element) {
-    var facet = this.gem.mapFacet.getTileFacet(parseInt(element.dataset.x), parseInt(element.dataset.y));
+    var facet = this._gem.mapFacet.getTileFacet(parseInt(element.dataset.x), parseInt(element.dataset.y));
     this.evr.publish(new z.client.events.ShowContextMenuEvent(this, [facet], new goog.math.Coordinate(e.clientX, e.clientY)));
   }
 };

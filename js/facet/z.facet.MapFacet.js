@@ -10,7 +10,7 @@ goog.require('goog.array');
  * @param {z.util.Rectangle} boundingBox
  */
 z.facet.MapFacet = function (gem, map, boundingBox) {
-  this.gem = gem;
+  this._gem = gem;
   this.evr = gem.evr;
   this.map = map;
   this.visibleTiles = ko.observableArray();
@@ -24,7 +24,7 @@ z.facet.MapFacet.prototype.setBoundingBox = function (boundingbox) {
   this.visibleTiles.removeAll();
   for (var y = boundingbox.bottom; y <= boundingbox.top; y++) {
     for (var x = boundingbox.left; x <= boundingbox.right; x++) {
-      this.visibleTiles.push(new z.facet.TileFacet(this.gem, x, y));
+      this.visibleTiles.push(new z.facet.TileFacet(this._gem, x, y));
     }
   }
 };

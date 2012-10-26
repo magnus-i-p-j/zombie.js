@@ -1,45 +1,81 @@
 goog.provide('z.facet.ContextMenuFacet');
 goog.require('z.entities.Tile');
 goog.require('z.rulebook.Rulebook');
-goog.require('goog.array')          ;
+goog.require('goog.array');
 
-z.facet.ContextMenuFacet = function (gem) {
-  this.gem = gem;
+/**
+ * @param {!z.ui.ActionFactory} actionFactory
+ * @param {!z.facet.Gem} gem
+ * @constructor
+ */
+z.facet.ContextMenuFacet = function (actionFactory, gem) {
+
+  /**
+   * @type {!z.ui.ActionFactory}
+   * @private
+   */
+  this._actionFactory = actionFactory;
+
+  /**
+   * @type {!z.facet.Gem}
+   * @private
+   */
+  this._gem = gem;
+
   this.visible = ko.observable(false);
-  this.actions = ko.observableArray();
+
+  this.actionFacets = ko.observableArray();
   gem.evr.subscribe(z.client.events.ShowContextMenuEvent, goog.bind(this.showContextMenuCallback, this));
 };
 
+/**
+ * @param {!z.client.events.ShowContextMenuEvent} showContextMenuEvent
+ */
 z.facet.ContextMenuFacet.prototype.showContextMenuCallback = function (showContextMenuEvent) {
   this._hide();
-  this.actions.removeAll();
+  this.actionFacets.removeAll();
   var ctx = showContextMenuEvent.data.context;
   if (ctx) {
-    var specifications = this._getContextualActions(ctx);
-    goog.array.forEach(specifications, function(s){
-      var facet = new z.client.facet.ActionFacet(this.gem, this, s);
-      this.actions.push(facet);
-    } , this);
+    var actions = this._getContextualActions(ctx);
+    goog.array.forEach(actions, function (a) {
+      var facet = new z.client.facet.ActionFacet(this._gem, this, a);
+      this.actionFacets.push(facet);
+    }, this);
     this._show(showContextMenuEvent.position);
   }
 };
 
-z.facet.ContextMenuFacet.prototype._getContextualActions = function(ctx){
-  var actions = [];
-  //The rulebook should be exposed via the session. And the session should be accessible globally.
-  var rulebook = this.gem.rulebook;
-  goog.array.forEach(ctx, function(c){
-    actions.concat(rulebook.getActionSpecifications(c));
+/**
+ * @param {!z.entities.Entity[]} ctx
+ * @return {z.facet.ActionFacet[]} actions
+ * @private
+ */
+z.facet.ContextMenuFacet.prototype._getContextualActions = function (ctx) {
+  var actionFacets = [];
+  var actionFactory = this._actionFactory;
+  goog.array.forEach(ctx, function (c) {
+    var actions = actionFactory.getActions(c.meta);
+    goog.array.forEach(actions, function (a) {
+      var facet = new z.client.facet.ActionFacet(c, a);
+      actionFacets.push(facet);
+    });
   });
-  return actions;
+  return actionFacets;
 };
 
+/**
+ * @param {!goog.math.Coordinate} position
+ * @private
+ */
 z.facet.ContextMenuFacet.prototype._show = function (position) {
   this.position = position;
-  this.visible = true;
+  this.visible(true);
 };
 
+/**
+ * @private
+ */
 z.facet.ContextMenuFacet.prototype._hide = function () {
-  this.show = false;
+  this.visible(false);
   this.position = null;
 };

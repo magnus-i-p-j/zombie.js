@@ -7,6 +7,7 @@ goog.require('z.entities.Entity');
  * @param {int} x
  * @param {int} y
  * @param {string} terrain
+ * @constructor
  */
 z.entities.Tile = function (guid, meta, x, y, terrain) {
   goog.base(this, guid, meta);

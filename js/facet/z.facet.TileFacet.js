@@ -12,7 +12,7 @@ z.facet.TileFacet.actions = (
 z.facet.TileFacet = function (gem, x, y) {
   this.x = x;
   this.y = y;
-  this.gem = gem;
+  this._gem = gem;
   this.map = gem.map;
 
   var tile = this.getTile();

@@ -515,7 +515,7 @@ goog.locale.defaultLocaleNameConstants = {
     'gay': 'Gayo',
     'gba': 'Gbaya',
     'gd': 'Scottish Gaelic',
-    'gem': 'Germanic Language',
+    "_gem": 'Germanic Language',
     'gez': 'Geez',
     'gil': 'Gilbertese',
     'gl': 'Galician',
