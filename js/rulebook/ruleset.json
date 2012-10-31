@@ -1,5 +1,87 @@
 {
   "improvement":[
-
+    {
+      "type":"farm_build",
+      "name":"Build farm",
+      "description":"Plow a patch of land and plant some beets.",
+      "prerequisites":{
+        "terrain":["grass"]
+      },
+      "cost":{
+        "labour":10
+      },
+      "effect":{
+        "terrain":"farm"
+      },
+      "comment":"We could have a system where a project can degenerate to another project. Then this project; when complete becomes farm_tend, which in turn becomes farm_harvest ."
+    },
+    {
+      "type":"farm_harvest",
+      "name":"Harvest farm",
+      "description":"Harvest a patch of land and get some beets.",
+      "prerequisites":{
+        "terrain":["farm_ripe"]
+      },
+      "cost":{
+        "labour":10
+      },
+      "effect":{
+        "terrain":"grass",
+        "comment":"later, when we have the effects that describe it, adds food to stores"
+      }
+    },
+    {
+      "type":"farm_tend",
+      "name":"Tend farm",
+      "description":"Tend a patch of land and weed some beets.",
+      "prerequisites":{
+        "terrain":["farm"]
+      },
+      "cost":{
+        "labour":50,
+        "min_time": 5
+      },
+      "effect":{
+        "terrain":"farm_ripe",
+        "assets": {
+            "food": 300,
+            "comment": "We'll need to figure out the details later."
+          }
+      }
+    }
+  ],
+  "terrain":[
+    {
+      "type":"farm",
+      "name":"Farm",
+      "description":"A patch of land where some beets are growing."
+    },
+    {
+      "type":"farm_ripe",
+      "name":"Farm",
+      "description":"A patch of land where some beets ready for harvest."
+    },
+    {
+      "type":"grass",
+      "name":"Grass",
+      "description":"A patch of green grass, untouched by the zombie apocalypse."
+    },
+    {
+      "type":"water",
+      "name":"Water",
+      "description":"A patch of blue water, untouched by the zombie apocalypse."
+    },
+    {
+      "type":"hills",
+      "name":"Hills",
+      "description":"A patch of high hill, untouched by the zombie apocalypse."
+    }
+  ],
+  "asset":[
+    {
+      "type":"food",
+      "name":"Food",
+      "description":"Some generic post-apocalyptic food. The taste is indescribable (because there isn't any) and the contents is mostly beets."
+    }
   ]
 }
