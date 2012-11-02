@@ -1,42 +1,28 @@
 goog.provide('z.facet.ActionFactory');
 
-z.facet.ActionFactory = function () {
+/**
+ * @param {!z.rulebook.Rulebook} rulebook
+ * @constructor
+ */
+z.facet.ActionFactory = function (rulebook) {
   this._actionDict = {};
+  this._rulebook = rulebook;
 };
 
 /**
  * @param {z.rulebook.meta} meta
  */
-z.facet.ActionFactory.prototype.getActions = function(meta){
-
-}
-
-z.facet.ActionFactory.prototype.CreateAction = function(specification){
-  var action;
-  if(this._isCached(specification)){
-    action = this._get(specification);
-  }else{
-    this._set(specification);
-    action = this._get(specification);
+z.facet.ActionFactory.prototype.getActions = function (meta) {
+  if (!this._actionDict[meta.type]) {
+    this._actionDict[meta.type] = this._createAction(meta);
   }
-  return action;
+  return this._actionDict[meta.type];
 };
 
-z.facet.ActionFactory.prototype._isCached = function(specification){
-  return this._actionCache[specification.category][specification.title];
+/**
+ * @param {z.rulebook.meta} meta
+ */
+z.facet.ActionFactory.prototype._createAction = function (meta) {
+  // TODO: finish
 };
 
-z.facet.ActionFactory.prototype._get = function(specification){
-  return this._actionCache[specification.category][specification.title];
-};
-
-z.facet.ActionFactory.prototype._set = function(specification){
-  var action;
-  if(specification.category === "improvement"){
-    //Do some DI if more parameters are needed, but this will do for now.
-    action = new z.client.actions.ImprovementAction(specification);
-  }
-  if(action){
-    this._actionCache[specification.category][specification.title] = action;
-  }
-};

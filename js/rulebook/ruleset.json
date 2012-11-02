@@ -1,65 +1,86 @@
 {
   "improvement":[
     {
-      "type":"farm_build",
-      "name":"Build farm",
-      "description":"Plow a patch of land and plant some beets.",
+      "type":"secure_area",
+      "name":"Secure area",
+      "description":"Build a zombie-proofish fence around a tile and kill all zombies within.",
       "prerequisites":{
         "terrain":["grass"]
       },
       "cost":{
-        "labour":10
+        "skill":{
+          "zlaying":100,
+          "building":100
+        }
       },
       "effect":{
-        "terrain":"farm"
-      },
-      "comment":"We could have a system where a project can degenerate to another project. Then this project; when complete becomes farm_tend, which in turn becomes farm_harvest ."
-    },
-    {
-      "type":"farm_harvest",
-      "name":"Harvest farm",
-      "description":"Harvest a patch of land and get some beets.",
-      "prerequisites":{
-        "terrain":["farm_ripe"]
-      },
-      "cost":{
-        "labour":10
-      },
-      "effect":{
-        "terrain":"grass",
-        "comment":"later, when we have the effects that describe it, adds food to stores"
+        "terrain":"fenced_grass"
       }
     },
     {
-      "type":"farm_tend",
-      "name":"Tend farm",
-      "description":"Tend a patch of land and weed some beets.",
+      "type":"field_plant",
+      "name":"Plant field",
+      "description":"Plow a patch of land and plant some beets.",
       "prerequisites":{
-        "terrain":["farm"]
+        "terrain":["field"]
       },
       "cost":{
-        "labour":50,
-        "min_time": 5
+        "skill":{
+          "farming":100
+        }
       },
       "effect":{
-        "terrain":"farm_ripe",
-        "assets": {
-            "food": 300,
-            "comment": "We'll need to figure out the details later."
-          }
+        "improvement":"field_tend"
+      }
+    },
+    {
+      "type":"field_tend",
+      "name":"Tend field",
+      "description":"Tend a patch of land and weed some beets.",
+      "prerequisites":{
+        "disabled":true
+      },
+      "cost":{
+        "skill":{
+          "farming":10
+        },
+        "min_turns":5
+      },
+      "effect":{
+        "improvement":"field_harvest"
+      }
+    },
+    {
+      "type":"field_harvest",
+      "name":"Harvest field",
+      "description":"Harvest a patch of land and get some beets.",
+      "prerequisites":{
+        "disabled":true
+      },
+      "cost":{
+        "skill":{
+          "farming":100
+        },
+        "max_turns":2
+      },
+      "effect":{
+        "assets":{
+          "food":300,
+          "comment":"We'll need to figure out the details later."
+        }
       }
     }
   ],
   "terrain":[
     {
-      "type":"farm",
-      "name":"Farm",
+      "type":"field",
+      "name":"Field",
       "description":"A patch of land where some beets are growing."
     },
     {
-      "type":"farm_ripe",
-      "name":"Farm",
-      "description":"A patch of land where some beets ready for harvest."
+      "type":"fenced_grass",
+      "name":"Fenced grass",
+      "description":"A patch of land surrounded by wicked looking barbed wire fence. Some zombie bits are stuck in it"
     },
     {
       "type":"grass",
@@ -82,6 +103,14 @@
       "type":"food",
       "name":"Food",
       "description":"Some generic post-apocalyptic food. The taste is indescribable (because there isn't any) and the contents is mostly beets."
+    }
+  ],
+  "skills":[
+    {
+      "type":"zlaying",
+      "name":"Et cetera",
+      "description":"et cetera",
+      "model":"linear"
     }
   ]
 }

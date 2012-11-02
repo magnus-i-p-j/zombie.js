@@ -52,6 +52,7 @@ z.rulebook.category = {
   TERRAIN: 'terrain',
   ITEM: 'item',
   CHARACTER: 'character',
-  ASSET: 'asset'
+  ASSET: 'asset',
+  TECH: 'tech'
 };
 

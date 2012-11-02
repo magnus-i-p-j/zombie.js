@@ -37,10 +37,6 @@ z.facet.ContextMenuFacet.prototype.showContextMenuCallback = function (showConte
   var ctx = showContextMenuEvent.data.context;
   if (ctx) {
     var actions = this._getContextualActions(ctx);
-    goog.array.forEach(actions, function (a) {
-      var facet = new z.client.facet.ActionFacet(this._gem, this, a);
-      this.actionFacets.push(facet);
-    }, this);
     this._show(showContextMenuEvent.position);
   }
 };
@@ -56,8 +52,10 @@ z.facet.ContextMenuFacet.prototype._getContextualActions = function (ctx) {
   goog.array.forEach(ctx, function (c) {
     var actions = actionFactory.getActions(c.meta);
     goog.array.forEach(actions, function (a) {
-      var facet = new z.client.facet.ActionFacet(c, a);
-      actionFacets.push(facet);
+      if (a.isApplicable(c)) {
+        var facet = new z.client.facet.ActionFacet(c, a);
+        actionFacets.push(facet);
+      }
     });
   });
   return actionFacets;
