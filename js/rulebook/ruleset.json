@@ -38,7 +38,7 @@
       "name":"Tend field",
       "description":"Tend a patch of land and weed some beets.",
       "prerequisites":{
-        "disabled":true
+        "blocked":true
       },
       "cost":{
         "skill":{
@@ -55,7 +55,7 @@
       "name":"Harvest field",
       "description":"Harvest a patch of land and get some beets.",
       "prerequisites":{
-        "disabled":true
+        "blocked":true
       },
       "cost":{
         "skill":{

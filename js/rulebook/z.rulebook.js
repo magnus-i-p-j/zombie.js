@@ -1,4 +1,5 @@
 goog.provide('z.rulebook');
+goog.provide('z.rulebook.logic');
 
 /**
  * @typedef {{
@@ -56,3 +57,8 @@ z.rulebook.category = {
   TECH: 'tech'
 };
 
+z.rulebook.logic.prerequisites = {
+  'terrain':function (condition, target) {
+    return goog.array.contains(condition, target.terrain)
+  }
+};
