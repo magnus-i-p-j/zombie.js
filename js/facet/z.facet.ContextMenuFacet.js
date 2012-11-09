@@ -42,18 +42,18 @@ z.facet.ContextMenuFacet.prototype.showContextMenuCallback = function (showConte
 };
 
 /**
- * @param {!z.entities.Entity[]} ctx
+ * @param {!z.entities.Entity[]} context
  * @return {z.facet.ActionFacet[]} actions
  * @private
  */
-z.facet.ContextMenuFacet.prototype._getContextualActions = function (ctx) {
+z.facet.ContextMenuFacet.prototype._getContextualActions = function (context) {
   var actionFacets = [];
   var actionFactory = this._actionFactory;
-  goog.array.forEach(ctx, function (c) {
-    var actions = actionFactory.getActions(c.meta);
-    goog.array.forEach(actions, function (a) {
-      if (a.isApplicable(c)) {
-        var facet = new z.client.facet.ActionFacet(c, a);
+  goog.array.forEach(context, function (entity) {
+    var actions = actionFactory.getActions(entity.meta);
+    goog.array.forEach(actions, function (action) {
+      if (action.isApplicable(entity)) {
+        var facet = new z.client.facet.ActionFacet(entity, action);
         actionFacets.push(facet);
       }
     });

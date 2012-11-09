@@ -14,10 +14,7 @@ z.facet.ActionFactory = function (rulebook) {
  * @return {z.ui.Action[]}
  */
 z.facet.ActionFactory.prototype.getActions = function (meta) {
-  if (!this._actionDict[meta.type]) {
-    this._actionDict[meta.type] = this._createActions(meta);
-  }
-  return this._actionDict[meta.type];
+  return this._createActions(meta);
 };
 
 /**
@@ -25,7 +22,16 @@ z.facet.ActionFactory.prototype.getActions = function (meta) {
  * @return {z.ui.Action[]}
  */
 z.facet.ActionFactory.prototype._createActions = function (meta) {
-  // TODO: finish <---- REALLY! DO THIS! FFS!
-
+  var actions = [];
+  if (meta.category === z.rulebook.category.TERRAIN) {
+    goog.array.forEach(this._rulebook.improvements, function (improvement) {
+          actions.push(new z.client.actions.ActionCreateImprovement(improvement));
+        }
+    );
+  }
+//  else if (meta.category === z.rulebook.category.IMPROVEMENT) {
+//    actions.push(new z.client.actions.ActionShowImprovement());
+//  }
+  return actions;
 };
 

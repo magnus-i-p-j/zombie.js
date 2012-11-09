@@ -59,6 +59,6 @@ z.rulebook.category = {
 
 z.rulebook.logic.prerequisites = {
   'terrain':function (condition, target) {
-    return goog.array.contains(condition, target.terrain)
+    return goog.array.contains(condition, target.terrain);
   }
 };

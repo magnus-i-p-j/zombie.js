@@ -5,7 +5,6 @@ goog.provide('z.ui.Action');
  */
 z.ui.Action = function () {
 };
-
 z.ui.Action.prototype.isApplicable = function () {
   // TODO: finish
 };

@@ -1,6 +1,20 @@
 {
   "improvement":[
     {
+      "type":"look_at_area",
+      "name":"Look at area",
+      "description":"Look at stuff.",
+      "prerequisites":{
+        "terrain":["grass"]
+      },
+      "cost":{
+        "min_turns":5
+      },
+      "effect":{
+        "terrain":"watched_grass"
+      }
+    },
+    {
       "type":"secure_area",
       "name":"Secure area",
       "description":"Build a zombie-proofish fence around a tile and kill all zombies within.",
