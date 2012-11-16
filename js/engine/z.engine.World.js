@@ -6,9 +6,10 @@ goog.require('goog.array');
 goog.require('mugd.utils.SimplexNoise');
 
 /**
+ * @param {!z.rulebook.Rulebook} rulebook
  * @constructor
  */
-z.engine.World = function () {
+z.engine.World = function (rulebook) {
   this.playerActor = new z.entities.Actor();
   this.tiles = [];
   this._entityFactory = new z.engine.world.EntityFactory();

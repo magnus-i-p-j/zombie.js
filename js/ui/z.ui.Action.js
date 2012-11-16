@@ -5,6 +5,19 @@ goog.provide('z.ui.Action');
  */
 z.ui.Action = function () {
 };
-z.ui.Action.prototype.isApplicable = function () {
-  // TODO: finish
+
+/**
+ * @param {!z.entities.Entity} target
+ * @abstract
+ */
+z.ui.Action.prototype.canExecute = function (target) {
 };
+
+/**
+ * @param {!z.entities.Entity} target
+ * @abstract
+ */
+z.ui.Action.prototype.execute = function (target) {
+};
+
+

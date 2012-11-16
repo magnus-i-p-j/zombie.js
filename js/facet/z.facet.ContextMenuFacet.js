@@ -52,8 +52,8 @@ z.facet.ContextMenuFacet.prototype._getContextualActions = function (context) {
   goog.array.forEach(context, function (entity) {
     var actions = actionFactory.getActions(entity.meta);
     goog.array.forEach(actions, function (action) {
-      if (action.isApplicable(entity)) {
-        var facet = new z.client.facet.ActionFacet(entity, action);
+      var facet = new z.client.facet.ActionFacet(action, entity);
+      if (facet.canExecute()) {
         actionFacets.push(facet);
       }
     });

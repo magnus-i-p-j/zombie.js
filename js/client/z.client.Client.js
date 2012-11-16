@@ -1,6 +1,7 @@
 goog.provide('z.client.Client');
 
 goog.require('goog.dom');
+goog.require('goog.net.XhrIo');
 goog.require('z.engine.World');
 goog.require('z.client.User');
 goog.require('z.client.GameSession');
@@ -18,7 +19,11 @@ z.client.Client.prototype.run = function () {
   // todo: 2. Choose game state
   // todo: 3. Start game.
 
-  this.startGame();
+  goog.net.XhrIo.send('../js/rulebook/ruleset.json', goog.bind(function (e) {
+    var ruleset = e.target.getResponseJson();
+    console.log('ruleset', ruleset);
+    this.startGame(ruleset);
+  }, this));
 };
 
 z.client.Client.prototype.login = function () {
@@ -27,18 +32,17 @@ z.client.Client.prototype.login = function () {
   this.user.name = 'John Doe';
 };
 
-z.client.Client.prototype.startGame = function (gameId) {
-  gameId = gameId || null;
-  this.rulebook = new z.rulebook.Rulebook();
-  this.session = new z.client.GameSession();
+z.client.Client.prototype.startGame = function (ruleset) {
+  this.rulebook = new z.rulebook.Rulebook(ruleset);
+  this.world = new z.engine.World(this.rulebook);
+  this.session = new z.client.GameSession(this.world);
 
-  //TODO: Refactor to a factory?
-  //TODO: Should the session really be creating the map and event router? Shouldn't this be injected.?
-  var gem = new z.facet.Gem(this.session.evr, this.session.map, this.rulebook);
-  var mapWidget = new z.widget.MapWidget(this.session.evr, gem);
 
+
+  var mapWidget = new z.widget.MapWidget(this.session.evr, this.session.gem);
   mapWidget.claim('map');
-  ko.applyBindings(gem, this.targetElement);
+  ko.applyBindings(this.session.gem, this.targetElement);
+
 
 
 };

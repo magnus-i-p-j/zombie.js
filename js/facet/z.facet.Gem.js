@@ -7,12 +7,14 @@ goog.require('z.facet.ContextMenuFacet');
 
 /**
  * @param {!z.util.EventRouter} evr
+ * @param map
+ * @param {!z.rulebook.Rulebook} rulebook
  */
 z.facet.Gem = function (evr, map, rulebook) {
   this.evr = evr;
   this.contextMenuFacet = new z.facet.ContextMenuFacet(this, rulebook);
 
-  this.rulebook = new z.rulebook.Rulebook();
+  this.rulebook = rulebook;
 
   //Should we only have a MapFacet here?
   this.map = map;

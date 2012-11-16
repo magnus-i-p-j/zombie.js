@@ -1,21 +1,21 @@
 goog.provide('z.facet.ActionFacet');
 
-z.facet.ActionFacet = function (gem, source, action) {
-  this._gem = gem;
-  this.source = source;
-  this.action = action;
-  this.title =  ko.observable(action.title);
-  this.description = ko.observable(action.description);
-  this.enabled = ko.observable(action.canExecute(source));
+/**
+ * @param {!z.ui.Action} action
+ * @param {!z.entities.Entity} target
+ * @constructor
+ */
+z.facet.ActionFacet = function (action, target) {
+  this.canExecute = ko.computed(this._canExecute, this);
 };
 
-z.facet.ActionFacet.prototype.start = function () {
-  //Gather all information that is needed to complete the action
-  //result = ActionResult? -> Can be committed to the world.
-  this.result = this.action.execute(this.source);
-  if (this.result) {
-    this._gem.evr.publish(new z.client.events.ActionExecutedEvent(this, result));
-  }
+/**
+ * @private
+ */
+z.facet.ActionFacet.prototype._canExecute = function () {
+  return this.action.canExecute(this.target);
 };
 
-// TODO continue
+z.facet.ActionFacet.prototype.execute = function () {
+  this.action.execute(this.target);
+};
