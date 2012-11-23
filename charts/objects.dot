@@ -1,0 +1,57 @@
+digraph {
+
+  ruleset
+  rulebook
+
+  subgraph cluster_client {
+    client
+    user
+    facet
+    gem
+    widget
+
+    subgraph cluster_session {
+      worldProxy
+      map
+      session
+      plan
+      action
+      actionFactory
+    }
+  }
+
+  subgraph cluster_entity {
+    entityFactory
+    tile
+
+  }
+
+  subgraph cluster_world {
+    label="REST service /world"
+    world -> actor
+  }
+
+
+  facet -> gem
+  facet -> widget
+  ruleset -> rulebook
+  rulebook -> worldProxy
+  rulebook -> session
+  world -> tile
+  map -> tile
+  worldProxy -> map
+  worldProxy -> world
+  worldProxy -> session
+  session -> map
+  map -> facet
+  session -> plan
+  plan -> action
+  client -> ruleset
+  user -> worldProxy
+  client -> user
+  entityFactory -> tile
+  session -> entityFactory
+  session -> actionFactory
+  actionFactory -> action
+  tile -> facet
+}
