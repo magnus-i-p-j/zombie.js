@@ -1,17 +1,17 @@
 TestCase("test EntityFactory", {
   'test exists':function () {
-    assertFunction(z.engine.world.EntityFactory);
+    assertFunction(z.common.EntityFactory);
   },
   setUp:function () {
     var self = this;
-    this.ef = new z.engine.world.EntityFactory();
-    this.oldGetGuid = z.util.getGuid;
-    z.util.getGuid = function () {
+    this.ef = new z.common.EntityFactory();
+    this.oldGetGuid = mugd.utils.getGuid;
+    mugd.utils.getGuid = function () {
       return self.retGuid;
     };
   },
   tearDown:function () {
-    z.util.getGuid = this.oldGetGuid;
+    mugd.utils.getGuid = this.oldGetGuid;
   },
   'test create Tile':function () {
     this.retGuid = 'test';

@@ -1,6 +1,6 @@
 TestCase('test Grid', {
   'setUp':function () {
-    this.grid = new z.util.Grid();
+    this.grid = new mugd.utils.Grid();
   },
   'tearDown':function () {
     delete this.grid;

@@ -97,7 +97,7 @@ goog.testing.MockRandom.prototype.hasMoreValues = function() {
  * Injects new numbers into the beginning of the sequence.
  * @param {Array.<number>|number} values Number or array of numbers to inject.
  */
-goog.testing.MockRandom.prototype.inject = function(values) {
+goog.testing.MockRandom.prototype._inject = function(values) {
   if (goog.isArray(values)) {
     this.sequence_ = values.concat(this.sequence_);
   } else {

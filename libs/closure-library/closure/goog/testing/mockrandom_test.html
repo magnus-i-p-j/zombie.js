@@ -38,11 +38,11 @@ See the COPYING file for details.
 
     assertFalse(random.hasMoreValues());
 
-    random.inject(2);
+    random._inject(2);
     assertTrue(random.hasMoreValues());
     assertEquals(2, Math.random());
 
-    random.inject([1, 2, 3]);
+    random._inject([1, 2, 3]);
     assertTrue(random.hasMoreValues());
     assertEquals(1, Math.random());
     assertEquals(2, Math.random());
@@ -50,7 +50,7 @@ See the COPYING file for details.
     assertFalse(random.hasMoreValues());
     assertNotUndefined(Math.random());
   }
-  
+
 </script>
 </body>
 </html>

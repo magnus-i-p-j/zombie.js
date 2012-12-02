@@ -131,7 +131,7 @@ goog.messaging.AbstractChannel.prototype.send = goog.abstractMethod;
  */
 goog.messaging.AbstractChannel.prototype.deliver = function(
     serviceName, payload) {
-  var service = this.getService(serviceName, payload);
+  var service = this.getResource(serviceName, payload);
   if (!service) {
     return;
   }
@@ -155,7 +155,7 @@ goog.messaging.AbstractChannel.prototype.deliver = function(
  *     service object for the given service, or null if none was found.
  * @protected
  */
-goog.messaging.AbstractChannel.prototype.getService = function(
+goog.messaging.AbstractChannel.prototype.getResource = function(
     serviceName, payload) {
   var service = this.services_[serviceName];
   if (service) {

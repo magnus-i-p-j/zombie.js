@@ -280,7 +280,7 @@ goog.messaging.PortChannel.prototype.deliver_ = function(e) {
   if (this.validateMessage_(data)) {
     var serviceName = data['serviceName'];
     var payload = data['payload'];
-    var service = this.getService(serviceName, payload);
+    var service = this.getResource(serviceName, payload);
     if (!service) {
       return;
     }

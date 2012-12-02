@@ -2,17 +2,23 @@ goog.provide('z.client.Client');
 
 goog.require('goog.dom');
 goog.require('goog.net.XhrIo');
-goog.require('z.engine.World');
+goog.require('goog.events.EventTarget');
+
+goog.require('z.client');
+
+goog.require('z.common.rulebook.Rulebook');
+goog.require('z.client.WorldProxy');
+
 goog.require('z.client.User');
 goog.require('z.client.GameSession');
-goog.require('z.widget.MapWidget');
-goog.require('z.facet.Gem');
-goog.require('z.rulebook.Rulebook');
+goog.require('z.client.facet.Gem');
 
 z.client.Client = function (targetId) {
   this.login();
   this.targetElement = goog.dom.getElement(targetId);
 };
+
+goog.inherits(z.client.Client, goog.events.EventTarget);
 
 z.client.Client.prototype.run = function () {
   // todo: 1. Show main menu
@@ -22,7 +28,7 @@ z.client.Client.prototype.run = function () {
   goog.net.XhrIo.send('../js/rulebook/ruleset.json', goog.bind(function (e) {
     var ruleset = e.target.getResponseJson();
     console.log('ruleset', ruleset);
-    this.startGame(ruleset);
+    this.startNewGame(ruleset);
   }, this));
 };
 
@@ -32,17 +38,16 @@ z.client.Client.prototype.login = function () {
   this.user.name = 'John Doe';
 };
 
-z.client.Client.prototype.startGame = function (ruleset) {
-  this.rulebook = new z.rulebook.Rulebook(ruleset);
-  this.world = new z.engine.World(this.rulebook);
-  this.session = new z.client.GameSession(this.world);
+z.client.Client.prototype.startNewGame = function (ruleset) {
 
+  var injector = new mugd.Injector();
+  injector.addResource(z.client.RULESET, ruleset);
+  injector.addResource(z.client.WORLD_URL, '#'); // TODO: add server
+  injector.addProvider(z.client.WORLD, z.client.WorldProxy);
+  injector.addProvider(z.client.RULEBOOK, z.common.rulebook.Rulebook);
+  injector.addProvider(z.client.MAP_WIDGET, z.widget.MapWidget);
 
+  this.session = injector.create(z.client.GameSession);
 
-  var mapWidget = new z.widget.MapWidget(this.session.evr, this.session.gem);
-  mapWidget.claim('map');
-  ko.applyBindings(this.session.gem, this.targetElement);
-
-
-
+  this.session.start();
 };

@@ -3,7 +3,7 @@ goog.provide('z.client.actions.ActionCreateImprovement');
 goog.require('z.ui.Action');
 
 /**
- * @param {!z.rulebook.Improvement} improvement
+ * @param {!z.common.rulebook.Improvement} improvement
  * @constructor
  */
 z.client.actions.ActionCreateImprovement = function (improvement) {

@@ -46,6 +46,6 @@ function createEventInterfaceTest(namespace, name) {
   })
 }
 
-z.util.test.testInterface(z.util, createEventInterfaceTest, ['Event']);
-z.util.test.testInterface(z.util.test, createEventInterfaceTest, ['TestEvent']);
-z.util.test.testInterface(z.engine.events, createEventInterfaceTest);
+mugd.utils.test.testInterface(z.util, createEventInterfaceTest, ['Event']);
+mugd.utils.test.testInterface(mugd.utils.test, createEventInterfaceTest, ['TestEvent']);
+mugd.utils.test.testInterface(z.engine.events, createEventInterfaceTest);

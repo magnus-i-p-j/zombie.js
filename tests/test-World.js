@@ -1,9 +1,9 @@
 TestCase("test World", {
   'test exists':function () {
-    assertFunction(z.engine.World);
+    assertFunction(z.service.World);
   },
   setUp:function () {
-    this.world = new z.engine.World();
+    this.world = new z.service.World();
   },
   'test registerGameSession':function () {
     var called = false;

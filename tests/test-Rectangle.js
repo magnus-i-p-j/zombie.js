@@ -1,10 +1,10 @@
 TestCase('test Rectangle', {
 
     'test empty constructor exists': function () {
-        z.util.Rectangle();
+        mugd.utils.Rectangle();
     },
     'test empty constructor intitializes top, right, bottom, left': function () {
-        var rect = new z.util.Rectangle();
+        var rect = new mugd.utils.Rectangle();
         assertNotUndefined(rect.top);
         assertNotUndefined(rect.right);
         assertNotUndefined(rect.bottom);
@@ -15,7 +15,7 @@ TestCase('test Rectangle', {
             right = 10,
             bottom = -10,
             left = -10;
-        z.util.Rectangle(top, right, bottom, left);
+        mugd.utils.Rectangle(top, right, bottom, left);
     },
     'test constructor raises exception when all in positive space': function () {
         var top = 10,
@@ -24,7 +24,7 @@ TestCase('test Rectangle', {
             left = 10;
         assertException(
             function () {
-                new z.util.Rectangle(top, right, bottom, left);
+                new mugd.utils.Rectangle(top, right, bottom, left);
             }, 'Invalid geometry');
     },
     'test constructor raises exception when all in negative space': function () {
@@ -34,7 +34,7 @@ TestCase('test Rectangle', {
             left = -15;
         assertException(
             function () {
-                new z.util.Rectangle(top, right, bottom, left);
+                new mugd.utils.Rectangle(top, right, bottom, left);
             }, 'Invalid geometry');
     },
     'test constructor raises exception when in mixed space': function () {
@@ -44,7 +44,7 @@ TestCase('test Rectangle', {
             left = -15;
         assertException(
             function () {
-                new z.util.Rectangle(top, right, bottom, left);
+                new mugd.utils.Rectangle(top, right, bottom, left);
             }, 'Invalid geometry');
     }
 });

@@ -1,20 +1,20 @@
 goog.provide('z.common.protocol');
 
 /** @typedef {{
-* id: z.util.guid,
+* id: mugd.utils.guid,
 * projects: z.common.protocol.project[]
 * }} */
 z.common.protocol.clientEndTurn;
 
 /** @typedef {{
-* identifier: (z.util.guid|z.common.protocol.projectParams),
+* identifier: (mugd.utils.guid|z.common.protocol.projectParams),
 * resources: z.common.protocol.resource[],
 * state: z.common.protocol.state
 * }} */
 z.common.protocol.project;
 
 
-/** @typedef {z.util.guid} */
+/** @typedef {mugd.utils.guid} */
 z.common.protocol.resource;
 
 /** @typedef {{

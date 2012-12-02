@@ -1,18 +1,18 @@
 TestCase('test EventRouter', {
   setUp:function () {
-    this.evm = z.util.EventRouter();
+    this.evm = mugd.utils.EventRouter();
   },
   'test EventRouter exists':function () {
-    assertFunction(z.util.EventRouter);
+    assertFunction(mugd.utils.EventRouter);
   },
   'test notified about subscribed event':function () {
     var called = false;
     var callback = function () {
       called = true;
     };
-    var event = new z.util.test.TestEvent();
+    var event = new mugd.utils.test.TestEvent();
 
-    this.evm.subscribe(z.util.test.TestEvent, callback);
+    this.evm.subscribe(mugd.utils.test.TestEvent, callback);
     this.evm.publish(event);
 
     assert(called);
@@ -22,9 +22,9 @@ TestCase('test EventRouter', {
     var callback = function (e) {
       incomingEvent = e;
     };
-    var publishedEvent = new z.util.test.TestEvent();
+    var publishedEvent = new mugd.utils.test.TestEvent();
 
-    this.evm.subscribe(z.util.test.TestEvent, callback);
+    this.evm.subscribe(mugd.utils.test.TestEvent, callback);
     this.evm.publish(publishedEvent);
 
     assert(publishedEvent === incomingEvent);

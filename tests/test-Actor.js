@@ -27,4 +27,4 @@ var createActorInterfaceTest = function (namespace, name) {
   TestCase("test " + name, testObject);
 };
 
-z.util.test.testInterface(z.entities, createActorInterfaceTest, ['Actor']);
+mugd.utils.test.testInterface(z.common.entities, createActorInterfaceTest, ['Actor']);
