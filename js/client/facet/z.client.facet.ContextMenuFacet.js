@@ -1,14 +1,20 @@
 goog.provide('z.client.facet.ContextMenuFacet');
+
+goog.require('goog.array');
+
+goog.require('z.client.facet.Facet');
+goog.require('mugd.Injector');
+goog.require('z.client');
+
 goog.require('z.common.entities.Tile');
 goog.require('z.common.rulebook.Rulebook');
-goog.require('goog.array');
 
 /**
  * @param {!z.ui.ActionFactory} actionFactory
- * @param {!z.client.facet.Gem} gem
  * @constructor
  */
-z.client.facet.ContextMenuFacet = function (actionFactory, gem) {
+z.client.facet.ContextMenuFacet = function (actionFactory) {
+  goog.base(this);
 
   /**
    * @type {!z.ui.ActionFactory}
@@ -16,16 +22,22 @@ z.client.facet.ContextMenuFacet = function (actionFactory, gem) {
    */
   this._actionFactory = actionFactory;
 
-  /**
-   * @type {!z.client.facet.Gem}
-   * @private
-   */
-  this._gem = gem;
-
   this.visible = ko.observable(false);
-
   this.actionFacets = ko.observableArray();
-  gem.evr.subscribe(z.client.events.ShowContextMenuEvent, goog.bind(this.showContextMenuCallback, this));
+};
+
+goog.inherits(z.client.facet.ContextMenuFacet, z.client.facet.Facet);
+
+z.client.facet.ContextMenuFacet.prototype[mugd.Injector.DEPS] = [
+  z.client.Resources.ACTION_FACTORY
+];
+
+/**
+ * @param {!z.client.facet.Gem} parent
+ */
+z.client.facet.ContextMenuFacet.prototype.setParentEventTarget = function (parent) {
+  goog.base(this, 'setParentEventTarget', parent);
+  // TODO: listen for context menu events
 };
 
 /**

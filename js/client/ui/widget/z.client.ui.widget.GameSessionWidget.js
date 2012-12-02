@@ -3,24 +3,24 @@ goog.require('mugd.Injector');
 goog.require('z.client');
 
 /**
- * @param {!Element} gameDomElement
  * @param {!z.client.facet.Gem} gem
  * @param {!z.client.ui.widget.MapWidget} mapWidget
+ * @constructor
  */
-z.client.ui.widget.GameSessionWidget = function (gameDomElement, gem, mapWidget) {
-  this.gameDomElement = gameDomElement;
+z.client.ui.widget.GameSessionWidget = function ( gem, mapWidget) {
   this.gem = gem;
   this.mapWidget = mapWidget;
 };
 
-z.client.ui.widget.GameSessionWidget.prototype.claim = function () {
-  ko.applyBindings(this.gem, this.gameDomElement);
+/**
+ * @param {!Element} gameDomElement
+ */
+z.client.ui.widget.GameSessionWidget.prototype.claim = function (gameDomElement) {
+  ko.applyBindings(this.gem, gameDomElement);
   this.mapWidget.claim(goog.dom.getElement('map'));
-
 };
 
 z.client.WorldProxy.prototype[mugd.Injector.DEPS] = [
-  z.client.Resources.GAME_DOM_ELEMENT,
   z.client.Resources.GEM,
   z.client.Resources.MAP_WIDGET
 ];

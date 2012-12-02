@@ -1,6 +1,6 @@
 goog.provide('z.client.actions.ActionCreateImprovement');
 
-goog.require('z.ui.Action');
+goog.require('z.client.Action');
 
 /**
  * @param {!z.common.rulebook.Improvement} improvement
@@ -10,7 +10,7 @@ z.client.actions.ActionCreateImprovement = function (improvement) {
   goog.base(this, improvement);
 
 };
-goog.inherits(z.client.actions.ActionCreateImprovement, z.ui.Action);
+goog.inherits(z.client.actions.ActionCreateImprovement, z.client.Action);
 
 z.client.actions.ActionCreateImprovement.prototype.canExecute = function (target) {
   this.improvement.isApplicable(target);

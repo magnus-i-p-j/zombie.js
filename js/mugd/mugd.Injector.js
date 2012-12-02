@@ -3,7 +3,7 @@ goog.provide('mugd.Injector');
 /**
  * @constructor
  */
-function mugd.Injector() {
+mugd.Injector = function () {
 
   /**
    * @type {!Object.<string, Function>}
@@ -18,7 +18,7 @@ function mugd.Injector() {
   this._resources = {};
 
   this.addResource(mugd.Injector.INJECTOR, this);
-}
+};
 
 /**
  * Adds a resource provider.
@@ -81,6 +81,7 @@ mugd.Injector.prototype.create = function (ctor) {
 mugd.Injector.prototype._inject = function (ctor, instance) {
   var keys = ctor.prototype[mugd.Injector.DEPS];
   if (!goog.isArray(keys)) {
+    console.log(ctor);
     throw 'No dependencies declared.';
   }
   var deps = keys.map(this.getResource, this);

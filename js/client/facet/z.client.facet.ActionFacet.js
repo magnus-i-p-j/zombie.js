@@ -1,7 +1,7 @@
 goog.provide('z.client.facet.ActionFacet');
 
 /**
- * @param {!z.ui.Action} action
+ * @param {!z.client.Action} action
  * @param {!z.common.entities.Entity} target
  * @constructor
  */

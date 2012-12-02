@@ -1,30 +1,31 @@
 goog.provide('z.client.facet.Gem');
-goog.require('z.client.facet.MapFacet');
-goog.require('z.client.facet.ContextMenuFacet');
 
-
+goog.require('z.client.facet.Facet');
+goog.require('mugd.Injector');
+goog.require('z.client');
 
 /**
- * @param {!mugd.utils.EventRouter} evr
- * @param map
- * @param {!z.common.rulebook.Rulebook} rulebook
+ * @param {!z.client.facet.MapFacet} mapFacet
+ * @param {!z.client.facet.ContextMenuFacet} contextMenuFacet
+ * @param {!z.client.WorldProxy} world
+ * @constructor
  */
-z.client.facet.Gem = function (evr, map, rulebook) {
-  this.evr = evr;
-  this.contextMenuFacet = new z.client.facet.ContextMenuFacet(this, rulebook);
-
-  this.rulebook = rulebook;
-
-  //Should we only have a MapFacet here?
-  this.map = map;
-  this.mapFacet = new z.client.facet.MapFacet(this, map);
-
+z.client.facet.Gem = function (mapFacet, contextMenuFacet, world) {
+  goog.base(this);
+  this.mapFacet = mapFacet;
+  this.contextMenuFacet = contextMenuFacet;
+  this.world = world;
   this.focusedTile = ko.observable();
 
-  //Events
-  this.evr.subscribe(z.client.events.TileFocusEvent, this.tileFocusCallback.bind(this));
+  this.mapFacet.setParentEventTarget(this);
+  this.contextMenuFacet.setParentEventTarget(this);
+  this.world.setParentEventTarget(this);
 };
 
-z.client.facet.Gem.prototype.tileFocusCallback = function (tileFocusEvent) {
-  this.focusedTile(tileFocusEvent.data.tileFacet);
-};
+goog.inherits(z.client.facet.Gem, z.client.facet.Facet);
+
+z.client.facet.Gem.prototype[mugd.Injector.DEPS] = [
+  z.client.Resources.MAP_FACET,
+  z.client.Resources.CONTEXT_MENU_FACET,
+  z.client.Resources.WORLD
+];

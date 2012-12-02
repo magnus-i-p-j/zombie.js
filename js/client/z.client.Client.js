@@ -8,10 +8,16 @@ goog.require('z.client');
 
 goog.require('z.common.rulebook.Rulebook');
 goog.require('z.client.WorldProxy');
+goog.require('z.client.ui.widget.MapWidget');
+goog.require('z.client.ui.widget.GameSessionWidget');
+goog.require('z.client.facet.Gem');
+goog.require('z.client.ActionFactory');
+goog.require('z.client.facet.MapFacet');
 
 goog.require('z.client.User');
 goog.require('z.client.GameSession');
-goog.require('z.client.facet.Gem');
+
+goog.require('mugd.Injector');
 
 z.client.Client = function (targetId) {
   this.login();
@@ -25,7 +31,7 @@ z.client.Client.prototype.run = function () {
   // todo: 2. Choose game state
   // todo: 3. Start game.
 
-  goog.net.XhrIo.send('../js/rulebook/ruleset.json', goog.bind(function (e) {
+  goog.net.XhrIo.send('../js/common/rulebook/ruleset.json', goog.bind(function (e) {
     var ruleset = e.target.getResponseJson();
     console.log('ruleset', ruleset);
     this.startNewGame(ruleset);
@@ -41,11 +47,15 @@ z.client.Client.prototype.login = function () {
 z.client.Client.prototype.startNewGame = function (ruleset) {
 
   var injector = new mugd.Injector();
-  injector.addResource(z.client.RULESET, ruleset);
-  injector.addResource(z.client.WORLD_URL, '#'); // TODO: add server
-  injector.addProvider(z.client.WORLD, z.client.WorldProxy);
-  injector.addProvider(z.client.RULEBOOK, z.common.rulebook.Rulebook);
-  injector.addProvider(z.client.MAP_WIDGET, z.widget.MapWidget);
+  injector.addResource(z.client.Resources.RULESET, ruleset);
+  injector.addResource(z.client.Resources.WORLD_URL, '#'); // TODO: add server
+  injector.addProvider(z.client.Resources.WORLD, z.client.WorldProxy);
+  injector.addProvider(z.client.Resources.RULEBOOK, z.common.rulebook.Rulebook);
+  injector.addProvider(z.client.Resources.MAP_WIDGET, z.client.ui.widget.MapWidget);
+  injector.addProvider(z.client.Resources.GAME_SESSION_WIDGET, z.client.ui.widget.GameSessionWidget);
+  injector.addProvider(z.client.Resources.GEM, z.client.facet.Gem);
+  injector.addProvider(z.client.Resources.ACTION_FACTORY, z.client.ActionFactory);
+  injector.addProvider(z.client.Resources.MAP_FACET, z.client.facet.MapFacet);
 
   this.session = injector.create(z.client.GameSession);
 

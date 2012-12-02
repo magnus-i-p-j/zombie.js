@@ -1,21 +1,44 @@
 goog.provide('z.client.facet.MapFacet');
 
-goog.require('z.client.facet.TileFacet');
 goog.require('goog.array');
 
-z.client.facet.MapFacet = function (gem) {
+goog.require('z.client.facet.Facet');
+goog.require('z.client.facet.TileFacet');
+
+goog.require('mugd.Injector');
+goog.require('z.client');
+
+z.client.facet.MapFacet = function (tileFacetFactory) {
+  goog.base(this);
   this._grid = new mugd.utils.Grid();
-  this._gem = gem;
+  this._tileFacetFactory = tileFacetFactory;
   this.visibleTiles = ko.observableArray();
   this.offsetX = ko.observable(-10 * 72);
   this.offsetY = ko.observable(-10 * (72 - 18));
 };
 
+goog.inherits(z.client.facet.MapFacet, z.client.facet.Facet);
+
+z.client.GameSession.prototype[mugd.Injector.DEPS] = [
+  z.client.Resources.TILE_FACET_FACTORY
+];
+
+
+
+/**
+ * @param {!z.client.facet.Gem} parent
+ */
+z.client.facet.ContextMenuFacet.prototype.setParentEventTarget = function (parent) {
+  goog.base(this, 'setParentEventTarget', parent);
+  // TODO: listen for map updated events
+};
+
+
 z.client.facet.MapFacet.prototype.setBoundingBox = function (boundingbox) {
   this.visibleTiles.removeAll();
   for (var y = boundingbox.bottom; y <= boundingbox.top; y++) {
     for (var x = boundingbox.left; x <= boundingbox.right; x++) {
-      this.visibleTiles.push(new z.client.facet.TileFacet(this._gem, x, y));
+      this.visibleTiles.push(this.tileFacetFactory.create( x, y));
     }
   }
 };
@@ -44,19 +67,19 @@ z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
   });
 };
 
-z.client.Map.prototype.getTileFacet = function (x, y) {
-  var tile = this.grid.getNode(x, y);
+z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
+  var tile = this._grid.getNode(x, y);
   if (!tile) {
     tile = this.getPlaceholderTileFacet(x, y);
   }
   return tile;
 };
 
-z.client.Map.prototype.getAdjacent = function (x, y) {
-  return this.grid.getAdjacent(x, y);
+z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
+  return this._grid.getAdjacent(x, y);
 };
 
-z.client.Map.prototype.getPlaceholderTileFacet = function (x, y) {
+z.client.facet.MapFacet.prototype.getPlaceholderTileFacet = function (x, y) {
   return {
     terrain:'unknown',
     x:x,
