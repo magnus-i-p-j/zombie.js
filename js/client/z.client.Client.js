@@ -13,6 +13,7 @@ goog.require('z.client.ui.widget.GameSessionWidget');
 goog.require('z.client.facet.Gem');
 goog.require('z.client.ActionFactory');
 goog.require('z.client.facet.MapFacet');
+goog.require('z.client.facet.ContextMenuFacet');
 
 goog.require('z.client.User');
 goog.require('z.client.GameSession');
@@ -56,6 +57,8 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addProvider(z.client.Resources.GEM, z.client.facet.Gem);
   injector.addProvider(z.client.Resources.ACTION_FACTORY, z.client.ActionFactory);
   injector.addProvider(z.client.Resources.MAP_FACET, z.client.facet.MapFacet);
+  injector.addProvider(z.client.Resources.CONTEXT_MENU_FACET, z.client.facet.ContextMenuFacet);
+  injector.addResource(z.client.Resources.GAME_DOM_ELEMENT, this.targetElement);
 
   this.session = injector.create(z.client.GameSession);
 

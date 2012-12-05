@@ -1,11 +1,13 @@
 goog.provide('z.client.facet.MapFacet');
 
 goog.require('goog.array');
+goog.require('goog.math.Rect');
 
 goog.require('z.client.facet.Facet');
 goog.require('z.client.facet.TileFacet');
 
 goog.require('mugd.Injector');
+goog.require('mugd.utils.Grid')
 goog.require('z.client');
 
 z.client.facet.MapFacet = function (tileFacetFactory) {
@@ -19,26 +21,26 @@ z.client.facet.MapFacet = function (tileFacetFactory) {
 
 goog.inherits(z.client.facet.MapFacet, z.client.facet.Facet);
 
-z.client.GameSession.prototype[mugd.Injector.DEPS] = [
-  z.client.Resources.TILE_FACET_FACTORY
+z.client.facet.MapFacet.prototype[mugd.Injector.DEPS] = [
+  //z.client.Resources.TILE_FACET_FACTORY
 ];
-
-
 
 /**
  * @param {!z.client.facet.Gem} parent
  */
-z.client.facet.ContextMenuFacet.prototype.setParentEventTarget = function (parent) {
+z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
   goog.base(this, 'setParentEventTarget', parent);
   // TODO: listen for map updated events
 };
 
-
+/**
+ * @param {!goog.math.Rect } boundingbox
+ */
 z.client.facet.MapFacet.prototype.setBoundingBox = function (boundingbox) {
   this.visibleTiles.removeAll();
   for (var y = boundingbox.bottom; y <= boundingbox.top; y++) {
     for (var x = boundingbox.left; x <= boundingbox.right; x++) {
-      this.visibleTiles.push(this.tileFacetFactory.create( x, y));
+      this.visibleTiles.push(this._grid[x][y]);
     }
   }
 };
@@ -55,10 +57,6 @@ z.client.facet.MapFacet.prototype.computeScreenPositionY = function (tileFacet) 
   var cut = -18;
   var screenY = tileFacet.y * ( height + cut ) - this.offsetY();
   return screenY + 'px';
-};
-
-z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
-  return this.map.getAdjacent(x, y);
 };
 
 z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {

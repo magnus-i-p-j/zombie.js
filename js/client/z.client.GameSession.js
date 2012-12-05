@@ -5,7 +5,7 @@ goog.require('z.client');
 
 /**
  * @param world
- * @param mainWidget
+ * @param {!z.client.ui.widget.GameSessionWidget} mainWidget
  * @param {!Element} gameDomElement
  * @constructor
  */

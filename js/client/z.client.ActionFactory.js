@@ -8,6 +8,10 @@ z.client.ActionFactory = function (rulebook) {
   this._rulebook = rulebook;
 };
 
+z.client.ActionFactory.prototype[mugd.Injector.DEPS] = [
+  z.client.Resources.RULEBOOK
+];
+
 /**
  * @param {z.common.rulebook.meta} meta
  * @return {z.client.Action[]}

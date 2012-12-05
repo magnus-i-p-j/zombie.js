@@ -12,6 +12,11 @@ z.client.ui.widget.GameSessionWidget = function ( gem, mapWidget) {
   this.mapWidget = mapWidget;
 };
 
+z.client.ui.widget.GameSessionWidget.prototype[mugd.Injector.DEPS] = [
+  z.client.Resources.GEM,
+  z.client.Resources.MAP_WIDGET
+];
+
 /**
  * @param {!Element} gameDomElement
  */
@@ -20,9 +25,6 @@ z.client.ui.widget.GameSessionWidget.prototype.claim = function (gameDomElement)
   this.mapWidget.claim(goog.dom.getElement('map'));
 };
 
-z.client.WorldProxy.prototype[mugd.Injector.DEPS] = [
-  z.client.Resources.GEM,
-  z.client.Resources.MAP_WIDGET
-];
+
 
 

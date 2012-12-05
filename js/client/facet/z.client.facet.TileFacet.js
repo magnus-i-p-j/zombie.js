@@ -1,36 +1,33 @@
 goog.provide('z.client.facet.TileFacet');
 
-goog.require('z.client.events.TileUpdatedEvent');
-goog.require('z.client.facet.ActionFacet');
+goog.require('z.client.facet.Facet');
 
-z.client.facet.TileFacet.actions = (
-  function(){
+/**
+ *
+ * @param {!z.common.entities.Tile} tile
+ * @constructor
+ */
+z.client.facet.TileFacet = function (tile) {
+  goog.base(this);
 
-  }
-)();
+  /**
+   * @type {!z.common.entities.Tile}
+   * @private
+   */
+  this._tile = tile;
 
-z.client.facet.TileFacet = function (gem, x, y) {
-  this.x = x;
-  this.y = y;
-  this._gem = gem;
-  this.map = gem.map;
-
-  var tile = this.getTileFacet();
+  /**
+   * @type {number}
+   */
+  this.x =  tile.x;
+  /**
+   * @type {number}
+   */
+  this.y = tile.y;
 
   this.terrain = ko.observable(tile.terrain);
 };
 
+goog.inherits(z.client.facet.TileFacet, z.client.facet.Facet);
 
-
-z.client.facet.TileFacet.prototype.getTileFacet = function () {
-  return this.map.getTileFacet(this.x, this.y);
-};
-
-
-z.client.facet.TileFacet.prototype.tileUpdatedCallback = function (tileUpdatedEvent) {
-  if (tileUpdatedEvent.source === this.map && tileUpdatedEvent.data.x === this.x && tileUpdatedEvent.data.y === this.y) {
-    var tile = this.getTileFacet();
-    this.terrain(tile.terrain);
-  }
-};
 
