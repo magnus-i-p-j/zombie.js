@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<META CHARSET="utf-8">
+<html>
+<head>
+  <title>Ruleset editor</title>
+  <link rel="stylesheet/less" type="text/css" href="../css/all.less">
+</head>
+<body>
+<div id="main"
+     class="game_container layout"
+     data-bind="template: 'ruleset_editor'">
+</div>
+<script type="text/html" id="ruleset_editor">
+  <div data-bind="foreach: improvements">
+    <div><span data-bind="text: type"></span>
+      <span data-bind="text: name"></span></div>
+  </div>
+</script>
+
+<script src="../libs/less-1.3.0.min.js"></script>
+<script src="../libs/jquery-1.7.2.js"></script>
+<script src="../libs/knockout-2.1.0.debug.js"></script>
+<script src="../libs/koExternalTemplateEngine_all.js"></script>
+<script src="../libs/closure-library/closure/goog/base.js"></script>
+<script src="../gen/deps.js"></script>
+<script>
+  goog.require('z.editor.ruleset');
+  goog.require('goog.net.XhrIo');
+</script>
+<script>
+  /**
+   * @type {z.editor.ruleset.Model}
+   */
+  var model = z.editor.ruleset.init('main');
+  goog.net.XhrIo.send(
+      '../js/common/rulebook/ruleset.json',
+      function (e) {
+        var ruleset = e.target.getResponseJson();
+        console.log('ruleset', ruleset);
+        model.update(ruleset);
+        console.log('model', model);
+      }
+  );
+</script>
+<script>document.write('<div>Time: ' + (new Date()).toString()+ '</div>')</script>
+</body>
+</html>
