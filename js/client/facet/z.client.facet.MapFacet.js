@@ -7,13 +7,12 @@ goog.require('z.client.facet.Facet');
 goog.require('z.client.facet.TileFacet');
 
 goog.require('mugd.Injector');
-goog.require('mugd.utils.Grid')
+goog.require('mugd.utils.Grid');
 goog.require('z.client');
 
-z.client.facet.MapFacet = function (tileFacetFactory) {
+z.client.facet.MapFacet = function () {
   goog.base(this);
   this._grid = new mugd.utils.Grid();
-  this._tileFacetFactory = tileFacetFactory;
   this.visibleTiles = ko.observableArray();
   this.offsetX = ko.observable(-10 * 72);
   this.offsetY = ko.observable(-10 * (72 - 18));
@@ -21,9 +20,7 @@ z.client.facet.MapFacet = function (tileFacetFactory) {
 
 goog.inherits(z.client.facet.MapFacet, z.client.facet.Facet);
 
-z.client.facet.MapFacet.prototype[mugd.Injector.DEPS] = [
-  //z.client.Resources.TILE_FACET_FACTORY
-];
+z.client.facet.MapFacet.prototype[mugd.Injector.DEPS] = [];
 
 /**
  * @param {!z.client.facet.Gem} parent
@@ -31,18 +28,6 @@ z.client.facet.MapFacet.prototype[mugd.Injector.DEPS] = [
 z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
   goog.base(this, 'setParentEventTarget', parent);
   // TODO: listen for map updated events
-};
-
-/**
- * @param {!goog.math.Rect } boundingbox
- */
-z.client.facet.MapFacet.prototype.setBoundingBox = function (boundingbox) {
-  this.visibleTiles.removeAll();
-  for (var y = boundingbox.bottom; y <= boundingbox.top; y++) {
-    for (var x = boundingbox.left; x <= boundingbox.right; x++) {
-      this.visibleTiles.push(this._grid[x][y]);
-    }
-  }
 };
 
 z.client.facet.MapFacet.prototype.computeScreenPositionX = function (tileFacet) {
@@ -60,15 +45,11 @@ z.client.facet.MapFacet.prototype.computeScreenPositionY = function (tileFacet) 
 };
 
 z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
-  return goog.array.find(this.visibleTiles(), function (element) {
-    return element.x === x && element.y === y;
-  });
-};
-
-z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
   var tile = this._grid.getNode(x, y);
   if (!tile) {
-    tile = this.getPlaceholderTileFacet(x, y);
+    tile = new z.client.ui.facet.TileFacet(x, y);
+    this._grid.setNode(x, y, tile);
+    this.visibleTiles.push(tile);
   }
   return tile;
 };
@@ -77,11 +58,13 @@ z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
   return this._grid.getAdjacent(x, y);
 };
 
-z.client.facet.MapFacet.prototype.getPlaceholderTileFacet = function (x, y) {
-  return {
-    terrain:'unknown',
-    x:x,
-    y:y
-  };
+/**
+ * @param {z.common.entities.Tile[]} tiles
+ */
+z.client.facet.MapFacet.prototype.update = function (tiles) {
+  goog.array.forEach(tiles, function (tile) {
+        var facet = this.getTileFacet(tile.x, tile.y);
+        facet.update(tile);
+      }, this
+  );
 };
-
