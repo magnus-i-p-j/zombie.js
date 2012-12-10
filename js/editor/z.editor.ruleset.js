@@ -13,8 +13,7 @@ z.editor.ruleset.init = function (initElement) {
   if (!target) {
     throw 'Could not find element to bind against: ' + initElement;
   }
-  infuser.defaults.templateURL = 'tpl';
-//  infuser.defaults.templatePrefix = './tpl/';
+  infuser.defaults.templatePrefix = './tpl/';
 
   var model = new z.editor.ruleset.Model();
   ko.applyBindings(model, target);
