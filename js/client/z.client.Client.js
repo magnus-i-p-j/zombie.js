@@ -63,4 +63,6 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   this.session = injector.create(z.client.GameSession);
 
   this.session.start();
+
+  injector.getResource(z.client.Resources.WORLD).tempEndTurn();
 };

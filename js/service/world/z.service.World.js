@@ -6,13 +6,14 @@ goog.require('goog.array');
 goog.require('mugd.utils.SimplexNoise');
 
 /**
- * @param {!z.common.rulebook.Rulebook} rulebook
+ * @param {!Object} ruleset
  * @constructor
  */
-z.service.World = function (rulebook) {
+z.service.World = function (ruleset) {
+  this._rulebook = new z.common.rulebook.Rulebook(ruleset);
   this.playerActor = new z.common.entities.Actor();
   this.tiles = [];
-  this._entityFactory = new z.common.EntityFactory();
+  this._entityFactory = new z.common.EntityFactory(this._rulebook);
   this.generateTiles();
 };
 

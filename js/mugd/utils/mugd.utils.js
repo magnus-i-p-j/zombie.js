@@ -154,7 +154,7 @@ goog.provide('z.util');
   UUID["new"] = UUID.create;
 
   w._UUID = UUID;
-}(z.util));
+}(mugd.utils));
 
 mugd.utils.getGuid = function (prefix, separator) {
   prefix = prefix || '';
