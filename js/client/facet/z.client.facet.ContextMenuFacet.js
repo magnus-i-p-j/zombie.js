@@ -2,9 +2,12 @@ goog.provide('z.client.facet.ContextMenuFacet');
 
 goog.require('goog.array');
 
+
 goog.require('z.client.facet.Facet');
+goog.require('z.client.facet.ActionFacet');
 goog.require('mugd.Injector');
 goog.require('z.client');
+goog.require('z.client.events');
 
 goog.require('z.common.entities.Tile');
 goog.require('z.common.rulebook.Rulebook');
@@ -38,35 +41,38 @@ z.client.facet.ContextMenuFacet.prototype[mugd.Injector.DEPS] = [
 z.client.facet.ContextMenuFacet.prototype.setParentEventTarget = function (parent) {
   goog.base(this, 'setParentEventTarget', parent);
   // TODO: listen for context menu events
+  this.eventHandler.listen(parent, z.client.events.EventType.SHOW_CONTEXT_MENU,
+      function(e){
+        this.doShowContextMenu(e.context, e.position);
+      });
 };
-
 /**
- * @param {!z.client.events.ShowContextMenuEvent} showContextMenuEvent
+ * @param {!z.client.facet.Facet[]} context
+ * @param {!goog.math.Coordinate} position
  */
-z.client.facet.ContextMenuFacet.prototype.showContextMenuCallback = function (showContextMenuEvent) {
+z.client.facet.ContextMenuFacet.prototype.doShowContextMenu = function (context, position) {
   this._hide();
   this.actionFacets.removeAll();
-  var ctx = showContextMenuEvent.data.context;
-  if (ctx) {
-    var actions = this._getContextualActions(ctx);
-    this._show(showContextMenuEvent.position);
+  if (context) {
+    var actions = this._getContextualActions(context);
+    this._show(position);
   }
 };
 
 /**
- * @param {!z.common.entities.Entity[]} context
+ * @param {!z.client.facet.Facet[]} context
  * @return {z.client.facet.ActionFacet[]} actions
  * @private
  */
 z.client.facet.ContextMenuFacet.prototype._getContextualActions = function (context) {
   var actionFacets = [];
   var actionFactory = this._actionFactory;
-  goog.array.forEach(context, function (entity) {
-    var actions = actionFactory.getActions(entity.meta);
+  goog.array.forEach(context, function (facet) {
+    var actions = actionFactory.getActions(facet.meta());
     goog.array.forEach(actions, function (action) {
-      var facet = new z.client.facet.ActionFacet(action, entity);
-      if (facet.canExecute()) {
-        actionFacets.push(facet);
+      var actionFacet = new z.client.facet.ActionFacet(action, facet);
+      if (actionFacet.canExecute()) {
+        actionFacets.push(actionFacet);
       }
     });
   });

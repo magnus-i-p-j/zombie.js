@@ -35,6 +35,10 @@ z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
       });
 };
 
+/**
+ * @param  {!z.client.facet.TileFacet} tileFacet
+ * @return {String}
+ */
 z.client.facet.MapFacet.prototype.computeScreenPositionX = function (tileFacet) {
   var width = 72;
   var screenX = tileFacet.x * width - this.offsetX();
@@ -42,6 +46,10 @@ z.client.facet.MapFacet.prototype.computeScreenPositionX = function (tileFacet) 
   return (screenX + offset) + 'px';
 };
 
+/**
+ * @param {!z.client.facet.TileFacet} tileFacet
+ * @return {String}
+ */
 z.client.facet.MapFacet.prototype.computeScreenPositionY = function (tileFacet) {
   var height = 72;
   var cut = -18;
@@ -50,19 +58,26 @@ z.client.facet.MapFacet.prototype.computeScreenPositionY = function (tileFacet) 
 };
 
 /**
- * @param {z.common.entities.Tile} tile
+ * @param {int} x
+ * @param {int} y
  * @return {z.client.facet.TileFacet}
  */
-z.client.facet.MapFacet.prototype.getTileFacet = function (tile) {
-  var tileFacet = this._grid.getNode(tile.x, tile.y);
-  if (!tileFacet) {
-    tileFacet = new z.client.facet.TileFacet(tile);
-    this._grid.setNode(tile.x, tile.y, tileFacet);
-    this.visibleTiles.push(tileFacet);
+z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
+  var facet = this._grid.getNode(x, y);
+  if (!facet) {
+    facet = new z.client.facet.TileFacet(x, y);
+    facet.setParentEventTarget(this);
+    this._grid.setNode(x, y, facet);
+    this.visibleTiles.push(facet);
   }
-  return tileFacet;
+  return facet;
 };
 
+/**
+ * @param {int} x
+ * @param {int} y
+ * @return {z.client.facet.TileFacet}
+ */
 z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
   return this._grid.getAdjacent(x, y);
 };
@@ -72,7 +87,7 @@ z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
  */
 z.client.facet.MapFacet.prototype.update = function (tiles) {
   goog.array.forEach(tiles, function (tile) {
-        var facet = this.getTileFacet(tile);
+        var facet = this.getTileFacet(tile.x, tile.y);
         facet.update(tile);
       }, this
   );

@@ -9,6 +9,7 @@ goog.require('goog.math.Coordinate');
 goog.require('mugd.ui.MapScroller');
 goog.require('mugd.Injector');
 goog.require('z.client');
+goog.require('z.client.events.ShowContextMenu')
 
 z.client.ui.widget.MapWidget = function (mapFacet, gem) {
   this._mapFacet = mapFacet;
@@ -92,6 +93,7 @@ z.client.ui.widget.MapWidget.prototype.onShowContextMenu = function (e) {
   var element = this.findTileElement(e);
   if (element) {
     var facet = this._mapFacet.getTileFacet(parseInt(element.dataset.x), parseInt(element.dataset.y));
-//    this.evr.publish(new z.client.events.ShowContextMenuEvent(this, [facet], new goog.math.Coordinate(e.clientX, e.clientY)));
+    var showContextMenu = new z.client.events.ShowContextMenu([facet], new goog.math.Coordinate(e.clientX, e.clientY));
+    this._mapFacet.dispatchEvent(showContextMenu);
   }
 };

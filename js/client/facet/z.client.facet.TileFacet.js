@@ -6,21 +6,21 @@ goog.require('z.client.facet.Facet');
  * @constructor
  * @param {z.common.entities.Tile} tile
  */
-z.client.facet.TileFacet = function (tile) {
+z.client.facet.TileFacet = function (x, y) {
   goog.base(this);
 
   /**
    * @type {number}
    */
-  this.x =  tile.x;
+  this.x =  x;
   /**
    * @type {number}
    */
-  this.y = tile.y;
+  this.y = y;
 
   this.terrain = ko.observable('unknown');
 
-  this.update(tile);
+  this.meta = ko.observable();
 };
 
 goog.inherits(z.client.facet.TileFacet, z.client.facet.Facet);
@@ -31,6 +31,7 @@ goog.inherits(z.client.facet.TileFacet, z.client.facet.Facet);
 z.client.facet.TileFacet.prototype.update = function (tile) {
   if (tile.x === this.x && tile.y === this.y) {
     this.terrain(tile.terrain);
+    this.meta(tile.meta);
   }else {
     throw ['Wrong tile, expected (',  this.x, '; ', this.y, '), got (', tile.x, '; ', tile.y, ')'].join('');
   }

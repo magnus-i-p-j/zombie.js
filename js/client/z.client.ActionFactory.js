@@ -1,5 +1,7 @@
 goog.provide('z.client.ActionFactory');
 
+goog.require('z.client.actions.CreateImprovement');
+
 /**
  * @param {!z.common.rulebook.Rulebook} rulebook
  * @constructor
@@ -28,7 +30,7 @@ z.client.ActionFactory.prototype._createActions = function (meta) {
   var actions = [];
   if (meta.category === z.common.rulebook.category.TERRAIN) {
     goog.array.forEach(this._rulebook.improvements, function (improvement) {
-          actions.push(new z.client.actions.ActionCreateImprovement(improvement));
+          actions.push(new z.client.actions.CreateImprovement(improvement));
         }
     );
   }

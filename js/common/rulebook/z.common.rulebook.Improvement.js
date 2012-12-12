@@ -37,9 +37,14 @@ z.common.rulebook.Improvement = function (improvement) {
  * @return {boolean}
  */
 z.common.rulebook.Improvement.prototype.isApplicable = function (target) {
-  return goog.array.every(this.improvement['prerequisites'], function (item, key) {
-    return z.common.rulebook.logic.prerequisites[key](item, target);
-  });
+  for (var key in this._improvement['prerequisites']) {
+    if (this._improvement['prerequisites'].hasOwnProperty(key)) {
+      if (!z.common.rulebook.logic.prerequisites[key](this._improvement['prerequisites'][key], target)) {
+        return false;
+      }
+    }
+  }
+  return true;
 };
 
 

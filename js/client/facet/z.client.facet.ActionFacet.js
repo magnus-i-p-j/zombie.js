@@ -6,6 +6,8 @@ goog.provide('z.client.facet.ActionFacet');
  * @constructor
  */
 z.client.facet.ActionFacet = function (action, target) {
+  this.action = action;
+  this.target = target;
   this.canExecute = ko.computed(this._canExecute, this);
 };
 
