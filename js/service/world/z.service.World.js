@@ -48,11 +48,11 @@ z.service.World.prototype.generateTiles = function () {
     for (var x = left; x < right; x++) {
       var height = noise.noise(x * scale, y * scale);
       if (height < waterLevel) {
-        this.tiles.push(this._entityFactory.createTile(x, y, 'water'));
+        this.tiles.push(this._entityFactory.createTile('water', x, y ));
       } else if (height > hillLevel) {
-        this.tiles.push(this._entityFactory.createTile(x, y, 'hill'));
+        this.tiles.push(this._entityFactory.createTile('hill', x, y));
       } else {
-        this.tiles.push(this._entityFactory.createTile(x, y, 'grass'));
+        this.tiles.push(this._entityFactory.createTile('grass', x, y));
       }
     }
   }

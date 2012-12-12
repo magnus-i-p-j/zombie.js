@@ -49,14 +49,18 @@ z.client.facet.MapFacet.prototype.computeScreenPositionY = function (tileFacet) 
   return screenY + 'px';
 };
 
-z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
-  var tile = this._grid.getNode(x, y);
-  if (!tile) {
-    tile = new z.client.ui.facet.TileFacet(x, y);
-    this._grid.setNode(x, y, tile);
-    this.visibleTiles.push(tile);
+/**
+ * @param {z.common.entities.Tile} tile
+ * @return {z.client.facet.TileFacet}
+ */
+z.client.facet.MapFacet.prototype.getTileFacet = function (tile) {
+  var tileFacet = this._grid.getNode(tile.x, tile.y);
+  if (!tileFacet) {
+    tileFacet = new z.client.facet.TileFacet(tile);
+    this._grid.setNode(tile.x, tile.y, tileFacet);
+    this.visibleTiles.push(tileFacet);
   }
-  return tile;
+  return tileFacet;
 };
 
 z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
@@ -68,7 +72,7 @@ z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
  */
 z.client.facet.MapFacet.prototype.update = function (tiles) {
   goog.array.forEach(tiles, function (tile) {
-        var facet = this.getTileFacet(tile.x, tile.y);
+        var facet = this.getTileFacet(tile);
         facet.update(tile);
       }, this
   );

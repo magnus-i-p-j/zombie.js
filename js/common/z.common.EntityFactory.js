@@ -17,5 +17,5 @@ z.common.EntityFactory.prototype.createActor = function () {
 z.common.EntityFactory.prototype.createTile = function (terrain, x, y) {
   var meta = this._rulebook.getMetaClass(terrain);
 
-  return new z.common.entities.Tile(mugd.utils.getGuid(), meta, x, y);
+  return new z.common.entities.Tile(mugd.utils.getGuid(), meta, x, y, terrain);
 };
