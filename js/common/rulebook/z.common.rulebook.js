@@ -60,5 +60,8 @@ z.common.rulebook.category = {
 z.common.rulebook.logic.prerequisites = {
   'terrain':function (condition, target) {
     return goog.array.contains(condition, target.terrain);
+  },
+  'blocked': function(condition, target){
+    return false;
   }
 };

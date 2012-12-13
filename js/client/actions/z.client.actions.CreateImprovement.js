@@ -12,10 +12,16 @@ z.client.actions.CreateImprovement = function (improvement) {
 };
 goog.inherits(z.client.actions.CreateImprovement, z.client.Action);
 
+/**
+ * @param {!z.client.facet.TileFacet} target
+ */
 z.client.actions.CreateImprovement.prototype.canExecute = function (target) {
-  this.improvement.isApplicable(target);
+  return this.improvement.isApplicable(target.entity);
 };
 
+/**
+ * @param {!z.client.facet.TileFacet} target
+ */
 z.client.actions.CreateImprovement.prototype.execute = function (target) {
   if (!this.canExecute(target)) {
     throw {name:'Cannot execute action with the supplied target.'};

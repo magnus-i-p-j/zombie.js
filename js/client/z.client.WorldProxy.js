@@ -27,7 +27,6 @@ z.client.WorldProxy.prototype[mugd.Injector.DEPS] = [
 
 z.client.WorldProxy.prototype.tempEndTurn = function () {
   // TODO; make this sane
-  this._world.generateTiles();
   var tiles = this._world.tiles;
   var e = new z.client.events.StartTurn({tiles:tiles});
   this.dispatchEvent(e);
