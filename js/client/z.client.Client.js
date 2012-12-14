@@ -10,6 +10,7 @@ goog.require('z.common.rulebook.Rulebook');
 goog.require('z.client.WorldProxy');
 goog.require('z.client.ui.widget.MapWidget');
 goog.require('z.client.ui.widget.GameSessionWidget');
+goog.require('z.client.ui.widget.ContextMenuWidget');
 goog.require('z.client.facet.Gem');
 goog.require('z.client.ActionFactory');
 goog.require('z.client.facet.MapFacet');
@@ -54,6 +55,7 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addProvider(z.client.Resources.RULEBOOK, z.common.rulebook.Rulebook);
   injector.addProvider(z.client.Resources.MAP_WIDGET, z.client.ui.widget.MapWidget);
   injector.addProvider(z.client.Resources.GAME_SESSION_WIDGET, z.client.ui.widget.GameSessionWidget);
+  injector.addProvider(z.client.Resources.CONTEXT_MENU_WIDGET, z.client.ui.widget.ContextMenuWidget);
   injector.addProvider(z.client.Resources.GEM, z.client.facet.Gem);
   injector.addProvider(z.client.Resources.ACTION_FACTORY, z.client.ActionFactory);
   injector.addProvider(z.client.Resources.MAP_FACET, z.client.facet.MapFacet);

@@ -26,6 +26,7 @@ z.client.facet.ContextMenuFacet = function (actionFactory) {
   this._actionFactory = actionFactory;
 
   this.visible = ko.observable(false);
+  this.position = ko.observable(null);
   this.actionFacets = ko.observableArray();
 };
 
@@ -51,7 +52,7 @@ z.client.facet.ContextMenuFacet.prototype.setParentEventTarget = function (paren
  * @param {!goog.math.Coordinate} position
  */
 z.client.facet.ContextMenuFacet.prototype.doShowContextMenu = function (context, position) {
-  this._hide();
+  this.hide();
   this.actionFacets.removeAll();
   if (context) {
     var actions = this._getContextualActions(context);
@@ -88,14 +89,11 @@ z.client.facet.ContextMenuFacet.prototype._getContextualActions = function (cont
  * @private
  */
 z.client.facet.ContextMenuFacet.prototype._show = function (position) {
-  this.position = position;
+  this.position(position);
   this.visible(true);
 };
 
-/**
- * @private
- */
-z.client.facet.ContextMenuFacet.prototype._hide = function () {
+z.client.facet.ContextMenuFacet.prototype.hide = function () {
   this.visible(false);
-  this.position = null;
+  this.position(null);
 };

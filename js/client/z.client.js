@@ -12,6 +12,7 @@ z.client.Resources = {
   RULEBOOK: 'rulebook',
   MAP_WIDGET: 'map widget',
   GAME_SESSION_WIDGET: 'game_session_widget',
+  CONTEXT_MENU_WIDGET: 'context_menu_widget',
   GEM: 'gem',
   MAP_FACET: 'map_facet',
   CONTEXT_MENU_FACET: 'context_menu_facet',

@@ -1,6 +1,5 @@
 .game_container {
   .map_widget {
-    position: absolute;
     cursor: default;
 
     .tile {
@@ -28,6 +27,48 @@
     bottom: 35%;
     left: 0;
     overflow: hidden;
+  }
+
+  #context_menu_widget{
+    z-index: 999;
+    position: fixed;
+    border:1px solid #666;
+    background-color:#eee;
+    min-width:150px;
+    ul{
+      list-style:none;
+      padding:0;
+      margin:0;
+      cursor:pointer;
+      li{
+        text-align:left;
+        padding:3px 10px 3px 5px;
+        margin:0;
+        cursor:pointer;
+        font-family:"Lucida Grande",Verdana;
+        text-decoration:none;
+        color:#333;
+        font-size:12px;
+        font-weight:bold;
+      }
+      li.selected,
+      li:hover{
+        color:#fff;
+        background-color:#3875d7;
+        cursor:pointer;
+      }
+      li.selected:hover {
+        color:#333;
+        background-color:#eee;
+        cursor:pointer;
+      }
+      li.disabled,
+      li:hover.disabled {
+        background-color: #eee;
+        color:#999;
+        cursor:pointer;
+      }
+    }
   }
 
   position: relative;

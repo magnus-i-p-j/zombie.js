@@ -53,12 +53,14 @@ mugd.ui.MapScroller.prototype.disposeInternal = function () {
 };
 
 /**
- * @param {!goog.events.Event} e
+ * @param {!goog.events.BrowserEvent } e
  */
 mugd.ui.MapScroller.prototype.mouseDown = function (e) {
-  this.startMouse = this.getMousePos(e);
-  this.handler.listen(this.scrollStarter, goog.events.EventType.MOUSEMOVE, this.mouseMove);
-  this.startScroll = this.getPos();
+  if(e.button === goog.events.BrowserEvent.MouseButton.LEFT){
+    this.startMouse = this.getMousePos(e);
+    this.handler.listen(this.scrollStarter, goog.events.EventType.MOUSEMOVE, this.mouseMove);
+    this.startScroll = this.getPos();
+  }
   e.preventDefault();
 };
 

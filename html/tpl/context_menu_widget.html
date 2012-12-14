@@ -1,0 +1,13 @@
+<div data-bind="with: position">
+  <div id="context_menu_widget" data-bind="style: {top: ( y - 5) + 'px', left: (x - 5) + 'px'}">
+
+    <div data-bind="foreach: $parent.actionFacets">
+      <ul>
+        <li>
+          <span data-bind="text: action.name"></span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
