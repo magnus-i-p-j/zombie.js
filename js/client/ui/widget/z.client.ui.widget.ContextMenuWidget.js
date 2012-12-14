@@ -24,7 +24,7 @@ goog.inherits(z.client.ui.widget.ContextMenuWidget, goog.Disposable);
 
 z.client.ui.widget.ContextMenuWidget.prototype.claim = function (targetElement) {
   this.targetElement = targetElement;
-  this.eventHandler.listen(targetElement, goog.events.EventType.MOUSEOVER, this.doMouseOut);
+  this.eventHandler.listen(targetElement, goog.events.EventType.MOUSEOUT, this.doMouseOut);
 }
 
 z.client.ui.widget.ContextMenuWidget.prototype[mugd.Injector.DEPS] = [
