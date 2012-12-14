@@ -3,7 +3,8 @@ goog.provide('z.client.Action');
 /**
  * @constructor
  */
-z.client.Action = function () {
+z.client.Action = function (name) {
+  this.name = name;
 };
 
 /**

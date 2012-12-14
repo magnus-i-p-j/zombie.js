@@ -7,7 +7,7 @@ goog.require('z.client.Action');
  * @constructor
  */
 z.client.actions.CreateImprovement = function (improvement) {
-  goog.base(this, improvement);
+  goog.base(this, improvement.name);
   this.improvement = improvement;
 };
 goog.inherits(z.client.actions.CreateImprovement, z.client.Action);
@@ -26,7 +26,7 @@ z.client.actions.CreateImprovement.prototype.execute = function (target) {
   if (!this.canExecute(target)) {
     throw {name:'Cannot execute action with the supplied target.'};
   }
-  console.log('Create a ' + this.improvement.name + ' at target ' + target.id);
+  console.log('Create a ' + this.improvement.name + ' at target (' + target.entity.x + ';' + target.entity.y + ')');
 
 };
 

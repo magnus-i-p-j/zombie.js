@@ -55,7 +55,11 @@ z.client.facet.ContextMenuFacet.prototype.doShowContextMenu = function (context,
   this.actionFacets.removeAll();
   if (context) {
     var actions = this._getContextualActions(context);
-    this._show(position);
+    if(actions.length > 0){
+      ko.utils.arrayPushAll(this.actionFacets(), actions);
+      this.actionFacets.valueHasMutated();
+      this._show(position);
+    }
   }
 };
 
