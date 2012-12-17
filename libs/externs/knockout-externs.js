@@ -12,6 +12,9 @@ ko.dependentObservable = function (evaluatorFunctionOrOptions, evaluatorFunction
 
 ko.computed = ko.dependentObservable;
 
+/**
+ * @param {Array=} initialValues
+ */
 ko.observableArray = function (initialValues) {
 };
 

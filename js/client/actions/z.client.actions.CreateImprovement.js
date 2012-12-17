@@ -4,6 +4,7 @@ goog.require('z.client.Action');
 
 /**
  * @param {!z.common.rulebook.Improvement} improvement
+ * @extends {z.client.Action}
  * @constructor
  */
 z.client.actions.CreateImprovement = function (improvement) {
@@ -14,6 +15,7 @@ goog.inherits(z.client.actions.CreateImprovement, z.client.Action);
 
 /**
  * @param {!z.client.facet.TileFacet} target
+ * @return {boolean}
  */
 z.client.actions.CreateImprovement.prototype.canExecute = function (target) {
   return this.improvement.isApplicable(target.entity);

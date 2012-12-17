@@ -13,14 +13,15 @@ goog.require('z.common.entities.Tile');
 goog.require('z.common.rulebook.Rulebook');
 
 /**
- * @param {!z.ui.ActionFactory} actionFactory
+ * @param {!z.client.ActionFactory} actionFactory
+ * @extends {z.client.facet.Facet}
  * @constructor
  */
 z.client.facet.ContextMenuFacet = function (actionFactory) {
   goog.base(this);
 
   /**
-   * @type {!z.ui.ActionFactory}
+   * @type {!z.client.ActionFactory}
    * @private
    */
   this._actionFactory = actionFactory;

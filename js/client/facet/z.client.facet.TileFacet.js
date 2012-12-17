@@ -3,6 +3,7 @@ goog.provide('z.client.facet.TileFacet');
 goog.require('z.client.facet.EntityFacet');
 
 /**
+ * @extends {z.client.facet.EntityFacet}
  * @constructor
  * @param {z.common.entities.Tile} tile
  */

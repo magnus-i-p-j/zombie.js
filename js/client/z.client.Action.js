@@ -9,6 +9,7 @@ z.client.Action = function (name) {
 
 /**
  * @param {!z.common.entities.Entity} target
+ * @return {boolean}
  * @abstract
  */
 z.client.Action.prototype.canExecute = function (target) {

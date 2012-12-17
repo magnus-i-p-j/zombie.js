@@ -4,6 +4,7 @@ goog.require('goog.events.EventTarget');
 goog.require('goog.events.EventHandler');
 
 /**
+ * @extends {z.client.facet.Facet}
  * @constructor
  */
 z.client.facet.EntityFacet = function () {
