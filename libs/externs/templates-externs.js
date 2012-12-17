@@ -1,0 +1,2 @@
+var infuser = {};
+infuser.defaults = {};
