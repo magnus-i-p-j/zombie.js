@@ -3,7 +3,7 @@
 
     <div data-bind="foreach: $parent.actionFacets">
       <ul>
-        <li>
+        <li data-bind="click: execute">
           <span data-bind="text: action.name"></span>
         </li>
       </ul>

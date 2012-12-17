@@ -27,7 +27,6 @@ goog.inherits(z.client.ui.widget.ContextMenuWidget, goog.Disposable);
 z.client.ui.widget.ContextMenuWidget.prototype.claim = function (targetElement) {
   this.targetElement = targetElement;
   this.eventHandler.listen(goog.dom.getParentElement(this.targetElement), goog.events.EventType.MOUSEOVER, this.doMouseOverParent);
-  this.eventHandler.listen(this.targetElement, goog.events.EventType.CLICK, this.doMouseClicked);
 };
 
 z.client.ui.widget.ContextMenuWidget.prototype[mugd.Injector.DEPS] = [
@@ -41,13 +40,6 @@ z.client.ui.widget.ContextMenuWidget.prototype.doMouseOverParent = function(e){
   if(this._contextMenuFacet.visible() && !this.targetElement.contains(e.target)){
     this._contextMenuFacet.hide();
   }
-};
-
-/**
- * @param {!goog.events.BrowserEvent } e
- */
-z.client.ui.widget.ContextMenuWidget.prototype.doMouseClicked = function(e){
-  console.log('Clicked a: ' + e.target.tagName);
 };
 
 z.client.ui.widget.ContextMenuWidget.prototype.disposeInternal = function(){
