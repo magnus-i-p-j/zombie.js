@@ -1,7 +1,10 @@
 {
   "id": "z",
   "inputs": ["js/z.js"],
-  "paths": ["js"],
+  "paths": ["js/client",
+            "js/mugd",
+            "js/common",
+            "js/service"],
   "mode": "ADVANCED",
   "level": "VERBOSE",
   "externs": ["libs/externs/knockout-externs.js",

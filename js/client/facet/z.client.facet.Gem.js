@@ -8,6 +8,7 @@ goog.require('z.client');
  * @param {!z.client.facet.MapFacet} mapFacet
  * @param {!z.client.facet.ContextMenuFacet} contextMenuFacet
  * @param {!z.client.WorldProxy} world
+ * @extends {z.client.facet.Facet}
  * @constructor
  */
 z.client.facet.Gem = function (mapFacet, contextMenuFacet, world) {

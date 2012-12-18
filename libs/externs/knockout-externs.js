@@ -4,6 +4,9 @@
 
 var ko = {};
 
+/***
+ * @param {?} initialValue
+ */
 ko.observable = function (initialValue) {
 };
 
@@ -18,19 +21,26 @@ ko.computed = ko.dependentObservable;
 ko.observableArray = function (initialValues) {
 };
 
+/**
+ * @return {boolean}
+ */
+ko.observableArray.valueHasMutated = function(){}
+
 ko.applyBindings = function (viewModel, rootNode) {
 };
 
 ko.setTemplateEngine = function (templateEngine) {
 };
 
-/** @constructor */
-
+/**
+ * @constructor
+ */
 ko.nativeTemplateEngine = function () {
 };
 
-/** @param {Object=} templateDocument */
-
+/**
+ * @param {Object=} templateDocument
+ */
 ko.nativeTemplateEngine.prototype.makeTemplateSource = function (template, templateDocument) {
 };
 
