@@ -4,8 +4,10 @@
 
 var ko = {};
 
-/***
- * @param {?} initialValue
+
+/**
+ * @param {*=} initialValue
+ * @return {function(*=):*}
  */
 ko.observable = function (initialValue) {
 };

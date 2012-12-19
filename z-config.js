@@ -1,6 +1,6 @@
 {
   "id": "z",
-  "inputs": ["js/z.js"],
+  "inputs": ["js/z.js", "libs/knockout-2.1.0.debug.js"],
   "paths": ["js/client",
             "js/mugd",
             "js/common",

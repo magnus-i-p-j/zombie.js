@@ -14,15 +14,21 @@ z.client.actions.CreateImprovement = function (improvement) {
 goog.inherits(z.client.actions.CreateImprovement, z.client.Action);
 
 /**
- * @param {!z.client.facet.TileFacet} target
- * @return {boolean}
+ * @override
  */
 z.client.actions.CreateImprovement.prototype.canExecute = function (target) {
-  return this.improvement.isApplicable(target.entity);
+  if(target.entity){
+    /**
+     * @type {!z.common.entities.Entity}
+     */
+    var entity = target.entity;
+    return this.improvement.isApplicable(entity);
+  }
+  return false;
 };
 
 /**
- * @param {!z.client.facet.TileFacet} target
+ * @override
  */
 z.client.actions.CreateImprovement.prototype.execute = function (target) {
   if (!this.canExecute(target)) {

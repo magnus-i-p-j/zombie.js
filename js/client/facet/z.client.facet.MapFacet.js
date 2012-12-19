@@ -11,10 +11,17 @@ goog.require('mugd.utils.Grid');
 goog.require('z.client');
 goog.require('z.client.events');
 
+/**
+ * @extends {z.client.facet.Facet}
+ * @constructor
+ */
 z.client.facet.MapFacet = function () {
   goog.base(this);
   this._grid = new mugd.utils.Grid();
   this.visibleTiles = ko.observableArray();
+  /**
+   * @type {function(number=): number}
+   */
   this.offsetX = ko.observable(-10 * 72);
   this.offsetY = ko.observable(-10 * (72 - 18));
 };
@@ -40,6 +47,9 @@ z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
  * @return {String}
  */
 z.client.facet.MapFacet.prototype.computeScreenPositionX = function (tileFacet) {
+  /**
+   * @type {Number}
+   */
   var width = 72;
   var screenX = tileFacet.x * width - this.offsetX();
   var offset = tileFacet.y % 2 ? 0 : width / 2;
@@ -58,8 +68,8 @@ z.client.facet.MapFacet.prototype.computeScreenPositionY = function (tileFacet) 
 };
 
 /**
- * @param {int} x
- * @param {int} y
+ * @param {number} x
+ * @param {number} y
  * @return {z.client.facet.TileFacet}
  */
 z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
@@ -74,8 +84,8 @@ z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
 };
 
 /**
- * @param {int} x
- * @param {int} y
+ * @param {number} x
+ * @param {number} y
  * @return {z.client.facet.TileFacet}
  */
 z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {

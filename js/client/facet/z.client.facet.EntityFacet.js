@@ -14,6 +14,9 @@ z.client.facet.EntityFacet = function () {
    * @type {z.common.entities.Entity}
    */
   this.entity = null;
+  /**
+   * @type {function(*=):*}
+   */
   this.meta = ko.observable();
 };
 

@@ -4,9 +4,10 @@ goog.require('z.common.entities.Entity');
 /**
  * @param {!z.utils.guid} guid
  * @param {!z.common.rulebook.meta} meta
- * @param {int} x
- * @param {int} y
+ * @param {number} x
+ * @param {number} y
  * @param {string} terrain
+ * @extends {z.common.entities.Entity}
  * @constructor
  */
 z.common.entities.Tile = function (guid, meta, x, y, terrain) {
