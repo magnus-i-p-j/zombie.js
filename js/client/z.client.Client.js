@@ -21,6 +21,11 @@ goog.require('z.client.GameSession');
 
 goog.require('mugd.Injector');
 
+/**
+ * @param {!string} targetId
+ * @extends {goog.events.EventTarget}
+ * @constructor
+ */
 z.client.Client = function (targetId) {
   this.login();
   this.targetElement = goog.dom.getElement(targetId);

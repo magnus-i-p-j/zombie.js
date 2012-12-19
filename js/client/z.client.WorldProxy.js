@@ -10,8 +10,6 @@ goog.require('z.client.events.StartTurn');
 /**
  * @param {string} url
  * @param {!Object} ruleset
- * @constructor
- * @extends {goog.events.EventTarget}
  */
 z.client.WorldProxy = function (url, ruleset) {
   goog.base(this);

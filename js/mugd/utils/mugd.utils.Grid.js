@@ -18,9 +18,20 @@ mugd.utils.Grid = function () {
   this._idMap = {};
 };
 
+/**
+ * @type {Number}
+ */
 mugd.utils.Grid.width = 500;
+/**
+ * @type {Number}
+ */
 mugd.utils.Grid.height = 500;
 
+/**
+ * @param {number} x
+ * @param {number} y
+ * @param {*} node
+ */
 mugd.utils.Grid.prototype.setNode = function (x, y, node) {
   this._data[x + this._offsetX][y + this._offsetY] = node;
   if (node.guid) {
@@ -28,14 +39,28 @@ mugd.utils.Grid.prototype.setNode = function (x, y, node) {
   }
 };
 
+/**
+ * @param {number} x
+ * @param {number} y
+ * @return {*}
+ */
 mugd.utils.Grid.prototype.getNode = function (x, y) {
   return this._data[x + this._offsetX][y + this._offsetY];
 };
 
+/**
+ * @param {mugd.utils.guid} guid
+ * @return {*|null}
+ */
 mugd.utils.Grid.prototype.getNodeById = function (guid) {
   return this._idMap[guid] || null;
 };
 
+/**
+ * @param {number} x
+ * @param {number} y
+ * @return {Array}
+ */
 mugd.utils.Grid.prototype.getAdjacent = function (x, y) {
   var tiles;
   if (y % 2 === 0) {

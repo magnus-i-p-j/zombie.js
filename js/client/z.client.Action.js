@@ -1,6 +1,7 @@
 goog.provide('z.client.Action');
 
 /**
+ * @param {string} name
  * @constructor
  */
 z.client.Action = function (name) {

@@ -2,7 +2,6 @@ goog.provide('z.client.facet.ContextMenuFacet');
 
 goog.require('goog.array');
 
-
 goog.require('z.client.facet.Facet');
 goog.require('z.client.facet.ActionFacet');
 goog.require('mugd.Injector');
@@ -44,7 +43,7 @@ z.client.facet.ContextMenuFacet.prototype.setParentEventTarget = function (paren
   goog.base(this, 'setParentEventTarget', parent);
   // TODO: listen for context menu events
   this.eventHandler.listen(parent, z.client.events.EventType.SHOW_CONTEXT_MENU,
-      function(e){
+      function (e) {
         this.doShowContextMenu(e.context, e.position);
       });
 };
@@ -57,7 +56,7 @@ z.client.facet.ContextMenuFacet.prototype.doShowContextMenu = function (context,
   this.actionFacets.removeAll();
   if (context) {
     var actions = this._getContextualActions(context);
-    if(actions.length > 0){
+    if (actions.length > 0) {
       ko.utils.arrayPushAll(this.actionFacets(), actions);
       this.actionFacets.valueHasMutated();
       this._show(position);
@@ -73,15 +72,26 @@ z.client.facet.ContextMenuFacet.prototype.doShowContextMenu = function (context,
 z.client.facet.ContextMenuFacet.prototype._getContextualActions = function (context) {
   var actionFacets = [];
   var actionFactory = this._actionFactory;
-  goog.array.forEach(context, function (facet) {
-    var actions = actionFactory.getActions(facet.meta());
-    goog.array.forEach(actions, function (action) {
-      var actionFacet = new z.client.facet.ActionFacet(action, facet);
-      if (actionFacet.canExecute()) {
-        actionFacets.push(actionFacet);
-      }
-    });
-  });
+  goog.array.forEach(context, function (f) {
+        if (f) {
+          /**
+           * @type {!z.client.facet.Facet}
+           */
+          var facet = f;
+          var actions = actionFactory.getActions(facet.meta());
+          goog.array.forEach(actions, function (a) {
+            if (a) {
+              /**
+               * @type {!z.client.Action}
+               */
+              var action = a;
+              var actionFacet = new z.client.facet.ActionFacet(action, facet);
+              if (actionFacet.canExecute()) {
+                actionFacets.push(actionFacet);
+              }
+            }
+          })
+        }});
   return actionFacets;
 };
 

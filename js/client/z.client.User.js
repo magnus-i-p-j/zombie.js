@@ -1,5 +1,8 @@
 goog.provide('z.client.User');
 
+/**
+ * @constructor
+ */
 z.client.User = function () {
 };
 

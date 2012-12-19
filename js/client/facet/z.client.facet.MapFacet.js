@@ -12,13 +12,16 @@ goog.require('z.client');
 goog.require('z.client.events');
 
 /**
- * @constructor
  * @extends {z.client.facet.Facet}
+ * @constructor
  */
 z.client.facet.MapFacet = function () {
   goog.base(this);
   this._grid = new mugd.utils.Grid();
   this.visibleTiles = ko.observableArray();
+  /**
+   * @type {function(number=): number}
+   */
   this.offsetX = ko.observable(-10 * 72);
   this.offsetY = ko.observable(-10 * (72 - 18));
 };
@@ -44,6 +47,9 @@ z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
  * @return {string}
  */
 z.client.facet.MapFacet.prototype.computeScreenPositionX = function (tileFacet) {
+  /**
+   * @type {Number}
+   */
   var width = 72;
   var screenX = tileFacet.x * width - this.offsetX();
   var offset = tileFacet.y % 2 ? 0 : width / 2;

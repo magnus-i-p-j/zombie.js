@@ -7,6 +7,9 @@ goog.provide('z.client.facet.ActionFacet');
  */
 z.client.facet.ActionFacet = function (action, target) {
   this.action = action;
+  /**
+   * @type {function(Object=): Object}
+   */
   this.target = ko.observable(target);
   this.canExecute = ko.computed(this._canExecute, this);
 };
