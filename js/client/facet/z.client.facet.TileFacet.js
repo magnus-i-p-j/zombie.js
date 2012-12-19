@@ -29,7 +29,7 @@ goog.inherits(z.client.facet.TileFacet, z.client.facet.EntityFacet);
  * @param {z.common.entities.Tile} tile
  */
 z.client.facet.TileFacet.prototype.update = function (tile) {
-  goog.base(this, 'update', tile);
+  this.setEntity(tile);
   if (tile.x === this.x && tile.y === this.y) {
     this.terrain(tile.terrain);
   }else {

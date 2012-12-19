@@ -2,13 +2,13 @@ goog.provide('z.client.facet.ActionFacet');
 
 /**
  * @param {!z.client.Action} action
- * @param {!Object} target
+ * @param {!z.client.facet.EntityFacet} target
  * @constructor
  */
 z.client.facet.ActionFacet = function (action, target) {
   this.action = action;
   /**
-   * @type {function(Object=): Object}
+   * @type {function(z.client.facet.EntityFacet=): !z.client.facet.EntityFacet}
    */
   this.target = ko.observable(target);
   this.canExecute = ko.computed(this._canExecute, this);
@@ -18,7 +18,12 @@ z.client.facet.ActionFacet = function (action, target) {
  * @private
  */
 z.client.facet.ActionFacet.prototype._canExecute = function () {
-  return this.action.canExecute(this.target());
+  var target = this.target();
+  if(goog.isNull(target)){
+    return false;
+  }
+  return this.action.canExecute(target);
+
 };
 
 z.client.facet.ActionFacet.prototype.execute = function () {

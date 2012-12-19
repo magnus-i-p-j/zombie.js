@@ -14,18 +14,19 @@ z.client.actions.CreateImprovement = function (improvement) {
 goog.inherits(z.client.actions.CreateImprovement, z.client.Action);
 
 /**
- * @param {!z.client.facet.TileFacet} target
+ * @override
+ * @param {!z.client.facet.EntityFacet} target
  * @return {boolean}
  */
 z.client.actions.CreateImprovement.prototype.canExecute = function (target) {
-  if (goog.isNull(target.entity)) {
+  if (goog.isNull(target.entity) || target.entity.meta.category !== z.common.rulebook.category.TERRAIN) {
     return false;
   }
   return this.improvement.isApplicable(target.entity);
 };
 
 /**
- * @param {!z.client.facet.TileFacet} target
+ * @param {!z.client.facet.EntityFacet} target
  */
 z.client.actions.CreateImprovement.prototype.execute = function (target) {
   if (!this.canExecute(target)) {

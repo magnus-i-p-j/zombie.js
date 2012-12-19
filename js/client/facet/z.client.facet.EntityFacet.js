@@ -15,7 +15,7 @@ z.client.facet.EntityFacet = function () {
    */
   this.entity = null;
   /**
-   * @type {function(*=):*}
+   * @type {ko.observable}
    */
   this.meta = ko.observable();
 };
@@ -23,10 +23,10 @@ z.client.facet.EntityFacet = function () {
 goog.inherits(z.client.facet.EntityFacet, z.client.facet.Facet);
 
 /**
+ * @protected
  * @param {!z.common.entities.Entity} entity
- * @constructor
  */
-z.client.facet.EntityFacet.prototype.update = function(entity){
+z.client.facet.EntityFacet.prototype.setEntity = function(entity){
   if(!this.entity || this.entity && this.entity.guid === entity.guid){
     this.entity = entity;
     this.meta(entity.meta);
