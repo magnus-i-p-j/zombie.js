@@ -9,8 +9,13 @@ goog.require('goog.math.Coordinate');
 goog.require('mugd.ui.MapScroller');
 goog.require('mugd.Injector');
 goog.require('z.client');
-goog.require('z.client.events.ShowContextMenu')
+goog.require('z.client.events.ShowContextMenu');
 
+/**
+ * @param {z.client.facet.MapFacet} mapFacet
+ * @param {z.client.facet.Gem} gem
+ * @constructor
+ */
 z.client.ui.widget.MapWidget = function (mapFacet, gem) {
   this._mapFacet = mapFacet;
   this._gem = gem;
@@ -38,7 +43,7 @@ z.client.ui.widget.MapWidget.prototype.claim = function (targetElement) {
 z.client.ui.widget.MapWidget.prototype.onTileClicked = function (e) {
   var element = this.findTileElement(e);
   if (element) {
-    var adjacent = this._mapFacet.getAdjacent(parseInt(element.dataset.x), parseInt(element.dataset.y));
+    var adjacent = this._mapFacet.getAdjacent(parseInt(element.dataset.x, 10), parseInt(element.dataset.y, 10));
     var elements = goog.array.map(adjacent, function (a) {
       return goog.dom.query('div[data-x = ' + a.x + '][data-y = ' + a.y + ']', e.currentTarget)[0];
     });

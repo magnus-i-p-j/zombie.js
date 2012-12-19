@@ -11,6 +11,7 @@ goog.require('goog.style');
 /**
  * @param {!z.client.facet.ContextMenuFacet} contextMenuFacet
  * @constructor
+ * @extends {goog.Disposable}
  */
 z.client.ui.widget.ContextMenuWidget = function(contextMenuFacet){
   goog.base(this);

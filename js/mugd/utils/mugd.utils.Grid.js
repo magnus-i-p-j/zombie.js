@@ -1,5 +1,8 @@
 goog.provide('mugd.utils.Grid');
 
+/**
+ * @constructor
+ */
 mugd.utils.Grid = function () {
   this._offsetX = mugd.utils.Grid.width / 2;
   this._offsetY = mugd.utils.Grid.height / 2;

@@ -1,2 +1,1 @@
-./simpleServer &
-java -jar libs/plovr-eba786b34df9.jar serve z-config.js
+java -jar libs/plovr-eba786b34df9.jar serve z-config.json

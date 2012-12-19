@@ -49,7 +49,7 @@ z.client.facet.ContextMenuFacet.prototype.setParentEventTarget = function (paren
       });
 };
 /**
- * @param {!Array.<z.client.facet.Facet>} context
+ * @param {!Array.<!z.client.facet.Facet>} context
  * @param {!goog.math.Coordinate} position
  */
 z.client.facet.ContextMenuFacet.prototype.doShowContextMenu = function (context, position) {
@@ -66,8 +66,8 @@ z.client.facet.ContextMenuFacet.prototype.doShowContextMenu = function (context,
 };
 
 /**
- * @param {Array.<z.client.facet.Facet>} context
- * @return {Array.<z.client.facet.ActionFacet>} actions
+ * @param {Array.<!z.client.facet.Facet>} context
+ * @return {Array.<!z.client.facet.ActionFacet>} actions
  * @private
  */
 z.client.facet.ContextMenuFacet.prototype._getContextualActions = function (context) {

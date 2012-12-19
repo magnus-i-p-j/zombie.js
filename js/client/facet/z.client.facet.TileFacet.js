@@ -3,9 +3,10 @@ goog.provide('z.client.facet.TileFacet');
 goog.require('z.client.facet.EntityFacet');
 
 /**
+ * @param {number} x
+ * @param {number} y
  * @extends {z.client.facet.EntityFacet}
  * @constructor
- * @param {z.common.entities.Tile} tile
  */
 z.client.facet.TileFacet = function (x, y) {
   goog.base(this);

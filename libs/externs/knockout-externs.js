@@ -5,7 +5,7 @@
 var ko = {};
 
 /***
- * @param {?} initialValue
+ * @param {*=} initialValue
  */
 ko.observable = function (initialValue) {
 };
@@ -24,7 +24,8 @@ ko.observableArray = function (initialValues) {
 /**
  * @return {boolean}
  */
-ko.observableArray.valueHasMutated = function(){}
+ko.observableArray.valueHasMutated = function () {
+};
 
 ko.applyBindings = function (viewModel, rootNode) {
 };
@@ -39,6 +40,7 @@ ko.nativeTemplateEngine = function () {
 };
 
 /**
+ * @param template
  * @param {Object=} templateDocument
  */
 ko.nativeTemplateEngine.prototype.makeTemplateSource = function (template, templateDocument) {

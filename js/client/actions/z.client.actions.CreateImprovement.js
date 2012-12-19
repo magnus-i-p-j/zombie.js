@@ -18,6 +18,9 @@ goog.inherits(z.client.actions.CreateImprovement, z.client.Action);
  * @return {boolean}
  */
 z.client.actions.CreateImprovement.prototype.canExecute = function (target) {
+  if (goog.isNull(target.entity)) {
+    return false;
+  }
   return this.improvement.isApplicable(target.entity);
 };
 
