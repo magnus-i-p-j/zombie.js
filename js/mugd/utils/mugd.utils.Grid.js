@@ -4,7 +4,15 @@ goog.provide('mugd.utils.Grid');
  * @constructor
  */
 mugd.utils.Grid = function () {
+  /**
+   * @type {!number}
+   * @private
+   */
   this._offsetX = mugd.utils.Grid.width / 2;
+  /**
+   * @type {!number}
+   * @private
+   */
   this._offsetY = mugd.utils.Grid.height / 2;
   this._data = (function () {
     var data = [];
@@ -19,11 +27,11 @@ mugd.utils.Grid = function () {
 };
 
 /**
- * @type {Number}
+ * @type {!number}
  */
 mugd.utils.Grid.width = 500;
 /**
- * @type {Number}
+ * @type {!number}
  */
 mugd.utils.Grid.height = 500;
 

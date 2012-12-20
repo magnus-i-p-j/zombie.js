@@ -11,27 +11,20 @@ goog.require('mugd.utils.SimplexNoise');
  */
 z.service.World = function (ruleset) {
   this._rulebook = new z.common.rulebook.Rulebook(ruleset);
-  this.playerActor = new z.common.entities.Actor();
   this.tiles = [];
   this._entityFactory = new z.common.EntityFactory(this._rulebook);
   this.generateTiles();
 };
 
-z.service.World.prototype.registerGameSession = function (gameSession) {
-  this.playerSession = gameSession;
-  this.playerSession.worldUpdate({tiles:this.tiles});
-};
-
 z.service.World.prototype.endTurn = function () {
   this.tick();
-  this.playerSession.worldUpdate({tiles:this.tiles});
 };
 
 z.service.World.prototype.tick = function () {
   var x = Math.floor(Math.random() * 21 - 10);
   var y = Math.floor(Math.random() * 21 - 10);
   var terrain = ['grass', 'water'][Math.floor(Math.random() * 2)];
-  this.tiles.push(this._entityFactory.createTile(x, y, terrain));
+  this.tiles.push(this._entityFactory.createTile(terrain, x, y));
 };
 
 z.service.World.prototype.generateTiles = function () {

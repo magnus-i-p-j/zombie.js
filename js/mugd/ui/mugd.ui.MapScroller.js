@@ -28,7 +28,7 @@ mugd.ui.MapScroller = function (scrollSource, getScrollMover) {
 goog.inherits(mugd.ui.MapScroller, goog.events.EventTarget);
 
 /**
- * @param {!goog.events.Event} e
+ * @param {!goog.events.BrowserEvent} e
  */
 mugd.ui.MapScroller.prototype.init = function (e) {
   this.mover = this.getScrollMover();

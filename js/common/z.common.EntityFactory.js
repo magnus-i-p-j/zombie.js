@@ -1,7 +1,7 @@
 goog.provide('z.common.EntityFactory');
 
 goog.require('z.common.entities.Tile');
-goog.require('z.util');
+goog.require('mugd.utils');
 goog.require('z.common.rulebook.Rulebook');
 
 /**

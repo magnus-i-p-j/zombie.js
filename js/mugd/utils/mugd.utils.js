@@ -1,4 +1,4 @@
-goog.provide('z.util');
+goog.provide('mugd.utils');
 
 //UUID/Guid Generator
 // use: UUID.create() or UUID.createSequential()
