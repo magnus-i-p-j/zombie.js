@@ -13,7 +13,6 @@ z.init = function (initElement) {
   client.run();
   return client;
 };
-//goog.exportSymbol('z', z);
-//goog.exportSymbol('z.init', z.init);
-//goog.exportProperty(z, 'init', z.init);
+
+goog.exportSymbol('zed.init', z.init);
 

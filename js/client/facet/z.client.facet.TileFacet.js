@@ -12,14 +12,21 @@ z.client.facet.TileFacet = function (x, y) {
   goog.base(this);
 
   /**
+   * @expose
    * @type {number}
    */
   this.x =  x;
+
   /**
+   * @expose
    * @type {number}
    */
   this.y = y;
 
+  /**
+   * @expose
+   * @type {function(string=):string}
+   */
   this.terrain = ko.observable('unknown');
 };
 
@@ -29,7 +36,7 @@ goog.inherits(z.client.facet.TileFacet, z.client.facet.EntityFacet);
  * @param {z.common.entities.Tile} tile
  */
 z.client.facet.TileFacet.prototype.update = function (tile) {
-  this.setEntity(/** @type{!z.common.entities.Entity} */(tile));
+  this.setEntity(/** @type {!z.common.entities.Entity} */(tile));
   if (tile.x === this.x && tile.y === this.y) {
     this.terrain(tile.terrain);
   }else {

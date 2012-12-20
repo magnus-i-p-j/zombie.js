@@ -24,7 +24,7 @@ ko.observableArray = function (initialValues) {
 /**
  * @return {boolean}
  */
-ko.observableArray.valueHasMutated = function(){}
+ko.observableArray.valueHasMutated = function(){};
 
 ko.applyBindings = function (viewModel, rootNode) {
 };

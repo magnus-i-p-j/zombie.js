@@ -17,13 +17,23 @@ goog.require('z.client.events');
  */
 z.client.facet.MapFacet = function () {
   goog.base(this);
-  this._grid = new mugd.utils.Grid();
+  /**
+   * @expose
+   * @type {function (Array=):Array|{valueHasMutated: function (): boolean }}
+   */
   this.visibleTiles = ko.observableArray();
   /**
+   * @expose
    * @type {function(number=): number}
    */
   this.offsetX = ko.observable(-10 * 72);
+  /**
+   * @expose
+   * @type {function(number=): number}
+   */
   this.offsetY = ko.observable(-10 * (72 - 18));
+
+  this._grid = new mugd.utils.Grid();
 };
 
 goog.inherits(z.client.facet.MapFacet, z.client.facet.Facet);

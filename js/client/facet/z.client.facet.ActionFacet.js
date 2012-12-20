@@ -8,9 +8,14 @@ goog.provide('z.client.facet.ActionFacet');
 z.client.facet.ActionFacet = function (action, target) {
   this.action = action;
   /**
+   * @expose
    * @type {function(z.client.facet.EntityFacet=): !z.client.facet.EntityFacet}
    */
   this.target = ko.observable(target);
+  /**
+   * @expose
+   * @type {function(boolean=): boolean}
+   */
   this.canExecute = ko.computed(this._canExecute, this);
 };
 

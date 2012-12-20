@@ -26,7 +26,7 @@ z.common.rulebook.improvement;
 
 /**
  * @typedef {{
- *   terrain: Array.<string>
+ *   terrain: Array.<!string>
  * }}
  */
 z.common.rulebook.prerequisites;
@@ -57,6 +57,7 @@ z.common.rulebook.category = {
   TECH: 'tech'
 };
 
+//noinspection JSUnusedLocalSymbols
 z.common.rulebook.logic.prerequisites = {
   'terrain':function (condition, target) {
     return goog.array.contains(condition, target.terrain);

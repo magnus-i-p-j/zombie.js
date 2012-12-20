@@ -25,8 +25,20 @@ z.client.facet.ContextMenuFacet = function (actionFactory) {
    */
   this._actionFactory = actionFactory;
 
+  /**
+   * @expose
+   * @type {function(boolean=):boolean}
+   */
   this.visible = ko.observable(false);
+  /**
+   * @expose
+   * @type {function(goog.math.Coordinate=):goog.math.Coordinate}
+   */
   this.position = ko.observable(null);
+  /**
+   * @expose
+   * @type {function (Array=):Array|{valueHasMutated: function (): boolean }}
+   */
   this.actionFacets = ko.observableArray();
 };
 
@@ -72,26 +84,22 @@ z.client.facet.ContextMenuFacet.prototype.doShowContextMenu = function (context,
 z.client.facet.ContextMenuFacet.prototype._getContextualActions = function (context) {
   var actionFacets = [];
   var actionFactory = this._actionFactory;
-  goog.array.forEach(context, function (f) {
-        if (f) {
+  goog.array.forEach(context, function (facet) {
+    if (facet) {
+      var actions = actionFactory.getActions(facet.meta());
+      goog.array.forEach(actions, function (action) {
+        if (action) {
           /**
-           * @type {!z.client.facet.EntityFacet}
+           * @type {!z.client.facet.ActionFacet}
            */
-          var facet = f;
-          var actions = actionFactory.getActions(facet.meta());
-          goog.array.forEach(actions, function (a) {
-            if (a) {
-              /**
-               * @type {!z.client.Action}
-               */
-              var action = a;
-              var actionFacet = new z.client.facet.ActionFacet(action, facet);
-              if (actionFacet.canExecute()) {
-                actionFacets.push(actionFacet);
-              }
-            }
-          })
-        }});
+          var actionFacet = new z.client.facet.ActionFacet(action, facet);
+          if (actionFacet.canExecute()) {
+            actionFacets.push(actionFacet);
+          }
+        }
+      })
+    }
+  });
   return actionFacets;
 };
 

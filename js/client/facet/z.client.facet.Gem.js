@@ -13,11 +13,23 @@ goog.require('z.client');
  */
 z.client.facet.Gem = function (mapFacet, contextMenuFacet, world) {
   goog.base(this);
+  /**
+   * @expose
+   * @type {!z.client.facet.MapFacet}
+   */
   this.mapFacet = mapFacet;
+  /**
+   * @expose
+   * @type {!z.client.facet.ContextMenuFacet}
+   */
   this.contextMenuFacet = contextMenuFacet;
-  this.world = world;
+  /**
+   * @expose
+   * @type {function(z.client.facet.TileFacet=):z.client.facet.TileFacet}
+   */
   this.focusedTile = ko.observable();
 
+  this.world = world;
   this.mapFacet.setParentEventTarget(this);
   this.contextMenuFacet.setParentEventTarget(this);
   this.world.setParentEventTarget(this);
