@@ -12,7 +12,7 @@ mugd.Injector = function () {
   this._providers = {};
 
   /**
-   * @type {!Object.<string, !Object>}
+   * @type {!Object.<string, !*>}
    * @private
    */
   this._resources = {};
@@ -41,7 +41,7 @@ mugd.Injector.prototype.addResource = function (key, resource) {
 /**
  * Returns a resource by its key.
  * @param {string} key The key of the service to get.
- * @return {!Object} The service.
+ * @return {*} The service.
  */
 mugd.Injector.prototype.getResource = function (key) {
   var resource = this._resources[key];
@@ -62,6 +62,9 @@ mugd.Injector.prototype.getResource = function (key) {
  * @return {!Object} An instance of the constructor.
  */
 mugd.Injector.prototype.create = function (ctor) {
+  /**
+   * @constructor
+   */
   var Dependant = function () {
   };
   Dependant.prototype = ctor.prototype;

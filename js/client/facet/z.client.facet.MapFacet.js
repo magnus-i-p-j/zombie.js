@@ -31,7 +31,7 @@ goog.inherits(z.client.facet.MapFacet, z.client.facet.Facet);
 z.client.facet.MapFacet.prototype[mugd.Injector.DEPS] = [];
 
 /**
- * @param {!z.client.facet.Gem} parent
+ * @param {goog.events.EventTarget} parent
  */
 z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
   goog.base(this, 'setParentEventTarget', parent);
@@ -48,7 +48,7 @@ z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
  */
 z.client.facet.MapFacet.prototype.computeScreenPositionX = function (tileFacet) {
   /**
-   * @type {Number}
+   * @type {!number}
    */
   var width = 72;
   var screenX = tileFacet.x * width - this.offsetX();
@@ -70,7 +70,7 @@ z.client.facet.MapFacet.prototype.computeScreenPositionY = function (tileFacet) 
 /**
  * @param {number} x
  * @param {number} y
- * @return {z.client.facet.TileFacet}
+ * @return {?z.client.facet.TileFacet}
  */
 z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
   var facet = this._grid.getNode(x, y);
@@ -80,16 +80,16 @@ z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
     this._grid.setNode(x, y, facet);
     this.visibleTiles.push(facet);
   }
-  return facet;
+  return /** @type {?z.client.facet.TileFacet} */ (facet);
 };
 
 /**
  * @param {number} x
  * @param {number} y
- * @return {z.client.facet.TileFacet}
+ * @return {Array.<z.client.facet.TileFacet>}
  */
 z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
-  return this._grid.getAdjacent(x, y);
+  return /** @type {Array.<z.client.facet.TileFacet>} */ this._grid.getAdjacent(x, y);
 };
 
 /**

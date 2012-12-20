@@ -26,7 +26,7 @@ z.common.rulebook.improvement;
 
 /**
  * @typedef {{
- *   terrain: string[]
+ *   terrain: Array.<string>
  * }}
  */
 z.common.rulebook.prerequisites;

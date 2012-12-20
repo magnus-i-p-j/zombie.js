@@ -1,7 +1,7 @@
 goog.provide('z.common.entities.Entity');
 
 /**
- * @param {!z.utils.guid} guid
+ * @param {!mugd.utils.guid} guid
  * @param {!z.common.rulebook.meta} meta
  * @constructor
  */

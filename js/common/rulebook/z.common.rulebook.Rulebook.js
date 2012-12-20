@@ -8,6 +8,9 @@ goog.require('mugd.Injector');
 goog.require('z.client');
 
 
+/**
+ * @constructor
+ */
 z.common.rulebook.Rulebook = function (ruleset) {
   /**
    * @type {Object}

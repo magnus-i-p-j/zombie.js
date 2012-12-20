@@ -156,6 +156,11 @@ goog.provide('z.util');
   w._UUID = UUID;
 }(mugd.utils));
 
+/**
+ * @param {string=} prefix
+ * @param {string=} separator
+ * @return {!mugd.utils.guid}
+ */
 mugd.utils.getGuid = function (prefix, separator) {
   prefix = prefix || '';
   separator = separator || ':';

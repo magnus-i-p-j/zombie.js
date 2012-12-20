@@ -2,7 +2,7 @@ goog.provide('z.common.entities.Tile');
 goog.require('z.common.entities.Entity');
 
 /**
- * @param {!z.utils.guid} guid
+ * @param {!mugd.utils.guid} guid
  * @param {!z.common.rulebook.meta} meta
  * @param {number} x
  * @param {number} y

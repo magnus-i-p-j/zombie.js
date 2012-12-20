@@ -65,7 +65,7 @@ z.client.facet.ContextMenuFacet.prototype.doShowContextMenu = function (context,
 };
 
 /**
- * @param {Array.<!z.client.facet.Facet>} context
+ * @param {Array.<!z.client.facet.EntityFacet>} context
  * @return {Array.<!z.client.facet.ActionFacet>} actions
  * @private
  */
@@ -75,7 +75,7 @@ z.client.facet.ContextMenuFacet.prototype._getContextualActions = function (cont
   goog.array.forEach(context, function (f) {
         if (f) {
           /**
-           * @type {!z.client.facet.Facet}
+           * @type {!z.client.facet.EntityFacet}
            */
           var facet = f;
           var actions = actionFactory.getActions(facet.meta());

@@ -12,8 +12,8 @@ goog.require('z.client');
 goog.require('z.client.events.ShowContextMenu');
 
 /**
- * @param {z.client.facet.MapFacet} mapFacet
- * @param {z.client.facet.Gem} gem
+ * @param {!z.client.facet.MapFacet} mapFacet
+ * @param {!z.client.facet.Gem} gem
  * @constructor
  */
 z.client.ui.widget.MapWidget = function (mapFacet, gem) {
@@ -54,6 +54,11 @@ z.client.ui.widget.MapWidget.prototype.onTileClicked = function (e) {
   }
 };
 
+/**
+ * @param {goog.events.BrowserEvent} e
+ * @param {Node=} element
+ * @return {Node}
+ */
 z.client.ui.widget.MapWidget.prototype.findTileElement = function (e, element) {
   if (element !== e.currentTarget && e.target) {
     element = element || e.target;
@@ -68,13 +73,15 @@ z.client.ui.widget.MapWidget.prototype.findTileElement = function (e, element) {
     } else {
       return this.findTileElement(e, element.parentElement);
     }
+  } else {
+    return null;
   }
 };
 
 z.client.ui.widget.MapWidget.prototype.getClientCenter = function (element) {
   var rect = goog.style.getBounds(element);
   var x = rect.left + rect.width / 2;
-  var y = rect.bottom - rect.height / 2;
+  var y = rect.top - rect.height / 2;
   return new goog.math.Coordinate(x, y);
 };
 
@@ -97,7 +104,7 @@ z.client.ui.widget.MapWidget.prototype.findClosestElement = function (center, el
 z.client.ui.widget.MapWidget.prototype.onShowContextMenu = function (e) {
   var element = this.findTileElement(e);
   if (element) {
-    var facet = this._mapFacet.getTileFacet(parseInt(element.dataset.x), parseInt(element.dataset.y));
+    var facet = this._mapFacet.getTileFacet(parseInt(element.dataset.x, 10), parseInt(element.dataset.y, 10));
     var showContextMenu = new z.client.events.ShowContextMenu([facet], new goog.math.Coordinate(e.clientX, e.clientY));
     this._mapFacet.dispatchEvent(showContextMenu);
   }
