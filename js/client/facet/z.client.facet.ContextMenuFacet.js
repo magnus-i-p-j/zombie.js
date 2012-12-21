@@ -37,7 +37,7 @@ z.client.facet.ContextMenuFacet = function (actionFactory) {
   this.position = ko.observable(null);
   /**
    * @expose
-   * @type {function (Array=):Array|{valueHasMutated: function (): boolean }}
+   * @type {function(Array.<!z.client.facet.ActionFacet>=):!Array.<!z.client.facet.ActionFacet>}
    */
   this.actionFacets = ko.observableArray();
 };

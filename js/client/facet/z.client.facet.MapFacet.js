@@ -19,7 +19,7 @@ z.client.facet.MapFacet = function () {
   goog.base(this);
   /**
    * @expose
-   * @type {function (Array=):Array|{valueHasMutated: function (): boolean }}
+   * @type {function (Array=):!Array}}
    */
   this.visibleTiles = ko.observableArray();
   /**

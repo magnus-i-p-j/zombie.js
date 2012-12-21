@@ -16,15 +16,20 @@ ko.dependentObservable = function (evaluatorFunctionOrOptions, evaluatorFunction
 ko.computed = ko.dependentObservable;
 
 /**
- * @param {Array=} initialValues
+ * @type {function(Array=):function(Array=):!Array}
  */
 ko.observableArray = function (initialValues) {
 };
 
+ko.observableArray.prototype.push = function(){};
+
+ko.observableArray.prototype.removeAll = function(){};
+
 /**
  * @return {boolean}
  */
-ko.observableArray.valueHasMutated = function(){};
+ko.observableArray.prototype.valueHasMutated = function(){};
+
 
 ko.applyBindings = function (viewModel, rootNode) {
 };
@@ -73,6 +78,9 @@ ko.utils.arrayMap = function (array, mapping) {
 ko.utils.arrayFilter = function (array, predicate) {
 };
 
+/**
+ * @type {function(!Array,Array)}
+ */
 ko.utils.arrayPushAll = function (array, valuesToPush) {
 };
 
