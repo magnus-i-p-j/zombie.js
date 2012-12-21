@@ -53,6 +53,7 @@ z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
 };
 
 /**
+ * @expose
  * @param  {!z.client.facet.TileFacet} tileFacet
  * @return {string}
  */
@@ -67,6 +68,7 @@ z.client.facet.MapFacet.prototype.computeScreenPositionX = function (tileFacet) 
 };
 
 /**
+ * @expose
  * @param {!z.client.facet.TileFacet} tileFacet
  * @return {string}
  */
