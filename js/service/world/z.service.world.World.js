@@ -21,22 +21,54 @@ z.service.world.World = function (ruleset, terrainGenerator) {
    * @private
    */
   this._tiles = new mugd.utils.Grid();
-  this._actors = [];
+  /**
+   * @type { Object.<!mugd.utils.guid, !z.common.entities.Actor> }
+   * @private
+   */
+  this._actors = {};
 
+  /**
+   * @type {Object.<!mugd.utils.guid, function(z.common.protocol.startTurn)>}
+   * @private
+   */
+  this._actorCallbacks = {};
 };
 
 /**
- * @param {Function} callback
+ * @param {function(z.common.protocol.startTurn)} actorCallback
  * @return {mugd.utils.guid}
  */
-z.service.world.World.prototype.createActor = function (callback) {
+z.service.world.World.prototype.createActor = function (actorCallback) {
   var actor = this._entityFactory.createActor();
-  this._actors.push(actor);
+  this._actors[actor.guid] = actor;
+  this._actorCallbacks[actor.guid] = actorCallback;
   return actor.guid;
 };
 
 z.service.world.World.prototype.endTurn = function () {
   this.tick();
+  for(var actorGuid in this._actors){
+    if(this._actors.hasOwnProperty(actorGuid)){
+      /**
+       * @type {z.common.protocol.startTurn}
+       */
+      var startTurn = {'actorId': actorGuid};
+      var tiles = [];
+      for (var y = -2; y <= 2; y++) {
+        for (var x = -2; x <= 2; x++) {
+          var tile = this._tiles.getNode(x, y);
+          tiles.push({
+            'tileId': tile.guid,
+            'x': tile.x,
+            'y': tile.y,
+            'type': tile.meta.type
+          });
+        }
+      }
+      startTurn['tiles'] = tiles;
+      this._actorCallbacks[actorGuid](startTurn);
+    }
+  }
 };
 
 z.service.world.World.prototype.tick = function () {
@@ -49,10 +81,10 @@ z.service.world.World.prototype.tick = function () {
 
   this._expandWorld();
   //Calculate zombies
-  //Discover tiles
   //Zombie attack
   //Advance Projects
   //Special events
+  //Report actors
 };
 
 /**
