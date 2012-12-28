@@ -109,7 +109,7 @@ z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
  */
 z.client.facet.MapFacet.prototype.update = function (tiles) {
   goog.array.forEach(tiles, function (tile) {
-        var facet = this.getTileFacet(tile.x, tile.y);
+        var facet = this.getTileFacet(tile.position.x, tile.position.y);
         facet.update(tile);
       }, this
   );

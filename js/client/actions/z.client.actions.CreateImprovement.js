@@ -32,7 +32,7 @@ z.client.actions.CreateImprovement.prototype.execute = function (target) {
   if (!this.canExecute(target)) {
     throw {name:'Cannot execute action with the supplied target.'};
   }
-  console.log('Create a ' + this.improvement.name + ' at target (' + target.entity.x + ';' + target.entity.y + ')');
+  console.log('Create a ' + this.improvement.name + ' at target (' + target.entity.position.x + ';' + target.entity.position.y + ')');
 
 };
 

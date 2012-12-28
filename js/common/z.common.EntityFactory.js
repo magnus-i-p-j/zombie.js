@@ -9,6 +9,7 @@ goog.require('z.common.events');
 /**
  * @param {!z.common.rulebook.Rulebook} rulebook
  * @constructor
+ * @extends {goog.events.EventTarget}
  */
 z.common.EntityFactory = function (rulebook) {
   goog.base(this);
@@ -25,7 +26,7 @@ z.common.EntityFactory = function (rulebook) {
   });
 
   /**
-   * @type {Object.<!mugd,utils.guid,!z.common.entities.Entity>}
+   * @type {Object.<!mugd.utils.guid,!z.common.entities.Entity>}
    * @private
    */
   this._entities = {};
@@ -33,6 +34,9 @@ z.common.EntityFactory = function (rulebook) {
 
 goog.inherits(z.common.EntityFactory, goog.events.EventTarget);
 
+/**
+ * @return {!z.common.entities.Actor}
+ */
 z.common.EntityFactory.prototype.createActor = function () {
 };
 
@@ -47,6 +51,18 @@ z.common.EntityFactory.prototype.createTile = function (terrain, x, y) {
   var tile =  new z.common.entities.Tile(mugd.utils.getGuid(), meta, x, y, terrain);
   this._registerEntity(tile);
   return tile;
+};
+
+/**
+ * @param {function(z.common.entities.Entity)} fn
+ * @param {Object} me
+ */
+z.common.EntityFactory.prototype.forEntities = function(fn, me){
+  for(var i in this._entities){
+    if(this._entities.hasOwnProperty(i)){
+      fn.call(me, this._entities[i]);
+    }
+  }
 };
 
 /**

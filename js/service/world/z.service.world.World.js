@@ -1,16 +1,17 @@
-goog.provide('z.service.World');
+goog.provide('z.service.world.World');
 
 goog.require('z.common.EntityFactory');
 goog.require('z.common.entities.Actor');
 goog.require('goog.array');
 goog.require('mugd.utils.SimplexNoise');
+goog.require('mugd.utils');
 
 /**
  * @param {!Object} ruleset
- * @param {!z.service.world.ITerrainGenerator}
+ * @param {!z.service.world.ITerrainGenerator} terrainGenerator
  * @constructor
  */
-z.service.World = function (ruleset, terrainGenerator) {
+z.service.world.World = function (ruleset, terrainGenerator) {
   this._rulebook = new z.common.rulebook.Rulebook(ruleset);
   this._terrainGenerator = terrainGenerator;
   this._entityFactory = new z.common.EntityFactory(this._rulebook);
@@ -19,22 +20,26 @@ z.service.World = function (ruleset, terrainGenerator) {
    * @type {mugd.utils.Grid}
    * @private
    */
-  this._tiles = [];
+  this._tiles = new mugd.utils.Grid();
   this._actors = [];
 
 };
 
-z.service.World.prototype.createActor = function (callback) {
+/**
+ * @param {Function} callback
+ * @return {mugd.utils.guid}
+ */
+z.service.world.World.prototype.createActor = function (callback) {
   var actor = this._entityFactory.createActor();
   this._actors.push(actor);
   return actor.guid;
 };
 
-z.service.World.prototype.endTurn = function () {
+z.service.world.World.prototype.endTurn = function () {
   this.tick();
 };
 
-z.service.World.prototype.tick = function () {
+z.service.world.World.prototype.tick = function () {
   //Ensure all actors are done.
   if (!goog.array.every(this._actors, function (actor) {
 
@@ -53,7 +58,7 @@ z.service.World.prototype.tick = function () {
 /**
  * @private
  */
-z.service.World.prototype._expandWorld = function () {
+z.service.world.World.prototype._expandWorld = function () {
   var x_min = 0;
   var x_max = 0;
   var y_min = 0;
@@ -61,7 +66,7 @@ z.service.World.prototype._expandWorld = function () {
   this._entityFactory.forEntities(
       function (entity) {
         if(!goog.isNull(entity.position)){
-          var range = z.service.World.actionRange(entity);
+          var range = z.service.world.World.actionRange(entity);
           x_min = Math.min(x_min, entity.position.x - range);
           x_max = Math.max(x_max, entity.position.x + range);
           y_min = Math.min(y_min, entity.position.y - range);
@@ -84,7 +89,7 @@ z.service.World.prototype._expandWorld = function () {
  * @param {!z.common.entities.Entity} entity
  * @return number
  */
-z.service.World.actionRange = function(entity){
+z.service.world.World.actionRange = function(entity){
   if(entity.vision){
     return entity.vision + 5;
   }

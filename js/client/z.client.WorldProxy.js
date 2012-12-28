@@ -4,8 +4,9 @@ goog.require('goog.events.EventTarget');
 
 goog.require('mugd.Injector');
 goog.require('z.client');
-goog.require('z.service.World');
+goog.require('z.service.world.World');
 goog.require('z.client.events.StartTurn');
+goog.require('z.service.world.RandomTerrainGenerator');
 
 /**
  * @param {string} url
@@ -17,7 +18,7 @@ z.client.WorldProxy = function (url, ruleset) {
   goog.base(this);
 
   this.url = url;
-  this._world = new z.service.World(ruleset);
+  this._world = new z.service.world.World(ruleset, new z.service.world.RandomTerrainGenerator('QWERTYUIOP'));
 };
 
 goog.inherits(z.client.WorldProxy, goog.events.EventTarget);

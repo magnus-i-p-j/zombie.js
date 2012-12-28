@@ -37,9 +37,9 @@ goog.inherits(z.client.facet.TileFacet, z.client.facet.EntityFacet);
  */
 z.client.facet.TileFacet.prototype.update = function (tile) {
   this.setEntity(/** @type {!z.common.entities.Entity} */(tile));
-  if (tile.x === this.x && tile.y === this.y) {
+  if (tile.position.x === this.x && tile.position.y === this.y) {
     this.terrain(tile.terrain);
   }else {
-    throw ['Wrong tile, expected (',  this.x, '; ', this.y, '), got (', tile.x, '; ', tile.y, ')'].join('');
+    throw ['Wrong tile, expected (',  this.x, '; ', this.y, '), got (', tile.position.x, '; ', tile.position.y, ')'].join('');
   }
 };
