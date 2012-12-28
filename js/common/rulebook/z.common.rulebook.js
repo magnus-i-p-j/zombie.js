@@ -66,3 +66,14 @@ z.common.rulebook.logic.prerequisites = {
     return false;
   }
 };
+
+/**
+ * @param {!z.common.entities.Entity} entity
+ * @return number
+ */
+z.common.rulebook.logic.actionRange = function(entity){
+  if(entity.vision){
+    return entity.vision + 5;
+  }
+  return 0;
+};

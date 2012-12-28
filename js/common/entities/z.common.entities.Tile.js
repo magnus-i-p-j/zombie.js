@@ -1,5 +1,6 @@
 goog.provide('z.common.entities.Tile');
 goog.require('z.common.entities.Entity');
+goog.require('goog.math.Coordinate');
 
 /**
  * @param {!mugd.utils.guid} guid
@@ -16,8 +17,7 @@ z.common.entities.Tile = function (guid, meta, x, y, terrain) {
     throw { name:'Not a css class' };
   }
   this.terrain = terrain;
-  this.x = x;
-  this.y = y;
+  this.position = new goog.math.Coordinate(x, y);
 };
 goog.inherits(z.common.entities.Tile, z.common.entities.Entity);
 
