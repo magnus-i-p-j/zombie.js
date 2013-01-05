@@ -36,7 +36,7 @@ z.common.rulebook.Rulebook.prototype[mugd.Injector.DEPS] = [
 
 /**
  * @param {string} type
- * @return {z.common.rulebook.meta}
+ * @return {!z.common.rulebook.meta}
  */
 z.common.rulebook.Rulebook.prototype.getMetaClass = function(type){
  return this._meta[type];

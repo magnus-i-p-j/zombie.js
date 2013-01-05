@@ -15,7 +15,7 @@ TestCase("test EntityFactory", {
   },
   'test create Tile':function () {
     this.retGuid = 'test';
-    var tile = this.ef.createTile(1, 2, 'grass');
+    var tile = this.ef.putTile(1, 2, 'grass');
 
     assertSame(1, tile.x);
     assertSame(2, tile.y);

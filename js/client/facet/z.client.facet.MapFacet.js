@@ -46,10 +46,20 @@ z.client.facet.MapFacet.prototype[mugd.Injector.DEPS] = [];
 z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
   goog.base(this, 'setParentEventTarget', parent);
   // TODO: listen for map updated events
-  this.eventHandler.listen(parent, z.client.events.EventType.START_TURN,
-      function(e){
-        this.update(e.data.tiles);
-      });
+  this.eventHandler.listen(parent, z.client.events.EventType.START_TURN, this.doStartTurn);
+};
+
+/**
+ * @param  {!z.client.events.StartTurn} e
+ */
+z.client.facet.MapFacet.prototype.doStartTurn = function (e) {
+  var tiles = goog.array.map(
+      e.data.tiles,
+      function (tileData) {
+        return new z.common.entities.Tile();
+      }
+  );
+  this.update(tiles);
 };
 
 /**

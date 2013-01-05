@@ -21,7 +21,7 @@ z.common.EntityFactory = function (rulebook) {
    * @protected
    */
   this.handler = new goog.events.EventHandler(this);
-  this.handler.listen(this, z.common.events.EventType.ENTITY_DELETED, function(e){
+  this.handler.listen(this, z.common.events.EventType.ENTITY_DELETED, function (e) {
     this._unregisterEntity(e.target);
   });
 
@@ -41,26 +41,43 @@ z.common.EntityFactory.prototype.createActor = function () {
 };
 
 /**
- * @param {string} terrain
- * @param {number} x
- * @param {number} y
+ * @param {!z.common.protocol.tile} data
  * @return {!z.common.entities.Tile}
  */
-z.common.EntityFactory.prototype.createTile = function (terrain, x, y) {
+z.common.EntityFactory.prototype.putTile = function (data) {
+  var tile = this.getTile(data['tileId']);
+  var terrain = data['terrain'];
   var meta = this._rulebook.getMetaClass(terrain);
-  var tile =  new z.common.entities.Tile(mugd.utils.getGuid(), meta, x, y, terrain);
-  this._registerEntity(tile);
+  if (!goog.isNull(tile)) {
+    tile = new z.common.entities.Tile(mugd.utils.getGuid(), meta, data['x'], data['y'], terrain);
+    this._registerEntity(tile);
+  } else {
+    tile.fromJSON(data, meta);
+  }
   return tile;
 };
 
 /**
- * @param {function(z.common.entities.Entity)} fn
- * @param {Object} me
+ * @param {!mugd.utils.guid} pos
  */
-z.common.EntityFactory.prototype.forEntities = function(fn, me){
-  for(var i in this._entities){
-    if(this._entities.hasOwnProperty(i)){
-      fn.call(me, this._entities[i]);
+z.common.EntityFactory.prototype.getTile = function (pos) {
+  // TODO: fetch tile
+  // TODO: return tile or null
+  return tile;
+};
+
+// GET
+// DELETE
+// PUT
+
+/**
+ * @param {function(z.common.entities.Entity)} fn
+ * @param {Object} self
+ */
+z.common.EntityFactory.prototype.forEntities = function (fn, self) {
+  for (var i in this._entities) {
+    if (this._entities.hasOwnProperty(i)) {
+      fn.call(self, this._entities[i]);
     }
   }
 };
@@ -69,7 +86,7 @@ z.common.EntityFactory.prototype.forEntities = function(fn, me){
  * @param {!z.common.entities.Entity} entity
  * @private
  */
-z.common.EntityFactory.prototype._registerEntity = function(entity){
+z.common.EntityFactory.prototype._registerEntity = function (entity) {
   this._entities[entity.guid] = entity;
   entity.setParentEventTarget(this);
 };
@@ -78,6 +95,6 @@ z.common.EntityFactory.prototype._registerEntity = function(entity){
  * @param {!z.common.entities.Entity} entity
  * @private
  */
-z.common.EntityFactory.prototype._unregisterEntity = function(entity){
+z.common.EntityFactory.prototype._unregisterEntity = function (entity) {
   delete this._entities[entity.guid];
 };

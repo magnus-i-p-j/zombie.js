@@ -1,22 +1,24 @@
 goog.provide('z.common.protocol');
 
 /** @typedef {{
-* actorId: !mugd.utils.guid,
-* projects: Array.<!z.common.protocol.project>
+*   actorId: !mugd.utils.guid,
+*   projects: Array.<!z.common.protocol.project>,
+*   turn: number
 * }} */
 z.common.protocol.clientEndTurn;
 
 /**
  * @typedef {{
  *  actorId: !mugd.utils.guid,
- *  tiles: Array.<!z.common.protocol.tile>
+ *  tiles: Array.<!z.common.protocol.tile>,
+ *  turn: number
  * }}
  */
 z.common.protocol.startTurn;
 
 /**
  * @typedef {{
- *  tileId: !mugd.utils.guid,
+ *  tileId: mugd.utils.guid,
  *  x: number,
  *  y: number,
  *  type: string
