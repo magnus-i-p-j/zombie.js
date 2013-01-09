@@ -7,5 +7,6 @@ if (false) {
 goog.require('z');
 
 goog.require('mugd.ui.MapScroller');
+goog.require('z.common.EntityRepository');
 
 

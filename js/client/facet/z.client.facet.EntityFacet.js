@@ -1,5 +1,7 @@
 goog.provide('z.client.facet.EntityFacet');
 
+goog.require('z.client.facet.Facet');
+
 goog.require('goog.events.EventTarget');
 goog.require('goog.events.EventHandler');
 
