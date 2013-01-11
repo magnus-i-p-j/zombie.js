@@ -81,7 +81,6 @@ z.service.world.World.prototype.tick = function () {
   //Advance Projects
   this._turn += 1;
   //Special events
-  //Report actors
 };
 
 /**
