@@ -22,10 +22,3 @@ z.common.entities.Entity = function (guid, meta) {
 
 goog.inherits(z.common.entities.Entity, goog.events.EventTarget);
 
-/**
- * @inheritDoc
- */
-z.common.entities.Entity.prototype.disposeInternal = function(){
-  goog.base(this, 'disposeInternal');
-  goog.events.dispatchEvent(this, z.common.events.EventType.ENTITY_DELETED);
-};

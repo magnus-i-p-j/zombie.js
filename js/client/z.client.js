@@ -18,6 +18,7 @@ z.client.Resources = {
   CONTEXT_MENU_FACET: 'context_menu_facet',
   GAME_DOM_ELEMENT: 'game_dom_element',
   ACTION_FACTORY: 'action_factory',
-  TILE_FACET_FACTORY: 'tile_facet_factory'
+  ENTITY_FACTORY: 'entity_factory',
+  REPOSITORY: 'repository'
 };
 

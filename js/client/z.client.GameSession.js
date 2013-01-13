@@ -4,7 +4,7 @@ goog.require('mugd.Injector');
 goog.require('z.client');
 
 /**
- * @param world
+ * @param {!z.client.WorldProxy} world
  * @param {!z.client.ui.widget.GameSessionWidget} mainWidget
  * @param {!Element} gameDomElement
  * @constructor
@@ -24,4 +24,5 @@ z.client.GameSession.prototype[mugd.Injector.DEPS] = [
 
 z.client.GameSession.prototype.start = function () {
   this.mainWidget.claim(this.gameDomElement);
+  this.world.firstTurn();
 };

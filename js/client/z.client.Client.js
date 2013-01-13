@@ -15,6 +15,8 @@ goog.require('z.client.facet.Gem');
 goog.require('z.client.ActionFactory');
 goog.require('z.client.facet.MapFacet');
 goog.require('z.client.facet.ContextMenuFacet');
+goog.require('z.common.EntityFactory');
+goog.require('z.common.EntityRepository');
 
 goog.require('z.client.User');
 goog.require('z.client.GameSession');
@@ -66,10 +68,11 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addProvider(z.client.Resources.MAP_FACET, z.client.facet.MapFacet);
   injector.addProvider(z.client.Resources.CONTEXT_MENU_FACET, z.client.facet.ContextMenuFacet);
   injector.addResource(z.client.Resources.GAME_DOM_ELEMENT, this.targetElement);
+  injector.addProvider(z.client.Resources.ENTITY_FACTORY, z.common.EntityFactory);
+  injector.addProvider(z.client.Resources.REPOSITORY, z.common.EntityRepository);
 
   this.session = injector.create(z.client.GameSession);
 
   this.session.start();
 
-  injector.getResource(z.client.Resources.WORLD).tempEndTurn();
 };
