@@ -53,13 +53,7 @@ z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
  * @param  {!z.client.events.StartTurn} e
  */
 z.client.facet.MapFacet.prototype.doStartTurn = function (e) {
-  var tiles = goog.array.map(
-      e.data.tiles,
-      function (tileData) {
-        return new z.common.entities.Tile();
-      }
-  );
-  this.update(tiles);
+  this.update(e.data.tiles);
 };
 
 /**
@@ -108,10 +102,10 @@ z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
 /**
  * @param {number} x
  * @param {number} y
- * @return {Array.<z.client.facet.TileFacet>}
+ * @return {Array.<!z.client.facet.TileFacet>}
  */
 z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
-  return /** @type {Array.<z.client.facet.TileFacet>} */ this._grid.getAdjacent(x, y);
+  return /** @type {Array.<!z.client.facet.TileFacet>} */ this._grid.getAdjacent(x, y);
 };
 
 /**

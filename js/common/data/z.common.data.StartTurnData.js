@@ -32,7 +32,7 @@ z.common.data.StartTurnData.fromProtocol = function (protocol) {
 /**
  * @return {z.common.protocol.startTurn}
  */
-z.common.data.StartTurnData.toProtocol = function () {
-  // TODO: finish z.common.data.StartTurnData.toProtocol
-  return {};
-};
+//z.common.data.StartTurnData.toProtocol = function () {
+//  TODO: finish z.common.data.StartTurnData.toProtocol
+//  return {};
+//};

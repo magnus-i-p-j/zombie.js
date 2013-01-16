@@ -8,7 +8,7 @@ z.client.Resources = {
   INJECTOR: mugd.Injector.INJECTOR,
   RULESET: 'ruleset',
   WORLD: 'world',
-  WORLD_URL: 'world url',
+  WORLD_SERVICE: 'world service',
   RULEBOOK: 'rulebook',
   MAP_WIDGET: 'map widget',
   GAME_SESSION_WIDGET: 'game_session_widget',

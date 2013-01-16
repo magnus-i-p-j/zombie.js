@@ -126,5 +126,12 @@
       "description":"et cetera",
       "model":"linear"
     }
+  ],
+  "actor":[
+    {
+      "type":"actor_player",
+      "name":"A player",
+      "description":"a player"
+    }
   ]
 }

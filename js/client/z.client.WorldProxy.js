@@ -7,20 +7,20 @@ goog.require('z.client');
 goog.require('z.service.world.World');
 goog.require('z.client.events.StartTurn');
 goog.require('z.service.world.RandomTerrainGenerator');
+goog.require('z.common.data.StartTurnData');
 goog.require('goog.array');
 
 /**
- * @param {string} url
+ * @param {function():!z.service.world.World} initWorldService
  * @param {!Object} ruleset
  * @param {!z.common.EntityFactory} entityFactory
  * @param {!z.common.EntityRepository} repository
  * @extends {goog.events.EventTarget}
  * @constructor
  */
-z.client.WorldProxy = function (url, ruleset, entityFactory, repository) {
+z.client.WorldProxy = function (initWorldService, ruleset, entityFactory, repository) {
   goog.base(this);
-  this._url = url;
-  this._world = new z.service.world.World(ruleset, new z.service.world.RandomTerrainGenerator('QWERTYUIOP'));
+  this._world = initWorldService(ruleset);
   this._entityFactory = entityFactory;
   this._repository = repository;
   this._actorId = null;
@@ -29,23 +29,28 @@ z.client.WorldProxy = function (url, ruleset, entityFactory, repository) {
 goog.inherits(z.client.WorldProxy, goog.events.EventTarget);
 
 z.client.WorldProxy.prototype[mugd.Injector.DEPS] = [
-  z.client.Resources.WORLD_URL,
+  z.client.Resources.WORLD_SERVICE,
   z.client.Resources.RULESET,
   z.client.Resources.ENTITY_FACTORY,
   z.client.Resources.REPOSITORY
 ];
 
+
 z.client.WorldProxy.prototype.firstTurn = function () {
-  this._actorId = this._world.createActor(
-      goog.bind(this.doStartTurn, this)
-  );
+  /**
+   * @type {function (!z.common.protocol.startTurn)}
+   */
+  var callback = goog.bind(this.doStartTurn, this);
+  this._actorId = this._world.createActor(callback);
+  this._world.actorEndTurn(this._actorId, {});
 };
 
 /**
- * @param {!z.common.data.StartTurnData} startTurn
+ * @param {!z.common.protocol.startTurn} startTurn
  */
 z.client.WorldProxy.prototype.doStartTurn = function (startTurn) {
-  var tiles = goog.array.map(startTurn.tiles, this.createOrUpdateTile, this);
+  var startTurnData =  z.common.data.StartTurnData.fromProtocol(startTurn);
+  var tiles = goog.array.map(startTurnData.tiles, this.createOrUpdateTile, this);
   var e = new z.client.events.StartTurn({tiles:tiles});
   this.dispatchEvent(e);
 };

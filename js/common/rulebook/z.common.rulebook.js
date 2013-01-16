@@ -54,6 +54,7 @@ z.common.rulebook.category = {
   ITEM: 'item',
   CHARACTER: 'character',
   ASSET: 'asset',
+  ACTOR: 'actor',
   TECH: 'tech'
 };
 

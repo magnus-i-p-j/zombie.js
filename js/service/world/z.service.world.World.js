@@ -1,11 +1,15 @@
 goog.provide('z.service.world.World');
 
+goog.require('mugd.Injector');
+goog.require('z.service');
+
+goog.require('z.common.rulebook');
+goog.require('z.common.protocol');
 goog.require('z.common.EntityFactory');
-goog.require('z.common.entities.Actor');
+goog.require('z.common.EntityRepository');
 goog.require('goog.array');
 goog.require('mugd.utils.SimplexNoise');
 goog.require('mugd.utils');
-goog.require('z.common.protocol');
 
 /**
  * @param {!Object} ruleset
@@ -13,9 +17,10 @@ goog.require('z.common.protocol');
  * @constructor
  */
 z.service.world.World = function (ruleset, terrainGenerator) {
+  this._entityRepository = new z.common.EntityRepository();
   this._rulebook = new z.common.rulebook.Rulebook(ruleset);
   this._terrainGenerator = terrainGenerator;
-  this._entityFactory = new z.common.EntityFactory(this._rulebook);
+  this._entityFactory = new z.common.EntityFactory(this._rulebook, this._entityRepository);
 
   /**
    * @type {number}
@@ -41,6 +46,11 @@ z.service.world.World = function (ruleset, terrainGenerator) {
   this._actorCallbacks = {};
 };
 
+z.service.world.World.prototype[mugd.Injector.DEPS] = [
+  z.service.Resources.RULESET,
+  z.service.Resources.TERRAIN_GENERATOR
+];
+
 /**
  * @param {function(!z.common.protocol.startTurn)} actorCallback
  * @return {mugd.utils.guid}
@@ -52,28 +62,38 @@ z.service.world.World.prototype.createActor = function (actorCallback) {
   return actor.guid;
 };
 
+/**
+ * @param {mugd.utils.guid} actorId
+ * @param {!Object} plan
+ */
+z.service.world.World.prototype.actorEndTurn = function (actorId, plan) {
+  // TODO: check if all actors are done
+  // TODO: store plan
+  this.endTurn();
+};
+
 z.service.world.World.prototype.endTurn = function () {
   this.tick();
   for (var actorGuid in this._actors) {
     if (this._actors.hasOwnProperty(actorGuid)) {
-      var tiles = [];
+      var tiles = this._entityRepository.map(
+          function (tile) {
+            return goog.json.serialize(tile);
+          },
+          function (entity) {
+            return entity.meta.category === z.common.rulebook.category.TERRAIN;
+          }
+      );
       /**
        * @type {z.common.protocol.startTurn}
        */
-      var startTurn = {'actorId':actorGuid, 'tiles':tiles, 'turn':this._turn + 1 };
-      for (var y = -2; y <= 2; y++) {
-        for (var x = -2; x <= 2; x++) {
-          var tile = this._tiles.getNode(x, y);
-          tiles.push(goog.json.serialize(tile));
-        }
-      }
+      var startTurn = {'actorId':actorGuid, 'tiles':tiles, 'turn':this._turn };
       this._actorCallbacks[actorGuid](startTurn);
     }
   }
 };
 
 z.service.world.World.prototype.tick = function () {
-
   //TODO: Ensure all actors are done.
   this._expandWorld();
   //Calculate zombies
@@ -87,26 +107,28 @@ z.service.world.World.prototype.tick = function () {
  * @private
  */
 z.service.world.World.prototype._expandWorld = function () {
-  var x_min = 0;
-  var x_max = 0;
-  var y_min = 0;
-  var y_max = 0;
-  this._entityFactory.forEntities(
+  var x_min = -10;
+  var x_max = 10;
+  var y_min = -10;
+  var y_max = 10;
+  this._entityRepository.map(
       function (entity) {
-        if (!goog.isNull(entity.position)) {
-          var range = z.service.world.World.actionRange(entity);
-          x_min = Math.min(x_min, entity.position.x - range);
-          x_max = Math.max(x_max, entity.position.x + range);
-          y_min = Math.min(y_min, entity.position.y - range);
-          y_max = Math.max(y_max, entity.position.y + range);
-        }
+        var range = z.service.world.World.actionRange(entity);
+        x_min = Math.min(x_min, entity.position.x - range);
+        x_max = Math.max(x_max, entity.position.x + range);
+        y_min = Math.min(y_min, entity.position.y - range);
+        y_max = Math.max(y_max, entity.position.y + range);
+      },
+      function (entity) {
+        return !goog.isNull(entity.position);
       }
-      , this);
+  );
 
   for (var y = y_min; y <= y_max; y++) {
     for (var x = x_min; x <= x_max; x++) {
       if (!goog.isDef(this._tiles.getNode(x, y))) {
-        this._tiles.setNode(x, y, this._terrainGenerator.generateTerrain(x, y));
+        var tile = this._terrainGenerator.generateTerrain(x, y);
+        this._tiles.setNode(x, y, tile);
       }
     }
   }

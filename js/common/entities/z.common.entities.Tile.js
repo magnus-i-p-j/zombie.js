@@ -29,8 +29,8 @@ z.common.entities.Tile.prototype.update = function (data, meta) {
   if (this.position.x !== data.x || this.position.y !== data.y || this.guid !== data.tileId) {
     throw {
       'name':'Incorrect update data',
-      'real x':this.x,
-      'real y':this.y,
+      'real x':this.position.x,
+      'real y':this.position.y,
       'bad x':data.x,
       'bad y':data.y
     };

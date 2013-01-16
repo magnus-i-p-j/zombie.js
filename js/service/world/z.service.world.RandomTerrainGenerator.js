@@ -1,5 +1,7 @@
 goog.provide('z.service.world.RandomTerrainGenerator');
 
+goog.require('mugd.Injector');
+goog.require('z.service');
 goog.require('z.service.world.ITerrainGenerator');
 
 /**
@@ -8,6 +10,7 @@ goog.require('z.service.world.ITerrainGenerator');
  * @implements {z.service.world.ITerrainGenerator}
  */
 z.service.world.RandomTerrainGenerator = function (seed) {
+  // TODO: generate Tiles
   /**
    * @type {string}
    * @private
@@ -19,6 +22,11 @@ z.service.world.RandomTerrainGenerator = function (seed) {
    */
   this._noise = new mugd.utils.SimplexNoise();
 };
+
+
+z.service.world.RandomTerrainGenerator.prototype[mugd.Injector.DEPS] = [
+  z.service.Resources.TERRAIN_SEED
+];
 
 /**
  * @inheritDoc

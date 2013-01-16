@@ -23,6 +23,8 @@ goog.require('z.client.GameSession');
 
 goog.require('mugd.Injector');
 
+goog.require('z.service');
+
 /**
  * @param {!string} targetId
  * @extends {goog.events.EventTarget}
@@ -57,7 +59,7 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
 
   var injector = new mugd.Injector();
   injector.addResource(z.client.Resources.RULESET, ruleset);
-  injector.addResource(z.client.Resources.WORLD_URL, '#'); // TODO: add server
+  injector.addResource(z.client.Resources.WORLD_SERVICE, z.client.Client.initWorldService );
   injector.addProvider(z.client.Resources.WORLD, z.client.WorldProxy);
   injector.addProvider(z.client.Resources.RULEBOOK, z.common.rulebook.Rulebook);
   injector.addProvider(z.client.Resources.MAP_WIDGET, z.client.ui.widget.MapWidget);
@@ -75,4 +77,18 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
 
   this.session.start();
 
+};
+
+z.client.Client.initWorldService = function(ruleset){
+  // TODO: add server
+  var injector = new mugd.Injector();
+  injector.addResource(z.service.Resources.RULESET, ruleset);
+  injector.addProvider(z.service.Resources.WORLD, z.service.world.World);
+  injector.addProvider(z.service.Resources.RULEBOOK, z.common.rulebook.Rulebook);
+  injector.addProvider(z.service.Resources.ENTITY_FACTORY, z.common.EntityFactory);
+  injector.addProvider(z.service.Resources.REPOSITORY, z.common.EntityRepository);
+  injector.addProvider(z.service.Resources.TERRAIN_GENERATOR, z.service.world.RandomTerrainGenerator);
+  injector.addResource(z.service.Resources.TERRAIN_SEED, 'ASDGW3E45RG');
+
+  return injector.getResource(z.service.Resources.WORLD);
 };

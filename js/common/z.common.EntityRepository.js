@@ -1,8 +1,13 @@
 goog.provide('z.common.EntityRepository');
 
+/**
+ * @constructor
+ */
 z.common.EntityRepository = function () {
   this._repo = {};
 };
+
+z.common.EntityRepository.prototype[mugd.Injector.DEPS] = [];
 
 /**
  * @param {z.common.entities.Entity} entity
@@ -27,7 +32,7 @@ z.common.EntityRepository.prototype.get = function (guid) {
 /**
  * @param {mugd.utils.guid} guid
  */
-z.common.EntityRepository.prototype.delete = function (guid) {
+z.common.EntityRepository.prototype.remove = function (guid) {
   var entity = this.get(guid);
   if (goog.isDefAndNotNull(entity)) {
     delete this._repo[guid];
