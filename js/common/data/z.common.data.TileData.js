@@ -1,6 +1,10 @@
 goog.provide('z.common.data.TileData');
 
 /**
+ * @param {?mugd.utils.guid} tileId
+ * @param {number} x
+ * @param {number} y
+ * @param {string} type
  * @constructor
  */
 z.common.data.TileData = function (tileId, x, y, type) {

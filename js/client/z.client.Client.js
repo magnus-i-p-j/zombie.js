@@ -41,12 +41,13 @@ z.client.Client.prototype.run = function () {
   // todo: 1. Show main menu
   // todo: 2. Choose game state
   // todo: 3. Start game.
-
-  goog.net.XhrIo.send('../js/common/rulebook/ruleset.json', goog.bind(function (e) {
+  var self = this;
+  goog.net.XhrIo.send('../js/common/rulebook/ruleset.json', function (e) {
     var ruleset = e.target.getResponseJson();
     console.log('ruleset', ruleset);
-    this.startNewGame(ruleset);
-  }, this));
+    debugger;
+    self.startNewGame(ruleset);
+  });
 };
 
 z.client.Client.prototype.login = function () {

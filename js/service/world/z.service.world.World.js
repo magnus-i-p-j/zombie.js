@@ -12,15 +12,17 @@ goog.require('mugd.utils.SimplexNoise');
 goog.require('mugd.utils');
 
 /**
- * @param {!Object} ruleset
+ * @param {!z.common.rulebook.Rulebook} rulebook
  * @param {!z.service.world.ITerrainGenerator} terrainGenerator
+ * @param {!z.common.EntityFactory} entityFactory
+ * @param {!z.common.EntityRepository} entityRepository
  * @constructor
  */
-z.service.world.World = function (ruleset, terrainGenerator) {
-  this._entityRepository = new z.common.EntityRepository();
-  this._rulebook = new z.common.rulebook.Rulebook(ruleset);
+z.service.world.World = function (rulebook, terrainGenerator, entityFactory, entityRepository) {
+  this._entityRepository = entityRepository;
+  this._rulebook = rulebook;
   this._terrainGenerator = terrainGenerator;
-  this._entityFactory = new z.common.EntityFactory(this._rulebook, this._entityRepository);
+  this._entityFactory = entityFactory;
 
   /**
    * @type {number}
@@ -47,8 +49,10 @@ z.service.world.World = function (ruleset, terrainGenerator) {
 };
 
 z.service.world.World.prototype[mugd.Injector.DEPS] = [
-  z.service.Resources.RULESET,
-  z.service.Resources.TERRAIN_GENERATOR
+  z.service.Resources.RULEBOOK,
+  z.service.Resources.TERRAIN_GENERATOR,
+  z.service.Resources.ENTITY_FACTORY,
+  z.service.Resources.REPOSITORY
 ];
 
 /**
@@ -123,7 +127,6 @@ z.service.world.World.prototype._expandWorld = function () {
         return !goog.isNull(entity.position);
       }
   );
-
   for (var y = y_min; y <= y_max; y++) {
     for (var x = x_min; x <= x_max; x++) {
       if (!goog.isDef(this._tiles.getNode(x, y))) {
@@ -132,7 +135,6 @@ z.service.world.World.prototype._expandWorld = function () {
       }
     }
   }
-
 };
 
 /**

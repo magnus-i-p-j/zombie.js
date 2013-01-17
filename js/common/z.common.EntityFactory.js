@@ -37,7 +37,9 @@ z.common.EntityFactory.prototype.createActor = function () {
 z.common.EntityFactory.prototype.createTile = function (data) {
   // TODO: Add check that it does not exist
   var meta = this._rulebook.getMetaClass(data.type);
-  data.tileId = this._getGuid();
+  if(goog.isNull(data.tileId)){
+    data.tileId = this._getGuid();
+  }
   var tile = new z.common.entities.Tile(data, meta);
   this._repository.put(tile);
   return tile;

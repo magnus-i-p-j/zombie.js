@@ -3,19 +3,29 @@ goog.provide('z.service.world.RandomTerrainGenerator');
 goog.require('mugd.Injector');
 goog.require('z.service');
 goog.require('z.service.world.ITerrainGenerator');
+goog.require('z.common.EntityFactory');
+goog.require('z.common.data.TileData');
+
 
 /**
  * @param {string} seed
+ * @param {z.common.EntityFactory} entityFactory
  * @constructor
  * @implements {z.service.world.ITerrainGenerator}
  */
-z.service.world.RandomTerrainGenerator = function (seed) {
+z.service.world.RandomTerrainGenerator = function (seed, entityFactory) {
+
   // TODO: generate Tiles
   /**
    * @type {string}
    * @private
    */
   this._seed = seed;
+  /**
+   * @type {z.common.EntityFactory}
+   * @private
+   */
+  this._entityFactory = entityFactory;
   /**
    * @type {mugd.utils.SimplexNoise}
    * @private
@@ -25,7 +35,8 @@ z.service.world.RandomTerrainGenerator = function (seed) {
 
 
 z.service.world.RandomTerrainGenerator.prototype[mugd.Injector.DEPS] = [
-  z.service.Resources.TERRAIN_SEED
+  z.service.Resources.TERRAIN_SEED,
+  z.service.Resources.ENTITY_FACTORY
 ];
 
 /**
@@ -41,9 +52,11 @@ z.service.world.RandomTerrainGenerator.prototype.generateTerrain = function (x, 
   if (height < waterLevel) {
     terrain = 'water';
   } else if (height > hillLevel) {
-    terrain = 'hill';
+    terrain = 'hills';
   } else {
     terrain = 'grass';
   }
-  return terrain;
+
+  var data = new z.common.data.TileData(null, x, y, terrain);
+  return this._entityFactory.createTile(data);
 };

@@ -1,1 +1,1 @@
-java -jar libs/plovr-eba786b34df9.jar serve z-config.json
+java -jar libs/plovr-eba786b34df9.jar serve z-config.simple.json z-config.json
