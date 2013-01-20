@@ -20,6 +20,10 @@ goog.require('goog.array');
  */
 z.client.WorldProxy = function (initWorldService, ruleset, entityFactory, repository) {
   goog.base(this);
+  /**
+   * @type {!z.service.world.World}
+   * @private
+   */
   this._world = initWorldService(ruleset);
   this._entityFactory = entityFactory;
   this._repository = repository;

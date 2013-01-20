@@ -45,7 +45,6 @@ z.client.Client.prototype.run = function () {
   goog.net.XhrIo.send('../js/common/rulebook/ruleset.json', function (e) {
     var ruleset = e.target.getResponseJson();
     console.log('ruleset', ruleset);
-    debugger;
     self.startNewGame(ruleset);
   });
 };

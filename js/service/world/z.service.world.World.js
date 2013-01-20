@@ -82,7 +82,7 @@ z.service.world.World.prototype.endTurn = function () {
     if (this._actors.hasOwnProperty(actorGuid)) {
       var tiles = this._entityRepository.map(
           function (tile) {
-            return goog.json.serialize(tile);
+            return z.common.data.TileData.toProtocol(tile);
           },
           function (entity) {
             return entity.meta.category === z.common.rulebook.category.TERRAIN;
