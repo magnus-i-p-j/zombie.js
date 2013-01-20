@@ -25,9 +25,9 @@ z.client.facet.Gem = function (mapFacet, contextMenuFacet, world) {
   this.contextMenuFacet = contextMenuFacet;
   /**
    * @expose
-   * @type {function(z.client.facet.TileFacet=):z.client.facet.TileFacet}
+   * @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet}
    */
-  this.focusedTile = ko.observable();
+  this.currentTarget = ko.observable();
 
   this.world = world;
   this.mapFacet.setParentEventTarget(this);

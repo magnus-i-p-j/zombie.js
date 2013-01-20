@@ -43,14 +43,7 @@ z.client.ui.widget.MapWidget.prototype.claim = function (targetElement) {
 z.client.ui.widget.MapWidget.prototype.onTileClicked = function (e) {
   var element = this.findTileElement(e);
   if (element) {
-    var adjacent = this._mapFacet.getAdjacent(parseInt(element.dataset.x, 10), parseInt(element.dataset.y, 10));
-    var elements = goog.array.map(adjacent, function (a) {
-      return goog.dom.query('div[data-x = ' + a.x + '][data-y = ' + a.y + ']', e.currentTarget)[0];
-    });
-    elements.push(element);
-
-    var selected = this.findClosestElement(new goog.math.Coordinate(e.clientX, e.clientY), elements);
-
+    this._gem.currentTarget(this._mapFacet.getTileFacet(parseInt(element.dataset.x, 10), parseInt(element.dataset.y, 10)));
   }
 };
 
@@ -64,7 +57,7 @@ z.client.ui.widget.MapWidget.prototype.findTileElement = function (e, element) {
     element = element || e.target;
 
     if (goog.dom.classes.has(element, 'focusedTile')) {
-      var focused = this._gem.focusedTile();
+      var focused = this._gem.currentTarget();
       element = goog.dom.query('div[data-x = ' + focused.x + '][data-y = ' + focused.y + ']', this.targetElement.firstChild)[0];
     }
 

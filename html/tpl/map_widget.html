@@ -12,10 +12,10 @@
       </div>
     </div>
     <div class="tile focusedTile"
-         data-bind="visible: $root.focusedTile,
+         data-bind="visible: $root.currentTarget,
         style: {
-          top: $root.focusedTile() ? computeScreenPositionY($root.focusedTile()) : 0,
-          left: $root.focusedTile() ? computeScreenPositionX($root.focusedTile()) : 0
+          top: $root.currentTarget() ? computeScreenPositionY($root.currentTarget()) : 0,
+          left: $root.currentTarget() ? computeScreenPositionX($root.currentTarget()) : 0
         }">
     </div>
   </div>

@@ -9,14 +9,14 @@ z.client.Action = function (name) {
 };
 
 /**
- * @param {!z.client.facet.EntityFacet} target
+ * @param {!Object} target
  * @return {boolean}
  */
 z.client.Action.prototype.canExecute = function (target) {
 };
 
 /**
- * @param {!z.client.facet.EntityFacet} target
+ * @param {!Object} target
  */
 z.client.Action.prototype.execute = function (target) {
 };
