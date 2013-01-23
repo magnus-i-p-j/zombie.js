@@ -3,6 +3,13 @@ goog.provide('z.client.events');
 goog.require('goog.events');
 
 /**
+ * @typedef {{
+ *  target: z.client.facet.EntityFacet
+ * }}
+ */
+z.client.events.Args;
+
+/**
  * @enum {string}
  */
 z.client.events.EventType = {
