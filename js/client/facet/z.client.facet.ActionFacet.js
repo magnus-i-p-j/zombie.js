@@ -24,13 +24,11 @@ z.client.facet.ActionFacet = function (action, target) {
  */
 z.client.facet.ActionFacet.prototype._canExecute = function () {
   var target = this.target();
-  if(goog.isNull(target)){
-    return false;
-  }
-  return this.action.canExecute(target);
+  return this.action.canExecute({target:target});
 
 };
 
 z.client.facet.ActionFacet.prototype.execute = function () {
-  this.action.execute(this.target());
+  var target = this.target();
+  this.action.execute({target:target});
 };

@@ -53,7 +53,6 @@ z.client.facet.ContextMenuFacet.prototype[mugd.Injector.DEPS] = [
  */
 z.client.facet.ContextMenuFacet.prototype.setParentEventTarget = function (parent) {
   goog.base(this, 'setParentEventTarget', parent);
-  // TODO: listen for context menu events
   this.eventHandler.listen(parent, z.client.events.EventType.SHOW_CONTEXT_MENU,
       function (e) {
         this.doShowContextMenu(e.context, e.position);

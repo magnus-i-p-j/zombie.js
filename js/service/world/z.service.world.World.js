@@ -67,11 +67,9 @@ z.service.world.World.prototype.createActor = function (actorCallback) {
 };
 
 /**
- * @param {mugd.utils.guid} actorId
- * @param {!Object} plan
+ * @param {z.common.data.ClientEndTurn} endTurnData
  */
-z.service.world.World.prototype.actorEndTurn = function (actorId, plan) {
-  // TODO: check if all actors are done
+z.service.world.World.prototype.actorEndTurn = function (endTurnData) {
   // TODO: store plan
   this.endTurn();
 };
@@ -98,7 +96,6 @@ z.service.world.World.prototype.endTurn = function () {
 };
 
 z.service.world.World.prototype.tick = function () {
-  //TODO: Ensure all actors are done.
   this._expandWorld();
   //Calculate zombies
   //Zombie attack

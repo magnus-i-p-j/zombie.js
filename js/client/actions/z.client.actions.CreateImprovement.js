@@ -15,10 +15,8 @@ goog.inherits(z.client.actions.CreateImprovement, z.client.Action);
 
 /**
  * @override
- * @param {!z.client.events.Args} args
- * @return {boolean}
  */
-z.client.actions.CreateImprovement.prototype.canExecute = function (args) {
+z.client.actions.CreateImprovement.prototype._canExecuteInternal = function (args) {
   var target = args.target;
   if (goog.isNull(target.entity) || target.entity.meta.category !== z.common.rulebook.category.TERRAIN) {
     return false;
@@ -27,15 +25,13 @@ z.client.actions.CreateImprovement.prototype.canExecute = function (args) {
 };
 
 /**
- * @param {!z.client.events.Args} args
+ * @override
  */
-z.client.actions.CreateImprovement.prototype.execute = function (args) {
-  if (!this.canExecute(target)) {
-    throw {name:'Cannot execute action with the supplied target.'};
-  }
-
+z.client.actions.CreateImprovement.prototype._executeInternal = function (args) {
+  var target = args.target;
   console.log('Create a ' + this.improvement.name + ' at target (' + target.entity.position.x + ';' + target.entity.position.y + ')');
-
 };
 
-
+z.client.actions.CreateImprovement.prototype.args = [
+  z.client.action.ArgsType.TARGET
+];

@@ -12,16 +12,17 @@ z.client.actions.EndTurn = function(world){
 };
 
 /**
- * @param {!z.client.facet.EntityFacet} target
- * @return {boolean}
+ * @override
  */
-z.client.actions.EndTurn.prototype.canExecute = function (target) {
+z.client.actions.EndTurn.prototype._canExecuteInternal = function () {
+  return true;
 };
 
 /**
- * @param {!z.client.facet.EntityFacet} target
+ * @override
  */
-z.client.actions.EndTurn.prototype.execute = function (target) {
+z.client.actions.EndTurn.prototype._executeInternal = function () {
+  this._world.endTurn();
 };
 
 
