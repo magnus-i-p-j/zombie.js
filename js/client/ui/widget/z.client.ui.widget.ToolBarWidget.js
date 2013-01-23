@@ -14,4 +14,4 @@ z.client.ui.widget.ToolBarWidget.prototype[mugd.Injector.DEPS] = [];
  */
 z.client.ui.widget.ToolBarWidget.prototype.claim = function(domElement){
 
-}
+};

@@ -17,6 +17,7 @@ goog.require('z.client.facet.MapFacet');
 goog.require('z.client.facet.ContextMenuFacet');
 goog.require('z.common.EntityFactory');
 goog.require('z.common.EntityRepository');
+goog.require('z.client.facet.ToolbarFacet');
 
 goog.require('z.client.User');
 goog.require('z.client.GameSession');
@@ -73,6 +74,9 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addProvider(z.client.Resources.ENTITY_FACTORY, z.common.EntityFactory);
   injector.addProvider(z.client.Resources.REPOSITORY, z.common.EntityRepository);
 
+  injector.addProvider(z.client.Resources.TOOLBAR_FACET, z.client.facet.ToolbarFacet);
+  injector.addResource(z.client.Resources.TOOLBAR_ACTION_FACETS, z.client.Client.initToolbarActionFacets);
+
   this.session = injector.create(z.client.GameSession);
 
   this.session.start();
@@ -90,5 +94,9 @@ z.client.Client.initWorldService = function(ruleset){
   injector.addProvider(z.service.Resources.TERRAIN_GENERATOR, z.service.world.RandomTerrainGenerator);
   injector.addResource(z.service.Resources.TERRAIN_SEED, 'ASDGW3E45RG');
 
+  return injector.getResource(z.service.Resources.WORLD);
+};
+z.client.Client.initToolbarActionFacets = function(){
+  // TODO: create action facets, or maybe make this a class
   return injector.getResource(z.service.Resources.WORLD);
 };
