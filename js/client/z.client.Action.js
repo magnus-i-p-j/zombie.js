@@ -21,7 +21,7 @@ z.client.Action.prototype.canExecute = function (args) {
     allArgsMet = goog.array.every(
         this.args,
         function (item) {
-          goog.isDefAndNotNull(args[item]);
+          return goog.isDefAndNotNull(args[item]);
         },
         this
     );

@@ -11,7 +11,8 @@ z.client.ActionFactory = function (rulebook) {
 };
 
 z.client.ActionFactory.prototype[mugd.Injector.DEPS] = [
-  z.client.Resources.RULEBOOK
+  z.client.Resources.RULEBOOK,
+  z.client.Resources.INJECTOR
 ];
 
 /**

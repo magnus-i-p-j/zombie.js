@@ -7,8 +7,6 @@ goog.provide('z.client.ui.widget.ToolBarWidget');
 z.client.ui.widget.ToolBarWidget = function(){
 };
 
-z.client.ui.widget.ToolBarWidget.prototype[mugd.Injector.DEPS] = [];
-
 /**
  * @inheritDoc
  */

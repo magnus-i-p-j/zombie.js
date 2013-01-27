@@ -3,19 +3,22 @@ goog.provide('z.client.facet.ToolbarFacet');
 /**
  * @extends {z.client.facet.Facet}
  * @constructor
- * @param {function():!Array.<!z.client.facet.ActionFacet>} actionFacetCreator
+ * @param {z.client.Action...} actions
  */
-z.client.facet.ToolbarFacet = function (actionFacetCreator) {
+z.client.facet.ToolbarFacet = function (actions) {
   goog.base(this);
+  //TODO: Create actionfacets. How!
   /**
    * @expose
    * @type {function(Array.<!z.client.facet.ActionFacet>=):!Array.<!z.client.facet.ActionFacet>}
    */
-  this.actionFacets = ko.observableArray(actionFacetCreator());
+  this.actionFacets = ko.observableArray();
 };
+
 goog.inherits(z.client.facet.ToolbarFacet, z.client.facet.Facet);
 
 
+
 z.client.facet.ToolbarFacet.prototype[mugd.Injector.DEPS] = [
-  z.client.Resources.TOOLBAR_ACTION_FACETS
+  z.client.Resources.END_TURN_ACTION
 ];

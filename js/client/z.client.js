@@ -21,6 +21,8 @@ z.client.Resources = {
   ENTITY_FACTORY: 'entity_factory',
   TOOLBAR_FACET: 'toolbar',
   TOOLBAR_ACTION_FACETS: 'toolbar_action_facets',
-  REPOSITORY: 'repository'
+  REPOSITORY: 'repository',
+  CURRENT_TARGET: 'current_target',
+  END_TURN_ACTION: 'end_turn_action'
 };
 

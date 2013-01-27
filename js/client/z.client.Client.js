@@ -18,6 +18,7 @@ goog.require('z.client.facet.ContextMenuFacet');
 goog.require('z.common.EntityFactory');
 goog.require('z.common.EntityRepository');
 goog.require('z.client.facet.ToolbarFacet');
+goog.require('z.client.actions.EndTurn');
 
 goog.require('z.client.User');
 goog.require('z.client.GameSession');
@@ -73,9 +74,10 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addResource(z.client.Resources.GAME_DOM_ELEMENT, this.targetElement);
   injector.addProvider(z.client.Resources.ENTITY_FACTORY, z.common.EntityFactory);
   injector.addProvider(z.client.Resources.REPOSITORY, z.common.EntityRepository);
+  injector.addResource(z.client.resources.CURRENT_TARGET, ko.observable());
 
   injector.addProvider(z.client.Resources.TOOLBAR_FACET, z.client.facet.ToolbarFacet);
-  injector.addResource(z.client.Resources.TOOLBAR_ACTION_FACETS, z.client.Client.initToolbarActionFacets);
+  injector.addResource(z.client.Resources.TOOLBAR_ACTION_FACETS, z.client.Client.initToolbarActions);
 
   this.session = injector.create(z.client.GameSession);
 
@@ -96,7 +98,14 @@ z.client.Client.initWorldService = function(ruleset){
 
   return injector.getResource(z.service.Resources.WORLD);
 };
-z.client.Client.initToolbarActionFacets = function(){
-  // TODO: create action facets, or maybe make this a class
-  return injector.getResource(z.service.Resources.WORLD);
+
+/**
+ * @param {mugd.Injector} injector
+ * @return {*|Object|undefined}
+ */
+z.client.Client.initToolbarActions = function(){
+  return [
+      new z.client.actions.EndTurn()
+  ];
 };
+

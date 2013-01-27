@@ -11,7 +11,7 @@ goog.require('z.client');
  * @extends {z.client.facet.Facet}
  * @constructor
  */
-z.client.facet.Gem = function (mapFacet, contextMenuFacet, world) {
+z.client.facet.Gem = function (mapFacet, contextMenuFacet, world, currentTarget) {
   goog.base(this);
   /**
    * @expose
@@ -27,7 +27,7 @@ z.client.facet.Gem = function (mapFacet, contextMenuFacet, world) {
    * @expose
    * @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet}
    */
-  this.currentTarget = ko.observable();
+  this.currentTarget = currentTarget;
 
   this.world = world;
   this.mapFacet.setParentEventTarget(this);
@@ -40,5 +40,6 @@ goog.inherits(z.client.facet.Gem, z.client.facet.Facet);
 z.client.facet.Gem.prototype[mugd.Injector.DEPS] = [
   z.client.Resources.MAP_FACET,
   z.client.Resources.CONTEXT_MENU_FACET,
-  z.client.Resources.WORLD
+  z.client.Resources.WORLD,
+  z.client.resources.CURRENT_TARGET
 ];

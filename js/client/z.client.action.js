@@ -11,6 +11,7 @@ z.client.action.Args;
  * @enum {string}
  */
 z.client.action.ArgsType = {
-  TARGET: 'target'
+  TARGET: 'target',
+  WORLD:z.client.Resources.WORLD
 };
 
