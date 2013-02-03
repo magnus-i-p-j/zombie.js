@@ -2,16 +2,18 @@ goog.provide('z.client.facet.ActionFacet');
 
 /**
  * @param {!z.client.Action} action
- * @param {function(z.client.facet.EntityFacet=): !z.client.facet.EntityFacet} target
  * @constructor
  */
-z.client.facet.ActionFacet = function (action, target) {
+z.client.facet.ActionFacet = function (action) {
   this.action = action;
   /**
    * @expose
    * @type {function(z.client.facet.EntityFacet=): !z.client.facet.EntityFacet}
    */
-  this.target = target;
+  this.target = ko.observable();
+  this.targetIsSatisfied = ko.observable(false);
+  this.targetIsNeeded = ko.observable(false);
+
   /**
    * @expose
    * @type {function(boolean=): boolean}
@@ -20,7 +22,6 @@ z.client.facet.ActionFacet = function (action, target) {
 };
 
 z.client.facet.ActionFacet.prototype[mugd.Injector.DEPS] = [
-  z.client.resources.CURRENT_TARGET
 ];
 
 /**

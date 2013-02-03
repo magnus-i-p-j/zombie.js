@@ -9,9 +9,11 @@ goog.require('z.client');
  * @param {!z.client.facet.ContextMenuFacet} contextMenuFacet
  * @param {!z.client.WorldProxy} world
  * @extends {z.client.facet.Facet}
+ * @param {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet} currentTarget
+ * @param {function(z.client.facet.ActionFacet=):z.client.facet.ActionFacet} currentAction
  * @constructor
  */
-z.client.facet.Gem = function (mapFacet, contextMenuFacet, world, currentTarget) {
+z.client.facet.Gem = function (mapFacet, contextMenuFacet, world, currentTarget, currentAction) {
   goog.base(this);
   /**
    * @expose
@@ -28,6 +30,11 @@ z.client.facet.Gem = function (mapFacet, contextMenuFacet, world, currentTarget)
    * @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet}
    */
   this.currentTarget = currentTarget;
+  /**
+   * @expose
+   * @type {function(z.client.facet.ActionFacet=):z.client.facet.ActionFacet}
+   */
+  this.currentAction = currentAction;
 
   this.world = world;
   this.mapFacet.setParentEventTarget(this);
@@ -41,5 +48,6 @@ z.client.facet.Gem.prototype[mugd.Injector.DEPS] = [
   z.client.Resources.MAP_FACET,
   z.client.Resources.CONTEXT_MENU_FACET,
   z.client.Resources.WORLD,
-  z.client.resources.CURRENT_TARGET
+  z.client.Resources.CURRENT_TARGET,
+  z.client.Resources.CURRENT_ACTION
 ];

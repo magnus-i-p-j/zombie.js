@@ -23,6 +23,7 @@ z.client.Resources = {
   TOOLBAR_ACTION_FACETS: 'toolbar_action_facets',
   REPOSITORY: 'repository',
   CURRENT_TARGET: 'current_target',
+  CURRENT_ACTION: 'current_action',
   END_TURN_ACTION: 'end_turn_action'
 };
 

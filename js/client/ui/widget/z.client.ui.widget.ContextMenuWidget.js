@@ -35,7 +35,7 @@ z.client.ui.widget.ContextMenuWidget.prototype[mugd.Injector.DEPS] = [
 ];
 
 /**
- * @param {!goog.events.BrowserEvent } e
+ * @param {!goog.events.BrowserEvent} e
  */
 z.client.ui.widget.ContextMenuWidget.prototype.doMouseOverParent = function(e){
   if(this._contextMenuFacet.visible() && !this.targetElement.contains(e.target)){

@@ -75,6 +75,7 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addProvider(z.client.Resources.ENTITY_FACTORY, z.common.EntityFactory);
   injector.addProvider(z.client.Resources.REPOSITORY, z.common.EntityRepository);
   injector.addResource(z.client.resources.CURRENT_TARGET, ko.observable());
+  injector.addResource(z.client.resources.CURRENT_ACTION, ko.observable());
 
   injector.addProvider(z.client.Resources.TOOLBAR_FACET, z.client.facet.ToolbarFacet);
   injector.addResource(z.client.Resources.TOOLBAR_ACTION_FACETS, z.client.Client.initToolbarActions);
@@ -100,8 +101,7 @@ z.client.Client.initWorldService = function(ruleset){
 };
 
 /**
- * @param {mugd.Injector} injector
- * @return {*|Object|undefined}
+ * @return {!Array.<!z.client.Action>}
  */
 z.client.Client.initToolbarActions = function(){
   return [
