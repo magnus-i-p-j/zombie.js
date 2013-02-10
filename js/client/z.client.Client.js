@@ -74,11 +74,11 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addResource(z.client.Resources.GAME_DOM_ELEMENT, this.targetElement);
   injector.addProvider(z.client.Resources.ENTITY_FACTORY, z.common.EntityFactory);
   injector.addProvider(z.client.Resources.REPOSITORY, z.common.EntityRepository);
-  injector.addResource(z.client.resources.CURRENT_TARGET, ko.observable());
-  injector.addResource(z.client.resources.CURRENT_ACTION, ko.observable());
+  injector.addResource(z.client.Resources.CURRENT_TARGET, ko.observable());
+  injector.addResource(z.client.Resources.CURRENT_ACTION, ko.observable());
 
   injector.addProvider(z.client.Resources.TOOLBAR_FACET, z.client.facet.ToolbarFacet);
-  injector.addResource(z.client.Resources.TOOLBAR_ACTION_FACETS, z.client.Client.initToolbarActions);
+  injector.addProvider(z.client.Resources.END_TURN_ACTION, z.client.actions.EndTurn);
 
   this.session = injector.create(z.client.GameSession);
 
@@ -98,14 +98,5 @@ z.client.Client.initWorldService = function(ruleset){
   injector.addResource(z.service.Resources.TERRAIN_SEED, 'ASDGW3E45RG');
 
   return injector.getResource(z.service.Resources.WORLD);
-};
-
-/**
- * @return {!Array.<!z.client.Action>}
- */
-z.client.Client.initToolbarActions = function(){
-  return [
-      new z.client.actions.EndTurn()
-  ];
 };
 

@@ -3,7 +3,7 @@ goog.provide('z.client.facet.ToolbarFacet');
 /**
  * @extends {z.client.facet.Facet}
  * @constructor
- * @param {z.client.Action...} actions
+ * @param {...z.client.Action} actions
  */
 z.client.facet.ToolbarFacet = function (actions) {
   goog.base(this);

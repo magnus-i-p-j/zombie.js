@@ -7,6 +7,7 @@ goog.require('z.client.facet.ActionFacet');
 goog.require('z.client.events');
 goog.require('z.common.entities.Tile');
 goog.require('z.common.rulebook.Rulebook');
+goog.require('z.client.action');
 
 /**
  * @param {!z.client.ActionFactory} actionFactory
@@ -85,7 +86,10 @@ z.client.facet.ContextMenuFacet.prototype._getContextualActions = function (cont
           /**
            * @type {!z.client.facet.ActionFacet}
            */
-          var actionFacet = new z.client.facet.ActionFacet(action, contextItem);
+          var actionFacet = new z.client.facet.ActionFacet(action);
+          if (actionFacet[z.client.action.ArgsType.TARGET]) {
+            actionFacet[z.client.action.ArgsType.TARGET](contextItem);
+          }
           if (actionFacet.canExecute()) {
             actionFacets.push(actionFacet);
           }

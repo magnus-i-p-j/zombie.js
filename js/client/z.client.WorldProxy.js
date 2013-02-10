@@ -12,7 +12,7 @@ goog.require('goog.array');
 goog.require('z.common.data.ClientEndTurn');
 
 /**
- * @param {function():!z.service.world.World} initWorldService
+ * @param {function(!Object):!z.service.world.World} initWorldService
  * @param {!Object} ruleset
  * @param {!z.common.EntityFactory} entityFactory
  * @param {!z.common.EntityRepository} repository
@@ -39,6 +39,7 @@ z.client.WorldProxy.prototype[mugd.Injector.DEPS] = [
   z.client.Resources.RULESET,
   z.client.Resources.ENTITY_FACTORY,
   z.client.Resources.REPOSITORY
+
 ];
 
 z.client.WorldProxy.prototype.firstTurn = function () {
@@ -47,7 +48,8 @@ z.client.WorldProxy.prototype.firstTurn = function () {
    */
   var callback = goog.bind(this.doStartTurn, this);
   this._actorId = this._world.createActor(callback);
-  this._world.actorEndTurn(this._actorId, {});
+  var endTurnData = new z.common.data.ClientEndTurn(this._actorId, this._turn);
+  this._world.actorEndTurn(endTurnData);
 };
 
 /**
@@ -63,18 +65,31 @@ z.client.WorldProxy.prototype.doStartTurn = function (startTurn) {
 
 /**
  * @param {!z.common.data.TileData} tileData
+ * @return {z.common.entities.Tile}
  */
 z.client.WorldProxy.prototype.createOrUpdateTile = function (tileData) {
-  var tile = this._repository.get(tileData.tileId);
+  /**
+   * @type {z.common.entities.Tile}
+   */
+  var tile;
+  var guid = tileData.tileId;
+  if (goog.isNull(guid)) {
+    throw 'Client cannot create tile without guid';
+  }
+  tile = this._repository.get(guid);
+  // TODO: continue
   if (goog.isNull(tile)) {
     tile = this._entityFactory.createTile(tileData);
   } else {
-    tile.update(tileData);
+    tile.update(tileData, meta);
   }
   return tile;
 };
 
 z.client.WorldProxy.prototype.endTurn = function () {
+  if (goog.isNull(this._actorId)) {
+    throw 'Tried to end turn with no actor';
+  }
   var endTurnData = new z.common.data.ClientEndTurn(this._actorId, this._turn);
   this._world.actorEndTurn(endTurnData);
 };

@@ -1,18 +1,17 @@
 goog.provide('z.client.facet.ActionFacet');
 
+goog.require('goog.array');
+
 /**
  * @param {!z.client.Action} action
  * @constructor
  */
 z.client.facet.ActionFacet = function (action) {
   this.action = action;
-  /**
-   * @expose
-   * @type {function(z.client.facet.EntityFacet=): !z.client.facet.EntityFacet}
-   */
-  this.target = ko.observable();
-  this.targetIsSatisfied = ko.observable(false);
-  this.targetIsNeeded = ko.observable(false);
+
+  goog.array.forEach(this.action.args, function (item) {
+    this[item] = ko.observable();
+  }, this);
 
   /**
    * @expose
@@ -21,18 +20,28 @@ z.client.facet.ActionFacet = function (action) {
   this.canExecute = ko.computed(this._canExecute, this);
 };
 
-z.client.facet.ActionFacet.prototype[mugd.Injector.DEPS] = [
-];
+/**
+ * @return {!z.client.action.Args}
+ * @private
+ */
+z.client.facet.ActionFacet.prototype._getArgs = function () {
+  var args = {};
+  goog.array.forEach(this.action.args, function (item) {
+    args[item] = this[item]();
+  }, this);
+  return args;
+};
 
 /**
  * @private
+ * @return {boolean}
  */
 z.client.facet.ActionFacet.prototype._canExecute = function () {
-  var target = this.target();
-  return this.action.canExecute({target:target});
+  var args = this._getArgs();
+  return this.action.canExecute(args);
 };
 
 z.client.facet.ActionFacet.prototype.execute = function () {
-  var target = this.target();
-  this.action.execute({target:target});
+  var args = this._getArgs();
+  this.action.execute(args);
 };
