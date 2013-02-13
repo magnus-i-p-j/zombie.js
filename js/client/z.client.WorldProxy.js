@@ -77,7 +77,6 @@ z.client.WorldProxy.prototype.createOrUpdateTile = function (tileData) {
     throw 'Client cannot create tile without guid';
   }
   tile = this._repository.get(guid);
-  // TODO: continue
   if (goog.isNull(tile)) {
     tile = this._entityFactory.createTile(tileData);
   } else {

@@ -1,17 +1,21 @@
 goog.provide('z.common.data.TileData');
 
+goog.require('z.common.data.EntityData');
+
 /**
- * @param {?mugd.utils.guid} tileId
+ * @param {?mugd.utils.guid} guid
  * @param {number} x
  * @param {number} y
  * @param {string} type
  * @constructor
+ * @implements {z.common.data.EntityData}
  */
-z.common.data.TileData = function (tileId, x, y, type) {
-  this.tileId = tileId;
+z.common.data.TileData = function (guid, x, y, type) {
+  this.guid = guid;
   this.x = x;
   this.y = y;
   this.type = type;
+  this.category = z.common.rulebook.category.TERRAIN;
 };
 
 /**

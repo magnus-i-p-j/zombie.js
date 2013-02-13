@@ -14,4 +14,3 @@ z.client.action.ArgsType = {
   TARGET: 'target',
   WORLD:z.client.Resources.WORLD
 };
-

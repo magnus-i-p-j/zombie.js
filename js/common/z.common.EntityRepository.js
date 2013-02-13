@@ -1,20 +1,37 @@
 goog.provide('z.common.EntityRepository');
 
+goog.require('z.common.entityMap');
+
 /**
+ * @param {!z.common.rulebook.Rulebook} rulebook
  * @constructor
  */
-z.common.EntityRepository = function () {
+z.common.EntityRepository = function (rulebook) {
+  this._rulebook = rulebook;
   this._repo = {};
 };
 
-z.common.EntityRepository.prototype[mugd.Injector.DEPS] = [];
+z.common.EntityRepository.prototype[mugd.Injector.DEPS] = [
+  z.client.Resources.RULEBOOK
+];
 
 /**
- * @param {z.common.entities.Entity} entity
+ * @param {z.common.data.EntityData} entityData
+ * @return {z.common.entities.Entity}
  */
-z.common.EntityRepository.prototype.put = function (entity) {
-  this._repo[entity.guid] = entity;
+z.common.EntityRepository.prototype.put = function (entityData) {
+  var entity = this.get(entityData.guid);
+  if(goog.isNull(entity)){
+    var meta = this._rulebook.getMetaClass(entityData.type);
+    entity = new z.common.entityMap[entityData.category](entityData.guid, meta);
+    this._repo[entity.guid] = entity;
+  }else{
+    entity.update(entityData, meta);
+  }
+  return entity;
 };
+
+//TODO: continue on repo and everything else it affects
 
 /**
  * @param {mugd.utils.guid} guid
