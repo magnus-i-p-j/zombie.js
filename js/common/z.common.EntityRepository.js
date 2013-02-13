@@ -21,8 +21,8 @@ z.common.EntityRepository.prototype[mugd.Injector.DEPS] = [
  */
 z.common.EntityRepository.prototype.put = function (entityData) {
   var entity = this.get(entityData.guid);
+  var meta = this._rulebook.getMetaClass(entityData.type);
   if(goog.isNull(entity)){
-    var meta = this._rulebook.getMetaClass(entityData.type);
     entity = new z.common.entityMap[entityData.category](entityData.guid, meta);
     this._repo[entity.guid] = entity;
   }else{
