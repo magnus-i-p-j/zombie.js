@@ -1,6 +1,7 @@
 goog.provide('z.common.EntityRepository');
 
 goog.require('z.common.entityMap');
+goog.require('mugd.utils');
 
 /**
  * @param {!z.common.rulebook.Rulebook} rulebook
@@ -17,21 +18,22 @@ z.common.EntityRepository.prototype[mugd.Injector.DEPS] = [
 
 /**
  * @param {z.common.data.EntityData} entityData
- * @return {z.common.entities.Entity}
+ * @return {!z.common.entities.Entity}
  */
 z.common.EntityRepository.prototype.put = function (entityData) {
   var entity = this.get(entityData.guid);
   var meta = this._rulebook.getMetaClass(entityData.type);
-  if(goog.isNull(entity)){
-    entity = new z.common.entityMap[entityData.category](entityData.guid, meta);
+  if (goog.isNull(entity)) {
+    if (goog.isNull(entityData.guid)) {
+      entityData.guid = mugd.utils.getGuid();
+    }
+    entity = new z.common.entityMap[entityData.category](entityData, meta);
     this._repo[entity.guid] = entity;
-  }else{
+  } else {
     entity.update(entityData, meta);
   }
   return entity;
 };
-
-//TODO: continue on repo and everything else it affects
 
 /**
  * @param {mugd.utils.guid} guid
@@ -68,8 +70,12 @@ z.common.EntityRepository.prototype.map = function (action, filter) {
   var result = [];
   for (var i in this._repo) {
     if (this._repo.hasOwnProperty(i)) {
-      if (filter(this._repo[i])) {
-        result.push(action(this._repo[i]));
+      /**
+       * @type {!z.common.entities.Entity}
+       */
+      var entity = this._repo[i];
+      if (filter(entity)) {
+        result.push(action(entity));
       }
     }
   }

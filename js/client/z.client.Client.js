@@ -15,7 +15,6 @@ goog.require('z.client.facet.Gem');
 goog.require('z.client.ActionFactory');
 goog.require('z.client.facet.MapFacet');
 goog.require('z.client.facet.ContextMenuFacet');
-goog.require('z.common.EntityFactory');
 goog.require('z.common.EntityRepository');
 goog.require('z.client.facet.ToolbarFacet');
 goog.require('z.client.actions.EndTurn');
@@ -72,7 +71,6 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addProvider(z.client.Resources.MAP_FACET, z.client.facet.MapFacet);
   injector.addProvider(z.client.Resources.CONTEXT_MENU_FACET, z.client.facet.ContextMenuFacet);
   injector.addResource(z.client.Resources.GAME_DOM_ELEMENT, this.targetElement);
-  injector.addProvider(z.client.Resources.ENTITY_FACTORY, z.common.EntityFactory);
   injector.addProvider(z.client.Resources.REPOSITORY, z.common.EntityRepository);
   injector.addResource(z.client.Resources.CURRENT_TARGET, ko.observable());
   injector.addResource(z.client.Resources.CURRENT_ACTION, ko.observable());
@@ -92,7 +90,6 @@ z.client.Client.initWorldService = function(ruleset){
   injector.addResource(z.service.Resources.RULESET, ruleset);
   injector.addProvider(z.service.Resources.WORLD, z.service.world.World);
   injector.addProvider(z.service.Resources.RULEBOOK, z.common.rulebook.Rulebook);
-  injector.addProvider(z.service.Resources.ENTITY_FACTORY, z.common.EntityFactory);
   injector.addProvider(z.service.Resources.REPOSITORY, z.common.EntityRepository);
   injector.addProvider(z.service.Resources.TERRAIN_GENERATOR, z.service.world.RandomTerrainGenerator);
   injector.addResource(z.service.Resources.TERRAIN_SEED, 'ASDGW3E45RG');

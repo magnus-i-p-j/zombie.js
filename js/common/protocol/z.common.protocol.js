@@ -26,6 +26,14 @@ z.common.protocol.startTurn;
  */
 z.common.protocol.tile;
 
+/**
+ * @typedef {{
+ *  actorId: mugd.utils.guid,
+ *  type: string
+ * }}
+ */
+z.common.protocol.actor;
+
 /** @typedef {{
  *  identifier: !(mugd.utils.guid|z.common.protocol.projectParams),
  *  resources: Array.<!z.common.protocol.resource>,

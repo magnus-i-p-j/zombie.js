@@ -5,24 +5,20 @@ goog.require('z.service');
 
 goog.require('z.common.rulebook');
 goog.require('z.common.protocol');
-goog.require('z.common.EntityFactory');
 goog.require('z.common.EntityRepository');
 goog.require('goog.array');
 goog.require('mugd.utils.SimplexNoise');
-goog.require('mugd.utils');
 
 /**
  * @param {!z.common.rulebook.Rulebook} rulebook
  * @param {!z.service.world.ITerrainGenerator} terrainGenerator
- * @param {!z.common.EntityFactory} entityFactory
  * @param {!z.common.EntityRepository} entityRepository
  * @constructor
  */
-z.service.world.World = function (rulebook, terrainGenerator, entityFactory, entityRepository) {
+z.service.world.World = function (rulebook, terrainGenerator, entityRepository) {
   this._entityRepository = entityRepository;
   this._rulebook = rulebook;
   this._terrainGenerator = terrainGenerator;
-  this._entityFactory = entityFactory;
 
   /**
    * @type {number}
@@ -51,7 +47,6 @@ z.service.world.World = function (rulebook, terrainGenerator, entityFactory, ent
 z.service.world.World.prototype[mugd.Injector.DEPS] = [
   z.service.Resources.RULEBOOK,
   z.service.Resources.TERRAIN_GENERATOR,
-  z.service.Resources.ENTITY_FACTORY,
   z.service.Resources.REPOSITORY
 ];
 
@@ -60,8 +55,9 @@ z.service.world.World.prototype[mugd.Injector.DEPS] = [
  * @return {mugd.utils.guid}
  */
 z.service.world.World.prototype.createActor = function (actorCallback) {
-  var actor = this._entityFactory.createActor();
-  this._actors[actor.guid] = actor;
+  var actorData = new z.common.data.ActorData(null, 'actor_player');
+  var actor = this._entityRepository.put(actorData);
+  this._actors[actor.guid] = /** @type {!z.common.entities.Actor} */actor;
   this._actorCallbacks[actor.guid] = actorCallback;
   return actor.guid;
 };
@@ -79,7 +75,8 @@ z.service.world.World.prototype.endTurn = function () {
   for (var actorGuid in this._actors) {
     if (this._actors.hasOwnProperty(actorGuid)) {
       var tiles = this._entityRepository.map(
-          function (tile) {
+          function (entity) {
+            var tile = /** @type {!z.common.entities.Tile} */ entity;
             return z.common.data.TileData.toProtocol(tile);
           },
           function (entity) {
@@ -144,5 +141,4 @@ z.service.world.World.actionRange = function (entity) {
   }
   return 0;
 };
-
 

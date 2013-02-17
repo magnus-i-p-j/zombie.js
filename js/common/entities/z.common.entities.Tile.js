@@ -9,7 +9,7 @@ goog.require('goog.math.Coordinate');
  * @constructor
  */
 z.common.entities.Tile = function (tileData, meta) {
-  goog.base(this, tileData.tileId, meta);
+  goog.base(this, tileData.guid, meta);
   var terrain = tileData.type;
   if (!z.common.entities.Tile.isCssRegex.test(terrain)) {
     throw { name:'Not a css class' };

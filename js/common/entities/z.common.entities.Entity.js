@@ -2,7 +2,6 @@ goog.provide('z.common.entities.Entity');
 
 goog.require('goog.events.EventTarget');
 
-
 /**
  * @param {!mugd.utils.guid} guid
  * @param {!z.common.rulebook.meta} meta

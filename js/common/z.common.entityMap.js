@@ -11,6 +11,6 @@ z.common.entityMap[z.common.rulebook.category.TERRAIN] = z.common.entities.Tile;
 z.common.entityMap[z.common.rulebook.category.ITEM] = function(){throw 'not implemented] = item'};
 z.common.entityMap[z.common.rulebook.category.CHARACTER] = function(){throw 'not implemented] = character'};
 z.common.entityMap[z.common.rulebook.category.ASSET] = function(){throw 'not implemented] = asset'};
-z.common.entityMap[z.common.rulebook.category.ACTOR] = function(){throw 'not implemented] = actor'};
+z.common.entityMap[z.common.rulebook.category.ACTOR] = z.common.entities.Actor;
 z.common.entityMap[z.common.rulebook.category.TECH] = function(){throw 'not implemented] = tech'};
 
