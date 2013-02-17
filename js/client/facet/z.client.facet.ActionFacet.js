@@ -41,6 +41,10 @@ z.client.facet.ActionFacet.prototype._canExecute = function () {
   return this.action.canExecute(args);
 };
 
+/**
+ * @expose
+ * @type {function()}
+ */
 z.client.facet.ActionFacet.prototype.execute = function () {
   var args = this._getArgs();
   this.action.execute(args);
