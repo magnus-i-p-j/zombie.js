@@ -90,7 +90,7 @@ z.client.facet.ContextMenuFacet.prototype._getContextualActions = function (cont
           if (actionFacet[z.client.action.ArgsType.TARGET]) {
             actionFacet[z.client.action.ArgsType.TARGET](contextItem);
           }
-          if (actionFacet.canExecute()) {
+          if (actionFacet['canExecute']()) {
             actionFacets.push(actionFacet);
           }
         }

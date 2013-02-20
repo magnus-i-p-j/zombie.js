@@ -5,9 +5,17 @@
 import SimpleHTTPServer
 import SocketServer
 
+class MyHTTPRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+	def end_headers(self):
+		self.send_my_headers()
+		SimpleHTTPServer.SimpleHTTPRequestHandler.end_headers(self)
+ 
+	def send_my_headers(self):
+		self.send_header("Cache-Control", "no-cache")
+
 PORT = 8000
 
-Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
+Handler = MyHTTPRequestHandler
 
 httpd = SocketServer.TCPServer(("", PORT), Handler)
 

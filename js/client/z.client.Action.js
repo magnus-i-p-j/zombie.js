@@ -2,6 +2,7 @@ goog.provide('z.client.Action');
 
 goog.require('z.client.action');
 goog.require('goog.array');
+goog.require('z.common.rulebook');
 
 /**
  * @param {string} name
@@ -9,6 +10,10 @@ goog.require('goog.array');
  */
 z.client.Action = function (name) {
   this.name = name;
+  /**
+   * @type {?z.common.rulebook.meta}
+   */
+  this.meta = null;
 };
 
 /**
@@ -33,8 +38,7 @@ z.client.Action.prototype.canExecute = function (args) {
     return this._canExecuteInternal(args);
   }
   return false;
-}
-;
+};
 
 /**
  * @param {!z.client.action.Args=} args

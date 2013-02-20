@@ -10,6 +10,14 @@ goog.require('z.client.Action');
 z.client.actions.CreateImprovement = function (improvement) {
   goog.base(this, improvement.name);
   this.improvement = improvement;
+
+  this.meta = {
+    type: 'action_create_improvement' + improvement.type,
+    category:z.common.rulebook.category.ACTION,
+    name: improvement.name,
+    description: 'Start doing the following: ' + improvement.description
+  };
+
 };
 goog.inherits(z.client.actions.CreateImprovement, z.client.Action);
 

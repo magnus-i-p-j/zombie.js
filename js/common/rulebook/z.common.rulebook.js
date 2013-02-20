@@ -55,7 +55,8 @@ z.common.rulebook.category = {
   CHARACTER: 'character',
   ASSET: 'asset',
   ACTOR: 'actor',
-  TECH: 'tech'
+  TECH: 'tech',
+  ACTION: 'action'
 };
 
 //noinspection JSUnusedLocalSymbols

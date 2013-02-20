@@ -2,6 +2,7 @@ goog.provide('z.client.actions.EndTurn');
 
 goog.require('z.client.Action');
 goog.require('z.client');
+goog.require('z.common.rulebook');
 
 /**
  * @param {!z.client.WorldProxy} world
@@ -11,6 +12,12 @@ goog.require('z.client');
 z.client.actions.EndTurn = function(world){
   goog.base(this, 'End turn');
   this._world = world;
+  this.meta = {
+    type: 'action_end_turn',
+    category:z.common.rulebook.category.ACTION,
+    name: 'End turn',
+    description: 'Ends your turn, commence gnawing'
+  };
 };
 goog.inherits(z.client.actions.EndTurn, z.client.Action);
 
