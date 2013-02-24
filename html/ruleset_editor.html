@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="main"
-     class="game_container layout"
+     class="ruleset_editor layout"
      data-bind="template: 'ruleset_editor'">
 </div>
 
@@ -15,26 +15,9 @@
 <script src="../libs/jquery-1.7.2.js"></script>
 <script src="../libs/knockout-2.1.0.debug.js"></script>
 <script src="../libs/koExternalTemplateEngine_all.js"></script>
-<script src="../libs/closure-library/closure/goog/base.js"></script>
-<script src="../gen/deps.js"></script>
-<script>
-  goog.require('z.editor.ruleset');
-  goog.require('goog.net.XhrIo');
-</script>
-<script>
-  /**
-   * @type {z.editor.ruleset.Model}
-   */
-  var model = z.editor.ruleset.init('main');
-  goog.net.XhrIo.send(
-      '../js/common/rulebook/ruleset.json',
-      function (e) {
-        var ruleset = e.target.getResponseJson();
-        console.log('ruleset', ruleset);
-        model.update(ruleset);
-        console.log('model', model);
-      }
-  );
-</script>
+<script src="http://localhost:9810/compile?id=zedit"></script>
+<!--<script src="../libs/closure-library/closure/goog/base.js"></script>-->
+<!--<script src="../gen/deps.js"></script>-->
+<script>zedit.init();</script>
 </body>
 </html>

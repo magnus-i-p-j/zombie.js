@@ -2,20 +2,23 @@ goog.provide('z.editor.ruleset');
 
 goog.require('goog.dom');
 goog.require('z.common.rulebook');
+goog.require('z.editor.ruleset.Schema');
+
 
 /**
  *
  * @param {string|Element} initElement
+ * @param {!Object} schema
  * @return {z.editor.ruleset.Model}
  */
-z.editor.ruleset.init = function (initElement) {
+z.editor.ruleset.init = function (initElement, schema) {
   var target = goog.dom.getElement(initElement);
   if (!target) {
     throw 'Could not find element to bind against: ' + initElement;
   }
   infuser.defaults.templatePrefix = './tpl/';
 
-  var model = new z.editor.ruleset.Model();
+  var model = new z.editor.ruleset.Model(schema);
   ko.applyBindings(model, target);
   return model;
 };
@@ -23,20 +26,21 @@ z.editor.ruleset.init = function (initElement) {
 /**
  * @constructor
  */
-z.editor.ruleset.Model = function () {
-  this.test = [1, 2, 3,4];
-  this['improvements'] = ko.observableArray();
-  this['terrains'] = ko.observableArray();
-  this['items'] = ko.observableArray();
-  this['characters'] = ko.observableArray();
-  this['assets'] = ko.observableArray();
-  this['techs'] = ko.observableArray();
+z.editor.ruleset.Model = function (schema) {
+  this['improvement'] = ko.observableArray();
+  this['terrain'] = ko.observableArray();
+  this['item'] = ko.observableArray();
+  this['character'] = ko.observableArray();
+  this['asset'] = ko.observableArray();
+  this['tech'] = ko.observableArray();
+  this['schema'] = schema;
   /**
    *
    * @type {Object}
    * @private
    */
   this._types = {};
+  this._schema = new z.editor.ruleset.Schema(schema);
 };
 
 /**
@@ -111,3 +115,4 @@ z.editor.ruleset.Concept.prototype.type;
  * @return {Object}
  */
 z.editor.ruleset.Concept.prototype.update = function() {};
+

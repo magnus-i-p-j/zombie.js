@@ -1,0 +1,26 @@
+{
+  "meta":{
+    "abstract": true,
+    "type":"key",
+    "name":"string",
+    "description":"string"
+  },
+  "improvement":{
+    "inherits": ["meta"],
+    "prerequisites":"prerequisites",
+    "cost":"cost",
+    "effect":"effect"
+  },
+  "prerequisites": {
+    "terrain": "Array:terrain"
+  },
+  "cost": {
+    "min_turns": "integer"
+  },
+  "effect": {
+    "terrain": "terrain"
+  },
+  "terrain":{
+    "inherits": ["meta"]
+  }
+}
