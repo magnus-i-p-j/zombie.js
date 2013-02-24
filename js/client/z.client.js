@@ -19,6 +19,7 @@ z.client.Resources = {
   GAME_DOM_ELEMENT: 'game_dom_element',
   ACTION_FACTORY: 'action_factory',
   TOOLBAR_FACET: 'toolbar',
+  INFO_FACET: 'info_facet',
   TOOLBAR_ACTION_FACETS: 'toolbar_action_facets',
   REPOSITORY: 'repository',
   CURRENT_TARGET: 'current_target',

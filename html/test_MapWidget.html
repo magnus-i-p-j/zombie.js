@@ -12,7 +12,7 @@
 <div id="z_client"
      class="game_container layout"
      style="margin: auto;" >
-  <div id="info_bar" class="layout">info_bar</div>
+  <div id="info_bar" class="layout"  data-bind="template: {name: 'info_bar_widget', data: infoFacet}" >info_bar</div>
   <div id="message_log" class="layout">message_log</div>
   <div id="current_selection_info" class="layout">current_selection_info</div>
   <div id="project_overview" class="layout">project_overview</div>
@@ -24,7 +24,7 @@
 <script src="../libs/jquery-1.7.2.js"></script>
 <script src="../libs/knockout-2.1.0.debug.js"></script>
 <script src="../libs/koExternalTemplateEngine_all.js"></script>
-<script src="http://localhost:9810/compile?id=z"></script>
+<script src="http://localhost:9810/compile?id=z-simple"></script>
 <script>
   var client = zed.init('z_client');
 </script>

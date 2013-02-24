@@ -17,6 +17,7 @@ goog.require('z.client.facet.MapFacet');
 goog.require('z.client.facet.ContextMenuFacet');
 goog.require('z.common.EntityRepository');
 goog.require('z.client.facet.ToolbarFacet');
+goog.require('z.client.facet.InfoFacet');
 goog.require('z.client.actions.EndTurn');
 
 goog.require('z.client.User');
@@ -76,6 +77,7 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addResource(z.client.Resources.CURRENT_ACTION, ko.observable());
 
   injector.addProvider(z.client.Resources.TOOLBAR_FACET, z.client.facet.ToolbarFacet);
+  injector.addProvider(z.client.Resources.INFO_FACET, z.client.facet.InfoFacet);
   injector.addProvider(z.client.Resources.END_TURN_ACTION, z.client.actions.EndTurn);
 
   this.session = injector.create(z.client.GameSession);

@@ -57,10 +57,13 @@ z.client.WorldProxy.prototype.doStartTurn = function (startTurn) {
   var startTurnData = z.common.data.StartTurnData.fromProtocol(startTurn);
   this._turn = startTurnData.turn;
   var tiles = goog.array.map(startTurnData.tiles, this._repository.put, this._repository);
-  var e = new z.client.events.StartTurn({tiles:tiles});
+  var e = new z.client.events.StartTurn({
+        tiles:tiles,
+        turn:this._turn
+      }
+  );
   this.dispatchEvent(e);
 };
-
 
 z.client.WorldProxy.prototype.endTurn = function () {
   if (goog.isNull(this._actorId)) {
