@@ -30,7 +30,7 @@ z.client.facet.ActionFacet = function (action) {
    * @type {string}
    */
   this['description'] = this._action.meta.description;
-  
+
   goog.array.forEach(this._action.args, function (item) {
     this[item] = ko.observable();
   }, this);

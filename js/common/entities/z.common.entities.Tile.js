@@ -12,7 +12,7 @@ z.common.entities.Tile = function (tileData, meta) {
   goog.base(this, tileData.guid, meta);
   var terrain = tileData.type;
   if (!z.common.entities.Tile.isCssRegex.test(terrain)) {
-    throw { name:'Not a css class' };
+    throw { 'name':'Not a css class' };
   }
   this.terrain = terrain;
   this.position = new goog.math.Coordinate(tileData.x, tileData.y);
@@ -26,13 +26,16 @@ z.common.entities.Tile.isCssRegex = /^[_a-zA-Z]+[_a-zA-Z0-9-]*$/;
  * @param {!z.common.rulebook.meta} meta
  */
 z.common.entities.Tile.prototype.update = function (data, meta) {
-  if (this.position.x !== data.x || this.position.y !== data.y || this.guid !== data.tileId) {
+  if (this.position.x !== data.x || this.position.y !== data.y || this.guid !== data.guid) {
     throw {
       'name':'Incorrect update data',
       'real x':this.position.x,
       'real y':this.position.y,
       'bad x':data.x,
-      'bad y':data.y
+      'bad y':data.y,
+      'data':data,
+      'guid':this.guid,
+      'tileId': data.guid
     };
   }
   this.terrain = data.type;

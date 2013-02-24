@@ -1,4 +1,77 @@
 .game_container {
+  font-family: "Lucida Grande", Verdana;
+
+  .layout {
+    position: absolute;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .scrollable {
+    position: absolute;
+  }
+
+  @leftHorizontalFold: 500px;
+  @rightHorizontalFold: 400px;
+  @verticalFold: 700px;
+  @infobarHeight: 20px;
+  @toolbarHeight: 30px;
+
+  @height: 700px;
+  @width: 900px;
+
+  width: @width;
+  height: @height;
+
+  #map {
+    top: @infobarHeight;
+    right: @width - @verticalFold;
+    bottom: @height - @leftHorizontalFold;
+    left: 0;
+    background-color: #ff69b4;
+  }
+
+  #message_log {
+    top: @leftHorizontalFold;
+    right: @width - @verticalFold;
+    bottom: @toolbarHeight;
+    left: 0;
+    background-color: #d3db60;
+  }
+
+  #toolbar {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: @toolbarHeight;
+    background-color: #fff4e2;
+  }
+
+  #info_bar {
+    top: 0;
+    right: 0;
+    height: @infobarHeight;
+    left: 0;
+    background-color: #e1e9ff;
+  }
+
+  #current_selection_info {
+    top: @rightHorizontalFold;
+    right: 0;
+    bottom: @toolbarHeight;
+    left: @verticalFold;
+    background-color: #c3f7ff;
+  }
+
+  #project_overview {
+    top: @infobarHeight;
+    right: 0;
+    bottom: @height - @rightHorizontalFold;
+    left: @verticalFold;
+    background-color: #baffa8;
+  }
+
   .map_widget {
     cursor: default;
 
@@ -21,14 +94,6 @@
     .focusedTile { z-index: 50; border-color: red; }
   }
 
-  #map {
-    top: 0;
-    right: 35%;
-    bottom: 35%;
-    left: 0;
-    overflow: hidden;
-  }
-
   #context_menu_widget {
     z-index: 999;
     position: fixed;
@@ -45,7 +110,6 @@
         padding: 3px 10px 3px 5px;
         margin: 0;
         cursor: pointer;
-        font-family: "Lucida Grande", Verdana;
         text-decoration: none;
         color: #333;
         font-size: 12px;
@@ -71,25 +135,45 @@
     }
   }
 
-  #toolbar{
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 40px;
+  #toolbar_widget {
+    height: 100%;
+    > ul {
+      display: block;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      li {
+        display: inline-block;
+        min-width: 5em;
+        height: 100%;
+        border: 1px solid gray;
+        border-radius: 6px;
+        outline: none;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+        -webkit-border-radius: .5em;
+        -moz-border-radius: .5em;
+        border-radius: .5em;
+        -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+        -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+
+        :hover {
+          text-decoration: none;
+        }
+        :active {
+          position: relative;
+          top: 1px;
+        }
+      }
+    }
+
   }
 
   position: relative;
   border: 1px solid #000000;
-
-  .layout {
-    position: absolute;
-    border: 1px solid #000000;
-    overflow: hidden;
-  }
-
-  .scrollable {
-    position: absolute;
-  }
 }
 
 @cardWidth: 25em;
@@ -99,7 +183,7 @@
     margin: 1em;
     padding: 1em;
     border: 1px solid #696969;
-    width:  @cardWidth;
+    width: @cardWidth;
     .label {
       width: @labelWidth;
     }
