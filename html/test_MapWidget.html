@@ -11,13 +11,17 @@
 <noscript>You might not have script enabled in your browser.</noscript>
 <div id="z_client"
      class="game_container layout"
-     style="margin: auto;" >
-  <div id="info_bar" class="layout"  data-bind="template: {name: 'info_bar_widget', data: infoFacet}" >info_bar</div>
-  <div id="message_log" class="layout">message_log</div>
+     style="margin: auto;">
+  <div id="info_bar" class="layout" data-bind="template: {name: 'info_bar_widget', data: infoFacet}">info_bar</div>
+  <div id="message_log" class="layout" data-bind="template: {name: 'message_log_widget', data: messageLogFacet}">
+    message_log
+  </div>
   <div id="current_selection_info" class="layout">current_selection_info</div>
   <div id="project_overview" class="layout">project_overview</div>
   <div id="map" class="layout" data-bind="template: {name: 'map_widget', data: mapFacet}"></div>
-  <div id="context_menu" class="context_menu" data-bind="template: {name: 'context_menu_widget', data: contextMenuFacet}"></div>
+  <div id="context_menu"
+       class="context_menu"
+       data-bind="template: {name: 'context_menu_widget', data: contextMenuFacet}"></div>
   <div id="toolbar" class="toolbar layout" data-bind="template: {name: 'toolbar_widget', data: toolbarFacet}"></div>
 </div>
 <script src="../libs/less-1.3.0.min.js"></script>

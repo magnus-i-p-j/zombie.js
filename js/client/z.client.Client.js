@@ -18,6 +18,7 @@ goog.require('z.client.facet.ContextMenuFacet');
 goog.require('z.common.EntityRepository');
 goog.require('z.client.facet.ToolbarFacet');
 goog.require('z.client.facet.InfoFacet');
+goog.require('z.client.facet.MessageLogFacet');
 goog.require('z.client.actions.EndTurn');
 
 goog.require('z.client.User');
@@ -61,7 +62,7 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
 
   var injector = new mugd.Injector();
   injector.addResource(z.client.Resources.RULESET, ruleset);
-  injector.addResource(z.client.Resources.WORLD_SERVICE, z.client.Client.initWorldService );
+  injector.addResource(z.client.Resources.WORLD_SERVICE, z.client.Client.initWorldService);
   injector.addProvider(z.client.Resources.WORLD, z.client.WorldProxy);
   injector.addProvider(z.client.Resources.RULEBOOK, z.common.rulebook.Rulebook);
   injector.addProvider(z.client.Resources.MAP_WIDGET, z.client.ui.widget.MapWidget);
@@ -78,6 +79,7 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
 
   injector.addProvider(z.client.Resources.TOOLBAR_FACET, z.client.facet.ToolbarFacet);
   injector.addProvider(z.client.Resources.INFO_FACET, z.client.facet.InfoFacet);
+  injector.addProvider(z.client.Resources.MESSAGE_LOG_FACET, z.client.facet.MessageLogFacet);
   injector.addProvider(z.client.Resources.END_TURN_ACTION, z.client.actions.EndTurn);
 
   this.session = injector.create(z.client.GameSession);
@@ -86,7 +88,7 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
 
 };
 
-z.client.Client.initWorldService = function(ruleset){
+z.client.Client.initWorldService = function (ruleset) {
   // TODO: add server
   var injector = new mugd.Injector();
   injector.addResource(z.service.Resources.RULESET, ruleset);
