@@ -1,5 +1,5 @@
-<ol data-bind="foreach: messages">
-  <li>
-    <span data-bind="time: time"></span>: <span data-bind="text: html"></span>
+<ol class="message_list" data-bind="foreach: messages">
+  <li data-bind="scrollIntoView: $data">
+    <span class="time" data-bind="time: time"></span>: <span data-bind="html: html"></span>
   </li>
 </ol>

@@ -1,5 +1,6 @@
 .game_container {
-  font-family: "Lucida Grande", Verdana;
+  font-family: "Lucida Grande", Verdana, "Sans-Serif";
+  font-size: 13px;
 
   .layout {
     position: absolute;
@@ -93,6 +94,23 @@
     .unknown { background-image: url("../img/void.png"); }
 
     .focusedTile { z-index: 50; border-color: red; }
+  }
+
+  .message_list {
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflox-y: scroll;
+    > li {
+    }
+  }
+
+  .time {
+    font-size: smaller;
+    color: #444444;
   }
 
   #context_menu_widget {

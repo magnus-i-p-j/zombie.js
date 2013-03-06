@@ -1,6 +1,7 @@
 goog.provide('z.client.ui.widget.GameSessionWidget');
 goog.require('mugd.Injector');
 goog.require('z.client');
+goog.require('goog.style');
 
 /**
  * @param {!z.client.facet.Gem} gem
@@ -8,16 +9,18 @@ goog.require('z.client');
  * @param {!z.client.ui.widget.ContextMenuWidget} contextMenuWidget
  * @constructor
  */
-z.client.ui.widget.GameSessionWidget = function (gem, mapWidget, contextMenuWidget) {
+z.client.ui.widget.GameSessionWidget = function (gem, mapWidget, contextMenuWidget, messageLogWidget) {
   this.gem = gem;
   this.mapWidget = mapWidget;
   this.contextMenuWidget = contextMenuWidget;
+  this.messageLogWidget = messageLogWidget;
 };
 
 z.client.ui.widget.GameSessionWidget.prototype[mugd.Injector.DEPS] = [
   z.client.Resources.GEM,
   z.client.Resources.MAP_WIDGET,
-  z.client.Resources.CONTEXT_MENU_WIDGET
+  z.client.Resources.CONTEXT_MENU_WIDGET,
+  z.client.Resources.MESSAGE_LOG_WIDGET
 ];
 
 /**
@@ -50,6 +53,13 @@ z.client.ui.widget.GameSessionWidget.prototype.initKo = function () {
       var html = hours + ':' + minutes + ':' + seconds;
       element.innerHTML = html;
     }
-  }
+  };
+  ko.bindingHandlers['scrollIntoView'] = {
+    'update':function (element, valueAccessor, allBindingsAccessor) {
+      setTimeout(function () {
+        goog.style.scrollIntoContainerView(element, element.parentElement);
+      }, 0);
+    }
+  };
 };
 

@@ -1,6 +1,7 @@
 goog.provide('z.client.actions.CreateImprovement');
 
 goog.require('z.client.Action');
+goog.require('goog.debug.Logger');
 
 /**
  * @param {!z.common.rulebook.Improvement} improvement
@@ -22,6 +23,13 @@ z.client.actions.CreateImprovement = function (improvement) {
 goog.inherits(z.client.actions.CreateImprovement, z.client.Action);
 
 /**
+ * @type {!goog.debug.Logger}
+ * @protected
+ */
+z.client.actions.CreateImprovement.prototype._logger = goog.debug.Logger.getLogger('z.client.actions.CreateImprovement');
+
+
+/**
  * @override
  */
 z.client.actions.CreateImprovement.prototype._canExecuteInternal = function (args) {
@@ -37,7 +45,7 @@ z.client.actions.CreateImprovement.prototype._canExecuteInternal = function (arg
  */
 z.client.actions.CreateImprovement.prototype._executeInternal = function (args) {
   var target = args[z.client.action.ArgsType.TARGET];
-  console.log('Create a ' + this.improvement.name + ' at target (' + target.entity.position.x + ';' + target.entity.position.y + ')');
+  this._logger.info('Create a ' + this.improvement.name + ' at target (' + target.entity.position.x + ';' + target.entity.position.y + ')');
 };
 
 z.client.actions.CreateImprovement.prototype.args = [
