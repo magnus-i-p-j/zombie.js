@@ -1,10 +1,28 @@
+@tileWidth: 72px;
+@tileHeight: 72px;
+//@basicBackground: Linen;
+@basicBackground: transparent;
+@darkerBackground: #eae0d6;
+@borderColour: AntiqueWhite;
+
 .game_container {
+  @startColour: #ebeadf;
+  @endColour: #faf0e6;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(@startColour), to(@endColour));
+  background-image: -webkit-linear-gradient(top, @startColour, @endColour);
+  background-image: -moz-linear-gradient(top, @startColour, @endColour);
+  background-image: -o-linear-gradient(top, @startColour, @endColour);
+  background-image: linear-gradient(to bottom, @startColour, @endColour);
+
+  h1 { margin: 0; padding: 0; }
   font-family: "Lucida Grande", Verdana, "Sans-Serif";
   font-size: 13px;
 
+  > .layout {
+    border: 2px @borderColour inset;
+  }
   .layout {
     position: absolute;
-    border: 1px solid #000000;
     box-sizing: border-box;
     overflow: hidden;
   }
@@ -18,10 +36,8 @@
   @verticalFold: 700px;
   @infobarHeight: 20px;
   @toolbarHeight: 30px;
-
   @height: 700px;
   @width: 900px;
-
   width: @width;
   height: @height;
 
@@ -31,7 +47,7 @@
     right: @width - @verticalFold;
     bottom: @height - @leftHorizontalFold;
     left: 0;
-    background-color: #ff69b4;
+    background-color: #000000;
   }
 
   #message_log {
@@ -39,7 +55,8 @@
     right: @width - @verticalFold;
     bottom: @toolbarHeight;
     left: 0;
-    background-color: #d3db60;
+    background-color: @basicBackground;
+    padding: 2px;
   }
 
   #toolbar {
@@ -47,7 +64,8 @@
     right: 0;
     bottom: 0;
     height: @toolbarHeight;
-    background-color: #fff4e2;
+    background-color: @darkerBackground;
+    border: none;
   }
 
   #info_bar {
@@ -55,7 +73,8 @@
     right: 0;
     height: @infobarHeight;
     left: 0;
-    background-color: #e1e9ff;
+    background-color: @darkerBackground;
+    border: none;
   }
 
   #current_selection_info {
@@ -63,7 +82,7 @@
     right: 0;
     bottom: @toolbarHeight;
     left: @verticalFold;
-    background-color: #c3f7ff;
+    background-color: @basicBackground;
   }
 
   #project_overview {
@@ -71,29 +90,27 @@
     right: 0;
     bottom: @height - @rightHorizontalFold;
     left: @verticalFold;
-    background-color: #baffa8;
+    background-color: @basicBackground;
   }
 
   .map_widget {
     cursor: default;
-
-    .tile {
-      width: 72px;
-      height: 72px;
-      background: no-repeat center center;
-      border: 1px solid transparent;
-      color: #fff;
-      text-shadow: 1px 1px 1px #000;
-      position: absolute;
-      .center_text { line-height: 72px; text-align: center; vertical-align: middle; }
-    }
-
-    .grass { background-image: url("../img/grass.png"); }
-    .water { background-image: url("../img/water.png"); }
-    .hills { background-image: url("../img/hill.png"); }
-    .unknown { background-image: url("../img/void.png"); }
-
     .focusedTile { z-index: 50; border-color: red; }
+  }
+
+  .tile {
+    width: @tileWidth;
+    height: @tileHeight;
+    background: no-repeat center center;
+    border: 1px solid transparent;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    position: absolute;
+    .center_text { line-height: 72px; text-align: center; vertical-align: middle; }
+    &.grass { background-image: url("../img/grass.png"); }
+    &.water { background-image: url("../img/water.png"); }
+    &.hills { background-image: url("../img/hill.png"); }
+    &.unknown { background-image: url("../img/void.png"); }
   }
 
   .message_list {
@@ -191,8 +208,43 @@
 
   }
 
+  .terrain_card {
+    @cardHeaderHeight: 30px;
+    @cardFooterHeight: 20px;
+    header {
+      top: 0;
+      left: 0;
+      right: 0;
+      height: @cardHeaderHeight;
+      vertical-align: top;
+      font-size: 1.2em;
+      padding: 2px 4px;
+    }
+    .body {
+      top: @cardHeaderHeight;
+      bottom: @cardFooterHeight;
+      width: 100%;
+      .image {
+        position: static;
+        float: right;
+        margin: 4px 0;
+      }
+      padding: 2px 4px;
+    }
+    footer {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: @cardFooterHeight;
+      text-align: right;
+      vertical-align: bottom;
+      font-size: .8em;
+      padding: 2px 4px;
+    }
+  }
+
   position: relative;
-  border: 1px solid #000000;
+  border: 2px outset @borderColour;
 }
 
 @cardWidth: 25em;

@@ -1,0 +1,13 @@
+<div class="terrain_card">
+  <header class="layout name"><h1 data-bind="text: meta().name"></h1></header>
+  <section class="layout body">
+    <div data-bind="attr: { class: terrain() + ' image tile', 'data-x': x, 'data-y': y }">
+
+    </div>
+    <p data-bind="text: meta().description"></p>
+  </section>
+  <footer class="layout">
+    <div>(<span data-bind="text: x"></span>, <span data-bind="text: y"></span>)</div>
+  </footer>
+</div>
+<pre style="display: none;" data-bind="text: JSON.stringify(ko.toJS(meta()), null, 2)"></pre>
