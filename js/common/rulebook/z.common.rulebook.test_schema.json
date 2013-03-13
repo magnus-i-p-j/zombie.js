@@ -1,0 +1,42 @@
+{
+  "id": "z.ruleset",
+  "type": "object",
+  "properties": {
+    "improvement" : {
+      "type": "array",
+      "items" : {
+        "id": "z.common.ruleset.improvement",
+        "properties": {
+          "type":"secure_area",
+          "prerequisite":{
+            "type" : "string",
+            "links": {
+              "rel": "full",
+              "href": "game://terrain/type/{@}"
+            }
+          }
+        }
+      }
+    },
+    "terrain": {
+      "type": "array",
+      "items": {
+        "id": "z.common.ruleset.terrain",
+        "properties": {
+          "type":{
+            "type": "string"
+
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "rel": "self",
+          "href": "game://terrain/type/{type}"
+        }
+      }
+    }
+  }
+}
+

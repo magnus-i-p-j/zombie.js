@@ -1,0 +1,18 @@
+{
+  "improvement":[
+    {
+      "type":"secure_area",
+      "prerequisite": "grass"
+    }
+  ],
+  "terrain":[
+    {
+      "type":"fenced_grass",
+      "name":"Fenced grass"
+    },
+    {
+      "type":"grass",
+      "name":"Grass"
+    }]
+}
+
