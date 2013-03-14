@@ -5,9 +5,9 @@
     "improvement" : {
       "type": "array",
       "items" : {
+       "type": "object",
         "id": "z.common.ruleset.improvement",
         "properties": {
-          "type":"secure_area",
           "prerequisite":{
             "type" : "string",
             "links": {
@@ -25,7 +25,6 @@
         "properties": {
           "type":{
             "type": "string"
-
           },
           "name": {
             "type": "string"
@@ -39,4 +38,3 @@
     }
   }
 }
-
