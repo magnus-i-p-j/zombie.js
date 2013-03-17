@@ -10,6 +10,7 @@
     <orderEntry type="library" name="MooTools" level="application" />
     <orderEntry type="library" name="MooTools-1.4.2" level="application" />
     <orderEntry type="library" name="JsTestDriver Assertion Framework" level="application" />
+    <orderEntry type="library" name="tv4" level="project" />
   </component>
 </module>
 

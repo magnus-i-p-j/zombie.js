@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="tv4" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/libs/tv4.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/libs/tv4.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

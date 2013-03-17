@@ -1,5 +1,7 @@
 goog.provide('z.common.entities.Actor');
 
+goog.require('z.common.entities.Entity');
+
 /**
  * @param {!mugd.utils.guid} guid
  * @param {!z.common.rulebook.meta} meta
