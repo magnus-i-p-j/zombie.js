@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{JsTestDriver Assertion Framework}" />
-    <excludedPredefinedLibrary name="AJAX" />
-    <excludedPredefinedLibrary name="DHTML" />
-    <excludedPredefinedLibrary name="DOM Core" />
-    <excludedPredefinedLibrary name="DOM Events" />
-    <excludedPredefinedLibrary name="DOM Traversal And Range" />
-    <excludedPredefinedLibrary name="DOM XPath" />
-    <excludedPredefinedLibrary name="EcmaScript" />
-    <excludedPredefinedLibrary name="EcmaScript Additional" />
-    <excludedPredefinedLibrary name="HTML 5" />
+    <excludedPredefinedLibrary name="HTML" />
   </component>
 </project>
 
