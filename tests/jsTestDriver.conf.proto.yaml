@@ -1,5 +1,6 @@
 test:
-  - "*.js"
+#  - "*.js" # todo: reactivate tests
+  - "mugd.editor/*.js"
 load:
   - ../libs/knockout-2.1.0.debug.js
   - ../libs/jquery-1.7.2.js

@@ -1,11 +1,11 @@
 goog.provide('z.client.actions.CreateImprovement');
 
-goog.require('z.client.Action');
+goog.require('z.client.action.Action');
 goog.require('goog.debug.Logger');
 
 /**
  * @param {!z.common.rulebook.Improvement} improvement
- * @extends {z.client.Action}
+ * @extends {z.client.action.Action}
  * @constructor
  */
 z.client.actions.CreateImprovement = function (improvement) {
@@ -14,20 +14,19 @@ z.client.actions.CreateImprovement = function (improvement) {
 
   this.meta = {
     type: 'action_create_improvement' + improvement.type,
-    category:z.common.rulebook.category.ACTION,
+    category: z.common.rulebook.category.ACTION,
     name: improvement.name,
     description: 'Start doing the following: ' + improvement.description
   };
 
 };
-goog.inherits(z.client.actions.CreateImprovement, z.client.Action);
+goog.inherits(z.client.actions.CreateImprovement, z.client.action.Action);
 
 /**
  * @type {!goog.debug.Logger}
  * @protected
  */
 z.client.actions.CreateImprovement.prototype._logger = goog.debug.Logger.getLogger('z.client.actions.CreateImprovement');
-
 
 /**
  * @override

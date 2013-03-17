@@ -6,7 +6,7 @@ goog.require('z.client.facet.ActionFacet');
 /**
  * @extends {z.client.facet.Facet}
  * @constructor
- * @param {...z.client.Action} actions
+ * @param {...z.client.action.Action} actions
  */
 z.client.facet.ToolbarFacet = function (actions) {
   goog.base(this);
@@ -15,7 +15,7 @@ z.client.facet.ToolbarFacet = function (actions) {
    * @expose
    * @type {function(Array.<!z.client.facet.ActionFacet>=):!Array.<!z.client.facet.ActionFacet>}
    */
-  this.actionFacets = ko.observableArray(goog.array.map(arguments, function(action){
+  this.actionFacets = ko.observableArray(goog.array.map(arguments, function (action) {
     return new z.client.facet.ActionFacet(action);
   }));
 

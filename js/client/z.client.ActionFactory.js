@@ -17,7 +17,7 @@ z.client.ActionFactory.prototype[mugd.Injector.DEPS] = [
 
 /**
  * @param {z.common.rulebook.meta} meta
- * @return {Array.<!z.client.Action>}
+ * @return {Array.<!z.client.action.Action>}
  */
 z.client.ActionFactory.prototype.getActions = function (meta) {
   return this._createActions(meta);
@@ -25,7 +25,7 @@ z.client.ActionFactory.prototype.getActions = function (meta) {
 
 /**
  * @param {z.common.rulebook.meta} meta
- * @return {Array.<!z.client.Action>}
+ * @return {Array.<!z.client.action.Action>}
  */
 z.client.ActionFactory.prototype._createActions = function (meta) {
   var actions = [];

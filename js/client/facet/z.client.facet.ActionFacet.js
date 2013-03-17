@@ -3,14 +3,14 @@ goog.provide('z.client.facet.ActionFacet');
 goog.require('goog.array');
 
 /**
- * @param {!z.client.Action} action
+ * @param {!z.client.action.Action} action
  * @constructor
  */
 z.client.facet.ActionFacet = function (action) {
 
   /**
    * @private
-   * @type {!z.client.Action}
+   * @type {!z.client.action.Action}
    */
   this._action = action;
 
