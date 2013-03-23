@@ -1,5 +1,7 @@
 goog.provide('mugd.editor.PrimitiveViewModel');
 
+goog.require('mugd.editor.constants');
+
 /**
  * @implements mugd.editor.IViewModel
  * @constructor
@@ -21,6 +23,32 @@ mugd.editor.PrimitiveViewModel = function (schema) {
    * @type {function(string=):string}
    */
   this['value'] = ko.observable();
+
+  var validateValueCallback = mugd.editor.PrimitiveViewModel.validateValue[this['type']()];
+  this['value'].subscribe(validateValueCallback);
+};
+
+mugd.editor.PrimitiveViewModel.isPrimitiveValue = function (schema) {
+  return goog.array.contains([
+    mugd.editor.constants.ValueType.STRING,
+    mugd.editor.constants.ValueType.NUMBER
+//      mugd.editor.constants.ValueType.STRING,
+//      mugd.editor.constants.ValueType.STRING
+  ],
+      schema['type']
+  );
+};
+
+mugd.editor.PrimitiveViewModel.validateValue = {};
+mugd.editor.PrimitiveViewModel.validateValue[mugd.editor.constants.ValueType.STRING] = function (value) {
+  if (!goog.isString(value)) {
+    throw {'name': 'TypeMismatchException', 'reason': 'Expected string', 'value': value};
+  }
+};
+mugd.editor.PrimitiveViewModel.validateValue[mugd.editor.constants.ValueType.NUMBER] = function (value) {
+  if (!goog.isNumber(value)) {
+    throw {'name': 'TypeMismatchException', 'reason': 'Expected number', 'value': value};
+  }
 };
 
 //Just for no errors

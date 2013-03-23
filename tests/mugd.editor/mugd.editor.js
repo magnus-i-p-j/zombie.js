@@ -1,7 +1,4 @@
 TestCase("test mugd.editor creates correct string model", {
-  'test exists mugd.editor.getViewModel': function () {
-    assertFunction(mugd.editor.getViewModel);
-  },
   data: 'must be string',
   schema: {
     "description": "Test",
@@ -13,6 +10,10 @@ TestCase("test mugd.editor creates correct string model", {
     if (!valid) {
       assert(JSON.stringify(tv4.error, null, 4), valid);
     }
+  },
+
+  'test exists mugd.editor.getViewModel': function () {
+    assertFunction(mugd.editor.getViewModel);
   },
   'test creates Model with title': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
@@ -29,9 +30,62 @@ TestCase("test mugd.editor creates correct string model", {
 
     assertSame(this.schema['type'], viewModel.type());
   },
-  'test creates Model with correct string this.data': function () {
+  'test creates Model with correct string data': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
     assertSame(this.data, viewModel.value());
+  },
+  "test throws exception for non string value": function () {
+    var schema = this.schema;
+    var data = true;
+    assertException(function () {
+      mugd.editor.getViewModel(schema, data);
+    }, 'TypeMismatchException');
+  }
+});
+
+TestCase("test mugd.editor creates correct number model", {
+  data: 1.42,
+  schema: {
+    "description": "Test 2",
+    "title": "Test 1",
+    "type": "number"
+  },
+  setUp: function () {
+    var valid = tv4.validate(this.data, this.schema);
+    if (!valid) {
+      assert(JSON.stringify(tv4.error, null, 4), valid);
+    }
+  },
+
+  'test exists mugd.editor.getViewModel': function () {
+    assertFunction(mugd.editor.getViewModel);
+  },
+  'test creates Model with title': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertSame(this.schema['title'], viewModel.title());
+  },
+  'test creates Model with description': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertSame(this.schema['description'], viewModel.description());
+  },
+  'test creates Model with type number': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertSame(mugd.editor.constants.ValueType.NUMBER, viewModel.type());
+  },
+  'test creates Model with correct number ': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertSame(this.data, viewModel.value());
+  },
+  "test throws exception for non number value": function () {
+    var schema = this.schema;
+    var data = true;
+    assertException(function () {
+      mugd.editor.getViewModel(schema, data);
+    }, 'TypeMismatchException');
   }
 });

@@ -21,20 +21,10 @@ mugd.editor.getViewModel = function (schema, data) {
  * @private
  */
 mugd.editor._getModel = function (schema) {
-  if (schema.type === mugd.editor.ValueType.STRING) {
+  if (mugd.editor.PrimitiveViewModel.isPrimitiveValue(schema)) {
     return new mugd.editor.PrimitiveViewModel(schema);
   }
+  throw {'name': 'TypeMismatchException', 'reason': 'no such type supported', 'schema': schema};
 };
 
-/**
- * @enum {string}
- */
-mugd.editor.ValueType = {
-  'ARRAY': 'array',
-  'BOOLEAN': 'boolean',
-  'INTEGER': 'integer',
-  'NUMBER': 'number',
-  'NULL': 'null',
-  'OBJECT': 'object',
-  'STRING': 'string'
-};
+

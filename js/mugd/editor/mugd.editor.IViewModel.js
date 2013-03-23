@@ -7,28 +7,28 @@ mugd.editor.IViewModel = function () {
 };
 
 /**
- * @param {string} value
+ * @param {string=} value
  * @return {string}
  */
 mugd.editor.IViewModel.prototype.title = function (value) {
 };
 
 /**
- * @param {string} value
+ * @param {string=} value
  * @return {string}
  */
 mugd.editor.IViewModel.prototype.description = function (value) {
 };
 
 /**
- * @param {mugd.editor.ValueType=} value
- * @return {!mugd.editor.ValueType}
+ * @param {mugd.editor.constants.ValueType=} value
+ * @return {!mugd.editor.constants.ValueType}
  */
 mugd.editor.IViewModel.prototype.type = function (value) {
 };
 
 /**
- * @param {*} value
+ * @param {*=} value
  * @return {*}
  */
 mugd.editor.IViewModel.prototype.value = function (value) {
