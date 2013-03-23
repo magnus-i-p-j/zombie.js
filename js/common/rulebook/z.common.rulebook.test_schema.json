@@ -1,40 +1,16 @@
 {
-  "id": "z.ruleset",
+  "title": "Terrain",
+  "description": "Some sort of stuff to walk on.",
   "type": "object",
   "properties": {
-    "improvement" : {
-      "type": "array",
-      "items" : {
-       "type": "object",
-        "id": "z.common.ruleset.improvement",
-        "properties": {
-          "prerequisite":{
-            "type" : "string",
-            "links": {
-              "rel": "full",
-              "href": "game://terrain/type/{@}"
-            }
-          }
-        }
-      }
+    "type": {
+      "title": "Unique id",
+      "type": "string"
     },
-    "terrain": {
-      "type": "array",
-      "items": {
-        "id": "z.common.ruleset.terrain",
-        "properties": {
-          "type":{
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "links": {
-          "rel": "self",
-          "href": "game://terrain/type/{type}"
-        }
-      }
+    "name": {
+      "title": "Name",
+      "description": "Visible name of terrain",
+      "type": "string"
     }
   }
 }

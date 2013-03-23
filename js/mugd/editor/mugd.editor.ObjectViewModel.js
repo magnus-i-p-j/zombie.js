@@ -16,17 +16,17 @@ mugd.editor.ObjectViewModel = function (schema, getSubModel) {
    * @type {function(string=):string}
    */
   this['description'] = ko.observable(schema['description']);
-  /**
-   * @type {function(string=):string}
-   */
+
+  this['properties'] = [];
+
   var properties = {};
   goog.object.forEach(schema['properties'],
       function (value, key, allValues) {
         properties[key] = getSubModel(value);
+        this['properties'].push(key);
       }, this
   );
   this['value'] = ko.observable(properties).extend({'objectValue': null});
-
 };
 
 mugd.editor.ObjectViewModel.isObjectValue = function (schema) {
@@ -46,10 +46,6 @@ ko.extenders.objectValue = function (target, option) {
     }
   });
   return result;
-};
-
-mugd.editor.ObjectViewModel.prototype._valueWrite = function (newValue) {
-
 };
 
 mugd.editor.ObjectViewModel.prototype.value = function (value) {

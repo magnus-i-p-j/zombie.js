@@ -1,6 +1,8 @@
 goog.provide('mugd.editor.PrimitiveViewModel');
 
 goog.require('mugd.editor.constants');
+goog.require('mugd.editor.IViewModel');
+goog.require('goog.array');
 
 /**
  * @implements mugd.editor.IViewModel

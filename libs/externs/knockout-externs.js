@@ -10,6 +10,12 @@ var ko = {};
 ko.observable = function (initialValue) {
 };
 
+ko.subscribe = function () {
+};
+
+ko.extenders = function () {
+};
+
 ko.dependentObservable = function (evaluatorFunctionOrOptions, evaluatorFunctionTarget, options) {
 };
 
@@ -21,15 +27,17 @@ ko.computed = ko.dependentObservable;
 ko.observableArray = function (initialValues) {
 };
 
-ko.observableArray.prototype.push = function(){};
+ko.observableArray.prototype.push = function () {
+};
 
-ko.observableArray.prototype.removeAll = function(){};
+ko.observableArray.prototype.removeAll = function () {
+};
 
 /**
  * @return {boolean}
  */
-ko.observableArray.prototype.valueHasMutated = function(){};
-
+ko.observableArray.prototype.valueHasMutated = function () {
+};
 
 ko.applyBindings = function (viewModel, rootNode) {
 };

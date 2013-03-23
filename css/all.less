@@ -250,6 +250,15 @@
 @cardWidth: 25em;
 @labelWidth: 10em;
 .ruleset_editor {
+  .source_selector {
+    label {
+      display: table-row;
+      > * {
+        display: table-cell;
+      }
+      > input { width: 40em; }
+    }
+  }
   .card {
     margin: 1em;
     padding: 1em;

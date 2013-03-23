@@ -1,14 +1,14 @@
-  {
-    "id":"zedit",
-    "inputs":["js/editor/z.editor.js"],
-    "paths":["js"],
-    "mode":"ADVANCED",
-    "level":"VERBOSE",
-    "externs":[
-      "libs/externs/knockout-externs.js",
-      "libs/externs/jquery-externs.js",
-      "libs/externs/console-externs.js",
-      "libs/externs/templates-externs.js",
-      "libs/externs/knockout-external_template-externs.js"
-    ]
-  }
+{
+  "id": "zedit",
+  "inputs": ["js/mugd/editor/mugd.editor.EditorViewModel.js"],
+  "paths": ["js"],
+  "mode": "SIMPLE",
+  "level": "VERBOSE",
+  "externs": [
+    "libs/externs/knockout-externs.js",
+    "libs/externs/jquery-externs.js",
+    "libs/externs/console-externs.js",
+    "libs/externs/templates-externs.js",
+    "libs/externs/knockout-external_template-externs.js"
+  ]
+}
