@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="tv4" type="javaScript">
+  <library name="tv4.js" type="javaScript">
     <properties>
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/libs/tv4.js" />
