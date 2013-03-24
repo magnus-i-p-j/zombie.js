@@ -15,6 +15,17 @@
         "title": "Name",
         "description": "Visible name of terrain",
         "type": "string"
+      },
+      "vli": {
+        "title": "Blliii",
+        "description": "sadfgsdfg",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Unique id",
+            "type": "string"
+          }
+        }
       }
     }
   }
