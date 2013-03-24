@@ -4,15 +4,18 @@
   <button data-bind="click: loadModel">Load model</button>
 </div>
 <div data-bind="with: model">
-  <div data-bind="text: title"></div>
-  <div data-bind="text: description"></div>
-  <ul data-bind="foreach: properties">
-    <li>
-      <label data-bind="attr: {title:description}">
-        <span data-bind="text: title"></span>
-        <input type="text" data-bind="value: value" />
-      </label>
-      <!--<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>-->
-    </li>
-  </ul>
+  <div data-bind="foreach: value">
+    <div data-bind="text: title"></div>
+    <div data-bind="text: description"></div>
+    <ul data-bind="foreach: properties">
+      <li>
+        <label data-bind="attr: {title:description}">
+          <span data-bind="text: title"></span>
+          <input type="text" data-bind="value: value" />
+        </label>
+        <!--<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>-->
+      </li>
+    </ul>
+  </div>
+  <button data-bind="click: newItem">New Item</button>
 </div>

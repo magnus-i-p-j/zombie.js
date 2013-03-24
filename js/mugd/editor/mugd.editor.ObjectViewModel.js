@@ -26,26 +26,20 @@ mugd.editor.ObjectViewModel = function (schema, getSubModel) {
         this['properties'].push(properties[key]);
       }, this
   );
-  this['value'] = ko.observable(properties).extend({'objectValue': null});
+  this['value'] = ko.observable(properties);
+};
+
+mugd.editor.ObjectViewModel.prototype.setValue = function (newValue) {
+  var current = this.value();
+  goog.object.forEach(newValue,
+      function (value, key) {
+        current[key].setValue(value);
+      }
+  );
 };
 
 mugd.editor.ObjectViewModel.isObjectValue = function (schema) {
   return schema.type === mugd.editor.constants.ValueType.OBJECT;
-};
-
-ko.extenders.objectValue = function (target, option) {
-  var result = ko.computed({
-    'read': target,
-    'write': function (newValue) {
-      var current = target();
-      goog.object.forEach(newValue,
-          function (value, key, allValues) {
-            current[key].value(value);
-          }
-      );
-    }
-  });
-  return result;
 };
 
 mugd.editor.ObjectViewModel.prototype.value = function (value) {

@@ -2,6 +2,7 @@ goog.provide('mugd.editor');
 
 goog.require('mugd.editor.PrimitiveViewModel');
 goog.require('mugd.editor.ObjectViewModel');
+goog.require('mugd.editor.ArrayViewModel');
 
 /**
  * @param {!Object} schema
@@ -11,7 +12,7 @@ goog.require('mugd.editor.ObjectViewModel');
 mugd.editor.getViewModel = function (schema, data) {
 
   var model = mugd.editor._getModel(schema);
-  model.value(data);
+  model.setValue(data);
   return model;
 
 };
@@ -27,6 +28,11 @@ mugd.editor._getModel = function (schema) {
   }
   if (mugd.editor.ObjectViewModel.isObjectValue(schema)) {
     return new mugd.editor.ObjectViewModel(schema, mugd.editor._getModel);
+  }
+  if (mugd.editor.ArrayViewModel.isArrayValue(schema)) {
+    return new mugd.editor.ArrayViewModel(schema, function () {
+      return mugd.editor._getModel(schema.items);
+    });
   }
   throw {'name': 'TypeMismatchException', 'reason': 'no such type supported', 'schema': schema};
 };

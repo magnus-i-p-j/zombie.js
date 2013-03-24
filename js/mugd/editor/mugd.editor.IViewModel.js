@@ -34,4 +34,10 @@ mugd.editor.IViewModel.prototype.type = function (value) {
 mugd.editor.IViewModel.prototype.value = function (value) {
 };
 
+/**
+ * @param {*} value
+ */
+mugd.editor.IViewModel.prototype.setValue = function (value) {
+};
+
 

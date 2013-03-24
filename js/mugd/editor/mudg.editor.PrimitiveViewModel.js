@@ -30,6 +30,10 @@ mugd.editor.PrimitiveViewModel = function (schema) {
   this['value'].subscribe(validateValueCallback);
 };
 
+mugd.editor.PrimitiveViewModel.prototype.setValue = function (value) {
+  this['value'](value);
+};
+
 mugd.editor.PrimitiveViewModel.isPrimitiveValue = function (schema) {
   return goog.array.contains([
     mugd.editor.constants.ValueType.STRING,

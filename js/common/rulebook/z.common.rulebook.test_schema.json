@@ -1,16 +1,21 @@
 {
-  "title": "Terrain",
-  "description": "Some sort of stuff to walk on.",
-  "type": "object",
-  "properties": {
-    "type": {
-      "title": "Unique id",
-      "type": "string"
-    },
-    "name": {
-      "title": "Name",
-      "description": "Visible name of terrain",
-      "type": "string"
+  "title": "Terrains",
+  "description": "The stuff people walk on.",
+  "type": "array",
+  "items": {
+    "title": "Terrain",
+    "description": "Some sort of stuff to walk on.",
+    "type": "object",
+    "properties": {
+      "type": {
+        "title": "Unique id",
+        "type": "string"
+      },
+      "name": {
+        "title": "Name",
+        "description": "Visible name of terrain",
+        "type": "string"
+      }
     }
   }
 }

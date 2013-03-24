@@ -1,4 +1,14 @@
-{
-  "type": "fenced_grass",
-  "name": "Fenced grass"
-}
+[
+  {
+    "type": "fenced_grass",
+    "name": "Fenced grass"
+  },
+  {
+    "type": "grass",
+    "name": "Grass"
+  },
+  {
+    "type": "water",
+    "name": "Water"
+  }
+]
