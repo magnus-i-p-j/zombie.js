@@ -2,25 +2,16 @@ goog.provide('mugd.editor.PrimitiveViewModel');
 
 goog.require('mugd.editor.constants');
 goog.require('mugd.editor.IViewModel');
+goog.require('mugd.editor.AbstractViewModel');
 goog.require('goog.array');
 
 /**
  * @implements mugd.editor.IViewModel
+ * @extends mugd.editor.AbstractViewModel
  * @constructor
  */
 mugd.editor.PrimitiveViewModel = function (schema) {
-  /**
-   * @type {function(string=):string}
-   */
-  this['title'] = ko.observable(schema['title']);
-  /**
-   * @type {function(string=):string}
-   */
-  this['description'] = ko.observable(schema['description']);
-  /**
-   * @type {function(string=):string}
-   */
-  this['type'] = ko.observable(schema['type']);
+  goog.base(this, schema);
   /**
    * @type {function(string=):string}
    */
@@ -28,6 +19,13 @@ mugd.editor.PrimitiveViewModel = function (schema) {
 
   var validateValueCallback = mugd.editor.PrimitiveViewModel.validateValue[this['type']()];
   this['value'].subscribe(validateValueCallback);
+};
+
+goog.inherits(mugd.editor.PrimitiveViewModel, mugd.editor.AbstractViewModel);
+
+mugd.editor.PrimitiveViewModel.prototype.toJSON = function () {
+  console.log(this['value']());
+  return this['value']();
 };
 
 mugd.editor.PrimitiveViewModel.prototype.setValue = function (value) {

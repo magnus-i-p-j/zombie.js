@@ -41,5 +41,10 @@ TestCase("test mugd.editor creates correct number model", {
     assertException(function () {
       mugd.editor.getViewModel(schema, data);
     }, 'TypeMismatchException');
+  },
+  'test to JSON returns correct number': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertSame(this.data, viewModel.toJSON());
   }
 });

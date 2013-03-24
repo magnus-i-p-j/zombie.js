@@ -35,6 +35,11 @@ TestCase("test mugd.editor array model", {
 
     assertSame(initialLength + 1, model.value().length);
     assertSame(expected, actual.value());
+  },
+  'test to JSON returns correct array': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertEquals(this.data, viewModel.toJSON());
   }
 
 });

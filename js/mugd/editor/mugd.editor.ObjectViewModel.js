@@ -1,21 +1,17 @@
 goog.provide('mugd.editor.ObjectViewModel');
 
-goog.require('goog.object');
 goog.require('mugd.editor.constants');
+goog.require('mugd.editor.IViewModel');
+goog.require('mugd.editor.AbstractViewModel');
+goog.require('goog.object');
 
 /**
  * @implements mugd.editor.IViewModel
+ * @extends mugd.editor.AbstractViewModel
  * @constructor
  */
 mugd.editor.ObjectViewModel = function (schema, getSubModel) {
-  /**
-   * @type {function(string=):string}
-   */
-  this['title'] = ko.observable(schema['title']);
-  /**
-   * @type {function(string=):string}
-   */
-  this['description'] = ko.observable(schema['description']);
+  goog.base(this, schema);
 
   this['properties'] = ko.observableArray();
 
@@ -27,6 +23,15 @@ mugd.editor.ObjectViewModel = function (schema, getSubModel) {
       }, this
   );
   this['value'] = ko.observable(properties);
+};
+goog.inherits(mugd.editor.ObjectViewModel, mugd.editor.AbstractViewModel);
+
+mugd.editor.ObjectViewModel.prototype.toJSON = function () {
+  return goog.object.map(this['value'](),
+      function (value) {
+        return value.toJSON();
+      }
+  );
 };
 
 mugd.editor.ObjectViewModel.prototype.setValue = function (newValue) {

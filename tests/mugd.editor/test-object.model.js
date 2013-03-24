@@ -68,6 +68,11 @@ TestCase("test mugd.editor object model", {
         assert(!!model);
       }
     }
+  },
+  'test to JSON returns correct object': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertEquals(this.data, viewModel.toJSON());
   }
 });
 
@@ -116,5 +121,10 @@ TestCase("test mugd.editor nested object model", {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
     assertSame("Buddy", viewModel.value().buddy.value().nickname.value());
+  },
+  'test to JSON returns correct object': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertEquals(this.data, viewModel.toJSON());
   }
 });
