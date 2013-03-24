@@ -17,13 +17,13 @@ mugd.editor.ObjectViewModel = function (schema, getSubModel) {
    */
   this['description'] = ko.observable(schema['description']);
 
-  this['properties'] = [];
+  this['properties'] = ko.observableArray();
 
   var properties = {};
   goog.object.forEach(schema['properties'],
       function (value, key, allValues) {
         properties[key] = getSubModel(value);
-        this['properties'].push(key);
+        this['properties'].push(properties[key]);
       }, this
   );
   this['value'] = ko.observable(properties).extend({'objectValue': null});

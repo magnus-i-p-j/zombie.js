@@ -135,6 +135,31 @@ TestCase("test mugd.editor object model", {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
     assertSame('Pelle', viewModel.value().firstname.value());
+  },
+  'test can iterate over properties': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    for (var i in this.schema.properties) {
+      if (this.schema.properties.hasOwnProperty(i)) {
+        var value = this.schema.properties[i];
+        var model = goog.array.find(viewModel.properties(),
+            function (model) {
+              if (value.description !== model.description()) {
+                return false;
+              }
+              if (value.title !== model.title()) {
+                return false;
+              }
+              if (value.type !== model.type()) {
+                return false;
+              }
+              return true;
+            }
+        );
+        // TODO: Check that this is actually a good model
+        assert(!!model);
+      }
+    }
   }
 });
 
