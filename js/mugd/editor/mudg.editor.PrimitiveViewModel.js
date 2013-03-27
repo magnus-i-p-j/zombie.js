@@ -6,7 +6,6 @@ goog.require('mugd.editor.AbstractViewModel');
 goog.require('goog.array');
 
 /**
- * @implements mugd.editor.IViewModel
  * @extends mugd.editor.AbstractViewModel
  * @constructor
  */
@@ -54,12 +53,3 @@ mugd.editor.PrimitiveViewModel.validateValue[mugd.editor.constants.ValueType.NUM
   }
 };
 
-//Just for no errors
-mugd.editor.PrimitiveViewModel.prototype.value = function () {
-};
-mugd.editor.PrimitiveViewModel.prototype.title = function () {
-};
-mugd.editor.PrimitiveViewModel.prototype.type = function () {
-};
-mugd.editor.PrimitiveViewModel.prototype.description = function () {
-};

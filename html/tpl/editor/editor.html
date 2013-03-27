@@ -4,7 +4,7 @@
   <button data-bind="click: loadModel">Load model</button>
 </div>
 <div data-bind="with: model">
+  <button data-bind="click: saveModel">Save model</button>
   <div data-bind="template: { name: type() }">
-    <!--<pre data-bind="text: JSON.stringify($data, null, 2)"></pre>-->
   </div>
 </div>

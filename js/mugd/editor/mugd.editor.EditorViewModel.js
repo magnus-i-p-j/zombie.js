@@ -22,6 +22,7 @@ mugd.editor.EditorViewModel.prototype['loadModel'] = function () {
               var data = e.target.getResponseJson();
               try {
                 self['model'](mugd.editor.getViewModel(schema, data));
+                self['model']()['fileName'](self['dataUri']().split('/').pop());
               } catch (ex) {
                 console.log(ex);
               }

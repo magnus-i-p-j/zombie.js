@@ -7,7 +7,6 @@ goog.require('goog.object');
 
 /**
  * @implements mugd.editor.IViewModel
- * @extends mugd.editor.AbstractViewModel
  * @constructor
  */
 mugd.editor.ObjectViewModel = function (schema, getSubModel) {

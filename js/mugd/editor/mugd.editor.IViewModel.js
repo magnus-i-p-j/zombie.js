@@ -47,9 +47,6 @@ mugd.editor.IViewModel.prototype.toJSON = function (value) {
 };
 
 /**
- * @param {*} value
+ *
  */
-mugd.editor.IViewModel.prototype.toString = function (value) {
-};
-
-
+mugd.editor.IViewModel.prototype.saveModel = function(){};

@@ -6,7 +6,6 @@ goog.require('mugd.editor.AbstractViewModel');
 goog.require('goog.array');
 
 /**
- * @implements mugd.editor.IViewModel
  * @extends mugd.editor.AbstractViewModel
  * @constructor
  */
@@ -60,11 +59,3 @@ ko.extenders.arrayValue = function (target, createSubModel) {
   return target;
 };
 
-mugd.editor.ArrayViewModel.prototype.value = function () {
-};
-mugd.editor.ArrayViewModel.prototype.type = function () {
-};
-mugd.editor.ArrayViewModel.prototype.description = function () {
-};
-mugd.editor.ArrayViewModel.prototype.title = function () {
-};
