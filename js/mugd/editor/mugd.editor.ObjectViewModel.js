@@ -6,11 +6,14 @@ goog.require('mugd.editor.AbstractViewModel');
 goog.require('goog.object');
 
 /**
+ * @param {!Object} schema
+ * @param {!mugd.editor.LinkResolver} resolver
+ * @param getSubModel
  * @implements mugd.editor.IViewModel
  * @constructor
  */
-mugd.editor.ObjectViewModel = function (schema, getSubModel) {
-  goog.base(this, schema);
+mugd.editor.ObjectViewModel = function (schema, resolver, getSubModel) {
+  goog.base(this, schema, resolver);
 
   this['properties'] = ko.observableArray();
 

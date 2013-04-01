@@ -1,20 +1,48 @@
 {
-  "title": "Terrains",
+  "title": "Concepts",
   "description": "The stuff people walk on.",
-  "type": "array",
-  "items": {
-    "title": "Terrain",
-    "description": "Some sort of stuff to walk on.",
-    "type": "object",
-    "properties": {
-      "type": {
-        "title": "Unique id",
-        "type": "string"
-      },
-      "name": {
-        "title": "Name",
-        "description": "Visible name of terrain",
-        "type": "string"
+  "type": "object",
+  "properties": {
+    "terrain": {
+      "title": "Terrains",
+      "description": "The stuff people walk on.",
+      "type": "array",
+      "items": {
+        "title": "Terrain",
+        "description": "Some sort of stuff to walk on.",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Unique id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of terrain",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "improvement": {
+      "title": "Improvements",
+      "description": "Change things for the better",
+      "type": "array",
+      "items": {
+        "title": "Improvement",
+        "description": "A project that improves a tile",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Unique id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of project",
+            "type": "string"
+          }
+        }
       }
     }
   }

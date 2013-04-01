@@ -1,12 +1,15 @@
 goog.provide('mugd.editor.AbstractViewModel');
 
 goog.require('goog.json');
+goog.require('mugd.editor.LinkResolver');
 
 /**
+ * @param {!Object} schema
+ * @param {!mugd.editor.LinkResolver} resolver
  * @constructor
  * @implements mugd.editor.IViewModel
  */
-mugd.editor.AbstractViewModel = function (schema) {
+mugd.editor.AbstractViewModel = function (schema, resolver) {
   /**
    * @type {function(string=):string}
    */
@@ -24,6 +27,12 @@ mugd.editor.AbstractViewModel = function (schema) {
    *@type {function(string=):string}
    */
   this['fileName'] = ko.observable();
+
+  /**
+   *
+   * @type {!mugd.editor.LinkResolver}
+   */
+  this['resolver'] = resolver;
 };
 
 /**

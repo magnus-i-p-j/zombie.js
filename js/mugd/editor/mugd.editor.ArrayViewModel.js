@@ -6,11 +6,14 @@ goog.require('mugd.editor.AbstractViewModel');
 goog.require('goog.array');
 
 /**
+ * @param {!Object} schema
+ * @param {!mugd.editor.LinkResolver} resolver
+ * @param createSubModel
  * @extends mugd.editor.AbstractViewModel
  * @constructor
  */
-mugd.editor.ArrayViewModel = function (schema, createSubModel) {
-  goog.base(this, schema);
+mugd.editor.ArrayViewModel = function (schema, resolver, createSubModel) {
+  goog.base(this, schema, resolver);
 
   this._createSubModel = createSubModel;
   this['newItem'] = function () {

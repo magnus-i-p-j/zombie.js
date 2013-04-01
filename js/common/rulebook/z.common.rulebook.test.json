@@ -1,4 +1,4 @@
-[
+{"terrain": [
   {
     "type": "fenced_grass",
     "name": "Fenced grass"
@@ -11,4 +11,10 @@
     "type": "water",
     "name": "Water"
   }
+], "improvement": [
+  {
+    "type": "secure_grass",
+    "name": "Secure grass"
+  }
 ]
+}

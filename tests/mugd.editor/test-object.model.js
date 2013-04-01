@@ -17,8 +17,9 @@ TestCase("test mugd.editor object model", {
       }
     }
   },
-  setUp: function () {
-    var valid = tv4.validate(this.data, this.schema);
+  "test schema validates": function () {
+    var valid;
+    valid = tv4.validate(this.data, this.schema);
     if (!valid) {
       assert(JSON.stringify(tv4.error, null, 4), valid);
     }

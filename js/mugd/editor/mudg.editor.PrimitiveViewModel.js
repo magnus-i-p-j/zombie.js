@@ -6,11 +6,13 @@ goog.require('mugd.editor.AbstractViewModel');
 goog.require('goog.array');
 
 /**
+ * @param {!Object} schema
+ * @param {!mugd.editor.LinkResolver} resolver
  * @extends mugd.editor.AbstractViewModel
  * @constructor
  */
-mugd.editor.PrimitiveViewModel = function (schema) {
-  goog.base(this, schema);
+mugd.editor.PrimitiveViewModel = function (schema, resolver) {
+  goog.base(this, schema, resolver);
   /**
    * @type {function(string=):string}
    */
