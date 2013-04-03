@@ -20,11 +20,13 @@ mugd.editor.ObjectViewModel = function (schema, resolver, getSubModel) {
   var properties = {};
   goog.object.forEach(schema['properties'],
       function (value, key, allValues) {
-        properties[key] = getSubModel(value);
+        properties[key] = getSubModel(value, resolver);
         this['properties'].push(properties[key]);
       }, this
   );
   this['value'] = ko.observable(properties);
+
+  resolver.put(this, schema);
 };
 goog.inherits(mugd.editor.ObjectViewModel, mugd.editor.AbstractViewModel);
 

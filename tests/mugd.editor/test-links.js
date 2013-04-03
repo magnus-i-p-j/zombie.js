@@ -82,13 +82,10 @@ TestCase("test links", {
   },
   'test can fetch object by link': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
-    var expected = {
-      "type": "water",
-      "name": "Water"
-    };
+    var expected = viewModel.value()['terrain'].value()[2];
 
     var actual = viewModel.resolver.get('game://terrain/water');
 
-    assertEquals(expected, actual);
+    assertSame(expected, actual);
   }
 });

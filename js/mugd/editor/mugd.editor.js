@@ -8,7 +8,7 @@ goog.require('mugd.editor.LinkResolver');
 /**
  * @param {!Object} schema
  * @param {*} data
- * @return {mugd.editor.RootViewModel}
+ * @return {mugd.editor.IViewModel}
  */
 mugd.editor.getViewModel = function (schema, data) {
   var resolver = new mugd.editor.LinkResolver();
