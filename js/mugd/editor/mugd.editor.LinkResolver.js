@@ -1,6 +1,7 @@
 goog.provide('mugd.editor.LinkResolver');
 
 goog.require('goog.array');
+goog.require('mugd.editor.Link');
 
 /**
  * @constructor
@@ -14,10 +15,14 @@ mugd.editor.LinkResolver = function () {
  * @return {*}
  */
 mugd.editor.LinkResolver.prototype.get = function (uri) {
-  var pair = goog.array.find(this._selfLinks, function(item){
+  var link = goog.array.find(this._selfLinks, function (item) {
     return item.uri() === uri;
   });
-  return pair.model;
+  if (goog.isNull(link)) {
+    link = new mugd.editor.Link(uri);
+    this._selfLinks.push(link);
+  }
+  return link;
 };
 
 /**
@@ -25,18 +30,20 @@ mugd.editor.LinkResolver.prototype.get = function (uri) {
  * @param {!Object} schema
  */
 mugd.editor.LinkResolver.prototype.put = function (model, schema) {
-  if(schema['links']){
+  if (schema['links']) {
     var links = schema['links'];
-    if(links['rel'] === 'self'){
+    if (links['rel'] === 'self') {
       var uri = ko.computed(
-          function(){
-            if(model.value() && model.value()['type'].value()){
+          function () {
+            if (model.value() && model.value()['type'].value()) {
               return 'game://terrain/' + model.value()['type'].value();
             }
-            return '';
+            return 'test' + math.random();
           }
       );
-      this._selfLinks.push({uri:uri, model:model});
+      var link = this.get(uri());
+      link.model(model);
+      link.href(true);
     }
   }
 };

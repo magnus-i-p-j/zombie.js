@@ -22,6 +22,7 @@ mugd.editor.getViewModel = function (schema, data) {
  * @param {!Object} schema
  * @return {mugd.editor.IViewModel}
  * @private
+ * @param resolver
  */
 mugd.editor._getModel = function (schema, resolver) {
   if (mugd.editor.PrimitiveViewModel.isPrimitiveValue(schema)) {
@@ -32,7 +33,7 @@ mugd.editor._getModel = function (schema, resolver) {
   }
   if (mugd.editor.ArrayViewModel.isArrayValue(schema)) {
     return new mugd.editor.ArrayViewModel(schema, resolver, function () {
-      return mugd.editor._getModel(schema.items, resolver);
+      return mugd.editor._getModel(schema['items'], resolver);
     });
   }
   throw {'name': 'TypeMismatchException', 'reason': 'no such type supported', 'schema': schema};
