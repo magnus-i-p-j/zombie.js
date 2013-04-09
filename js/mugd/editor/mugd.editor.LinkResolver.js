@@ -7,7 +7,8 @@ goog.require('mugd.editor.Link');
  * @constructor
  */
 mugd.editor.LinkResolver = function () {
-  this._selfLinks = [];
+  this.links = [];
+  this.unresolvedLinks = {};
 };
 
 /**
@@ -15,13 +16,15 @@ mugd.editor.LinkResolver = function () {
  * @return {*}
  */
 mugd.editor.LinkResolver.prototype.get = function (uri) {
-  var link = goog.array.find(this._selfLinks, function (item) {
-    return item.uri() === uri;
+  var link = goog.array.find(this.links, function (item) {
+    return item.isComplete() && uri === item.toUri();
   });
-  if (goog.isNull(link)) {
+
+  if(goog.isNull(link)){
     link = new mugd.editor.Link(uri);
-    this._selfLinks.push(link);
+    this.unresolvedLinks[uri] = link;
   }
+
   return link;
 };
 
@@ -33,18 +36,24 @@ mugd.editor.LinkResolver.prototype.put = function (model, schema) {
   if (schema['links']) {
     var links = schema['links'];
     if (links['rel'] === 'self') {
-      var uri = ko.computed(
-          function () {
-            if (model.value() && model.value()['type'].value()) {
-              return 'game://terrain/' + model.value()['type'].value();
-            }
-            return 'test' + math.random();
-          }
-      );
-      var link = this.get(uri());
-      link.model(model);
-      link.href(true);
+
+      var link = new mugd.editor.Link(links['href'], model);
+      link.complete.subscribe(function(){
+        this.onLinkCompleted(link);
+      }, this);
+      this.links.push(link);
+      //console.log('Links =' + this.links);
     }
   }
 };
 
+mugd.editor.LinkResolver.prototype.onLinkCompleted = function(link){
+  //This is the link that caused the event to be triggered.
+  if(link.isComplete()){
+    if(this.unresolvedLinks[link.toUri()]){ //TODO: manage many unresolved links to the same object!!!
+      var unresolved = this.unresolvedLinks[link.toUri()];
+      unresolved.model(link.model());
+      delete this.unresolvedLinks[link.toUri()];
+    }
+  }
+};

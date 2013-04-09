@@ -112,7 +112,7 @@ TestCase("test links", {
     var first = viewModel.resolver.get('game://terrain/water');
     var second = viewModel.resolver.get('game://terrain/water');
 
-    assertSame(first, second);
+    assertSame(first.model(), second.model());
   },
   'test can fetch uri in advance': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, {});
