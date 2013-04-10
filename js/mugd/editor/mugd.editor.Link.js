@@ -1,26 +1,50 @@
 goog.provide('mugd.editor.Link');
 
+/**
+ * @param {string} href
+ * @param {mugd.editor.IViewModel=} model
+ * @constructor
+ */
 mugd.editor.Link = function(href, model){
   this.href = href;
+  /**
+   * @type {function(mugd.editor.IViewModel=):mugd.editor.IViewModel}
+   */
   this.model = ko.observable(model);
+
+  /**
+   * @type {*}
+   * @private
+   */
   this._parts = ko.observableArray();
+
+  /**
+   * @type {function(string=):string}
+   */
   this.uri = ko.computed(function(){
     if(!(this.model() && this.model().value())){
       return this.href;
     }
     else{
-      //console.log('Value = ' + JSON.stringify(this.model().value()));
-      //if(!this._parts()[0]){ //TODO: Throttle when to parse the href?
-        this.parseHref(this.href, this.model().value());
-      //}
-      return this.toUri();
+      this._parseHref(this.href, this.model().value());
+      return this._toUri();
     }
   }, this);
-  this.complete = ko.computed(this.isComplete, this);
+
+  /**
+   * @type {function(boolean=):boolean}
+   */
+  this.complete = ko.computed(this._isComplete, this);
+
 };
 
-mugd.editor.Link.prototype.parseHref = function(href, value){
-  var regex = /({.*?})/;
+/**
+ * @param {string} href
+ * @param {*} value
+ * @private
+ */
+mugd.editor.Link.prototype._parseHref = function(href, value){
+  var regex = /({[\w]*})/;
   var parts = href.split(regex);
 
   for(var i = 0; i < parts.length; ++i){
@@ -31,16 +55,19 @@ mugd.editor.Link.prototype.parseHref = function(href, value){
       }
     }
   }
-  //console.log('Parts = ' + parts + '; uri = ' + this.toUri());
 
   this._parts(parts);
   this._parts.valueHasMutated();
 };
 
-mugd.editor.Link.prototype.toUri = function(){
+/**
+ * @returns {string}
+ * @private
+ */
+mugd.editor.Link.prototype._toUri = function(){
   var uri = [];
   for(var i = 0; i < this._parts().length; ++i){
-    if( typeof(this._parts()[i]) === 'function'){
+    if(ko.isObservable(this._parts()[i])){
       uri.push(this._parts()[i]());
     }
     else{
@@ -50,12 +77,16 @@ mugd.editor.Link.prototype.toUri = function(){
   return uri.join('');
 };
 
-mugd.editor.Link.prototype.isComplete = function(){
+/**
+ * @returns {boolean}
+ * @private
+ */
+mugd.editor.Link.prototype._isComplete = function(){
   var complete = false;
   if(this._parts()[0]){
     complete = true;
     for(var i = 0; i < this._parts().length; ++i){
-      if(complete && typeof(this._parts()[i]) === 'function'){
+      if(complete && ko.isObservable(this._parts()[i])){
         complete = !!this._parts()[i]();
       }
     }

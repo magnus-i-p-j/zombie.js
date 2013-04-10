@@ -7,22 +7,42 @@ goog.require('mugd.editor.Link');
  * @constructor
  */
 mugd.editor.LinkResolver = function () {
-  this.links = [];
-  this.unresolvedLinks = {};
+
+  /**
+   * @private
+   * @type {Array.<!mugd.editor.Link>}
+   */
+  this._links = [];
+
+  /**
+   * @private
+   * @type {Object.<string,!mugd.editor.Link>}
+   */
+  this._unresolvedLinks = {};
+
+  /**
+   * @type {function(number=):number}
+   */
+  this.numUnresolved = ko.observable(0);
 };
 
 /**
  * @param {string} uri
- * @return {*}
+ * @return {!mugd.editor.Link}
  */
 mugd.editor.LinkResolver.prototype.get = function (uri) {
-  var link = goog.array.find(this.links, function (item) {
-    return item.isComplete() && uri === item.toUri();
+  var link = goog.array.find(this._links, function (item) {
+    return item.uri() && uri === item.uri();
   });
 
-  if(goog.isNull(link)){
+  if(!goog.isDefAndNotNull(link)){
+    link = this._unresolvedLinks[uri];
+  }
+
+  if(!goog.isDefAndNotNull(link)){
     link = new mugd.editor.Link(uri);
-    this.unresolvedLinks[uri] = link;
+    this._unresolvedLinks[uri] = link;
+    this.numUnresolved(this.numUnresolved()+1);
   }
 
   return link;
@@ -36,24 +56,26 @@ mugd.editor.LinkResolver.prototype.put = function (model, schema) {
   if (schema['links']) {
     var links = schema['links'];
     if (links['rel'] === 'self') {
-
       var link = new mugd.editor.Link(links['href'], model);
       link.complete.subscribe(function(){
-        this.onLinkCompleted(link);
+        this._onLinkCompleted(link);
       }, this);
-      this.links.push(link);
-      //console.log('Links =' + this.links);
+      this._links.push(link);
     }
   }
 };
 
-mugd.editor.LinkResolver.prototype.onLinkCompleted = function(link){
-  //This is the link that caused the event to be triggered.
-  if(link.isComplete()){
-    if(this.unresolvedLinks[link.toUri()]){ //TODO: manage many unresolved links to the same object!!!
-      var unresolved = this.unresolvedLinks[link.toUri()];
+/**
+ * @param {!mugd.editor.Link} link
+ * @private
+ */
+mugd.editor.LinkResolver.prototype._onLinkCompleted = function(link){
+  if(link.complete()){
+    if(this._unresolvedLinks[link.uri()]){
+      var unresolved = this._unresolvedLinks[link.uri()];
       unresolved.model(link.model());
-      delete this.unresolvedLinks[link.toUri()];
+      delete this._unresolvedLinks[link.uri()];
+      this.numUnresolved(this.numUnresolved()-1);
     }
   }
 };

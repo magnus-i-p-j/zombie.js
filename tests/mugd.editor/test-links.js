@@ -112,6 +112,7 @@ TestCase("test links", {
     var first = viewModel.resolver.get('game://terrain/water');
     var second = viewModel.resolver.get('game://terrain/water');
 
+    assertSame(first.uri(), second.uri());
     assertSame(first.model(), second.model());
   },
   'test can fetch uri in advance': function () {
@@ -122,5 +123,26 @@ TestCase("test links", {
     var expected = viewModel.value()['terrain'].value()[2];
 
     assertSame(expected, actual.model());
+  },
+  'test can fetch multiple times in advance' : function() {
+    var viewModel = mugd.editor.getViewModel(this.schema, {});
+
+    var first = viewModel.resolver.get('game://terrain/water');
+    var second = viewModel.resolver.get('game://terrain/water');
+
+    viewModel.setValue(this.data);
+
+    assertSame(first.uri(), second.uri());
+    assertSame(first.model(), second.model());
+  },
+  'test that resolver reports if any links are still unresolved' : function(){
+    var viewModel = mugd.editor.getViewModel(this.schema, {});
+    var actual = viewModel.resolver.get('game://terrain/water');
+
+    assertSame(1, viewModel.resolver.numUnresolved());
+
+    viewModel.setValue(this.data);
+
+    assertSame(0, viewModel.resolver.numUnresolved());
   }
 });
