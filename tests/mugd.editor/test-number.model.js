@@ -28,7 +28,7 @@ TestCase("test mugd.editor creates correct number model", {
   'test creates Model with type number': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
-    assertSame(mugd.editor.constants.ValueType.NUMBER, viewModel.type());
+    assertSame(mugd.editor.constants.ValueType.NUMBER, viewModel.type);
   },
   'test creates Model with correct number ': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);

@@ -18,7 +18,7 @@ mugd.editor.PrimitiveViewModel = function (schema, resolver) {
    */
   this['value'] = ko.observable();
 
-  var validateValueCallback = mugd.editor.PrimitiveViewModel.validateValue[this['type']()];
+  var validateValueCallback = mugd.editor.PrimitiveViewModel.validateValue[this['type']];
   this['value'].subscribe(validateValueCallback);
 };
 

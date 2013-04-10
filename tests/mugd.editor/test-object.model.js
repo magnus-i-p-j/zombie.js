@@ -38,7 +38,7 @@ TestCase("test mugd.editor object model", {
   'test creates Model with type object': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
-    assertSame(mugd.editor.constants.ValueType.OBJECT, viewModel.type());
+    assertSame(mugd.editor.constants.ValueType.OBJECT, viewModel.type);
   },
   'test can fetch name from model': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
@@ -59,7 +59,7 @@ TestCase("test mugd.editor object model", {
               if (value.title !== model.title()) {
                 return false;
               }
-              if (value.type !== model.type()) {
+              if (value.type !== model.type) {
                 return false;
               }
               return true;

@@ -3,6 +3,7 @@ goog.provide('mugd.editor');
 goog.require('mugd.editor.PrimitiveViewModel');
 goog.require('mugd.editor.ObjectViewModel');
 goog.require('mugd.editor.ArrayViewModel');
+goog.require('mugd.editor.FullLinkViewModel');
 goog.require('mugd.editor.LinkResolver');
 
 /**
@@ -25,6 +26,9 @@ mugd.editor.getViewModel = function (schema, data) {
  * @param resolver
  */
 mugd.editor._getModel = function (schema, resolver) {
+  if (mugd.editor.FullLinkViewModel.isFullLinkValue(schema)){
+    return new mugd.editor.FullLinkViewModel(schema, resolver);
+  }
   if (mugd.editor.PrimitiveViewModel.isPrimitiveValue(schema)) {
     return new mugd.editor.PrimitiveViewModel(schema, resolver);
   }

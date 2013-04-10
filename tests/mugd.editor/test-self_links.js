@@ -1,4 +1,4 @@
-TestCase("test links", {
+TestCase("test self links", {
   data: {
     "terrain": [
       {

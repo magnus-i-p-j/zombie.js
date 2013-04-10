@@ -28,7 +28,7 @@ TestCase("test mugd.editor creates correct string model", {
   'test creates Model with type string': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
-    assertSame(this.schema['type'], viewModel.type());
+    assertSame(this.schema['type'], viewModel.type);
   },
   'test creates Model with correct string data': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);

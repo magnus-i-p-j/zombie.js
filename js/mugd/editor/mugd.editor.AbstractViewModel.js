@@ -19,9 +19,9 @@ mugd.editor.AbstractViewModel = function (schema, resolver) {
    */
   this['description'] = ko.observable(schema['description']);
   /**
-   * @type {function(string=):string}
+   * @type {string}
    */
-  this['type'] = ko.observable(schema['type']);
+  this['type'] = schema['type'];
   /**
    *
    *@type {function(string=):string}
