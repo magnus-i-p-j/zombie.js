@@ -2,6 +2,7 @@ goog.provide('mugd.editor.LinkResolver');
 
 goog.require('goog.array');
 goog.require('mugd.editor.Link');
+goog.require('mugd.editor.Linker');
 
 /**
  * @constructor
@@ -16,7 +17,7 @@ mugd.editor.LinkResolver = function () {
 
   /**
    * @private
-   * @type {Object.<string,!mugd.editor.Link>}
+   * @type {Object.<string,!mugd.editor.Uri>}
    */
   this._unresolvedLinks = {};
 
@@ -35,14 +36,14 @@ mugd.editor.LinkResolver.prototype.get = function (uri) {
     return item.uri() && uri === item.uri();
   });
 
-  if(!goog.isDefAndNotNull(link)){
+  if (!goog.isDefAndNotNull(link)) {
     link = this._unresolvedLinks[uri];
   }
 
-  if(!goog.isDefAndNotNull(link)){
+  if (!goog.isDefAndNotNull(link)) {
     link = new mugd.editor.Link(uri);
     this._unresolvedLinks[uri] = link;
-    this.numUnresolved(this.numUnresolved()+1);
+    this.numUnresolved(this.numUnresolved() + 1);
   }
 
   return link;
@@ -57,7 +58,7 @@ mugd.editor.LinkResolver.prototype.put = function (model, schema) {
     var links = schema['links'];
     if (links['rel'] === 'self') {
       var link = new mugd.editor.Link(links['href'], model);
-      link.complete.subscribe(function(){
+      link.complete.subscribe(function () {
         this._onLinkCompleted(link);
       }, this);
       this._links.push(link);
@@ -69,13 +70,13 @@ mugd.editor.LinkResolver.prototype.put = function (model, schema) {
  * @param {!mugd.editor.Link} link
  * @private
  */
-mugd.editor.LinkResolver.prototype._onLinkCompleted = function(link){
-  if(link.complete()){
-    if(this._unresolvedLinks[link.uri()]){
+mugd.editor.LinkResolver.prototype._onLinkCompleted = function (link) {
+  if (link.complete()) {
+    if (this._unresolvedLinks[link.uri()]) {
       var unresolved = this._unresolvedLinks[link.uri()];
       unresolved.model(link.model());
       delete this._unresolvedLinks[link.uri()];
-      this.numUnresolved(this.numUnresolved()-1);
+      this.numUnresolved(this.numUnresolved() - 1);
     }
   }
 };
