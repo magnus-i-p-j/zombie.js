@@ -16,7 +16,7 @@ mugd.editor.LinkResolver = function () {
 
   /**
    * @private
-   * @type {Object.<string,!mugd.editor.Uri>}
+   * @type {Object.<string,Array.<function(!mugd.editor.IViewModel)>}
    */
   this._unresolvedLinks = {};
 
@@ -28,24 +28,25 @@ mugd.editor.LinkResolver = function () {
 
 /**
  * @param {string} uri
- * @return {!mugd.editor.Link}
+ * @param {function(!mugd.editor.IViewModel)} callback
  */
-mugd.editor.LinkResolver.prototype.get = function (uri) {
+mugd.editor.LinkResolver.prototype.get = function (uri, callback) {
+
   var link = goog.array.find(this._links, function (item) {
-    return item.uri() && uri === item.uri();
+    return uri === item.uri();
   });
 
-  if (!goog.isDefAndNotNull(link)) {
-    link = this._unresolvedLinks[uri];
+  if (goog.isDefAndNotNull(link)) {
+    callback(link);
   }
-
-  if (!goog.isDefAndNotNull(link)) {
-    link = new mugd.editor.Link(uri);
-    this._unresolvedLinks[uri] = link;
+  else{
+    if(!this._unresolvedLinks[uri]){
+      this._unresolvedLinks[uri] = [];
+    }
     this.numUnresolved(this.numUnresolved() + 1);
+    this._unresolvedLinks[uri].push(callback);
   }
 
-  return link;
 };
 
 /**
@@ -56,9 +57,10 @@ mugd.editor.LinkResolver.prototype.put = function (model, schema) {
   if (schema['links']) {
     var links = schema['links'];
     if (links['rel'] === 'self') {
-      var link = new mugd.editor.Link(links['href'], model);
-      link.complete.subscribe(function () {
-        this._onLinkCompleted(link);
+      var link = new mugd.editor.Link(links['href']);
+      link.model(model);
+      link.uri.subscribe(function (uri) {
+        this._onUriChanged(link, uri);
       }, this);
       this._links.push(link);
     }
@@ -67,15 +69,16 @@ mugd.editor.LinkResolver.prototype.put = function (model, schema) {
 
 /**
  * @param {!mugd.editor.Link} link
+ * @param {string} uri
  * @private
  */
-mugd.editor.LinkResolver.prototype._onLinkCompleted = function (link) {
-  if (link.complete()) {
-    if (this._unresolvedLinks[link.uri()]) {
-      var unresolved = this._unresolvedLinks[link.uri()];
-      unresolved.model(link.model());
-      delete this._unresolvedLinks[link.uri()];
-      this.numUnresolved(this.numUnresolved() - 1);
-    }
+mugd.editor.LinkResolver.prototype._onUriChanged = function (link, uri) {
+  if (this._unresolvedLinks[uri]) {
+    var unresolved = this._unresolvedLinks[uri];
+    goog.array.forEach(unresolved, function(callback){
+      callback(link.model());
+    });
+    delete this._unresolvedLinks[uri];
+    this.numUnresolved(this.numUnresolved() - 1);
   }
 };

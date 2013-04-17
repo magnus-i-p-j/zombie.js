@@ -94,10 +94,10 @@ TestCase("test self links", {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
     var expected = viewModel.value()['terrain'].value()[2];
 
-    var actual = viewModel.resolver.get('game://terrain/water');
+    var actual = ko.observable();
+    viewModel.resolver.get('game://terrain/water', actual);
 
-    assertSame(expected, actual.model());
-    assertSame('game://terrain/water', actual.uri());
+    assertSame(expected, actual());
   },
   'test can fetch non-existing uri': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, {});
