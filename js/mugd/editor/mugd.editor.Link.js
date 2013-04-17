@@ -2,62 +2,47 @@ goog.provide('mugd.editor.Link');
 
 /**
  * @param {string} href
- * @param {mugd.editor.IViewModel=} model
  * @constructor
  */
-mugd.editor.Link = function(href, model){
+mugd.editor.Link = function(href){
   this.href = href;
+
   /**
    * @type {function(mugd.editor.IViewModel=):mugd.editor.IViewModel}
    */
-  this.model = ko.observable(model);
+  this.model = ko.observable();
 
+  var tokens = href.match(/([^{]+)|(\{[^{]+})/g);
   /**
    * @type {*}
    * @private
    */
-  this._parts = ko.observableArray();
+  this._parts = goog.array.map(
+      tokens,
+      function (part) {
+        return part[0] === '{' ? this._createValueAccessor(part.slice(1, -1)) : part;
+      },
+      this
+  );
 
   /**
    * @type {function(string=):string}
    */
-  this.uri = ko.computed(function(){
-    if(!(this.model() && this.model().value())){
-      return this.href;
-    }
-    else{
-      this._parseHref(this.href, this.model().value());
-      return this._toUri();
-    }
-  }, this);
-
-  /**
-   * @type {function(boolean=):boolean}
-   */
-  this.complete = ko.computed(this._isComplete, this);
-
+  this.uri = ko.computed(this._toUri, this);
 };
 
-/**
- * @param {string} href
- * @param {*} value
- * @private
- */
-mugd.editor.Link.prototype._parseHref = function(href, value){
-  var regex = /({[\w]*})/;
-  var parts = href.split(regex);
+mugd.editor.Link.prototype._createValueAccessor = function (field) {
 
-  for(var i = 0; i < parts.length; ++i){
-    if(parts[i].match(regex)){
-      var prop = value[parts[i].slice(1,-1)];
-      if(prop){
-        parts[i] = prop.value;
-      }
+  var model = this.model;
+
+  return function () {
+    var value;
+    if (model()) {
+       value = model()[field]();
     }
-  }
+    return value;
+  };
 
-  this._parts(parts);
-  this._parts.valueHasMutated();
 };
 
 /**
@@ -66,30 +51,25 @@ mugd.editor.Link.prototype._parseHref = function(href, value){
  */
 mugd.editor.Link.prototype._toUri = function(){
   var uri = [];
-  for(var i = 0; i < this._parts().length; ++i){
-    if(ko.isObservable(this._parts()[i])){
-      uri.push(this._parts()[i]());
-    }
-    else{
-      uri.push(this._parts()[i]);
-    }
-  }
-  return uri.join('');
+
+  var i = 0;
+  var value;
+  do{
+    value = goog.isFunction(this._parts[i]) ? this._parts[i]() : this._parts[i];
+    uri.push(value);
+    i += 1;
+  }while(i < this._parts.length && goog.isDef(value));
+
+  return goog.isDef(value) ? uri.join('') : this._getGuidUri();
 };
 
 /**
- * @returns {boolean}
+ * @returns {string}
  * @private
  */
-mugd.editor.Link.prototype._isComplete = function(){
-  var complete = false;
-  if(this._parts()[0]){
-    complete = true;
-    for(var i = 0; i < this._parts().length; ++i){
-      if(complete && ko.isObservable(this._parts()[i])){
-        complete = !!this._parts()[i]();
-      }
-    }
+mugd.editor.Link.prototype._getGuidUri = function(){
+  if(!this._guidUri){
+    this._guidUri = mugd.utils.getGuid('guid:', '//');
   }
-  return complete;
+  return this._guidUri;
 };

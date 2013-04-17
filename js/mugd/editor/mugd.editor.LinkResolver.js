@@ -2,7 +2,6 @@ goog.provide('mugd.editor.LinkResolver');
 
 goog.require('goog.array');
 goog.require('mugd.editor.Link');
-goog.require('mugd.editor.Linker');
 
 /**
  * @constructor

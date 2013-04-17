@@ -5,7 +5,7 @@ TestCase("test mugd.editor.Link", {
       type: ko.observable('grass')
     };
 
-    var link = new mugd.editor.Linker(href);
+    var link = new mugd.editor.Link(href);
 
     console.log(link.uri());
 
