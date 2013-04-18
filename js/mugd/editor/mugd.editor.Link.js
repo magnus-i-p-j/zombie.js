@@ -37,9 +37,7 @@ mugd.editor.Link.prototype._createValueAccessor = function (field) {
 
   return function () {
     var value;
-    console.log(field);
     if (model()) {
-      console.log(model().value()[field]);
       value = model().value()[field].value();
     }
     return value;

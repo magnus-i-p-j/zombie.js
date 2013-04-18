@@ -37,7 +37,7 @@ mugd.editor.LinkResolver.prototype.get = function (uri, callback) {
   });
 
   if (goog.isDefAndNotNull(link)) {
-    callback(link);
+    callback(link.model());
   }
   else{
     if(!this._unresolvedLinks[uri]){

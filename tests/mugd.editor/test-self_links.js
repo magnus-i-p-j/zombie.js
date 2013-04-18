@@ -102,42 +102,40 @@ TestCase("test self links", {
   'test can fetch non-existing uri': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, {});
 
-    var actual = viewModel.resolver.get('game://terrain/water');
+    var called = false;
+    var callback = function(){
+      called = true;
+    };
+    viewModel.resolver.get('game://terrain/water', callback);
 
-    assertSame('game://terrain/water', actual.uri());
-  },
-  'test can fetch non-existing uri twice': function () {
-    var viewModel = mugd.editor.getViewModel(this.schema, {});
-
-    var first = viewModel.resolver.get('game://terrain/water');
-    var second = viewModel.resolver.get('game://terrain/water');
-
-    assertSame(first.uri(), second.uri());
-    assertSame(first.model(), second.model());
+    assertFalse(called);
   },
   'test can fetch uri in advance': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, {});
-    var actual = viewModel.resolver.get('game://terrain/water');
+    var actual = ko.observable();
+    viewModel.resolver.get('game://terrain/water', actual);
 
     viewModel.setValue(this.data);
     var expected = viewModel.value()['terrain'].value()[2];
 
-    assertSame(expected, actual.model());
+    assertSame(expected, actual());
   },
   'test can fetch multiple times in advance' : function() {
     var viewModel = mugd.editor.getViewModel(this.schema, {});
 
-    var first = viewModel.resolver.get('game://terrain/water');
-    var second = viewModel.resolver.get('game://terrain/water');
+    var first = ko.observable();
+    viewModel.resolver.get('game://terrain/water', first);
+    var second = ko.observable();
+    viewModel.resolver.get('game://terrain/water', second);
 
     viewModel.setValue(this.data);
 
-    assertSame(first.uri(), second.uri());
-    assertSame(first.model(), second.model());
+    assertSame(first(), second());
   },
   'test that resolver reports if any links are still unresolved' : function(){
     var viewModel = mugd.editor.getViewModel(this.schema, {});
-    var actual = viewModel.resolver.get('game://terrain/water');
+    var actual = ko.observable();
+    viewModel.resolver.get('game://terrain/water', actual);
 
     assertSame(1, viewModel.resolver.numUnresolved());
 

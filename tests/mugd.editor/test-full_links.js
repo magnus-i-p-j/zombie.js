@@ -93,11 +93,11 @@ TestCase("test full links", {
   'test basic full link': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
-    var expected = viewModel.resolver.get('game://terrain/grass');
+    var expected = ko.observable();
+    viewModel.resolver.get('game://terrain/grass', expected);
 
     var actual = viewModel.value()['improvement'].value()[0].value()['required_terrain'];
 
-    assertSame(expected, actual.model());
-    assertSame('game://terrain/water', actual.uri());
+    assertSame(expected().value()['type'].value(), actual.value());
   }
 });
