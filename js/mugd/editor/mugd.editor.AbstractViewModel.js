@@ -45,22 +45,22 @@ mugd.editor.AbstractViewModel.prototype.saveModel = function () {
 };
 
 mugd.editor.AbstractViewModel.prototype.setValue = function () {
-  throw {'name': 'NotImplementedException', 'methodName': 'setValue'};
+  throw {'name': 'NotImplementedException', 'message': 'setValue'};
 };
 mugd.editor.AbstractViewModel.prototype.toJSON = function () {
-  throw {'name': 'NotImplementedException', 'methodName': 'toJSON'};
+  throw {'name': 'NotImplementedException', 'message': 'toJSON'};
 };
 mugd.editor.AbstractViewModel.prototype.value = function () {
-  throw {'name': 'NotImplementedException', 'methodName': 'value'};
+  throw {'name': 'NotImplementedException', 'message': 'value'};
 };
 
 //Just so the IDE stops whining.
 mugd.editor.AbstractViewModel.prototype.title = function () {
-  throw {'name': 'NotImplementedException', 'methodName': 'title'};
+  throw {'name': 'NotImplementedException', 'message': 'title'};
 };
 mugd.editor.AbstractViewModel.prototype.description = function () {
-  throw {'name': 'NotImplementedException', 'methodName': 'description'};
+  throw {'name': 'NotImplementedException', 'message': 'description'};
 };
 mugd.editor.AbstractViewModel.prototype.type = function () {
-  throw {'name': 'NotImplementedException', 'methodName': 'type'};
+  throw {'name': 'NotImplementedException', 'message': 'type'};
 };

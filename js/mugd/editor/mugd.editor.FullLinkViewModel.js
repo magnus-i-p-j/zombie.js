@@ -1,6 +1,6 @@
 goog.provide('mugd.editor.FullLinkViewModel');
 
-goog.require('mugd.editor.AbstractViewModel');
+goog.require('mugd.editor.PrimitiveViewModel');
 
 /**
  * @param {!Object} schema
@@ -10,10 +10,10 @@ goog.require('mugd.editor.AbstractViewModel');
  */
 mugd.editor.FullLinkViewModel = function(schema, resolver){
   goog.base(this, schema, resolver);
-
-
+  this.options = ko.observableArray();
+  resolver.select(schema, this.options);
 };
-goog.inherits(mugd.editor.FullLinkViewModel, mugd.editor.AbstractViewModel);
+goog.inherits(mugd.editor.FullLinkViewModel, mugd.editor.PrimitiveViewModel);
 
 /**
  * @param {Object} schema
