@@ -1,21 +1,43 @@
 TestCase("test mugd.editor.Link", {
-  'test uri updates when model changes': function () {
+  setUp: function () {
     var href = 'game://terrain/{type}';
     var model = {
-      value : ko.observable()
+      value: ko.observable()
     };
-    model.value({
-      type : ko.observable()
-    });
     model.value(
-        {type: { value: ko.observable('grass')}
-    });
+        {
+          type: {
+            value: ko.observable('grass')
+          }
+        }
+    );
+    this.href = href;
+    this.model = model;
+    this.link = new mugd.editor.Link(href);
+    this.link.model(this.model);
+  },
+  'test uri updates when model changes': function () {
 
-    var link = new mugd.editor.Link(href);
+    assertSame('game://terrain/grass', this.link.uri());
 
-    link.model(model);
-    assertSame('game://terrain/grass', link.uri());
-    link.model().value()['type'].value('water');
-    assertSame('game://terrain/water', link.uri());
+    this.link.model().value()['type'].value('water');
+    assertSame('game://terrain/water', this.link.uri());
+  },
+  'test model changed when updating uri': function () {
+
+    this.link.uri('game://terrain/water');
+
+    var actual = this.link.model().value()['type'].value();
+
+    assertSame('water', actual);
+  },
+  'test exception when uri cannot be parsed': function () {
+    var link = this.link;
+    assertException(function () {
+      link.uri('game://terrain/');
+    }, 'CannotParseUri');
+    assertException(function () {
+      link.uri('game://project/grass');
+    }, 'CannotParseUri');
   }
 });
