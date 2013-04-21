@@ -51,6 +51,12 @@ mugd.editor.ObjectViewModel.isObjectValue = function (schema) {
   return schema.type === mugd.editor.constants.ValueType.OBJECT;
 };
 
+mugd.editor.ObjectViewModel.prototype.disposeInternal = function () {
+  goog.object.forEach(this.value(), function (model) {
+    model.dispose();
+  })
+};
+
 mugd.editor.ObjectViewModel.prototype.value = function (value) {
 };
 mugd.editor.ObjectViewModel.prototype.title = function () {

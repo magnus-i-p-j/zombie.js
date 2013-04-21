@@ -40,6 +40,27 @@ TestCase("test mugd.editor array model", {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
     assertEquals(this.data, viewModel.toJSON());
-  }
+  },
+  'test array disposes all children when disposed': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+    var children = [];
+    goog.array.map(viewModel.value(), function (model) {
+      children.push(model);
+    });
 
+    viewModel.dispose();
+
+    goog.array.forEach(children, function (child) {
+      assertTrue(child.isDisposed())
+    }, this);
+  },
+  'test array removes child when child disposed': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    var dyingChild = viewModel.value()[1];
+
+    dyingChild.dispose();
+
+    assertFalse(goog.array.contains(viewModel.value(), dyingChild));
+  }
 });

@@ -1,5 +1,6 @@
 goog.provide('mugd.editor.AbstractViewModel');
 
+goog.require('goog.Disposable');
 goog.require('goog.json');
 goog.require('mugd.editor.LinkResolver');
 
@@ -8,8 +9,10 @@ goog.require('mugd.editor.LinkResolver');
  * @param {!mugd.editor.LinkResolver} resolver
  * @constructor
  * @implements mugd.editor.IViewModel
+ * @extends goog.Disposable
  */
 mugd.editor.AbstractViewModel = function (schema, resolver) {
+  goog.base(this);
   /**
    * @type {function(string=):string}
    */
@@ -35,9 +38,8 @@ mugd.editor.AbstractViewModel = function (schema, resolver) {
   this['resolver'] = resolver;
 };
 
-/**
- *
- */
+goog.inherits(mugd.editor.AbstractViewModel, goog.Disposable);
+
 mugd.editor.AbstractViewModel.prototype.saveModel = function () {
   var json = JSON.stringify(this);
   var blob = new Blob([json], {type: 'data:application/json;charset=utf-8'});

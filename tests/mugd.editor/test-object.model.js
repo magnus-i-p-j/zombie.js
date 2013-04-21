@@ -127,5 +127,18 @@ TestCase("test mugd.editor nested object model", {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
     assertEquals(this.data, viewModel.toJSON());
+  },
+  'test object disposes all children when disposed': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+    var children = [];
+    children.push(viewModel.value()['firstname']);
+    children.push(viewModel.value()['age']);
+    children.push(viewModel.value()['buddy']);
+
+    viewModel.dispose();
+
+    goog.array.forEach(children, function (child) {
+      assertTrue(child.isDisposed())
+    }, this);
   }
 });

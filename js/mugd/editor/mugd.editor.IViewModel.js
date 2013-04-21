@@ -2,6 +2,7 @@ goog.provide('mugd.editor.IViewModel');
 
 /**
  * @interface
+ * @extends goog.Disposable.IDisposable
  */
 mugd.editor.IViewModel = function () {
 };
@@ -51,4 +52,9 @@ mugd.editor.IViewModel.prototype.toJSON = function (value) {
  */
 mugd.editor.IViewModel.prototype.saveModel = function () {
 };
+
+/**
+ * @type {mugd.editor.LinkResolver}
+ */
+mugd.editor.IViewModel.prototype.resolver;
 
