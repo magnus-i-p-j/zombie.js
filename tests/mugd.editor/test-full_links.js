@@ -101,19 +101,19 @@ TestCase("test full links", {
     assertTrue(actual instanceof mugd.editor.FullLinkViewModel);
     assertSame(expected().value()['type'].value(), actual.value());
   },
-  'test basic options' : function() {
+  'test basic options': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
     var improvement = viewModel.value()['improvement'].value()[0];
     var options = improvement.value()['required_terrain'].options();
 
     assertEquals(this.data.terrain.length, options.length);
-    for(var i = 0; i < options.length; ++i){
-      assertSame(this.data.terrain[i].type, options[i].value()['type'].value() );
-      assertSame(this.data.terrain[i].name, options[i].value()['name'].value() );
+    for (var i = 0; i < options.length; ++i) {
+      assertSame(this.data.terrain[i].type, options[i].value()['type'].value());
+      assertSame(this.data.terrain[i].name, options[i].value()['name'].value());
     }
   },
-  'test that options is updated when an uri is changed' : function() {
+  'test that options is updated when an uri is changed': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, {});
     viewModel.setValue(this.data);
 
@@ -126,11 +126,11 @@ TestCase("test full links", {
 
     assertEquals(this.data.terrain.length, options.length);
 
-    var actual = goog.array.find(options, function(option){
+    var actual = goog.array.find(options, function (option) {
       var type = option.value()['type'].value();
-      return type === 'grass' ||  type === 'safe_grass';
+      return type === 'grass' || type === 'safe_grass';
     });
 
-    assertSame(actual, expected);
+    assertSame(actual.value(), expected);
   }
 });

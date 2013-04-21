@@ -42,8 +42,8 @@ mugd.editor.LinkResolver.prototype.get = function (uri, callback) {
   if (goog.isDefAndNotNull(link)) {
     callback(link.model());
   }
-  else{
-    if(!this._unresolvedLinks[uri]){
+  else {
+    if (!this._unresolvedLinks[uri]) {
       this._unresolvedLinks[uri] = [];
     }
     this.numUnresolved(this.numUnresolved() + 1);
@@ -52,24 +52,20 @@ mugd.editor.LinkResolver.prototype.get = function (uri, callback) {
 
 };
 
-mugd.editor.LinkResolver.prototype.select = function (schema, options) {
-  if (schema['links']) {
-    var links = schema['links'];
-    if (links['rel'] === 'full') {
-      var href = links['href'];
-      var regex = new RegExp(href.replace("{@}","(.*[^/])"));
-      if(!this._fullLinks[regex]){
-        this._fullLinks[regex] = [];
-      }
-
-      goog.array.forEach(this._links, function(link){
-        if(regex.test(link.uri())){
-          options.push(link.model());
+mugd.editor.LinkResolver.prototype.select = function (schema) {
+  if (schema['links']['rel'] === 'full') {
+    var href = schema['links']['href'];
+    if (!this._fullLinks[href]) {
+      this._fullLinks[href] = ko.observableArray();
+      var regex = new RegExp(href.replace("{@}", "(.*[^/])"));
+      goog.array.forEach(this._links, function (link) {
+        if (regex.test(link.uri())) {
+          this._fullLinks[href].push(link.model());
         }
-      });
-
-      this._fullLinks[regex].push(options);
+      }, this);
     }
+
+    return this._fullLinks[href];
   }
 };
 
@@ -100,17 +96,11 @@ mugd.editor.LinkResolver.prototype._onUriChanged = function (link, uri) {
 
   if (this._unresolvedLinks[uri]) {
     var unresolved = this._unresolvedLinks[uri];
-    goog.array.forEach(unresolved, function(callback){
+    goog.array.forEach(unresolved, function (callback) {
       callback(link.model());
     });
     delete this._unresolvedLinks[uri];
     this.numUnresolved(this.numUnresolved() - 1);
   }
-  /*
-  goog.object.forEach(this._fullLinks, function(regex, regex){
-    if(regex.test(uri)){
-      console.log(i);
-    }
-  });
-  */
+
 };

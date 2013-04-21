@@ -8,10 +8,9 @@ goog.require('mugd.editor.PrimitiveViewModel');
  * @implements mugd.editor.IViewModel
  * @constructor
  */
-mugd.editor.FullLinkViewModel = function(schema, resolver){
+mugd.editor.FullLinkViewModel = function (schema, resolver) {
   goog.base(this, schema, resolver);
-  this.options = ko.observableArray();
-  resolver.select(schema, this.options);
+  this.options = resolver.select(schema);
 };
 goog.inherits(mugd.editor.FullLinkViewModel, mugd.editor.PrimitiveViewModel);
 
@@ -19,6 +18,6 @@ goog.inherits(mugd.editor.FullLinkViewModel, mugd.editor.PrimitiveViewModel);
  * @param {Object} schema
  * @return {boolean}
  */
-mugd.editor.FullLinkViewModel.isFullLinkValue = function(schema){
-  return schema['links'] &&  schema['links']['rel'] === 'full';
+mugd.editor.FullLinkViewModel.isFullLinkValue = function (schema) {
+  return schema['links'] && schema['links']['rel'] === 'full';
 };
