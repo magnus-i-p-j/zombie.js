@@ -32,6 +32,21 @@ mugd.editor.PrimitiveViewModel.prototype.setValue = function (value) {
   this['value'](value);
 };
 
+/**
+ * @param {!Array} path
+ * @param {int=}index
+ * @returns {*}
+ */
+mugd.editor.PrimitiveViewModel.prototype.fetchSplitPath = function (path, index) {
+  if (!goog.isDef(index)) {
+    index = 0;
+  }
+  if (path.length <= index) {
+    return this['value']();
+  }
+  throw {'name': 'InvalidPathException', 'message': path};
+};
+
 mugd.editor.PrimitiveViewModel.isPrimitiveValue = function (schema) {
   return goog.array.contains([
     mugd.editor.constants.ValueType.STRING,

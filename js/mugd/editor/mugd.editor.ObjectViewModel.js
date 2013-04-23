@@ -47,6 +47,23 @@ mugd.editor.ObjectViewModel.prototype.setValue = function (newValue) {
   );
 };
 
+/**
+ * @param {Array} path
+ * @param {int=}index
+ * @returns {*}
+ */
+mugd.editor.ObjectViewModel.prototype.fetchSplitPath = function (path, index) {
+  if (!goog.isDef(index)) {
+    index = 0;
+  }
+  var head = path[index];
+  var value = this.value();
+  if (value[head]) {
+    return value[head].fetchSplitPath(path, index + 1);
+  }
+  throw {'name': 'InvalidPathException', 'message': path};
+};
+
 mugd.editor.ObjectViewModel.isObjectValue = function (schema) {
   return schema.type === mugd.editor.constants.ValueType.OBJECT;
 };

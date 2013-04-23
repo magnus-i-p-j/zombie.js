@@ -45,7 +45,27 @@ mugd.editor.AbstractViewModel.prototype.saveModel = function () {
   var blob = new Blob([json], {type: 'data:application/json;charset=utf-8'});
   saveAs(blob, this['fileName']());
 };
+/**
+ * @param {string} path
+ * @returns {*}
+ */
+mugd.editor.AbstractViewModel.prototype.fetch = function (path) {
+  var splitPath;
+  if (path === '') {
+    splitPath = [];
+  } else {
+    splitPath = path.split('/');
+  }
+  return this.fetchSplitPath(splitPath);
+};
 
+/**
+ * @param {Array} path
+ * @returns {*}
+ */
+mugd.editor.AbstractViewModel.prototype.fetchSplitPath = function (path) {
+  throw {'name': 'NotImplementedException', 'message': 'fetchSplitPath'};
+};
 mugd.editor.AbstractViewModel.prototype.setValue = function () {
   throw {'name': 'NotImplementedException', 'message': 'setValue'};
 };

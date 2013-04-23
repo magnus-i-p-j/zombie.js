@@ -51,6 +51,23 @@ mugd.editor.ArrayViewModel.prototype.setValue = function (dataArray) {
   this['value'](newValue);
 };
 
+/**
+ * @param {Array} path
+ * @param {int=} index
+ * @returns {*}
+ */
+mugd.editor.ArrayViewModel.prototype.fetchSplitPath = function (path, index) {
+  if (!goog.isDef(index)) {
+    index = 0;
+  }
+  var head = path[index];
+  var value = this.value();
+  if (value[head]) {
+    return value[head].fetchSplitPath(path, index + 1);
+  }
+  throw {'name': 'InvalidPathException', 'message': path};
+};
+
 mugd.editor.ArrayViewModel.prototype._createSubModel = function () {
   var newModel = this._createSubModelCallback();
   newModel.addOnDisposeCallback(this._createSubModelDisposedCallback(newModel), this);

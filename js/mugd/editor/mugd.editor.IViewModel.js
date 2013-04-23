@@ -40,6 +40,19 @@ mugd.editor.IViewModel.prototype.value = function (value) {
  */
 mugd.editor.IViewModel.prototype.setValue = function (value) {
 };
+/**
+ * @param {string} path
+ * @returns {*}
+ */
+mugd.editor.IViewModel.prototype.fetch = function (path) {
+};
+/**
+ * @param {Array} path
+ * @param {int=} index
+ * @returns {*}
+ */
+mugd.editor.IViewModel.prototype.fetchSplitPath = function (path, index) {
+};
 
 /**
  * @param {*} value

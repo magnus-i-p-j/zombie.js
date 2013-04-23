@@ -46,5 +46,17 @@ TestCase("test mugd.editor creates correct string model", {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
     assertSame(this.data, viewModel.toJSON());
+  },
+  'test fetch returns string value when empty': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertSame('must be string', viewModel.fetch(''));
+  },
+  'test fetch throws exception when not empty': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertException(function () {
+      viewModel.fetch('royale');
+    }, 'InvalidPathException');
   }
 });

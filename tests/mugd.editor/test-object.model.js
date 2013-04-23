@@ -140,5 +140,23 @@ TestCase("test mugd.editor nested object model", {
     goog.array.forEach(children, function (child) {
       assertTrue(child.isDisposed())
     }, this);
+  },
+  'test fetch returns correct values': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertSame(23, viewModel.fetch('age'));
+    assertSame('Pelle', viewModel.fetch('firstname'));
+    assertSame('Buddy', viewModel.fetch('buddy/nickname'));
+
+  },
+  'test fetch throws exception when path invalid': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertException(function () {
+      viewModel.fetch('royale');
+    }, 'InvalidPathException');
+    assertException(function () {
+      viewModel.fetch('buddy/hatename');
+    }, 'InvalidPathException');
   }
 });

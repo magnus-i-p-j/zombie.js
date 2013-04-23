@@ -62,5 +62,24 @@ TestCase("test mugd.editor array model", {
     dyingChild.dispose();
 
     assertFalse(goog.array.contains(viewModel.value(), dyingChild));
+  },
+  'test fetch returns correct values': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertSame('age', viewModel.fetch('0'));
+    assertSame('23', viewModel.fetch('1'));
+    assertSame('firstname', viewModel.fetch('2'));
+    assertSame('Pelle', viewModel.fetch('3'));
+
+  },
+  'test fetch throws exception when path invalid': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertException(function () {
+      viewModel.fetch('4');
+    }, 'InvalidPathException');
+    assertException(function () {
+      viewModel.fetch('buddy/hatename');
+    }, 'InvalidPathException');
   }
 });
