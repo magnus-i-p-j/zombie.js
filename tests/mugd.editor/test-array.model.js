@@ -44,6 +44,7 @@ TestCase("test mugd.editor array model", {
   'test array disposes all children when disposed': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
     var children = [];
+
     goog.array.map(viewModel.value(), function (model) {
       children.push(model);
     });

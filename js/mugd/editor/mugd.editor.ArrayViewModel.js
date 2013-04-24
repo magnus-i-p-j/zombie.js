@@ -48,7 +48,8 @@ mugd.editor.ArrayViewModel.prototype.setValue = function (dataArray) {
       },
       this
   );
-  this['value'](newValue);
+  ko.utils.arrayPushAll(this['value'](), newValue);
+  this['value'].valueHasMutated();
 };
 
 /**
@@ -75,14 +76,14 @@ mugd.editor.ArrayViewModel.prototype._createSubModel = function () {
 };
 
 mugd.editor.ArrayViewModel.prototype.disposeInternal = function () {
-  goog.array.forEach(this.value(), function (model) {
+  var value = this.value().slice();
+  goog.array.forEach(value, function (model) {
     model.dispose();
-  })
+  });
+  goog.base(this, 'disposeInternal');
 };
 
 mugd.editor.ArrayViewModel.prototype._createSubModelDisposedCallback = function (subModel) {
-//  console.log(subModel);
-//  console.log(this);
   return function () {
     this.value.remove(subModel);
   };

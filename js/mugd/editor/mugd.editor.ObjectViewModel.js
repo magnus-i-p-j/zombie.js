@@ -71,7 +71,8 @@ mugd.editor.ObjectViewModel.isObjectValue = function (schema) {
 mugd.editor.ObjectViewModel.prototype.disposeInternal = function () {
   goog.object.forEach(this.value(), function (model) {
     model.dispose();
-  })
+  });
+  goog.base(this, 'disposeInternal');
 };
 
 mugd.editor.ObjectViewModel.prototype.value = function (value) {

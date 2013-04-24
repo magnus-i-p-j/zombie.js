@@ -58,6 +58,10 @@ mugd.editor.PrimitiveViewModel.isPrimitiveValue = function (schema) {
   );
 };
 
+mugd.editor.PrimitiveViewModel.prototype.disposeInternal = function(){
+  goog.base(this, 'disposeInternal');
+};
+
 mugd.editor.PrimitiveViewModel.validateValue = {};
 mugd.editor.PrimitiveViewModel.validateValue[mugd.editor.constants.ValueType.STRING] = function (value) {
   if (!goog.isString(value)) {
