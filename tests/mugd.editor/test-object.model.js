@@ -144,19 +144,25 @@ TestCase("test mugd.editor nested object model", {
   'test fetch returns correct values': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
-    assertSame(23, viewModel.fetch('age'));
-    assertSame('Pelle', viewModel.fetch('firstname'));
-    assertSame('Buddy', viewModel.fetch('buddy/nickname'));
+    assertSame(23, viewModel.fetch('age/'));
+    assertSame('Pelle', viewModel.fetch('firstname/'));
+    assertSame('Buddy', viewModel.fetch('buddy/nickname/'));
 
+  },
+  'test fetch returns whole nested model' : function(){
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+    var expected = viewModel.value().buddy;
+    var actual = viewModel.fetch('buddy');
+    assertSame(expected, actual);
   },
   'test fetch throws exception when path invalid': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
     assertException(function () {
-      viewModel.fetch('royale');
+      viewModel.fetch('royale/');
     }, 'InvalidPathException');
     assertException(function () {
-      viewModel.fetch('buddy/hatename');
+      viewModel.fetch('buddy/hatename/');
     }, 'InvalidPathException');
   }
 });

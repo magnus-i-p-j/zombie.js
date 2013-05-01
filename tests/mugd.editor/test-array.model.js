@@ -67,11 +67,15 @@ TestCase("test mugd.editor array model", {
   'test fetch returns correct values': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);
 
-    assertSame('age', viewModel.fetch('0'));
-    assertSame('23', viewModel.fetch('1'));
-    assertSame('firstname', viewModel.fetch('2'));
-    assertSame('Pelle', viewModel.fetch('3'));
-
+    assertSame('age', viewModel.fetch('0/'));
+    assertSame('23', viewModel.fetch('1/'));
+    assertSame('firstname', viewModel.fetch('2/'));
+    assertSame('Pelle', viewModel.fetch('3/'));
+  },
+  'test fetch returns correct models': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+    var expected = viewModel.value()[3];
+    assertSame(expected, viewModel.fetch('3'));
   },
   'test fetch throws exception when path invalid': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, this.data);

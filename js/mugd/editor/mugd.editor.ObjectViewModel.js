@@ -56,6 +56,11 @@ mugd.editor.ObjectViewModel.prototype.fetchSplitPath = function (path, index) {
   if (!goog.isDef(index)) {
     index = 0;
   }
+
+  if(index === path.length){
+    return this;
+  }
+
   var head = path[index];
   var value = this.value();
   if (value[head]) {

@@ -41,9 +41,16 @@ mugd.editor.PrimitiveViewModel.prototype.fetchSplitPath = function (path, index)
   if (!goog.isDef(index)) {
     index = 0;
   }
-  if (path.length <= index) {
+
+  if(index === path.length){
+    return this;
+  }
+
+  if (path[index] === '') {
     return this['value']();
   }
+
+
   throw {'name': 'InvalidPathException', 'message': path};
 };
 

@@ -63,6 +63,15 @@ mugd.editor.ArrayViewModel.prototype.fetchSplitPath = function (path, index) {
   }
   var head = path[index];
   var value = this.value();
+
+  if (head === '') {
+    return value;
+  }
+
+  if(index === path.length){
+    return this;
+  }
+
   if (value[head]) {
     return value[head].fetchSplitPath(path, index + 1);
   }

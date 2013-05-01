@@ -114,17 +114,17 @@ TestCase("test full links", {
     }
   }
   ,
-//  'test that options is updated when a model is removed': function () {
-//    var viewModel = mugd.editor.getViewModel(this.schema, {});
-//    viewModel.setValue(this.data);
-//
-//    var improvement = viewModel.value()['improvement'].value()[0];
-//    var options = improvement.value()['required_terrain'].options();
-//
-//    var grass = viewModel.value()['terrain'].value()[1];
-//    assertSame('grass', grass.fetch('type'));
-//    viewModel.value()['terrain'].value.remove(grass);
-//
-//    assertFalse(goog.array.contains(options, grass));
-//  }
+  'test that options is updated when a model is removed': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, {});
+    viewModel.setValue(this.data);
+
+    var improvement = viewModel.value()['improvement'].value()[0];
+    var options = improvement.value()['required_terrain'].options;
+
+    var grass = viewModel.fetch('terrain/1');
+    assertSame('grass', grass.fetch('type/'));
+    grass.dispose();
+
+    assertFalse(goog.array.contains(options(), grass));
+  }
 });
