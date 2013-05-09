@@ -40,6 +40,15 @@ mugd.editor.AbstractViewModel = function (schema, resolver) {
 
 goog.inherits(mugd.editor.AbstractViewModel, goog.Disposable);
 
+mugd.editor.AbstractViewModel.prototype.disposeInternal = function(){
+  if(this.links){
+    goog.array.forEach(this.links, function(link){
+      link.dispose();
+    });
+  }
+  goog.base(this, 'disposeInternal');
+};
+
 mugd.editor.AbstractViewModel.prototype.saveModel = function () {
   var json = JSON.stringify(this);
   var blob = new Blob([json], {type: 'data:application/json;charset=utf-8'});

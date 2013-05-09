@@ -71,3 +71,7 @@ mugd.editor.IViewModel.prototype.saveModel = function () {
  */
 mugd.editor.IViewModel.prototype.resolver;
 
+/**
+ * @type {Array<mugd.editor.Link>}
+ */
+mugd.editor.IViewModel.prototype.links;

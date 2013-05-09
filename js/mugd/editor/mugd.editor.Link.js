@@ -46,6 +46,18 @@ mugd.editor.Link = function (href) {
     'read': this._toUri,
     'write': this._fromUri
   }, this);
+
+  /**
+   * @type {string}
+   */
+  this.previousUri = null;
+};
+
+goog.inherits(mugd.editor.Link, goog.Disposable);
+
+mugd.editor.Link.prototype.disposeInternal = function(){
+  this.uri.valueHasMutated();
+  goog.base(this, 'disposeInternal');
 };
 
 mugd.editor.Link.prototype._createValueAccessor = function (field) {
@@ -79,6 +91,11 @@ mugd.editor.Link.prototype._createValueSetter = function (field) {
  * @private
  */
 mugd.editor.Link.prototype._toUri = function () {
+
+  if (this.isDisposed()){
+    return '';
+  }
+
   var uri = [];
 
   var i = 0;
@@ -97,17 +114,22 @@ mugd.editor.Link.prototype._toUri = function () {
  * @private
  */
 mugd.editor.Link.prototype._fromUri = function (newUri) {
-  var parts = newUri.match(this._UriParse);
-  if (goog.isNull(parts)) {
-    throw {'name': 'CannotParseUri', 'message': 'Got ' + newUri};
+  if(newUri === ''){
+    this.dispose();
   }
-  var i = 1;
-  while (parts[i]) {
-    this._UriMapping[i - 1](parts[i]);
-    i = i + 1;
+  else{
+    var parts = newUri.match(this._UriParse);
+    if (goog.isNull(parts)) {
+      throw {'name': 'CannotParseUri', 'message': 'Got ' + newUri};
+    }
+    var i = 1;
+    while (parts[i]) {
+      this._UriMapping[i - 1](parts[i]);
+      i = i + 1;
+    }
   }
-
 };
+
 /**
  * @returns {string}
  * @private

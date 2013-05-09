@@ -21,7 +21,7 @@ mugd.editor.LinkResolver = function () {
    */
   this._unresolvedLinks = {};
 
-  this._fullLinks = {};
+  this._selects = {};
 
   /**
    * @type {function(number=):number}
@@ -52,20 +52,44 @@ mugd.editor.LinkResolver.prototype.get = function (uri, callback) {
 
 };
 
+/**
+ * @param {!Object} schema
+ * @returns {string}
+ */
+mugd.editor.LinkResolver.prototype._getSelectId = function(schema) {
+  return schema['links']['href'];
+};
+
+/**
+ * @param {!Object} schema
+ * @returns {function(string):boolean}
+ */
+mugd.editor.LinkResolver.prototype._getTestFunction = function (schema) {
+  var href = schema['links']['href'];
+  var regex = new RegExp(href.replace("{@}", "(.*[^/])"));
+  return function(uri){
+    return uri ? regex.test(uri) : false;
+  };
+};
+
 mugd.editor.LinkResolver.prototype.select = function (schema) {
   if (schema['links']['rel'] === 'full') {
-    var href = schema['links']['href'];
-    if (!this._fullLinks[href]) {
-      this._fullLinks[href] = ko.observableArray();
-      var regex = new RegExp(href.replace("{@}", "(.*[^/])"));
+    var id = this._getSelectId(schema);
+    if (!this._selects[id]) {
+      var result = ko.observableArray();
+      var test = this._getTestFunction(schema);
       goog.array.forEach(this._links, function (link) {
-        if (regex.test(link.uri())) {
-          this._fullLinks[href].push(link.model());
+        if (test(link.uri())) {
+          result.push(link.model());
         }
       }, this);
+      this._selects[id] = {
+        test: test,
+        result: result
+      };
     }
 
-    return this._fullLinks[href];
+    return this._selects[id].result;
   }
 };
 
@@ -82,18 +106,16 @@ mugd.editor.LinkResolver.prototype.put = function (model, schema) {
       link.uri.subscribe(function (uri) {
         this._onUriChanged(link, uri);
       }, this);
+      if(!model.links){
+        model.links = [];
+      }
+      model.links.push(link);
       this._links.push(link);
     }
   }
 };
 
-/**
- * @param {!mugd.editor.Link} link
- * @param {string} uri
- * @private
- */
-mugd.editor.LinkResolver.prototype._onUriChanged = function (link, uri) {
-
+mugd.editor.LinkResolver.prototype._updateUnresolvedLinks = function (uri, link) {
   if (this._unresolvedLinks[uri]) {
     var unresolved = this._unresolvedLinks[uri];
     goog.array.forEach(unresolved, function (callback) {
@@ -102,5 +124,31 @@ mugd.editor.LinkResolver.prototype._onUriChanged = function (link, uri) {
     delete this._unresolvedLinks[uri];
     this.numUnresolved(this.numUnresolved() - 1);
   }
+};
 
+/**
+ * @param {mugd.editor.Link} link
+ * @param {string} previousUri
+ * @param {string} uri
+ * @private
+ */
+mugd.editor.LinkResolver.prototype._updateSelects = function (link, previousUri, uri) {
+  goog.object.forEach(this._selects, function (select) {
+    if(select.test(previousUri) && !select.test(uri)){
+      select.result.remove(link.model());
+    }else if(!select.test(previousUri) && select.test(uri)){
+      select.result.add(link.model());
+    }
+  });
+};
+
+/**
+ * @param {!mugd.editor.Link} link
+ * @param {string} uri
+ * @private
+ */
+mugd.editor.LinkResolver.prototype._onUriChanged = function (link, uri) {
+  this._updateUnresolvedLinks(uri, link);
+  this._updateSelects(link, link.previousUri, uri);
+  link.previousUri = uri;
 };
