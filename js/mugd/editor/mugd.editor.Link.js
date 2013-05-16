@@ -40,6 +40,11 @@ mugd.editor.Link = function (href) {
   )).join('') + '$');
 
   /**
+   * @type {function(boolean=):boolean}
+   * @private
+   */
+  this._disposed = ko.observable(false);
+  /**
    * @type {function(string=):string}
    */
   this.uri = ko.computed({
@@ -56,7 +61,7 @@ mugd.editor.Link = function (href) {
 goog.inherits(mugd.editor.Link, goog.Disposable);
 
 mugd.editor.Link.prototype.disposeInternal = function(){
-  this.uri.valueHasMutated();
+  this._disposed(true);
   goog.base(this, 'disposeInternal');
 };
 
@@ -92,7 +97,7 @@ mugd.editor.Link.prototype._createValueSetter = function (field) {
  */
 mugd.editor.Link.prototype._toUri = function () {
 
-  if (this.isDisposed()){
+  if (this._disposed()){
     return '';
   }
 
