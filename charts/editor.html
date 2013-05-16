@@ -1,0 +1,40 @@
+<html>
+<head>
+  <script type="text/javascript" src="/charts/js/jquery.js"></script>
+  <script type="text/javascript" src="/charts/js/jquery_plantuml.js"></script>
+  <!-- rawdeflate.js is implicity used by jquery_plantuml.js -->
+</head>
+
+<body>
+<img uml="
+ViewModel -> ViewModel
+
+">
+<hr>
+<img uml='
+interface IViewModel
+IViewModel: value
+abstract class AbstractViewModel
+class LinkResolver
+class Options
+
+Link : model: IViewModel
+Link : uri
+
+IViewModel <|-- AbstractViewModel
+AbstractViewModel <|-- PrimitiveViewModel
+AbstractViewModel <|-- ArrayViewModel
+AbstractViewModel <|-- ObjectViewModel
+PrimitiveViewModel <|-- FullLinkViewModel
+ArrayViewModel  o-- "0..*" IViewModel
+ObjectViewModel o-- "1..*" IViewModel
+LinkResolver <-- "0..*" IViewModel
+( LinkResolver, IViewModel ) . Link
+Link "0..*" <-- Options
+LinkResolver "1" --> "0..*" Options
+FullLinkViewModel "0..*" --> "1" Options
+FullLinkViewModel : model: IViewModel
+
+'>
+</body>
+</html>
