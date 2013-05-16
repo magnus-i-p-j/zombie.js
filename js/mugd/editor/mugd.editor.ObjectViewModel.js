@@ -57,7 +57,7 @@ mugd.editor.ObjectViewModel.prototype.fetchSplitPath = function (path, index) {
     index = 0;
   }
 
-  if(index === path.length){
+  if (index === path.length) {
     return this;
   }
 

@@ -137,7 +137,7 @@ mugd.editor.LinkResolver.prototype._updateSelects = function (link, previousUri,
     if(select.test(previousUri) && !select.test(uri)){
       select.result.remove(link.model());
     }else if(!select.test(previousUri) && select.test(uri)){
-      select.result.add(link.model());
+      select.result.push(link.model());
     }
   });
 };

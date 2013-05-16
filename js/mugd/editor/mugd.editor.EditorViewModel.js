@@ -20,12 +20,12 @@ mugd.editor.EditorViewModel.prototype['loadModel'] = function () {
         goog.net.XhrIo.send(self['dataUri'](),
             function (e) {
               var data = e.target.getResponseJson();
-              try {
+//              try {
                 self['model'](mugd.editor.getViewModel(schema, data));
                 self['model']()['fileName'](self['dataUri']().split('/').pop());
-              } catch (ex) {
-                console.log(ex);
-              }
+//              } catch (ex) {
+//                console.log(ex);
+//              }
             }
         );
       }

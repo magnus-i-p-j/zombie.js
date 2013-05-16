@@ -1,5 +1,7 @@
 goog.provide('mugd.editor.Link');
 
+goog.require('mugd.utils');
+
 /**
  * @param {string} href
  * @constructor

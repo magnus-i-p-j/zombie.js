@@ -112,8 +112,7 @@ TestCase("test full links", {
       assertSame(this.data.terrain[i].type, options[i].value()['type'].value());
       assertSame(this.data.terrain[i].name, options[i].value()['name'].value());
     }
-  }
-  ,
+  },
   'test that options is updated when a model is removed': function () {
     var viewModel = mugd.editor.getViewModel(this.schema, {});
     viewModel.setValue(this.data);
@@ -126,5 +125,38 @@ TestCase("test full links", {
     grass.dispose();
 
     assertFalse(goog.array.contains(options(), grass));
+  },
+  'test that options is updated when a model is added': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    var improvement = viewModel.fetch('improvement/0');
+    var options = improvement.fetch('required_terrain').options;
+
+    /**
+     *
+     * @type {mugd.editor.ArrayViewModel}
+     */
+    var terrains = viewModel.fetch('terrain');
+    var newModel = terrains['newItem']();
+    newModel.fetch('name').value('New Model');
+    newModel.fetch('type').value('new_model');
+//    newModel['type']('new_model');
+
+    assertTrue(goog.array.contains(options(), newModel));
+  },
+  'test should have template full-link': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    assertSame('full-link', viewModel.fetch('improvement/0/required_terrain').template());
+  },
+  'test should select the correct model when initialised': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    var improvementSecureGrass = viewModel.fetch('improvement/0/required_terrain');
+    var terrainGrass = viewModel.fetch('terrain/1');
+
+
+    assertSame(terrainGrass, improvementSecureGrass['value']());
+
   }
 });

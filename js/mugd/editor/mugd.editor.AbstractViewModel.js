@@ -26,6 +26,10 @@ mugd.editor.AbstractViewModel = function (schema, resolver) {
    */
   this['type'] = schema['type'];
   /**
+   * @type {string}
+   */
+  this['template'] = ko.observable(this['type']);
+  /**
    *
    *@type {function(string=):string}
    */
@@ -40,9 +44,9 @@ mugd.editor.AbstractViewModel = function (schema, resolver) {
 
 goog.inherits(mugd.editor.AbstractViewModel, goog.Disposable);
 
-mugd.editor.AbstractViewModel.prototype.disposeInternal = function(){
-  if(this.links){
-    goog.array.forEach(this.links, function(link){
+mugd.editor.AbstractViewModel.prototype.disposeInternal = function () {
+  if (this.links) {
+    goog.array.forEach(this.links, function (link) {
       link.dispose();
     });
   }

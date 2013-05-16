@@ -11,6 +11,7 @@ goog.require('mugd.editor.PrimitiveViewModel');
 mugd.editor.FullLinkViewModel = function (schema, resolver) {
   goog.base(this, schema, resolver);
   this.options = resolver.select(schema);
+  this['template']('full-link');
 };
 goog.inherits(mugd.editor.FullLinkViewModel, mugd.editor.PrimitiveViewModel);
 

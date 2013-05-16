@@ -29,6 +29,13 @@ mugd.editor.IViewModel.prototype.type = function (value) {
 };
 
 /**
+ * @param {string=} value
+ * @return {!string}
+ */
+mugd.editor.IViewModel.prototype.template = function (value) {
+};
+
+/**
  * @param {*=} value
  * @return {*}
  */

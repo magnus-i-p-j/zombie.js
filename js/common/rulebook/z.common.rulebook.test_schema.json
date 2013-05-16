@@ -21,6 +21,10 @@
             "description": "Visible name of terrain",
             "type": "string"
           }
+        },
+        "links": {
+          "rel": "self",
+          "href": "game://terrain/{type}"
         }
       }
     },
@@ -41,6 +45,15 @@
             "title": "Name",
             "description": "Visible name of project",
             "type": "string"
+          },
+          "terrain": {
+            "title": "Terrain",
+            "description": "The terrain that is required",
+            "type": "string",
+            "links": {
+              "rel": "full",
+              "href": "game://terrain/{@}"
+            }
           }
         }
       }

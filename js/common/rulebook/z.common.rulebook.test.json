@@ -1,20 +1,22 @@
-{"terrain": [
-  {
-    "type": "fenced_grass",
-    "name": "Fenced grass"
-  },
-  {
-    "type": "grass",
-    "name": "Grass"
-  },
-  {
-    "type": "water",
-    "name": "Water"
-  }
-], "improvement": [
+{
+  "terrain": [
+    {
+      "type": "fenced_grass",
+      "name": "Fenced grass"
+    },
+    {
+      "type": "grass",
+      "name": "Grass"
+    },
+    {
+      "type": "water",
+      "name": "Water"
+    }
+  ], "improvement": [
   {
     "type": "secure_grass",
-    "name": "Secure grass"
+    "name": "Secure grass",
+    "terrain": "grass"
   }
 ]
 }
