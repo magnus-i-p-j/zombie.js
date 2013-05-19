@@ -22,7 +22,11 @@ mugd.editor.Link = function (href) {
   this._partsToUri = goog.array.map(
       tokens,
       function (part) {
-        return part[0] === '{' ? this._createValueAccessor(part.slice(1, -1)) : part;
+        if (part[0] === '{') {
+          return this._createValueAccessor(part.slice(1, -1));
+        } else {
+          return part;
+        }
       },
       this
   );
@@ -62,7 +66,7 @@ mugd.editor.Link = function (href) {
 
 goog.inherits(mugd.editor.Link, goog.Disposable);
 
-mugd.editor.Link.prototype.disposeInternal = function(){
+mugd.editor.Link.prototype.disposeInternal = function () {
   this._disposed(true);
   goog.base(this, 'disposeInternal');
 };
@@ -71,14 +75,24 @@ mugd.editor.Link.prototype._createValueAccessor = function (field) {
 
   var model = this.model;
 
-  return function () {
-    var value;
-    if (model()) {
-      value = model().value()[field].value();
-    }
-    return value;
-  };
-
+  var accessor;
+  if (field === '@') {
+    accessor = function () {
+      if(model()){
+        return model().value();
+      }
+    };
+  }
+  else {
+    accessor = function () {
+      var value;
+      if (model()) {
+        value = model().value()[field].value();
+      }
+      return value;
+    };
+  }
+  return accessor;
 };
 
 mugd.editor.Link.prototype._createValueSetter = function (field) {
@@ -99,7 +113,7 @@ mugd.editor.Link.prototype._createValueSetter = function (field) {
  */
 mugd.editor.Link.prototype._toUri = function () {
 
-  if (this._disposed()){
+  if (this._disposed()) {
     return '';
   }
 
@@ -121,10 +135,10 @@ mugd.editor.Link.prototype._toUri = function () {
  * @private
  */
 mugd.editor.Link.prototype._fromUri = function (newUri) {
-  if(newUri === ''){
+  if (newUri === '') {
     this.dispose();
   }
-  else{
+  else {
     var parts = newUri.match(this._UriParse);
     if (goog.isNull(parts)) {
       throw {'name': 'CannotParseUri', 'message': 'Got ' + newUri};

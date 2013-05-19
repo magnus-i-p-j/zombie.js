@@ -155,8 +155,14 @@ TestCase("test full links", {
     var improvementSecureGrass = viewModel.fetch('improvement/0/required_terrain');
     var terrainGrass = viewModel.fetch('terrain/1');
 
+    assertSame(terrainGrass, improvementSecureGrass['model']());
+  },
+  'test should select the correct value when initialised': function () {
+    var viewModel = mugd.editor.getViewModel(this.schema, this.data);
+
+    var improvementSecureGrass = viewModel.fetch('improvement/0/required_terrain');
+    var terrainGrass = viewModel.fetch('terrain/1/type/');
 
     assertSame(terrainGrass, improvementSecureGrass['value']());
-
   }
 });

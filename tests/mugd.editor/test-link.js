@@ -39,5 +39,14 @@ TestCase("test mugd.editor.Link", {
     assertException(function () {
       link.uri('game://project/grass');
     }, 'CannotParseUri');
+  },
+  'test should be able to parse uris containing @': function(){
+    var href = 'game://terrain/{@}';
+    var link = new mugd.editor.Link(href);
+    var model = {
+      value : ko.observable('fungi')
+    };
+    link.model(model);
+    assertSame('game://terrain/fungi', link.uri());
   }
 });
