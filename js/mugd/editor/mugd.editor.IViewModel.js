@@ -32,7 +32,7 @@ mugd.editor.IViewModel.prototype.type = function (value) {
  * @param {string=} value
  * @return {!string}
  */
-mugd.editor.IViewModel.prototype.template = function (value) {
+mugd.editor.IViewModel.prototype['template'] = function (value) {
 };
 
 /**
@@ -54,15 +54,15 @@ mugd.editor.IViewModel.prototype.setValue = function (value) {
 mugd.editor.IViewModel.prototype.fetch = function (path) {
 };
 /**
- * @param {Array} path
- * @param {int=} index
+ * @param {!Array} path
+ * @param {number=} index
  * @returns {*}
  */
 mugd.editor.IViewModel.prototype.fetchSplitPath = function (path, index) {
 };
 
 /**
- * @param {*} value
+ * @param {string=} value
  */
 mugd.editor.IViewModel.prototype.toJSON = function (value) {
 };

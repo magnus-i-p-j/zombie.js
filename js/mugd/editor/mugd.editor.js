@@ -42,4 +42,15 @@ mugd.editor._getModel = function (schema, resolver) {
   throw {'name': 'TypeMismatchException', 'reason': 'no such type supported', 'schema': schema};
 };
 
+/**
+ * @param {!Element} rootNode
+ */
+mugd.editor.init = function (rootNode) {
+  infuser.defaults.templatePrefix = 'tpl/editor/';
+  var vm = new mugd.editor.EditorViewModel();
+  ko.applyBindings(vm, rootNode);
+};
+
+goog.exportSymbol('editor.init', mugd.editor.init );
+
 

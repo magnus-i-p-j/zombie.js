@@ -4,6 +4,8 @@ goog.require('goog.Disposable');
 goog.require('goog.json');
 goog.require('mugd.editor.LinkResolver');
 
+goog.require('goog.json');
+
 /**
  * @param {!Object} schema
  * @param {!mugd.editor.LinkResolver} resolver
@@ -26,7 +28,7 @@ mugd.editor.AbstractViewModel = function (schema, resolver) {
    */
   this['type'] = schema['type'];
   /**
-   * @type {string}
+   * @type {function(string=):string}
    */
   this['template'] = ko.observable(this['type']);
   /**
@@ -39,7 +41,9 @@ mugd.editor.AbstractViewModel = function (schema, resolver) {
    *
    * @type {!mugd.editor.LinkResolver}
    */
-  this['resolver'] = resolver;
+  this.resolver = resolver;
+
+  this.links = null;
 };
 
 goog.inherits(mugd.editor.AbstractViewModel, goog.Disposable);
@@ -54,7 +58,7 @@ mugd.editor.AbstractViewModel.prototype.disposeInternal = function () {
 };
 
 mugd.editor.AbstractViewModel.prototype.saveModel = function () {
-  var json = JSON.stringify(this);
+  var json = goog.json.serialize(this);
   var blob = new Blob([json], {type: 'data:application/json;charset=utf-8'});
   saveAs(blob, this['fileName']());
 };
@@ -72,14 +76,16 @@ mugd.editor.AbstractViewModel.prototype.fetch = function (path) {
   return this.fetchSplitPath(splitPath);
 };
 
+
 /**
- * @param {Array} path
+ * @param {!Array} path
+ * @param {number=} index
  * @returns {*}
  */
-mugd.editor.AbstractViewModel.prototype.fetchSplitPath = function (path) {
+mugd.editor.AbstractViewModel.prototype.fetchSplitPath = function (path, index) {
   throw {'name': 'NotImplementedException', 'message': 'fetchSplitPath'};
 };
-mugd.editor.AbstractViewModel.prototype.setValue = function () {
+mugd.editor.AbstractViewModel.prototype.setValue = function (value) {
   throw {'name': 'NotImplementedException', 'message': 'setValue'};
 };
 mugd.editor.AbstractViewModel.prototype.toJSON = function () {

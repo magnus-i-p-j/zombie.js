@@ -34,7 +34,7 @@ mugd.editor.PrimitiveViewModel.prototype.setValue = function (value) {
 
 /**
  * @param {!Array} path
- * @param {int=}index
+ * @param {number=}index
  * @returns {*}
  */
 mugd.editor.PrimitiveViewModel.prototype.fetchSplitPath = function (path, index) {

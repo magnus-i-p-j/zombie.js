@@ -18,7 +18,7 @@ mugd.editor.ArrayViewModel = function (schema, resolver, createSubModel) {
   this._createSubModelCallback = createSubModel;
 
   /**
-   * @type {function(string=):string}
+   * @type {function(!Array=):!Array}
    */
   this['value'] = ko.observableArray();
 };
@@ -38,23 +38,32 @@ mugd.editor.ArrayViewModel.prototype.toJSON = function () {
   );
 };
 
-mugd.editor.ArrayViewModel.prototype.setValue = function (dataArray) {
-  var newValue = goog.array.map(
-      dataArray,
-      function (data) {
-        var model = this._createSubModel();
-        model.setValue(data);
-        return model;
-      },
-      this
-  );
-  ko.utils.arrayPushAll(this['value'](), newValue);
-  this['value'].valueHasMutated();
+/**
+ * @param {*} value
+ */
+mugd.editor.ArrayViewModel.prototype.setValue = function (value) {
+  if (goog.isArray(value)) {
+//    value = value;
+    var newValue = goog.array.map(
+        ( /**
+         * @type {!Array}
+         */
+        value ),
+        function (data) {
+          var model = this._createSubModel();
+          model.setValue(data);
+          return model;
+        },
+        this
+    );
+    ko.utils.arrayPushAll(this['value'](), newValue);
+    this['value'].valueHasMutated();
+  }
 };
 
 /**
  * @param {Array} path
- * @param {int=} index
+ * @param {number=} index
  * @returns {*}
  */
 mugd.editor.ArrayViewModel.prototype.fetchSplitPath = function (path, index) {
@@ -68,7 +77,7 @@ mugd.editor.ArrayViewModel.prototype.fetchSplitPath = function (path, index) {
     return value;
   }
 
-  if(index === path.length){
+  if (index === path.length) {
     return this;
   }
 
