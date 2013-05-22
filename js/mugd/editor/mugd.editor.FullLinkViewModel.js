@@ -35,20 +35,19 @@ mugd.editor.FullLinkViewModel = function (schema, resolver) {
       if (model.links) {
         if (model.links[0]) {
           this._link.uri(model.links[0].uri());
-          this._model = model;
         }
       }
     }
   }, this);
 
-  this._onUriChanged = ko.computed(
-      function () {
-        var uri = this._link.uri();
+  this._link.uri.subscribe(
+      function (uri) {
         if (uri.substring(0, 4) !== 'guid') {
           resolver.get(uri, this._model);
         }
-      }
-      , this);
+      },
+      this
+  );
 
 };
 goog.inherits(mugd.editor.FullLinkViewModel, mugd.editor.PrimitiveViewModel);
