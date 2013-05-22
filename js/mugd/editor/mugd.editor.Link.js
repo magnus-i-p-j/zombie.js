@@ -78,12 +78,11 @@ mugd.editor.Link.prototype._createValueAccessor = function (field) {
   var accessor;
   if (field === '@') {
     accessor = function () {
-      if(model()){
+      if (model()) {
         return model().value();
       }
     };
-  }
-  else {
+  } else {
     accessor = function () {
       var value;
       if (model()) {
@@ -98,7 +97,13 @@ mugd.editor.Link.prototype._createValueAccessor = function (field) {
 mugd.editor.Link.prototype._createValueSetter = function (field) {
 
   var model = this.model;
-
+  if (field === '@') {
+    return function (newValue) {
+      if (model()) {
+        model().value(newValue);
+      }
+    };
+  }
   return function (newValue) {
     if (model()) {
       model().value()[field].value(newValue);

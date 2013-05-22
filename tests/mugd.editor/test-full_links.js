@@ -65,7 +65,8 @@ TestCase("test full links", {
               "title": "Unique id",
               "type": "string"
             },
-            "name": {              "title": "Name",
+            "name": {
+              "title": "Name",
               "description": "Visible name of project",
               "type": "string"
             },

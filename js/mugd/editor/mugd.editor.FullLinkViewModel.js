@@ -16,32 +16,42 @@ mugd.editor.FullLinkViewModel = function (schema, resolver) {
 
   this._link = new mugd.editor.Link(schema['links']['href']);
   this._link.model(this);
+  this._model = null;
+  this._model = ko.observable();
 
   this['model'] = ko.computed({
-    read : function(){
-      return this._link.model();
+    /**
+     * @this {mugd.editor.FullLinkViewModel}
+     * @returns {mugd.editor.IViewModel}
+     */
+    read: function () {
+      return this._model();
     },
-    write: function(value){
-      this._link.model(value);
-      this['value'](value.value().type.value());
+    /**
+     * @this {mugd.editor.FullLinkViewModel}
+     * @param {mugd.editor.IViewModel} model
+     */
+    write: function (model) {
+      if (model.links) {
+        if (model.links[0]) {
+          this._link.uri(model.links[0].uri());
+          this._model = model;
+        }
+      }
     }
   }, this);
 
-
   this._onUriChanged = ko.computed(
-    function(){
-      var uri = this._link.uri();
-      if(uri.substring(0,4) !== 'guid'){
-        resolver.get(uri, this['model']);
+      function () {
+        var uri = this._link.uri();
+        if (uri.substring(0, 4) !== 'guid') {
+          resolver.get(uri, this._model);
+        }
       }
-    }
-  , this);
-
+      , this);
 
 };
 goog.inherits(mugd.editor.FullLinkViewModel, mugd.editor.PrimitiveViewModel);
-
-
 
 /**
  * @param {Object} schema
