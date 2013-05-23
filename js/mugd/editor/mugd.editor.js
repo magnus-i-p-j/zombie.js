@@ -1,5 +1,6 @@
 goog.provide('mugd.editor');
 
+goog.require('mugd.editor.EditorViewModel');
 goog.require('mugd.editor.PrimitiveViewModel');
 goog.require('mugd.editor.ObjectViewModel');
 goog.require('mugd.editor.ArrayViewModel');
@@ -25,7 +26,7 @@ mugd.editor.getViewModel = function (schema, data) {
  * @param resolver
  */
 mugd.editor._getModel = function (schema, resolver) {
-  if (mugd.editor.FullLinkViewModel.isFullLinkValue(schema)){
+  if (mugd.editor.FullLinkViewModel.isFullLinkValue(schema)) {
     return new mugd.editor.FullLinkViewModel(schema, resolver);
   }
   if (mugd.editor.PrimitiveViewModel.isPrimitiveValue(schema)) {
@@ -51,6 +52,6 @@ mugd.editor.init = function (rootNode) {
   ko.applyBindings(vm, rootNode);
 };
 
-goog.exportSymbol('editor.init', mugd.editor.init );
+goog.exportSymbol('editor.init', mugd.editor.init);
 
 

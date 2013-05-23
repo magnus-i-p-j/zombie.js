@@ -1,6 +1,5 @@
 goog.provide('mugd.editor.EditorViewModel');
 
-goog.require('mugd.editor');
 goog.require('goog.net.XhrIo');
 
 /**

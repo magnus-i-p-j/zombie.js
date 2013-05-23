@@ -40,9 +40,11 @@ mugd.editor.LinkResolver.prototype.get = function (uri, callback) {
   });
 
   if (goog.isDefAndNotNull(link)) {
-    callback(link.model());
+    var model = link.model();
   }
-  else {
+  if (goog.isDefAndNotNull(model)) {
+    callback(model);
+  } else {
     if (!this._unresolvedLinks[uri]) {
       this._unresolvedLinks[uri] = [];
     }
@@ -128,7 +130,7 @@ mugd.editor.LinkResolver.prototype._updateUnresolvedLinks = function (uri, link)
 
 /**
  * @param {mugd.editor.Link} link
- * @param {string} previousUri
+ * @param {string|null} previousUri
  * @param {string} uri
  * @private
  */

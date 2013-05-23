@@ -12,11 +12,12 @@
       "type": "water",
       "name": "Water"
     }
-  ], "improvement": [
-  {
-    "type": "secure_grass",
-    "name": "Secure grass",
-    "terrain": "grass"
-  }
-]
+  ],
+  "improvement": [
+    {
+      "type": "secure_grass",
+      "name": "Secure grass",
+      "terrain": "grass"
+    }
+  ]
 }

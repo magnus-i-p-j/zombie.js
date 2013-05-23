@@ -10,6 +10,7 @@ goog.require('goog.object');
  * @param {!mugd.editor.LinkResolver} resolver
  * @param getSubModel
  * @implements mugd.editor.IViewModel
+ * @extends mugd.editor.AbstractViewModel
  * @constructor
  */
 mugd.editor.ObjectViewModel = function (schema, resolver, getSubModel) {
@@ -39,17 +40,17 @@ mugd.editor.ObjectViewModel.prototype.toJSON = function () {
 };
 
 mugd.editor.ObjectViewModel.prototype.setValue = function (newValue) {
-  var current = this.value();
+  var current = this['value']();
   goog.object.forEach(newValue,
       function (value, key) {
-        current[key].setValue(value);
+        current[key]['setValue'](value);
       }
   );
 };
 
 /**
  * @param {Array} path
- * @param {int=}index
+ * @param {number=}index
  * @returns {*}
  */
 mugd.editor.ObjectViewModel.prototype.fetchSplitPath = function (path, index) {
@@ -62,7 +63,7 @@ mugd.editor.ObjectViewModel.prototype.fetchSplitPath = function (path, index) {
   }
 
   var head = path[index];
-  var value = this.value();
+  var value = this['value']();
   if (value[head]) {
     return value[head].fetchSplitPath(path, index + 1);
   }
@@ -74,17 +75,15 @@ mugd.editor.ObjectViewModel.isObjectValue = function (schema) {
 };
 
 mugd.editor.ObjectViewModel.prototype.disposeInternal = function () {
-  goog.object.forEach(this.value(), function (model) {
+  goog.object.forEach(this['value'](), function (model) {
     model.dispose();
   });
   goog.base(this, 'disposeInternal');
 };
 
-mugd.editor.ObjectViewModel.prototype.value = function (value) {
-};
 mugd.editor.ObjectViewModel.prototype.title = function () {
 };
-mugd.editor.ObjectViewModel.prototype.type = function (value) {
+mugd.editor.ObjectViewModel.prototype['type'] = function (value) {
   return mugd.editor.constants.ValueType.OBJECT;
 };
 mugd.editor.ObjectViewModel.prototype.description = function () {
