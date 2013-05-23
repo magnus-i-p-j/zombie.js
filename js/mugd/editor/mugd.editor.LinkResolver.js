@@ -17,7 +17,7 @@ mugd.editor.LinkResolver = function () {
 
   /**
    * @private
-   * @type {Object.<string,Array.<function(!mugd.editor.IViewModel)>}
+   * @type {Object.<string,Array.<function(!mugd.editor.IViewModel)>>}
    */
   this._unresolvedLinks = {};
 
@@ -56,7 +56,7 @@ mugd.editor.LinkResolver.prototype.get = function (uri, callback) {
  * @param {!Object} schema
  * @returns {string}
  */
-mugd.editor.LinkResolver.prototype._getSelectId = function(schema) {
+mugd.editor.LinkResolver.prototype._getSelectId = function (schema) {
   return schema['links']['href'];
 };
 
@@ -67,7 +67,7 @@ mugd.editor.LinkResolver.prototype._getSelectId = function(schema) {
 mugd.editor.LinkResolver.prototype._getTestFunction = function (schema) {
   var href = schema['links']['href'];
   var regex = new RegExp(href.replace("{@}", "(.*[^/])"));
-  return function(uri){
+  return function (uri) {
     return uri ? regex.test(uri) : false;
   };
 };
@@ -106,7 +106,7 @@ mugd.editor.LinkResolver.prototype.put = function (model, schema) {
       link.uri.subscribe(function (uri) {
         this._onUriChanged(link, uri);
       }, this);
-      if(!model.links){
+      if (!model.links) {
         model.links = [];
       }
       model.links.push(link);
@@ -134,9 +134,9 @@ mugd.editor.LinkResolver.prototype._updateUnresolvedLinks = function (uri, link)
  */
 mugd.editor.LinkResolver.prototype._updateSelects = function (link, previousUri, uri) {
   goog.object.forEach(this._selects, function (select) {
-    if(select.test(previousUri) && !select.test(uri)){
+    if (select.test(previousUri) && !select.test(uri)) {
       select.result.remove(link.model());
-    }else if(!select.test(previousUri) && select.test(uri)){
+    } else if (!select.test(previousUri) && select.test(uri)) {
       select.result.push(link.model());
     }
   });

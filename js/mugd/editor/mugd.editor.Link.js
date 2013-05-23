@@ -4,6 +4,7 @@ goog.require('mugd.utils');
 
 /**
  * @param {string} href
+ * @extends goog.Disposable
  * @constructor
  */
 mugd.editor.Link = function (href) {
@@ -59,7 +60,7 @@ mugd.editor.Link = function (href) {
   }, this);
 
   /**
-   * @type {string}
+   * @type {string|null}
    */
   this.previousUri = null;
 };

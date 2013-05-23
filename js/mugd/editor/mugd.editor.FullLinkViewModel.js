@@ -7,6 +7,7 @@ goog.require('mugd.editor.Link');
  * @param {!Object} schema
  * @param {!mugd.editor.LinkResolver} resolver
  * @implements mugd.editor.IViewModel
+ * @extends mugd.editor.PrimitiveViewModel
  * @constructor
  */
 mugd.editor.FullLinkViewModel = function (schema, resolver) {

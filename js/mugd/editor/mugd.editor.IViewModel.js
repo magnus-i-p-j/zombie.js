@@ -2,7 +2,7 @@ goog.provide('mugd.editor.IViewModel');
 
 /**
  * @interface
- * @extends goog.Disposable.IDisposable
+ * @extends goog.disposable.IDisposable
  */
 mugd.editor.IViewModel = function () {
 };
@@ -11,21 +11,21 @@ mugd.editor.IViewModel = function () {
  * @param {string=} value
  * @return {string}
  */
-mugd.editor.IViewModel.prototype.title = function (value) {
+mugd.editor.IViewModel.prototype['title'] = function (value) {
 };
 
 /**
  * @param {string=} value
  * @return {string}
  */
-mugd.editor.IViewModel.prototype.description = function (value) {
+mugd.editor.IViewModel.prototype['description'] = function (value) {
 };
 
 /**
  * @param {mugd.editor.constants.ValueType=} value
  * @return {!mugd.editor.constants.ValueType}
  */
-mugd.editor.IViewModel.prototype.type = function (value) {
+mugd.editor.IViewModel.prototype['type'] = function (value) {
 };
 
 /**
@@ -39,13 +39,13 @@ mugd.editor.IViewModel.prototype['template'] = function (value) {
  * @param {*=} value
  * @return {*}
  */
-mugd.editor.IViewModel.prototype.value = function (value) {
+mugd.editor.IViewModel.prototype['value'] = function (value) {
 };
 
 /**
  * @param {*} value
  */
-mugd.editor.IViewModel.prototype.setValue = function (value) {
+mugd.editor.IViewModel.prototype['setValue'] = function (value) {
 };
 /**
  * @param {string} path
@@ -79,6 +79,6 @@ mugd.editor.IViewModel.prototype.saveModel = function () {
 mugd.editor.IViewModel.prototype.resolver;
 
 /**
- * @type {Array<mugd.editor.Link>}
+ * @type {Array.<!mugd.editor.Link>}
  */
 mugd.editor.IViewModel.prototype.links;
