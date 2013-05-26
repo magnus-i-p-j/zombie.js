@@ -260,15 +260,14 @@
     }
   }
   .card {
-    margin: 1em;
-    padding: 1em;
-    border: 1px solid #696969;
     width: @cardWidth;
     .label {
       width: @labelWidth;
+      font-size: .8em;
     }
     .value {
       width: (@cardWidth - @labelWidth);
+      font-size: .8em;
     }
     .cell {
       display: inline-block;
@@ -279,3 +278,15 @@
   }
 }
 
+section section {
+  margin: .3em;
+  padding: .3em;
+  border: 1px solid #696969;
+  h1{
+    margin: .1em 0 .1em 0
+  }
+  header p{
+    margin: 0;
+    font-size: .8em;
+  }
+}

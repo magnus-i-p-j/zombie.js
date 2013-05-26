@@ -12,3 +12,14 @@ mugd.editor.constants.ValueType = {
   'OBJECT': 'object',
   'STRING': 'string'
 };
+
+/**
+ * @enum {string}
+ */
+mugd.editor.constants.ModelState = {
+  'NEW': 'new',
+  'UPDATED': 'updated',
+  'DELETED': 'deleted',
+  'UNCHANGED': 'unchanged'
+}
+

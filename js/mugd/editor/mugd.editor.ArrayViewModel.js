@@ -89,6 +89,7 @@ mugd.editor.ArrayViewModel.prototype.fetchSplitPath = function (path, index) {
 
 mugd.editor.ArrayViewModel.prototype._createSubModel = function () {
   var newModel = this._createSubModelCallback();
+  newModel['modelState'](mugd.editor.constants.ModelState.NEW);
   newModel.addOnDisposeCallback(this._createSubModelDisposedCallback(newModel), this);
   return newModel;
 };

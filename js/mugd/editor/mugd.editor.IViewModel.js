@@ -74,6 +74,13 @@ mugd.editor.IViewModel.prototype['saveModel'] = function () {
 };
 
 /**
+ * @param {mugd.editor.constants.ModelState=} state
+ * @return {mugd.editor.constants.ModelState}
+ */
+mugd.editor.IViewModel.prototype['modelState'] = function (state) {
+};
+
+/**
  * @type {mugd.editor.LinkResolver}
  */
 mugd.editor.IViewModel.prototype.resolver;

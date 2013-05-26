@@ -36,6 +36,10 @@ mugd.editor.AbstractViewModel = function (schema, resolver) {
    *@type {function(string=):string}
    */
   this['fileName'] = ko.observable();
+  /**
+   * @type {function(mugd.editor.constants.ModelState=):mugd.editor.constants.ModelState}
+   */
+  this['modelState'] = ko.observable(mugd.editor.constants.ModelState.UNCHANGED);
 
   /**
    *
