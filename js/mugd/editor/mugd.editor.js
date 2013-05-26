@@ -15,7 +15,8 @@ goog.require('mugd.editor.LinkResolver');
 mugd.editor.getViewModel = function (schema, data) {
   var resolver = new mugd.editor.LinkResolver();
   var model = mugd.editor._getModel(schema, resolver);
-  model.setValue(data);
+  console.log('set value');
+  model['setValue'](data);
   return model;
 };
 
@@ -26,6 +27,7 @@ mugd.editor.getViewModel = function (schema, data) {
  * @param resolver
  */
 mugd.editor._getModel = function (schema, resolver) {
+  console.log(schema['type']);
   if (mugd.editor.FullLinkViewModel.isFullLinkValue(schema)) {
     return new mugd.editor.FullLinkViewModel(schema, resolver);
   }

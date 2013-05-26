@@ -57,7 +57,7 @@ mugd.editor.AbstractViewModel.prototype.disposeInternal = function () {
   goog.base(this, 'disposeInternal');
 };
 
-mugd.editor.AbstractViewModel.prototype.saveModel = function () {
+mugd.editor.AbstractViewModel.prototype['saveModel'] = function () {
   var json = goog.json.serialize(this);
   var blob = new Blob([json], {type: 'data:application/json;charset=utf-8'});
   saveAs(blob, this['fileName']());
@@ -85,23 +85,23 @@ mugd.editor.AbstractViewModel.prototype.fetch = function (path) {
 mugd.editor.AbstractViewModel.prototype.fetchSplitPath = function (path, index) {
   throw {'name': 'NotImplementedException', 'message': 'fetchSplitPath'};
 };
-mugd.editor.AbstractViewModel.prototype.setValue = function (value) {
+mugd.editor.AbstractViewModel.prototype['setValue'] = function (value) {
   throw {'name': 'NotImplementedException', 'message': 'setValue'};
 };
 mugd.editor.AbstractViewModel.prototype.toJSON = function () {
   throw {'name': 'NotImplementedException', 'message': 'toJSON'};
 };
-mugd.editor.AbstractViewModel.prototype.value = function () {
+mugd.editor.AbstractViewModel.prototype['value'] = function () {
   throw {'name': 'NotImplementedException', 'message': 'value'};
 };
 
 //Just so the IDE stops whining.
-mugd.editor.AbstractViewModel.prototype.title = function () {
+mugd.editor.AbstractViewModel.prototype['title'] = function () {
   throw {'name': 'NotImplementedException', 'message': 'title'};
 };
-mugd.editor.AbstractViewModel.prototype.description = function () {
+mugd.editor.AbstractViewModel.prototype['description'] = function () {
   throw {'name': 'NotImplementedException', 'message': 'description'};
 };
-mugd.editor.AbstractViewModel.prototype.type = function () {
+mugd.editor.AbstractViewModel.prototype['type'] = function () {
   throw {'name': 'NotImplementedException', 'message': 'type'};
 };

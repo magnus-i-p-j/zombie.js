@@ -41,7 +41,7 @@ mugd.editor.ArrayViewModel.prototype.toJSON = function () {
 /**
  * @param {*} value
  */
-mugd.editor.ArrayViewModel.prototype.setValue = function (value) {
+mugd.editor.ArrayViewModel.prototype['setValue'] = function (value) {
   if (goog.isArray(value)) {
 //    value = value;
     var newValue = goog.array.map(
@@ -51,7 +51,7 @@ mugd.editor.ArrayViewModel.prototype.setValue = function (value) {
         value ),
         function (data) {
           var model = this._createSubModel();
-          model.setValue(data);
+          model['setValue'](data);
           return model;
         },
         this
@@ -71,7 +71,7 @@ mugd.editor.ArrayViewModel.prototype.fetchSplitPath = function (path, index) {
     index = 0;
   }
   var head = path[index];
-  var value = this.value();
+  var value = this['value']();
 
   if (head === '') {
     return value;
@@ -94,7 +94,7 @@ mugd.editor.ArrayViewModel.prototype._createSubModel = function () {
 };
 
 mugd.editor.ArrayViewModel.prototype.disposeInternal = function () {
-  var value = this.value().slice();
+  var value = this['value']().slice();
   goog.array.forEach(value, function (model) {
     model.dispose();
   });

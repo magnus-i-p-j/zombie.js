@@ -39,7 +39,7 @@ mugd.editor.ObjectViewModel.prototype.toJSON = function () {
   );
 };
 
-mugd.editor.ObjectViewModel.prototype.setValue = function (newValue) {
+mugd.editor.ObjectViewModel.prototype['setValue'] = function (newValue) {
   var current = this['value']();
   goog.object.forEach(newValue,
       function (value, key) {
@@ -81,10 +81,10 @@ mugd.editor.ObjectViewModel.prototype.disposeInternal = function () {
   goog.base(this, 'disposeInternal');
 };
 
-mugd.editor.ObjectViewModel.prototype.title = function () {
+mugd.editor.ObjectViewModel.prototype['title'] = function () {
 };
 mugd.editor.ObjectViewModel.prototype['type'] = function (value) {
   return mugd.editor.constants.ValueType.OBJECT;
 };
-mugd.editor.ObjectViewModel.prototype.description = function () {
+mugd.editor.ObjectViewModel.prototype['description'] = function () {
 };

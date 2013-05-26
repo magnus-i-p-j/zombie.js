@@ -28,7 +28,7 @@ mugd.editor.PrimitiveViewModel.prototype.toJSON = function () {
   return this['value']();
 };
 
-mugd.editor.PrimitiveViewModel.prototype.setValue = function (value) {
+mugd.editor.PrimitiveViewModel.prototype['setValue'] = function (value) {
   this['value'](value);
 };
 

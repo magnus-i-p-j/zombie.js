@@ -80,14 +80,14 @@ mugd.editor.Link.prototype._createValueAccessor = function (field) {
   if (field === '@') {
     accessor = function () {
       if (model()) {
-        return model().value();
+        return model()['value']();
       }
     };
   } else {
     accessor = function () {
       var value;
       if (model()) {
-        value = model().value()[field].value();
+        value = model()['value']()[field]['value']();
       }
       return value;
     };
@@ -101,13 +101,13 @@ mugd.editor.Link.prototype._createValueSetter = function (field) {
   if (field === '@') {
     return function (newValue) {
       if (model()) {
-        model().value(newValue);
+        model()['value'](newValue);
       }
     };
   }
   return function (newValue) {
     if (model()) {
-      model().value()[field].value(newValue);
+      model()['value']()[field]['value'](newValue);
     }
   };
 

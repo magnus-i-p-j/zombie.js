@@ -17,7 +17,6 @@ mugd.editor.FullLinkViewModel = function (schema, resolver) {
 
   this._link = new mugd.editor.Link(schema['links']['href']);
   this._link.model(this);
-  this._model = null;
   this._model = ko.observable();
 
   this['model'] = ko.computed({
@@ -25,14 +24,14 @@ mugd.editor.FullLinkViewModel = function (schema, resolver) {
      * @this {mugd.editor.FullLinkViewModel}
      * @returns {mugd.editor.IViewModel}
      */
-    read: function () {
+    'read': function () {
       return this._model();
     },
     /**
      * @this {mugd.editor.FullLinkViewModel}
      * @param {mugd.editor.IViewModel} model
      */
-    write: function (model) {
+    'write': function (model) {
       if (model.links) {
         if (model.links[0]) {
           this._link.uri(model.links[0].uri());

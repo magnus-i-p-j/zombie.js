@@ -70,7 +70,7 @@ mugd.editor.IViewModel.prototype.toJSON = function (value) {
 /**
  *
  */
-mugd.editor.IViewModel.prototype.saveModel = function () {
+mugd.editor.IViewModel.prototype['saveModel'] = function () {
 };
 
 /**
