@@ -62,8 +62,8 @@ mugd.editor.AbstractViewModel.prototype.disposeInternal = function () {
 };
 
 mugd.editor.AbstractViewModel.prototype['saveModel'] = function () {
-  var json = goog.json.serialize(this);
-  var blob = new Blob([json], {type: 'data:application/json;charset=utf-8'});
+  var json = JSON.stringify(this);
+  var blob = new Blob([json], {'type': 'data:application/json;charset=utf-8'});
   saveAs(blob, this['fileName']());
 };
 /**
@@ -92,7 +92,7 @@ mugd.editor.AbstractViewModel.prototype.fetchSplitPath = function (path, index) 
 mugd.editor.AbstractViewModel.prototype['setValue'] = function (value) {
   throw {'name': 'NotImplementedException', 'message': 'setValue'};
 };
-mugd.editor.AbstractViewModel.prototype.toJSON = function () {
+mugd.editor.AbstractViewModel.prototype['toJSON'] = function () {
   throw {'name': 'NotImplementedException', 'message': 'toJSON'};
 };
 mugd.editor.AbstractViewModel.prototype['value'] = function () {

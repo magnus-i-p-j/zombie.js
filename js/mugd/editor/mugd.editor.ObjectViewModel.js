@@ -31,10 +31,10 @@ mugd.editor.ObjectViewModel = function (schema, resolver, getSubModel) {
 };
 goog.inherits(mugd.editor.ObjectViewModel, mugd.editor.AbstractViewModel);
 
-mugd.editor.ObjectViewModel.prototype.toJSON = function () {
+mugd.editor.ObjectViewModel.prototype['toJSON'] = function () {
   return goog.object.map(this['value'](),
       function (value) {
-        return value.toJSON();
+        return value['toJSON']();
       }
   );
 };

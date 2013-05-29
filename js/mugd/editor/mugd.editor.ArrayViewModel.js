@@ -26,14 +26,19 @@ goog.inherits(mugd.editor.ArrayViewModel, mugd.editor.AbstractViewModel);
 
 mugd.editor.ArrayViewModel.prototype['newItem'] = function () {
   var model = this._createSubModel();
+  model['modelState'](mugd.editor.constants.ModelState.NEW);
   this['value'].push(model);
   return model;
 };
 
-mugd.editor.ArrayViewModel.prototype.toJSON = function () {
+mugd.editor.ArrayViewModel.prototype['deleteItem'] = function (model) {
+  model.dispose();
+};
+
+mugd.editor.ArrayViewModel.prototype['toJSON'] = function () {
   return goog.array.map(this['value'](),
       function (value) {
-        return value.toJSON();
+        return value['toJSON']();
       }
   );
 };
@@ -89,7 +94,6 @@ mugd.editor.ArrayViewModel.prototype.fetchSplitPath = function (path, index) {
 
 mugd.editor.ArrayViewModel.prototype._createSubModel = function () {
   var newModel = this._createSubModelCallback();
-  newModel['modelState'](mugd.editor.constants.ModelState.NEW);
   newModel.addOnDisposeCallback(this._createSubModelDisposedCallback(newModel), this);
   return newModel;
 };

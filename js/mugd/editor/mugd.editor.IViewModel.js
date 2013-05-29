@@ -64,7 +64,7 @@ mugd.editor.IViewModel.prototype.fetchSplitPath = function (path, index) {
 /**
  * @param {string=} value
  */
-mugd.editor.IViewModel.prototype.toJSON = function (value) {
+mugd.editor.IViewModel.prototype['toJSON'] = function (value) {
 };
 
 /**

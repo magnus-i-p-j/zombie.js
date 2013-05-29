@@ -24,7 +24,7 @@ mugd.editor.PrimitiveViewModel = function (schema, resolver) {
 
 goog.inherits(mugd.editor.PrimitiveViewModel, mugd.editor.AbstractViewModel);
 
-mugd.editor.PrimitiveViewModel.prototype.toJSON = function () {
+mugd.editor.PrimitiveViewModel.prototype['toJSON'] = function () {
   return this['value']();
 };
 
