@@ -12,7 +12,7 @@ z.common.EntityRepository = function (rulebook) {
   this._repo = {};
 };
 
-z.common.EntityRepository.prototype[mugd.Injector.DEPS] = [
+z.common.EntityRepository.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.RULEBOOK
 ];
 

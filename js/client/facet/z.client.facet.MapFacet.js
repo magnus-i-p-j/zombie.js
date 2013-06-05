@@ -6,7 +6,7 @@ goog.require('goog.math.Rect');
 goog.require('z.client.facet.Facet');
 goog.require('z.client.facet.TileFacet');
 
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 goog.require('mugd.utils.Grid');
 goog.require('z.client');
 goog.require('z.client.events');
@@ -38,7 +38,7 @@ z.client.facet.MapFacet = function () {
 
 goog.inherits(z.client.facet.MapFacet, z.client.facet.Facet);
 
-z.client.facet.MapFacet.prototype[mugd.Injector.DEPS] = [];
+z.client.facet.MapFacet.prototype[mugd.injector.Injector.DEPS] = [];
 
 /**
  * @param {goog.events.EventTarget} parent

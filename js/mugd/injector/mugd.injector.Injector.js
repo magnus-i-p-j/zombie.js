@@ -1,9 +1,9 @@
-goog.provide('mugd.Injector');
+goog.provide('mugd.injector.Injector');
 
 /**
  * @constructor
  */
-mugd.Injector = function () {
+mugd.injector.Injector = function () {
 
   /**
    * @type {!Object.<string, Function>}
@@ -17,7 +17,7 @@ mugd.Injector = function () {
    */
   this._resources = {};
 
-  this.addResource(mugd.Injector.INJECTOR, this);
+  this.addResource(mugd.injector.Injector.INJECTOR, this);
 };
 
 /**
@@ -25,7 +25,7 @@ mugd.Injector = function () {
  * @param {string} key
  * @param {Function} provider
  */
-mugd.Injector.prototype.addProvider = function (key, provider) {
+mugd.injector.Injector.prototype.addProvider = function (key, provider) {
   this._providers[key] = provider;
 };
 
@@ -34,7 +34,7 @@ mugd.Injector.prototype.addProvider = function (key, provider) {
  * @param {string} key
  * @param {*} resource
  */
-mugd.Injector.prototype.addResource = function (key, resource) {
+mugd.injector.Injector.prototype.addResource = function (key, resource) {
   this._resources[key] = resource;
 };
 
@@ -43,7 +43,7 @@ mugd.Injector.prototype.addResource = function (key, resource) {
  * @param {string} key The key of the service to get.
  * @return {*} The service.
  */
-mugd.Injector.prototype.getResource = function (key) {
+mugd.injector.Injector.prototype.getResource = function (key) {
   var resource = this._resources[key];
   if (!resource) {
     var provider = this._providers[key];
@@ -61,7 +61,7 @@ mugd.Injector.prototype.getResource = function (key) {
  * @param {Function} ctor The constructor function to use.
  * @return {!Object} An instance of the constructor.
  */
-mugd.Injector.prototype.create = function (ctor) {
+mugd.injector.Injector.prototype.create = function (ctor) {
   /**
    * @constructor
    */
@@ -81,8 +81,8 @@ mugd.Injector.prototype.create = function (ctor) {
  * @param {!Object} instance The instance to use.
  * @private
  */
-mugd.Injector.prototype._inject = function (ctor, instance) {
-  var keys = ctor.prototype[mugd.Injector.DEPS];
+mugd.injector.Injector.prototype._inject = function (ctor, instance) {
+  var keys = ctor.prototype[mugd.injector.Injector.DEPS];
   if (!goog.isArray(keys)) {
     console.log(ctor);
     throw 'No dependencies declared.';
@@ -95,8 +95,8 @@ mugd.Injector.prototype._inject = function (ctor, instance) {
 /**
  * @const
   */
-mugd.Injector.INJECTOR = '$injector';
+mugd.injector.Injector.INJECTOR = '$injector';
 /**
  * @const
   */
-mugd.Injector.DEPS = '$deps';
+mugd.injector.Injector.DEPS = '$deps';

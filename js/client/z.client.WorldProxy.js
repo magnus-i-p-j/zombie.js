@@ -2,7 +2,7 @@ goog.provide('z.client.WorldProxy');
 
 goog.require('goog.events.EventTarget');
 
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 goog.require('z.client');
 goog.require('z.service.world.World');
 goog.require('z.client.events.StartTurn');
@@ -33,7 +33,7 @@ z.client.WorldProxy = function (initWorldService, ruleset, repository) {
 
 goog.inherits(z.client.WorldProxy, goog.events.EventTarget);
 
-z.client.WorldProxy.prototype[mugd.Injector.DEPS] = [
+z.client.WorldProxy.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.WORLD_SERVICE,
   z.client.Resources.RULESET,
   z.client.Resources.REPOSITORY

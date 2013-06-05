@@ -1,6 +1,6 @@
 goog.provide('z.client.facet.ActionListFacet');
 
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 goog.require('z.client');
 
 goog.require('z.client.facet.Facet');
@@ -20,6 +20,6 @@ z.client.facet.ActionListFacet = function () {
 
 goog.inherits(z.client.facet.ActionListFacet, z.client.facet.Facet);
 
-z.client.facet.ActionListFacet.prototype[mugd.Injector.DEPS] = [
+z.client.facet.ActionListFacet.prototype[mugd.injector.Injector.DEPS] = [
 ];
 

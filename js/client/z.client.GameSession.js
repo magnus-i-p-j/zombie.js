@@ -1,6 +1,6 @@
 goog.provide('z.client.GameSession');
 
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 goog.require('z.client');
 
 /**
@@ -15,7 +15,7 @@ z.client.GameSession = function (world, mainWidget, gameDomElement) {
   this.gameDomElement = gameDomElement;
 };
 
-z.client.GameSession.prototype[mugd.Injector.DEPS] = [
+z.client.GameSession.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.WORLD,
   z.client.Resources.GAME_SESSION_WIDGET,
   z.client.Resources.GAME_DOM_ELEMENT

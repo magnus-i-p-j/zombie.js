@@ -17,7 +17,7 @@ z.client.facet.InfoFacet = function () {
 
 goog.inherits(z.client.facet.InfoFacet, z.client.facet.Facet);
 
-z.client.facet.InfoFacet.prototype[mugd.Injector.DEPS] = [];
+z.client.facet.InfoFacet.prototype[mugd.injector.Injector.DEPS] = [];
 
 
 /**

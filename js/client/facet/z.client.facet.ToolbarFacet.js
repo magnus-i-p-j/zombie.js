@@ -23,6 +23,6 @@ z.client.facet.ToolbarFacet = function (actions) {
 
 goog.inherits(z.client.facet.ToolbarFacet, z.client.facet.Facet);
 
-z.client.facet.ToolbarFacet.prototype[mugd.Injector.DEPS] = [
+z.client.facet.ToolbarFacet.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.END_TURN_ACTION
 ];

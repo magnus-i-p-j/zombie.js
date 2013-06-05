@@ -7,7 +7,7 @@ goog.require('goog.style');
 goog.require('goog.math');
 goog.require('goog.math.Coordinate');
 goog.require('mugd.ui.MapScroller');
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 goog.require('z.client');
 goog.require('z.client.events.ShowContextMenu');
 
@@ -21,7 +21,7 @@ z.client.ui.widget.MapWidget = function (mapFacet, gem) {
   this._gem = gem;
 };
 
-z.client.ui.widget.MapWidget.prototype[mugd.Injector.DEPS] = [
+z.client.ui.widget.MapWidget.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.MAP_FACET,
   z.client.Resources.GEM
 ];

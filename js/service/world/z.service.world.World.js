@@ -1,6 +1,6 @@
 goog.provide('z.service.world.World');
 
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 goog.require('z.service');
 
 goog.require('z.common.rulebook');
@@ -44,7 +44,7 @@ z.service.world.World = function (rulebook, terrainGenerator, entityRepository) 
   this._actorCallbacks = {};
 };
 
-z.service.world.World.prototype[mugd.Injector.DEPS] = [
+z.service.world.World.prototype[mugd.injector.Injector.DEPS] = [
   z.service.Resources.RULEBOOK,
   z.service.Resources.TERRAIN_GENERATOR,
   z.service.Resources.REPOSITORY

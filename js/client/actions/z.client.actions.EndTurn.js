@@ -21,7 +21,7 @@ z.client.actions.EndTurn = function (world) {
 };
 goog.inherits(z.client.actions.EndTurn, z.client.action.Action);
 
-z.client.actions.EndTurn.prototype[mugd.Injector.DEPS] = [
+z.client.actions.EndTurn.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.WORLD
 ];
 

@@ -32,7 +32,7 @@ z.client.ui.widget.MessageLogWidget = function (messageLogFacet) {
   rootLogger.addHandler(goog.bind(this.addLogRecord, this));
 };
 
-z.client.ui.widget.MessageLogWidget.prototype[mugd.Injector.DEPS] = [
+z.client.ui.widget.MessageLogWidget.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.MESSAGE_LOG_FACET
 ];
 

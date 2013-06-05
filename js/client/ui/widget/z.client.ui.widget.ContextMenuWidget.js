@@ -1,6 +1,6 @@
 goog.provide('z.client.ui.widget.ContextMenuWidget');
 
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 goog.require('z.client');
 goog.require('goog.events.EventTarget');
 goog.require('goog.events.EventHandler');
@@ -30,7 +30,7 @@ z.client.ui.widget.ContextMenuWidget.prototype.claim = function (targetElement) 
   this.eventHandler.listen(goog.dom.getParentElement(this.targetElement), goog.events.EventType.MOUSEOVER, this.doMouseOverParent);
 };
 
-z.client.ui.widget.ContextMenuWidget.prototype[mugd.Injector.DEPS] = [
+z.client.ui.widget.ContextMenuWidget.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.CONTEXT_MENU_FACET
 ];
 

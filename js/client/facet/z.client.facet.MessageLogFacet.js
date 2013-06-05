@@ -25,7 +25,7 @@ z.client.facet.MessageLogFacet = function (infoFacet) {
 
 goog.inherits(z.client.facet.MessageLogFacet, z.client.facet.Facet);
 
-z.client.facet.MessageLogFacet.prototype[mugd.Injector.DEPS] = [
+z.client.facet.MessageLogFacet.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.INFO_FACET
 ];
 

@@ -1,11 +1,11 @@
 goog.provide('z.client');
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 
 /**
  * @enum {string}
  */
 z.client.Resources = {
-  INJECTOR:mugd.Injector.INJECTOR,
+  INJECTOR:mugd.injector.Injector.INJECTOR,
   RULESET:'ruleset',
   WORLD:'world',
   WORLD_SERVICE:'world service',

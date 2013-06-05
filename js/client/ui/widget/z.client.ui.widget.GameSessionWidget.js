@@ -1,5 +1,5 @@
 goog.provide('z.client.ui.widget.GameSessionWidget');
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 goog.require('z.client');
 goog.require('goog.style');
 
@@ -16,7 +16,7 @@ z.client.ui.widget.GameSessionWidget = function (gem, mapWidget, contextMenuWidg
   this.messageLogWidget = messageLogWidget;
 };
 
-z.client.ui.widget.GameSessionWidget.prototype[mugd.Injector.DEPS] = [
+z.client.ui.widget.GameSessionWidget.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.GEM,
   z.client.Resources.MAP_WIDGET,
   z.client.Resources.CONTEXT_MENU_WIDGET,

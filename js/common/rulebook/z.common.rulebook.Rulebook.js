@@ -5,7 +5,7 @@ goog.require("z.common.rulebook.Improvement");
 goog.require("z.common.rulebook.Terrain");
 goog.require("z.common.rulebook.Actor");
 
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 goog.require('z.client');
 
 
@@ -36,7 +36,7 @@ z.common.rulebook.Rulebook = function (ruleset) {
   }, this);
 };
 
-z.common.rulebook.Rulebook.prototype[mugd.Injector.DEPS] = [
+z.common.rulebook.Rulebook.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.RULESET
 ];
 

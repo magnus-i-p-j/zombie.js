@@ -37,7 +37,7 @@ z.client.facet.ContextMenuFacet = function (actionFactory) {
 
 goog.inherits(z.client.facet.ContextMenuFacet, z.client.facet.ActionListFacet);
 
-z.client.facet.ContextMenuFacet.prototype[mugd.Injector.DEPS] = [
+z.client.facet.ContextMenuFacet.prototype[mugd.injector.Injector.DEPS] = [
   z.client.Resources.ACTION_FACTORY
 ];
 

@@ -1,6 +1,6 @@
 goog.provide('z.service.world.RandomTerrainGenerator');
 
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 goog.require('z.service');
 goog.require('z.service.world.ITerrainGenerator');
 goog.require('z.common.EntityRepository');
@@ -32,7 +32,7 @@ z.service.world.RandomTerrainGenerator = function (seed, entityRepository) {
 };
 
 
-z.service.world.RandomTerrainGenerator.prototype[mugd.Injector.DEPS] = [
+z.service.world.RandomTerrainGenerator.prototype[mugd.injector.Injector.DEPS] = [
   z.service.Resources.TERRAIN_SEED,
   z.service.Resources.REPOSITORY
 ];

@@ -25,7 +25,7 @@ goog.require('z.client.actions.EndTurn');
 goog.require('z.client.User');
 goog.require('z.client.GameSession');
 
-goog.require('mugd.Injector');
+goog.require('mugd.injector.Injector');
 
 goog.require('z.service');
 
@@ -61,7 +61,7 @@ z.client.Client.prototype.login = function () {
 
 z.client.Client.prototype.startNewGame = function (ruleset) {
 
-  var injector = new mugd.Injector();
+  var injector = new mugd.injector.Injector();
   injector.addResource(z.client.Resources.RULESET, ruleset);
   injector.addResource(z.client.Resources.WORLD_SERVICE, z.client.Client.initWorldService);
   injector.addProvider(z.client.Resources.WORLD, z.client.WorldProxy);
@@ -92,7 +92,7 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
 
 z.client.Client.initWorldService = function (ruleset) {
   // TODO: add server
-  var injector = new mugd.Injector();
+  var injector = new mugd.injector.Injector();
   injector.addResource(z.service.Resources.RULESET, ruleset);
   injector.addProvider(z.service.Resources.WORLD, z.service.world.World);
   injector.addProvider(z.service.Resources.RULEBOOK, z.common.rulebook.Rulebook);
