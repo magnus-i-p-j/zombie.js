@@ -9,13 +9,18 @@ goog.require('goog.array');
 goog.require('goog.style');
 
 /**
- * @param {!z.client.facet.ContextMenuFacet} contextMenuFacet
+ * @param {!mugd.injector.ServiceHolder} services
  * @constructor
  * @extends {goog.Disposable}
+ * @implements mugd.injector.IInjectable
  */
-z.client.ui.widget.ContextMenuWidget = function(contextMenuFacet){
+z.client.ui.widget.ContextMenuWidget = function (services) {
   goog.base(this);
-  this._contextMenuFacet = contextMenuFacet;
+  /**
+   * @type {!z.client.facet.ContextMenuFacet}
+   * @private
+   */
+  this._contextMenuFacet = services.get(z.client.Resources.CONTEXT_MENU_FACET);
   /**
    * @protected
    * @type {goog.events.EventHandler}
@@ -30,19 +35,15 @@ z.client.ui.widget.ContextMenuWidget.prototype.claim = function (targetElement) 
   this.eventHandler.listen(goog.dom.getParentElement(this.targetElement), goog.events.EventType.MOUSEOVER, this.doMouseOverParent);
 };
 
-z.client.ui.widget.ContextMenuWidget.prototype[mugd.injector.Injector.DEPS] = [
-  z.client.Resources.CONTEXT_MENU_FACET
-];
-
 /**
  * @param {!goog.events.BrowserEvent} e
  */
-z.client.ui.widget.ContextMenuWidget.prototype.doMouseOverParent = function(e){
-  if(this._contextMenuFacet.visible() && !this.targetElement.contains(e.target)){
+z.client.ui.widget.ContextMenuWidget.prototype.doMouseOverParent = function (e) {
+  if (this._contextMenuFacet.visible() && !this.targetElement.contains(e.target)) {
     this._contextMenuFacet.hide();
   }
 };
 
-z.client.ui.widget.ContextMenuWidget.prototype.disposeInternal = function(){
+z.client.ui.widget.ContextMenuWidget.prototype.disposeInternal = function () {
   this.eventHandler.dispose();
 };

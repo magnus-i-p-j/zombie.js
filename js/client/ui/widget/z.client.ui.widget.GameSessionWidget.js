@@ -4,24 +4,28 @@ goog.require('z.client');
 goog.require('goog.style');
 
 /**
- * @param {!z.client.facet.Gem} gem
- * @param {!z.client.ui.widget.MapWidget} mapWidget
- * @param {!z.client.ui.widget.ContextMenuWidget} contextMenuWidget
+ * @param {!mugd.injector.ServiceHolder} services
  * @constructor
+ * @implements mugd.injector.IInjectable
  */
-z.client.ui.widget.GameSessionWidget = function (gem, mapWidget, contextMenuWidget, messageLogWidget) {
-  this.gem = gem;
-  this.mapWidget = mapWidget;
-  this.contextMenuWidget = contextMenuWidget;
-  this.messageLogWidget = messageLogWidget;
+z.client.ui.widget.GameSessionWidget = function (services) {
+  /**
+   * @type {!z.client.facet.Gem}
+   */
+  this.gem = services.get(z.client.Resources.GEM);
+  /**
+   * @type {!z.client.ui.widget.MapWidget}
+   */
+  this.mapWidget = services.get(z.client.Resources.MAP_WIDGET);
+  /**
+   * @type {!z.client.ui.widget.ContextMenuWidget}
+   */
+  this.contextMenuWidget = services.get(z.client.Resources.CONTEXT_MENU_WIDGET);
+  /**
+   * @type {!z.client.ui.widget.MessageLogWidget}
+   */
+  this.messageLogWidget = services.get(z.client.Resources.MESSAGE_LOG_WIDGET);
 };
-
-z.client.ui.widget.GameSessionWidget.prototype[mugd.injector.Injector.DEPS] = [
-  z.client.Resources.GEM,
-  z.client.Resources.MAP_WIDGET,
-  z.client.Resources.CONTEXT_MENU_WIDGET,
-  z.client.Resources.MESSAGE_LOG_WIDGET
-];
 
 /**
  * @param {!Element} gameDomElement

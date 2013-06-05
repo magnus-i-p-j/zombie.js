@@ -10,15 +10,28 @@ goog.require('goog.array');
 goog.require('mugd.utils.SimplexNoise');
 
 /**
- * @param {!z.common.rulebook.Rulebook} rulebook
- * @param {!z.service.world.ITerrainGenerator} terrainGenerator
- * @param {!z.common.EntityRepository} entityRepository
+ * @param {!mugd.injector.ServiceHolder} services
  * @constructor
+ * @implements {mugd.injector.IInjectable}
  */
-z.service.world.World = function (rulebook, terrainGenerator, entityRepository) {
-  this._entityRepository = entityRepository;
-  this._rulebook = rulebook;
-  this._terrainGenerator = terrainGenerator;
+z.service.world.World = function (services) {
+  /**
+   * @type {!z.common.EntityRepository} entityRepository
+   * @private
+   */
+  this._entityRepository = services.get(z.service.Resources.REPOSITORY);
+  /**
+   *
+   * @type {!z.common.rulebook.Rulebook} rulebook
+   * @private
+   */
+  this._rulebook = services.get(z.service.Resources.RULESET);
+  /**
+   *
+   * @type {!z.service.world.ITerrainGenerator} terrainGenerator
+   * @private
+   */
+  this._terrainGenerator = services.get(z.service.Resources.TERRAIN_GENERATOR);
 
   /**
    * @type {number}
@@ -43,12 +56,6 @@ z.service.world.World = function (rulebook, terrainGenerator, entityRepository) 
    */
   this._actorCallbacks = {};
 };
-
-z.service.world.World.prototype[mugd.injector.Injector.DEPS] = [
-  z.service.Resources.RULEBOOK,
-  z.service.Resources.TERRAIN_GENERATOR,
-  z.service.Resources.REPOSITORY
-];
 
 /**
  * @param {function(!z.common.protocol.startTurn)} actorCallback
@@ -86,7 +93,7 @@ z.service.world.World.prototype.endTurn = function () {
       /**
        * @type {z.common.protocol.startTurn}
        */
-      var startTurn = {'actorId':actorGuid, 'tiles':tiles, 'turn':this._turn };
+      var startTurn = {'actorId': actorGuid, 'tiles': tiles, 'turn': this._turn };
       this._actorCallbacks[actorGuid](startTurn);
     }
   }

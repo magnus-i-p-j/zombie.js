@@ -3,17 +3,17 @@ goog.provide('z.client.ActionFactory');
 goog.require('z.client.actions.CreateImprovement');
 
 /**
- * @param {!z.common.rulebook.Rulebook} rulebook
+ * @param {!mugd.injector.ServiceHolder} services
  * @constructor
+ * @implements {mugd.injector.IInjectable}
  */
-z.client.ActionFactory = function (rulebook) {
-  this._rulebook = rulebook;
+z.client.ActionFactory = function (services) {
+  /**
+   * @type {!z.common.rulebook.Rulebook}
+   * @private
+   */
+  this._rulebook = services.get(z.client.Resources.RULEBOOK);
 };
-
-z.client.ActionFactory.prototype[mugd.injector.Injector.DEPS] = [
-  z.client.Resources.RULEBOOK,
-  z.client.Resources.INJECTOR
-];
 
 /**
  * @param {z.common.rulebook.meta} meta

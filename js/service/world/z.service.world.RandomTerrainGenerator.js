@@ -6,36 +6,28 @@ goog.require('z.service.world.ITerrainGenerator');
 goog.require('z.common.EntityRepository');
 goog.require('z.common.data.TileData');
 
-
 /**
- * @param {string} seed
- * @param {z.common.EntityRepository} entityRepository
- * @constructor
+ * @param {!mugd.injector.ServiceHolder} services * @constructor
  * @implements {z.service.world.ITerrainGenerator}
+ * @implements mugd.injector.IInjectable
  */
-z.service.world.RandomTerrainGenerator = function (seed, entityRepository) {
+z.service.world.RandomTerrainGenerator = function (services) {
   /**
    * @type {string}
    * @private
    */
-  this._seed = seed;
+  this._seed = services.get(z.client.Resources.TERRAIN_SEED);
   /**
    * @type {z.common.EntityRepository}
    * @private
    */
-  this._entityRepository = entityRepository;
+  this._entityRepository = services.get(z.client.Resources.REPOSITORY);
   /**
    * @type {mugd.utils.SimplexNoise}
    * @private
    */
   this._noise = new mugd.utils.SimplexNoise();
 };
-
-
-z.service.world.RandomTerrainGenerator.prototype[mugd.injector.Injector.DEPS] = [
-  z.service.Resources.TERRAIN_SEED,
-  z.service.Resources.REPOSITORY
-];
 
 /**
  * @inheritDoc

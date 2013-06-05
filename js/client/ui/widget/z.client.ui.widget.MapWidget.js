@@ -12,19 +12,22 @@ goog.require('z.client');
 goog.require('z.client.events.ShowContextMenu');
 
 /**
- * @param {!z.client.facet.MapFacet} mapFacet
- * @param {!z.client.facet.Gem} gem
+ * @param {!mugd.injector.ServiceHolder} services
  * @constructor
+ * @implements mugd.injector.IInjectable
  */
-z.client.ui.widget.MapWidget = function (mapFacet, gem) {
-  this._mapFacet = mapFacet;
-  this._gem = gem;
+z.client.ui.widget.MapWidget = function (services) {
+  /**
+   * @type {!z.client.facet.MapFacet}
+   * @private
+   */
+  this._mapFacet = services.get(z.client.Resources.MAP_FACET);
+  /**
+   * @type {!z.client.facet.Gem}
+   * @private
+   */
+  this._gem = services.get(z.client.Resources.GEM);
 };
-
-z.client.ui.widget.MapWidget.prototype[mugd.injector.Injector.DEPS] = [
-  z.client.Resources.MAP_FACET,
-  z.client.Resources.GEM
-];
 
 z.client.ui.widget.MapWidget.prototype.claim = function (targetElement) {
   this.targetElement = targetElement;

@@ -5,13 +5,17 @@ goog.require('z.client');
 goog.require('z.common.rulebook');
 
 /**
- * @param {!z.client.WorldProxy} world
+ * @param {!mugd.injector.ServiceHolder} services
  * @constructor
- * @extends {z.client.action.Action}
+ * @implements {mugd.injector.IInjectable}
  */
-z.client.actions.EndTurn = function (world) {
+z.client.actions.EndTurn = function (services) {
   goog.base(this, 'End turn');
-  this._world = world;
+  /**
+   * @type {!z.client.WorldProxy}
+   * @private
+   */
+  this._world = services.get(z.client.Resources.WORLD);
   this.meta = {
     type: 'action_end_turn',
     category: z.common.rulebook.category.ACTION,
@@ -20,10 +24,6 @@ z.client.actions.EndTurn = function (world) {
   };
 };
 goog.inherits(z.client.actions.EndTurn, z.client.action.Action);
-
-z.client.actions.EndTurn.prototype[mugd.injector.Injector.DEPS] = [
-  z.client.Resources.WORLD
-];
 
 /**
  * @override

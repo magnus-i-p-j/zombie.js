@@ -10,18 +10,19 @@ goog.require('z.common.rulebook.Rulebook');
 goog.require('z.client.action');
 
 /**
- * @param {!z.client.ActionFactory} actionFactory
+ * @param {!mugd.injector.ServiceHolder} services
  * @extends {z.client.facet.ActionListFacet}
  * @constructor
+ * @implements mugd.injector.IInjectable
  */
-z.client.facet.ContextMenuFacet = function (actionFactory) {
+z.client.facet.ContextMenuFacet = function (services) {
   goog.base(this);
 
   /**
    * @type {!z.client.ActionFactory}
    * @private
    */
-  this._actionFactory = actionFactory;
+  this._actionFactory = services.get(z.client.Resources.ACTION_FACTORY);
 
   /**
    * @expose
@@ -36,10 +37,6 @@ z.client.facet.ContextMenuFacet = function (actionFactory) {
 };
 
 goog.inherits(z.client.facet.ContextMenuFacet, z.client.facet.ActionListFacet);
-
-z.client.facet.ContextMenuFacet.prototype[mugd.injector.Injector.DEPS] = [
-  z.client.Resources.ACTION_FACTORY
-];
 
 /**
  * @override

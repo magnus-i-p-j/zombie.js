@@ -4,17 +4,18 @@ goog.require('z.common.entityMap');
 goog.require('mugd.utils');
 
 /**
- * @param {!z.common.rulebook.Rulebook} rulebook
+ * @param {!mugd.injector.ServiceHolder} services
  * @constructor
+ * @implements mugd.injector.IInjectable
  */
-z.common.EntityRepository = function (rulebook) {
-  this._rulebook = rulebook;
+z.common.EntityRepository = function (services) {
+  /**
+   * @type {!z.common.rulebook.Rulebook}
+   * @private
+   */
+  this._rulebook = services.get(z.client.Resources.RULEBOOK);
   this._repo = {};
 };
-
-z.common.EntityRepository.prototype[mugd.injector.Injector.DEPS] = [
-  z.client.Resources.RULEBOOK
-];
 
 /**
  * @param {z.common.data.EntityData} entityData

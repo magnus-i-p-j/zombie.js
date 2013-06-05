@@ -13,32 +13,32 @@ goog.require('z.common.data.ClientEndTurn');
 goog.require('z.common.data.ActorData');
 
 /**
- * @param {function(!Object):!z.service.world.World} initWorldService
- * @param {!Object} ruleset
- * @param {!z.common.EntityRepository} repository
+ * @param {!mugd.injector.ServiceHolder} services
  * @extends {goog.events.EventTarget}
  * @constructor
+ * @implements {mugd.injector.IInjectable}
  */
-z.client.WorldProxy = function (initWorldService, ruleset, repository) {
+z.client.WorldProxy = function (services) {
   goog.base(this);
+  /**
+   * @type {!Object}
+   */
+  var ruleset = services.get(z.client.Resources.RULEBOOK);
   /**
    * @type {!z.service.world.World}
    * @private
    */
-  this._world = initWorldService(ruleset);
-  this._repository = repository;
+  this._world = services.get(z.client.Resources.WORLD_SERVICE)(ruleset);
+  /**
+   * @type {!z.common.EntityRepository}
+   * @private
+   */
+  this._repository = services.get(z.client.Resources.REPOSITORY);
   this._actorId = null;
   this._turn = 0;
 };
 
 goog.inherits(z.client.WorldProxy, goog.events.EventTarget);
-
-z.client.WorldProxy.prototype[mugd.injector.Injector.DEPS] = [
-  z.client.Resources.WORLD_SERVICE,
-  z.client.Resources.RULESET,
-  z.client.Resources.REPOSITORY
-
-];
 
 z.client.WorldProxy.prototype.firstTurn = function () {
   /**
@@ -58,8 +58,8 @@ z.client.WorldProxy.prototype.doStartTurn = function (startTurn) {
   this._turn = startTurnData.turn;
   var tiles = goog.array.map(startTurnData.tiles, this._repository.put, this._repository);
   var e = new z.client.events.StartTurn({
-        tiles:tiles,
-        turn:this._turn
+        tiles: tiles,
+        turn: this._turn
       }
   );
   this.dispatchEvent(e);

@@ -5,16 +5,17 @@ goog.require('z.client');
 goog.require('goog.debug.Logger');
 
 /**
- * @param {z.client.facet.MessageLogFacet} messageLogFacet
+ * @param {!mugd.injector.ServiceHolder} services
  * @constructor
  * @implements z.client.ui.widget.IWidget
+ * @implements mugd.injector.IInjectable
  */
-z.client.ui.widget.MessageLogWidget = function (messageLogFacet) {
+z.client.ui.widget.MessageLogWidget = function (services) {
   /**
    * @type {z.client.facet.MessageLogFacet}
    * @private
    */
-  this._messageLogFacet = messageLogFacet;
+  this._messageLogFacet = services.get(z.client.Resources.MESSAGE_LOG_FACET);
   /**
    * @type {goog.debug.HtmlFormatter}
    * @private
@@ -31,10 +32,6 @@ z.client.ui.widget.MessageLogWidget = function (messageLogFacet) {
   var rootLogger = goog.debug.Logger.getLogger('');
   rootLogger.addHandler(goog.bind(this.addLogRecord, this));
 };
-
-z.client.ui.widget.MessageLogWidget.prototype[mugd.injector.Injector.DEPS] = [
-  z.client.Resources.MESSAGE_LOG_FACET
-];
 
 z.client.ui.widget.MessageLogWidget.googLogLevelToTag = [
   [z.client.Tags.ERROR, 1000],
@@ -63,13 +60,13 @@ z.client.ui.widget.MessageLogWidget.prototype.addLogRecord = function (logRecord
   if (this._capturing) {
     var html = this.getFormatter().formatRecord(logRecord);
     var tags = [z.client.Tags.DEBUG];
-    var level = goog.array.find(z.client.ui.widget.MessageLogWidget.googLogLevelToTag, function(level){
+    var level = goog.array.find(z.client.ui.widget.MessageLogWidget.googLogLevelToTag, function (level) {
       return level[1] <= logRecord.getLevel().value;
     });
-    if(!goog.isNull(level)){
+    if (!goog.isNull(level)) {
       tags.push(level[0]);
     }
-    this._messageLogFacet.addMessage(html,tags);
+    this._messageLogFacet.addMessage(html, tags);
   }
 };
 

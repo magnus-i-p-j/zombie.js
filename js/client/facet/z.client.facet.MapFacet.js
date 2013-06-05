@@ -12,10 +12,12 @@ goog.require('z.client');
 goog.require('z.client.events');
 
 /**
+ * @param {!mugd.injector.ServiceHolder} services
  * @extends {z.client.facet.Facet}
  * @constructor
+ * @implements mugd.injector.IInjectable
  */
-z.client.facet.MapFacet = function () {
+z.client.facet.MapFacet = function (services) {
   goog.base(this);
   /**
    * @expose
@@ -37,8 +39,6 @@ z.client.facet.MapFacet = function () {
 };
 
 goog.inherits(z.client.facet.MapFacet, z.client.facet.Facet);
-
-z.client.facet.MapFacet.prototype[mugd.injector.Injector.DEPS] = [];
 
 /**
  * @param {goog.events.EventTarget} parent

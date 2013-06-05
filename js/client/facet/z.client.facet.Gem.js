@@ -5,47 +5,46 @@ goog.require('mugd.injector.Injector');
 goog.require('z.client');
 
 /**
- * @param {!z.client.facet.MapFacet} mapFacet
- * @param {!z.client.facet.ContextMenuFacet} contextMenuFacet
- * @param {!z.client.facet.ToolbarFacet} toolbarFacet
- * @param {!z.client.facet.InfoFacet} infoFacet
- * @param {!z.client.facet.MessageLogFacet} messageLogFacet
- * @param {!z.client.WorldProxy} world
+ * @param {!mugd.injector.ServiceHolder} services
  * @extends {z.client.facet.Facet}
- * @param {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet} currentTarget
- * @param {function(z.client.facet.ActionFacet=):z.client.facet.ActionFacet} currentAction
  * @constructor
  */
-z.client.facet.Gem = function (mapFacet, contextMenuFacet, toolbarFacet, infoFacet, messageLogFacet, world, currentTarget, currentAction) {
+z.client.facet.Gem = function (services) {
   goog.base(this);
   /**
    * @type {!z.client.facet.MapFacet}
    */
-  this['mapFacet'] = mapFacet;
+  this['mapFacet'] = services.get(z.client.Resources.MAP_FACET);
   /**
    * @type {!z.client.facet.ContextMenuFacet}
    */
-  this['contextMenuFacet'] = contextMenuFacet;
+  this['contextMenuFacet'] = services.get(z.client.Resources.CONTEXT_MENU_FACET);
   /**
    * @type {!z.client.facet.ToolbarFacet}
    */
-  this['toolbarFacet'] = toolbarFacet;
+  this['toolbarFacet'] = services.get(z.client.Resources.TOOLBAR_FACET);
   /**
    * @type {!z.client.facet.InfoFacet}
    */
-  this['infoFacet'] = infoFacet;
+  this['infoFacet'] = services.get(z.client.Resources.INFO_FACET);
   /**
    * @type {!z.client.facet.MessageLogFacet}
    */
-  this['messageLogFacet'] = messageLogFacet;
+  this['messageLogFacet'] = services.get(z.client.Resources.MESSAGE_LOG_FACET);
   /**
    * @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet}
    */
-  this['currentTarget'] = currentTarget;
+  this['currentTarget'] = services.get(z.client.Resources.CURRENT_TARGET);
   /**
    * @type {function(z.client.facet.ActionFacet=):z.client.facet.ActionFacet}
    */
-  this['currentAction'] = currentAction;
+  this['currentAction'] = services.get(z.client.Resources.CURRENT_ACTION);
+
+  /**
+   * @type {!z.client.WorldProxy}
+   * @type {*}
+   */
+  var world = services.get(z.client.Resources.WORLD);
 
   this['mapFacet'].setParentEventTarget(this);
   this['contextMenuFacet'].setParentEventTarget(this);
@@ -57,13 +56,3 @@ z.client.facet.Gem = function (mapFacet, contextMenuFacet, toolbarFacet, infoFac
 
 goog.inherits(z.client.facet.Gem, z.client.facet.Facet);
 
-z.client.facet.Gem.prototype[mugd.injector.Injector.DEPS] = [
-  z.client.Resources.MAP_FACET,
-  z.client.Resources.CONTEXT_MENU_FACET,
-  z.client.Resources.TOOLBAR_FACET,
-  z.client.Resources.INFO_FACET,
-  z.client.Resources.MESSAGE_LOG_FACET,
-  z.client.Resources.WORLD,
-  z.client.Resources.CURRENT_TARGET,
-  z.client.Resources.CURRENT_ACTION
-];

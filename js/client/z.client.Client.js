@@ -88,6 +88,9 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
 
   this.session.start();
 
+
+//  this.session = injector.Create(z.client.GameSession).New();
+
 };
 
 z.client.Client.initWorldService = function (ruleset) {

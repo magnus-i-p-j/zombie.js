@@ -4,12 +4,11 @@ goog.require('goog.array');
 goog.require('z.client.facet.Facet');
 
 /**
+ * @param {!mugd.injector.ServiceHolder} services
  * @extends {z.client.facet.Facet}
  * @constructor
- *
- * @param  {z.client.facet.InfoFacet} infoFacet
  */
-z.client.facet.MessageLogFacet = function (infoFacet) {
+z.client.facet.MessageLogFacet = function (services) {
   goog.base(this);
 
   /**
@@ -18,16 +17,12 @@ z.client.facet.MessageLogFacet = function (infoFacet) {
   this['messages'] = ko.observableArray();
 
   /**
-   * @type {z.client.facet.InfoFacet}
+   * @type {!z.client.facet.InfoFacet}
    */
-  this.info = infoFacet;
+  this.info = services.get(z.client.Resources.INFO_FACET);
 };
 
 goog.inherits(z.client.facet.MessageLogFacet, z.client.facet.Facet);
-
-z.client.facet.MessageLogFacet.prototype[mugd.injector.Injector.DEPS] = [
-  z.client.Resources.INFO_FACET
-];
 
 /**
  * @param {goog.events.EventTarget} parent

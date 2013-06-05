@@ -1,5 +1,7 @@
 goog.provide('mugd.injector.Injector');
 
+goog.require('mugd.injector.ServiceHolder');
+
 /**
  * @constructor
  */
@@ -58,45 +60,25 @@ mugd.injector.Injector.prototype.getResource = function (key) {
 
 /**
  * Instantiates the given constructor resolving its dependencies.
- * @param {Function} ctor The constructor function to use.
+ * @param {function(new:mugd.injector.IInjectable, Object)} Ctor The constructor function to use.
  * @return {!Object} An instance of the constructor.
  */
-mugd.injector.Injector.prototype.create = function (ctor) {
-  /**
-   * @constructor
-   */
-  var Dependant = function () {
-  };
-  Dependant.prototype = ctor.prototype;
-  var instance = new Dependant();
-
-  this._inject(ctor, instance);
-
-  return instance;
+mugd.injector.Injector.prototype.create = function (Ctor) {
+  var services = new mugd.injector.ServiceHolder(this);
+  return new Ctor(services);
 };
 
 /**
- * Injects dependencies to a constructor in the context of the given instance.
- * @param {Function} ctor The constructor function to use.
- * @param {!Object} instance The instance to use.
- * @private
+ * Instantiates the given constructor resolving its dependencies.
+ * @param {function(new:mugd.injector.IInjectable, Object)} Ctor The constructor function to use.
+ * @return {!Object} An instance of the constructor.
  */
-mugd.injector.Injector.prototype._inject = function (ctor, instance) {
-  var keys = ctor.prototype[mugd.injector.Injector.DEPS];
-  if (!goog.isArray(keys)) {
-    console.log(ctor);
-    throw 'No dependencies declared.';
-  }
-  var deps = keys.map(this.getResource, this);
-
-  ctor.apply(instance, deps);
+mugd.injector.Injector.prototype.Create = function (Ctor) {
+  var services = new mugd.injector.ServiceHolder(this, Ctor);
+  services.New();
 };
 
 /**
  * @const
-  */
+ */
 mugd.injector.Injector.INJECTOR = '$injector';
-/**
- * @const
-  */
-mugd.injector.Injector.DEPS = '$deps';
