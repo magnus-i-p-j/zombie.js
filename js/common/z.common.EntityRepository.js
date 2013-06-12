@@ -4,7 +4,7 @@ goog.require('z.common.entityMap');
 goog.require('mugd.utils');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @implements mugd.injector.IInjectable
  */

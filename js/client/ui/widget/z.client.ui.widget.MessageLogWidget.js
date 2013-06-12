@@ -7,7 +7,7 @@ goog.require('mugd.injector.IInjectable');
 goog.require('z.client.ui.widget.IWidget');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @implements z.client.ui.widget.IWidget
  * @implements mugd.injector.IInjectable

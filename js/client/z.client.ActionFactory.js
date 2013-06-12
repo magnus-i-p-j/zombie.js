@@ -3,7 +3,7 @@ goog.provide('z.client.ActionFactory');
 goog.require('z.client.actions.CreateImprovement');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @implements {mugd.injector.IInjectable}
  */

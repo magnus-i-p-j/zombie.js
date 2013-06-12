@@ -10,7 +10,7 @@ goog.require('z.common.rulebook.Rulebook');
 goog.require('z.client.action');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @extends {z.client.facet.ActionListFacet}
  * @constructor
  * @implements mugd.injector.IInjectable

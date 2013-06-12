@@ -84,12 +84,9 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addProvider(z.client.Resources.MESSAGE_LOG_FACET, z.client.facet.MessageLogFacet);
   injector.addProvider(z.client.Resources.END_TURN_ACTION, z.client.actions.EndTurn);
 
-  this.session = injector.create(z.client.GameSession);
+  this.session = injector.Compose(z.client.GameSession).New();
 
   this.session.start();
-
-
-//  this.session = injector.Create(z.client.GameSession).New();
 
 };
 

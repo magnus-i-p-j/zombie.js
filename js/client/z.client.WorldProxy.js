@@ -13,7 +13,7 @@ goog.require('z.common.data.ClientEndTurn');
 goog.require('z.common.data.ActorData');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @extends {goog.events.EventTarget}
  * @constructor
  * @implements {mugd.injector.IInjectable}

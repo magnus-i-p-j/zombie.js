@@ -5,7 +5,7 @@ goog.require('mugd.injector.Injector');
 goog.require('z.client');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @extends {z.client.facet.Facet}
  * @constructor
  */

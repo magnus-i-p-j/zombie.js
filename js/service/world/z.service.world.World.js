@@ -10,7 +10,7 @@ goog.require('goog.array');
 goog.require('mugd.utils.SimplexNoise');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @implements {mugd.injector.IInjectable}
  */

@@ -6,7 +6,7 @@ goog.require('z.common.rulebook');
 goog.require('mugd.injector.IInjectable');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @implements {mugd.injector.IInjectable}
  * @extends {z.client.action.Action}

@@ -4,7 +4,7 @@ goog.require('z.client');
 goog.require('goog.style');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @implements mugd.injector.IInjectable
  */

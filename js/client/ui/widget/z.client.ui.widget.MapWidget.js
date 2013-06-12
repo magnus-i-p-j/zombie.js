@@ -12,7 +12,7 @@ goog.require('z.client');
 goog.require('z.client.events.ShowContextMenu');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @implements mugd.injector.IInjectable
  */

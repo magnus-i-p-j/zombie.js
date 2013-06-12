@@ -3,7 +3,7 @@ goog.provide('z.client.facet.InfoFacet');
 goog.require('z.client.facet.Facet');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @extends {z.client.facet.Facet}
  * @constructor
  * @implements mugd.injector.IInjectable

@@ -9,7 +9,7 @@ goog.require('goog.array');
 goog.require('goog.style');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @extends {goog.Disposable}
  * @implements mugd.injector.IInjectable

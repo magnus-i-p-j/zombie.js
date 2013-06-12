@@ -1,6 +1,6 @@
 goog.provide('mugd.injector.Injector');
 
-goog.require('mugd.injector.ServiceHolder');
+goog.require('mugd.injector.MicroFactory');
 
 /**
  * @constructor
@@ -52,7 +52,7 @@ mugd.injector.Injector.prototype.getResource = function (key) {
     if (!provider) {
       throw 'No provider found for key: ' + key;
     }
-    resource = this.create(provider);
+    resource = this.Compose(provider).New();
     this.addResource(key, resource);
   }
   return resource;
@@ -60,12 +60,22 @@ mugd.injector.Injector.prototype.getResource = function (key) {
 
 /**
  * Instantiates the given constructor resolving its dependencies.
- * @param {function(new:mugd.injector.IInjectable, !mugd.injector.ServiceHolder)} Ctor The constructor function to use.
+ * @param {function(new:mugd.injector.IInjectable, !mugd.injector.MicroFactory)} Ctor The constructor function to use.
  * @return {!Object} An instance of the constructor.
+ * @deprecated
  */
 mugd.injector.Injector.prototype.create = function (Ctor) {
-  var services = new mugd.injector.ServiceHolder(this);
-  return new Ctor(services);
+  var mf = new mugd.injector.MicroFactory(this, Ctor);
+  return mf.New();
+};
+
+/**
+ * Creates a MicroFactory for the given constructor
+ * @param {function(new:mugd.injector.IInjectable, !mugd.injector.MicroFactory)} Ctor The constructor function to use.
+ * @return {!mugd.injector.MicroFactory} An instance of the factory.
+ */
+mugd.injector.Injector.prototype.Compose = function (Ctor) {
+  return new mugd.injector.MicroFactory(this, Ctor);
 };
 
 

@@ -7,7 +7,7 @@ goog.require('z.common.EntityRepository');
 goog.require('z.common.data.TileData');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @implements {z.service.world.ITerrainGenerator}
  * @implements {mugd.injector.IInjectable}

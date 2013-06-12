@@ -4,7 +4,7 @@ goog.require('goog.array');
 goog.require('z.client.facet.ActionFacet');
 
 /**
- * @param {!mugd.injector.ServiceHolder} services
+ * @param {!mugd.injector.MicroFactory} services
  * @extends {z.client.facet.Facet}
  * @constructor
  */
