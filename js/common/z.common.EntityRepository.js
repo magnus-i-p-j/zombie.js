@@ -13,7 +13,7 @@ z.common.EntityRepository = function (services) {
    * @type {!z.common.rulebook.Rulebook}
    * @private
    */
-  this._rulebook = services.get(z.client.Resources.RULEBOOK);
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */services.get(z.client.Resources.RULEBOOK);
   this._repo = {};
 };
 

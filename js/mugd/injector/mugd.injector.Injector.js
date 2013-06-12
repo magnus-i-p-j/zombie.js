@@ -60,7 +60,7 @@ mugd.injector.Injector.prototype.getResource = function (key) {
 
 /**
  * Instantiates the given constructor resolving its dependencies.
- * @param {function(new:mugd.injector.IInjectable, Object)} Ctor The constructor function to use.
+ * @param {function(new:mugd.injector.IInjectable, !mugd.injector.ServiceHolder)} Ctor The constructor function to use.
  * @return {!Object} An instance of the constructor.
  */
 mugd.injector.Injector.prototype.create = function (Ctor) {
@@ -68,15 +68,6 @@ mugd.injector.Injector.prototype.create = function (Ctor) {
   return new Ctor(services);
 };
 
-/**
- * Instantiates the given constructor resolving its dependencies.
- * @param {function(new:mugd.injector.IInjectable, Object)} Ctor The constructor function to use.
- * @return {!Object} An instance of the constructor.
- */
-mugd.injector.Injector.prototype.Create = function (Ctor) {
-  var services = new mugd.injector.ServiceHolder(this, Ctor);
-  services.New();
-};
 
 /**
  * @const

@@ -18,7 +18,7 @@ z.common.rulebook.Rulebook = function (services) {
   /**
    * @type {!Object}
    */
-  var ruleset = services.get(z.client.Resources.RULESET);
+  var ruleset = /** @type {!Object} */services.get(z.client.Resources.RULESET);
   /**
    * @type {Object}
    * @private

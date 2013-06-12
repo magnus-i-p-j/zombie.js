@@ -16,22 +16,20 @@ goog.require('mugd.utils.SimplexNoise');
  */
 z.service.world.World = function (services) {
   /**
-   * @type {!z.common.EntityRepository} entityRepository
+   * @type {!z.common.EntityRepository}
    * @private
    */
-  this._entityRepository = services.get(z.service.Resources.REPOSITORY);
+  this._entityRepository = /** @type {!z.common.EntityRepository} */ services.get(z.service.Resources.REPOSITORY);
   /**
-   *
-   * @type {!z.common.rulebook.Rulebook} rulebook
+   * @type {!z.common.rulebook.Rulebook}
    * @private
    */
-  this._rulebook = services.get(z.service.Resources.RULESET);
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.service.Resources.RULESET);
   /**
-   *
-   * @type {!z.service.world.ITerrainGenerator} terrainGenerator
+   * @type {!z.service.world.ITerrainGenerator}
    * @private
    */
-  this._terrainGenerator = services.get(z.service.Resources.TERRAIN_GENERATOR);
+  this._terrainGenerator = /** @type {!z.service.world.ITerrainGenerator} */services.get(z.service.Resources.TERRAIN_GENERATOR);
 
   /**
    * @type {number}

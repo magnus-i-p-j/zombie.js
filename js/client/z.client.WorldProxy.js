@@ -23,17 +23,17 @@ z.client.WorldProxy = function (services) {
   /**
    * @type {!Object}
    */
-  var ruleset = services.get(z.client.Resources.RULEBOOK);
+  var ruleset = /** @type {!Object} */services.get(z.client.Resources.RULESET);
   /**
    * @type {!z.service.world.World}
    * @private
    */
-  this._world = services.get(z.client.Resources.WORLD_SERVICE)(ruleset);
+  this._world = (/** @type {function(!Object):!z.service.world.World} */ services.get(z.client.Resources.WORLD_SERVICE))(ruleset);
   /**
    * @type {!z.common.EntityRepository}
    * @private
    */
-  this._repository = services.get(z.client.Resources.REPOSITORY);
+  this._repository = /** @type {!z.common.EntityRepository} */services.get(z.client.Resources.REPOSITORY);
   this._actorId = null;
   this._turn = 0;
 };
