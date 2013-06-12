@@ -20,6 +20,23 @@ z.client.facet.EntityFacet = function () {
    * @type {function(z.common.rulebook.meta=):!z.common.rulebook.meta}
    */
   this.meta = ko.observable();
+
+  this['category'] = ko.computed(function () {
+    var meta = this.meta();
+    return meta ? meta.category : undefined;
+  }, this);
+  this['name'] = ko.computed(function () {
+    var meta = this.meta();
+    return meta ? meta.name : undefined;
+  }, this);
+  this['description'] = ko.computed(function () {
+    var meta = this.meta();
+    return meta ? meta.description : undefined;
+  }, this);
+  this['type'] = ko.computed(function () {
+    var meta = this.meta();
+    return meta ? meta.type : undefined;
+  }, this);
 };
 
 goog.inherits(z.client.facet.EntityFacet, z.client.facet.Facet);
@@ -28,11 +45,11 @@ goog.inherits(z.client.facet.EntityFacet, z.client.facet.Facet);
  * @protected
  * @param {!z.common.entities.Entity} entity
  */
-z.client.facet.EntityFacet.prototype.setEntity = function(entity){
-  if(!this.entity || this.entity && this.entity.guid === entity.guid){
+z.client.facet.EntityFacet.prototype.setEntity = function (entity) {
+  if (!this.entity || this.entity && this.entity.guid === entity.guid) {
     this.entity = entity;
     this.meta(entity.meta);
-  }else{
+  } else {
     throw ['Wrong entity, expected (', this.entity.guid , '), got (', entity.guid, ')'].join('');
   }
 };
