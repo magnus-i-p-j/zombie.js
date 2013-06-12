@@ -22,7 +22,14 @@ mugd.injector.MicroFactory = function (injector, Ctor) {
  * @returns {*}
  */
 mugd.injector.MicroFactory.prototype.get = function (resource) {
-  return this.injector.getResource(resource);
+  var withRes = this._res[resource];
+  try {
+    var injRes = this.injector.getResource(resource);
+  } catch (e) {
+    if () { // TODO: catch No provider found for key: ' + key
+
+    }
+  }
 };
 
 /**
@@ -30,4 +37,11 @@ mugd.injector.MicroFactory.prototype.get = function (resource) {
  */
 mugd.injector.MicroFactory.prototype.New = function () {
   return /** @type {!mugd.injector.IInjectable} */ new this.Ctor(this);
+};
+
+/**
+ * @returns {!mugd.injector.MicroFactory}
+ */
+mugd.injector.MicroFactory.prototype.With = function () {
+
 };
