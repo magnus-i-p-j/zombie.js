@@ -21,12 +21,12 @@ z.client.ui.widget.MapWidget = function (services) {
    * @type {!z.client.facet.MapFacet}
    * @private
    */
-  this._mapFacet = services.get(z.client.Resources.MAP_FACET);
+  this._mapFacet = /** @type {!z.client.facet.MapFacet} */ services.get(z.client.Resources.MAP_FACET);
   /**
    * @type {!z.client.facet.Gem}
    * @private
    */
-  this._gem = services.get(z.client.Resources.GEM);
+  this._gem = /** @type {!z.client.facet.Gem} */ services.get(z.client.Resources.GEM);
 };
 
 z.client.ui.widget.MapWidget.prototype.claim = function (targetElement) {

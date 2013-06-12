@@ -32,7 +32,7 @@ z.client.Resources = {
 /**
  * @typedef {{
  *  turn: number,
- *  html: string.
+ *  html: string,
  *  tags: Object.<!z.client.Tags,boolean>,
  *  time: Date
  * }}

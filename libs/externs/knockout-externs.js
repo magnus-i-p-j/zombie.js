@@ -21,6 +21,8 @@ ko.dependentObservable = function (evaluatorFunctionOrOptions, evaluatorFunction
 
 ko.computed = ko.dependentObservable;
 
+ko.bindingHandlers = {};
+
 /**
  * @type {function(Array=):function(Array=):!Array}
  */

@@ -7,9 +7,6 @@ goog.provide('mugd.injector.IInjectable');
 mugd.injector.IInjectable = function (args) {
 };
 
-/**
- * @type {!Array.<string>}
- */
-mugd.injector.IInjectable.prototype.$deps;
+
 
 

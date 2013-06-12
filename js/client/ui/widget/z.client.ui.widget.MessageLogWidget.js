@@ -3,6 +3,8 @@ goog.provide('z.client.ui.widget.MessageLogWidget');
 goog.require('goog.debug.HtmlFormatter');
 goog.require('z.client');
 goog.require('goog.debug.Logger');
+goog.require('mugd.injector.IInjectable');
+goog.require('z.client.ui.widget.IWidget');
 
 /**
  * @param {!mugd.injector.ServiceHolder} services
@@ -15,7 +17,7 @@ z.client.ui.widget.MessageLogWidget = function (services) {
    * @type {z.client.facet.MessageLogFacet}
    * @private
    */
-  this._messageLogFacet = services.get(z.client.Resources.MESSAGE_LOG_FACET);
+  this._messageLogFacet = /** @type {z.client.facet.MessageLogFacet} */ services.get(z.client.Resources.MESSAGE_LOG_FACET);
   /**
    * @type {goog.debug.HtmlFormatter}
    * @private

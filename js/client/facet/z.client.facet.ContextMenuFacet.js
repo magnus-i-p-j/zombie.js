@@ -16,13 +16,13 @@ goog.require('z.client.action');
  * @implements mugd.injector.IInjectable
  */
 z.client.facet.ContextMenuFacet = function (services) {
-  goog.base(this);
+  goog.base(this, services);
 
   /**
    * @type {!z.client.ActionFactory}
    * @private
    */
-  this._actionFactory = services.get(z.client.Resources.ACTION_FACTORY);
+  this._actionFactory = /** @type {!z.client.ActionFactory} */ services.get(z.client.Resources.ACTION_FACTORY);
 
   /**
    * @expose

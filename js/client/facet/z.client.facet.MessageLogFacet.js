@@ -2,6 +2,7 @@ goog.provide('z.client.facet.MessageLogFacet');
 
 goog.require('goog.array');
 goog.require('z.client.facet.Facet');
+goog.require('z.client');
 
 /**
  * @param {!mugd.injector.ServiceHolder} services
@@ -19,7 +20,7 @@ z.client.facet.MessageLogFacet = function (services) {
   /**
    * @type {!z.client.facet.InfoFacet}
    */
-  this.info = services.get(z.client.Resources.INFO_FACET);
+  this.info = /** @type {!z.client.facet.InfoFacet} */ services.get(z.client.Resources.INFO_FACET);
 };
 
 goog.inherits(z.client.facet.MessageLogFacet, z.client.facet.Facet);
@@ -45,7 +46,7 @@ z.client.facet.MessageLogFacet.prototype.doStartTurn = function (e) {
  */
 z.client.facet.MessageLogFacet.prototype.addMessage = function (html, tags) {
   var messageItem = {};
-  messageItem['turn'] = this.info.turn();
+  messageItem['turn'] = this.info['turn']();
   messageItem['time'] = new Date();
   messageItem['html'] = html;
   messageItem['tags'] = {};

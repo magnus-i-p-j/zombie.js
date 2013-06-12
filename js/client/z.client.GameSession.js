@@ -2,6 +2,7 @@ goog.provide('z.client.GameSession');
 
 goog.require('mugd.injector.Injector');
 goog.require('z.client');
+goog.require('mugd.injector.IInjectable');
 
 /**
  * @param {!mugd.injector.ServiceHolder} services

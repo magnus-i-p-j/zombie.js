@@ -3,11 +3,13 @@ goog.provide('z.client.actions.EndTurn');
 goog.require('z.client.action.Action');
 goog.require('z.client');
 goog.require('z.common.rulebook');
+goog.require('mugd.injector.IInjectable');
 
 /**
  * @param {!mugd.injector.ServiceHolder} services
  * @constructor
  * @implements {mugd.injector.IInjectable}
+ * @extends {z.client.action.Action}
  */
 z.client.actions.EndTurn = function (services) {
   goog.base(this, 'End turn');
@@ -15,7 +17,7 @@ z.client.actions.EndTurn = function (services) {
    * @type {!z.client.WorldProxy}
    * @private
    */
-  this._world = services.get(z.client.Resources.WORLD);
+  this._world = /** @type {!z.client.WorldProxy} */ services.get(z.client.Resources.WORLD);
   this.meta = {
     type: 'action_end_turn',
     category: z.common.rulebook.category.ACTION,
