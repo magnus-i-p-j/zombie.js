@@ -13,6 +13,8 @@ z.client.ActionFactory = function (services) {
    * @private
    */
   this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.client.Resources.RULEBOOK);
+
+  this._injector = /** @type {!mugd.injector.Injector} */ services.get(z.client.Resources.INJECTOR);
 };
 
 /**
@@ -30,8 +32,9 @@ z.client.ActionFactory.prototype.getActions = function (meta) {
 z.client.ActionFactory.prototype._createActions = function (meta) {
   var actions = [];
   if (meta.category === z.common.rulebook.category.TERRAIN) {
+    var factory = this._injector.Compose(z.client.actions.CreateImprovement);
     goog.array.forEach(this._rulebook.improvements, function (improvement) {
-          actions.push(new z.client.actions.CreateImprovement(improvement));
+          actions.push(factory.With({'improvement': improvement}).New());
         }
     );
   }

@@ -4,19 +4,19 @@ goog.require('z.client.action.Action');
 goog.require('goog.debug.Logger');
 
 /**
- * @param {!z.common.rulebook.Improvement} improvement
+ * @param {!mugd.injector.MicroFactory} services
  * @extends {z.client.action.Action}
  * @constructor
  */
-z.client.actions.CreateImprovement = function (improvement) {
-  goog.base(this, improvement.name);
-  this.improvement = improvement;
+z.client.actions.CreateImprovement = function (services) {
+  this.improvement = /** @type {!z.common.rulebook.Improvement} */  services.get('improvement');
+  goog.base(this, this.improvement.name);
 
   this.meta = {
-    type: 'action_create_improvement' + improvement.type,
+    type: 'action_create_improvement' + this.improvement.type,
     category: z.common.rulebook.category.ACTION,
-    name: improvement.name,
-    description: 'Start doing the following: ' + improvement.description
+    name: this.improvement.name,
+    description: 'Start doing the following: ' + this.improvement.description
   };
 
 };
@@ -50,3 +50,4 @@ z.client.actions.CreateImprovement.prototype._executeInternal = function (args) 
 z.client.actions.CreateImprovement.prototype.args = [
   z.client.action.ArgsType.TARGET
 ];
+

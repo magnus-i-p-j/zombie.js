@@ -1,6 +1,7 @@
 goog.provide('mugd.injector.Injector');
 
 goog.require('mugd.injector.MicroFactory');
+goog.require('mugd.injector.NoProviderFoundException');
 
 /**
  * @constructor
@@ -50,7 +51,7 @@ mugd.injector.Injector.prototype.getResource = function (key) {
   if (!resource) {
     var provider = this._providers[key];
     if (!provider) {
-      throw 'No provider found for key: ' + key;
+      throw new mugd.injector.NoProviderFoundException('No provider found for key: ' + key);
     }
     resource = this.Compose(provider).New();
     this.addResource(key, resource);
