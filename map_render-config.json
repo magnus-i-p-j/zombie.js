@@ -1,0 +1,17 @@
+{
+  "id":"map_render",
+  "inputs":["js/service/z.service.MapRenderService.js"],
+  "paths":["js/client",
+    "js/mugd",
+    "js/common",
+    "js/service"],
+  "mode":"simple",
+  "level":"VERBOSE",
+  "externs":[
+    "libs/externs/knockout-externs.js",
+    "libs/externs/jquery-externs.js",
+    "libs/externs/console-externs.js",
+    "libs/externs/templates-externs.js",
+    "libs/externs/knockout-external_template-externs.js"
+  ]
+}
