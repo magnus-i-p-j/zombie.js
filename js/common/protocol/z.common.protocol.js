@@ -35,20 +35,35 @@ z.common.protocol.tile;
 z.common.protocol.actor;
 
 /** @typedef {{
- *  identifier: !(mugd.utils.guid|z.common.protocol.projectParams),
- *  resources: Array.<!z.common.protocol.resource>,
- *  state: !z.common.protocol.state
- * }} */
+ *  projectId: !mugd.utils.guid,
+ *  resources: !Array.<!z.common.protocol.resource>,
+ *  investment: !Object.<z.common.protocol.type,number>,
+ *  priority: number,
+ *  state: !z.common.protocol.state,
+ *  tileId: mugd.utils.guid,
+ *  type: string
+ * }}
+ */
 z.common.protocol.project;
+
+/**
+ * @typedef {{
+ *  projectId: !mugd.utils.guid,
+ *  resources: !Array.<!z.common.protocol.resource>,
+ *  investment: !Object.<z.common.protocol.type,number>,
+ *  priority: number,
+ *  state: !z.common.protocol.state,
+ *  tileId: mugd.utils.guid,
+ *  type: string
+ * }}
+ */
+z.common.protocol.improvement;
 
 /** @typedef {!mugd.utils.guid} */
 z.common.protocol.resource;
 
-/** @typedef {{
-* targetId: !mugd.utils.guid,
-* type: string
-}} */
-z.common.protocol.projectParams;
+/** @typedef {string} */
+z.common.protocol.type;
 
 /**
  * @enum {string}
