@@ -10,6 +10,8 @@ z.service.MapRenderService = function(terrains){
    * @private
    */
   this._terrains = terrains;
+
+  console.log(this._terrains);
   console.log(this._terrains);
 };
 
