@@ -8,5 +8,6 @@ goog.require('z');
 goog.require('mugd.ui.MapScroller');
 goog.require('z.common.EntityRepository');
 goog.require('mugd.editor');
+goog.require('z.service.MapRenderService');
 
 

@@ -9,10 +9,16 @@ z.service.MapRenderService = function(terrains){
    * @type {Object.<string, number>}
    * @private
    */
-  this._terrains = terrains;
+   this._terrains = terrains;
 
-  console.log(this._terrains);
-  console.log(this._terrains);
+};
+
+z.service.MapRenderService.prototype.getTerrainOverlay = function(queryString){
+  //Todo: Continue to validate the query string.
+  var regex = /^((?:\?[a-zA-Z0-9_]+=[a-zA-Z0-9_]+)?(?:&[a-zA-Z0-9_]+=[a-zA-Z0-9_]+)*)$/;
+  if(!regex.test(queryString)){
+    throw {'name': 'InvalidArgumentException', 'message': 'queryString'};
+  }
 };
 
 /**
