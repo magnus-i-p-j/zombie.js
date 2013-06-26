@@ -11,7 +11,6 @@ z.service.MapRenderService = function(terrains){
    */
   this._terrains = terrains;
   console.log(this._terrains);
-  console.log(this._terrains);
 };
 
 /**
