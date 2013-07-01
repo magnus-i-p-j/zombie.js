@@ -78,11 +78,19 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addProvider(z.client.Resources.REPOSITORY, z.common.EntityRepository);
   injector.addResource(z.client.Resources.CURRENT_TARGET, ko.observable());
   injector.addResource(z.client.Resources.CURRENT_ACTION, ko.observable());
-
+  injector.addProvider(z.client.Resources.ENTITY_MAP, z.common.EntityMap);
   injector.addProvider(z.client.Resources.TOOLBAR_FACET, z.client.facet.ToolbarFacet);
   injector.addProvider(z.client.Resources.INFO_FACET, z.client.facet.InfoFacet);
   injector.addProvider(z.client.Resources.MESSAGE_LOG_FACET, z.client.facet.MessageLogFacet);
   injector.addProvider(z.client.Resources.END_TURN_ACTION, z.client.actions.EndTurn);
+
+  injector.addFactory(z.common.rulebook.category.IMPROVEMENT, z.common.entities.Improvement);
+  injector.addFactory(z.common.rulebook.category.TERRAIN, z.common.entities.Tile);
+  injector.addFactory(z.common.rulebook.category.ITEM, function(){throw 'not implemented] = item'});
+  injector.addFactory(z.common.rulebook.category.CHARACTER, function(){throw 'not implemented] = character'});
+  injector.addFactory(z.common.rulebook.category.ASSET, function(){throw 'not implemented] = asset'});
+  injector.addFactory(z.common.rulebook.category.ACTOR, z.common.entities.Actor);
+  injector.addFactory(z.common.rulebook.category.TECH, function(){throw 'not implemented] = tech'});
 
   this.session = injector.Compose(z.client.GameSession).New();
 

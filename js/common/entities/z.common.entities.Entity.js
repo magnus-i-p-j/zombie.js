@@ -19,5 +19,13 @@ z.common.entities.Entity = function (guid, meta) {
   this.position = null;
 };
 
+/**
+ * @param {!z.common.data.EntityData} entityData
+ * @param {!z.common.rulebook.meta} meta
+ */
+z.common.entities.Entity.prototype.update = function(entityData, meta){
+  throw {'name': 'NotImplementedException', 'message': 'update'};
+};
+
 goog.inherits(z.common.entities.Entity, goog.events.EventTarget);
 

@@ -7,6 +7,7 @@ goog.require('z.client');
 /**
  * @param {!mugd.injector.MicroFactory} services
  * @extends {z.client.facet.Facet}
+ * @implements mugd.injector.IInjectable
  * @constructor
  */
 z.client.facet.Gem = function (services) {

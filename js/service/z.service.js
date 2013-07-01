@@ -7,11 +7,11 @@ goog.require('mugd.injector.Injector');
  */
 z.service.Resources = {
   INJECTOR: mugd.injector.Injector.INJECTOR,
-  RULESET: 'ruleset',
-  WORLD: 'world',
-  RULEBOOK: 'rulebook',
-  REPOSITORY: 'repository',
-  TERRAIN_SEED: 'terrain seed',
-  TERRAIN_GENERATOR: 'terrain generator'
+  RULESET: 'service_ruleset',
+  WORLD: 'service_world',
+  RULEBOOK: 'service_rulebook',
+  REPOSITORY: 'service_repository',
+  TERRAIN_SEED: 'service_terrain seed',
+  TERRAIN_GENERATOR: 'service_terrain generator'
 };
 

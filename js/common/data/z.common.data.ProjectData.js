@@ -3,11 +3,6 @@ goog.provide('z.common.data.ProjectData');
 goog.require('z.common.data.EntityData');
 
 /**
- * @param {?mugd.utils.guid} guid
- * @constructor
- * @implements {z.common.data.EntityData}
- */
-/**
  * @param {!mugd.utils.guid} guid
  * @param {!z.common.rulebook.category} category
  * @param {string} type
