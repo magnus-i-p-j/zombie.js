@@ -18,6 +18,16 @@ z.service.world.RandomTerrainGenerator = function (services) {
    * @private
    */
   this._seed = /** @type {string} */ services.get(z.service.Resources.TERRAIN_SEED);
+
+  var oldMath = window['Math'];
+  window['Math']['seedrandom'](this._seed);
+  /**
+   * @type {*}
+   * @private
+   */
+  this._math = window['Math'];
+  window['Math'] = oldMath;
+
   /**
    * @type {z.common.EntityRepository}
    * @private
@@ -27,7 +37,7 @@ z.service.world.RandomTerrainGenerator = function (services) {
    * @type {mugd.utils.SimplexNoise}
    * @private
    */
-  this._noise = new mugd.utils.SimplexNoise();
+  this._noise = new mugd.utils.SimplexNoise(this._math);
 };
 
 /**
