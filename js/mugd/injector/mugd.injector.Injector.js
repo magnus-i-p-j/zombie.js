@@ -66,11 +66,15 @@ mugd.injector.Injector.prototype.getResource = function (key) {
 
   if (!resource) {
     var provider = this._providers[key];
-    resource = this.Compose(provider).New();
+    if (provider) {
+      resource = this.Compose(provider).New();
+    }
   }
   if (!resource) {
     var factory = this._factories[key];
-    resource = this.Compose(factory);
+    if (factory) {
+      resource = this.Compose(factory);
+    }
   }
 
   if (!resource) {
@@ -101,7 +105,6 @@ mugd.injector.Injector.prototype.create = function (Ctor) {
 mugd.injector.Injector.prototype.Compose = function (Ctor) {
   return new mugd.injector.MicroFactory(this, Ctor);
 };
-
 
 /**
  * @const

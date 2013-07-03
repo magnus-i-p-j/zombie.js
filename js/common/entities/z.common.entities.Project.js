@@ -4,14 +4,24 @@ goog.require('z.common.data.ProjectData');
 goog.require('z.common.entities.Entity');
 
 /**
- * @param {!z.common.data.ProjectData} projectData
- * @param {!z.common.rulebook.meta} meta
+ * @param {!mugd.injector.MicroFactory} services
  * @extends {z.common.entities.Entity}
  * @constructor
  */
-z.common.entities.Project = function (projectData, meta) {
-  goog.base(this, projectData.guid, meta);
-  this.name = meta.name;
+z.common.entities.Project = function (services) {
+  goog.base(this, services);
+
+  this.name = this.meta.name;
+
+  /**
+   * @type {!z.common.data.ProjectData}
+   */
+  var projectData = /** @type {!z.common.data.ProjectData} */ services.get('entityData');
+
+  /**
+   * @type {!z.common.EntityRepository}
+   */
+  var entityRepository = /** @type {!z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
 
   /**
    * @type {z.common.rulebook.category}
@@ -29,9 +39,11 @@ z.common.entities.Project = function (projectData, meta) {
   this.priority = projectData.priority;
 
   /**
-   * @type {*}
+   * @type {!z.common.entities.Tile}
    */
-  this.tileId = projectData.tileId;
+  this.tile = /** @type {!z.common.entities.Tile} */ entityRepository.get(projectData.tileId);
+
+  this.position = this.tile.position;
 
   //TODO: Find entities instead of id:s
   this.resources = projectData.resources;

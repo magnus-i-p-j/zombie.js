@@ -3,13 +3,12 @@ goog.provide('z.common.entities.Actor');
 goog.require('z.common.entities.Entity');
 
 /**
- * @param {!mugd.utils.guid} guid
- * @param {!z.common.rulebook.meta} meta
+ * @param {!mugd.injector.MicroFactory} services
  * @extends {z.common.entities.Entity}
  * @constructor
  */
-z.common.entities.Actor = function (guid, meta) {
-  goog.base(this, guid, meta);
+z.common.entities.Actor = function (services) {
+  goog.base(this, services);
   this.name = null;
 };
 

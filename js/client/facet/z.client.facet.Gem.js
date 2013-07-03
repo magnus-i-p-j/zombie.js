@@ -44,7 +44,7 @@ z.client.facet.Gem = function (services) {
   /**
    * @type {!z.client.WorldProxy}
    */
-  var world = /** @type {!z.client.WorldProxy} */ services.get(z.client.Resources.WORLD);
+  var world = /** @type {!z.client.WorldProxy} */ services.get(z.common.Resources.WORLD);
 
   this['mapFacet'].setParentEventTarget(this);
   this['contextMenuFacet'].setParentEventTarget(this);

@@ -12,9 +12,9 @@ z.client.ActionFactory = function (services) {
    * @type {!z.common.rulebook.Rulebook}
    * @private
    */
-  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.client.Resources.RULEBOOK);
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
 
-  this._injector = /** @type {!mugd.injector.Injector} */ services.get(z.client.Resources.INJECTOR);
+  this._injector = /** @type {!mugd.injector.Injector} */ services.get(z.common.Resources.INJECTOR);
 };
 
 /**

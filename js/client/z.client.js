@@ -5,11 +5,7 @@ goog.require('mugd.injector.Injector');
  * @enum {string}
  */
 z.client.Resources = {
-  INJECTOR:mugd.injector.Injector.INJECTOR,
-  RULESET:'client_ruleset',
-  WORLD:'client_world',
   WORLD_SERVICE:'client_world service',
-  RULEBOOK:'client_rulebook',
   MAP_WIDGET:'client_map widget',
   GAME_SESSION_WIDGET:'client_game_session_widget',
   CONTEXT_MENU_WIDGET:'client_context_menu_widget',
@@ -23,11 +19,9 @@ z.client.Resources = {
   INFO_FACET:'client_info_facet',
   MESSAGE_LOG_FACET:'client_message_log_facet',
   TOOLBAR_ACTION_FACETS:'client_toolbar_action_facets',
-  REPOSITORY:'client_repository',
   CURRENT_TARGET:'client_current_target',
   CURRENT_ACTION:'client_current_action',
-  END_TURN_ACTION:'client_end_turn_action',
-  ENTITY_MAP:'client_entity_map'
+  END_TURN_ACTION:'client_end_turn_action'
 };
 
 /**

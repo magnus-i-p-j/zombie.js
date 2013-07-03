@@ -2,6 +2,7 @@ goog.provide('z.client.GameSession');
 
 goog.require('mugd.injector.Injector');
 goog.require('z.client');
+goog.require('z.common');
 goog.require('mugd.injector.IInjectable');
 
 /**
@@ -13,7 +14,7 @@ z.client.GameSession = function (services) {
   /**
    * @type {!z.client.WorldProxy}
    */
-  this.world = /** @type {!z.client.WorldProxy} */ services.get(z.client.Resources.WORLD);
+  this.world = /** @type {!z.client.WorldProxy} */ services.get(z.common.Resources.WORLD);
 
   /**
    * @type {!z.client.ui.widget.GameSessionWidget}

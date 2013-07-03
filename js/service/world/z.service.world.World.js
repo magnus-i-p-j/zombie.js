@@ -19,12 +19,12 @@ z.service.world.World = function (services) {
    * @type {!z.common.EntityRepository}
    * @private
    */
-  this._entityRepository = /** @type {!z.common.EntityRepository} */ services.get(z.service.Resources.REPOSITORY);
+  this._entityRepository = /** @type {!z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
   /**
    * @type {!z.common.rulebook.Rulebook}
    * @private
    */
-  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.service.Resources.RULESET);
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULESET);
   /**
    * @type {!z.service.world.ITerrainGenerator}
    * @private

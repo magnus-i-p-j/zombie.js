@@ -17,6 +17,7 @@ goog.require('z.common.data.EntityData');
 z.common.data.ProjectData = function (guid, category, type, state, priority, tileId, resources, investment) {
   this.guid = guid;
   this.category = category;
+  this.type = type;
   this.state = state;
   this.priority = priority;
   this.tileId = tileId;
@@ -33,7 +34,7 @@ z.common.data.ProjectData.fromProtocol = function (protocol) {
 };
 
 /**
- * @param {!z.common.entities.ProjectData} project
+ * @param {!z.common.entities.Project} project
  * @return {!z.common.protocol.project}
  */
 z.common.data.ProjectData.toProtocol = function (project) {

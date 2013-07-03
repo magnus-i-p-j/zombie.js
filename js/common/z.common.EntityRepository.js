@@ -12,13 +12,13 @@ z.common.EntityRepository = function (services) {
    * @type {!z.common.rulebook.Rulebook}
    * @private
    */
-  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.client.Resources.RULEBOOK);
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
 
   /**
    * @type {!mugd.injector.Injector}
    * @private
    */
-  this._injector = /** @type {!mugd.injector.Injector} */ services.get(z.client.Resources.INJECTOR);
+  this._injector = /** @type {!mugd.injector.Injector} */ services.get(z.common.Resources.INJECTOR);
 
   this._repo = {};
 };
@@ -34,7 +34,7 @@ z.common.EntityRepository.prototype.put = function (entityData) {
     if (goog.isNull(entityData.guid)) {
       entityData.guid = mugd.utils.getGuid();
     }
-    entity = this._injector.getResource(entityData.category).With({'entityData': entityData, 'meta': meta});
+    entity = this._injector.getResource(entityData.category).With({'entityData': entityData, 'meta': meta}).New();
     this._repo[entity.guid] = entity;
   } else {
     entity.update(entityData, meta);
