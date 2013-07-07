@@ -42,6 +42,11 @@ z.client.facet.Gem = function (services) {
   this['currentAction'] = /** @type {function(z.client.facet.ActionFacet=):z.client.facet.ActionFacet} */ services.get(z.client.Resources.CURRENT_ACTION);
 
   /**
+   * @type {!z.common.EntityRepository}
+   */
+  var repository = /** @type {!z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
+
+  /**
    * @type {!z.client.WorldProxy}
    */
   var world = /** @type {!z.client.WorldProxy} */ services.get(z.common.Resources.WORLD);
@@ -51,6 +56,7 @@ z.client.facet.Gem = function (services) {
   this['toolbarFacet'].setParentEventTarget(this);
   this['infoFacet'].setParentEventTarget(this);
   this['messageLogFacet'].setParentEventTarget(this);
+  repository.setParentEventTarget(this);
   world.setParentEventTarget(this);
 };
 

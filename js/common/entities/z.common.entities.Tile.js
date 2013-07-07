@@ -49,6 +49,14 @@ z.common.entities.Tile.prototype.update = function (data, meta) {
       'tileId': tileData.guid
     };
   }
+
+  /**
+   * @type {boolean}
+   */
+  var updated = this.terrain != tileData.type || this.meta.type == meta.type;
+
   this.terrain = tileData.type;
   this.meta = meta;
+
+  return updated;
 };

@@ -35,6 +35,7 @@ goog.inherits(z.common.entities.Entity, goog.events.EventTarget);
 /**
  * @param {!z.common.data.EntityData} entityData
  * @param {!z.common.rulebook.meta} meta
+ * @return {boolean}
  */
 z.common.entities.Entity.prototype.update = function (entityData, meta) {
   throw {'name': 'NotImplementedException', 'message': 'update'};

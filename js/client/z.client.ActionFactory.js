@@ -34,7 +34,7 @@ z.client.ActionFactory.prototype._createActions = function (meta) {
   if (meta.category === z.common.rulebook.category.TERRAIN) {
     var factory = this._injector.Compose(z.client.actions.CreateImprovement);
     goog.array.forEach(this._rulebook.improvements, function (improvement) {
-          actions.push(factory.With({'improvement': improvement}).New());
+          actions.push(factory.With({'current_improvement': improvement}).New());
         }
     );
   }

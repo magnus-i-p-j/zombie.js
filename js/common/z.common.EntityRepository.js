@@ -1,6 +1,10 @@
 goog.provide('z.common.EntityRepository');
 
 goog.require('mugd.utils');
+goog.require('goog.events.EventTarget');
+goog.require('z.common.events');
+goog.provide('z.common.events.EntityCreated');
+goog.provide('z.common.events.EntityModified');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -23,6 +27,8 @@ z.common.EntityRepository = function (services) {
   this._repo = {};
 };
 
+goog.inherits(z.common.EntityRepository, goog.events.EventTarget);
+
 /**
  * @param {z.common.data.EntityData} entityData
  * @return {!z.common.entities.Entity}
@@ -36,8 +42,13 @@ z.common.EntityRepository.prototype.put = function (entityData) {
     }
     entity = this._injector.getResource(entityData.category).With({'entityData': entityData, 'meta': meta}).New();
     this._repo[entity.guid] = entity;
+    var event = new z.common.events.EntityCreated(entity);
+    this.dispatchEvent(event);
   } else {
-    entity.update(entityData, meta);
+    if(entity.update(entityData, meta)){
+      var event = new z.common.events.EntityModified(entity);
+      this.dispatchEvent(event);
+    }
   }
   return entity;
 };

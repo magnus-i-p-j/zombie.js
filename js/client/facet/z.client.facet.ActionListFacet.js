@@ -20,3 +20,4 @@ z.client.facet.ActionListFacet = function (services) {
 };
 
 goog.inherits(z.client.facet.ActionListFacet, z.client.facet.Facet);
+

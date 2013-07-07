@@ -3,12 +3,12 @@ goog.provide('z.common.data.ProjectData');
 goog.require('z.common.data.EntityData');
 
 /**
- * @param {!mugd.utils.guid} guid
+ * @param {?mugd.utils.guid} guid
  * @param {!z.common.rulebook.category} category
  * @param {string} type
  * @param {!z.common.protocol.state} state
  * @param {number} priority
- * @param {!mugd.utils.guid} tileId
+ * @param {?mugd.utils.guid} tileId
  * @param {!Array.<!z.common.protocol.resource>} resources
  * @param {!Object.<z.common.protocol.type,number>} investment
  * @constructor
