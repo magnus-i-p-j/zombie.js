@@ -2,7 +2,7 @@ goog.provide('mugd.injector.IInjectable');
 
 /**
  * @interface
- * @param {!Object} args
+ * @param {!mugd.injector.MicroFactory} args
  */
 mugd.injector.IInjectable = function (args) {
 };

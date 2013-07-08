@@ -12,9 +12,9 @@ z.client.ActionFactory = function (services) {
    * @type {!z.common.rulebook.Rulebook}
    * @private
    */
-  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.client.Resources.RULEBOOK);
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
 
-  this._injector = /** @type {!mugd.injector.Injector} */ services.get(z.client.Resources.INJECTOR);
+  this._injector = /** @type {!mugd.injector.Injector} */ services.get(z.common.Resources.INJECTOR);
 };
 
 /**
@@ -34,7 +34,7 @@ z.client.ActionFactory.prototype._createActions = function (meta) {
   if (meta.category === z.common.rulebook.category.TERRAIN) {
     var factory = this._injector.Compose(z.client.actions.CreateImprovement);
     goog.array.forEach(this._rulebook.improvements, function (improvement) {
-          actions.push(factory.With({'improvement': improvement}).New());
+          actions.push(factory.With({'current_improvement': improvement}).New());
         }
     );
   }

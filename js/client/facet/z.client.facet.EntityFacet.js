@@ -21,6 +21,11 @@ z.client.facet.EntityFacet = function () {
    */
   this.meta = ko.observable();
 
+  /**
+   * @type {?mugd.utils.guid}
+   */
+  this['guid'] = null;
+
   this['category'] = ko.computed(function () {
     var meta = this.meta();
     return meta ? meta.category : undefined;
@@ -48,6 +53,7 @@ goog.inherits(z.client.facet.EntityFacet, z.client.facet.Facet);
 z.client.facet.EntityFacet.prototype.setEntity = function (entity) {
   if (!this.entity || this.entity && this.entity.guid === entity.guid) {
     this.entity = entity;
+    this['guid'] = this.entity.guid;
     this.meta(entity.meta);
   } else {
     throw ['Wrong entity, expected (', this.entity.guid , '), got (', entity.guid, ')'].join('');

@@ -9,7 +9,7 @@ goog.require('mugd.injector.NoProviderFoundException');
 mugd.injector.Injector = function () {
 
   /**
-   * @type {!Object.<string, Function>}
+   * @type {!Object.<string, function(new:mugd.injector.IInjectable, !mugd.injector.MicroFactory)>}
    * @private
    */
   this._providers = {};
@@ -20,16 +20,31 @@ mugd.injector.Injector = function () {
    */
   this._resources = {};
 
+  /**
+   * @type {!Object.<string, function(new:mugd.injector.IInjectable, !mugd.injector.MicroFactory)>}
+   * @private
+   */
+  this._factories = {};
+
   this.addResource(mugd.injector.Injector.INJECTOR, this);
+};
+
+/**
+ * Adds a resource factory.
+ * @param {string} key
+ * @param {function(new:mugd.injector.IInjectable, !mugd.injector.MicroFactory)} FactoryCtor The constructor function to use.
+ */
+mugd.injector.Injector.prototype.addFactory = function (key, FactoryCtor) {
+  this._factories[key] = FactoryCtor;
 };
 
 /**
  * Adds a resource provider.
  * @param {string} key
- * @param {Function} provider
+ * @param {function(new:mugd.injector.IInjectable, !mugd.injector.MicroFactory)} ProviderCtor The constructor function to use.
  */
-mugd.injector.Injector.prototype.addProvider = function (key, provider) {
-  this._providers[key] = provider;
+mugd.injector.Injector.prototype.addProvider = function (key, ProviderCtor) {
+  this._providers[key] = ProviderCtor;
 };
 
 /**
@@ -48,14 +63,26 @@ mugd.injector.Injector.prototype.addResource = function (key, resource) {
  */
 mugd.injector.Injector.prototype.getResource = function (key) {
   var resource = this._resources[key];
+
   if (!resource) {
     var provider = this._providers[key];
-    if (!provider) {
-      throw new mugd.injector.NoProviderFoundException('No provider found for key: ' + key);
+    if (provider) {
+      resource = this.Compose(provider).New();
     }
-    resource = this.Compose(provider).New();
-    this.addResource(key, resource);
   }
+  if (!resource) {
+    var factory = this._factories[key];
+    if (factory) {
+      resource = this.Compose(factory);
+    }
+  }
+
+  if (!resource) {
+    throw new mugd.injector.NoProviderFoundException('No provider found for key: ' + key);
+  }
+
+  this.addResource(key, resource);
+
   return resource;
 };
 
@@ -78,7 +105,6 @@ mugd.injector.Injector.prototype.create = function (Ctor) {
 mugd.injector.Injector.prototype.Compose = function (Ctor) {
   return new mugd.injector.MicroFactory(this, Ctor);
 };
-
 
 /**
  * @const

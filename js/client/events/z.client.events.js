@@ -4,6 +4,7 @@ goog.require('goog.events');
 
 /**
  * @enum {string}
+ * @extends {goog.events.Event}
  */
 z.client.events.EventType = {
   START_TURN: goog.events.getUniqueId('start_turn'),

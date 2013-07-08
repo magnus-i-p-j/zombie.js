@@ -14,6 +14,10 @@ mugd.injector.MicroFactory = function (injector, Ctor) {
    */
   this.injector = injector;
 
+  if (!Ctor) {
+    throw {'name': 'InvalidArgumentException', 'message': 'no constructor given'}
+  }
+
   /**
    * @type {!function(new:mugd.injector.IInjectable, !mugd.injector.MicroFactory)}
    */
@@ -39,19 +43,19 @@ mugd.injector.MicroFactory.prototype.get = function (key) {
   } catch (e) {
     if (!(e instanceof mugd.injector.NoProviderFoundException)) {
       throw e;
-    }else if(!goog.isDefAndNotNull(withRes)){
+    } else if (!goog.isDefAndNotNull(withRes)) {
       throw e;
     }
   }
 
-  if(goog.isDefAndNotNull(withRes) && goog.isDefAndNotNull(injRes)){
+  if (goog.isDefAndNotNull(withRes) && goog.isDefAndNotNull(injRes)) {
     throw new mugd.injector.MultipleProviderFoundException('Multiple providers found for key' + key);
   }
 
   var resource;
-  if(goog.isDefAndNotNull(withRes)){
+  if (goog.isDefAndNotNull(withRes)) {
     resource = withRes;
-  }else{
+  } else {
     resource = injRes;
   }
 

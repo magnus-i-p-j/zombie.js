@@ -6,12 +6,7 @@ goog.require('mugd.injector.Injector');
  * @enum {string}
  */
 z.service.Resources = {
-  INJECTOR: mugd.injector.Injector.INJECTOR,
-  RULESET: 'ruleset',
-  WORLD: 'world',
-  RULEBOOK: 'rulebook',
-  REPOSITORY: 'repository',
-  TERRAIN_SEED: 'terrain seed',
-  TERRAIN_GENERATOR: 'terrain generator'
+  TERRAIN_SEED: 'service_terrain seed',
+  TERRAIN_GENERATOR: 'service_terrain generator'
 };
 

@@ -5,28 +5,24 @@ goog.require('mugd.injector.Injector');
  * @enum {string}
  */
 z.client.Resources = {
-  INJECTOR:mugd.injector.Injector.INJECTOR,
-  RULESET:'ruleset',
-  WORLD:'world',
-  WORLD_SERVICE:'world service',
-  RULEBOOK:'rulebook',
-  MAP_WIDGET:'map widget',
-  GAME_SESSION_WIDGET:'game_session_widget',
-  CONTEXT_MENU_WIDGET:'context_menu_widget',
-  MESSAGE_LOG_WIDGET: 'message_log_widget',
-  GEM:'gem',
-  MAP_FACET:'map_facet',
-  CONTEXT_MENU_FACET:'context_menu_facet',
-  GAME_DOM_ELEMENT:'game_dom_element',
-  ACTION_FACTORY:'action_factory',
-  TOOLBAR_FACET:'toolbar',
-  INFO_FACET:'info_facet',
-  MESSAGE_LOG_FACET:'message_log_facet',
-  TOOLBAR_ACTION_FACETS:'toolbar_action_facets',
-  REPOSITORY:'repository',
-  CURRENT_TARGET:'current_target',
-  CURRENT_ACTION:'current_action',
-  END_TURN_ACTION:'end_turn_action'
+  WORLD_SERVICE:'client_world service',
+  MAP_WIDGET:'client_map widget',
+  GAME_SESSION_WIDGET:'client_game_session_widget',
+  CONTEXT_MENU_WIDGET:'client_context_menu_widget',
+  MESSAGE_LOG_WIDGET: 'client_message_log_widget',
+  GEM:'client_gem',
+  MAP_FACET:'client_map_facet',
+  CONTEXT_MENU_FACET:'client_context_menu_facet',
+  GAME_DOM_ELEMENT:'client_game_dom_element',
+  ACTION_FACTORY:'client_action_factory',
+  TOOLBAR_FACET:'client_toolbar',
+  INFO_FACET:'client_info_facet',
+  MESSAGE_LOG_FACET:'client_message_log_facet',
+  TOOLBAR_ACTION_FACETS:'client_toolbar_action_facets',
+  CURRENT_TARGET:'client_current_target',
+  CURRENT_ACTION:'client_current_action',
+  END_TURN_ACTION:'client_end_turn_action',
+  PROJECT_LIST_FACET: 'client_project_list_facet'
 };
 
 /**

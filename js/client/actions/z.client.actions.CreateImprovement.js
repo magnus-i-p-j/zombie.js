@@ -2,6 +2,7 @@ goog.provide('z.client.actions.CreateImprovement');
 
 goog.require('z.client.action.Action');
 goog.require('goog.debug.Logger');
+goog.require('z.common');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -9,8 +10,14 @@ goog.require('goog.debug.Logger');
  * @constructor
  */
 z.client.actions.CreateImprovement = function (services) {
-  this.improvement = /** @type {!z.common.rulebook.Improvement} */  services.get('improvement');
+  this.improvement = /** @type {!z.common.rulebook.Improvement} */  services.get('current_improvement');
   goog.base(this, this.improvement.name);
+
+  /**
+   * @type{!z.common.EntityRepository}
+   * @private
+   */
+  this._repository = /** @type{!z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
 
   this.meta = {
     type: 'action_create_improvement' + this.improvement.type,
@@ -43,7 +50,14 @@ z.client.actions.CreateImprovement.prototype._canExecuteInternal = function (arg
  * @override
  */
 z.client.actions.CreateImprovement.prototype._executeInternal = function (args) {
-  var target = args[z.client.action.ArgsType.TARGET];
+  /**
+   * @type {!z.client.facet.TileFacet}
+   */
+  var target = /** @type {!z.client.facet.TileFacet} */ args[z.client.action.ArgsType.TARGET];
+
+  var projectData = this.improvement.createNewProjectData();
+  projectData.tileId = target['guid'];
+  this._repository.put(projectData);
   this._logger.info('Create a ' + this.improvement.name + ' at target (' + target.entity.position.x + ';' + target.entity.position.y + ')');
 };
 

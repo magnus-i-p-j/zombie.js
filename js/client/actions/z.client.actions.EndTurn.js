@@ -17,7 +17,7 @@ z.client.actions.EndTurn = function (services) {
    * @type {!z.client.WorldProxy}
    * @private
    */
-  this._world = /** @type {!z.client.WorldProxy} */ services.get(z.client.Resources.WORLD);
+  this._world = /** @type {!z.client.WorldProxy} */ services.get(z.common.Resources.WORLD);
   this.meta = {
     type: 'action_end_turn',
     category: z.common.rulebook.category.ACTION,

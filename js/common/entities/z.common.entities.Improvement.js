@@ -3,13 +3,12 @@ goog.provide('z.common.entities.Improvement');
 goog.require('z.common.entities.Project');
 
 /**
- * @param {!z.common.data.ImprovementData} tileData
- * @param {!z.common.rulebook.meta} meta
- * @extends {z.common.entities.Entity}
+ * @param {!mugd.injector.MicroFactory} services
+ * @extends {z.common.entities.Project}
  * @constructor
  */
-z.common.entities.Improvement = function (tileData, meta) {
-  goog.base(this, tileData.guid, meta);
-
+z.common.entities.Improvement = function (services) {
+  goog.base(this, services);
 };
+
 goog.inherits(z.common.entities.Improvement, z.common.entities.Project);

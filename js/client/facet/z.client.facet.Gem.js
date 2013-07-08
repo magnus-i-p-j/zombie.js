@@ -7,6 +7,7 @@ goog.require('z.client');
 /**
  * @param {!mugd.injector.MicroFactory} services
  * @extends {z.client.facet.Facet}
+ * @implements mugd.injector.IInjectable
  * @constructor
  */
 z.client.facet.Gem = function (services) {
@@ -41,15 +42,27 @@ z.client.facet.Gem = function (services) {
   this['currentAction'] = /** @type {function(z.client.facet.ActionFacet=):z.client.facet.ActionFacet} */ services.get(z.client.Resources.CURRENT_ACTION);
 
   /**
+   * @type {@type {function(z.client.facet.ProjectListFacet=):z.client.facet.ProjectListFacet}
+   */
+  this['projectsFacet'] = /** @type {@type {function(z.client.facet.ProjectListFacet=):z.client.facet.ProjectListFacet} */ services.get(z.client.Resources.PROJECT_LIST_FACET);
+
+  /**
+   * @type {!z.common.EntityRepository}
+   */
+  var repository = /** @type {!z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
+
+  /**
    * @type {!z.client.WorldProxy}
    */
-  var world = /** @type {!z.client.WorldProxy} */ services.get(z.client.Resources.WORLD);
+  var world = /** @type {!z.client.WorldProxy} */ services.get(z.common.Resources.WORLD);
 
   this['mapFacet'].setParentEventTarget(this);
   this['contextMenuFacet'].setParentEventTarget(this);
   this['toolbarFacet'].setParentEventTarget(this);
   this['infoFacet'].setParentEventTarget(this);
   this['messageLogFacet'].setParentEventTarget(this);
+  this['projectsFacet'].setParentEventTarget(this);
+  repository.setParentEventTarget(this);
   world.setParentEventTarget(this);
 };
 

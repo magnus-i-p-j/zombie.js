@@ -22,7 +22,7 @@ z.service.world.RandomTerrainGenerator = function (services) {
    * @type {z.common.EntityRepository}
    * @private
    */
-  this._entityRepository = /** @type {z.common.EntityRepository} */ services.get(z.service.Resources.REPOSITORY);
+  this._entityRepository = /** @type {z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
   /**
    * @type {mugd.utils.SimplexNoise}
    * @private
