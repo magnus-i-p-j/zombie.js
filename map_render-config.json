@@ -1,6 +1,6 @@
 {
   "id":"map_render",
-  "inputs":["js/service/z.service.MapRenderService.js"],
+  "inputs":["js/service/mapRender/z.service.mapRender.MapRenderService.js"],
   "paths":["js/client",
     "js/mugd",
     "js/common",
