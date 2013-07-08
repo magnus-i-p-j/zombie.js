@@ -3,15 +3,17 @@ goog.provide('z.common.EntityRepository');
 goog.require('mugd.utils');
 goog.require('goog.events.EventTarget');
 goog.require('z.common.events');
-goog.provide('z.common.events.EntityCreated');
-goog.provide('z.common.events.EntityModified');
+goog.require('z.common.events.EntityCreated');
+goog.require('z.common.events.EntityModified');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @implements mugd.injector.IInjectable
+ * @extends {goog.events.EventTarget}
  */
 z.common.EntityRepository = function (services) {
+  goog.base(this);
   /**
    * @type {!z.common.rulebook.Rulebook}
    * @private

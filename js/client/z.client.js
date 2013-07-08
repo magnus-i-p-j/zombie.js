@@ -21,7 +21,8 @@ z.client.Resources = {
   TOOLBAR_ACTION_FACETS:'client_toolbar_action_facets',
   CURRENT_TARGET:'client_current_target',
   CURRENT_ACTION:'client_current_action',
-  END_TURN_ACTION:'client_end_turn_action'
+  END_TURN_ACTION:'client_end_turn_action',
+  PROJECT_LIST_FACET: 'client_project_list_facet'
 };
 
 /**

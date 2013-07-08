@@ -18,21 +18,40 @@ z.client.facet.ProjectListFacet = function () {
 
 };
 
+goog.inherits(z.client.facet.ProjectListFacet, z.client.facet.Facet);
+
 /**
  * @param {goog.events.EventTarget} parent
  */
-z.client.facet.InfoFacet.prototype.setParentEventTarget = function (parent) {
+z.client.facet.ProjectListFacet.prototype.setParentEventTarget = function (parent) {
   goog.base(this, 'setParentEventTarget', parent);
-  this.eventHandler.listen(parent, z.common.events.EntityCreated, this.doEntityCreated);
-  this.eventHandler.listen(parent, z.common.events.EntityModified, this.doEntityModified);
+  this.eventHandler.listen(parent, z.common.events.EventType.ENTITY_CREATED, this.doEntityCreated);
+  this.eventHandler.listen(parent, z.common.events.EventType.ENTITY_MODIFIED, this.doEntityModified);
 };
 
-z.client.facet.InfoFacet.prototype.doEntityCreated = function () {
-  console.log("EntityCreated");
+/**
+ * @param {!z.common.events.EntityCreated} e
+ */
+z.client.facet.ProjectListFacet.prototype.doEntityCreated = function (e) {
+  /**
+   * @type {!z.common.entities.Entity}
+   */
+  var entity = e.entity;
+  if(entity instanceof z.common.entities.Project){
+    console.log("Project created");
+  }
 };
 
-z.client.facet.InfoFacet.prototype.doEntityModified = function () {
-  console.log("EntityModified");
+/**
+ * @param {!z.common.events.EntityModified} e
+ */
+z.client.facet.ProjectListFacet.prototype.doEntityModified = function (e) {
+  /**
+   * @type {!z.common.entities.Entity}
+   */
+  var entity = e.entity;
+  if(entity instanceof z.common.entities.Project){
+    console.log("Project modified");
+  }
 };
 
-goog.inherits(z.client.facet.ProjectListFacet, z.client.facet.Facet);

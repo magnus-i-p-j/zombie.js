@@ -12,4 +12,4 @@ z.common.events.EntityModified = function (entity) {
   this.entity = entity;
 };
 
-goog.inherits(z.common.events.ShowContextMenu, goog.events.Event);
+goog.inherits(z.common.events.EntityModified, goog.events.Event);
