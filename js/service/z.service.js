@@ -7,7 +7,13 @@ goog.require('mugd.injector.Injector');
  */
 z.service.Resources = {
   TERRAIN_SEED: 'service_terrain seed',
-  TERRAIN_GENERATOR: 'service_terrain generator',
+  TERRAIN_GENERATOR: 'service_terrain generator'
+};
+
+/**
+ * @enum string
+ */
+z.service.Directions = {
   NORTH_WEST_TERRAIN: 'nw',
   NORTH_EAST_TERRAIN: 'ne',
   EAST_TERRAIN: 'e',

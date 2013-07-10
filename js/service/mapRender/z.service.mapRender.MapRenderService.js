@@ -7,16 +7,13 @@ goog.require('z.service.exceptions.InvalidQueryStringException');
 goog.require('z.service.mapRender.TerrainOverlayQuery');
 
 /**
- * @param {Object.<string,number>} terrains
- * @param {z.service.mapRender.ITerrainOverlayStrategy}
+ * @param {!z.service.mapRender.ITerrainOverlayStrategy}  terrainOverlayStrategy
  * @constructor
  */
-z.service.mapRender.MapRenderService = function (terrains, terrainOverlayStrategy) {
+z.service.mapRender.MapRenderService = function (terrainOverlayStrategy) {
   /**
-   * @type {Object.<string, number>}
-   * @private
+   * @type {!z.service.mapRender.ITerrainOverlayStrategy}
    */
-  this._terrains = terrains;
   this.terrainOverlayStrategy = terrainOverlayStrategy;
 };
 
@@ -28,7 +25,7 @@ z.service.mapRender.MapRenderService.prototype.getTerrainOverlay = function (que
   /**
    * @type {z.service.mapRender.TerrainOverlayQuery}
    */
-  var query = this.parseQueryString(queryString);
+  var query = new z.service.mapRender.TerrainOverlayQuery(queryString);
   var overlay = this.terrainOverlayStrategy.getOverlay(query);
   return overlay;
 };
@@ -40,33 +37,8 @@ z.service.mapRender.MapRenderService.prototype.validateQueryString = function (q
   }
 };
 
-/**
- * @param {string} queryString
- * @returns {z.service.mapRender.TerrainOverlayQuery}
- */
-z.service.mapRender.MapRenderService.prototype.parseQueryString = function (queryString) {
 
-  var keyValuePairs = queryString.split(['?', '&']);
-  keyValuePairs.pop();
-  keyValuePairs = goog.array.map(keyValuePairs, function (pair) {
-    return pair.split('=');
-  });
-
-  var query = new z.service.mapRender.TerrainOverlayQuery();
-  goog.array.forEach(keyValuePairs, function (pair) {
-    var key = pair[0];
-    var value = pair[1];
-    if (query.hasOwnProperty(key)) {
-      query[key] = value;
-    }
-  });
-
-  if (!goog.object.every(query, goog.isDefAndNotNull)) {
-    throw new z.service.exceptions.InvalidQueryStringException('Unparsable query string.', queryString);
-  }
-
-  return query;
-};
+goog.require('z.service.mapRender.BasicTerrainOverlayStrategy');
 
 /**
  * @returns {!z.service.mapRender.MapRenderService}
@@ -74,10 +46,11 @@ z.service.mapRender.MapRenderService.prototype.parseQueryString = function (quer
 z.service.mapRender.MapRenderService.instance = function () {
   var terrains = {
     'water': 1,
-    'grass': 2,
-    'hills': 3
+    'grass': 2
   };
-  return new z.service.mapRender.MapRenderService(terrains);
+  var tileStrategy = new z.service.mapRender.BasicTerrainOverlayStrategy(terrains);
+  var svc = new z.service.mapRender.MapRenderService(tileStrategy);
+  return svc;
 };
 
 goog.exportSymbol('map.render', z.service.mapRender.MapRenderService.instance);
