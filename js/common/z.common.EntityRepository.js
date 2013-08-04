@@ -42,7 +42,7 @@ z.common.EntityRepository.prototype.put = function (entityData) {
     if (goog.isNull(entityData.guid)) {
       entityData.guid = mugd.utils.getGuid();
     }
-    entity = this._injector.getResource(entityData.category).With({'entityData': entityData, 'meta': meta}).New();
+    entity = this._injector.getResource(meta.category).With({'entityData': entityData, 'meta': meta}).New();
     this._repo[entity.guid] = entity;
     var event = new z.common.events.EntityCreated(entity);
     this.dispatchEvent(event);

@@ -47,5 +47,10 @@ z.common.rulebook.Rulebook = function (services) {
  * @return {!z.common.rulebook.meta}
  */
 z.common.rulebook.Rulebook.prototype.getMetaClass = function (type) {
-  return this._meta[type];
+  var meta = this._meta[type];
+  if (goog.isDefAndNotNull(meta)) {
+    return  meta;
+  } else {
+    throw 'type: ' + type + ' has no meta class';
+  }
 };

@@ -26,7 +26,7 @@ z.common.entities.Project = function (services) {
   /**
    * @type {z.common.rulebook.category}
    */
-  this.category = projectData.category;
+  this.category = this.meta.category;
 
   /**
    * @type {!z.common.protocol.state}

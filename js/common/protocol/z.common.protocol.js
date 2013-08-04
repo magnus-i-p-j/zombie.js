@@ -1,10 +1,11 @@
 goog.provide('z.common.protocol');
 
 /** @typedef {{
-*   actorId: !mugd.utils.guid,
-*   projects: Array.<!z.common.protocol.project>,
-*   turn: number
-* }} */
+ *   actorId: !mugd.utils.guid,
+ *   projects: Array.<!z.common.protocol.project>,
+ *   turn: number
+ * }}
+ */
 z.common.protocol.clientEndTurn;
 
 /**
@@ -69,9 +70,9 @@ z.common.protocol.type;
  * @enum {string}
  */
 z.common.protocol.state = {
-  NEW:'new',
-  DELETE:'delete',
-  MODIFIED:'modified',
-  PASS:'pass'
+  NEW: 'new',
+  DELETE: 'delete',
+  MODIFIED: 'modified',
+  PASS: 'pass'
 };
 
