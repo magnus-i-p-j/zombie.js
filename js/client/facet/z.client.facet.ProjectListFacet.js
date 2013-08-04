@@ -2,6 +2,7 @@ goog.provide('z.client.facet.ProjectListFacet');
 
 goog.require('z.client.facet.Facet');
 goog.require('z.common.events');
+goog.require('z.client.facet.ProjectFacet');
 
 /**
  * @extends {z.client.facet.Facet}
@@ -37,8 +38,10 @@ z.client.facet.ProjectListFacet.prototype.doEntityCreated = function (e) {
    * @type {!z.common.entities.Entity}
    */
   var entity = e.entity;
-  if(entity instanceof z.common.entities.Project){
-    console.log("Project created");
+  if (entity instanceof z.common.entities.Project) {
+    var projectFacet = new z.client.facet.ProjectFacet();
+    projectFacet.setEntity(entity);
+    this['projects'].push(projectFacet);
   }
 };
 
@@ -50,7 +53,7 @@ z.client.facet.ProjectListFacet.prototype.doEntityModified = function (e) {
    * @type {!z.common.entities.Entity}
    */
   var entity = e.entity;
-  if(entity instanceof z.common.entities.Project){
+  if (entity instanceof z.common.entities.Project) {
     console.log("Project modified");
   }
 };

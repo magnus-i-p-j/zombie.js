@@ -21,7 +21,9 @@
            data-bind="template: {name: 'current_selection_info_widget', data: currentTarget}"
            class="layout">current_selection_info
   </section>
-  <section id="project_overview" class="layout">project_overview</section>
+  <section id="project_overview"
+           class="layout"
+      data-bind="template: {name: 'project_list_widget', data: projectsFacet}">project_overview</section>
   <section id="map" class="layout" data-bind="template: {name: 'map_widget', data: mapFacet}"></section>
   <section id="context_menu"
            class="context_menu"
