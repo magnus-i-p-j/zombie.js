@@ -57,7 +57,7 @@ z.client.Client.prototype.run = function () {
   // todo: 2. Choose game state
   // todo: 3. Start game.
   var self = this;
-  goog.net.XhrIo.send('../js/common/rulebook/ruleset.json', function (e) {
+  goog.net.XhrIo.send('../ruleset/main.json', function (e) {
     var ruleset = e.target.getResponseJson();
     console.log('ruleset', ruleset);
     self.startNewGame(ruleset);

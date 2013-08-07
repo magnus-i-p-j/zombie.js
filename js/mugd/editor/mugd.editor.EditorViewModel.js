@@ -6,8 +6,8 @@ goog.require('goog.net.XhrIo');
  * @constructor
  */
 mugd.editor.EditorViewModel = function () {
-  this['schemaUri'] = ko.observable('../js/common/rulebook/z.common.rulebook.test_schema.json');
-  this['dataUri'] = ko.observable('../js/common/rulebook/z.common.rulebook.test.json');
+  this['schemaUri'] = ko.observable('../ruleset/main_schema.json');
+  this['dataUri'] = ko.observable('../ruleset/main.json');
   this['model'] = ko.observable();
 };
 

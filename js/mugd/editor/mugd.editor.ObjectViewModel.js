@@ -43,7 +43,12 @@ mugd.editor.ObjectViewModel.prototype['setValue'] = function (newValue) {
   var current = this['value']();
   goog.object.forEach(newValue,
       function (value, key) {
+        if(current[key]){
         current[key]['setValue'](value);
+        }
+        else{
+          console.log("Discarding value for: " + key);
+        }
       }
   );
 };

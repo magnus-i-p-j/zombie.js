@@ -1,0 +1,110 @@
+{
+  "title": "Concepts",
+  "description": "The stuff people walk on.",
+  "type": "object",
+  "properties": {
+    "terrain": {
+      "title": "Terrains",
+      "description": "The stuff people walk on.",
+      "type": "array",
+      "items": {
+        "title": "Terrain",
+        "description": "Some sort of stuff to walk on.",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of terrain",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "description": "Describes the terrain",
+            "type": "string"
+          }
+        },
+        "links": {
+          "rel": "self",
+          "href": "game://terrain/{type}"
+        }
+      }
+    },
+    "improvement": {
+      "title": "Improvements",
+      "description": "Change things for the better",
+      "type": "array",
+      "items": {
+        "title": "Improvement",
+        "description": "A project that improves a tile",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of project",
+            "type": "string"
+          },
+        "description": {
+          "title": "Description",
+          "description": "Describes the terrain",
+          "type": "string"
+        },
+          "prerequisites": {
+            "description": "Lists the prerequisites for the project",
+            "title": "Prerequisites",
+            "type": "object",
+            "properties": {
+              "terrain": {
+                "type": "array",
+                "title": "Terrains",
+                "description": "The terrain types this improvement is applicable to",
+                "items": {
+                  "title": "Terrain",
+                  "description": "One of the possible terrains",
+                  "type": "string",
+                  "links": {
+                    "rel": "full",
+                    "href": "game://terrain/{@}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "actor":{
+      "title": "Actors",
+      "description": "Entities affecting the world",
+      "type": "array",
+      "items": {
+        "title": "Actor",
+        "description": "An actor",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of actor",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "description": "Describes the actor",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

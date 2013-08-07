@@ -2,7 +2,7 @@
   "id": "zedit",
   "inputs": ["js/mugd/editor/mugd.editor.js"],
   "paths": ["js"],
-  "mode": "ADVANCED",
+  "mode": "RAW",
   "level": "VERBOSE",
   "externs": [
     "libs/externs/knockout-externs.js",
