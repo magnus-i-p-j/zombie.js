@@ -51,11 +51,11 @@
             "description": "Visible name of project",
             "type": "string"
           },
-        "description": {
-          "title": "Description",
-          "description": "Describes the terrain",
-          "type": "string"
-        },
+          "description": {
+            "title": "Description",
+            "description": "Describes the terrain",
+            "type": "string"
+          },
           "prerequisites": {
             "description": "Lists the prerequisites for the project",
             "title": "Prerequisites",
@@ -80,7 +80,7 @@
         }
       }
     },
-    "actor":{
+    "actor": {
       "title": "Actors",
       "description": "Entities affecting the world",
       "type": "array",
@@ -101,6 +101,84 @@
           "description": {
             "title": "Description",
             "description": "Describes the actor",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "stockpile": {
+      "title": "Stockpile",
+      "description": "Natural resources e.g",
+      "type": "array",
+      "items": {
+        "title": "Stockpile",
+        "description": "A stockpiled resource",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of stockpile",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "description": "Describes the stockpile",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "artifact": {
+      "title": "Artifacts",
+      "description": "Unique items",
+      "type": "array",
+      "items": {
+        "title": "Artifact",
+        "description": "Unique item",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of artifact",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "description": "Describes the artifact",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "personnel": {
+      "title": "Personnel",
+      "description": "Persons populating the world",
+      "type": "array",
+      "items": {
+        "title": "Character",
+        "description": "A character",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of character",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "description": "Describes the character",
             "type": "string"
           }
         }
