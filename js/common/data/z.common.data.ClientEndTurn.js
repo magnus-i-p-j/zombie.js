@@ -3,7 +3,7 @@ goog.provide('z.common.data.ClientEndTurn');
 /**
  * @param {!mugd.utils.guid} actorId
  * @param {number} turn
- * @param {!Array.<!z.common.entities.Project>} projects
+ * @param {!Array.<!z.common.data.ProjectData>} projects
  * @constructor
  */
 z.common.data.ClientEndTurn = function (actorId, turn, projects) {
@@ -31,7 +31,7 @@ z.common.data.ClientEndTurn.prototype.toProtocol = function () {
     'actorId': this.actorId,
     'turn': this.turn,
     'projects': goog.array.map(this.projects, function (project) {
-      return z.common.data.ProjectData.toProtocol(project)
+      return project.toProtocol()
     })
   };
 };

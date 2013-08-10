@@ -2,6 +2,7 @@ goog.provide('z.common.EntityRepository');
 
 goog.require('mugd.utils');
 goog.require('goog.events.EventTarget');
+goog.require('goog.functions');
 goog.require('z.common.events');
 goog.require('z.common.events.EntityCreated');
 goog.require('z.common.events.EntityModified');
@@ -47,7 +48,7 @@ z.common.EntityRepository.prototype.put = function (entityData) {
     var event = new z.common.events.EntityCreated(entity);
     this.dispatchEvent(event);
   } else {
-    if(entity.update(entityData, meta)){
+    if (entity.update(entityData, meta)) {
       var event = new z.common.events.EntityModified(entity);
       this.dispatchEvent(event);
     }
@@ -100,4 +101,12 @@ z.common.EntityRepository.prototype.map = function (action, filter) {
     }
   }
   return result;
+};
+
+/**
+ * @param {(function(!z.common.entities.Entity):boolean)=} filter
+ * @return {!Array}
+ */
+z.common.EntityRepository.prototype.filter = function (filter) {
+  return this.map(goog.functions.identity, filter);
 };

@@ -71,6 +71,7 @@ z.service.world.World.prototype.createActor = function (actorCallback) {
  * @param {z.common.data.ClientEndTurn} endTurnData
  */
 z.service.world.World.prototype.actorEndTurn = function (endTurnData) {
+  console.log(endTurnData);
   // TODO: store plan
   this.endTurn();
 };
@@ -101,9 +102,19 @@ z.service.world.World.prototype.tick = function () {
   this._expandWorld();
   //Calculate zombies
   //Zombie attack
-  //Advance Projects
+  this._advanceProjects();
   this._turn += 1;
   //Special events
+};
+
+/**
+ * @private
+ */
+z.service.world.World.prototype._advanceProjects = function () {
+  // for each project
+  //   get project price
+  //   calculate use
+  //   send use to project
 };
 
 /**

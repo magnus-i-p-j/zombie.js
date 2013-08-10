@@ -69,6 +69,21 @@ z.client.WorldProxy.prototype.endTurn = function () {
   if (goog.isNull(this._actorId)) {
     throw 'Tried to end turn with no actor';
   }
-  var endTurnData = new z.common.data.ClientEndTurn(this._actorId, this._turn);
+
+  var projects = this._repository.map(
+      function (project) {
+        return z.common.data.ProjectData.fromEntity(project);
+      },
+      function (entity) {
+        if (entity instanceof z.common.entities.Project) {
+          if (entity.state !== z.common.protocol.state.PASS) {
+            return true;
+          }
+        }
+        return false;
+      });
+
+  var endTurnData = new z.common.data.ClientEndTurn(this._actorId, this._turn, projects);
+
   this._world.actorEndTurn(endTurnData);
 };

@@ -40,8 +40,22 @@ z.common.data.ProjectData.fromProtocol = function (protocol) {
 
 /**
  * @param {!z.common.entities.Project} project
+ * @return {!z.common.data.ProjectData}
+ */
+z.common.data.ProjectData.fromEntity = function (project) {
+  var guid      = project.guid;
+  var type      = project.meta.type;
+  var state     = project.state;
+  var priority  = project.priority;
+  var tileId    = project.tile.guid;
+  var resources = project.resources;
+  var investment= project.investment;
+  return new z.common.data.ProjectData(guid, type, state, priority, tileId, resources, investment);
+};
+
+/**
  * @return {!z.common.protocol.project}
  */
-z.common.data.ProjectData.toProtocol = function (project) {
+z.common.data.ProjectData.prototype.toProtocol = function () {
   throw {'name': 'NotImplementedException', 'message': 'toProtocol'};
 };
