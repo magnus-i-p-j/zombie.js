@@ -34,7 +34,12 @@ z.client.WorldProxy = function (services) {
    * @private
    */
   this._repository = /** @type {!z.common.EntityRepository} */services.get(z.common.Resources.REPOSITORY);
-  this._actorId = null;
+
+  /**
+   * @type {!z.client.facet.ActorFacet}
+   * @private
+   */
+  this._playerFacet = /** @type {!z.client.facet.ActorFacet} */ services.get(z.client.Resources.PLAYER_FACET);
   this._turn = 0;
 };
 
@@ -45,8 +50,9 @@ z.client.WorldProxy.prototype.firstTurn = function () {
    * @type {function (!z.common.protocol.startTurn)}
    */
   var callback = goog.bind(this.doStartTurn, this);
-  this._actorId = this._world.createActor(callback);
-  var endTurnData = new z.common.data.ClientEndTurn(this._actorId, this._turn);
+  var actorData = this._world.createPlayerActor(callback);
+  this._playerFacet.setEntity(this._repository.put(actorData));
+  var endTurnData = new z.common.data.ClientEndTurn(this._playerFacet['guid'], this._turn, []);
   this._world.actorEndTurn(endTurnData);
 };
 
@@ -66,12 +72,13 @@ z.client.WorldProxy.prototype.doStartTurn = function (startTurn) {
 };
 
 z.client.WorldProxy.prototype.endTurn = function () {
-  if (goog.isNull(this._actorId)) {
+  if (goog.isNull(this._playerFacet['guid'])) {
     throw 'Tried to end turn with no actor';
   }
 
   var projects = this._repository.map(
-      function (project) {
+      function (item) {
+        var project = /** @type {!z.common.entities.Project} */ item;
         return z.common.data.ProjectData.fromEntity(project);
       },
       function (entity) {
@@ -83,7 +90,7 @@ z.client.WorldProxy.prototype.endTurn = function () {
         return false;
       });
 
-  var endTurnData = new z.common.data.ClientEndTurn(this._actorId, this._turn, projects);
+  var endTurnData = new z.common.data.ClientEndTurn(this._playerFacet['guid'], this._turn, projects);
 
   this._world.actorEndTurn(endTurnData);
 };

@@ -43,7 +43,7 @@ mugd.injector.MicroFactory.prototype.get = function (key) {
   } catch (e) {
     if (!(e instanceof mugd.injector.NoProviderFoundException)) {
       throw e;
-    } else if (!goog.isDefAndNotNull(withRes)) {
+    } else if (!goog.isDef(withRes)) {
       throw e;
     }
   }

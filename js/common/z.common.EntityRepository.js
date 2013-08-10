@@ -39,16 +39,20 @@ goog.inherits(z.common.EntityRepository, goog.events.EventTarget);
 z.common.EntityRepository.prototype.put = function (entityData) {
   var entity = this.get(entityData.guid);
   var meta = this._rulebook.getMetaClass(entityData.type);
+  /**
+   * @type {z.common.entities.Actor}
+   */
+  var owner = /** @type {z.common.entities.Actor} */ this.get(entityData.ownerId);
   if (goog.isNull(entity)) {
     if (goog.isNull(entityData.guid)) {
       entityData.guid = mugd.utils.getGuid();
     }
-    entity = this._injector.getResource(meta.category).With({'entityData': entityData, 'meta': meta}).New();
+    entity = this._injector.getResource(meta.category).With({'entityData': entityData, 'meta': meta, 'owner':owner}).New();
     this._repo[entity.guid] = entity;
     var event = new z.common.events.EntityCreated(entity);
     this.dispatchEvent(event);
   } else {
-    if (entity.update(entityData, meta)) {
+    if (entity.update(entityData, meta, owner)) {
       var event = new z.common.events.EntityModified(entity);
       this.dispatchEvent(event);
     }

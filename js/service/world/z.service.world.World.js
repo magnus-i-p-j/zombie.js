@@ -46,7 +46,13 @@ z.service.world.World = function (services) {
    * @type { Object.<!mugd.utils.guid, !z.common.entities.Actor> }
    * @private
    */
-  this._actors = {};
+  this._playerActors = {};
+  var worldActorData = new z.common.data.ActorData(null, 'actor_world');
+  /**
+   * @type {!z.common.entities.Actor}
+   * @private
+   */
+  this._worldActor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(worldActorData);
 
   /**
    * @type {Object.<!mugd.utils.guid, function(z.common.protocol.startTurn)>}
@@ -57,14 +63,14 @@ z.service.world.World = function (services) {
 
 /**
  * @param {function(!z.common.protocol.startTurn)} actorCallback
- * @return {mugd.utils.guid}
+ * @return {!z.common.data.ActorData}
  */
-z.service.world.World.prototype.createActor = function (actorCallback) {
+z.service.world.World.prototype.createPlayerActor = function (actorCallback) {
   var actorData = new z.common.data.ActorData(null, 'actor_player');
-  var actor = this._entityRepository.put(actorData);
-  this._actors[actor.guid] = /** @type {!z.common.entities.Actor} */actor;
+  var actor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(actorData);
+  this._playerActors[actor.guid] = actor;
   this._actorCallbacks[actor.guid] = actorCallback;
-  return actor.guid;
+  return  z.common.data.ActorData.fromEntity(actor);
 };
 
 /**
@@ -73,13 +79,29 @@ z.service.world.World.prototype.createActor = function (actorCallback) {
 z.service.world.World.prototype.actorEndTurn = function (endTurnData) {
   console.log(endTurnData);
   // TODO: store plan
+  var actor = this._entityRepository.get(endTurnData.actorId);
+  goog.array.forEach(endTurnData.projects,
+      function (projectData) {
+        this.updateProject(projectData, actor);
+      }, this
+  );
+
   this.endTurn();
+};
+
+/**
+ * @param projectData
+ * @param actor
+ */
+z.service.world.World.prototype.updateProject = function (projectData, actor) {
+  var project = this._entityRepository.get(projectData.guid);
+  project.update(projectData);
 };
 
 z.service.world.World.prototype.endTurn = function () {
   this.tick();
-  for (var actorGuid in this._actors) {
-    if (this._actors.hasOwnProperty(actorGuid)) {
+  for (var actorGuid in this._playerActors) {
+    if (this._playerActors.hasOwnProperty(actorGuid)) {
       var tiles = this._entityRepository.map(
           function (entity) {
             var tile = /** @type {!z.common.entities.Tile} */ entity;
@@ -92,7 +114,7 @@ z.service.world.World.prototype.endTurn = function () {
       /**
        * @type {z.common.protocol.startTurn}
        */
-      var startTurn = {'actorId': actorGuid, 'tiles': tiles, 'turn': this._turn };
+      var startTurn = {'actorId': /** @type{!mugd.utils.guid} */ actorGuid, 'tiles': tiles, 'turn': this._turn };
       this._actorCallbacks[actorGuid](startTurn);
     }
   }
@@ -140,7 +162,9 @@ z.service.world.World.prototype._expandWorld = function () {
   for (var y = y_min; y <= y_max; y++) {
     for (var x = x_min; x <= x_max; x++) {
       if (!goog.isDef(this._tiles.getNode(x, y))) {
-        var tile = this._terrainGenerator.generateTerrain(x, y);
+        var tileData = this._terrainGenerator.generateTerrain(x, y);
+        tileData.ownerId = this._worldActor.guid;
+        var tile = this._entityRepository.put(tileData);
         this._tiles.setNode(x, y, tile);
       }
     }

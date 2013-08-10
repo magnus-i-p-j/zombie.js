@@ -4,6 +4,7 @@ goog.require('z.common.data.EntityData');
 
 /**
  * @param {?mugd.utils.guid} guid
+ * @param {?mugd.utils.guid} ownerId
  * @param {string} type
  * @param {!z.common.protocol.state} state
  * @param {number} priority
@@ -13,8 +14,9 @@ goog.require('z.common.data.EntityData');
  * @constructor
  * @implements {z.common.data.EntityData}
  */
-z.common.data.ProjectData = function (guid, type, state, priority, tileId, resources, investment) {
+z.common.data.ProjectData = function (guid, ownerId, type, state, priority, tileId, resources, investment) {
   this.guid = guid;
+  this.ownerId = ownerId;
   this.type = type;
   this.state = state;
   this.priority = priority;
@@ -29,13 +31,14 @@ z.common.data.ProjectData = function (guid, type, state, priority, tileId, resou
  */
 z.common.data.ProjectData.fromProtocol = function (protocol) {
   var guid         = protocol['projectId'];
+  var ownerId      = protocol['ownerId'];
   var resources    = protocol['resources'];
   var investment   = protocol['investment'];
   var priority     = protocol['priority'];
   var state        = protocol['state'];
   var tileId       = protocol['tileId'];
   var type         = protocol['type'];
-  return new z.common.data.ProjectData(guid, type, state, priority, tileId, resources, investment);
+  return new z.common.data.ProjectData(guid, ownerId, type, state, priority, tileId, resources, investment);
 };
 
 /**
@@ -44,13 +47,14 @@ z.common.data.ProjectData.fromProtocol = function (protocol) {
  */
 z.common.data.ProjectData.fromEntity = function (project) {
   var guid      = project.guid;
+  var ownerId   = project.owner.guid;
   var type      = project.meta.type;
   var state     = project.state;
   var priority  = project.priority;
   var tileId    = project.tile.guid;
   var resources = project.resources;
   var investment= project.investment;
-  return new z.common.data.ProjectData(guid, type, state, priority, tileId, resources, investment);
+  return new z.common.data.ProjectData(guid, ownerId, type, state, priority, tileId, resources, investment);
 };
 
 /**

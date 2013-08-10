@@ -10,6 +10,7 @@ goog.require('z.common.entities.Entity');
 z.common.entities.Actor = function (services) {
   goog.base(this, services);
   this.name = null;
+  this.owner = this;
 };
 
 goog.inherits(z.common.entities.Actor, z.common.entities.Entity);

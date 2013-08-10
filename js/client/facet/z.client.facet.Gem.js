@@ -42,9 +42,9 @@ z.client.facet.Gem = function (services) {
   this['currentAction'] = /** @type {function(z.client.facet.ActionFacet=):z.client.facet.ActionFacet} */ services.get(z.client.Resources.CURRENT_ACTION);
 
   /**
-   * @type {@type {function(z.client.facet.ProjectListFacet=):z.client.facet.ProjectListFacet}
+   * @type {function(z.client.facet.ProjectListFacet=):z.client.facet.ProjectListFacet}
    */
-  this['projectsFacet'] = /** @type {@type {function(z.client.facet.ProjectListFacet=):z.client.facet.ProjectListFacet} */ services.get(z.client.Resources.PROJECT_LIST_FACET);
+  this['projectsFacet'] = /** @type {function(z.client.facet.ProjectListFacet=):z.client.facet.ProjectListFacet} */ services.get(z.client.Resources.PROJECT_LIST_FACET);
 
   /**
    * @type {!z.common.EntityRepository}

@@ -19,6 +19,12 @@ z.client.actions.CreateImprovement = function (services) {
    */
   this._repository = /** @type{!z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
 
+  /**
+   * @type {!z.client.facet.ActorFacet}
+   * @private
+   */
+  this._playerFacet = /** @type {!z.client.facet.ActorFacet} */ services.get(z.client.Resources.PLAYER_FACET);
+
   this.meta = {
     type: 'action_create_improvement' + this.improvement.type,
     category: z.common.rulebook.category.ACTION,
@@ -54,9 +60,9 @@ z.client.actions.CreateImprovement.prototype._executeInternal = function (args) 
    * @type {!z.client.facet.TileFacet}
    */
   var target = /** @type {!z.client.facet.TileFacet} */ args[z.client.action.ArgsType.TARGET];
-
   var projectData = this.improvement.createNewProjectData();
   projectData.tileId = target['guid'];
+  projectData.ownerId = this._playerFacet['guid'];
   this._repository.put(projectData);
   this._logger.info('Create a ' + this.improvement.name + ' at target (' + target.entity.position.x + ';' + target.entity.position.y + ')');
 };

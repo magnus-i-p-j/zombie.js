@@ -10,8 +10,20 @@ goog.require('z.common.data.EntityData');
  */
 z.common.data.ActorData = function (guid, type) {
   this.guid = guid;
+  this.ownerId = guid;
   this.type = type;
   this.category = z.common.rulebook.category.ACTOR;
+};
+
+/**
+ * @param {!z.common.entities.Actor} actor
+ * @return {!z.common.data.ActorData}
+ */
+z.common.data.ActorData.fromEntity = function (actor) {
+  return new z.common.data.ActorData(
+      actor.guid,
+      actor.meta.type
+  );
 };
 
 /**

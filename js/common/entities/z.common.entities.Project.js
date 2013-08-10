@@ -38,10 +38,12 @@ z.common.entities.Project = function (services) {
    */
   this.priority = projectData.priority;
 
-  /**
-   * @type {!z.common.entities.Tile}
-   */
-  this.tile = /** @type {!z.common.entities.Tile} */ entityRepository.get(projectData.tileId);
+  if (goog.isDefAndNotNull(projectData.tileId)) {
+    /**
+     * @type {!z.common.entities.Tile}
+     */
+    this.tile = /** @type {!z.common.entities.Tile} */ entityRepository.get(projectData.tileId);
+  }
 
   this.position = this.tile.position;
 

@@ -20,6 +20,7 @@ z.common.protocol.startTurn;
 /**
  * @typedef {{
  *  tileId: mugd.utils.guid,
+ *  ownerId: mugd.utils.guid,
  *  x: number,
  *  y: number,
  *  type: string
@@ -37,28 +38,16 @@ z.common.protocol.actor;
 
 /** @typedef {{
  *  projectId: !mugd.utils.guid,
+ *  ownerId: !mugd.utils.guid,
  *  resources: !Array.<!z.common.protocol.resource>,
  *  investment: !Object.<z.common.protocol.type,number>,
  *  priority: number,
  *  state: !z.common.protocol.state,
- *  tileId: mugd.utils.guid,
+ *  tileId: !mugd.utils.guid,
  *  type: string
  * }}
  */
 z.common.protocol.project;
-
-/**
- * @typedef {{
- *  projectId: !mugd.utils.guid,
- *  resources: !Array.<!z.common.protocol.resource>,
- *  investment: !Object.<z.common.protocol.type,number>,
- *  priority: number,
- *  state: !z.common.protocol.state,
- *  tileId: mugd.utils.guid,
- *  type: string
- * }}
- */
-z.common.protocol.improvement;
 
 /** @typedef {!mugd.utils.guid} */
 z.common.protocol.resource;

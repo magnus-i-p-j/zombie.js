@@ -31,7 +31,7 @@ z.common.data.ClientEndTurn.prototype.toProtocol = function () {
     'actorId': this.actorId,
     'turn': this.turn,
     'projects': goog.array.map(this.projects, function (project) {
-      return project.toProtocol()
+      return project.toProtocol();
     })
   };
 };

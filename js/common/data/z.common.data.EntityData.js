@@ -17,6 +17,6 @@ z.common.data.EntityData.prototype.guid;
 z.common.data.EntityData.prototype.type;
 
 /**
- * @type {z.common.rulebook.category}
+ * @type {mugd.utils.guid}
  */
-z.common.data.EntityData.prototype.category;
+z.common.data.EntityData.prototype.ownerId;

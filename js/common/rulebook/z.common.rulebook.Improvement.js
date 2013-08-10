@@ -49,7 +49,7 @@ z.common.rulebook.Improvement.prototype.isApplicable = function (target) {
 
 z.common.rulebook.Improvement.prototype.createNewProjectData = function(){
   var projectData = new z.common.data.ProjectData(
-      null, this.type, z.common.protocol.state.NEW, 0, null, [], {}
+      null, null, this.type, z.common.protocol.state.NEW, 0, null, [], {}
   );
   return projectData;
 };
