@@ -76,6 +76,39 @@
                 }
               }
             }
+          },
+          "cost": {
+            "description": "Lists the cost for the project",
+            "title": "Costs",
+            "type": "object",
+            "properties": {
+              "stockpile": {
+                "type": "array",
+                "title": "Stockpiled resources",
+                "description": "Stuff needed to build",
+                "items": {
+                  "title": "Resource",
+                  "description": "One of the required resources",
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "title": "Resource",
+                      "description": "The required resource",
+                      "type": "string",
+                      "links": {
+                        "rel": "full",
+                        "href": "game://stockpile/{@}"
+                      }
+                    },
+                    "amount": {
+                      "title": "Amount",
+                      "description": "The amount required",
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -129,8 +162,13 @@
             "description": "Describes the stockpile",
             "type": "string"
           }
+        },
+        "links": {
+          "rel": "self",
+          "href": "game://stockpile/{type}"
         }
       }
+
     },
     "artifact": {
       "title": "Artifacts",
