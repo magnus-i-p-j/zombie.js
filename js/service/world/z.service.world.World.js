@@ -1,6 +1,7 @@
 goog.provide('z.service.world.World');
 
 goog.require('mugd.injector.Injector');
+goog.require('goog.debug.Logger');
 goog.require('z.service');
 
 goog.require('z.common.rulebook');

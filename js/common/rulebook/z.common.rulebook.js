@@ -51,12 +51,8 @@ z.common.rulebook.effect;
 z.common.rulebook.category = {
   IMPROVEMENT: 'improvement',
   TERRAIN: 'terrain',
-  ITEM: 'item',
-  CHARACTER: 'character',
-  ASSET: 'asset',
   ACTOR: 'actor',
-  TECH: 'tech',
-  ACTION: 'action'
+  STOCKPILE:'stockpile'
 };
 
 //noinspection JSUnusedLocalSymbols

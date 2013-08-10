@@ -4,6 +4,7 @@ goog.require("z.common.rulebook");
 goog.require("z.common.rulebook.Improvement");
 goog.require("z.common.rulebook.Terrain");
 goog.require("z.common.rulebook.Actor");
+goog.require("z.common.rulebook.StockpiledResource");
 
 goog.require('mugd.injector.Injector');
 goog.require('z.client');
@@ -37,6 +38,11 @@ z.common.rulebook.Rulebook = function (services) {
   }, this);
   this.actors = goog.array.map(ruleset[z.common.rulebook.category.ACTOR], function (item) {
     var meta = new z.common.rulebook.Actor(item);
+    this._meta[meta.type] = meta;
+    return meta;
+  }, this);
+  this.stockpiledResources = goog.array.map(ruleset[z.common.rulebook.category.STOCKPILE], function (item) {
+    var meta = new z.common.rulebook.StockpiledResource(item);
     this._meta[meta.type] = meta;
     return meta;
   }, this);
