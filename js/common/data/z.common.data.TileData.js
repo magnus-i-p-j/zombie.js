@@ -21,6 +21,20 @@ z.common.data.TileData = function (guid, ownerId, x, y, type) {
 };
 
 /**
+ * @param {!z.common.entities.Tile} tile
+ * @return {!z.common.data.TileData}
+ */
+z.common.data.TileData.fromEntity = function (tile) {
+  return new z.common.data.TileData(
+      tile.guid,
+      tile.owner.guid,
+      tile.position.x,
+      tile.position.y,
+      tile.meta.type
+  );
+};
+
+/**
  * @param {!z.common.protocol.tile} protocol
  * @return {!z.common.data.TileData}
  */

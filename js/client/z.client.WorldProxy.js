@@ -47,7 +47,7 @@ goog.inherits(z.client.WorldProxy, goog.events.EventTarget);
 
 z.client.WorldProxy.prototype.firstTurn = function () {
   /**
-   * @type {function (!z.common.protocol.startTurn)}
+   * @type {function (!z.common.data.StartTurnData)}
    */
   var callback = goog.bind(this.doStartTurn, this);
   var actorData = this._world.createPlayerActor(callback);
@@ -57,10 +57,9 @@ z.client.WorldProxy.prototype.firstTurn = function () {
 };
 
 /**
- * @param {!z.common.protocol.startTurn} startTurn
+ * @param {!z.common.data.StartTurnData} startTurnData
  */
-z.client.WorldProxy.prototype.doStartTurn = function (startTurn) {
-  var startTurnData = z.common.data.StartTurnData.fromProtocol(startTurn);
+z.client.WorldProxy.prototype.doStartTurn = function (startTurnData) {
   this._turn = startTurnData.turn;
   var tiles = goog.array.map(startTurnData.tiles, this._repository.put, this._repository);
   var e = new z.client.events.StartTurn({

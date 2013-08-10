@@ -55,14 +55,20 @@ z.service.world.World = function (services) {
   this._worldActor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(worldActorData);
 
   /**
-   * @type {Object.<!mugd.utils.guid, function(z.common.protocol.startTurn)>}
+   * @type {Object.<!mugd.utils.guid, function(!z.common.data.StartTurnData)>}
    * @private
    */
   this._actorCallbacks = {};
 };
 
 /**
- * @param {function(!z.common.protocol.startTurn)} actorCallback
+ * @type {!goog.debug.Logger}
+ * @protected
+ */
+z.service.world.World.prototype._logger = goog.debug.Logger.getLogger('z.service.world.World');
+
+/**
+ * @param {function(!z.common.data.StartTurnData)} actorCallback
  * @return {!z.common.data.ActorData}
  */
 z.service.world.World.prototype.createPlayerActor = function (actorCallback) {
@@ -92,12 +98,21 @@ z.service.world.World.prototype.actorEndTurn = function (endTurnData) {
 /**
  * @param projectData
  * @param actor
+ * @private
  */
 z.service.world.World.prototype.updateProject = function (projectData, actor) {
   var project = this._entityRepository.get(projectData.guid);
-  project.update(projectData);
+  if (goog.isDefAndNotNull(project) && project.owner !== actor) {
+    this._logger.warning('project is not owned by the correct actor');
+  } else {
+    this._logger.info('Received project service side');
+    this._entityRepository.put(projectData);
+  }
 };
 
+/**
+ * @private
+ */
 z.service.world.World.prototype.endTurn = function () {
   this.tick();
   for (var actorGuid in this._playerActors) {
@@ -105,16 +120,28 @@ z.service.world.World.prototype.endTurn = function () {
       var tiles = this._entityRepository.map(
           function (entity) {
             var tile = /** @type {!z.common.entities.Tile} */ entity;
-            return z.common.data.TileData.toProtocol(tile);
+            return z.common.data.TileData.fromEntity(tile);
           },
           function (entity) {
             return entity.meta.category === z.common.rulebook.category.TERRAIN;
           }
       );
+      var visibleProjects = this._entityRepository.map(
+          function (item) {
+            var project = /** @type {!z.common.entities.Project} */ item;
+            return z.common.data.ProjectData.fromEntity(project);
+          },
+          function (entity) {
+            if (entity instanceof z.common.entities.Project) {
+              return true;
+            }
+            return false;
+          });
+
       /**
-       * @type {z.common.protocol.startTurn}
+       * @type {!z.common.data.StartTurnData}
        */
-      var startTurn = {'actorId': /** @type{!mugd.utils.guid} */ actorGuid, 'tiles': tiles, 'turn': this._turn };
+      var startTurn = new z.common.data.StartTurnData(actorGuid, tiles, this._turn, visibleProjects);
       this._actorCallbacks[actorGuid](startTurn);
     }
   }

@@ -53,3 +53,33 @@ z.common.entities.Project = function (services) {
 };
 
 goog.inherits(z.common.entities.Project, z.common.entities.Entity);
+
+/**
+ * @inheritDoc
+ */
+z.common.entities.Project.prototype.update = function (entityData, meta, owner) {
+  if (!(entityData instanceof z.common.data.ProjectData)) {
+    throw {'name': 'InvalidDataException', 'message': 'not a z.common.data.ProjectData'};
+  }
+
+  var projectData = /** @type {!z.common.data.ProjectData} */ entityData;
+
+  var updated = false;
+
+  if (this.priority !== projectData.priority) {
+    this.priority = projectData.priority;
+    updated = true;
+  }
+  if (this.state !== projectData.state) {
+    this.state = projectData.state;
+    updated = true;
+  }
+  if (goog.isDefAndNotNull(owner) && this.owner !== owner) {
+    this.owner = owner;
+    updated = true;
+  }
+  return updated;
+};
+
+
+
