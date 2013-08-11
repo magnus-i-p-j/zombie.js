@@ -5,6 +5,7 @@ z.common.Resources = {
   RULESET: 'common_ruleset',
   RULEBOOK: 'common_rulebook',
   REPOSITORY: 'common_repository',
-  WORLD:'common_world'
+  WORLD:'common_world',
+  STOCK:'common_stock'
 };
 

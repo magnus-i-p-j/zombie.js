@@ -43,5 +43,24 @@ TestCase("test z.common.Stockpile", {
     var left = this.stockpile['wood'].peek();
     assertSame(6, actual);
     assertSame(9, left);
+  },
+  'test should round floats up': function () {
+    this.stockpile['metal'].add(22);
+
+    var actual = this.stockpile['metal'].take(6.1);
+    assertSame(7, actual);
+  },
+  'test should add object to separate properties': function () {
+    this.stockpile.add({'metal': 22});
+
+    var actual = this.stockpile['metal'].peek();
+    assertSame(22, actual);
+  },
+  'test should subtract current': function () {
+    this.stockpile.add({'metal': 2, 'wood': 5});
+
+    var actual = this.stockpile.diff({'wood': 10, 'metal': 0});
+    assertEquals({'wood': 5, 'metal': -2}, actual);
   }
+
 });
