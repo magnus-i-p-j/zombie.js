@@ -31,7 +31,8 @@ z.common.protocol.tile;
 /**
  * @typedef {{
  *  actorId: mugd.utils.guid,
- *  type: string
+ *  type: string,
+ *  stockpile: !Object.<!z.common.protocol.type,number>
  * }}
  */
 z.common.protocol.actor;
@@ -40,7 +41,7 @@ z.common.protocol.actor;
  *  projectId: !mugd.utils.guid,
  *  ownerId: !mugd.utils.guid,
  *  resources: !Array.<!z.common.protocol.resource>,
- *  investment: !Object.<z.common.protocol.type,number>,
+ *  investment: !Object.<!z.common.protocol.type,number>,
  *  priority: number,
  *  state: !z.common.protocol.state,
  *  tileId: !mugd.utils.guid,

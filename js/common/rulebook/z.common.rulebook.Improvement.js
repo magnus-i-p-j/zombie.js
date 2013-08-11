@@ -3,6 +3,9 @@ goog.provide('z.common.rulebook.Improvement');
 goog.require('z.common.rulebook.logic');
 goog.require('z.common.rulebook');
 
+goog.require('goog.array');
+
+
 /**
  * @param {!z.common.rulebook.improvement} improvement
  * @constructor
@@ -30,6 +33,15 @@ z.common.rulebook.Improvement = function (improvement) {
    * @type {string}
    */
   this.description = this._improvement.description;
+
+  this.cost = {};
+  goog.array.forEach(
+      this._improvement['cost']['stockpile'],
+      function (item) {
+        var name = item['type'];
+        this.cost[name] = item['amount'];
+      }, this
+  );
 };
 
 /**
@@ -47,7 +59,7 @@ z.common.rulebook.Improvement.prototype.isApplicable = function (target) {
   return true;
 };
 
-z.common.rulebook.Improvement.prototype.createNewProjectData = function(){
+z.common.rulebook.Improvement.prototype.createNewProjectData = function () {
   var projectData = new z.common.data.ProjectData(
       null, null, this.type, z.common.protocol.state.NEW, 0, null, [], {}
   );

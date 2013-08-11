@@ -3,6 +3,7 @@ goog.provide('z.service.world.World');
 goog.require('mugd.injector.Injector');
 goog.require('goog.debug.Logger');
 goog.require('z.service');
+goog.require('z.common.Cashier');
 
 goog.require('z.common.rulebook');
 goog.require('z.common.protocol');
@@ -77,7 +78,7 @@ z.service.world.World.prototype.createPlayerActor = function (actorCallback) {
   var actor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(actorData);
   this._playerActors[actor.guid] = actor;
   this._actorCallbacks[actor.guid] = actorCallback;
-  return  z.common.data.ActorData.fromEntity(actor);
+  return  z.common.data.ActorData.fromEntity( actor);
 };
 
 /**
@@ -161,10 +162,31 @@ z.service.world.World.prototype.tick = function () {
  * @private
  */
 z.service.world.World.prototype._advanceProjects = function () {
-  // for each project
-  //   get project price
-  //   calculate use
-  //   send use to project
+
+  /**
+   * @type {!Array.<!z.common.entities.Project>}
+   */
+  var projects = this._entityRepository.filter(function(entity){
+    return entity instanceof z.common.entities.Project;
+  });
+
+  projects.sort(function(lhs, rhs){
+    return lhs.priority - rhs.priority;
+  });
+
+  goog.array.forEach(projects, function(project){
+    /**
+     * @type {!z.common.entities.Actor}
+     */
+    var owner = project.owner;
+    var stockpile = owner.stockpile;
+    var cost = project.getCost();
+    var cashier = new z.common.Cashier(stockpile);
+    var investment = cashier.withdraw(cost);
+    project.invest(investment);
+    project.advance();
+  });
+
 };
 
 /**

@@ -18,9 +18,9 @@ TestCase("test z.common.Cashier", {
     ], "artifact": [], "personnel": []};
     injector.addResource(z.common.Resources.RULESET, ruleset);
     injector.addProvider(z.common.Resources.RULEBOOK, z.common.rulebook.Rulebook);
-    injector.addProvider(z.common.Resources.STOCK, z.common.Stockpile);
-    this.stockpile = injector.getResource(z.common.Resources.STOCK);
-    this.cashier = injector.Compose(z.common.Cashier).New();
+    injector.addProvider("STOCK", z.common.Stockpile);
+    this.stockpile = injector.getResource("STOCK");
+    this.cashier = new z.common.Cashier(this.stockpile);
   },
   'test should give nothing when nothing is available': function () {
     var actual = this.cashier.withdraw({"wood": 5});

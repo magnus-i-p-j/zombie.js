@@ -33,7 +33,8 @@ z.common.rulebook.prerequisites;
 
 /**
  * @typedef {{
- *   labour: number
+ *   name: string,
+ *   amount: number
  * }}
  */
 z.common.rulebook.cost;

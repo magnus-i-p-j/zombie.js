@@ -53,7 +53,7 @@ z.common.data.ProjectData.fromEntity = function (project) {
   var priority  = project.priority;
   var tileId    = project.tile.guid;
   var resources = project.resources;
-  var investment= project.investment;
+  var investment= project.investment.peek();
   return new z.common.data.ProjectData(guid, ownerId, type, state, priority, tileId, resources, investment);
 };
 

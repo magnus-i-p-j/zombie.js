@@ -3,16 +3,15 @@ goog.provide('z.common.Cashier');
 goog.require('goog.object');
 
 /**
- * @param {!mugd.injector.MicroFactory} services
- * @implements mugd.injector.IInjectable
+ * @param {!z.common.Stockpile} stock
  * @constructor
  */
-z.common.Cashier = function (services) {
+z.common.Cashier = function (stock) {
   /**
    * @type {!z.common.Stockpile}
    * @private
    */
-  this._stock = /** @type {!z.common.Stockpile} */ services.get(z.common.Resources.STOCK);
+  this._stock = stock;
 };
 
 z.common.Cashier.prototype.withdraw = function (request) {

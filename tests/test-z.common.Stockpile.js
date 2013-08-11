@@ -61,6 +61,19 @@ TestCase("test z.common.Stockpile", {
 
     var actual = this.stockpile.diff({'wood': 10, 'metal': 0});
     assertEquals({'wood': 5, 'metal': -2}, actual);
+  },
+  'test should return current value': function () {
+    this.stockpile.add({'wood': 5, 'metal': 8});
+
+    var actual = this.stockpile.peek();
+    assertEquals({'wood': 5, 'metal': 8}, actual);
+  },
+  'test should purge': function () {
+    this.stockpile.add({'metal': 2, 'wood': 5});
+    this.stockpile.purge();
+
+    assertSame(0, this.stockpile['wood'].peek());
+    assertSame(0, this.stockpile['metal'].peek());
   }
 
 });
