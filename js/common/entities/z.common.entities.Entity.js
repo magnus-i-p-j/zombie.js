@@ -28,6 +28,12 @@ z.common.entities.Entity = function (services) {
    * {goog.math.Coordinate}
    */
   this.position = null;
+
+  /**
+   * @type {!z.common.entities.Actor}
+   */
+  this.owner = /** @type {!z.common.entities.Actor} */ services.get('owner');
+
 };
 
 goog.inherits(z.common.entities.Entity, goog.events.EventTarget);
@@ -35,9 +41,10 @@ goog.inherits(z.common.entities.Entity, goog.events.EventTarget);
 /**
  * @param {!z.common.data.EntityData} entityData
  * @param {!z.common.rulebook.meta} meta
+ * @param {z.common.entities.Actor} owner
  * @return {boolean}
  */
-z.common.entities.Entity.prototype.update = function (entityData, meta) {
+z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
   throw {'name': 'NotImplementedException', 'message': 'update'};
 };
 

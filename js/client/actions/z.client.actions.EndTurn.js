@@ -19,10 +19,10 @@ z.client.actions.EndTurn = function (services) {
    */
   this._world = /** @type {!z.client.WorldProxy} */ services.get(z.common.Resources.WORLD);
   this.meta = {
-    type: 'action_end_turn',
-    category: z.common.rulebook.category.ACTION,
-    name: 'End turn',
-    description: 'Ends your turn, commence gnawing'
+    'type': 'action_end_turn',
+    'category': z.common.rulebook.category.ACTION,
+    'name': 'End turn',
+    'description': 'Ends your turn, commence gnawing'
   };
 };
 goog.inherits(z.client.actions.EndTurn, z.client.action.Action);

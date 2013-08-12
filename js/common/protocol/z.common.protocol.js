@@ -1,10 +1,11 @@
 goog.provide('z.common.protocol');
 
 /** @typedef {{
-*   actorId: !mugd.utils.guid,
-*   projects: Array.<!z.common.protocol.project>,
-*   turn: number
-* }} */
+ *   actorId: !mugd.utils.guid,
+ *   projects: Array.<!z.common.protocol.project>,
+ *   turn: number
+ * }}
+ */
 z.common.protocol.clientEndTurn;
 
 /**
@@ -19,6 +20,7 @@ z.common.protocol.startTurn;
 /**
  * @typedef {{
  *  tileId: mugd.utils.guid,
+ *  ownerId: mugd.utils.guid,
  *  x: number,
  *  y: number,
  *  type: string
@@ -29,35 +31,24 @@ z.common.protocol.tile;
 /**
  * @typedef {{
  *  actorId: mugd.utils.guid,
- *  type: string
+ *  type: string,
+ *  stockpile: !Object.<!z.common.protocol.type,number>
  * }}
  */
 z.common.protocol.actor;
 
 /** @typedef {{
  *  projectId: !mugd.utils.guid,
+ *  ownerId: !mugd.utils.guid,
  *  resources: !Array.<!z.common.protocol.resource>,
- *  investment: !Object.<z.common.protocol.type,number>,
+ *  investment: !Object.<!z.common.protocol.type,number>,
  *  priority: number,
  *  state: !z.common.protocol.state,
- *  tileId: mugd.utils.guid,
+ *  tileId: !mugd.utils.guid,
  *  type: string
  * }}
  */
 z.common.protocol.project;
-
-/**
- * @typedef {{
- *  projectId: !mugd.utils.guid,
- *  resources: !Array.<!z.common.protocol.resource>,
- *  investment: !Object.<z.common.protocol.type,number>,
- *  priority: number,
- *  state: !z.common.protocol.state,
- *  tileId: mugd.utils.guid,
- *  type: string
- * }}
- */
-z.common.protocol.improvement;
 
 /** @typedef {!mugd.utils.guid} */
 z.common.protocol.resource;
@@ -69,9 +60,9 @@ z.common.protocol.type;
  * @enum {string}
  */
 z.common.protocol.state = {
-  NEW:'new',
-  DELETE:'delete',
-  MODIFIED:'modified',
-  PASS:'pass'
+  NEW: 'new',
+  DELETE: 'delete',
+  MODIFIED: 'modified',
+  PASS: 'pass'
 };
 

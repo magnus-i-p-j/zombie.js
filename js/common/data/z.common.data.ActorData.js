@@ -5,13 +5,28 @@ goog.require('z.common.data.EntityData');
 /**
  * @param {?mugd.utils.guid} guid
  * @param {string} type
+ * @param {Object.<z.common.protocol.type,number>} stockpile
  * @constructor
  * @implements {z.common.data.EntityData}
  */
-z.common.data.ActorData = function (guid, type) {
+z.common.data.ActorData = function (guid, type, stockpile) {
   this.guid = guid;
+  this.ownerId = guid;
   this.type = type;
+  this.stockpile = stockpile;
   this.category = z.common.rulebook.category.ACTOR;
+};
+
+/**
+ * @param {!z.common.entities.Actor} actor
+ * @return {!z.common.data.ActorData}
+ */
+z.common.data.ActorData.fromEntity = function (actor) {
+  return new z.common.data.ActorData(
+      actor.guid,
+      actor.meta.type,
+      actor.stockpile.peek()
+  );
 };
 
 /**
@@ -21,7 +36,8 @@ z.common.data.ActorData = function (guid, type) {
 z.common.data.ActorData.fromProtocol = function (protocol) {
   return new z.common.data.ActorData(
       protocol['actorId'],
-      protocol['type']
+      protocol['type'],
+      protocol['stockpile']
   );
 };
 

@@ -4,18 +4,34 @@ goog.require('z.common.data.EntityData');
 
 /**
  * @param {?mugd.utils.guid} guid
+ * @param {?mugd.utils.guid} ownerId
  * @param {number} x
  * @param {number} y
  * @param {string} type
  * @constructor
  * @implements {z.common.data.EntityData}
  */
-z.common.data.TileData = function (guid, x, y, type) {
+z.common.data.TileData = function (guid, ownerId, x, y, type) {
   this.guid = guid;
+  this.ownerId = ownerId;
   this.x = x;
   this.y = y;
   this.type = type;
   this.category = z.common.rulebook.category.TERRAIN;
+};
+
+/**
+ * @param {!z.common.entities.Tile} tile
+ * @return {!z.common.data.TileData}
+ */
+z.common.data.TileData.fromEntity = function (tile) {
+  return new z.common.data.TileData(
+      tile.guid,
+      tile.owner.guid,
+      tile.position.x,
+      tile.position.y,
+      tile.meta.type
+  );
 };
 
 /**
@@ -25,6 +41,7 @@ z.common.data.TileData = function (guid, x, y, type) {
 z.common.data.TileData.fromProtocol = function (protocol) {
   return new z.common.data.TileData(
       protocol['tileId'],
+      protocol['ownerId'],
       protocol['x'],
       protocol['y'],
       protocol['type']
@@ -38,6 +55,7 @@ z.common.data.TileData.fromProtocol = function (protocol) {
 z.common.data.TileData.toProtocol = function (tile) {
   return {
       'tileId': tile.guid,
+      'ownerId': tile.owner.guid,
       'x': tile.position.x,
       'y': tile.position.y,
       'type': tile.meta.type

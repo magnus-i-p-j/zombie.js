@@ -2,6 +2,7 @@ goog.provide('z.common.EntityRepository');
 
 goog.require('mugd.utils');
 goog.require('goog.events.EventTarget');
+goog.require('goog.functions');
 goog.require('z.common.events');
 goog.require('z.common.events.EntityCreated');
 goog.require('z.common.events.EntityModified');
@@ -38,16 +39,20 @@ goog.inherits(z.common.EntityRepository, goog.events.EventTarget);
 z.common.EntityRepository.prototype.put = function (entityData) {
   var entity = this.get(entityData.guid);
   var meta = this._rulebook.getMetaClass(entityData.type);
+  /**
+   * @type {z.common.entities.Actor}
+   */
+  var owner = /** @type {z.common.entities.Actor} */ this.get(entityData.ownerId);
   if (goog.isNull(entity)) {
     if (goog.isNull(entityData.guid)) {
       entityData.guid = mugd.utils.getGuid();
     }
-    entity = this._injector.getResource(entityData.category).With({'entityData': entityData, 'meta': meta}).New();
+    entity = this._injector.getResource(meta.category).With({'entityData': entityData, 'meta': meta, 'owner':owner}).New();
     this._repo[entity.guid] = entity;
     var event = new z.common.events.EntityCreated(entity);
     this.dispatchEvent(event);
   } else {
-    if(entity.update(entityData, meta)){
+    if (entity.update(entityData, meta, owner)) {
       var event = new z.common.events.EntityModified(entity);
       this.dispatchEvent(event);
     }
@@ -100,4 +105,12 @@ z.common.EntityRepository.prototype.map = function (action, filter) {
     }
   }
   return result;
+};
+
+/**
+ * @param {(function(!z.common.entities.Entity):boolean)=} filter
+ * @return {!Array}
+ */
+z.common.EntityRepository.prototype.filter = function (filter) {
+  return this.map(goog.functions.identity, filter);
 };

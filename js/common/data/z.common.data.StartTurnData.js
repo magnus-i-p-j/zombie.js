@@ -8,12 +8,14 @@ goog.require('goog.array');
  * @param {!mugd.utils.guid} actorId
  * @param {Array.<!z.common.data.TileData>} tiles
  * @param {number} turn
+ * @param {Array.<!z.common.data.ProjectData>} projects
  * @constructor
  */
-z.common.data.StartTurnData = function (actorId, tiles, turn) {
+z.common.data.StartTurnData = function (actorId, tiles, turn, projects) {
   this.actorId = actorId;
   this.tiles = tiles;
   this.turn = turn;
+  this.projects = projects;
 };
 
 /**
@@ -21,12 +23,7 @@ z.common.data.StartTurnData = function (actorId, tiles, turn) {
  * @return {!z.common.data.StartTurnData}
  */
 z.common.data.StartTurnData.fromProtocol = function (protocol) {
-  var tiles = goog.array.map(protocol['tiles'], z.common.data.TileData.fromProtocol);
-  return new z.common.data.StartTurnData(
-      protocol['actorId'],
-      tiles,
-      protocol['turn']
-  );
+  throw 'NotImplementedException';
 };
 
 /**

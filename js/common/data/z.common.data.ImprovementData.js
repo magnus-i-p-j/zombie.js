@@ -4,6 +4,7 @@ goog.require('z.common.data.ProjectData');
 
 /**
  * @param {!mugd.utils.guid} guid
+ * @param {!mugd.utils.guid} ownerId
  * @param {string} type
  * @param {!z.common.protocol.state} state
  * @param {number} priority
@@ -13,30 +14,6 @@ goog.require('z.common.data.ProjectData');
  * @constructor
  * @extends {z.common.data.ProjectData}
  */
-z.common.data.ImprovementData = function (guid, type, state, priority, tileId, resources, investment) {
-  goog.base(this, guid, z.common.rulebook.category.IMPROVEMENT, type, state, priority, tileId, resources, investment);
-};
-
-/**
- * @param {!z.common.protocol.improvement} protocol
- * @return {!z.common.data.ImprovementData}
- */
-z.common.data.ImprovementData.fromProtocol = function (protocol) {
-  return new z.common.data.ImprovementData(
-      protocol['projectId'],
-      protocol['type'],
-      protocol['state'],
-      protocol['priority'],
-      protocol['tileId'],
-      protocol['resources'],
-      protocol['investment']
-  );
-};
-
-/**
- * @param {!z.common.entities.Improvement} improvement
- * @return {!z.common.protocol.improvement}
- */
-z.common.data.ImprovementData.toProtocol = function (improvement) {
-  // TODO: Finish toProtocol when entity is finishedish.
+z.common.data.ImprovementData = function (guid, ownerId, type, state, priority, tileId, resources, investment) {
+  goog.base(this, guid, ownerId, type, state, priority, tileId, resources, investment);
 };

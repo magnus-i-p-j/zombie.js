@@ -3,7 +3,6 @@ goog.provide('z.service.world.RandomTerrainGenerator');
 goog.require('mugd.injector.Injector');
 goog.require('z.service');
 goog.require('z.service.world.ITerrainGenerator');
-goog.require('z.common.EntityRepository');
 goog.require('z.common.data.TileData');
 
 /**
@@ -18,11 +17,7 @@ z.service.world.RandomTerrainGenerator = function (services) {
    * @private
    */
   this._seed = /** @type {string} */ services.get(z.service.Resources.TERRAIN_SEED);
-  /**
-   * @type {z.common.EntityRepository}
-   * @private
-   */
-  this._entityRepository = /** @type {z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
+
   /**
    * @type {mugd.utils.SimplexNoise}
    * @private
@@ -48,6 +43,6 @@ z.service.world.RandomTerrainGenerator.prototype.generateTerrain = function (x, 
     terrain = 'grass';
   }
 
-  var data = new z.common.data.TileData(null, x, y, terrain);
-  return /** @type {!z.common.entities.Tile} */ this._entityRepository.put(data);
+  var data = new z.common.data.TileData(null, null, x, y, terrain);
+  return data;
 };

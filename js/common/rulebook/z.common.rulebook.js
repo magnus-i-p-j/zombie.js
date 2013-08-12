@@ -33,7 +33,8 @@ z.common.rulebook.prerequisites;
 
 /**
  * @typedef {{
- *   labour: number
+ *   name: string,
+ *   amount: number
  * }}
  */
 z.common.rulebook.cost;
@@ -51,12 +52,8 @@ z.common.rulebook.effect;
 z.common.rulebook.category = {
   IMPROVEMENT: 'improvement',
   TERRAIN: 'terrain',
-  ITEM: 'item',
-  CHARACTER: 'character',
-  ASSET: 'asset',
   ACTOR: 'actor',
-  TECH: 'tech',
-  ACTION: 'action'
+  STOCKPILE:'stockpile'
 };
 
 //noinspection JSUnusedLocalSymbols

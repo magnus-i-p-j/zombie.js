@@ -4,6 +4,7 @@ goog.require("z.common.rulebook");
 goog.require("z.common.rulebook.Improvement");
 goog.require("z.common.rulebook.Terrain");
 goog.require("z.common.rulebook.Actor");
+goog.require("z.common.rulebook.StockpiledResource");
 
 goog.require('mugd.injector.Injector');
 goog.require('z.client');
@@ -40,6 +41,11 @@ z.common.rulebook.Rulebook = function (services) {
     this._meta[meta.type] = meta;
     return meta;
   }, this);
+  this.stockpiledResources = goog.array.map(ruleset[z.common.rulebook.category.STOCKPILE], function (item) {
+    var meta = new z.common.rulebook.StockpiledResource(item);
+    this._meta[meta.type] = meta;
+    return meta;
+  }, this);
 };
 
 /**
@@ -47,5 +53,10 @@ z.common.rulebook.Rulebook = function (services) {
  * @return {!z.common.rulebook.meta}
  */
 z.common.rulebook.Rulebook.prototype.getMetaClass = function (type) {
-  return this._meta[type];
+  var meta = this._meta[type];
+  if (goog.isDefAndNotNull(meta)) {
+    return  meta;
+  } else {
+    throw 'type: ' + type + ' has no meta class';
+  }
 };

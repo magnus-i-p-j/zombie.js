@@ -75,7 +75,8 @@ mugd.editor.PrimitiveViewModel.validateValue[mugd.editor.constants.ValueType.STR
     throw {'name': 'TypeMismatchException', 'reason': 'Expected string', 'value': value};
   }
 };
-mugd.editor.PrimitiveViewModel.validateValue[mugd.editor.constants.ValueType.NUMBER] = function (value) {
+mugd.editor.PrimitiveViewModel.validateValue[mugd.editor.constants.ValueType.NUMBER] = function (inValue) {
+  var value = parseFloat(inValue);
   if (!goog.isNumber(value)) {
     throw {'name': 'TypeMismatchException', 'reason': 'Expected number', 'value': value};
   }

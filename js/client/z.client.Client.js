@@ -25,6 +25,7 @@ goog.require('z.client.facet.ToolbarFacet');
 goog.require('z.client.facet.InfoFacet');
 goog.require('z.client.facet.MessageLogFacet');
 goog.require('z.client.facet.ProjectListFacet');
+goog.require('z.client.facet.ActorFacet');
 
 goog.require('z.client.actions.EndTurn');
 
@@ -57,7 +58,7 @@ z.client.Client.prototype.run = function () {
   // todo: 2. Choose game state
   // todo: 3. Start game.
   var self = this;
-  goog.net.XhrIo.send('../js/common/rulebook/ruleset.json', function (e) {
+  goog.net.XhrIo.send('../ruleset/main.json', function (e) {
     var ruleset = e.target.getResponseJson();
     console.log('ruleset', ruleset);
     self.startNewGame(ruleset);
@@ -94,6 +95,7 @@ z.client.Client.prototype.startNewGame = function (ruleset) {
   injector.addProvider(z.client.Resources.MESSAGE_LOG_FACET, z.client.facet.MessageLogFacet);
   injector.addProvider(z.client.Resources.END_TURN_ACTION, z.client.actions.EndTurn);
   injector.addProvider(z.client.Resources.PROJECT_LIST_FACET, z.client.facet.ProjectListFacet);
+  injector.addProvider(z.client.Resources.PLAYER_FACET, z.client.facet.ActorFacet);
 
   injector.addFactory(z.common.rulebook.category.IMPROVEMENT, z.common.entities.Improvement);
   injector.addFactory(z.common.rulebook.category.TERRAIN, z.common.entities.Tile);

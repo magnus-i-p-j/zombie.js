@@ -1,7 +1,9 @@
 goog.provide('z.service.world.World');
 
 goog.require('mugd.injector.Injector');
+goog.require('goog.debug.Logger');
 goog.require('z.service');
+goog.require('z.common.Cashier');
 
 goog.require('z.common.rulebook');
 goog.require('z.common.protocol');
@@ -46,52 +48,102 @@ z.service.world.World = function (services) {
    * @type { Object.<!mugd.utils.guid, !z.common.entities.Actor> }
    * @private
    */
-  this._actors = {};
+  this._playerActors = {};
+  var worldActorData = new z.common.data.ActorData(null, 'actor_world');
+  /**
+   * @type {!z.common.entities.Actor}
+   * @private
+   */
+  this._worldActor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(worldActorData);
 
   /**
-   * @type {Object.<!mugd.utils.guid, function(z.common.protocol.startTurn)>}
+   * @type {Object.<!mugd.utils.guid, function(!z.common.data.StartTurnData)>}
    * @private
    */
   this._actorCallbacks = {};
 };
 
 /**
- * @param {function(!z.common.protocol.startTurn)} actorCallback
- * @return {mugd.utils.guid}
+ * @type {!goog.debug.Logger}
+ * @protected
  */
-z.service.world.World.prototype.createActor = function (actorCallback) {
+z.service.world.World.prototype._logger = goog.debug.Logger.getLogger('z.service.world.World');
+
+/**
+ * @param {function(!z.common.data.StartTurnData)} actorCallback
+ * @return {!z.common.data.ActorData}
+ */
+z.service.world.World.prototype.createPlayerActor = function (actorCallback) {
   var actorData = new z.common.data.ActorData(null, 'actor_player');
-  var actor = this._entityRepository.put(actorData);
-  this._actors[actor.guid] = /** @type {!z.common.entities.Actor} */actor;
+  var actor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(actorData);
+  this._playerActors[actor.guid] = actor;
   this._actorCallbacks[actor.guid] = actorCallback;
-  return actor.guid;
+  return  z.common.data.ActorData.fromEntity( actor);
 };
 
 /**
  * @param {z.common.data.ClientEndTurn} endTurnData
  */
 z.service.world.World.prototype.actorEndTurn = function (endTurnData) {
+  console.log(endTurnData);
   // TODO: store plan
+  var actor = this._entityRepository.get(endTurnData.actorId);
+  goog.array.forEach(endTurnData.projects,
+      function (projectData) {
+        this.updateProject(projectData, actor);
+      }, this
+  );
+
   this.endTurn();
 };
 
+/**
+ * @param projectData
+ * @param actor
+ * @private
+ */
+z.service.world.World.prototype.updateProject = function (projectData, actor) {
+  var project = this._entityRepository.get(projectData.guid);
+  if (goog.isDefAndNotNull(project) && project.owner !== actor) {
+    this._logger.warning('project is not owned by the correct actor');
+  } else {
+    this._logger.info('Received project service side');
+    this._entityRepository.put(projectData);
+  }
+};
+
+/**
+ * @private
+ */
 z.service.world.World.prototype.endTurn = function () {
   this.tick();
-  for (var actorGuid in this._actors) {
-    if (this._actors.hasOwnProperty(actorGuid)) {
+  for (var actorGuid in this._playerActors) {
+    if (this._playerActors.hasOwnProperty(actorGuid)) {
       var tiles = this._entityRepository.map(
           function (entity) {
             var tile = /** @type {!z.common.entities.Tile} */ entity;
-            return z.common.data.TileData.toProtocol(tile);
+            return z.common.data.TileData.fromEntity(tile);
           },
           function (entity) {
             return entity.meta.category === z.common.rulebook.category.TERRAIN;
           }
       );
+      var visibleProjects = this._entityRepository.map(
+          function (item) {
+            var project = /** @type {!z.common.entities.Project} */ item;
+            return z.common.data.ProjectData.fromEntity(project);
+          },
+          function (entity) {
+            if (entity instanceof z.common.entities.Project) {
+              return true;
+            }
+            return false;
+          });
+
       /**
-       * @type {z.common.protocol.startTurn}
+       * @type {!z.common.data.StartTurnData}
        */
-      var startTurn = {'actorId': actorGuid, 'tiles': tiles, 'turn': this._turn };
+      var startTurn = new z.common.data.StartTurnData(actorGuid, tiles, this._turn, visibleProjects);
       this._actorCallbacks[actorGuid](startTurn);
     }
   }
@@ -101,9 +153,40 @@ z.service.world.World.prototype.tick = function () {
   this._expandWorld();
   //Calculate zombies
   //Zombie attack
-  //Advance Projects
+  this._advanceProjects();
   this._turn += 1;
   //Special events
+};
+
+/**
+ * @private
+ */
+z.service.world.World.prototype._advanceProjects = function () {
+
+  /**
+   * @type {!Array.<!z.common.entities.Project>}
+   */
+  var projects = this._entityRepository.filter(function(entity){
+    return entity instanceof z.common.entities.Project;
+  });
+
+  projects.sort(function(lhs, rhs){
+    return lhs.priority - rhs.priority;
+  });
+
+  goog.array.forEach(projects, function(project){
+    /**
+     * @type {!z.common.entities.Actor}
+     */
+    var owner = project.owner;
+    var stockpile = owner.stockpile;
+    var cost = project.getCost();
+    var cashier = new z.common.Cashier(stockpile);
+    var investment = cashier.withdraw(cost);
+    project.invest(investment);
+    project.advance();
+  });
+
 };
 
 /**
@@ -129,7 +212,9 @@ z.service.world.World.prototype._expandWorld = function () {
   for (var y = y_min; y <= y_max; y++) {
     for (var x = x_min; x <= x_max; x++) {
       if (!goog.isDef(this._tiles.getNode(x, y))) {
-        var tile = this._terrainGenerator.generateTerrain(x, y);
+        var tileData = this._terrainGenerator.generateTerrain(x, y);
+        tileData.ownerId = this._worldActor.guid;
+        var tile = this._entityRepository.put(tileData);
         this._tiles.setNode(x, y, tile);
       }
     }
