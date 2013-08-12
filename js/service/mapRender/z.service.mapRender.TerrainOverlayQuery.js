@@ -22,9 +22,9 @@ z.service.mapRender.TerrainOverlayQuery = function (queryString) {
  * @private
  */
 z.service.mapRender.TerrainOverlayQuery.prototype._parseQueryString = function (queryString) {
+  queryString = queryString.slice(1);
+  var keyValuePairs = queryString.split('&');
 
-  var keyValuePairs = queryString.split(['?', '&']);
-  keyValuePairs.pop();
   keyValuePairs = goog.array.map(keyValuePairs, function (pair) {
     return pair.split('=');
   });
@@ -32,10 +32,11 @@ z.service.mapRender.TerrainOverlayQuery.prototype._parseQueryString = function (
   goog.array.forEach(keyValuePairs, function (pair) {
     var key = pair[0];
     var value = pair[1];
+
     if (this.hasOwnProperty(key)) {
       this[key] = value;
     }
-  });
+  }, this);
 
   if (!goog.object.every(this, goog.isDefAndNotNull)) {
     throw new z.service.exceptions.InvalidQueryStringException('Unparsable query string.', queryString);
