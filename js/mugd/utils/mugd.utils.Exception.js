@@ -10,6 +10,10 @@ mugd.utils.Exception = function(name, message){
   goog.base(this, message);
   this.message = message;
   this.name = name;
-}
+};
+
+mugd.utils.Exception.prototype.toString = function(){
+  return this.name + ': ' + this.message;
+};
 
 goog.inherits(mugd.utils.Exception, Error);
