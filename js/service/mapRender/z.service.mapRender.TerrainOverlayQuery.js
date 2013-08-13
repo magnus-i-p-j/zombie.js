@@ -50,6 +50,9 @@ z.service.mapRender.TerrainOverlayQuery.prototype.getOverlaps = function () {
 };
 
 z.service.mapRender.TerrainOverlayQuery.prototype._getOverlaps = function (directions) {
+  /**
+   * @type {Array.<!z.service.mapRender.Overlap>}
+   */
   var overlaps = [];
   goog.array.forEach(directions, function (direction) {
     if (this._isOverlapping(direction)) {
@@ -58,6 +61,14 @@ z.service.mapRender.TerrainOverlayQuery.prototype._getOverlaps = function (direc
       this._addOverlap(overlaps, overlap);
     }
   }, this);
+
+  if(overlaps.length >= 2){
+    var last = goog.array.peek(overlaps);
+    var first = overlaps[0];
+    if(last.tryMerge(first)){
+      overlaps.splice(0,1);
+    }
+  }
 
   return overlaps;
 };
@@ -69,10 +80,7 @@ z.service.mapRender.TerrainOverlayQuery.prototype._getOverlaps = function (direc
  */
 z.service.mapRender.TerrainOverlayQuery.prototype._addOverlap = function (overlaps, overlap) {
   var previous = goog.array.peek(overlaps);
-  if (previous && previous.terrain === overlap.terrain) {
-    previous.Merge(overlap);
-  }
-  else {
+  if (!(previous && previous.tryMerge(overlap))) {
     overlaps.push(overlap);
   }
 };

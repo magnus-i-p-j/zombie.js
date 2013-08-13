@@ -1,7 +1,7 @@
 test:
   #- "*.js"
   #- "mugd.editor/*.js"
-  - "test-MapRenderService.js"
+  - "z.service.mapRender.MapRenderService/*.js"
 load:
   - ../libs/knockout-2.1.0.debug.js
   - ../libs/jquery-1.7.2.js

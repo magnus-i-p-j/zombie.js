@@ -12,7 +12,7 @@ z.service.mapRender.Overlap = function (terrain) {
   this.directions = [];
 };
 
-z.service.mapRender.Overlap.prototype.TryMerge = function (other) {
+z.service.mapRender.Overlap.prototype.tryMerge = function (other) {
   var merged = false;
 
   if (this.terrain === other.terrain &&
@@ -26,12 +26,9 @@ z.service.mapRender.Overlap.prototype.TryMerge = function (other) {
 
 z.service.mapRender.Overlap.prototype._adjacent = function(lhs, rhs){
   var allDirections = goog.object.getValues(z.service.Directions);
+  goog.array.remove(allDirections, z.service.Directions.CENTER_TERRAIN);
   var i = goog.array.indexOf(allDirections, lhs);
   var j = goog.array.indexOf(allDirections, rhs);
   var d = Math.abs(i - j);
-  return d === 1 || d === allDirections.length;
-};
-
-z.service.mapRender.Overlap.prototype.Merge = function (other) {
-  goog.array.extend(this.directions, other.directions);
+  return d === 1 || d === allDirections.length - 1;
 };
