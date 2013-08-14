@@ -1,6 +1,14 @@
 goog.provide('mugd.utils');
 
 /**
+ * @param {*} n
+ * @returns {boolean}
+ */
+mugd.utils.isNumber = function(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+/**
  * @param {string=} prefix
  * @param {string=} separator
  * @return {!mugd.utils.guid}
@@ -43,3 +51,4 @@ mugd.utils.CHOOSE_CHARS = 'abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ012
 
 /** @typedef {string} */
 mugd.utils.guid;
+

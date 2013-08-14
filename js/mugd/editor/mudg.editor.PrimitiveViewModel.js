@@ -1,6 +1,7 @@
 goog.provide('mugd.editor.PrimitiveViewModel');
 
 goog.require('mugd.editor.constants');
+goog.require('mugd.utils');
 goog.require('mugd.editor.IViewModel');
 goog.require('mugd.editor.AbstractViewModel');
 goog.require('goog.array');
@@ -13,13 +14,26 @@ goog.require('goog.array');
  */
 mugd.editor.PrimitiveViewModel = function (schema, resolver) {
   goog.base(this, schema, resolver);
-  /**
-   * @type {function(string=):string}
-   */
-  this['value'] = ko.observable();
 
+  /**
+   * @type {string|number}
+   * @private
+   */
+  var _value = ko.observable();
   var validateValueCallback = mugd.editor.PrimitiveViewModel.validateValue[this['type']];
-  this['value'].subscribe(validateValueCallback);
+  /**
+   * @type {function(string=):string|number}
+   */
+  this['value'] = ko.computed(
+      {
+        'read': function(){
+          return _value();
+        },
+        'write': function(value){
+          _value(validateValueCallback(value));
+        }
+      }
+  );
 };
 
 goog.inherits(mugd.editor.PrimitiveViewModel, mugd.editor.AbstractViewModel);
@@ -50,7 +64,6 @@ mugd.editor.PrimitiveViewModel.prototype.fetchSplitPath = function (path, index)
     return this['value']();
   }
 
-
   throw {'name': 'InvalidPathException', 'message': path};
 };
 
@@ -74,11 +87,14 @@ mugd.editor.PrimitiveViewModel.validateValue[mugd.editor.constants.ValueType.STR
   if (!goog.isString(value)) {
     throw {'name': 'TypeMismatchException', 'reason': 'Expected string', 'value': value};
   }
+  return value;
 };
-mugd.editor.PrimitiveViewModel.validateValue[mugd.editor.constants.ValueType.NUMBER] = function (inValue) {
-  var value = parseFloat(inValue);
-  if (!goog.isNumber(value)) {
+mugd.editor.PrimitiveViewModel.validateValue[mugd.editor.constants.ValueType.NUMBER] = function (value) {
+  if (!mugd.utils.isNumber(value)) {
     throw {'name': 'TypeMismatchException', 'reason': 'Expected number', 'value': value};
   }
+  return parseFloat(value);
 };
+
+
 
