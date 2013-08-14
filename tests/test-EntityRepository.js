@@ -1,19 +1,30 @@
 TestCase("test EntityRepository", {
   'setUp':function () {
-    this.repo = new z.common.EntityRepository();
+    var injector = new mugd.injector.Injector();
+    injector.addFactory("mocking", this.mockEntity);
+    injector.addProvider(z.common.Resources.RULEBOOK, this.mockRulebook);
+    this.repo = injector.Compose(z.common.EntityRepository).New();
   },
-  'test exists':function () {
-    assertFunction(z.common.EntityRepository);
+  'mockEntity':function(){
+  },
+  'mockRulebook': function(){
+    this.getMetaClass = function(type){
+      return {
+        "category": "mocking",
+        "type": "mockEntity",
+        "name": "mock",
+        "description": "mock stuff"
+      }
+    };
   },
   'test get entity by guid':function () {
-    var mockEntity = {
-      guid:'1234'
+    var mockEntityData = {
+      guid:'1234',
+      type:'mockEntity'
     };
-    this.repo.put(mockEntity);
-
-    var actual = this.repo.get(mockEntity.guid);
-
-    assertSame(actual, mockEntity);
+    var mockEntity = this.repo.put(mockEntityData);
+    var actual = this.repo.get(mockEntityData.guid);
+    assertSame(mockEntity, actual);
   },
   'test get entity that does not exist':function () {
 
@@ -21,14 +32,14 @@ TestCase("test EntityRepository", {
 
     assertNull(actual);
   },
-  'test deleting entity works':function () {
-    var mockEntity = {
-      guid:'1234'
+  'test removing entity works':function () {
+    var mockEntityData = {
+      guid:'1234',
+      type:'mockEntity'
     };
-    this.repo.put(mockEntity);
-
-    this.repo.delete(mockEntity.guid);
-    var actual = this.repo.get(mockEntity.guid);
+    var mockEntity = this.repo.put(mockEntityData);
+    this.repo.remove(mockEntityData.guid);
+    var actual = this.repo.get(mockEntityData.guid);
 
     assertNull(actual);
   },
@@ -45,10 +56,11 @@ TestCase("test EntityRepository", {
     assertFalse(somethingDone);
   },
   'test map applies function to all elements':function () {
-    var mockEntity = {
-      guid:'1234'
+    var mockEntityData = {
+      guid:'1234',
+      type:'mockEntity'
     };
-    this.repo.put(mockEntity);
+    var mockEntity = this.repo.put(mockEntityData);
     var items = 0;
 
     function action(entity) {
@@ -65,16 +77,20 @@ TestCase("test EntityRepository", {
     assertEquals(1, items);
   },
   'test map does not apply function to filtered elements':function () {
-    var mockEntity1 = {
+    var mockEntityData1 = {
       guid:'1234',
-      include:true
+      type:'mockEntity'
     };
-    var mockEntity2 = {
+    var mockEntity1 = this.repo.put(mockEntityData1);
+    mockEntity1.include = true;
+
+    var mockEntityData2 = {
       guid:'5678',
-      include:false
+      type:'mockEntity'
     };
-    this.repo.put(mockEntity1);
-    this.repo.put(mockEntity2);
+    var mockEntity2 = this.repo.put(mockEntityData2);
+    mockEntity2.include = false;
+
     var items = 0;
 
     function action(entity) {

@@ -48,7 +48,7 @@ z.common.EntityRepository.prototype.put = function (entityData) {
       entityData.guid = mugd.utils.getGuid();
     }
     entity = this._injector.getResource(meta.category).With({'entityData': entityData, 'meta': meta, 'owner':owner}).New();
-    this._repo[entity.guid] = entity;
+    this._repo[entityData.guid] = entity;
     var event = new z.common.events.EntityCreated(entity);
     this.dispatchEvent(event);
   } else {
