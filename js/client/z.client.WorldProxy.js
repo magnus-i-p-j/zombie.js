@@ -61,9 +61,8 @@ z.client.WorldProxy.prototype.firstTurn = function () {
  */
 z.client.WorldProxy.prototype.doStartTurn = function (startTurnData) {
   this._turn = startTurnData.turn;
-  var tiles = goog.array.map(startTurnData.tiles, this._repository.put, this._repository);
+  goog.array.forEach(startTurnData.entities, this._repository.put, this._repository);
   var e = new z.client.events.StartTurn({
-        tiles: tiles,
         turn: this._turn
       }
   );

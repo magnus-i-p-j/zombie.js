@@ -11,7 +11,7 @@ z.common.protocol.clientEndTurn;
 /**
  * @typedef {{
  *  actorId: !mugd.utils.guid,
- *  tiles: Array.<!z.common.protocol.tile>,
+ *  entities: Array.<!z.common.protocol.entity>,
  *  turn: number
  * }}
  */
@@ -49,6 +49,11 @@ z.common.protocol.actor;
  * }}
  */
 z.common.protocol.project;
+
+/**
+ * @typedef {!z.common.protocol.actor|!z.common.protocol.tile|!z.common.protocol.project}
+ */
+z.common.protocol.entity;
 
 /** @typedef {!mugd.utils.guid} */
 z.common.protocol.resource;

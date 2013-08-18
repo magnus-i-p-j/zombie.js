@@ -47,15 +47,15 @@ z.common.EntityRepository.prototype.put = function (entityData) {
     if (goog.isNull(entityData.guid)) {
       entityData.guid = mugd.utils.getGuid();
     }
-    entity = this._injector.getResource(meta.category).With({'entityData': entityData, 'meta': meta, 'owner':owner}).New();
+    entity = this._injector.getResource(meta.category).With({'entityData': entityData, 'meta': meta, 'owner': owner}).New();
+
     this._repo[entityData.guid] = entity;
+    entity.setParentEventTarget(this);
+
     var event = new z.common.events.EntityCreated(entity);
     this.dispatchEvent(event);
   } else {
-    if (entity.update(entityData, meta, owner)) {
-      var event = new z.common.events.EntityModified(entity);
-      this.dispatchEvent(event);
-    }
+    entity.update(entityData, meta, owner);
   }
   return entity;
 };

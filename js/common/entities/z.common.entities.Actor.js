@@ -19,7 +19,7 @@ z.common.entities.Actor = function (services) {
 /**
  * @inheritDoc
  */
-z.common.entities.Actor.prototype.update = function (entityData, meta, owner) {
+z.common.entities.Actor.prototype._update = function (entityData, meta, owner) {
   if (!(entityData instanceof z.common.data.ActorData)) {
     throw {'name': 'InvalidDataException', 'message': 'not a z.common.data.ActorData'};
   }

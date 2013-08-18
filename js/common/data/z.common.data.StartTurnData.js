@@ -4,18 +4,15 @@ goog.require('z.common.data.TileData');
 goog.require('goog.array');
 
 /**
- *
  * @param {!mugd.utils.guid} actorId
- * @param {Array.<!z.common.data.TileData>} tiles
+ * @param {Array.<!z.common.data.TileData|!z.common.data.ActorData|!z.common.data.ProjectData>} entities
  * @param {number} turn
- * @param {Array.<!z.common.data.ProjectData>} projects
  * @constructor
  */
-z.common.data.StartTurnData = function (actorId, tiles, turn, projects) {
+z.common.data.StartTurnData = function (actorId, entities, turn) {
   this.actorId = actorId;
-  this.tiles = tiles;
+  this.entities = entities;
   this.turn = turn;
-  this.projects = projects;
 };
 
 /**

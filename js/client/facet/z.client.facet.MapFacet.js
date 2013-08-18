@@ -45,15 +45,7 @@ goog.inherits(z.client.facet.MapFacet, z.client.facet.Facet);
  */
 z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
   goog.base(this, 'setParentEventTarget', parent);
-  // TODO: listen for map updated events
-  this.eventHandler.listen(parent, z.client.events.EventType.START_TURN, this.doStartTurn);
-};
-
-/**
- * @param  {!z.client.events.StartTurn} e
- */
-z.client.facet.MapFacet.prototype.doStartTurn = function (e) {
-  this.update(e.data.tiles);
+  this.eventHandler.listen(parent, z.common.events.EventType.ENTITY_CREATED, this.doEntityCreated);
 };
 
 /**
@@ -109,12 +101,16 @@ z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
 };
 
 /**
- * @param {Array.<!z.common.entities.Tile>} tiles
+ * @param {z.common.events.EntityCreated} event
  */
-z.client.facet.MapFacet.prototype.update = function (tiles) {
-  goog.array.forEach(tiles, function (tile) {
-        var facet = this.getTileFacet(tile.position.x, tile.position.y);
-        facet.update(tile);
-      }, this
-  );
+z.client.facet.MapFacet.prototype.doEntityCreated = function (event) {
+  if (event.entity instanceof z.common.entities.Tile) {
+    /**
+     * @type {!z.common.entities.Tile}
+     */
+    var tile = /** @type {!z.common.entities.Tile} */event.entity;
+    var facet = this.getTileFacet(tile.position.x, tile.position.y);
+    facet.update(tile);
+    // TODO:
+  }
 };

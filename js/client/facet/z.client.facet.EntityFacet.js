@@ -51,6 +51,7 @@ goog.inherits(z.client.facet.EntityFacet, z.client.facet.Facet);
  * @param {!z.common.entities.Entity} entity
  */
 z.client.facet.EntityFacet.prototype.setEntity = function (entity) {
+  // TODO: listen to changes in entity
   if (!this.entity || this.entity && this.entity.guid === entity.guid) {
     this.entity = entity;
     this['guid'] = this.entity.guid;

@@ -77,7 +77,7 @@ z.common.entities.Project.prototype.advance = function (){
 /**
  * @inheritDoc
  */
-z.common.entities.Project.prototype.update = function (entityData, meta, owner) {
+z.common.entities.Project.prototype._update = function (entityData, meta, owner) {
   if (!(entityData instanceof z.common.data.ProjectData)) {
     throw {'name': 'InvalidDataException', 'message': 'not a z.common.data.ProjectData'};
   }

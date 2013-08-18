@@ -15,7 +15,6 @@ z.client.events.StartTurn = function (data) {
 goog.inherits(z.client.events.StartTurn, goog.events.Event);
 
 /** @typedef {{
- * tiles: Array.<!z.common.entities.Tile>,
  * turn: number
  * }}
  */

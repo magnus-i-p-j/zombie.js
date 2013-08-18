@@ -27,7 +27,7 @@ z.common.entities.Tile.isCssRegex = /^[_a-zA-Z]+[_a-zA-Z0-9-]*$/;
 /**
  * @inheritDoc
  */
-z.common.entities.Tile.prototype.update = function (data, meta) {
+z.common.entities.Tile.prototype._update = function (data, meta) {
   if (!(data instanceof z.common.data.TileData)) {
     throw {'name': 'InvalidDataException', 'message': 'not a z.common.data.TileData'};
   }

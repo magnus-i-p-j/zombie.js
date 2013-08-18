@@ -45,6 +45,23 @@ goog.inherits(z.common.entities.Entity, goog.events.EventTarget);
  * @return {boolean}
  */
 z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
-  throw {'name': 'NotImplementedException', 'message': 'update'};
+  var updated = this._update(entityData, meta, owner);
+  if (updated) {
+    var event = new z.common.events.EntityModified(this);
+    this.dispatchEvent(event);
+  }
+  return updated;
 };
 
+/**
+ * @internal Override this to implement entity
+ *
+ * @param {!z.common.data.EntityData} entityData
+ * @param {!z.common.rulebook.meta} meta
+ * @param {z.common.entities.Actor} owner
+ * @return {boolean}
+ * @protected
+ */
+z.common.entities.Entity.prototype._update = function (entityData, meta, owner) {
+  throw {'name': 'NotImplementedException', 'message': 'update'};
+};

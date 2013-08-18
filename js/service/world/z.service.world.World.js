@@ -140,10 +140,13 @@ z.service.world.World.prototype.endTurn = function () {
             return false;
           });
 
+      var entities = [];
+      goog.array.extend(entities, tiles, visibleProjects);
+
       /**
        * @type {!z.common.data.StartTurnData}
        */
-      var startTurn = new z.common.data.StartTurnData(actorGuid, tiles, this._turn, visibleProjects);
+      var startTurn = new z.common.data.StartTurnData(actorGuid, entities, this._turn);
       this._actorCallbacks[actorGuid](startTurn);
     }
   }
