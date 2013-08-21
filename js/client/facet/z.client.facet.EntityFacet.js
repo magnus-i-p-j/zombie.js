@@ -51,12 +51,19 @@ goog.inherits(z.client.facet.EntityFacet, z.client.facet.Facet);
  * @param {!z.common.entities.Entity} entity
  */
 z.client.facet.EntityFacet.prototype.setEntity = function (entity) {
-  // TODO: listen to changes in entity
   if (!this.entity || this.entity && this.entity.guid === entity.guid) {
     this.entity = entity;
     this['guid'] = this.entity.guid;
     this.meta(entity.meta);
+    this.eventHandler.listen(entity, z.common.events.EventType.ENTITY_MODIFIED, this.doEntityModified);
   } else {
     throw ['Wrong entity, expected (', this.entity.guid , '), got (', entity.guid, ')'].join('');
   }
+};
+
+/**
+ * @param {z.common.events.EntityModified} event
+ */
+z.client.facet.EntityFacet.prototype.doEntityModified = function(event){
+   this.meta(event.entity.meta);
 };

@@ -3,22 +3,9 @@ TestCase("test z.common.Stockpile", {
     assertFunction(z.common.Stockpile);
   },
   'setUp': function () {
-    var injector = new mugd.injector.Injector();
-    var ruleset = {"terrain": [], "improvement": [], "actor": [], "stockpile": [
-      {
-        "type": "wood",
-        "name": "Wood",
-        "description": "Wooden stuff"
-      },
-      {
-        "type": "metal",
-        "name": "Metal",
-        "description": "Shiny!!!"
-      }
-    ], "artifact": [], "personnel": []};
-    injector.addResource(z.common.Resources.RULESET, ruleset);
-    injector.addProvider(z.common.Resources.RULEBOOK, z.common.rulebook.Rulebook);
-    this.stockpile = injector.Compose(z.common.Stockpile).New();
+    this.stockpile = new z.common.Stockpile();
+    this.stockpile.add('wood');
+    this.stockpile.add('metal');
   },
   'test should stock wood': function () {
     this.stockpile['wood'].add(5);
@@ -51,29 +38,32 @@ TestCase("test z.common.Stockpile", {
     assertSame(7, actual);
   },
   'test should add object to separate properties': function () {
-    this.stockpile.add({'metal': 22});
+    this.stockpile.addAll({'metal': 22});
 
     var actual = this.stockpile['metal'].peek();
     assertSame(22, actual);
   },
   'test should subtract current': function () {
-    this.stockpile.add({'metal': 2, 'wood': 5});
+    this.stockpile.addAll({'metal': 2, 'wood': 5});
 
-    var actual = this.stockpile.diff({'wood': 10, 'metal': 0});
+    var actual = this.stockpile.diffAll({'wood': 10, 'metal': 0});
     assertEquals({'wood': 5, 'metal': -2}, actual);
   },
   'test should return current value': function () {
-    this.stockpile.add({'wood': 5, 'metal': 8});
+    this.stockpile.addAll({'wood': 5, 'metal': 8});
 
-    var actual = this.stockpile.peek();
+    var actual = this.stockpile.peekAll();
     assertEquals({'wood': 5, 'metal': 8}, actual);
   },
   'test should purge': function () {
-    this.stockpile.add({'metal': 2, 'wood': 5});
-    this.stockpile.purge();
+    this.stockpile.addAll({'metal': 2, 'wood': 5});
+    this.stockpile.purgeAll();
 
     assertSame(0, this.stockpile['wood'].peek());
     assertSame(0, this.stockpile['metal'].peek());
+  },
+  'test should default to zero when resource is unknown': function () {
+    var diff = this.stockpile.diff('scrap', 5);
+    assertSame(-5, diff);
   }
-
 });

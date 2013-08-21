@@ -2,50 +2,67 @@ goog.provide('z.common.Stockpile');
 goog.require('goog.object');
 
 /**
- * @param {!mugd.injector.MicroFactory} services
- * @implements mugd.injector.IInjectable
  * @constructor
  */
-z.common.Stockpile = function (services) {
-  var rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
-  goog.array.forEach(rulebook.stockpiledResources, function (meta) {
-        this[meta.type] = new z.common.StockpiledResource(meta);
-      }, this
-  );
+z.common.Stockpile = function () {
 };
 
-z.common.Stockpile.prototype.add = function (values) {
+z.common.Stockpile.prototype.addAll = function (values) {
   goog.object.forEach(values, function (amount, name) {
-    this[name].add(amount);
+    this.add(name, amount);
   }, this);
 };
 
-z.common.Stockpile.prototype.purge = function () {
+z.common.Stockpile.prototype.add = function (name, amount) {
+  amount = amount || 0;
+  if (!this[name]) {
+    this[name] = new z.common.StockpiledResource();
+  }
+  this[name].add(amount);
+};
+
+z.common.Stockpile.prototype.purgeAll = function () {
   goog.object.forEach(this, function (amount, name) {
-    if (goog.isFunction(this[name].purge)) {
-      this[name].purge();
-    }
+    this.purge(name);
   }, this);
 };
 
-z.common.Stockpile.prototype.peek = function () {
+z.common.Stockpile.prototype.purge = function (name) {
+  if (this[name] && goog.isFunction(this[name].purge)) {
+    this[name].purge(name);
+  }
+};
+
+z.common.Stockpile.prototype.peekAll = function () {
   var response = {};
   goog.object.forEach(this, function (amount, name) {
-    if (goog.isFunction(this[name].peek)) {
-      response[name] = this[name].peek();
+    var value = this.peek(name);
+    if(value !== 0) {
+      response[name] = value;
     }
   }, this);
   return response;
 };
 
-z.common.Stockpile.prototype.diff = function (values) {
+z.common.Stockpile.prototype.peek = function (name) {
+  var amount = 0;
+  if (this[name] && goog.isFunction(this[name].peek)) {
+    amount = this[name].peek();
+  }
+  return amount;
+};
+
+z.common.Stockpile.prototype.diffAll = function (values) {
   return goog.object.map(values, function (amount, name) {
-    return amount - this[name].peek();
+    return this.diff(name, amount);
   }, this);
 };
 
-z.common.StockpiledResource = function (meta) {
-  this.meta = meta;
+z.common.Stockpile.prototype.diff = function (name, amount) {
+  return amount - this[name].peek();
+};
+
+z.common.StockpiledResource = function () {
   this.value = 0;
 };
 
