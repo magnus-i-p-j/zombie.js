@@ -62,8 +62,24 @@ TestCase("test z.common.Stockpile", {
     assertSame(0, this.stockpile['wood'].peek());
     assertSame(0, this.stockpile['metal'].peek());
   },
-  'test should default to zero when resource is unknown': function () {
+  'test should default to zero amount when resource is unknown': function () {
     var diff = this.stockpile.diff('scrap', 5);
-    assertSame(-5, diff);
+    assertSame(5, diff);
+  },
+  'test should take nothing when nothing is available': function () {
+    var actual = this.stockpile.take('scrap', 5);
+    assertSame(0, actual);
+  },
+  'test should take requested': function () {
+    this.stockpile.add('scrap', 50);
+    var actual = this.stockpile.take('scrap', 5);
+    assertSame(5, actual);
+    assertSame(45, this.stockpile.peek('scrap'));
+  },
+  'test should take as much as possible when scarce': function () {
+    this.stockpile.add('scrap', 3);
+    var actual = this.stockpile.take('scrap', 3);
+    assertSame(3, actual);
+    assertSame(0, this.stockpile.peek('scrap'));
   }
 });

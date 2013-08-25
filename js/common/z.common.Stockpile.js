@@ -59,7 +59,17 @@ z.common.Stockpile.prototype.diffAll = function (values) {
 };
 
 z.common.Stockpile.prototype.diff = function (name, amount) {
+  if (!this[name]) {
+    this[name] = new z.common.StockpiledResource();
+  }
   return amount - this[name].peek();
+};
+
+z.common.Stockpile.prototype.take = function (name, amount) {
+  if (!this[name]) {
+    return 0;
+  }
+  return this[name].take(amount);
 };
 
 z.common.StockpiledResource = function () {
