@@ -221,6 +221,37 @@
           }
         }
       }
+    },
+    "bounds": {
+      "title": "Bounds",
+      "description": "Rules affecting the start and end of the game",
+      "type": "object",
+      "properties": {
+        "starting_resources": {
+          "type": "array",
+          "title": "Starting resources",
+          "description": "Resources the player gets at the beginning",
+          "items": {
+            "title": "Resource",
+            "description": "One of the provided resources",
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Resource",
+                "type": "string",
+                "links": {
+                  "rel": "full",
+                  "href": "game://stockpile/{@}"
+                }
+              },
+              "amount": {
+                "title": "Amount",
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

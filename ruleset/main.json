@@ -47,11 +47,11 @@
       "stockpile": [
         {
           "type": "wood",
-          "amount": "5"
+          "amount": 5
         },
         {
-          "type": "metal",
-          "amount": "1"
+          "type": "scrap",
+          "amount": 2
         }
       ]
     }
@@ -115,5 +115,31 @@
     "type": "ammo",
     "name": "Ammo",
     "description": "Various stuff useful for killing zombies"
+  },
+  {
+    "type": "scrap",
+    "name": "Scrap",
+    "description": "Various bits and bobs"
+  },
+  {
+    "type": "fuel",
+    "name": "Fuel",
+    "description": "Firey stuff"
+  },
+  {
+    "type": "food",
+    "name": "Food",
+    "description": "Turnips"
   }
-], "artifact": [], "personnel": []}
+], "artifact": [], "personnel": [], "bounds": {
+  "starting_resources": [
+    {
+      "type": "wood",
+      "amount": 20
+    },
+    {
+      "type": "metal",
+      "amount": 5
+    }
+  ]
+}}

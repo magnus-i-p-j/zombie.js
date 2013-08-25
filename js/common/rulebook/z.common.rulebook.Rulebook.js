@@ -5,6 +5,7 @@ goog.require("z.common.rulebook.Improvement");
 goog.require("z.common.rulebook.Terrain");
 goog.require("z.common.rulebook.Actor");
 goog.require("z.common.rulebook.StockpiledResource");
+goog.require("z.common.rulebook.GameStartingData");
 
 goog.require('mugd.injector.Injector');
 goog.require('z.client');
@@ -26,26 +27,13 @@ z.common.rulebook.Rulebook = function (services) {
    */
   this._meta = {};
 
-  this.improvements = goog.array.map(ruleset[z.common.rulebook.category.IMPROVEMENT], function (item) {
-    var improvement = new z.common.rulebook.Improvement(item);
-    this._meta[improvement.type] = improvement;
-    return improvement;
-  }, this);
-  this.terrain = goog.array.map(ruleset[z.common.rulebook.category.TERRAIN], function (item) {
-    var terrain = new z.common.rulebook.Terrain(item);
-    this._meta[terrain.type] = terrain;
-    return terrain;
-  }, this);
-  this.actors = goog.array.map(ruleset[z.common.rulebook.category.ACTOR], function (item) {
-    var meta = new z.common.rulebook.Actor(item);
-    this._meta[meta.type] = meta;
-    return meta;
-  }, this);
-  this.stockpiledResources = goog.array.map(ruleset[z.common.rulebook.category.STOCKPILE], function (item) {
-    var meta = new z.common.rulebook.StockpiledResource(item);
-    this._meta[meta.type] = meta;
-    return meta;
-  }, this);
+  this.improvements = this._parseCategoryData(ruleset[z.common.rulebook.category.IMPROVEMENT], z.common.rulebook.Improvement);
+  this.terrain = this._parseCategoryData(ruleset[z.common.rulebook.category.TERRAIN], z.common.rulebook.Terrain);
+  this.actors = this._parseCategoryData(ruleset[z.common.rulebook.category.ACTOR], z.common.rulebook.Actor);
+  this.stockpiledResources = this._parseCategoryData(ruleset[z.common.rulebook.category.STOCKPILE], z.common.rulebook.StockpiledResource);
+
+  this.gameStartingData = new z.common.rulebook.GameStartingData(ruleset);
+
 };
 
 /**
@@ -59,4 +47,12 @@ z.common.rulebook.Rulebook.prototype.getMetaClass = function (type) {
   } else {
     throw 'type: ' + type + ' has no meta class';
   }
+};
+
+z.common.rulebook.Rulebook.prototype._parseCategoryData = function (categoryData, CategoryClass) {
+  return goog.array.map(categoryData, function (item) {
+    var categoryInstance = new CategoryClass(item);
+    this._meta[categoryInstance.type] = categoryInstance;
+    return categoryInstance;
+  }, this);
 };

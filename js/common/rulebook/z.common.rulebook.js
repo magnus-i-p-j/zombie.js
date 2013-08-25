@@ -53,7 +53,8 @@ z.common.rulebook.category = {
   IMPROVEMENT: 'improvement',
   TERRAIN: 'terrain',
   ACTOR: 'actor',
-  STOCKPILE:'stockpile'
+  STOCKPILE:'stockpile',
+  STARTING_RESOURCES:'starting_resources'
 };
 
 //noinspection JSUnusedLocalSymbols

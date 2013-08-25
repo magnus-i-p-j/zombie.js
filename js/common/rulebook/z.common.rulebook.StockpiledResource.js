@@ -19,7 +19,7 @@ z.common.rulebook.StockpiledResource = function(meta){
   /**
    * @type {z.common.rulebook.category}
    */
-  this.category = z.common.rulebook.category.ACTOR;
+  this.category = z.common.rulebook.category.STOCKPILE;
   /**
    * @type {string}
    */
