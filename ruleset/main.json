@@ -139,6 +139,10 @@
     },
     {
       "type": "metal",
+      "amount": 2
+    },
+    {
+      "type": "scrap",
       "amount": 5
     }
   ]

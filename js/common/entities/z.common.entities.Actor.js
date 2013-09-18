@@ -14,9 +14,17 @@ z.common.entities.Actor = function (services) {
   this.owner = this;
 
   /**
+   * @type {!z.common.data.ActorData}
+   */
+  var actorData = /** @type {!z.common.data.ActorData} */ services.get('entityData');
+
+  /**
    * @type {!z.common.Stockpile}
    */
   this.stockpile = new z.common.Stockpile();
+
+  this.stockpile.addAll(actorData.stockpile);
+
 };
 
 goog.inherits(z.common.entities.Actor, z.common.entities.Entity);

@@ -69,6 +69,7 @@ z.common.entities.Project.prototype.invest = function (investment){
 
 z.common.entities.Project.prototype.advance = function (){
   console.log('advancing project');
+  console.log(this.investment.peekAll());
   this.state = z.common.protocol.state.PASS;
 };
 
