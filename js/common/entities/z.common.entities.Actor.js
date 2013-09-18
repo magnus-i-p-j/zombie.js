@@ -12,9 +12,14 @@ z.common.entities.Actor = function (services) {
   goog.base(this, services);
   this.name = null;
   this.owner = this;
-  var injector = /** @type {!mugd.injector.Injector} */ services.get(z.common.Resources.INJECTOR);
-  this.stockpile = injector.Compose(z.common.Stockpile).New();
+
+  /**
+   * @type {!z.common.Stockpile}
+   */
+  this.stockpile = new z.common.Stockpile();
 };
+
+goog.inherits(z.common.entities.Actor, z.common.entities.Entity);
 
 /**
  * @inheritDoc
@@ -28,9 +33,8 @@ z.common.entities.Actor.prototype._update = function (entityData, meta, owner) {
    * @type {!z.common.data.ActorData}
    */
   var actorData = /** @type {!z.common.data.ActorData} */ entityData;
-  this.stockpile.purge();
-  this.stockpile.add(actorData.stockpile);
+  this.stockpile.purgeAll();
+  this.stockpile.addAll(actorData.stockpile);
   return true;
 };
 
-goog.inherits(z.common.entities.Actor, z.common.entities.Entity);

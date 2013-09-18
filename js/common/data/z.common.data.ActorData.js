@@ -25,7 +25,7 @@ z.common.data.ActorData.fromEntity = function (actor) {
   return new z.common.data.ActorData(
       actor.guid,
       actor.meta.type,
-      actor.stockpile.peek()
+      actor.stockpile.peekAll()
   );
 };
 

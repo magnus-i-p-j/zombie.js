@@ -14,5 +14,5 @@ z.client.facet.ProjectFacet = function () {
 goog.inherits(z.client.facet.ProjectFacet, z.client.facet.EntityFacet);
 
 z.client.facet.ProjectFacet.prototype.doEntityModified = function(event){
-  goog.base(event,'doEntityModified');
+  goog.base(this,'doEntityModified', event);
 };

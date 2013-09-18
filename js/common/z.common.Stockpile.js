@@ -72,6 +72,9 @@ z.common.Stockpile.prototype.take = function (name, amount) {
   return this[name].take(amount);
 };
 
+/**
+ * @constructor
+ */
 z.common.StockpiledResource = function () {
   this.value = 0;
 };

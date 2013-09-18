@@ -54,7 +54,7 @@ z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
 };
 
 /**
- * @internal Override this to implement entity
+ * Override this to implement entity
  *
  * @param {!z.common.data.EntityData} entityData
  * @param {!z.common.rulebook.meta} meta

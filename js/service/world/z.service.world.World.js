@@ -49,7 +49,7 @@ z.service.world.World = function (services) {
    * @private
    */
   this._playerActors = {};
-  var worldActorData = new z.common.data.ActorData(null, 'actor_world');
+  var worldActorData = new z.common.data.ActorData(null, 'actor_world', {});
   /**
    * @type {!z.common.entities.Actor}
    * @private
@@ -74,7 +74,7 @@ z.service.world.World.prototype._logger = goog.debug.Logger.getLogger('z.service
  * @return {!z.common.data.ActorData}
  */
 z.service.world.World.prototype.createPlayerActor = function (actorCallback) {
-  var actorData = new z.common.data.ActorData(null, 'actor_player');
+  var actorData = new z.common.data.ActorData(null, 'actor_player', {});
   var actor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(actorData);
   this._playerActors[actor.guid] = actor;
   this._actorCallbacks[actor.guid] = actorCallback;
