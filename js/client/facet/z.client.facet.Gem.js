@@ -62,6 +62,7 @@ z.client.facet.Gem = function (services) {
   this['infoFacet'].setParentEventTarget(this);
   this['messageLogFacet'].setParentEventTarget(this);
   this['projectsFacet'].setParentEventTarget(this);
+
   repository.setParentEventTarget(this);
   world.setParentEventTarget(this);
 };

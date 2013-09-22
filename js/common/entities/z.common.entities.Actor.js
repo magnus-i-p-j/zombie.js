@@ -36,7 +36,6 @@ z.common.entities.Actor.prototype._update = function (entityData, meta, owner) {
   if (!(entityData instanceof z.common.data.ActorData)) {
     throw {'name': 'InvalidDataException', 'message': 'not a z.common.data.ActorData'};
   }
-
   /**
    * @type {!z.common.data.ActorData}
    */

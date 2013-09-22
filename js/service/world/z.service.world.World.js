@@ -142,7 +142,7 @@ z.service.world.World.prototype.endTurn = function () {
 
       var entities = [];
       goog.array.extend(entities, tiles, visibleProjects);
-
+      entities.push(z.common.data.ActorData.fromEntity(this._playerActors[actorGuid]));
       /**
        * @type {!z.common.data.StartTurnData}
        */

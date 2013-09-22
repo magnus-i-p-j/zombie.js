@@ -1,6 +1,8 @@
 goog.provide('z.client.facet.InfoFacet');
 
 goog.require('z.client.facet.Facet');
+goog.require('z.client.facet.StockpileFacet');
+
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -15,6 +17,12 @@ z.client.facet.InfoFacet = function (services) {
    * @type {function(number=):number}
    */
   this['turn'] = ko.observable();
+
+  /**
+   * @type {!z.client.facet.ActorFacet}
+   */
+  var player = /** @type {!z.client.facet.ActorFacet}*/ services.get(z.client.Resources.PLAYER_FACET);
+  this['resources'] = player['resources'];
 };
 
 goog.inherits(z.client.facet.InfoFacet, z.client.facet.Facet);
