@@ -1,0 +1,5 @@
+.idea
+gen
+*.pyc
+tests/jsTestDriver.conf
+
