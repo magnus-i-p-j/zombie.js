@@ -1,7 +1,6 @@
 var Client = IgeClass.extend({
 	classId: 'Client',
 	init: function () {
-		ige.showStats(1);
 
 		// Load our textures
 		var self = this,
@@ -13,9 +12,8 @@ var Client = IgeClass.extend({
 
 		// Load the fairy texture and store it in the gameTexture array
 		gameTexture[0] = new IgeTexture('../../libs/ige_prototype/examples/assets/textures/sprites/fairy.png');
-
-		// Load a smart texture
-		gameTexture[1] = new IgeTexture('../../libs/ige_prototype/examples/assets/textures/smartTextures/simpleBox.js');
+    //gameTexture[2] = new IgeCellSheet('../../libs/ige_prototype/examples/assets/textures/tiles/grassSheet.png', 4, 1);
+    gameTexture[1] = new IgeCellSheet('../../libs/ige_prototype/examples/assets/textures/tiles/tilea5b.png', 8, 16);
 
 		// Wait for our textures to load before continuing
 		ige.on('texturesLoaded', function () {
@@ -27,8 +25,10 @@ var Client = IgeClass.extend({
 				// Check if the engine started successfully
 				if (success) {
 					// Create the scene
-					self.scene1 = new IgeScene2d()
-						.id('scene1');
+					self.mainScene = new IgeScene2d()
+						.id('mainScene')
+            .translateTo(0, 0, 0)
+            .drawBounds(false);
 
 					// Create the main viewport and set the scene
 					// it will "look" at as the new scene1 we just
@@ -36,44 +36,47 @@ var Client = IgeClass.extend({
 					self.vp1 = new IgeViewport()
 						.id('vp1')
 						.autoSize(true)
-						.scene(self.scene1)
+						.scene(self.mainScene)
 						.drawBounds(true)
 						.mount(ige);
 
-					// Create an entity and mount it to the scene
-					// (the class Rotator is declared in ./gameClasses/Rotator.js)
-					self.obj[0] = new Rotator()
-						.id('fairy1')
-						.depth(1)
-						.width(100)
-						.height(100)
-						.texture(gameTexture[0])
-						.translateTo(200, 0, 0)
-						.mount(self.scene1);
+          // Create the texture maps
+          self.textureMap = new IgeTextureMap()
+              .depth(0)
+              .tileWidth(80)
+              .tileHeight(80)
+            //.drawGrid(3)
+              .drawMouse(true)
+              .translateTo(0, 0, 0)
+              .drawBounds(false)
+              .autoSection(10)
+              .drawSectionBounds(true)
+              .mount(self.mainScene);
 
-					// Create a second rotator entity and mount
-					// it to the first one at 0, 50 relative to the
-					// parent
-					self.obj[1] = new Rotator()
-						.id('fairy2')
-						.depth(1)
-						.width(50)
-						.height(50)
-						.texture(gameTexture[0])
-						.translateTo(50, 50, 0)
-						.mount(self.obj[0]);
+          self.textureMap.addTexture(gameTexture[0]);
+          self.textureMap.addTexture(gameTexture[1]);
 
-					// Create a third rotator entity and mount
-					// it to the first on at 0, -50 relative to the
-					// parent, but assign it a smart texture!
-					self.obj[2] = new Rotator()
-						.id('simpleBox')
-						.depth(1)
-						.width(50)
-						.height(50)
-						.texture(gameTexture[0])
-						.translateTo(0, -50, 0)
-						.mount(self.obj[0]);
+          // Paint the 2d texture map
+          // Paint some pointless fairy tiles
+          // paintTile takes the arguments:
+          // +---- paintTile(x, y, textureIndex, textureCell)
+          self.textureMap.paintTile(0, 0, 0, 1);
+          self.textureMap.paintTile(1, 0, 0, 1);
+          self.textureMap.paintTile(2, 0, 0, 1);
+
+          self.textureMap.paintTile(0, 1, 1, 1);
+          self.textureMap.paintTile(1, 1, 1, 1);
+          self.textureMap.paintTile(2, 1, 1, 1);
+          self.textureMap.paintTile(0, 2, 1, 2);
+          self.textureMap.paintTile(1, 2, 1, 2);
+          self.textureMap.paintTile(2, 2, 1, 2);
+          self.textureMap.paintTile(0, 3, 1, 3);
+          self.textureMap.paintTile(1, 3, 1, 3);
+          self.textureMap.paintTile(2, 3, 1, 3);
+          self.textureMap.paintTile(2, 3, 0, 1);
+
+          self.vp1.addComponent(IgeMousePanComponent).mousePan.enabled(true);
+
 				}
 			});
 		});
