@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libs/ige" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/libs/ige_prototype" vcs="Git" />
   </component>
 </project>
 
