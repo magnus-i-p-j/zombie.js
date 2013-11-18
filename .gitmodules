@@ -1,0 +1,3 @@
+[submodule "libs/isogenic-map"]
+	path = libs/isogenic-map
+	url = https://github.com/magnus-i-p-j/zombie.js-map.git
