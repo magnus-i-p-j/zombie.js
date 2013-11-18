@@ -50,10 +50,10 @@ z.client.ui.widget.MapWidget.prototype.claim = function (targetElement) {
 
   this._imap.claim(targetElement.id);
 
-  this._imap.onTileFocused(this.onTileClicked);
+  this._imap.onTileFocused(this.onTileClicked.bind(this));
 
-  this._imap.onTileContext(this.onShowContextMenu);
-  this._imap.onTileContext(this.onShowContextMenu);
+  this._imap.onTileContext(this.onShowContextMenu.bind(this));
+  this._imap.onTileContext(this.onShowContextMenu.bind(this));
 
   // Prevent standard context menu from showing.
   goog.events.listen(this.targetElement, goog.events.EventType.CONTEXTMENU, goog.events.Event.preventDefault, false);
