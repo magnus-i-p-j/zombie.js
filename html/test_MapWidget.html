@@ -25,7 +25,7 @@
            class="layout"
            data-bind="template: {name: 'project_list_widget', data: projectsFacet}">project_overview
   </section>
-  <section id="map" class="layout" data-bind="template: {name: 'map_widget', data: mapFacet}"></section>
+  <section id="map" class="layout"></section>
   <section id="context_menu"
            class="context_menu"
            data-bind="template: {name: 'context_menu_widget', data: contextMenuFacet}"></section>
@@ -37,6 +37,8 @@
 <script src="../libs/jquery-1.7.2.js"></script>
 <script src="../libs/knockout-2.1.0.debug.js"></script>
 <script src="../libs/koExternalTemplateEngine_all.js"></script>
+<script>var igeRoot = '../libs/isogenic-map/libs/ige_prototype/engine/';</script>
+<script src="../libs/isogenic-map/libs/ige_prototype/engine/loader.js"></script>
 <script src="http://localhost:9810/compile?id=z-simple"></script>
 <script>
   var client = zed.init('z_client');

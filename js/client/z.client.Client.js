@@ -61,7 +61,13 @@ z.client.Client.prototype.run = function () {
   goog.net.XhrIo.send('../ruleset/main.json', function (e) {
     var ruleset = e.target.getResponseJson();
     console.log('ruleset', ruleset);
-    self.startNewGame(ruleset);
+    goog.net.XhrIo.send('../ruleset/textures.json',
+      function(e){
+        var textures = e.target.getResponseJson();
+        console.log('textures', textures);
+        self.startNewGame(ruleset, textures);
+      }
+    );
   });
 };
 
@@ -71,13 +77,15 @@ z.client.Client.prototype.login = function () {
   this.user.name = 'John Doe';
 };
 
-z.client.Client.prototype.startNewGame = function (ruleset) {
+z.client.Client.prototype.startNewGame = function (ruleset, textures) {
 
   var injector = new mugd.injector.Injector();
   injector.addResource(z.common.Resources.RULESET, ruleset);
   injector.addProvider(z.common.Resources.REPOSITORY, z.common.EntityRepository);
   injector.addProvider(z.common.Resources.WORLD, z.client.WorldProxy);
   injector.addProvider(z.common.Resources.RULEBOOK, z.common.rulebook.Rulebook);
+  injector.addResource(z.client.Resources.TEXTURES, textures);
+  injector.addResource(z.client.Resources.IMAP, IsogenicMap);
   injector.addResource(z.client.Resources.WORLD_SERVICE, z.client.Client.initWorldService);
   injector.addProvider(z.client.Resources.MAP_WIDGET, z.client.ui.widget.MapWidget);
   injector.addProvider(z.client.Resources.GAME_SESSION_WIDGET, z.client.ui.widget.GameSessionWidget);
