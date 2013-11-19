@@ -1,0 +1,49 @@
+digraph{
+    subgraph cluster_buildings{
+        label="Buildings"
+        building[shape=box]
+        "apartment complex"
+        house
+        store
+        school
+        industry
+        "office building"
+    }
+    subgraph cluster_fields{
+        label="Fields"
+        park
+        garden
+        field[shape=box]
+    }
+    subgraph cluster_infrastructure{
+        label="Infrastructure"
+        road
+        bridge
+        parking
+        infrastructure[shape=box]
+    }
+    subgraph cluster_water{
+        label="Waters"
+        stream
+        ocean
+        water[shape=box]
+    }
+
+    "apartment complex" -> building
+    house -> building
+    store -> building
+    school -> building
+    industry -> building
+    "office building" -> building
+
+    park -> field
+    garden -> field
+
+    road -> infrastructure
+    bridge -> infrastructure
+    parking -> infrastructure
+
+    stream -> water
+    ocean -> water
+
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="30" tilewidth="100" tileheight="100">
+ <tileset firstgid="1" name="Water" tilewidth="100" tileheight="100">
+  <image source="../../img/tiles/water.png" width="100" height="100"/>
+  <terraintypes>
+   <terrain name="New Terrain" tile="-1"/>
+  </terraintypes>
+ </tileset>
+ <tileset firstgid="2" name="tiles" tilewidth="100" tileheight="100">
+  <image source="../../img/tiles/tiles.png" width="500" height="300"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzFlesOgyAMRnGbogz2/o9rTCDpvrSlctl+nMQQ7bFQ2uCcC4SU8YSY144G3gS6HiZ60yQvfhsYr/RPI7z4fJA4M71cvrVzGe31hlxH1BU6vcGJ36UGL8WSa4kpeTeAW9sErzdAnZvglf6l15sY76+w5IbsmZfCFWsl0Htm3dNWb2S8eFY17w5oTuqN7rsWsDakmkbfHS93n9BL3ZKLYqmdB0OPV4tb0LzaXrfk0ut9ZgJ5xtovNYNxy7rk5XrJv70WJG9tny35UjDf1vPVcuG8ZY70ermeJPWsdWC+2I/uziSpnmp1lRSvpQdavNx72izkPLPmruXOWKi9r9XVkvlkloHgjJO8I50XJxSRHDQ=
+  </data>
+ </layer>
+</map>
