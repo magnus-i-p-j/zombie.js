@@ -28,8 +28,12 @@ z.client.ui.widget.MapWidget = function (services) {
    */
   this._gem = /** @type {!z.client.facet.Gem} */ services.get(z.client.Resources.GEM);
 
-  var textures = services.get(z.client.Resources.TEXTURES);
-  var imapClass = services.get(z.client.Resources.IMAP);
+  /**
+   * @type {Object}
+   */
+  var textures =/** @type {Object} */  services.get(z.client.Resources.TEXTURES);
+
+  var imapClass = /** @type {function(new:IMap,Object,Object)} */ services.get(z.client.Resources.IMAP);
   this._imap = /** @type {IMap} */ new imapClass({}, textures);
 
   var self = this;

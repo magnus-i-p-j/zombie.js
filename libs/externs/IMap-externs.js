@@ -1,5 +1,5 @@
 /**
- * @typedef:{{
+ * @typedef {{
  *  tileX: number,
  *  tileY: number,
  *  clientX: number,

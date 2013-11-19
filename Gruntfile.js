@@ -3,9 +3,14 @@ module.exports = function (grunt) {
   grunt.initConfig({
       clean: [ 'build/tmp', 'build/deploy' ],
       mkdir: {
-        z: {
+        tmp: {
           options:{
-            create: ['build/tmp']
+            create: [ 'build/tmp']
+          }
+        },
+        deploy: {
+          options:{
+            create: [ 'build/deploy']
           }
         }
       },
@@ -38,21 +43,16 @@ module.exports = function (grunt) {
         z: {
           src: [
             'js',
-            'libs/closure-library/'
+            'libs/closure-library',
+            'build/tmp'
           ],
           dest: 'build/tmp/zed.js'
         }
       },
-      copy: {
-        a: {
-          files: {
-            'build/tmp/a.js': ['js/client/z.client.action.js']
-          }
-        },
-        b: {
-          files: {
-            'build/tmp/': ['js/client/User.js']
-          }
+      rename: {
+        isogenic: {
+          src: 'build/deploy/game.js',
+          dest: 'build/tmp/IMap.js'
         }
       }
     }
@@ -64,9 +64,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-closure-tools');
   grunt.loadNpmTasks('grunt-mkdir');
+  grunt.loadNpmTasks('grunt-rename');
+
 
 // Define your tasks here
-  grunt.registerTask('default', ['clean', 'mkdir:z', 'shell:isogenic', 'closureBuilder:z']);
-  grunt.registerTask('test', ['mkdir:z']);
+  grunt.registerTask('isogenic', ['clean', 'shell:isogenic', 'rename:isogenic']);
+  grunt.registerTask('default', ['clean', 'isogenic', 'mkdir', 'closureBuilder:z']);
+  grunt.registerTask('test', ['mkdir']);
 }
 ;

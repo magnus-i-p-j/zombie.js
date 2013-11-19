@@ -56,12 +56,12 @@ z.client.facet.ContextMenuFacet.prototype.setParentEventTarget = function (paren
  */
 z.client.facet.ContextMenuFacet.prototype.doShowContextMenu = function (context, position) {
   this.hide();
-  this.actionFacets.removeAll();
+  this['actionFacets'].removeAll();
   if (context) {
     var actions = this._getContextualActions(context);
     if (actions.length > 0) {
-      ko.utils.arrayPushAll(this.actionFacets(), actions);
-      this.actionFacets.valueHasMutated();
+      ko.utils.arrayPushAll(this['actionFacets'](), actions);
+      this['actionFacets'].valueHasMutated();
       this._show(position);
     }
   }

@@ -13,10 +13,9 @@ goog.require('z.client.facet.Facet');
 z.client.facet.ActionListFacet = function (services) {
   goog.base(this);
   /**
-   * @expose
    * @type {function(Array.<!z.client.facet.ActionFacet>=):!Array.<!z.client.facet.ActionFacet>}
    */
-  this.actionFacets = ko.observableArray();
+  this['actionFacets'] = ko.observableArray();
 };
 
 goog.inherits(z.client.facet.ActionListFacet, z.client.facet.Facet);

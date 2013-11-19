@@ -5,6 +5,10 @@ goog.require('z.common.Stockpile');
 goog.require('goog.object');
 goog.require('goog.array');
 
+/**
+ * @constructor
+ * @extends {z.client.facet.Facet}
+ */
 z.client.facet.StockpileFacet = function () {
   goog.base(this);
 
