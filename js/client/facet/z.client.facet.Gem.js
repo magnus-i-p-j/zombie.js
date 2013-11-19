@@ -15,7 +15,7 @@ z.client.facet.Gem = function (services) {
   /**
    * @type {!z.client.facet.MapFacet}
    */
-  this['mapFacet'] = /** @type {!z.client.facet.MapFacet} */services.get(z.client.Resources.MAP_FACET);
+  this['mapFacet'] = /** @type   {!z.client.facet.MapFacet} */services.get(z.client.Resources.MAP_FACET);
   /**
    * @type {!z.client.facet.ContextMenuFacet}
    */
