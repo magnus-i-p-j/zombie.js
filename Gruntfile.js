@@ -67,6 +67,18 @@ module.exports = function (grunt) {
           src: 'build/deploy/game.js',
           dest: 'build/tmp/IMap.js'
         }
+      },
+      concat: {
+        tpl:{
+          options:{
+            process: function(src, filepath){
+              var id = filepath.replace(/.*tpl\//, '').replace(/\.html/,'');
+              return '<script id="' + id + '" type="text/html">\n' + src + '\n</script>'
+            }
+          },
+          src: ['html/tpl/**/*.html'],
+          dest: 'build/tmp/tpl.html'
+        }
       }
     }
   )
@@ -78,11 +90,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-closure-tools');
   grunt.loadNpmTasks('grunt-mkdir');
   grunt.loadNpmTasks('grunt-rename');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
 
 // Define your tasks here
   grunt.registerTask('isogenic', ['clean', 'shell:isogenic', 'rename:isogenic']);
   grunt.registerTask('default', ['clean', 'isogenic', 'mkdir', 'closureBuilder:z']);
-  grunt.registerTask('test', ['mkdir']);
+
+  grunt.registerTask('test', ['concat']);
 }
 ;
