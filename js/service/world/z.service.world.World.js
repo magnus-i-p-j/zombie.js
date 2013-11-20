@@ -85,7 +85,6 @@ z.service.world.World.prototype.createPlayerActor = function (actorCallback) {
  * @param {z.common.data.ClientEndTurn} endTurnData
  */
 z.service.world.World.prototype.actorEndTurn = function (endTurnData) {
-  console.log(endTurnData);
   // TODO: store plan
   var actor = this._entityRepository.get(endTurnData.actorId);
   goog.array.forEach(endTurnData.projects,

@@ -34,11 +34,9 @@ module.exports = function (grunt) {
           compile: true,
           inputs: 'js/z.js',
           compilerOpts: {
-            //TODO: Move to a separate target.
+            //debug: true,
+            //formatting:'PRETTY_PRINT',
             compilation_level: 'ADVANCED_OPTIMIZATIONS',
-            formatting: 'PRETTY_PRINT',
-
-            debug:true,
             externs:[
               "libs/externs/knockout-externs.js",
               "libs/externs/jquery-externs.js",
@@ -95,7 +93,7 @@ module.exports = function (grunt) {
 
 // Define your tasks here
   grunt.registerTask('isogenic', ['clean', 'shell:isogenic', 'rename:isogenic']);
-  grunt.registerTask('default', ['clean', 'isogenic', 'mkdir', 'closureBuilder:z']);
+  grunt.registerTask('default', ['clean', 'isogenic', 'mkdir', 'closureBuilder:z', 'concat']);
 
   grunt.registerTask('test', ['concat']);
 }
