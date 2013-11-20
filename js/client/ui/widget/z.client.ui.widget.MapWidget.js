@@ -39,8 +39,7 @@ z.client.ui.widget.MapWidget = function (services) {
   var self = this;
   ko.computed(
       function () {
-        var newTile = self._mapFacet.newTile();
-        console.log(newTile);
+        var newTile = self._mapFacet['newTile']();
         if (newTile) {
           self._imap.drawTile(newTile.x, newTile.y, newTile.type());
         }
@@ -64,17 +63,17 @@ z.client.ui.widget.MapWidget.prototype.claim = function (targetElement) {
 };
 
 /**
- * @param {mapEvent} e
+ * @param {mapEvent} mapEvent
  */
-z.client.ui.widget.MapWidget.prototype.onTileClicked = function (e) {
-  this._gem['currentTarget'](this._mapFacet.getTileFacet(e.tileX, e.tileY));
+z.client.ui.widget.MapWidget.prototype.onTileClicked = function (mapEvent) {
+  this._gem['currentTarget'](this._mapFacet.getTileFacet(mapEvent['tileX'], mapEvent['tileY']));
 };
 
 /**
- * @param {mapEvent} e
+ * @param {mapEvent} mapEvent
  */
-z.client.ui.widget.MapWidget.prototype.onShowContextMenu = function (e) {
-  var facet = this._mapFacet.getTileFacet(e.tileX, e.tileY);
-  var showContextMenu = new z.client.events.ShowContextMenu([facet], new goog.math.Coordinate(e.clientX, e.clientY));
+z.client.ui.widget.MapWidget.prototype.onShowContextMenu = function (mapEvent) {
+  var facet = this._mapFacet.getTileFacet(mapEvent['tileX'], mapEvent['tileY']);
+  var showContextMenu = new z.client.events.ShowContextMenu([facet], new goog.math.Coordinate(mapEvent['tileX'], mapEvent['tileY']));
   this._mapFacet.dispatchEvent(showContextMenu);
 };

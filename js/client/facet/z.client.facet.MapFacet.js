@@ -21,7 +21,7 @@ z.client.facet.MapFacet = function (services) {
   goog.base(this);
 
   this._grid = new mugd.utils.Grid();
-  this.newTile = ko.observable();
+  this['newTile'] = ko.observable();
 };
 
 goog.inherits(z.client.facet.MapFacet, z.client.facet.Facet);
@@ -46,7 +46,7 @@ z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
     facet = new z.client.facet.TileFacet(x, y);
     facet.setParentEventTarget(this);
     this._grid.setNode(x, y, facet);
-    this.newTile(facet);
+    this['newTile'](facet);
   }
   return /** @type {?z.client.facet.TileFacet} */ (facet);
 };
