@@ -74,6 +74,6 @@ z.client.ui.widget.MapWidget.prototype.onTileClicked = function (mapEvent) {
  */
 z.client.ui.widget.MapWidget.prototype.onShowContextMenu = function (mapEvent) {
   var facet = this._mapFacet.getTileFacet(mapEvent['tileX'], mapEvent['tileY']);
-  var showContextMenu = new z.client.events.ShowContextMenu([facet], new goog.math.Coordinate(mapEvent['tileX'], mapEvent['tileY']));
+  var showContextMenu = new z.client.events.ShowContextMenu([facet], new goog.math.Coordinate(mapEvent['clientX'], mapEvent['clientY']));
   this._mapFacet.dispatchEvent(showContextMenu);
 };
