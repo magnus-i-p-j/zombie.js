@@ -34,7 +34,20 @@ module.exports = function (grunt) {
           compile: true,
           inputs: 'js/z.js',
           compilerOpts: {
-            compilation_level: 'ADVANCED_OPTIMIZATIONS'
+            //TODO: Move to a separate target.
+            compilation_level: 'ADVANCED_OPTIMIZATIONS',
+            formatting: 'PRETTY_PRINT',
+
+            debug:true,
+            externs:[
+              "libs/externs/knockout-externs.js",
+              "libs/externs/jquery-externs.js",
+              "libs/externs/console-externs.js",
+              "libs/externs/templates-externs.js",
+              "libs/externs/knockout-external_template-externs.js",
+              "libs/externs/IMap-externs.js",
+              "libs/externs/isogenic_map-externs.js"
+            ]
           },
           execOpts: {
             maxBuffer: 999999 * 1024

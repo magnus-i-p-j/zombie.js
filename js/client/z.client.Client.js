@@ -58,12 +58,12 @@ z.client.Client.prototype.run = function () {
   // todo: 2. Choose game state
   // todo: 3. Start game.
   var self = this;
-  goog.net.XhrIo.send('../ruleset/main.json', function (e) {
-    var ruleset = e.target.getResponseJson();
+  goog.net.XhrIo.send('../ruleset/main.json', function (r) {
+    var ruleset = r.target.getResponseJson();
     console.log('ruleset', ruleset);
     goog.net.XhrIo.send('../ruleset/textures.json',
-      function(e){
-        var textures = e.target.getResponseJson();
+      function(t){
+        var textures = t.target.getResponseJson();
         console.log('textures', textures);
         self.startNewGame(ruleset, textures);
       }
@@ -103,16 +103,16 @@ z.client.Client.prototype.startNewGame = function (ruleset, textures) {
   injector.addProvider(z.client.Resources.MESSAGE_LOG_FACET, z.client.facet.MessageLogFacet);
   injector.addProvider(z.client.Resources.END_TURN_ACTION, z.client.actions.EndTurn);
   injector.addProvider(z.client.Resources.PROJECT_LIST_FACET, z.client.facet.ProjectListFacet);
-  injector.addProvider(z.client.Resources.PLAYER_FACET, z.client.facet.ActorFacet);
 
+  injector.addProvider(z.client.Resources.PLAYER_FACET, z.client.facet.ActorFacet);
   injector.addFactory(z.common.rulebook.category.IMPROVEMENT, z.common.entities.Improvement);
   injector.addFactory(z.common.rulebook.category.TERRAIN, z.common.entities.Tile);
 //  injector.addFactory(z.common.rulebook.category.ITEM, function(){throw 'not implemented] = item'});
 //  injector.addFactory(z.common.rulebook.category.CHARACTER, function(){throw 'not implemented] = character'});
 //  injector.addFactory(z.common.rulebook.category.ASSET, function(){throw 'not implemented] = asset'});
   injector.addFactory(z.common.rulebook.category.ACTOR, z.common.entities.Actor);
-//  injector.addFactory(z.common.rulebook.category.TECH, function(){throw 'not implemented] = tech'});
 
+//  injector.addFactory(z.common.rulebook.category.TECH, function(){throw 'not implemented] = tech'});
   this.session = injector.Compose(z.client.GameSession).New();
 
   this.session.start();

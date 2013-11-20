@@ -27,7 +27,6 @@ z.client.ui.widget.MapWidget = function (services) {
    * @private
    */
   this._gem = /** @type {!z.client.facet.Gem} */ services.get(z.client.Resources.GEM);
-
   /**
    * @type {Object}
    */
