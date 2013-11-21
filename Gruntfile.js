@@ -5,7 +5,7 @@ module.exports = function (grunt) {
       mkdir: {
         tmp: {
           options:{
-            create: [ 'build/tmp']
+            create: [ 'build/tmp', 'build/tmp/js']
           }
         },
         deploy: {
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
           }
         },
         isogenic: {
-          command: 'node server/ige -deploy ../../../../build/ -clear true'
+          command: 'node server/ige -deploy ../../../../build/'
         }
       },
       closureBuilder:  {
@@ -32,7 +32,7 @@ module.exports = function (grunt) {
           compilerFile: 'libs/closure-compiler/compiler.jar',
           output_mode: 'compile',
           compile: true,
-          inputs: 'js/z.js',
+          inputs: ['js/z.js'],
           compilerOpts: {
             //debug: true,
             //formatting:'PRETTY_PRINT',
@@ -55,15 +55,27 @@ module.exports = function (grunt) {
           src: [
             'js',
             'libs/closure-library',
-            'build/tmp'
+            'build/tmp/js'
           ],
-          dest: 'build/tmp/zed.js'
+          dest: 'build/tmp/js/zed.js'
         }
       },
       rename: {
         isogenic: {
           src: 'build/deploy/game.js',
-          dest: 'build/tmp/IMap.js'
+          dest: 'build/tmp/js/IMap.js'
+        }
+      },
+      less: {
+        all: {
+          options: {
+            relativeUrls: true,
+            paths: ["css"],
+            cleancss: true
+          },
+          files: {
+            "build/tmp/css/all.css": "css/all.less"
+          }
         }
       },
       concat: {
@@ -76,6 +88,48 @@ module.exports = function (grunt) {
           },
           src: ['html/tpl/**/*.html'],
           dest: 'build/tmp/tpl.html'
+        },
+        html:{
+          options:{
+            banner: '<link rel="stylesheet" type="text/css" href="../css/all.css"> \n'
+          },
+          src: ['build/tmp/tpl.html', 'html/layout.html'],
+          dest: 'build/tmp/html/all.html'
+        }
+      },
+      copy:{
+        index:{
+          cwd: 'build',
+          src:'index.html',
+          dest: 'build/deploy/html/',
+          filter: 'isFile',
+          expand: true
+        },
+        tmp:{
+          cwd: 'build/tmp/',
+          src:['css/*', 'html/all.html', 'html/index.html', 'js/*'],
+          dest: 'build/deploy/',
+          filter: 'isFile',
+          expand: true
+        },
+        libs:{
+          cwd: 'libs',
+          src:['jquery-1.7.2.js', 'knockout-2.1.0.debug.js'],
+          dest: 'build/deploy/libs',
+          filter: 'isFile',
+          expand: true
+        },
+        img:{
+          src:'img/**',
+          dest: 'build/deploy/',
+          filter: 'isFile',
+          expand: true
+        },
+        ruleset:{
+          src:'ruleset/**',
+          dest: 'build/deploy/',
+          filter: 'isFile',
+          expand: true
         }
       }
     }
@@ -89,12 +143,14 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-mkdir');
   grunt.loadNpmTasks('grunt-rename');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
 
 // Define your tasks here
   grunt.registerTask('isogenic', ['clean', 'shell:isogenic', 'rename:isogenic']);
-  grunt.registerTask('default', ['clean', 'isogenic', 'mkdir', 'closureBuilder:z', 'concat']);
+  grunt.registerTask('default', ['clean', 'isogenic', 'mkdir', 'closureBuilder:z', 'less', 'concat', 'copy']);
 
-  grunt.registerTask('test', ['concat']);
+  grunt.registerTask('test', ['closureBuilder:z']);
 }
 ;
