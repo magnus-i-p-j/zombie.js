@@ -6,6 +6,7 @@ goog.require('goog.dom');
 goog.require('goog.style');
 goog.require('goog.math');
 goog.require('goog.math.Coordinate');
+goog.require('goog.array');
 goog.require('mugd.ui.MapScroller');
 goog.require('mugd.injector.Injector');
 goog.require('z.client');
@@ -36,16 +37,19 @@ z.client.ui.widget.MapWidget = function (services) {
   var imapClass = /** @type {function(new:IMap,Object,Object)} */ services.get(z.client.Resources.IMAP);
   this._imap = /** @type {IMap} */ new imapClass({}, textures);
 
-  var self = this;
+  var mapWidget = this;
   ko.computed(
       function () {
-        var newTile = self._mapFacet['newTile']();
+        var newTile = mapWidget._mapFacet['newTile']();
         if (newTile) {
-          self._imap.drawTile(newTile.x, newTile.y, newTile.type());
+          var aTiles = mapWidget._mapFacet.getAdjacent(newTile.x,newTile.y);
+          var adjacent = goog.array.map(aTiles, function(tile){
+            return tile.type();
+          });
+          mapWidget._imap.drawTile(newTile.x, newTile.y, newTile.type(), adjacent);
         }
       }
   );
-
 };
 
 z.client.ui.widget.MapWidget.prototype.claim = function (targetElement) {

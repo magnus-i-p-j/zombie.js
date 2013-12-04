@@ -70,16 +70,15 @@ mugd.utils.Grid.prototype.getNodeById = function (guid) {
  * @return {Array}
  */
 mugd.utils.Grid.prototype.getAdjacent = function (x, y) {
-  var tiles;
-  if (y % 2 === 0) {
-    tiles = [
-        {x: x, y: y - 1}, {x: x + 1, y: y - 1}, {x: x + 1, y: y}, {x: x + 1, y: y + 1}, {x: x, y: y + 1}, {x: x - 1, y: y}
-    ];
-  } else {
-    tiles = [
-        {x: x - 1, y: y - 1}, {x: x, y: y - 1}, {x: x + 1, y: y}, {x: x, y: y + 1}, {x: x - 1, y: y + 1}, {x: x - 1, y: y}
-    ];
-  }
-  return tiles;
+  return [
+    this.getNode(x - 1, y    ),
+    this.getNode(x - 1, y + 1),
+    this.getNode(x    , y + 1),
+    this.getNode(x + 1, y + 1),
+    this.getNode(x + 1, y),
+    this.getNode(x + 1, y - 1),
+    this.getNode(x    , y - 1),
+    this.getNode(x - 1, y - 1)
+  ];
 };
 

@@ -1,5 +1,17 @@
-{
-    "grass":"\/img\/tiles\/grass.png",
-    "water":"\/img\/tiles\/water.png",
-    "hills":"\/img\/tiles\/hill.png"
-}
+[
+  {
+    "name": "water",
+    "type": "single",
+    "uri": "\/img\/tiles\/water.png"
+  },
+  {
+    "name": "grass",
+    "type": "transition",
+    "uri": "\/img\/tiles\/grass.png"
+  },
+  {
+    "name": "hills",
+    "type": "single",
+    "uri": "\/img\/tiles\/hill.png"
+  }
+]
