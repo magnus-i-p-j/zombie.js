@@ -68,6 +68,7 @@ mugd.utils.Grid.prototype.getNodeById = function (guid) {
  * @param {number} x
  * @param {number} y
  * @return {Array}
+ * TODO: document that it's in a specific order
  */
 mugd.utils.Grid.prototype.getAdjacent = function (x, y) {
   return [

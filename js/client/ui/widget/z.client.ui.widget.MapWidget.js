@@ -7,7 +7,6 @@ goog.require('goog.style');
 goog.require('goog.math');
 goog.require('goog.math.Coordinate');
 goog.require('goog.array');
-goog.require('mugd.ui.MapScroller');
 goog.require('mugd.injector.Injector');
 goog.require('z.client');
 goog.require('z.client.events.ShowContextMenu');
@@ -32,24 +31,17 @@ z.client.ui.widget.MapWidget = function (services) {
   /**
    * @type {Object}
    */
-  var textures =/** @type {Object} */  services.get(z.client.Resources.TEXTURES);
+  var textures = /** @type {Object} */  services.get(z.client.Resources.TEXTURES);
 
   var imapClass = /** @type {function(new:IMap,Object,Object)} */ services.get(z.client.Resources.IMAP);
   this._imap = /** @type {IMap} */ new imapClass({}, textures);
 
-  var mapWidget = this;
-  ko.computed(
-      function () {
-        var newTile = mapWidget._mapFacet['newTile']();
-        if (newTile) {
-          var aTiles = mapWidget._mapFacet.getAdjacent(newTile.x,newTile.y);
-          var adjacent = goog.array.map(aTiles, function(tile){
-            return tile.type();
-          });
-          mapWidget._imap.drawTile(newTile.x, newTile.y, newTile.type(), adjacent);
-        }
-      }
-  );
+  /**
+   * @type {goog.events.EventHandler}
+   * @protected
+   */
+  this.eventHandler = new goog.events.EventHandler(this);
+  this.eventHandler.listen(this._gem, z.client.events.EventType.START_TURN, this.doStartTurn);
 };
 
 z.client.ui.widget.MapWidget.prototype.claim = function (targetElement) {
@@ -80,4 +72,31 @@ z.client.ui.widget.MapWidget.prototype.onShowContextMenu = function (mapEvent) {
   var facet = this._mapFacet.getTileFacet(mapEvent['tileX'], mapEvent['tileY']);
   var showContextMenu = new z.client.events.ShowContextMenu([facet], new goog.math.Coordinate(mapEvent['clientX'], mapEvent['clientY']));
   this._mapFacet.dispatchEvent(showContextMenu);
+};
+
+
+/**
+ * @param  {!z.client.events.StartTurn} e
+ */
+z.client.ui.widget.MapWidget.prototype.doStartTurn = function (e) {
+  goog.array.forEach(this._mapFacet['tiles'](), this._drawTile, this);
+};
+
+/**
+ * @param  {!z.client.facet.TileFacet} tileFacet
+ */
+z.client.ui.widget.MapWidget.prototype._drawTile = function (tileFacet) {
+  if (tileFacet) {
+    var x = tileFacet.x;
+    var y = tileFacet.y;
+    var adjacent = goog.array.map(this._mapFacet.getAdjacent(x, y), function (tileFacet) {
+        if (tileFacet) {
+          return tileFacet['terrain']();
+        } else {
+          return 'unknown';
+        }
+      }
+    );
+    this._imap.drawTile(x, y, tileFacet['terrain'](), adjacent);
+  }
 };
