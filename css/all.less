@@ -6,31 +6,12 @@
 @borderColour: AntiqueWhite;
 
 .game_container {
-  @startColour: #ebeadf;
-  @endColour: #faf0e6;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(@startColour), to(@endColour));
-  background-image: -webkit-linear-gradient(top, @startColour, @endColour);
-  background-image: -moz-linear-gradient(top, @startColour, @endColour);
-  background-image: -o-linear-gradient(top, @startColour, @endColour);
-  background-image: linear-gradient(to bottom, @startColour, @endColour);
 
   h1 { margin: 0; padding: 0; }
   font-family: "Lucida Grande", Verdana, "Sans-Serif";
   font-size: 13px;
-
-  > .layout {
-    border: 2px @borderColour inset;
-  }
-  .layout {
-    position: absolute;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  .scrollable {
-    position: absolute;
-  }
-
+  position: relative;
+  overflow: hidden;
   @leftHorizontalFold: 500px;
   @rightHorizontalFold: 400px;
   @verticalFold: 700px;
@@ -40,13 +21,29 @@
   @width: 900px;
   width: @width;
   height: @height;
+  margin: 0;
+
+  > .layout {
+    z-index: 2;
+    @startColour: #ebeadf;
+    @endColour: #faf0e6;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(@startColour), to(@endColour));
+    background-image: -webkit-linear-gradient(top, @startColour, @endColour);
+    background-image: -moz-linear-gradient(top, @startColour, @endColour);
+    background-image: -o-linear-gradient(top, @startColour, @endColour);
+    background-image: linear-gradient(to bottom, @startColour, @endColour);
+    border: 2px @borderColour inset;
+  }
+  .layout {
+    position: absolute;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
 
   #map {
+    z-index: 1;
     font-size: xx-small;
-    top: @infobarHeight;
-    right: @width - @verticalFold;
-    bottom: @height - @leftHorizontalFold;
-    left: 0;
     background-color: #000000;
   }
 
@@ -243,8 +240,6 @@
     }
   }
 
-  position: relative;
-  border: 2px outset @borderColour;
 }
 
 @cardWidth: 25em;

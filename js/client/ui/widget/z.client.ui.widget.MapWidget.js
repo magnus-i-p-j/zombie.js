@@ -62,6 +62,8 @@ z.client.ui.widget.MapWidget.prototype.claim = function (targetElement) {
  * @param {mapEvent} mapEvent
  */
 z.client.ui.widget.MapWidget.prototype.onTileClicked = function (mapEvent) {
+  console.log(mapEvent['tileX'] +","+ mapEvent['tileY']);
+
   this._gem['currentTarget'](this._mapFacet.getTileFacet(mapEvent['tileX'], mapEvent['tileY']));
 };
 
