@@ -3,36 +3,94 @@
 //@basicBackground: Linen;
 @basicBackground: transparent;
 @darkerBackground: #eae0d6;
-@borderColour: AntiqueWhite;
+@borderColour: #292929;
+
+@radialCenterColour: #5e0000;
+@radialEndColour: #000;
+
+@startColour: #16161c;
+@endColour: #01020a;
+
+@textColour: #afafaf;
+
+@buttonColour: #2e2f16;
+@buttonColourBorder: #2f2c1e;
+@buttonRadius: 3px;
+
+html,
+body {
+  height: 100%;
+}
 
 .game_container {
 
-  h1 { margin: 0; padding: 0; }
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
   font-family: "Lucida Grande", Verdana, "Sans-Serif";
   font-size: 13px;
   position: relative;
   overflow: hidden;
-  @leftHorizontalFold: 500px;
-  @rightHorizontalFold: 400px;
-  @verticalFold: 700px;
+  display: block;
+  @leftHorizontalFold: 70%;
+  @rightHorizontalFold: 60%;
+  @verticalFold: 75%;
   @infobarHeight: 20px;
-  @toolbarHeight: 30px;
-  @height: 700px;
-  @width: 900px;
+  @toolbarHeight: 40px;
+  @height: 100%;
+  @width: 100%;
   width: @width;
   height: @height;
   margin: 0;
 
+  color: @textColour;
+
+  button {
+    height: 100%;
+    margin: 0 5px;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: @textColour;
+    background-color: @buttonColour;
+    -webkit-border-radius: @buttonRadius;
+    border-radius: @buttonRadius;
+    background-clip: padding-box;
+    border: @buttonColourBorder 2px outset;
+    text-shadow: 2px 2px 2px black;
+    font-weight: bold;
+    background-color: #1F5210;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#1F5210), to(#0B2100));
+    background-image: -webkit-linear-gradient(top, #1F5210, #0B2100);
+    background-image: -moz-linear-gradient(top, #1F5210, #0B2100);
+    background-image: -ms-linear-gradient(top, #1F5210, #0B2100);
+    background-image: -o-linear-gradient(top, #1F5210, #0B2100);
+    background-image: linear-gradient(to bottom, #1F5210, #0B2100);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#1F5210, endColorstr=#0B2100);
+    &:hover {
+      background-color: #2b7316;
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#2b7316), to(#0B2100));
+      background-image: -webkit-linear-gradient(top, #2b7316, #0B2100);
+      background-image: -moz-linear-gradient(top, #2b7316, #0B2100);
+      background-image: -ms-linear-gradient(top, #2b7316, #0B2100);
+      background-image: -o-linear-gradient(top, #2b7316, #0B2100);
+      background-image: linear-gradient(to bottom, #2b7316, #0B2100);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#2b7316, endColorstr=#0B2100);
+    }
+  }
+
   > .layout {
     z-index: 2;
-    @startColour: #ebeadf;
-    @endColour: #faf0e6;
     background-image: -webkit-gradient(linear, left top, left bottom, from(@startColour), to(@endColour));
     background-image: -webkit-linear-gradient(top, @startColour, @endColour);
     background-image: -moz-linear-gradient(top, @startColour, @endColour);
     background-image: -o-linear-gradient(top, @startColour, @endColour);
     background-image: linear-gradient(to bottom, @startColour, @endColour);
-    border: 2px @borderColour inset;
+    -webkit-box-shadow: 2px 2px 20px 2px rgba(1, 2, 0, 1);
+    -moz-box-shadow: 2px 2px 20px 2px rgba(1, 2, 0, 1);
+    box-shadow: 2px 2px 20px 2px rgba(1, 2, 0, 1);
+    border: 1px @borderColour solid;
+    margin: 1px;
   }
   .layout {
     position: absolute;
@@ -40,11 +98,18 @@
     overflow: hidden;
   }
 
-
   #map {
     z-index: 1;
     font-size: xx-small;
-    background-color: #000000;
+    background-color: @radialEndColour;
+    background: @radialCenterColour; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, @radialCenterColour 0%, @radialEndColour 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,@radialCenterColour), color-stop(100%,@radialEndColour)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, @radialCenterColour 0%,@radialEndColour 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, @radialCenterColour 0%,@radialEndColour 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, @radialCenterColour 0%,@radialEndColour 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, @radialCenterColour 0%,@radialEndColour 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@radialCenterColour', endColorstr='@radialEndColour', GradientType=1); /* IE6-9 fallback on horizontal gradient */
   }
 
   #message_log {
@@ -63,6 +128,7 @@
     height: @toolbarHeight;
     background-color: @darkerBackground;
     border: none;
+    margin-bottom: 0;
   }
 
   #info_bar {
@@ -80,6 +146,7 @@
     bottom: @toolbarHeight;
     left: @verticalFold;
     background-color: @basicBackground;
+    margin-right: 0;
   }
 
   #project_overview {
@@ -88,11 +155,15 @@
     bottom: @height - @rightHorizontalFold;
     left: @verticalFold;
     background-color: @basicBackground;
+    margin-right: 0;
   }
 
   .map_widget {
     cursor: default;
-    .focusedTile { z-index: 50; border-color: red; }
+    .focusedTile {
+      z-index: 50;
+      border-color: red;
+    }
   }
 
   .tile {
@@ -103,11 +174,23 @@
     color: #fff;
     text-shadow: 1px 1px 1px #000;
     position: absolute;
-    .center_text { line-height: 72px; text-align: center; vertical-align: middle; }
-    &.grass { background-image: url("../img/tiles/grass.png"); }
-    &.water { background-image: url("../img/tiles/water.png"); }
-    &.hills { background-image: url("../img/tiles/hill.png"); }
-    &.unknown { background-image: url("../img/tiles/void.png"); }
+    .center_text {
+      line-height: 72px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    &.grass {
+      background-image: url("../img/tiles/grass.png");
+    }
+    &.water {
+      background-image: url("../img/tiles/water.png");
+    }
+    &.hills {
+      background-image: url("../img/tiles/hill.png");
+    }
+    &.unknown {
+      background-image: url("../img/tiles/void.png");
+    }
   }
 
   .message_list {
@@ -115,9 +198,8 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    overflow: scroll;
     overflow-x: hidden;
-    overflox-y: scroll;
+    overflow-y: scroll;
     > li {
     }
   }
@@ -180,7 +262,6 @@
         min-width: 5em;
         height: 100%;
         border: 1px solid gray;
-        border-radius: 6px;
         outline: none;
         cursor: pointer;
         text-align: center;
@@ -251,7 +332,9 @@
       > * {
         display: table-cell;
       }
-      > input { width: 40em; }
+      > input {
+        width: 40em;
+      }
     }
   }
   .card {

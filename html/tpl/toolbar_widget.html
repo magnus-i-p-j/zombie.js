@@ -1,7 +1,5 @@
-<div id="toolbar_widget">
-  <div data-bind="foreach: actionFacets">
-      <button data-bind="click: execute">
-        <span data-bind="text: name"></span>
-      </button>
-  </div>
+<div id="toolbar_widget" data-bind="foreach: actionFacets">
+  <button data-bind="click: execute">
+    <span data-bind="text: name"></span>
+  </button>
 </div>
