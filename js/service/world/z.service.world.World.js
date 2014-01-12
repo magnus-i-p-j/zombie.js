@@ -124,7 +124,7 @@ z.service.world.World.prototype.endTurn = function () {
             return z.common.data.TileData.fromEntity(tile);
           },
           function (entity) {
-            return entity.meta.category === z.common.rulebook.category.TERRAIN;
+            return entity.meta.category === z.common.rulebook.category.TILE;
           }
       );
       var visibleProjects = this._entityRepository.map(

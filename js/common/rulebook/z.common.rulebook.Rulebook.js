@@ -4,6 +4,7 @@ goog.require("z.common.rulebook");
 goog.require("z.common.rulebook.Improvement");
 goog.require("z.common.rulebook.Terrain");
 goog.require("z.common.rulebook.Actor");
+goog.require("z.common.rulebook.Tile");
 goog.require("z.common.rulebook.StockpiledResource");
 goog.require("z.common.rulebook.GameStartingData");
 
@@ -31,6 +32,7 @@ z.common.rulebook.Rulebook = function (services) {
   this.terrain = this._parseCategoryData(ruleset[z.common.rulebook.category.TERRAIN], z.common.rulebook.Terrain);
   this.actors = this._parseCategoryData(ruleset[z.common.rulebook.category.ACTOR], z.common.rulebook.Actor);
   this.stockpiledResources = this._parseCategoryData(ruleset[z.common.rulebook.category.STOCKPILE], z.common.rulebook.StockpiledResource);
+  this.tiles = this._parseCategoryData(ruleset[z.common.rulebook.category.TILE], z.common.rulebook.Tile);
 
   this.gameStartingData = new z.common.rulebook.GameStartingData(ruleset);
 

@@ -7,17 +7,19 @@ goog.require('z.common.data.EntityData');
  * @param {?mugd.utils.guid} ownerId
  * @param {number} x
  * @param {number} y
+ * @param {z.common.terrain} terrain
  * @param {string} type
  * @constructor
  * @implements {z.common.data.EntityData}
  */
-z.common.data.TileData = function (guid, ownerId, x, y, type) {
+z.common.data.TileData = function (guid, ownerId, x, y, terrain, type) {
   this.guid = guid;
   this.ownerId = ownerId;
   this.x = x;
   this.y = y;
+  this.terrain = terrain;
   this.type = type;
-  this.category = z.common.rulebook.category.TERRAIN;
+  this.category = z.common.rulebook.category.TILE;
 };
 
 /**
@@ -30,6 +32,7 @@ z.common.data.TileData.fromEntity = function (tile) {
       tile.owner.guid,
       tile.position.x,
       tile.position.y,
+      tile.terrain,
       tile.meta.type
   );
 };
@@ -44,6 +47,7 @@ z.common.data.TileData.fromProtocol = function (protocol) {
       protocol['ownerId'],
       protocol['x'],
       protocol['y'],
+      protocol['terrain'],
       protocol['type']
   );
 };
@@ -58,6 +62,7 @@ z.common.data.TileData.toProtocol = function (tile) {
       'ownerId': tile.owner.guid,
       'x': tile.position.x,
       'y': tile.position.y,
+      'terrain': tile.terrain,
       'type': tile.meta.type
   };
 };

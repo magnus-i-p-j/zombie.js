@@ -139,6 +139,32 @@
         }
       }
     },
+    "tile": {
+      "title": "Tiles",
+      "description": "Tiles in the world",
+      "type": "array",
+      "items": {
+        "title": "Tile",
+        "description": "A tile",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of tile",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "description": "Describes the tile",
+            "type": "string"
+          }
+        }
+      }
+    },
     "stockpile": {
       "title": "Stockpile",
       "description": "Natural resources e.g",

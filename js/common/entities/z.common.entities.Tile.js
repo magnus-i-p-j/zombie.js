@@ -13,16 +13,16 @@ z.common.entities.Tile = function (services) {
    * @type {!z.common.data.TileData}
    */
   var tileData = /** @type {!z.common.data.TileData} */ services.get('entityData');
-  var terrain = tileData.type;
-  if (!z.common.entities.Tile.isCssRegex.test(terrain)) {
-    throw { 'name': 'Not a css class' };
-  }
-  this.terrain = terrain;
+
+  /**
+   * @type {z.common.terrain}
+   */
+  this.terrain = Object.freeze(tileData.terrain);
   this.position = new goog.math.Coordinate(tileData.x, tileData.y);
 };
 goog.inherits(z.common.entities.Tile, z.common.entities.Entity);
 
-z.common.entities.Tile.isCssRegex = /^[_a-zA-Z]+[_a-zA-Z0-9-]*$/;
+
 
 /**
  * @inheritDoc

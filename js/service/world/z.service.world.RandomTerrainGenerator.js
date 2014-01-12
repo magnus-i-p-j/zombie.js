@@ -34,15 +34,19 @@ z.service.world.RandomTerrainGenerator.prototype.generateTerrain = function (x, 
   var hillLevel = .6;
 
   var height = this._noise.noise(x * scale, y * scale);
-  var terrain;
+  var base;
+  var content;
   if (height < waterLevel) {
-    terrain = 'water';
+    base = 'water';
   } else if (height > hillLevel) {
-    terrain = 'hills';
+    base = 'hills';
   } else {
-    terrain = 'grass';
+    base = 'grass';
+    if(Math.random() <=0.2){
+      content = 'house'
+    }
   }
 
-  var data = new z.common.data.TileData(null, null, x, y, terrain);
+  var data = new z.common.data.TileData(null, null, x, y, {'base': base, 'content': content}, 'tile');
   return data;
 };

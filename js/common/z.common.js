@@ -8,3 +8,7 @@ z.common.Resources = {
   WORLD:'common_world'
 };
 
+/**
+ * @typedef:{Object.<string, string>}
+ */
+z.common.terrain;

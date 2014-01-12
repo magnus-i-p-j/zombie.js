@@ -2,16 +2,25 @@
   {
     "name": "water",
     "type": "single",
+    "zone": "base",
     "uri": "\/img\/tiles\/water.png"
   },
   {
     "name": "grass",
     "type": "transition",
+    "zone": "base",
     "uri": "\/img\/tiles\/grass.png"
   },
   {
     "name": "hills",
     "type": "single",
+    "zone": "base",
     "uri": "\/img\/tiles\/hill.png"
+  },
+  {
+    "name": "house",
+    "type": "single",
+    "zone": "content",
+    "uri": "\/img\/tiles\/house.png"
   }
 ]

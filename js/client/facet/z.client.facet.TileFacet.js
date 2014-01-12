@@ -24,9 +24,9 @@ z.client.facet.TileFacet = function (x, y) {
   this.y = y;
 
   /**
-   * @type {function(string=):string}
+   * @type {function(z.common.terrain=):z.common.terrain}
    */
-  this['terrain'] = ko.observable('unknown');
+  this['terrain'] = ko.observable({});
 };
 
 goog.inherits(z.client.facet.TileFacet, z.client.facet.EntityFacet);

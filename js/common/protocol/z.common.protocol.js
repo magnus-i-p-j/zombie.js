@@ -23,6 +23,7 @@ z.common.protocol.startTurn;
  *  ownerId: mugd.utils.guid,
  *  x: number,
  *  y: number,
+ *  terrain: z.common.terrain,
  *  type: string
  * }}
  */

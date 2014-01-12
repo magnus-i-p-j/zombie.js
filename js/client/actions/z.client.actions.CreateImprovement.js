@@ -46,7 +46,7 @@ z.client.actions.CreateImprovement.prototype._logger = goog.debug.Logger.getLogg
  */
 z.client.actions.CreateImprovement.prototype._canExecuteInternal = function (args) {
   var target = args[z.client.action.ArgsType.TARGET];
-  if (goog.isNull(target.entity) || target.entity.meta.category !== z.common.rulebook.category.TERRAIN) {
+  if (goog.isNull(target.entity) || target.entity.meta.category !== z.common.rulebook.category.TILE) {
     return false;
   }
   return this.improvement.isApplicable(target.entity);

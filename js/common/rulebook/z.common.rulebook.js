@@ -56,7 +56,8 @@ z.common.rulebook.category = {
   STOCKPILE:'stockpile',
   STARTING_RESOURCES:'starting_resources',
   ACTION:'action',
-  BOUNDS:'bounds'
+  BOUNDS:'bounds',
+  TILE:'tile'
 };
 
 //noinspection JSUnusedLocalSymbols

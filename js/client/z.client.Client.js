@@ -106,7 +106,7 @@ z.client.Client.prototype.startNewGame = function (ruleset, textures) {
 
   injector.addProvider(z.client.Resources.PLAYER_FACET, z.client.facet.ActorFacet);
   injector.addFactory(z.common.rulebook.category.IMPROVEMENT, z.common.entities.Improvement);
-  injector.addFactory(z.common.rulebook.category.TERRAIN, z.common.entities.Tile);
+  injector.addFactory(z.common.rulebook.category.TILE, z.common.entities.Tile);
 //  injector.addFactory(z.common.rulebook.category.ITEM, function(){throw 'not implemented] = item'});
 //  injector.addFactory(z.common.rulebook.category.CHARACTER, function(){throw 'not implemented] = character'});
 //  injector.addFactory(z.common.rulebook.category.ASSET, function(){throw 'not implemented] = asset'});
@@ -130,7 +130,7 @@ z.client.Client.initWorldService = function (ruleset) {
   injector.addResource(z.service.Resources.TERRAIN_SEED, 'ASDGW3E45RG');
 
   injector.addFactory(z.common.rulebook.category.IMPROVEMENT, z.common.entities.Improvement);
-  injector.addFactory(z.common.rulebook.category.TERRAIN, z.common.entities.Tile);
+  injector.addFactory(z.common.rulebook.category.TILE, z.common.entities.Tile);
 //  injector.addFactory(z.common.rulebook.category.ITEM, function(){throw 'not implemented] = item'});
 //  injector.addFactory(z.common.rulebook.category.CHARACTER, function(){throw 'not implemented] = character'});
 //  injector.addFactory(z.common.rulebook.category.ASSET, function(){throw 'not implemented] = asset'});
