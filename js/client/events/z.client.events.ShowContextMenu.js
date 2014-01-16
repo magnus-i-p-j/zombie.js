@@ -3,7 +3,7 @@ goog.provide('z.client.events.ShowContextMenu');
 goog.require('goog.events.Event');
 
 /**
- * @param {Array.<z.client.facet.Facet>} context
+ * @param {Array.<!z.common.rulebook.meta>} context
  * @param {goog.math.Coordinate} position
  * @extends {goog.events.Event}
  * @constructor

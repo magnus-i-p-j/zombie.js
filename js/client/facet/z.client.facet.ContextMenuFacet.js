@@ -25,6 +25,12 @@ z.client.facet.ContextMenuFacet = function (services) {
   this._actionFactory = /** @type {!z.client.ActionFactory} */ services.get(z.client.Resources.ACTION_FACTORY);
 
   /**
+   * @private
+   * @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet}
+   */
+  this._currentTarget = /** @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet} */services.get(z.client.Resources.CURRENT_TARGET);
+
+  /**
    * @expose
    * @type {function(boolean=):boolean}
    */
@@ -68,16 +74,16 @@ z.client.facet.ContextMenuFacet.prototype.doShowContextMenu = function (context,
 };
 
 /**
- * @param {Array.<!z.client.facet.EntityFacet>} context
+ * @param {Array.<!z.common.rulebook.meta>} context
  * @return {Array.<!z.client.facet.ActionFacet>} actions
  * @private
  */
 z.client.facet.ContextMenuFacet.prototype._getContextualActions = function (context) {
   var actionFacets = [];
   var actionFactory = this._actionFactory;
-  goog.array.forEach(context, function (contextItem) {
-    if (contextItem) {
-      var actions = actionFactory.getActions(contextItem.meta());
+  goog.array.forEach(context, function (meta) {
+    if (meta) {
+      var actions = actionFactory.getActions(meta);
       goog.array.forEach(actions, function (action) {
         if (action) {
           /**
@@ -85,15 +91,16 @@ z.client.facet.ContextMenuFacet.prototype._getContextualActions = function (cont
            */
           var actionFacet = new z.client.facet.ActionFacet(action);
           if (actionFacet[z.client.action.ArgsType.TARGET]) {
-            actionFacet[z.client.action.ArgsType.TARGET](contextItem);
+            var currentTarget = this._currentTarget();
+            actionFacet[z.client.action.ArgsType.TARGET](currentTarget);
           }
           if (actionFacet['canExecute']()) {
             actionFacets.push(actionFacet);
           }
         }
-      })
+      }, this)
     }
-  });
+  }, this);
   return actionFacets;
 };
 

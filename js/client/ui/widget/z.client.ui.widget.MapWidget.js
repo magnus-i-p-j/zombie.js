@@ -32,6 +32,12 @@ z.client.ui.widget.MapWidget = function (services) {
    * @type {Object}
    */
   var textures = /** @type {Object} */  services.get(z.client.Resources.TEXTURES);
+  /**
+   * @private
+   * @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet}
+   */
+  this._currentTarget = /** @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet} */services.get(z.client.Resources.CURRENT_TARGET);
+
 
   var imapClass = /** @type {function(new:IMap,Object,Object)} */ services.get(z.client.Resources.IMAP);
   this._imap = /** @type {IMap} */ new imapClass({}, textures);
@@ -70,7 +76,8 @@ z.client.ui.widget.MapWidget.prototype.onTileClicked = function (mapEvent) {
  */
 z.client.ui.widget.MapWidget.prototype.onShowContextMenu = function (mapEvent) {
   var facet = this._mapFacet.getTileFacet(mapEvent['tileX'], mapEvent['tileY']);
-  var showContextMenu = new z.client.events.ShowContextMenu([facet], new goog.math.Coordinate(mapEvent['clientX'], mapEvent['clientY']));
+  this._currentTarget(facet);
+  var showContextMenu = new z.client.events.ShowContextMenu(facet.getTerrainMeta(), new goog.math.Coordinate(mapEvent['clientX'], mapEvent['clientY']));
   this._mapFacet.dispatchEvent(showContextMenu);
 };
 

@@ -19,6 +19,11 @@ goog.require('z.client.events');
  */
 z.client.facet.MapFacet = function (services) {
   goog.base(this);
+  /**
+   * @type {!z.common.rulebook.Rulebook}
+   * @private
+   */
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
 
   this._grid = new mugd.utils.Grid();
 
@@ -44,7 +49,7 @@ z.client.facet.MapFacet.prototype.setParentEventTarget = function (parent) {
 z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
   var facet = this._grid.getNode(x, y);
   if (!facet) {
-    facet = new z.client.facet.TileFacet(x, y);
+    facet = new z.client.facet.TileFacet(x, y, this._rulebook);
     facet.setParentEventTarget(this);
     this._grid.setNode(x, y, facet);
     this['tiles'].push(facet);
