@@ -1,7 +1,7 @@
 <div class="terrain_card">
   <header class="layout name"><h1 data-bind="text: name"></h1></header>
   <section class="layout body">
-    <div data-bind="attr: { class: terrain() + ' image tile', 'data-x': x, 'data-y': y }"></div>
+    <div data-bind="attr: { class: terrain()['base'] + ' image tile', 'data-x': x, 'data-y': y }"></div>
     <p data-bind="text: description"></p>
   </section>
   <footer class="layout">
