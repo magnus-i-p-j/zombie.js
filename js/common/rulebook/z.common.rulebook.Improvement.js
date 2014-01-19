@@ -49,7 +49,6 @@ z.common.rulebook.Improvement = function (improvement) {
  * @return {boolean}
  */
 z.common.rulebook.Improvement.prototype.isApplicable = function (target) {
-  // TODO: Fix so this works with multi-terraib
   for (var key in this._improvement['prerequisites']) {
     if (this._improvement['prerequisites'].hasOwnProperty(key)) {
       if (!z.common.rulebook.logic.prerequisites[key](this._improvement['prerequisites'][key], target)) {

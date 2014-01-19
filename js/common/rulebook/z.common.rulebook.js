@@ -63,7 +63,16 @@ z.common.rulebook.category = {
 //noinspection JSUnusedLocalSymbols
 z.common.rulebook.logic.prerequisites = {
   'terrain':function (condition, target) {
-    return goog.array.contains(condition, target.terrain);
+    if(!(target instanceof z.common.entities.Tile)){
+      return false;
+    }
+
+    var fulfilled = false;
+    goog.object.forEach(target.terrain, function(terrain){
+      fulfilled = fulfilled || goog.array.contains(condition, terrain);
+    });
+
+    return fulfilled;
   },
   'blocked': function(condition, target){
     return false;

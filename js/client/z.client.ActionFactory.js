@@ -18,20 +18,20 @@ z.client.ActionFactory = function (services) {
 };
 
 /**
- * @param {z.common.rulebook.meta} meta
+ * @param {Array.<!z.common.rulebook.meta>} metas
  * @return {Array.<!z.client.action.Action>}
  */
-z.client.ActionFactory.prototype.getActions = function (meta) {
-  return this._createActions(meta);
+z.client.ActionFactory.prototype.getActions = function (metas) {
+  return this._createActions(metas);
 };
 
 /**
- * @param {z.common.rulebook.meta} meta
+ * @param {Array.<!z.common.rulebook.meta>} metas
  * @return {Array.<!z.client.action.Action>}
  */
-z.client.ActionFactory.prototype._createActions = function (meta) {
+z.client.ActionFactory.prototype._createActions = function (metas) {
   var actions = [];
-  if (meta.category === z.common.rulebook.category.TERRAIN) {
+  if (this._hasCategory(metas, z.common.rulebook.category.TERRAIN)) {
     var factory = this._injector.Compose(z.client.actions.CreateImprovement);
     goog.array.forEach(this._rulebook.improvements, function (improvement) {
           actions.push(factory.With({'current_improvement': improvement}).New());
@@ -44,3 +44,11 @@ z.client.ActionFactory.prototype._createActions = function (meta) {
   return actions;
 };
 
+/**
+ * @param {Array.<!z.common.rulebook.meta>} metas
+ * @param {z.common.rulebook.category} category
+ * @private
+ */
+z.client.ActionFactory.prototype._hasCategory = function (metas, category) {
+  return goog.array.some(metas, function(meta){ return meta.category === category; });
+};

@@ -23,6 +23,11 @@
     "type": "hills",
     "name": "Hills",
     "description": "A patch of high hill, untouched by the zombie apocalypse."
+  },
+  {
+    "type": "house",
+    "name": "House",
+    "description": "A house someone used to live in. Now they're still living in it..."
   }
 ], "improvement": [
   {
@@ -87,6 +92,30 @@
     },
     "cost": {
       "stockpile": []
+    }
+  },
+  {
+    "type": "fortify_house",
+    "name": "Fortify",
+    "description": "Fortify the house",
+    "prerequisites": {
+      "terrain": ["house"]
+    },
+    "cost": {
+      "stockpile": [
+        {
+          "type": "wood",
+          "amount": 3
+        },
+        {
+          "type": "metal",
+          "amount": 1
+        },
+        {
+          "type": "scrap",
+          "amount": 2
+        }
+      ]
     }
   }
 ], "actor": [
