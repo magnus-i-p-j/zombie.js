@@ -2,32 +2,54 @@
   {
     "type": "field",
     "name": "Field",
-    "description": "A patch of land where some beets are growing."
-  },
-  {
-    "type": "fenced_grass",
-    "name": "Fenced grass",
-    "description": "A patch of land surrounded by wicked looking barbed wire fence. Some zombie bits are stuck in it"
-  },
-  {
-    "type": "grass",
-    "name": "Grass",
-    "description": "A patch of green grass, untouched by the zombie apocalypse."
+    "description": "A patch of land where some beets are growing.",
+    "zone": "content"
   },
   {
     "type": "water",
     "name": "Water",
-    "description": "A patch of blue water, untouched by the zombie apocalypse."
+    "description": "A patch of blue water, untouched by the zombie apocalypse.",
+    "zone": "base"
   },
   {
     "type": "hills",
     "name": "Hills",
-    "description": "A patch of high hill, untouched by the zombie apocalypse."
+    "description": "A patch of high hill, untouched by the zombie apocalypse.",
+    "zone": "base"
   },
   {
     "type": "house",
     "name": "House",
-    "description": "A house someone used to live in. Now they're still living in it..."
+    "description": "A house someone used to live in. Now they're still living in it...",
+    "zone": "content"
+  },
+  {
+    "type": "grass",
+    "name": "Grass",
+    "description": "Some grass with only a few zombie bits.",
+    "zone": "base"
+  },
+  {
+    "type": "fence",
+    "name": "Fence",
+    "description": "A rickety fence, suitable for delaying zombies while you leg it.",
+    "zone": "perimeter"
+  }
+], "zone": [
+  {
+    "type": "content",
+    "name": "Content",
+    "description": "Inner parts of tile"
+  },
+  {
+    "type": "perimeter",
+    "name": "Perimeter",
+    "description": "The stuff around the tile"
+  },
+  {
+    "type": "base",
+    "name": "Base",
+    "description": "The stuff the tile is made of"
   }
 ], "improvement": [
   {
@@ -35,7 +57,11 @@
     "name": "Look at area",
     "description": "Look at stuff.",
     "prerequisites": {
-      "terrain": ["grass"]
+      "terrain": ["field"]
+    },
+    "effects": {
+      "effect_stockpile": [],
+      "effect_terrain": "field"
     },
     "cost": {
       "stockpile": []
@@ -46,19 +72,14 @@
     "name": "Secure area",
     "description": "Build a zombie-proofish fence around a tile and kill all zombies within.",
     "prerequisites": {
-      "terrain": ["grass", "hills"]
+      "terrain": ["field", "hills"]
+    },
+    "effects": {
+      "effect_stockpile": [],
+      "effect_terrain": "field"
     },
     "cost": {
-      "stockpile": [
-        {
-          "type": "wood",
-          "amount": 5
-        },
-        {
-          "type": "scrap",
-          "amount": 2
-        }
-      ]
+      "stockpile": []
     }
   },
   {
@@ -67,6 +88,10 @@
     "description": "Plow a patch of land and plant some beets.",
     "prerequisites": {
       "terrain": ["field"]
+    },
+    "effects": {
+      "effect_stockpile": [],
+      "effect_terrain": "field"
     },
     "cost": {
       "stockpile": []
@@ -79,6 +104,10 @@
     "prerequisites": {
       "terrain": []
     },
+    "effects": {
+      "effect_stockpile": [],
+      "effect_terrain": "field"
+    },
     "cost": {
       "stockpile": []
     }
@@ -89,6 +118,10 @@
     "description": "Harvest a patch of land and get some beets.",
     "prerequisites": {
       "terrain": []
+    },
+    "effects": {
+      "effect_stockpile": [],
+      "effect_terrain": "field"
     },
     "cost": {
       "stockpile": []
@@ -101,21 +134,12 @@
     "prerequisites": {
       "terrain": ["house"]
     },
+    "effects": {
+      "effect_stockpile": [],
+      "effect_terrain": "field"
+    },
     "cost": {
-      "stockpile": [
-        {
-          "type": "wood",
-          "amount": 3
-        },
-        {
-          "type": "metal",
-          "amount": 1
-        },
-        {
-          "type": "scrap",
-          "amount": 2
-        }
-      ]
+      "stockpile": []
     }
   }
 ], "actor": [

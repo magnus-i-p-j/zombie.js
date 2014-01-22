@@ -52,6 +52,7 @@ z.common.rulebook.effect;
 z.common.rulebook.category = {
   IMPROVEMENT: 'improvement',
   TERRAIN: 'terrain',
+  ZONE: 'zone',
   ACTOR: 'actor',
   STOCKPILE:'stockpile',
   STARTING_RESOURCES:'starting_resources',

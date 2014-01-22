@@ -186,7 +186,7 @@ z.service.world.World.prototype._advanceProjects = function () {
     var cashier = new z.common.Cashier(stockpile);
     var investment = cashier.withdraw(cost);
     project.invest(investment);
-    project.advance();
+    var effects = project.advance();
   });
 
 };

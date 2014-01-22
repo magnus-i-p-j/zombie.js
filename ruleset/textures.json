@@ -22,5 +22,17 @@
     "type": "single",
     "zone": "content",
     "uri": "\/img\/tiles\/house.png"
+  },
+  {
+    "name": "field",
+    "type": "single",
+    "zone": "content",
+    "uri": "\/img\/tiles\/field.png"
+  },
+  {
+    "name": "fence",
+    "type": "single",
+    "zone": "perimeter",
+    "uri": "\/img\/tiles\/fence.png"
   }
 ]

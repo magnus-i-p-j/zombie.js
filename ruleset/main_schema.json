@@ -25,11 +25,51 @@
             "title": "Description",
             "description": "Describes the terrain",
             "type": "string"
+          },
+          "zone": {
+            "title": "Zone",
+            "description": "The zone the terrain occupies",
+            "type": "string",
+            "links": {
+              "rel": "full",
+              "href": "game://zone/{@}"
+            }
+
           }
         },
         "links": {
           "rel": "self",
           "href": "game://terrain/{type}"
+        }
+      }
+    },
+    "zone": {
+      "title": "Zones",
+      "description": "The different zones available in tiles",
+      "type": "array",
+      "items": {
+        "title": "Zone",
+        "description": "A part of the stuff you walk on.",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of zone",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "description": "Describes the zone",
+            "type": "string"
+          }
+        },
+        "links": {
+          "rel": "self",
+          "href": "game://zone/{type}"
         }
       }
     },
@@ -73,6 +113,53 @@
                     "rel": "full",
                     "href": "game://terrain/{@}"
                   }
+                }
+              }
+            }
+          },
+          "effects": {
+            "type": "object",
+            "title": "Effects",
+            "description": "The effects this project has",
+            "properties": {
+              "effect_stockpile": {
+                "title": "Change stockpile",
+                "type": "array",
+                "items": {
+                  "title": "Resource",
+                  "description": "One of the resources",
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "title": "Resource",
+                      "description": "The gained resource",
+                      "type": "string",
+                      "links": {
+                        "rel": "full",
+                        "href": "game://stockpile/{@}"
+                      }
+                    },
+                    "magnitude": {
+                      "title": "Magnitude",
+                      "description": "The amount gained",
+                      "type": "number"
+                    },
+                    "variation": {
+                      "title": "Variation",
+                      "description": "The variation in amount gained",
+                      "type": "number"
+                    }
+                  }
+                },
+                "description": "Gain this stuff"
+              },
+              "effect_terrain": {
+                "title": "Change terrain",
+                "description": "Change to this terrain",
+                "type": "string",
+                "links": {
+                  "rel": "full",
+                  "href": "game://terrain/{@}"
                 }
               }
             }
