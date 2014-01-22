@@ -32,7 +32,7 @@ goog.inherits(z.client.ui.widget.ContextMenuWidget, goog.Disposable);
 
 z.client.ui.widget.ContextMenuWidget.prototype.claim = function (targetElement) {
   this.targetElement = targetElement;
-  this.eventHandler.listen(goog.dom.getParentElement(this.targetElement), goog.events.EventType.MOUSEOVER, this.doMouseOverParent);
+  this.eventHandler.listen(goog.dom.getParentElement(this.targetElement), goog.events.EventType.MOUSEDOWN, this.doMouseOverParent);
 };
 
 /**
