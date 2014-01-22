@@ -1,6 +1,6 @@
 goog.provide('z.client.ActionFactory');
 
-goog.require('z.client.actions.CreateImprovement');
+goog.require('z.client.actions.CreateProject');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -32,14 +32,14 @@ z.client.ActionFactory.prototype.getActions = function (metas) {
 z.client.ActionFactory.prototype._createActions = function (metas) {
   var actions = [];
   if (this._hasCategory(metas, z.common.rulebook.category.TERRAIN)) {
-    var factory = this._injector.Compose(z.client.actions.CreateImprovement);
-    goog.array.forEach(this._rulebook.improvements, function (improvement) {
-          actions.push(factory.With({'current_improvement': improvement}).New());
+    var factory = this._injector.Compose(z.client.actions.CreateProject);
+    goog.array.forEach(this._rulebook.projects, function (project) {
+          actions.push(factory.With({'current_project': project}).New());
         }
     );
   }
-//  else if (meta.category === z.common.rulebook.category.IMPROVEMENT) {
-//    actions.push(new z.client.actions.ActionShowImprovement());
+//  else if (meta.category === z.common.rulebook.category.PROJECT) {
+//    actions.push(new z.client.actions.ActionShowProject());
 //  }
   return actions;
 };

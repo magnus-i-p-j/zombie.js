@@ -73,13 +73,13 @@
         }
       }
     },
-    "improvement": {
-      "title": "Improvements",
+    "project": {
+      "title": "Projects",
       "description": "Change things for the better",
       "type": "array",
       "items": {
-        "title": "Improvement",
-        "description": "A project that improves a tile",
+        "title": "Project",
+        "description": "A project that does stuff",
         "type": "object",
         "properties": {
           "type": {
@@ -104,7 +104,7 @@
               "terrain": {
                 "type": "array",
                 "title": "Terrains",
-                "description": "The terrain types this improvement is applicable to",
+                "description": "The terrain types this project is applicable to",
                 "items": {
                   "title": "Terrain",
                   "description": "One of the possible terrains",

@@ -51,7 +51,7 @@
     "name": "Base",
     "description": "The stuff the tile is made of"
   }
-], "improvement": [
+], "project": [
   {
     "type": "look_at_area",
     "name": "Look at area",
@@ -72,11 +72,11 @@
     "name": "Secure area",
     "description": "Build a zombie-proofish fence around a tile and kill all zombies within.",
     "prerequisites": {
-      "terrain": ["field", "hills"]
+      "terrain": ["grass", "house"]
     },
     "effects": {
       "effect_stockpile": [],
-      "effect_terrain": "field"
+      "effect_terrain": "fence"
     },
     "cost": {
       "stockpile": []

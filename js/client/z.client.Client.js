@@ -33,7 +33,7 @@ goog.require('z.common.rulebook.Rulebook');
 
 goog.require('z.common.EntityRepository');
 
-goog.require('z.common.entities.Improvement');
+goog.require('z.common.entities.Project');
 goog.require('z.common.entities.Actor');
 goog.require('z.common.entities.Tile');
 goog.require('z.common.entities.Project');
@@ -105,7 +105,7 @@ z.client.Client.prototype.startNewGame = function (ruleset, textures) {
   injector.addProvider(z.client.Resources.PROJECT_LIST_FACET, z.client.facet.ProjectListFacet);
 
   injector.addProvider(z.client.Resources.PLAYER_FACET, z.client.facet.ActorFacet);
-  injector.addFactory(z.common.rulebook.category.IMPROVEMENT, z.common.entities.Improvement);
+  injector.addFactory(z.common.rulebook.category.PROJECT, z.common.entities.Project);
   injector.addFactory(z.common.rulebook.category.TILE, z.common.entities.Tile);
 //  injector.addFactory(z.common.rulebook.category.ITEM, function(){throw 'not implemented] = item'});
 //  injector.addFactory(z.common.rulebook.category.CHARACTER, function(){throw 'not implemented] = character'});
@@ -129,7 +129,7 @@ z.client.Client.initWorldService = function (ruleset) {
   injector.addProvider(z.service.Resources.TERRAIN_GENERATOR, z.service.world.RandomTerrainGenerator);
   injector.addResource(z.service.Resources.TERRAIN_SEED, 'ASDGW3E45RG');
 
-  injector.addFactory(z.common.rulebook.category.IMPROVEMENT, z.common.entities.Improvement);
+  injector.addFactory(z.common.rulebook.category.PROJECT, z.common.entities.Project);
   injector.addFactory(z.common.rulebook.category.TILE, z.common.entities.Tile);
 //  injector.addFactory(z.common.rulebook.category.ITEM, function(){throw 'not implemented] = item'});
 //  injector.addFactory(z.common.rulebook.category.CHARACTER, function(){throw 'not implemented] = character'});

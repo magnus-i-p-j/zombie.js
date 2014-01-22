@@ -22,7 +22,7 @@ z.common.rulebook.meta;
  *   effect: z.common.rulebook.effect
  * }}
  */
-z.common.rulebook.improvement;
+z.common.rulebook.project;
 
 /**
  * @typedef {{
@@ -50,7 +50,7 @@ z.common.rulebook.effect;
  * @enum {string}
  */
 z.common.rulebook.category = {
-  IMPROVEMENT: 'improvement',
+  PROJECT: 'project',
   TERRAIN: 'terrain',
   ZONE: 'zone',
   ACTOR: 'actor',

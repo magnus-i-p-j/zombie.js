@@ -1,7 +1,7 @@
 goog.provide("z.common.rulebook.Rulebook");
 
 goog.require("z.common.rulebook");
-goog.require("z.common.rulebook.Improvement");
+goog.require("z.common.rulebook.Project");
 goog.require("z.common.rulebook.Terrain");
 goog.require("z.common.rulebook.Actor");
 goog.require("z.common.rulebook.Tile");
@@ -28,7 +28,7 @@ z.common.rulebook.Rulebook = function (services) {
    */
   this._meta = {};
 
-  this.improvements = this._parseCategoryData(ruleset[z.common.rulebook.category.IMPROVEMENT], z.common.rulebook.Improvement);
+  this.projects = this._parseCategoryData(ruleset[z.common.rulebook.category.PROJECT], z.common.rulebook.Project);
   this.terrain = this._parseCategoryData(ruleset[z.common.rulebook.category.TERRAIN], z.common.rulebook.Terrain);
   this.actors = this._parseCategoryData(ruleset[z.common.rulebook.category.ACTOR], z.common.rulebook.Actor);
   this.stockpiledResources = this._parseCategoryData(ruleset[z.common.rulebook.category.STOCKPILE], z.common.rulebook.StockpiledResource);
