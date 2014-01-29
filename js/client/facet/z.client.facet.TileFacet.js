@@ -1,6 +1,7 @@
 goog.provide('z.client.facet.TileFacet');
 
 goog.require('z.client.facet.EntityFacet');
+goog.require('z.common');
 
 /**
  * @param {number} x

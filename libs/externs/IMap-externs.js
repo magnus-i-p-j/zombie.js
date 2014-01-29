@@ -9,6 +9,11 @@
 var mapEvent;
 
 /**
+ * @typedef {Object.<string, string>}
+ */
+var terrain;
+
+/**
  * @interface
  */
 var IMap = function () {
@@ -22,9 +27,10 @@ IMap.prototype.claim = function (elementId) {};
 /**
  * @param {number} x
  * @param {number} y
- * @param {string} terrain
+ * @param {z.common.terrain} terrain
+ * @param {Array.<z.common.terrain>} adjacent
  */
-IMap.prototype.drawTile = function (x, y, terrain) {};
+IMap.prototype.drawTile = function (x, y, terrain, adjacent) {};
 
 /**
  * @param {function(mapEvent)} callback

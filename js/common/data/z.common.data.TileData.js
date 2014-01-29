@@ -1,5 +1,6 @@
 goog.provide('z.common.data.TileData');
 
+goog.require('z.common');
 goog.require('z.common.data.EntityData');
 
 /**
@@ -13,12 +14,34 @@ goog.require('z.common.data.EntityData');
  * @implements {z.common.data.EntityData}
  */
 z.common.data.TileData = function (guid, ownerId, x, y, terrain, type) {
+  /**
+   * @type {?mugd.utils.guid}
+   */
   this.guid = guid;
+  /**
+   *
+   * @type {?mugd.utils.guid}
+   */
   this.ownerId = ownerId;
+  /**
+   * @type {number}
+   */
   this.x = x;
+  /**
+   * @type {number}
+   */
   this.y = y;
+  /**
+   * @type {z.common.terrain}
+   */
   this.terrain = terrain;
+  /**
+    * @type {string}
+   */
   this.type = type;
+  /**
+   * @type {z.common.rulebook.category}
+   */
   this.category = z.common.rulebook.category.TILE;
 };
 

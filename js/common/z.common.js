@@ -9,6 +9,6 @@ z.common.Resources = {
 };
 
 /**
- * @typedef:{Object.<string, string>}
+ * @typedef {!Object.<string, string>}
  */
 z.common.terrain;

@@ -17,7 +17,8 @@ z.common.entities.Tile = function (services) {
   /**
    * @type {z.common.terrain}
    */
-  this.terrain = Object.freeze(tileData.terrain);
+  this.terrain = tileData.terrain;
+  Object.freeze(this.terrain);
   this.position = new goog.math.Coordinate(tileData.x, tileData.y);
 };
 goog.inherits(z.common.entities.Tile, z.common.entities.Entity);
@@ -55,7 +56,7 @@ z.common.entities.Tile.prototype._update = function (data, meta) {
    */
   var updated = this.terrain != tileData.type || this.meta.type == meta.type;
 
-  this.terrain = tileData.type;
+  this.terrain = tileData.terrain;
   this.meta = meta;
 
   return updated;

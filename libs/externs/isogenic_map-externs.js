@@ -12,9 +12,10 @@ IsogenicMap.prototype.claim = function (elementId) {};
 /**
  * @param {number} x
  * @param {number} y
- * @param {string} terrain
+ * @param {z.common.terrain} terrain
+ * @param {Array.<z.common.terrain>} adjacent
  */
-IsogenicMap.prototype.drawTile = function (x, y, terrain) {};
+IsogenicMap.prototype.drawTile = function (x, y, terrain, adjacent) {};
 
 /**
  * @param {function(mapEvent)} callback
