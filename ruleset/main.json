@@ -75,11 +75,22 @@
       "terrain": ["grass", "house"]
     },
     "effects": {
-      "effect_stockpile": [],
+      "effect_stockpile": [
+        {
+          "type": "ammo",
+          "magnitude": 5,
+          "variation": 2
+        }
+      ],
       "effect_terrain": "fence"
     },
     "cost": {
-      "stockpile": []
+      "stockpile": [
+        {
+          "type": "wood",
+          "amount": 5
+        }
+      ]
     }
   },
   {
@@ -105,8 +116,7 @@
       "terrain": []
     },
     "effects": {
-      "effect_stockpile": [],
-      "effect_terrain": "field"
+      "effect_stockpile": []
     },
     "cost": {
       "stockpile": []

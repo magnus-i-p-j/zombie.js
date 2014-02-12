@@ -63,7 +63,7 @@ z.client.facet.MapFacet.prototype.getTileFacet = function (x, y) {
  * @return {Array.<!z.client.facet.TileFacet>}
  */
 z.client.facet.MapFacet.prototype.getAdjacent = function (x, y) {
-  return /** @type {Array.<!z.client.facet.TileFacet>} */ this._grid.getAdjacent(x, y);
+  return /** @type {Array.<!z.client.facet.TileFacet>} */ (this._grid.getAdjacent(x, y));
 };
 
 /**
@@ -74,9 +74,8 @@ z.client.facet.MapFacet.prototype.doEntityCreated = function (event) {
     /**
      * @type {!z.common.entities.Tile}
      */
-    var tile = /** @type {!z.common.entities.Tile} */event.entity;
+    var tile = /** @type {!z.common.entities.Tile} */ ( event.entity );
     var facet = this.getTileFacet(tile.position.x, tile.position.y);
     facet.update(tile);
-    // TODO:
   }
 };
