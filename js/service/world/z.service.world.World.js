@@ -177,16 +177,16 @@ z.service.world.World.prototype._advanceProjects = function () {
   });
 
   goog.array.forEach(projects, function(project){
+    project.state = z.common.protocol.state.PASS;
     /**
      * @type {!z.common.entities.Actor}
      */
     var owner = project.owner;
     var stockpile = owner.stockpile;
-    var cost = project.getCost();
+    var cost = project.getRemainingCost();
     var cashier = new z.common.Cashier(stockpile);
     var investment = cashier.withdraw(cost);
-    project.invest(investment);
-    var effects = project.advance();
+    var effects = project.advance(investment);
   });
 
 };

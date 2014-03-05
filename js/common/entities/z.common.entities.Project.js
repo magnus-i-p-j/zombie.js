@@ -2,6 +2,7 @@ goog.provide('z.common.entities.Project');
 
 goog.require('z.common.data.ProjectData');
 goog.require('z.common.entities.Entity');
+goog.require('goog.functions');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -53,24 +54,49 @@ z.common.entities.Project = function (services) {
   this.investment = new z.common.Stockpile();
   this.investment.addAll(projectData.investment);
 
+  this.completion = 0;
+
   //TODO: Find entities instead of id:s
   this.resources = projectData.resources;
 };
 
 goog.inherits(z.common.entities.Project, z.common.entities.Entity);
 
-z.common.entities.Project.prototype.getCost = function (){
+z.common.entities.Project.prototype.getRemainingCost = function (){
   return this.investment.diffAll(this.meta.cost);
 };
 
 z.common.entities.Project.prototype.invest = function (investment){
+  var previous = this.completion;
   this.investment.addAll(investment);
+  this.completion = this.investment.ratioAll(this.meta.cost);
+  if(previous !== this.completion){
+    this._setModified();
+  }
 };
 
-z.common.entities.Project.prototype.advance = function (){
+/**
+ * @return {Array.<Object>}
+ */
+z.common.entities.Project.prototype.advance = function (investment){
   console.log('advancing project');
   console.log(this.investment.peekAll());
-  this.state = z.common.protocol.state.PASS;
+
+  z.common.entities.Project.prototype.invest(investment);
+  var cost = this.getRemainingCost();
+  var done = !goog.object.some(cost, goog.function.identity);
+  var effects = [];
+  if(done){
+
+    this._setModified();
+  }
+  return effects;
+};
+
+z.common.entities.Project.prototype._setModified = function(){
+  if(this.state === z.common.protocol.state.PASS){
+    this.state = z.common.protocol.state.MODIFIED;
+  }
 };
 
 /**

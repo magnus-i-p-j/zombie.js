@@ -19,7 +19,7 @@ z.common.rulebook.meta;
  *   description: string,
  *   prerequisites: z.common.rulebook.prerequisites,
  *   cost: z.common.rulebook.cost,
- *   effect: z.common.rulebook.effect
+ *   effect: Array.<z.common.rulebook.effect>
  * }}
  */
 z.common.rulebook.project;
@@ -41,9 +41,10 @@ z.common.rulebook.cost;
 
 /**
  * @typedef {{
- *   terrain: string
+ *   effect: string
  * }}
  */
+//TODO: DO SOMETHING HERE! DAGNABBIT!
 z.common.rulebook.effect;
 
 /**

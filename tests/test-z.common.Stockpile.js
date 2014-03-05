@@ -81,5 +81,23 @@ TestCase("test z.common.Stockpile", {
     var actual = this.stockpile.take('scrap', 3);
     assertSame(3, actual);
     assertSame(0, this.stockpile.peek('scrap'));
+  },
+  'test should say that stockpile is empty': function () {
+    assertTrue(this.stockpile.isEmpty());
+  },
+  'test should say that stockpile is not empty': function () {
+    this.stockpile.add('scrap', 3);
+    assertFalse(this.stockpile.isEmpty());
+  },
+  'test should compute ratio for a resource': function () {
+    this.stockpile.add('scrap', 3);
+    var actual = this.stockpile.ratio('scrap', 4);
+    assertEquals(3 / 4, actual);
+  },
+  'test should compute smallest ratio for all resources': function () {
+    this.stockpile.add('scrap', 3);
+    this.stockpile.add('wood', 5);
+    var actual = this.stockpile.ratioAll({'scrap': 4, 'wood': 20});
+    assertEquals(5 / 20, actual);
   }
 });

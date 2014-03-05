@@ -72,6 +72,25 @@ z.common.Stockpile.prototype.take = function (name, amount) {
   return this[name].take(amount);
 };
 
+z.common.Stockpile.prototype.isEmpty = function () {
+  return !goog.object.getAnyKey(this.peekAll());
+};
+
+z.common.Stockpile.prototype.ratioAll = function(values){
+  var ratio = 1;
+  goog.object.forEach(values, function (amount, name) {
+    ratio =  Math.min(this.ratio(name, amount), ratio);
+  }, this);
+  return ratio;
+};
+
+z.common.Stockpile.prototype.ratio = function(name, amount){
+  if (!this[name]) {
+    this[name] = new z.common.StockpiledResource();
+  }
+  return this[name].peek() / amount;
+};
+
 /**
  * @constructor
  */

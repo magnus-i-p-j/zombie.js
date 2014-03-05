@@ -1,7 +1,6 @@
 test:
   - "*.js"
 exclude:
-  - "mugd.editor/*.js"
   - "z.service.mapRender.MapRenderService/*.js"
 load:
   - ../libs/knockout-2.1.0.debug.js

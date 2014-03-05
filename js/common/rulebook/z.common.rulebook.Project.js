@@ -42,6 +42,9 @@ z.common.rulebook.Project = function (project) {
         this.cost[name] = item['amount'];
       }, this
   );
+
+  this.effects = this._project.description;
+
 };
 
 /**
