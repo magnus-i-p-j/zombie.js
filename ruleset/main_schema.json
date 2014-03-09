@@ -143,11 +143,6 @@
                       "title": "Magnitude",
                       "description": "The amount gained",
                       "type": "number"
-                    },
-                    "variation": {
-                      "title": "Variation",
-                      "description": "The variation in amount gained",
-                      "type": "number"
                     }
                   }
                 },

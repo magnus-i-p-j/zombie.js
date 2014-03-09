@@ -78,8 +78,7 @@
       "effect_stockpile": [
         {
           "type": "ammo",
-          "magnitude": 5,
-          "variation": 2
+          "magnitude": 5
         }
       ],
       "effect_terrain": "fence"

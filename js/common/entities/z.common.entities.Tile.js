@@ -57,6 +57,7 @@ z.common.entities.Tile.prototype._update = function (data, meta) {
   var updated = this.terrain != tileData.type || this.meta.type == meta.type;
 
   this.terrain = tileData.terrain;
+  Object.freeze(this.terrain);
   this.meta = meta;
 
   return updated;

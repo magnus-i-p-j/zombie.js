@@ -19,7 +19,6 @@ z.common.rulebook.meta;
  *   description: string,
  *   prerequisites: z.common.rulebook.prerequisites,
  *   cost: z.common.rulebook.cost,
- *   effect: Array.<z.common.rulebook.effect>
  * }}
  */
 z.common.rulebook.project;
@@ -41,11 +40,33 @@ z.common.rulebook.cost;
 
 /**
  * @typedef {{
- *   effect: string
+ *   type: string,
+ *   args: z.common.rulebook.effect_stockpile|z.common.rulebook.effect_terrain
  * }}
  */
-//TODO: DO SOMETHING HERE! DAGNABBIT!
 z.common.rulebook.effect;
+
+/**
+ * @typedef {{
+ *   type: string,
+ *   change: *
+ * }}
+ */
+z.common.rulebook.result;
+
+
+/**
+ * @typedef {Array.<{
+ *   type: string,
+ *   magnitude: number
+ * }>}
+ */
+z.common.rulebook.effect_stockpile;
+
+/**
+ * @typedef {string}
+ */
+z.common.rulebook.effect_terrain;
 
 /**
  * @enum {string}
@@ -55,39 +76,28 @@ z.common.rulebook.category = {
   TERRAIN: 'terrain',
   ZONE: 'zone',
   ACTOR: 'actor',
-  STOCKPILE:'stockpile',
-  STARTING_RESOURCES:'starting_resources',
-  ACTION:'action',
-  BOUNDS:'bounds',
-  TILE:'tile'
+  STOCKPILE: 'stockpile',
+  STARTING_RESOURCES: 'starting_resources',
+  ACTION: 'action',
+  BOUNDS: 'bounds',
+  TILE: 'tile'
 };
 
 //noinspection JSUnusedLocalSymbols
 z.common.rulebook.logic.prerequisites = {
-  'terrain':function (condition, target) {
-    if(!(target instanceof z.common.entities.Tile)){
+  'terrain': function (condition, target) {
+    if (!(target instanceof z.common.entities.Tile)) {
       return false;
     }
 
     var fulfilled = false;
-    goog.object.forEach(target.terrain, function(terrain){
+    goog.object.forEach(target.terrain, function (terrain) {
       fulfilled = fulfilled || goog.array.contains(condition, terrain);
     });
 
     return fulfilled;
   },
-  'blocked': function(condition, target){
+  'blocked': function (condition, target) {
     return false;
   }
-};
-
-/**
- * @param {!z.common.entities.Entity} entity
- * @return number
- */
-z.common.rulebook.logic.actionRange = function(entity){
-  if(entity.vision){
-    return entity.vision + 5;
-  }
-  return 0;
 };

@@ -78,7 +78,7 @@ z.service.world.World.prototype.createPlayerActor = function (actorCallback) {
   var actor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(actorData);
   this._playerActors[actor.guid] = actor;
   this._actorCallbacks[actor.guid] = actorCallback;
-  return  z.common.data.ActorData.fromEntity( actor);
+  return  z.common.data.ActorData.fromEntity(actor);
 };
 
 /**
@@ -88,9 +88,9 @@ z.service.world.World.prototype.actorEndTurn = function (endTurnData) {
   // TODO: store plan
   var actor = this._entityRepository.get(endTurnData.actorId);
   goog.array.forEach(endTurnData.projects,
-      function (projectData) {
-        this.updateProject(projectData, actor);
-      }, this
+    function (projectData) {
+      this.updateProject(projectData, actor);
+    }, this
   );
 
   this.endTurn();
@@ -119,25 +119,25 @@ z.service.world.World.prototype.endTurn = function () {
   for (var actorGuid in this._playerActors) {
     if (this._playerActors.hasOwnProperty(actorGuid)) {
       var tiles = this._entityRepository.map(
-          function (entity) {
-            var tile = /** @type {!z.common.entities.Tile} */ entity;
-            return z.common.data.TileData.fromEntity(tile);
-          },
-          function (entity) {
-            return entity.meta.category === z.common.rulebook.category.TILE;
-          }
+        function (entity) {
+          var tile = /** @type {!z.common.entities.Tile} */ entity;
+          return z.common.data.TileData.fromEntity(tile);
+        },
+        function (entity) {
+          return entity.meta.category === z.common.rulebook.category.TILE;
+        }
       );
       var visibleProjects = this._entityRepository.map(
-          function (item) {
-            var project = /** @type {!z.common.entities.Project} */ item;
-            return z.common.data.ProjectData.fromEntity(project);
-          },
-          function (entity) {
-            if (entity instanceof z.common.entities.Project) {
-              return true;
-            }
-            return false;
-          });
+        function (item) {
+          var project = /** @type {!z.common.entities.Project} */ item;
+          return z.common.data.ProjectData.fromEntity(project);
+        },
+        function (entity) {
+          if (entity instanceof z.common.entities.Project) {
+            return true;
+          }
+          return false;
+        });
 
       var entities = [];
       goog.array.extend(entities, tiles, visibleProjects);
@@ -168,15 +168,17 @@ z.service.world.World.prototype._advanceProjects = function () {
   /**
    * @type {!Array.<!z.common.entities.Project>}
    */
-  var projects = this._entityRepository.filter(function(entity){
+  var projects = this._entityRepository.filter(function (entity) {
     return entity instanceof z.common.entities.Project;
   });
 
-  projects.sort(function(lhs, rhs){
+  projects.sort(function (lhs, rhs) {
     return lhs.priority - rhs.priority;
   });
 
-  goog.array.forEach(projects, function(project){
+  var results = {};
+
+  goog.array.forEach(projects, function (project) {
     project.state = z.common.protocol.state.PASS;
     /**
      * @type {!z.common.entities.Actor}
@@ -187,8 +189,49 @@ z.service.world.World.prototype._advanceProjects = function () {
     var cashier = new z.common.Cashier(stockpile);
     var investment = cashier.withdraw(cost);
     var effects = project.advance(investment);
-  });
+    results[project.guid] = this._applyEffects(effects, project);
+  }, this);
 
+  return results;
+};
+
+/**
+ * @param {Array.<z.common.rulebook.effect>} effects
+ * @param {z.common.entities.Project} project
+ * @returns {Array.<z.common.rulebook.result>}
+ * @private
+ */
+z.service.world.World.prototype._applyEffects = function (effects, project) {
+
+  var results = goog.array.map(
+    effects,
+    function (effect) {
+      return this['_apply_' + effect['type']](effect['args'], project);
+    },
+    this
+  );
+  return results;
+};
+
+/**
+ *
+ * @param {z.common.rulebook.effect_stockpile} effect
+ * @param {z.common.entities.Project} project
+ */
+z.service.world.World.prototype['_apply_effect_stockpile'] = function (effect, project) {
+};
+
+/**
+ * @param {z.common.rulebook.effect_terrain} effect
+ * @param {z.common.entities.Project} project
+ */
+z.service.world.World.prototype['_apply_effect_terrain'] = function (effect, project) {
+  var tile = project.tile;
+  var tileData = z.common.data.TileData.fromEntity(tile);
+  var effectMeta = this.rulebook.getMetaClass(effect);
+  tileData.terrain = tileData.terrain.clone();
+  tileData.terrain[effectMeta.zone] = effect;
+  this._repository.put(tileData);
 };
 
 /**
@@ -200,16 +243,16 @@ z.service.world.World.prototype._expandWorld = function () {
   var y_min = -10;
   var y_max = 10;
   this._entityRepository.map(
-      function (entity) {
-        var range = z.service.world.World.actionRange(entity);
-        x_min = Math.min(x_min, entity.position.x - range);
-        x_max = Math.max(x_max, entity.position.x + range);
-        y_min = Math.min(y_min, entity.position.y - range);
-        y_max = Math.max(y_max, entity.position.y + range);
-      },
-      function (entity) {
-        return !goog.isNull(entity.position);
-      }
+    function (entity) {
+      var range = z.service.world.World.actionRange(entity);
+      x_min = Math.min(x_min, entity.position.x - range);
+      x_max = Math.max(x_max, entity.position.x + range);
+      y_min = Math.min(y_min, entity.position.y - range);
+      y_max = Math.max(y_max, entity.position.y + range);
+    },
+    function (entity) {
+      return !goog.isNull(entity.position);
+    }
   );
   for (var y = y_min; y <= y_max; y++) {
     for (var x = x_min; x <= x_max; x++) {
