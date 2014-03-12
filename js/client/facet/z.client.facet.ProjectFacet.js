@@ -13,6 +13,6 @@ z.client.facet.ProjectFacet = function () {
 
 goog.inherits(z.client.facet.ProjectFacet, z.client.facet.EntityFacet);
 
-z.client.facet.ProjectFacet.prototype.doEntityModified = function(event){
-  goog.base(this,'doEntityModified', event);
+z.client.facet.EntityFacet.prototype._update = function () {
+  ;
 };

@@ -43,7 +43,6 @@ goog.inherits(z.client.facet.TileFacet, z.client.facet.EntityFacet);
 z.client.facet.TileFacet.prototype.getTerrainMeta = function () {
   var metas = [];
   var obj = this['terrain']();
-  console.log('z.client.facet.TileFacet.prototype.getTerrainMeta', obj);
   goog.object.forEach(obj, function (terrain) {
     if (terrain) {
       metas.push(this._rulebook.getMetaClass(terrain));
@@ -55,11 +54,7 @@ z.client.facet.TileFacet.prototype.getTerrainMeta = function () {
 /**
  * @param {z.common.entities.Tile} tile
  */
-z.client.facet.TileFacet.prototype.update = function (tile) {
-  this.setEntity(/** @type {!z.common.entities.Entity} */(tile));
-  if (tile.position.x === this.x && tile.position.y === this.y) {
-    this['terrain'](tile.terrain);
-  }else {
-    throw ['Wrong tile, expected (',  this.x, '; ', this.y, '), got (', tile.position.x, '; ', tile.position.y, ')'].join('');
-  }
+z.client.facet.TileFacet.prototype._update = function () {
+  var tile = /** @type {z.common.entities.Tile} */ this.entity;
+  this['terrain'](tile.terrain);
 };

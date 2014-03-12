@@ -76,6 +76,6 @@ z.client.facet.MapFacet.prototype.doEntityCreated = function (event) {
      */
     var tile = /** @type {!z.common.entities.Tile} */ ( event.entity );
     var facet = this.getTileFacet(tile.position.x, tile.position.y);
-    facet.update(tile);
+    facet.setEntity(tile);
   }
 };

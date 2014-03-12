@@ -47,7 +47,6 @@ z.client.facet.EntityFacet = function () {
 goog.inherits(z.client.facet.EntityFacet, z.client.facet.Facet);
 
 /**
- * @protected
  * @param {!z.common.entities.Entity} entity
  */
 z.client.facet.EntityFacet.prototype.setEntity = function (entity) {
@@ -56,6 +55,7 @@ z.client.facet.EntityFacet.prototype.setEntity = function (entity) {
     this['guid'] = this.entity.guid;
     this.meta(entity.meta);
     this.eventHandler.listen(entity, z.common.events.EventType.ENTITY_MODIFIED, this.doEntityModified);
+    this._update(entity);
   } else {
     throw ['Wrong entity, expected (', this.entity.guid , '), got (', entity.guid, ')'].join('');
   }
@@ -64,6 +64,13 @@ z.client.facet.EntityFacet.prototype.setEntity = function (entity) {
 /**
  * @param {z.common.events.EntityModified} event
  */
-z.client.facet.EntityFacet.prototype.doEntityModified = function(event){
-   this.meta(event.entity.meta);
+z.client.facet.EntityFacet.prototype.doEntityModified = function (event) {
+  this.setEntity(event.entity);
+};
+
+/**
+ * @protected
+ */
+z.client.facet.EntityFacet.prototype._update = function () {
+  throw {'name': 'NotImplementedException', 'message': '_setEntity'};
 };

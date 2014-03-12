@@ -228,10 +228,10 @@ z.service.world.World.prototype['_apply_effect_stockpile'] = function (effect, p
 z.service.world.World.prototype['_apply_effect_terrain'] = function (effect, project) {
   var tile = project.tile;
   var tileData = z.common.data.TileData.fromEntity(tile);
-  var effectMeta = this.rulebook.getMetaClass(effect);
-  tileData.terrain = tileData.terrain.clone();
+  var effectMeta = this._rulebook.getMetaClass(effect);
+  tileData.terrain =  goog.object.unsafeClone(tileData.terrain);
   tileData.terrain[effectMeta.zone] = effect;
-  this._repository.put(tileData);
+  this._entityRepository.put(tileData);
 };
 
 /**

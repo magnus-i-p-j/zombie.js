@@ -1,6 +1,7 @@
 goog.provide('z.common.entities.Tile');
 goog.require('z.common.entities.Entity');
 goog.require('goog.math.Coordinate');
+goog.require('goog.object');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -54,7 +55,18 @@ z.common.entities.Tile.prototype._update = function (data, meta) {
   /**
    * @type {boolean}
    */
-  var updated = this.terrain != tileData.type || this.meta.type == meta.type;
+  var updated = !goog.object.every(
+    this.terrain,
+    function(value, key){
+      return tileData.terrain[key] === value;
+    },
+    this
+  );
+
+  if(!updated){
+    updated = goog.object.getCount(this.terrain) !==
+      goog.object.getCount(tileData.terrain);
+  }
 
   this.terrain = tileData.terrain;
   Object.freeze(this.terrain);

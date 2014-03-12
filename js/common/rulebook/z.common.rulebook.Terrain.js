@@ -29,4 +29,9 @@ z.common.rulebook.Terrain = function(terrain){
    */
   this.description = this._terrain.description;
 
+  /**
+   * @type {string}
+   */
+  this.zone = this._terrain.zone;
+
 };

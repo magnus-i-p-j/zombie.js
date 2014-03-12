@@ -79,9 +79,6 @@ z.common.entities.Project.prototype.invest = function (investment) {
  * @return {Array.<Object>}
  */
 z.common.entities.Project.prototype.advance = function (investment) {
-  console.log('advancing project');
-  console.log(this.investment.peekAll());
-
   this.invest(investment);
   var cost = this.getRemainingCost();
   var done = !goog.object.some(cost, goog.functions.identity);
@@ -101,8 +98,7 @@ z.common.entities.Project.prototype.advance = function (investment) {
     this._setModified();
   }
   return effects;
-}
-;
+};
 
 z.common.entities.Project.prototype._setModified = function () {
   if (this.state === z.common.protocol.state.PASS) {

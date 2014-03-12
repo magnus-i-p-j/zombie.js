@@ -43,7 +43,7 @@ z.common.rulebook.Project = function (project) {
       }, this
   );
 
-  this.effects = this._project.description;
+  this.effects = this._project.effects;
 
 };
 

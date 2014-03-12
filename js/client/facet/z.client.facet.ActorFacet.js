@@ -13,16 +13,8 @@ z.client.facet.ActorFacet = function () {
 
 goog.inherits(z.client.facet.ActorFacet, z.client.facet.EntityFacet);
 
-/**
- * @deprecated
- * @param {z.common.entities.Actor} actor
- */
-z.client.facet.ActorFacet.prototype.update = function (actor) {
+z.client.facet.ActorFacet.prototype._update = function () {
+  var actor = /** @type {z.common.entities.Actor} */ this.entity;
+  this['resources'].update(actor.stockpile);
 };
 
-z.client.facet.ActorFacet.prototype.doEntityModified = function(event){
-  console.log('actor modified');
-  goog.base(this,'doEntityModified', event);
-  this['resources'].update(event.entity.stockpile);
-  console.log('actor modified');
-};
