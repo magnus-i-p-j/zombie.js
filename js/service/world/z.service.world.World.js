@@ -219,6 +219,10 @@ z.service.world.World.prototype._applyEffects = function (effects, project) {
  * @param {z.common.entities.Project} project
  */
 z.service.world.World.prototype['_apply_effect_stockpile'] = function (effect, project) {
+  var owner = project.owner;
+  goog.array.forEach(effect, function (resource) {
+    owner.stockpile.add(resource.type, resource.magnitude);
+  }, this);
 };
 
 /**
@@ -229,7 +233,7 @@ z.service.world.World.prototype['_apply_effect_terrain'] = function (effect, pro
   var tile = project.tile;
   var tileData = z.common.data.TileData.fromEntity(tile);
   var effectMeta = this._rulebook.getMetaClass(effect);
-  tileData.terrain =  goog.object.unsafeClone(tileData.terrain);
+  tileData.terrain = goog.object.unsafeClone(tileData.terrain);
   tileData.terrain[effectMeta.zone] = effect;
   this._entityRepository.put(tileData);
 };
