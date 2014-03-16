@@ -115,3 +115,9 @@ z.client.facet.ContextMenuFacet.prototype.hide = function () {
   this.visible(false);
   this.position(null);
 };
+
+z.client.facet.ContextMenuFacet.prototype['executeAction'] = function (action) {
+  this.hide();
+  action.execute();
+};
+

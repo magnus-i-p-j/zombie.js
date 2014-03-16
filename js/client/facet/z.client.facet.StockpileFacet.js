@@ -4,6 +4,7 @@ goog.require('z.client.facet.Facet');
 goog.require('z.common.Stockpile');
 goog.require('goog.object');
 goog.require('goog.array');
+goog.require('goog.string');
 
 /**
  * @constructor
@@ -32,9 +33,10 @@ z.client.facet.StockpileFacet.prototype.update = function (stockpile) {
 
   goog.object.forEach(resources, function (amount, resource) {
     this['resources'].push(
-    {
-      'amount': ko.observable(amount),
-      'type': resource
-    });
+      {
+        'amount': ko.observable(amount),
+        'type': resource,
+        'name': goog.string.toTitleCase(resource)
+      });
   }, this);
 };
