@@ -66,10 +66,13 @@ z.common.entities.Project.prototype.getRemainingCost = function () {
   return this.investment.diffAll(this.meta.cost);
 };
 
+z.common.entities.Project.prototype.deriveValues = function () {
+  this.completion = this.investment.ratioAll(this.meta.cost);
+};
 z.common.entities.Project.prototype.invest = function (investment) {
   var previous = this.completion;
   this.investment.addAll(investment);
-  this.completion = this.investment.ratioAll(this.meta.cost);
+  this.deriveValues();
   if (previous !== this.completion) {
     this._setModified();
   }
@@ -110,6 +113,7 @@ z.common.entities.Project.prototype._setModified = function () {
  * @inheritDoc
  */
 z.common.entities.Project.prototype._update = function (entityData, meta, owner) {
+  console.log(entityData);
   if (!(entityData instanceof z.common.data.ProjectData)) {
     throw {'name': 'InvalidDataException', 'message': 'not a z.common.data.ProjectData'};
   }
@@ -137,6 +141,7 @@ z.common.entities.Project.prototype._update = function (entityData, meta, owner)
     this.investment.addAll(projectData.investment);
     updated = true;
   }
+  this.deriveValues();
   return updated;
 };
 
