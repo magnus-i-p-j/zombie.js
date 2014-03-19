@@ -115,7 +115,7 @@ z.service.world.World.prototype.updateProject = function (projectData, actor) {
  * @private
  */
 z.service.world.World.prototype.endTurn = function () {
-  this.tick();
+  var killed = this.tick();
   for (var actorGuid in this._playerActors) {
     if (this._playerActors.hasOwnProperty(actorGuid)) {
       var tiles = this._entityRepository.map(
@@ -145,19 +145,40 @@ z.service.world.World.prototype.endTurn = function () {
       /**
        * @type {!z.common.data.StartTurnData}
        */
-      var startTurn = new z.common.data.StartTurnData(actorGuid, entities, this._turn);
+      var startTurn = new z.common.data.StartTurnData(actorGuid, entities, killed, this._turn);
       this._actorCallbacks[actorGuid](startTurn);
     }
   }
 };
 
 z.service.world.World.prototype.tick = function () {
+  var killed = this._setEntityState();
   this._expandWorld();
   //Calculate zombies
   //Zombie attack
   this._advanceProjects();
   this._turn += 1;
   //Special events
+
+  return killed;
+};
+
+/**
+ * @returns {Array.<!mugd.utils.guid>}
+ * @private
+ */
+z.service.world.World.prototype._setEntityState = function () {
+  var killed = [];
+  this._entityRepository.map(
+    function (entity){
+      if(entity.state === z.common.protocol.MODIFIED){
+        entity.state = z.common.protocol.PASS;
+      }else if(entity.state === z.common.protocol.KILL){
+        entity.state = z.common.protocol.DEAD;
+        killed.push(entity.guid);
+      }
+  });
+  return killed;
 };
 
 /**

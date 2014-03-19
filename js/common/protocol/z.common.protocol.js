@@ -66,9 +66,8 @@ z.common.protocol.type;
  * @enum {string}
  */
 z.common.protocol.state = {
-  NEW: 'new',
-  DELETE: 'delete',
   MODIFIED: 'modified',
-  PASS: 'pass'
+  PASS: 'pass',
+  KILL: 'kill',
+  DEAD: 'dead'
 };
-

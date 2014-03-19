@@ -19,15 +19,15 @@ z.client.facet.ProjectFacet = function () {
 
 goog.inherits(z.client.facet.ProjectFacet, z.client.facet.EntityFacet);
 
-z.client.facet.EntityFacet.prototype._update = function () {
+z.client.facet.ProjectFacet.prototype._update = function () {
   var project = /** @type {z.common.entities.Project} */ this.entity;
-  this['remove'](project.state === z.common.protocol.state.DELETE);
+  this['remove'](project.state === z.common.protocol.state.KILL);
   this['completion'](project.completion);
 };
 
-z.client.facet.EntityFacet.prototype.handleRemoveSubscribe = function (value) {
+z.client.facet.ProjectFacet.prototype.handleRemoveSubscribe = function (value) {
   if (value) {
-    this.entity.state = z.common.protocol.state.DELETE;
+    this.entity.state = z.common.protocol.state.KILL;
   } else {
     this.entity.state = z.common.protocol.state.MODIFIED;
   }

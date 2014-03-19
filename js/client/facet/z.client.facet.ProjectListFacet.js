@@ -28,6 +28,17 @@ z.client.facet.ProjectListFacet.prototype.setParentEventTarget = function (paren
   goog.base(this, 'setParentEventTarget', parent);
   this.eventHandler.listen(parent, z.common.events.EventType.ENTITY_CREATED, this.doEntityCreated);
   this.eventHandler.listen(parent, z.common.events.EventType.ENTITY_MODIFIED, this.doEntityModified);
+  this.eventHandler.listen(parent, z.client.events.EventType.START_TURN, this.doStartTurn);
+};
+
+/**
+ * @param {!z.common.events.EntityCreated} e
+ */
+z.client.facet.ProjectListFacet.prototype.doStartTurn = function (e) {
+  this['projects'].remove(function(project){
+    console.log(project['remove']());
+    return project['remove']();
+  });
 };
 
 /**
