@@ -74,7 +74,7 @@ z.service.world.World.prototype._logger = goog.debug.Logger.getLogger('z.service
  * @return {!z.common.data.ActorData}
  */
 z.service.world.World.prototype.createPlayerActor = function (actorCallback) {
-  var actorData = new z.common.data.ActorData(null, 'actor_player', this._rulebook.gameStartingData.startingResources);
+  var actorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED,'actor_player', this._rulebook.gameStartingData.startingResources);
   var actor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(actorData);
   this._playerActors[actor.guid] = actor;
   this._actorCallbacks[actor.guid] = actorCallback;
@@ -172,9 +172,9 @@ z.service.world.World.prototype._setEntityState = function () {
   this._entityRepository.map(
     function (entity){
       if(entity.state === z.common.protocol.MODIFIED){
-        entity.state = z.common.protocol.PASS;
+        entity.setState(z.common.protocol.PASS);
       }else if(entity.state === z.common.protocol.KILL){
-        entity.state = z.common.protocol.DEAD;
+        entity.setState(z.common.protocol.DEAD);
         killed.push(entity.guid);
       }
   });

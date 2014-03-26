@@ -34,9 +34,36 @@ z.common.entities.Entity = function (services) {
    */
   this.owner = /** @type {!z.common.entities.Actor} */ services.get('owner');
 
+  /**
+   * @private
+   * @type {!z.common.protocol.state}
+   */
+  if(!entityData.state){
+    throw {};
+  }
+  this._state = entityData.state;
 };
 
 goog.inherits(z.common.entities.Entity, goog.events.EventTarget);
+
+/**
+ * @return {!z.common.protocol.state} state
+ */
+z.common.entities.Entity.prototype.getState = function () {
+  return this._state;
+};
+
+/**
+ * @param {!z.common.protocol.state} state
+ */
+z.common.entities.Entity.prototype.setState = function (state) {
+  if (this._state !== state && this._state !== z.common.protocol.state.DEAD) {
+    this._state = state;
+    var event = new z.common.events.EntityModified(this);
+    this.dispatchEvent(event);
+  }
+};
+
 
 /**
  * @param {!z.common.data.EntityData} entityData
@@ -45,7 +72,14 @@ goog.inherits(z.common.entities.Entity, goog.events.EventTarget);
  * @return {boolean}
  */
 z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
-  var updated = this._update(entityData, meta, owner);
+  var updated = false;
+  var state = entityData.state;
+  if (this._state !== state) {
+    this._state = state;
+    updated = true;
+  }
+  updated = this._update(entityData, meta, owner) || updated;
+
   if (updated) {
     var event = new z.common.events.EntityModified(this);
     this.dispatchEvent(event);

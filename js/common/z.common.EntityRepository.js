@@ -79,6 +79,7 @@ z.common.EntityRepository.prototype.get = function (guid) {
 z.common.EntityRepository.prototype.remove = function (guid) {
   var entity = this.get(guid);
   if (goog.isDefAndNotNull(entity)) {
+    entity.setState(z.common.protocol.state.DEAD);
     delete this._repo[guid];
   }
 };

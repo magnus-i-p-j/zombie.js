@@ -60,9 +60,16 @@ z.client.WorldProxy.prototype.firstTurn = function () {
  * @param {!z.common.data.StartTurnData} startTurnData
  */
 z.client.WorldProxy.prototype.doStartTurn = function (startTurnData) {
-  //TODO: Continue with kill list.
   this._turn = startTurnData.turn;
   goog.array.forEach(startTurnData.entities, this._repository.put, this._repository);
+
+  goog.array.forEach(startTurnData.killed, function(guid){
+    var entity = this.get(guid);
+    if(!goog.isNull(entity)){
+      entity.setState(z.common.protocol.state.DEAD);
+    }
+  }, this._repository);
+
   var e = new z.client.events.StartTurn({
         turn: this._turn
       }

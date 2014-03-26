@@ -20,3 +20,8 @@ z.common.data.EntityData.prototype.type;
  * @type {mugd.utils.guid}
  */
 z.common.data.EntityData.prototype.ownerId;
+
+/**
+ * @type {!z.common.protocol.state}
+ */
+z.common.data.EntityData.prototype.state;

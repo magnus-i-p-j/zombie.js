@@ -30,11 +30,6 @@ z.common.entities.Project = function (services) {
   this.category = this.meta.category;
 
   /**
-   * @type {!z.common.protocol.state}
-   */
-  this.state = projectData.state;
-
-  /**
    * @type {number}
    */
   this.priority = projectData.priority;
@@ -126,10 +121,7 @@ z.common.entities.Project.prototype._update = function (entityData, meta, owner)
     this.priority = projectData.priority;
     updated = true;
   }
-  if (this.state !== projectData.state) {
-    this.state = projectData.state;
-    updated = true;
-  }
+
   if (goog.isDefAndNotNull(owner) && this.owner !== owner) {
     this.owner = owner;
     updated = true;

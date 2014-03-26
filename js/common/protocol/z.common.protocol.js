@@ -33,6 +33,7 @@ z.common.protocol.tile;
  * @typedef {{
  *  actorId: mugd.utils.guid,
  *  type: string,
+ *  state: !z.common.protocol.state,
  *  stockpile: !Object.<!z.common.protocol.type,number>
  * }}
  */
