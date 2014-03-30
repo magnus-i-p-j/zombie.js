@@ -77,23 +77,24 @@ z.common.entities.Project.prototype.invest = function (investment) {
  * @return {Array.<Object>}
  */
 z.common.entities.Project.prototype.advance = function (investment) {
+  var wasDone = !goog.object.some(this.getRemainingCost(), goog.functions.identity);
   this.invest(investment);
-  var cost = this.getRemainingCost();
-  var done = !goog.object.some(cost, goog.functions.identity);
   var effects = [];
-  if (done) {
-    goog.object.forEach(
-      this.meta.effects,
-      function (effect, key) {
-        var tmp = {};
-        tmp['type'] = key;
-        tmp['args'] = goog.object.unsafeClone(effect);
-        effects.push(tmp);
-      },
-      this
-    );
-
-    this._setModified();
+  if (wasDone) {
+    var done = !goog.object.some(this.getRemainingCost(), goog.functions.identity);
+    if (done) {
+      goog.object.forEach(
+        this.meta.effects,
+        function (effect, key) {
+          var tmp = {};
+          tmp['type'] = key;
+          tmp['args'] = goog.object.unsafeClone(effect);
+          effects.push(tmp);
+        },
+        this
+      );
+      this._setModified();
+    }
   }
   return effects;
 };
