@@ -49,7 +49,7 @@ z.service.world.World = function (services) {
    * @private
    */
   this._playerActors = {};
-  var worldActorData = new z.common.data.ActorData(null, 'actor_world', {});
+  var worldActorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_world', {});
   /**
    * @type {!z.common.entities.Actor}
    * @private
@@ -74,7 +74,7 @@ z.service.world.World.prototype._logger = goog.debug.Logger.getLogger('z.service
  * @return {!z.common.data.ActorData}
  */
 z.service.world.World.prototype.createPlayerActor = function (actorCallback) {
-  var actorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED,'actor_player', this._rulebook.gameStartingData.startingResources);
+  var actorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_player', this._rulebook.gameStartingData.startingResources);
   var actor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(actorData);
   this._playerActors[actor.guid] = actor;
   this._actorCallbacks[actor.guid] = actorCallback;
@@ -115,6 +115,8 @@ z.service.world.World.prototype.updateProject = function (projectData, actor) {
  * @private
  */
 z.service.world.World.prototype.endTurn = function () {
+  console.log('World.endTurn begins');
+  this._logger.info('World.endTurn begins');
   var killed = this.tick();
   for (var actorGuid in this._playerActors) {
     if (this._playerActors.hasOwnProperty(actorGuid)) {
@@ -149,6 +151,8 @@ z.service.world.World.prototype.endTurn = function () {
       this._actorCallbacks[actorGuid](startTurn);
     }
   }
+  this._logger.info('World.endTurn ends');
+  console.log('World.endTurn ends');
 };
 
 z.service.world.World.prototype.tick = function () {
@@ -170,14 +174,14 @@ z.service.world.World.prototype.tick = function () {
 z.service.world.World.prototype._setEntityState = function () {
   var killed = [];
   this._entityRepository.map(
-    function (entity){
-      if(entity.state === z.common.protocol.MODIFIED){
-        entity.setState(z.common.protocol.PASS);
-      }else if(entity.state === z.common.protocol.KILL){
-        entity.setState(z.common.protocol.DEAD);
+    function (entity) {
+      if (entity.state === z.common.protocol.state.MODIFIED) {
+        entity.setState(z.common.protocol.state.PASS);
+      } else if (entity.state === z.common.protocol.state.KILL) {
+        entity.setState(z.common.protocol.state.DEAD);
         killed.push(entity.guid);
       }
-  });
+    });
   return killed;
 };
 
@@ -190,7 +194,10 @@ z.service.world.World.prototype._advanceProjects = function () {
    * @type {!Array.<!z.common.entities.Project>}
    */
   var projects = this._entityRepository.filter(function (entity) {
-    return entity instanceof z.common.entities.Project;
+    if (entity instanceof z.common.entities.Project && entity.getState() !== z.common.protocol.state.DEAD) {
+      return true;
+    }
+    return false
   });
 
   projects.sort(function (lhs, rhs) {
@@ -200,7 +207,6 @@ z.service.world.World.prototype._advanceProjects = function () {
   var results = {};
 
   goog.array.forEach(projects, function (project) {
-    project.state = z.common.protocol.state.PASS;
     /**
      * @type {!z.common.entities.Actor}
      */
@@ -223,7 +229,6 @@ z.service.world.World.prototype._advanceProjects = function () {
  * @private
  */
 z.service.world.World.prototype._applyEffects = function (effects, project) {
-
   var results = goog.array.map(
     effects,
     function (effect) {
@@ -242,7 +247,7 @@ z.service.world.World.prototype._applyEffects = function (effects, project) {
 z.service.world.World.prototype['_apply_effect_stockpile'] = function (effect, project) {
   var owner = project.owner;
   goog.array.forEach(effect, function (resource) {
-    owner.stockpile.add(resource.type, resource.magnitude);
+    owner.stockpile.add(resource['type'], resource['magnitude']);
   }, this);
 };
 
@@ -254,7 +259,7 @@ z.service.world.World.prototype['_apply_effect_terrain'] = function (effect, pro
   var tile = project.tile;
   var tileData = z.common.data.TileData.fromEntity(tile);
   var effectMeta = this._rulebook.getMetaClass(effect);
-  tileData.terrain = goog.object.unsafeClone(tileData.terrain);
+  tileData.terrain = /** @type {z.common.terrain} */ goog.object.unsafeClone(tileData.terrain);
   tileData.terrain[effectMeta.zone] = effect;
   this._entityRepository.put(tileData);
 };

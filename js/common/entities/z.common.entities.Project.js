@@ -108,7 +108,6 @@ z.common.entities.Project.prototype._setModified = function () {
  * @inheritDoc
  */
 z.common.entities.Project.prototype._update = function (entityData, meta, owner) {
-  console.log(entityData);
   if (!(entityData instanceof z.common.data.ProjectData)) {
     throw {'name': 'InvalidDataException', 'message': 'not a z.common.data.ProjectData'};
   }

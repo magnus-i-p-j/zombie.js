@@ -30,14 +30,14 @@ z.common.data.ProjectData = function (guid, ownerId, type, state, priority, tile
  * @return {!z.common.data.ProjectData}
  */
 z.common.data.ProjectData.fromProtocol = function (protocol) {
-  var guid         = protocol['projectId'];
-  var ownerId      = protocol['ownerId'];
-  var resources    = protocol['resources'];
-  var investment   = protocol['investment'];
-  var priority     = protocol['priority'];
-  var state        = protocol['state'];
-  var tileId       = protocol['tileId'];
-  var type         = protocol['type'];
+  var guid = protocol['projectId'];
+  var ownerId = protocol['ownerId'];
+  var resources = protocol['resources'];
+  var investment = protocol['investment'];
+  var priority = protocol['priority'];
+  var state = protocol['state'];
+  var tileId = protocol['tileId'];
+  var type = protocol['type'];
   return new z.common.data.ProjectData(guid, ownerId, type, state, priority, tileId, resources, investment);
 };
 
@@ -46,14 +46,14 @@ z.common.data.ProjectData.fromProtocol = function (protocol) {
  * @return {!z.common.data.ProjectData}
  */
 z.common.data.ProjectData.fromEntity = function (project) {
-  var guid      = project.guid;
-  var ownerId   = project.owner.guid;
-  var type      = project.meta.type;
-  var state     = project.getState();
-  var priority  = project.priority;
-  var tileId    = project.tile.guid;
+  var guid = project.guid;
+  var ownerId = project.owner.guid;
+  var type = project.meta.type;
+  var state = project.getState();
+  var priority = project.priority;
+  var tileId = project.tile.guid;
   var resources = project.resources;
-  var investment= project.investment.peekAll();
+  var investment = project.investment.peekAll();
   return new z.common.data.ProjectData(guid, ownerId, type, state, priority, tileId, resources, investment);
 };
 
@@ -61,5 +61,14 @@ z.common.data.ProjectData.fromEntity = function (project) {
  * @return {!z.common.protocol.project}
  */
 z.common.data.ProjectData.prototype.toProtocol = function () {
-  throw {'name': 'NotImplementedException', 'message': 'toProtocol'};
+  var protocol = {};
+  protocol['projectId'] = this.guid;
+  protocol['ownerId'] = this.ownerId;
+  protocol['tileId'] = this.tileId;
+  protocol['state'] = this.state;
+  protocol['type'] = this.type;
+  protocol['investment'] = this.investment;
+  protocol['resources'] = this.resources;
+  protocol['priority'] = this.priority;
+  return /**@type {!z.common.protocol.project} */ protocol;
 };

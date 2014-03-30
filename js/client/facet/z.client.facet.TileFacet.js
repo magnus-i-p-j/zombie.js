@@ -51,9 +51,6 @@ z.client.facet.TileFacet.prototype.getTerrainMeta = function () {
   return metas;
 };
 
-/**
- * @param {z.common.entities.Tile} tile
- */
 z.client.facet.TileFacet.prototype._update = function () {
   var tile = /** @type {z.common.entities.Tile} */ this.entity;
   this['terrain'](tile.terrain);

@@ -1,7 +1,7 @@
 goog.provide('z.common.rulebook.Project');
 
-goog.require('z.common.rulebook.logic');
 goog.require('z.common.rulebook');
+goog.require('z.common.rulebook.logic');
 
 goog.require('goog.array');
 
@@ -43,8 +43,7 @@ z.common.rulebook.Project = function (project) {
       }, this
   );
 
-  this.effects = this._project.effects;
-
+  this.effects = this._project['effects'];
 };
 
 /**

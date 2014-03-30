@@ -18,7 +18,7 @@ z.common.rulebook.meta;
  *   name: string,
  *   description: string,
  *   prerequisites: z.common.rulebook.prerequisites,
- *   cost: z.common.rulebook.cost,
+ *   cost: z.common.rulebook.cost
  * }}
  */
 z.common.rulebook.project;
@@ -41,7 +41,7 @@ z.common.rulebook.cost;
 /**
  * @typedef {{
  *   type: string,
- *   args: z.common.rulebook.effect_stockpile|z.common.rulebook.effect_terrain
+ *   args: (z.common.rulebook.effect_stockpile|z.common.rulebook.effect_terrain)
  * }}
  */
 z.common.rulebook.effect;

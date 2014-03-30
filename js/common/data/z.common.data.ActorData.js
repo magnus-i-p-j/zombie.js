@@ -4,8 +4,8 @@ goog.require('z.common.data.EntityData');
 
 /**
  * @param {?mugd.utils.guid} guid
- * @param {string} type
  * @param {!z.common.protocol.state} state
+ * @param {string} type
  * @param {Object.<z.common.protocol.type,number>} stockpile
  * @constructor
  * @implements {z.common.data.EntityData}

@@ -39,22 +39,14 @@ z.service.world.RandomTerrainGenerator.prototype.generateTerrain = function (x, 
     terrain['base'] = 'water';
   } else if (height > hillLevel) {
     terrain['base'] = 'hills';
-    if (Math.random() <= 0.2) {
-      terrain['perimeter'] = 'fence';
-    }
   } else {
     terrain['base'] = 'grass';
     if (Math.random() <= 0.2) {
-      terrain['perimeter'] = 'fence';
-    }
-    if (Math.random() <= 0.2) {
       terrain['content'] = 'house';
-    } else if (Math.random() <= 0.3) {
-      terrain['content'] = 'field';
     }
   }
 
 
-  var data = new z.common.data.TileData(null, null, x, y, terrain, 'tile');
+  var data = new z.common.data.TileData(null, z.common.protocol.state.MODIFIED, null, x, y, terrain, 'tile');
   return data;
 };

@@ -36,7 +36,6 @@ z.client.facet.ProjectListFacet.prototype.setParentEventTarget = function (paren
  */
 z.client.facet.ProjectListFacet.prototype.doStartTurn = function (e) {
   this['projects'].remove(function(project){
-    console.log(project['remove']());
     return project['remove']();
   });
 };
@@ -64,8 +63,5 @@ z.client.facet.ProjectListFacet.prototype.doEntityModified = function (e) {
    * @type {!z.common.entities.Entity}
    */
   var entity = e.entity;
-  if (entity instanceof z.common.entities.Project) {
-    console.log("Project modified");
-  }
 };
 

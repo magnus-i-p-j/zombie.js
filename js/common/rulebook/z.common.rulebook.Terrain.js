@@ -32,6 +32,6 @@ z.common.rulebook.Terrain = function(terrain){
   /**
    * @type {string}
    */
-  this.zone = this._terrain.zone;
+  this.zone = this._terrain['zone'];
 
 };

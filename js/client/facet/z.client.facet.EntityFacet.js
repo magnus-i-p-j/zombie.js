@@ -55,7 +55,7 @@ z.client.facet.EntityFacet.prototype.setEntity = function (entity) {
     this['guid'] = this.entity.guid;
     this.meta(entity.meta);
     this.eventHandler.listen(entity, z.common.events.EventType.ENTITY_MODIFIED, this.doEntityModified);
-    this._update(entity);
+    this._update();
   } else {
     throw ['Wrong entity, expected (', this.entity.guid , '), got (', entity.guid, ')'].join('');
   }

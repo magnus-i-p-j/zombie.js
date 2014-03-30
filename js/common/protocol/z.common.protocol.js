@@ -21,6 +21,7 @@ z.common.protocol.startTurn;
  * @typedef {{
  *  tileId: mugd.utils.guid,
  *  ownerId: mugd.utils.guid,
+ *  state: !z.common.protocol.state,
  *  x: number,
  *  y: number,
  *  terrain: z.common.terrain,
