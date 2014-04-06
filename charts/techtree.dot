@@ -1,0 +1,190 @@
+digraph {
+  always_available [shape=circle]
+  victory [shape=doublecircle]
+  {
+    node [shape=box]
+    recruit
+    scavenge
+    patrol
+    farm
+    repair_car
+    preach
+    strip
+    bartend
+    oversee_farms
+
+    {
+      node [color=green]
+      fence
+      wall
+      watch_tower
+      way_post
+      trading_post
+      pig_pen
+      goat_pen
+      chicken_shed
+      shanty
+      house
+      field
+      garden
+    }
+  }
+  {
+    node [shape=hexagon]
+    {
+      node [color=orange]
+      rank=same
+      fuel
+      ammo
+      metal
+      wood
+      food
+    }
+    characters
+    { 
+      node [color=red]
+      security
+      danger
+      threat_level
+      activity
+    }
+    labour
+    knowledge
+    combat
+    happiness
+    population
+    stable_food
+    relations
+    not_dying
+  }
+
+  {
+    node [shape=hexagon, color=magenta]
+    car
+    pigs
+    goats
+    chickens
+  }
+
+  {
+    node [shape=hexagon, color=blue]
+    mechanic
+    forager
+    farmer
+    medic
+    construction
+    veteran
+    welder
+  }
+
+  always_available -> recruit
+  always_available -> scavenge
+  always_available -> patrol
+
+  food -> characters
+  mechanic -> repair_car
+  repair_car -> car
+  pigs -> pig_pen
+  goats -> goat_pen
+  chickens -> chicken_shed
+  pig_pen -> food
+  goat_pen -> food
+  chicken_shed -> food
+  farm -> food
+  security -> danger
+  watch_tower -> security
+  patrol -> security
+  fence -> security
+  trading_post -> pigs
+  trading_post -> goats
+  trading_post -> chickens
+  forager -> scavenge
+  scavenge -> fuel
+  scavenge -> ammo
+  scavenge -> metal
+  scavenge -> wood
+  scavenge -> food
+  recruit -> characters
+  characters -> mechanic
+  characters -> forager
+  characters -> labour
+  characters -> knowledge
+  characters -> combat
+  characters -> veteran
+  characters -> welder
+  entertainment -> characters
+  way_post -> recruit
+  
+  house -> preach 
+  house -> strip
+  house -> bartend
+  preach -> entertainment
+  strip -> entertainment
+  bartend -> entertainment
+  entertainment -> happiness
+  garden -> farm
+  field -> farm
+  characters -> farmer
+  characters -> medic
+  characters -> construction
+  farmer -> farm
+  farmer -> oversee_farms
+  oversee_farms -> farm
+  wall -> security
+  low_danger -> watch_tower
+  low_danger -> pig_pen
+  low_danger -> goat_pen
+  low_danger -> chicken_shed
+  low_danger -> house
+  low_danger -> shanty
+  low_danger -> way_post
+  low_danger -> wall
+  low_danger -> trading_post
+  low_danger -> field
+  low_danger -> garden
+  danger -> low_danger
+  threat_level -> danger
+  wood -> fence
+  wood -> wall
+  metal -> wall
+  wood -> watch_tower
+  metal -> watch_tower
+  wood -> pig_pen
+  wood -> goat_pen
+  wood -> chicken_shed
+  wood -> house
+  wood -> shanty
+  wood -> way_post
+  wood -> trading_post
+  
+  happiness -> victory
+  population -> victory
+  stable_food -> victory
+  relations -> victory
+  not_dying -> victory
+  
+  security -> not_dying
+  danger -> not_dying
+  ammo -> not_dying
+
+  characters -> population
+  farm -> stable_food
+  pig_pen -> stable_food
+  goat_pen -> stable_food
+  chicken_shed -> stable_food
+  trading_post -> relations
+  way_post -> relations
+  activity -> danger
+
+  fuel -> car
+
+  recruit -> activity
+  scavenge -> activity
+  patrol -> activity
+  farm -> activity
+  repair_car -> activity
+  preach -> activity
+  strip -> activity
+  bartend -> activity
+  oversee_farms -> activity
+}
