@@ -3,37 +3,43 @@
     "type": "field",
     "name": "Field",
     "description": "A patch of land where some beets are growing.",
-    "zone": "content"
+    "zone": "content",
+    "image": "field"
   },
   {
     "type": "water",
     "name": "Water",
     "description": "A patch of blue water, untouched by the zombie apocalypse.",
-    "zone": "base"
+    "zone": "base",
+    "image": "water"
   },
   {
     "type": "hills",
     "name": "Hills",
     "description": "A patch of high hill, untouched by the zombie apocalypse.",
-    "zone": "base"
+    "zone": "base",
+    "image": "hill"
   },
   {
     "type": "house",
     "name": "House",
     "description": "A house someone used to live in. Now they're still living in it...",
-    "zone": "content"
+    "zone": "content",
+    "image": "house"
   },
   {
     "type": "grass",
     "name": "Grass",
     "description": "Some grass with only a few zombie bits.",
-    "zone": "base"
+    "zone": "base",
+    "image": "grass"
   },
   {
     "type": "fence",
     "name": "Fence",
     "description": "A rickety fence, suitable for delaying zombies while you leg it.",
-    "zone": "perimeter"
+    "zone": "perimeter",
+    "image": "fence"
   }
 ], "zone": [
   {
@@ -75,21 +81,11 @@
       "terrain": ["grass", "house"]
     },
     "effects": {
-      "effect_stockpile": [
-        {
-          "type": "ammo",
-          "magnitude": 5
-        }
-      ],
+      "effect_stockpile": [],
       "effect_terrain": "fence"
     },
     "cost": {
-      "stockpile": [
-        {
-          "type": "wood",
-          "amount": 5
-        }
-      ]
+      "stockpile": []
     }
   },
   {
@@ -115,7 +111,8 @@
       "terrain": []
     },
     "effects": {
-      "effect_stockpile": []
+      "effect_stockpile": [],
+      "effect_terrain": "field"
     },
     "cost": {
       "stockpile": []
@@ -199,7 +196,90 @@
     "name": "Food",
     "description": "Turnips"
   }
-], "artifact": [], "personnel": [], "bounds": {
+], "characters": [
+  {
+    "type": "welder_weldersson",
+    "name": "Welder Welderson",
+    "description": "A reknowed welder ",
+    "stats": {
+      "combat": 5,
+      "knowledge": 12,
+      "labour": 5
+    },
+    "traits": ["welder"]
+  },
+  {
+    "type": "farmer_bill",
+    "name": "Farmer Bill",
+    "description": "A farmer known for his banjo solos",
+    "stats": {
+      "combat": 7,
+      "knowledge": 4,
+      "labour": 12
+    },
+    "traits": ["farmer"]
+  },
+  {
+    "type": "gi_joe",
+    "name": "G. I. Joe",
+    "description": "A lethal action actor known for his figure skating",
+    "stats": {
+      "combat": 12,
+      "knowledge": 9,
+      "labour": 8
+    },
+    "traits": ["veteran"]
+  }
+], "traits": [
+  {
+    "type": "welder",
+    "name": "Welder",
+    "description": "Knows how to work a welding power supply"
+  },
+  {
+    "type": "farmer",
+    "name": "Farmer",
+    "description": "Can grow turnips"
+  },
+  {
+    "type": "veteran",
+    "name": "Veteran",
+    "description": "A veteran in combat."
+  }
+], "images": [
+  {
+    "type": "fence_2",
+    "url": "tiles/fence_2.png"
+  },
+  {
+    "type": "fence",
+    "url": "tiles/fence.png"
+  },
+  {
+    "type": "field",
+    "url": "tiles/field.png"
+  },
+  {
+    "type": "grass",
+    "url": "tiles/grass.png"
+  },
+  {
+    "type": "hill",
+    "url": "tiles/hill.png"
+  },
+  {
+    "type": "house",
+    "url": "tiles/house.png"
+  },
+  {
+    "type": "tiles",
+    "url": "tiles/tiles.png"
+  },
+  {
+    "type": "water",
+    "url": "tiles/water.png"
+  }
+], "bounds": {
   "starting_resources": [
     {
       "type": "wood",

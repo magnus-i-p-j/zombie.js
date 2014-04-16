@@ -2,6 +2,17 @@
   "title": "Concepts",
   "description": "The stuff people walk on.",
   "type": "object",
+  "required": [
+    "terrain",
+    "zone",
+    "project",
+    "actor",
+    "tile",
+    "stockpile",
+    "personnel",
+    "images",
+    "bounds"
+  ],
   "properties": {
     "terrain": {
       "title": "Terrains",
@@ -11,15 +22,18 @@
         "title": "Terrain",
         "description": "Some sort of stuff to walk on.",
         "type": "object",
+        "required": ["name", "type", "description", "zone", "image"],
         "properties": {
           "type": {
             "title": "Type",
-            "type": "string"
+            "type": "string",
+            "format": "id"
           },
           "name": {
             "title": "Name",
             "description": "Visible name of terrain",
-            "type": "string"
+            "type": "string",
+            "pattern": ".{2}"
           },
           "description": {
             "title": "Description",
@@ -34,7 +48,16 @@
               "rel": "full",
               "href": "game://zone/{@}"
             }
-
+          },
+          "image": {
+            "title": "Image",
+            "description": "What the tile looks like",
+            "type": "string",
+            "format": "image",
+            "links": {
+              "rel": "full",
+              "href": "game://image/{@}"
+            }
           }
         },
         "links": {
@@ -51,6 +74,7 @@
         "title": "Zone",
         "description": "A part of the stuff you walk on.",
         "type": "object",
+        "required": ["name", "type", "description"],
         "properties": {
           "type": {
             "title": "Type",
@@ -81,6 +105,7 @@
         "title": "Project",
         "description": "A project that does stuff",
         "type": "object",
+        "required": ["name", "type", "description", "prerequisites", "effects", "cost"],
         "properties": {
           "type": {
             "title": "Type",
@@ -129,6 +154,7 @@
                   "title": "Resource",
                   "description": "One of the resources",
                   "type": "object",
+                  "required": ["type", "magnitude", "variation"],
                   "properties": {
                     "type": {
                       "title": "Resource",
@@ -142,6 +168,11 @@
                     "magnitude": {
                       "title": "Magnitude",
                       "description": "The amount gained",
+                      "type": "number"
+                    },
+                    "variation": {
+                      "title": "Variation",
+                      "description": "The variation in amount gained",
                       "type": "number"
                     }
                   }
@@ -172,6 +203,7 @@
                   "title": "Resource",
                   "description": "One of the required resources",
                   "type": "object",
+                  "required": ["type", "amount"],
                   "properties": {
                     "type": {
                       "title": "Resource",
@@ -203,6 +235,7 @@
         "title": "Actor",
         "description": "An actor",
         "type": "object",
+        "required": ["name", "type", "description"],
         "properties": {
           "type": {
             "title": "Type",
@@ -229,6 +262,7 @@
         "title": "Tile",
         "description": "A tile",
         "type": "object",
+        "required": ["name", "type", "description"],
         "properties": {
           "type": {
             "title": "Type",
@@ -255,6 +289,7 @@
         "title": "Stockpile",
         "description": "A stockpiled resource",
         "type": "object",
+        "required": ["name", "type", "description"],
         "properties": {
           "type": {
             "title": "Type",
@@ -276,42 +311,16 @@
           "href": "game://stockpile/{type}"
         }
       }
-
     },
-    "artifact": {
-      "title": "Artifacts",
-      "description": "Unique items",
-      "type": "array",
-      "items": {
-        "title": "Artifact",
-        "description": "Unique item",
-        "type": "object",
-        "properties": {
-          "type": {
-            "title": "Type",
-            "type": "string"
-          },
-          "name": {
-            "title": "Name",
-            "description": "Visible name of artifact",
-            "type": "string"
-          },
-          "description": {
-            "title": "Description",
-            "description": "Describes the artifact",
-            "type": "string"
-          }
-        }
-      }
-    },
-    "personnel": {
-      "title": "Personnel",
-      "description": "Persons populating the world",
+    "characters": {
+      "title": "Characters",
+      "description": "Persons populating the world that TRUST YOU!",
       "type": "array",
       "items": {
         "title": "Character",
         "description": "A character",
         "type": "object",
+        "required": ["type", "name", "description", "stats"],
         "properties": {
           "type": {
             "title": "Type",
@@ -326,7 +335,101 @@
             "title": "Description",
             "description": "Describes the character",
             "type": "string"
+          },
+          "stats" : {
+            "title": "Stats",
+            "description": "A quantifiable characteristic" ,
+            "type": "object",
+            "required": ["combat", "knowledge", "labour"],
+            "properties": {
+              "combat": {
+                "title": "Combat",
+                "description": "Measures how good the character is at combat",
+                "type": "number"
+              },
+              "knowledge": {
+                "title": "Knowledge",
+                "description": "Measures how knowledgeable the character is",
+                "type": "number"
+              },
+              "labour": {
+                "title": "Labour",
+                "description": "Measures the characters proficiency in labour",
+                "type": "number"
+              }
+            }
+          },
+          "traits" : {
+            "type": "array",
+            "title": "Traits",
+            "description": "The traits of the character",
+            "items": {
+              "title": "Trait",
+              "description": "A trait",
+              "type": "string",
+              "links": {
+                "rel": "full",
+                "href": "game://trait/{@}"
+              }
+            }
           }
+        }
+      }
+    },
+    "traits":{
+      "title": "Traits",
+      "description": "The different traits a character can have",
+      "type": "array",
+      "items": {
+        "title": "Trait",
+        "description": "A trait",
+        "type": "object",
+        "required": ["type", "name", "description"],
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of trait",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "description": "Describes the trait",
+            "type": "string"
+          }
+        },
+        "links": {
+          "rel": "self",
+          "href": "game://trait/{type}"
+        }
+      }
+    },
+    "images": {
+      "title": "Images",
+      "description": "Images available",
+      "type": "array",
+      "items": {
+        "title": "Image",
+        "description": "An image",
+        "type": "object",
+        "required": ["url", "type"],
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "description": "The url where the image can be found",
+            "type": "string"
+          }
+        },
+        "links": {
+          "rel": "self",
+          "href": "game://image/{type}"
         }
       }
     },
@@ -334,6 +437,7 @@
       "title": "Bounds",
       "description": "Rules affecting the start and end of the game",
       "type": "object",
+      "required": ["starting_resources"],
       "properties": {
         "starting_resources": {
           "type": "array",
@@ -343,6 +447,7 @@
             "title": "Resource",
             "description": "One of the provided resources",
             "type": "object",
+            "required": ["type", "amount"],
             "properties": {
               "type": {
                 "title": "Resource",
