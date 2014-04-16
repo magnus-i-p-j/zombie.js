@@ -80,7 +80,7 @@ z.common.entities.Project.prototype.advance = function (investment) {
   var wasDone = !goog.object.some(this.getRemainingCost(), goog.functions.identity);
   this.invest(investment);
   var effects = [];
-  if (wasDone) {
+  if (!wasDone) {
     var done = !goog.object.some(this.getRemainingCost(), goog.functions.identity);
     if (done) {
       goog.object.forEach(
