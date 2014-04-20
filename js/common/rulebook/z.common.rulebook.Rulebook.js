@@ -33,6 +33,7 @@ z.common.rulebook.Rulebook = function (services) {
   this.actors = this._parseCategoryData(ruleset[z.common.rulebook.category.ACTOR], z.common.rulebook.Actor);
   this.stockpiledResources = this._parseCategoryData(ruleset[z.common.rulebook.category.STOCKPILE], z.common.rulebook.StockpiledResource);
   this.tiles = this._parseCategoryData(ruleset[z.common.rulebook.category.TILE], z.common.rulebook.Tile);
+  this.archetypes = this._parseCategoryData(ruleset[z.common.rulebook.category.ARCHETYPE], z.common.rulebook.Archetype);
 
   this.gameStartingData = new z.common.rulebook.GameStartingData(ruleset);
 

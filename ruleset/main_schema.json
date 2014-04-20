@@ -9,7 +9,8 @@
     "actor",
     "tile",
     "stockpile",
-    "personnel",
+    "archetype",
+    "traits",
     "images",
     "bounds"
   ],
@@ -312,15 +313,15 @@
         }
       }
     },
-    "characters": {
-      "title": "Characters",
-      "description": "Persons populating the world that TRUST YOU!",
+    "archetype": {
+      "title": "Archetypes",
+      "description": "Types of characters in the world",
       "type": "array",
       "items": {
-        "title": "Character",
-        "description": "A character",
+        "title": "Archetype",
+        "description": "A archetype",
         "type": "object",
-        "required": ["type", "name", "description", "stats"],
+        "required": ["type", "name", "description", "stats", "traits","frequency"],
         "properties": {
           "type": {
             "title": "Type",
@@ -328,57 +329,75 @@
           },
           "name": {
             "title": "Name",
-            "description": "Visible name of character",
+            "description": "Visible name of archetype",
             "type": "string"
           },
           "description": {
             "title": "Description",
-            "description": "Describes the character",
+            "description": "Describes the archetype",
             "type": "string"
           },
-          "stats" : {
+          "frequency": {
+            "title": "Frequency",
+            "description": "How many of the archetype survived the zapocalypse",
+            "type": "number"
+          },
+          "stats": {
             "title": "Stats",
-            "description": "A quantifiable characteristic" ,
+            "description": "A quantifiable characteristic",
             "type": "object",
             "required": ["combat", "knowledge", "labour"],
             "properties": {
               "combat": {
                 "title": "Combat",
-                "description": "Measures how good the character is at combat",
+                "description": "Measures how good the archetype is at combat",
                 "type": "number"
               },
               "knowledge": {
                 "title": "Knowledge",
-                "description": "Measures how knowledgeable the character is",
+                "description": "Measures how knowledgeable the archetype is",
                 "type": "number"
               },
               "labour": {
                 "title": "Labour",
-                "description": "Measures the characters proficiency in labour",
+                "description": "Measures the archetype proficiency in labour",
                 "type": "number"
               }
             }
           },
-          "traits" : {
+          "traits": {
             "type": "array",
             "title": "Traits",
-            "description": "The traits of the character",
+            "description": "The traits of the archetype",
             "items": {
               "title": "Trait",
               "description": "A trait",
-              "type": "string",
-              "links": {
-                "rel": "full",
-                "href": "game://trait/{@}"
+              "type": "object",
+              "required": ["type", "probability"],
+              "properties": {
+                "type": {
+                  "title": "Trait type",
+                  "type": "string",
+                  "links": {
+                    "rel": "full",
+                    "href": "game://trait/{@}"
+                  }
+                },
+                "probability": {
+                  "title": "Probability",
+                  "description": "The chance that the character starts with this trait.",
+                  "type": "number",
+                  "format": "probability"
+                }
               }
             }
           }
         }
       }
     },
-    "traits":{
+    "traits": {
       "title": "Traits",
-      "description": "The different traits a character can have",
+      "description": "The different traits a archetype can have",
       "type": "array",
       "items": {
         "title": "Trait",

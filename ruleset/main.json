@@ -196,39 +196,64 @@
     "name": "Food",
     "description": "Turnips"
   }
-], "characters": [
+], "archetype": [
   {
-    "type": "welder_weldersson",
-    "name": "Welder Welderson",
-    "description": "A reknowed welder ",
+    "type": "welder",
+    "name": "Welder",
+    "description": "An accomplished welder ",
+    "frequency": 3,
     "stats": {
-      "combat": 5,
-      "knowledge": 12,
-      "labour": 5
-    },
-    "traits": ["welder"]
-  },
-  {
-    "type": "farmer_bill",
-    "name": "Farmer Bill",
-    "description": "A farmer known for his banjo solos",
-    "stats": {
-      "combat": 7,
-      "knowledge": 4,
-      "labour": 12
-    },
-    "traits": ["farmer"]
-  },
-  {
-    "type": "gi_joe",
-    "name": "G. I. Joe",
-    "description": "A lethal action actor known for his figure skating",
-    "stats": {
-      "combat": 12,
-      "knowledge": 9,
+      "combat": 8,
+      "knowledge": 15,
       "labour": 8
     },
-    "traits": ["veteran"]
+    "traits": [
+      {
+        "type": "welder",
+        "probability": 1
+      }
+    ]
+  },
+  {
+    "type": "farmer",
+    "name": "Farmer",
+    "description": "A farmer of farms",
+    "frequency": 10,
+    "stats": {
+      "combat": 11,
+      "knowledge": 6,
+      "labour": 15
+    },
+    "traits": [
+      {
+        "type": "farmer",
+        "probability": 1
+      }
+    ]
+  },
+  {
+    "type": "soldier",
+    "name": "Soldier",
+    "description": "Trained by the old regime to fight",
+    "frequency": 30,
+    "stats": {
+      "combat": 14,
+      "knowledge": 8,
+      "labour": 8
+    },
+    "traits": []
+  },
+  {
+    "type": "ordinary",
+    "name": "Ordinary",
+    "description": "This character probably did something important before; but now is just another body.",
+    "frequency": 150,
+    "stats": {
+      "combat": 10,
+      "knowledge": 10,
+      "labour": 10
+    },
+    "traits": []
   }
 ], "traits": [
   {
@@ -242,9 +267,9 @@
     "description": "Can grow turnips"
   },
   {
-    "type": "veteran",
-    "name": "Veteran",
-    "description": "A veteran in combat."
+    "type": "survivor",
+    "name": "Survivor",
+    "description": "Coolheaded and collected, this character will do what's necessary to survive the zombie hordes."
   }
 ], "images": [
   {

@@ -67,7 +67,3 @@ z.common.rulebook.Project.prototype.createNewProjectData = function () {
   );
   return projectData;
 };
-
-
-
-

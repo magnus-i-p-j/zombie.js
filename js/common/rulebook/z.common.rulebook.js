@@ -41,6 +41,28 @@ z.common.rulebook.cost;
 /**
  * @typedef {{
  *   type: string,
+ *   category: z.common.rulebook.category,
+ *   name: string,
+ *   description: string,
+ *   frequency: number,
+ *   stats : z.common.rulebook.stats,
+ *   traits: Array.<string>
+ * }}
+ */
+z.common.rulebook.archetype;
+
+/**
+ * @typedef {{
+ *     combat: number,
+ *     knowledge: number,
+ *     labour: number
+ * }}
+ */
+z.common.rulebook.stats;
+
+/**
+ * @typedef {{
+ *   type: string,
  *   args: (z.common.rulebook.effect_stockpile|z.common.rulebook.effect_terrain)
  * }}
  */
@@ -80,7 +102,9 @@ z.common.rulebook.category = {
   STARTING_RESOURCES: 'starting_resources',
   ACTION: 'action',
   BOUNDS: 'bounds',
-  TILE: 'tile'
+  TILE: 'tile',
+  ARCHETYPE: 'archetype',
+  TRAITS: 'traits'
 };
 
 //noinspection JSUnusedLocalSymbols
