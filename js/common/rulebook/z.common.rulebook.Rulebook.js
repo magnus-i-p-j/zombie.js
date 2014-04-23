@@ -34,7 +34,7 @@ z.common.rulebook.Rulebook = function (services) {
   this.stockpiledResources = this._parseCategoryData(ruleset[z.common.rulebook.category.STOCKPILE], z.common.rulebook.StockpiledResource);
   this.tiles = this._parseCategoryData(ruleset[z.common.rulebook.category.TILE], z.common.rulebook.Tile);
   this.archetypes = this._parseCategoryData(ruleset[z.common.rulebook.category.ARCHETYPE], z.common.rulebook.Archetype);
-
+  this.traits = this._parseCategoryData(ruleset[z.common.rulebook.category.TRAIT], z.common.rulebook.Trait);
   this.gameStartingData = new z.common.rulebook.GameStartingData(ruleset);
 
 };

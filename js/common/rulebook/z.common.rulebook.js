@@ -104,7 +104,7 @@ z.common.rulebook.category = {
   BOUNDS: 'bounds',
   TILE: 'tile',
   ARCHETYPE: 'archetype',
-  TRAITS: 'traits'
+  TRAIT: 'trait'
 };
 
 //noinspection JSUnusedLocalSymbols
