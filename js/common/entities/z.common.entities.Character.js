@@ -1,6 +1,7 @@
 goog.provide('z.common.entities.Character');
 
 goog.require('goog.array');
+goog.require('goog.object');
 goog.require('z.common.entities.Entity');
 
 
