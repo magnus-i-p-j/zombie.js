@@ -7,7 +7,9 @@ goog.require('mugd.injector.Injector');
  */
 z.service.Resources = {
   TERRAIN_SEED: 'service_terrain seed',
-  TERRAIN_GENERATOR: 'service_terrain generator'
+  TERRAIN_GENERATOR: 'service_terrain generator',
+  CHARACTER_BASE: 'service_character_base',
+  CHARACTER_FACTORY: 'service_character_factory'
 };
 
 /**

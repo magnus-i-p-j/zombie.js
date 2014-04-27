@@ -30,6 +30,8 @@ goog.require('z.client.facet.ActorFacet');
 goog.require('z.client.actions.EndTurn');
 
 goog.require('z.common.rulebook.Rulebook');
+goog.require('z.common.rulebook.CharacterBase');
+goog.require('z.service.world.CharacterFactory');
 
 goog.require('z.common.EntityRepository');
 
@@ -62,7 +64,7 @@ z.client.Client.prototype.run = function () {
     var ruleset = r.target.getResponseJson();
     console.log('ruleset', ruleset);
     goog.net.XhrIo.send('../ruleset/textures.json',
-      function(t){
+      function (t) {
         var textures = t.target.getResponseJson();
         console.log('textures', textures);
         self.startNewGame(ruleset, textures);
@@ -125,6 +127,9 @@ z.client.Client.initWorldService = function (ruleset) {
   injector.addResource(z.common.Resources.RULESET, ruleset);
   injector.addProvider(z.common.Resources.WORLD, z.service.world.World);
   injector.addProvider(z.common.Resources.RULEBOOK, z.common.rulebook.Rulebook);
+  injector.addProvider(z.common.Resources.CHARACTER_BASE, z.common.rulebook.CharacterBase);
+  // TODO: create these classes
+  injector.addProvider(z.common.Resources.CHARACTER_FACTORY, z.service.world.CharacterFactory);
   injector.addProvider(z.common.Resources.REPOSITORY, z.common.EntityRepository);
   injector.addProvider(z.service.Resources.TERRAIN_GENERATOR, z.service.world.RandomTerrainGenerator);
   injector.addResource(z.service.Resources.TERRAIN_SEED, 'ASDGW3E45RG');

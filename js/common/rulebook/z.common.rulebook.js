@@ -91,6 +91,16 @@ z.common.rulebook.effect_stockpile;
 z.common.rulebook.effect_terrain;
 
 /**
+ * @typedef {{
+ *  name: string,
+ *  description: ?string,
+ *  gender: ?string,
+ *  archetype: ?string
+ * }}
+ */
+z.common.rulebook.character_base;
+
+/**
  * @enum {string}
  */
 z.common.rulebook.category = {
