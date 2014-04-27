@@ -271,6 +271,815 @@
     "name": "Survivor",
     "description": "Coolheaded and collected, this character will do what's necessary to survive the zombie hordes."
   }
+], "character": [
+  {
+    "name": "William",
+    "gender": "male"
+  },
+  {
+    "name": "Lucas",
+    "gender": "male"
+  },
+  {
+    "name": "Oscar",
+    "gender": "male"
+  },
+  {
+    "name": "Hugo",
+    "gender": "male"
+  },
+  {
+    "name": "Elias",
+    "gender": "male"
+  },
+  {
+    "name": "Oliver",
+    "gender": "male"
+  },
+  {
+    "name": "Liam",
+    "gender": "male"
+  },
+  {
+    "name": "Alexander",
+    "gender": "male"
+  },
+  {
+    "name": "Viktor",
+    "gender": "male"
+  },
+  {
+    "name": "Emil",
+    "gender": "male"
+  },
+  {
+    "name": "Axel",
+    "gender": "male"
+  },
+  {
+    "name": "Anton",
+    "gender": "male"
+  },
+  {
+    "name": "Erik",
+    "gender": "male"
+  },
+  {
+    "name": "Leo",
+    "gender": "male"
+  },
+  {
+    "name": "Filip",
+    "gender": "male"
+  },
+  {
+    "name": "Vincent",
+    "gender": "male"
+  },
+  {
+    "name": "Olle",
+    "gender": "male"
+  },
+  {
+    "name": "Arvid",
+    "gender": "male"
+  },
+  {
+    "name": "Ludvig",
+    "gender": "male"
+  },
+  {
+    "name": "Theo",
+    "gender": "male"
+  },
+  {
+    "name": "Charlie",
+    "gender": "male"
+  },
+  {
+    "name": "Isak",
+    "gender": "male"
+  },
+  {
+    "name": "Edvin",
+    "gender": "male"
+  },
+  {
+    "name": "Albin",
+    "gender": "male"
+  },
+  {
+    "name": "Gustav",
+    "gender": "male"
+  },
+  {
+    "name": "Elliot",
+    "gender": "male"
+  },
+  {
+    "name": "Nils",
+    "gender": "male"
+  },
+  {
+    "name": "Adam",
+    "gender": "male"
+  },
+  {
+    "name": "Melvin",
+    "gender": "male"
+  },
+  {
+    "name": "Wilmer",
+    "gender": "male"
+  },
+  {
+    "name": "Max",
+    "gender": "male"
+  },
+  {
+    "name": "Viggo",
+    "gender": "male"
+  },
+  {
+    "name": "Noah",
+    "gender": "male"
+  },
+  {
+    "name": "Benjamin",
+    "gender": "male"
+  },
+  {
+    "name": "Alfred",
+    "gender": "male"
+  },
+  {
+    "name": "Alvin",
+    "gender": "male"
+  },
+  {
+    "name": "Leon",
+    "gender": "male"
+  },
+  {
+    "name": "Kevin",
+    "gender": "male"
+  },
+  {
+    "name": "Simon",
+    "gender": "male"
+  },
+  {
+    "name": "Theodor",
+    "gender": "male"
+  },
+  {
+    "name": "Casper",
+    "gender": "male"
+  },
+  {
+    "name": "Jonathan",
+    "gender": "male"
+  },
+  {
+    "name": "Melker",
+    "gender": "male"
+  },
+  {
+    "name": "Sixten",
+    "gender": "male"
+  },
+  {
+    "name": "Ville",
+    "gender": "male"
+  },
+  {
+    "name": "Rasmus",
+    "gender": "male"
+  },
+  {
+    "name": "Gabriel",
+    "gender": "male"
+  },
+  {
+    "name": "Carl",
+    "gender": "male"
+  },
+  {
+    "name": "Linus",
+    "gender": "male"
+  },
+  {
+    "name": "Jacob",
+    "gender": "male"
+  },
+  {
+    "name": "Malte",
+    "gender": "male"
+  },
+  {
+    "name": "Noel",
+    "gender": "male"
+  },
+  {
+    "name": "Love",
+    "gender": "male"
+  },
+  {
+    "name": "Felix",
+    "gender": "male"
+  },
+  {
+    "name": "Milo",
+    "gender": "male"
+  },
+  {
+    "name": "Adrian",
+    "gender": "male"
+  },
+  {
+    "name": "Sebastian",
+    "gender": "male"
+  },
+  {
+    "name": "Neo",
+    "gender": "male"
+  },
+  {
+    "name": "Valter",
+    "gender": "male"
+  },
+  {
+    "name": "Josef",
+    "gender": "male"
+  },
+  {
+    "name": "David",
+    "gender": "male"
+  },
+  {
+    "name": "Jack",
+    "gender": "male"
+  },
+  {
+    "name": "Samuel",
+    "gender": "male"
+  },
+  {
+    "name": "Joel",
+    "gender": "male"
+  },
+  {
+    "name": "Harry",
+    "gender": "male"
+  },
+  {
+    "name": "Mohammed",
+    "gender": "male"
+  },
+  {
+    "name": "Wilhelm",
+    "gender": "male"
+  },
+  {
+    "name": "Loke",
+    "gender": "male"
+  },
+  {
+    "name": "Hampus",
+    "gender": "male"
+  },
+  {
+    "name": "Vilgot",
+    "gender": "male"
+  },
+  {
+    "name": "August",
+    "gender": "male"
+  },
+  {
+    "name": "Vidar",
+    "gender": "male"
+  },
+  {
+    "name": "Sam",
+    "gender": "male"
+  },
+  {
+    "name": "Eddie",
+    "gender": "male"
+  },
+  {
+    "name": "Sigge",
+    "gender": "male"
+  },
+  {
+    "name": "Milton",
+    "gender": "male"
+  },
+  {
+    "name": "Elton",
+    "gender": "male"
+  },
+  {
+    "name": "Frank",
+    "gender": "male"
+  },
+  {
+    "name": "Daniel",
+    "gender": "male"
+  },
+  {
+    "name": "Elis",
+    "gender": "male"
+  },
+  {
+    "name": "Alex",
+    "gender": "male"
+  },
+  {
+    "name": "Tim",
+    "gender": "male"
+  },
+  {
+    "name": "Robin",
+    "gender": "male"
+  },
+  {
+    "name": "Maximilian",
+    "gender": "male"
+  },
+  {
+    "name": "John",
+    "gender": "male"
+  },
+  {
+    "name": "Fabian",
+    "gender": "male"
+  },
+  {
+    "name": "Hjalmar",
+    "gender": "male"
+  },
+  {
+    "name": "Mio",
+    "gender": "male"
+  },
+  {
+    "name": "Hannes",
+    "gender": "male"
+  },
+  {
+    "name": "Elvin",
+    "gender": "male"
+  },
+  {
+    "name": "Tage",
+    "gender": "male"
+  },
+  {
+    "name": "Måns",
+    "gender": "male"
+  },
+  {
+    "name": "Aron",
+    "gender": "male"
+  },
+  {
+    "name": "Ivar",
+    "gender": "male"
+  },
+  {
+    "name": "Ali",
+    "gender": "male"
+  },
+  {
+    "name": "Otto",
+    "gender": "male"
+  },
+  {
+    "name": "Svante",
+    "gender": "male"
+  },
+  {
+    "name": "Marcus",
+    "gender": "male"
+  },
+  {
+    "name": "Ebbe",
+    "gender": "male"
+  },
+  {
+    "name": "Edward",
+    "gender": "male"
+  },
+  {
+    "name": "Alice",
+    "gender": "female"
+  },
+  {
+    "name": "Maja",
+    "gender": "female"
+  },
+  {
+    "name": "Elsa",
+    "gender": "female"
+  },
+  {
+    "name": "Julia",
+    "gender": "female"
+  },
+  {
+    "name": "Linnéa",
+    "gender": "female"
+  },
+  {
+    "name": "Ella",
+    "gender": "female"
+  },
+  {
+    "name": "Ebba",
+    "gender": "female"
+  },
+  {
+    "name": "Molly",
+    "gender": "female"
+  },
+  {
+    "name": "Wilma",
+    "gender": "female"
+  },
+  {
+    "name": "Emma",
+    "gender": "female"
+  },
+  {
+    "name": "Nellie",
+    "gender": "female"
+  },
+  {
+    "name": "Alva",
+    "gender": "female"
+  },
+  {
+    "name": "Isabelle",
+    "gender": "female"
+  },
+  {
+    "name": "Olivia",
+    "gender": "female"
+  },
+  {
+    "name": "Agnes",
+    "gender": "female"
+  },
+  {
+    "name": "Klara",
+    "gender": "female"
+  },
+  {
+    "name": "Elin",
+    "gender": "female"
+  },
+  {
+    "name": "Emilia",
+    "gender": "female"
+  },
+  {
+    "name": "Freja",
+    "gender": "female"
+  },
+  {
+    "name": "Ellen",
+    "gender": "female"
+  },
+  {
+    "name": "Lilly",
+    "gender": "female"
+  },
+  {
+    "name": "Nova",
+    "gender": "female"
+  },
+  {
+    "name": "Moa",
+    "gender": "female"
+  },
+  {
+    "name": "Ida",
+    "gender": "female"
+  },
+  {
+    "name": "Stella",
+    "gender": "female"
+  },
+  {
+    "name": "Alma",
+    "gender": "female"
+  },
+  {
+    "name": "Saga",
+    "gender": "female"
+  },
+  {
+    "name": "Amanda",
+    "gender": "female"
+  },
+  {
+    "name": "Alicia",
+    "gender": "female"
+  },
+  {
+    "name": "Astrid",
+    "gender": "female"
+  },
+  {
+    "name": "Vera",
+    "gender": "female"
+  },
+  {
+    "name": "Tuva",
+    "gender": "female"
+  },
+  {
+    "name": "Isabella",
+    "gender": "female"
+  },
+  {
+    "name": "Felicia",
+    "gender": "female"
+  },
+  {
+    "name": "Elvira",
+    "gender": "female"
+  },
+  {
+    "name": "Sara",
+    "gender": "female"
+  },
+  {
+    "name": "Selma",
+    "gender": "female"
+  },
+  {
+    "name": "Signe",
+    "gender": "female"
+  },
+  {
+    "name": "Matilda",
+    "gender": "female"
+  },
+  {
+    "name": "Hanna",
+    "gender": "female"
+  },
+  {
+    "name": "Ester",
+    "gender": "female"
+  },
+  {
+    "name": "Ellie",
+    "gender": "female"
+  },
+  {
+    "name": "Thea",
+    "gender": "female"
+  },
+  {
+    "name": "Tyra",
+    "gender": "female"
+  },
+  {
+    "name": "Tilde",
+    "gender": "female"
+  },
+  {
+    "name": "Lova",
+    "gender": "female"
+  },
+  {
+    "name": "Lea",
+    "gender": "female"
+  },
+  {
+    "name": "Minna",
+    "gender": "female"
+  },
+  {
+    "name": "Sofia",
+    "gender": "female"
+  },
+  {
+    "name": "Meja",
+    "gender": "female"
+  },
+  {
+    "name": "Nora",
+    "gender": "female"
+  },
+  {
+    "name": "Lovisa",
+    "gender": "female"
+  },
+  {
+    "name": "Inez",
+    "gender": "female"
+  },
+  {
+    "name": "Siri",
+    "gender": "female"
+  },
+  {
+    "name": "Filippa",
+    "gender": "female"
+  },
+  {
+    "name": "Emelie",
+    "gender": "female"
+  },
+  {
+    "name": "Nathalie",
+    "gender": "female"
+  },
+  {
+    "name": "Edith",
+    "gender": "female"
+  },
+  {
+    "name": "Liv",
+    "gender": "female"
+  },
+  {
+    "name": "Tindra",
+    "gender": "female"
+  },
+  {
+    "name": "Tilda",
+    "gender": "female"
+  },
+  {
+    "name": "Stina",
+    "gender": "female"
+  },
+  {
+    "name": "Leia",
+    "gender": "female"
+  },
+  {
+    "name": "Märta",
+    "gender": "female"
+  },
+  {
+    "name": "Ingrid",
+    "gender": "female"
+  },
+  {
+    "name": "Livia",
+    "gender": "female"
+  },
+  {
+    "name": "Emmy",
+    "gender": "female"
+  },
+  {
+    "name": "Cornelia",
+    "gender": "female"
+  },
+  {
+    "name": "Iris",
+    "gender": "female"
+  },
+  {
+    "name": "Jasmine",
+    "gender": "female"
+  },
+  {
+    "name": "Juni",
+    "gender": "female"
+  },
+  {
+    "name": "Melissa",
+    "gender": "female"
+  },
+  {
+    "name": "My",
+    "gender": "female"
+  },
+  {
+    "name": "Tove",
+    "gender": "female"
+  },
+  {
+    "name": "Elise",
+    "gender": "female"
+  },
+  {
+    "name": "Linn",
+    "gender": "female"
+  },
+  {
+    "name": "Lisa",
+    "gender": "female"
+  },
+  {
+    "name": "Svea",
+    "gender": "female"
+  },
+  {
+    "name": "Joline",
+    "gender": "female"
+  },
+  {
+    "name": "Ronja",
+    "gender": "female"
+  },
+  {
+    "name": "Elina",
+    "gender": "female"
+  },
+  {
+    "name": "Mira",
+    "gender": "female"
+  },
+  {
+    "name": "Josefin",
+    "gender": "female"
+  },
+  {
+    "name": "Anna",
+    "gender": "female"
+  },
+  {
+    "name": "Evelina",
+    "gender": "female"
+  },
+  {
+    "name": "Hilda",
+    "gender": "female"
+  },
+  {
+    "name": "Rebecca",
+    "gender": "female"
+  },
+  {
+    "name": "Vilda",
+    "gender": "female"
+  },
+  {
+    "name": "Frida",
+    "gender": "female"
+  },
+  {
+    "name": "Lina",
+    "gender": "female"
+  },
+  {
+    "name": "Sigrid",
+    "gender": "female"
+  },
+  {
+    "name": "Greta",
+    "gender": "female"
+  },
+  {
+    "name": "Nicole",
+    "gender": "female"
+  },
+  {
+    "name": "Hedda",
+    "gender": "female"
+  },
+  {
+    "name": "Majken",
+    "gender": "female"
+  },
+  {
+    "name": "Sofie",
+    "gender": "female"
+  },
+  {
+    "name": "Annie",
+    "gender": "female"
+  },
+  {
+    "name": "Victoria",
+    "gender": "female"
+  },
+  {
+    "name": "Hedvig",
+    "gender": "female"
+  },
+  {
+    "name": "Hilma",
+    "gender": "female"
+  },
+  {
+    "name": "Maria",
+    "gender": "female"
+  },
+  {
+    "name": "Rut",
+    "gender": "female"
+  }
 ], "images": [
   {
     "type": "fence_2",

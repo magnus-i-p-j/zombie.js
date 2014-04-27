@@ -104,6 +104,7 @@ z.common.rulebook.category = {
   BOUNDS: 'bounds',
   TILE: 'tile',
   ARCHETYPE: 'archetype',
+  CHARACTER: 'character',
   TRAIT: 'trait'
 };
 

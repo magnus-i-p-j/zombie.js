@@ -12,6 +12,7 @@
     "archetype",
     "traits",
     "images",
+    "character",
     "bounds"
   ],
   "properties": {
@@ -321,7 +322,7 @@
         "title": "Archetype",
         "description": "A archetype",
         "type": "object",
-        "required": ["type", "name", "description", "stats", "traits","frequency"],
+        "required": ["type", "name", "description", "stats", "traits", "frequency"],
         "properties": {
           "type": {
             "title": "Type",
@@ -393,6 +394,10 @@
             }
           }
         }
+      },
+      "links": {
+        "rel": "self",
+        "href": "game://trait/{type}"
       }
     },
     "traits": {
@@ -422,7 +427,44 @@
         },
         "links": {
           "rel": "self",
-          "href": "game://trait/{type}"
+          "href": "game://archetype/{type}"
+        }
+      }
+    },
+    "character": {
+      "title": "Characters",
+      "description": "The characters that can exist",
+      "type": "array",
+      "items": {
+        "title": "Character",
+        "description": "A character",
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "title": "Name",
+            "description": "Primary name of character",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "description": "Describes the character",
+            "type": "string"
+          },
+          "gender": {
+            "title": "Gender",
+            "description": "Gender of the character",
+            "enum": ["male", "female", "other"]
+          },
+          "archetype": {
+            "title": "Archetype",
+            "description": "The archetype of the character",
+            "type": "string",
+            "links": {
+              "rel": "full",
+              "href": "game://archetype/{@}"
+            }
+          }
         }
       }
     },
