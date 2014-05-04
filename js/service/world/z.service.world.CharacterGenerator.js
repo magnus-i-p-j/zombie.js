@@ -1,13 +1,15 @@
-goog.provide('z.common.rulebook.CharacterBase');
+goog.provide('z.service.world.CharacterGenerator.');
 
 goog.require('goog.array');
+goog.require('goog.object');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @implements mugd.injector.IInjectable
  */
-z.common.rulebook.CharacterBase = function (services) {
+z.service.world.CharacterGenerator = function (services) {
+  this._statsVariation = 3;
   /**
    * @type {!Object}
    */
@@ -27,12 +29,23 @@ z.common.rulebook.CharacterBase = function (services) {
     }
   }, this);
 
-
+  goog.object.forEach(this._archetypeData, goog.array.shuffle);
+  goog.array.shuffle(this._anyArchetypeData);
 };
 
 /**
  * @param {string} archetypeType
+ * @return {z.common.rulebook.character_base}
  */
-z.common.rulebook.CharacterBase.prototype.getNewArchetypeBase = function (archetypeType) {
+z.service.world.CharacterGenerator.prototype.getCharacterByArchetype = function (archetypeType) {
+  var archetypeBase = null;
+  if(this._archetypeData[archetypeType] && this._archetypeData[archetypeType].length){
+    archetypeBase = this._archetypeData[archetypeType].pop();
+  }else if(this._anyArchetypeData.length){
+    archetypeBase = this._anyArchetypeData.pop();
+  }else{
+    throw "No more characters left";
+  }
+
 
 };

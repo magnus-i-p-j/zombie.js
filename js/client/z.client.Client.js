@@ -127,7 +127,7 @@ z.client.Client.initWorldService = function (ruleset) {
   injector.addResource(z.common.Resources.RULESET, ruleset);
   injector.addProvider(z.common.Resources.WORLD, z.service.world.World);
   injector.addProvider(z.common.Resources.RULEBOOK, z.common.rulebook.Rulebook);
-  injector.addProvider(z.common.Resources.CHARACTER_BASE, z.common.rulebook.CharacterBase);
+  injector.addProvider(z.common.Resources.CHARACTER_GENERATOR, z.service.world.CharacterGenerator);
   // TODO: create these classes
   injector.addProvider(z.common.Resources.CHARACTER_FACTORY, z.service.world.CharacterFactory);
   injector.addProvider(z.common.Resources.REPOSITORY, z.common.EntityRepository);

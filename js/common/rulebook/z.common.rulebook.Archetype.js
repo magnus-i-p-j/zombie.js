@@ -35,7 +35,3 @@ z.common.rulebook.Archetype = function(meta){
   this.frequency = this._meta.frequency;
 
 };
-
-z.common.rulebook.Archetype.prototype.createNewCharacterMeta = function (rand) {
-  // TODO: implement
-};
