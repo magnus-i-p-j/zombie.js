@@ -5,14 +5,14 @@ goog.provide('z.service.world.CharacterFactory');
  * @constructor
  * @implements mugd.injector.IInjectable
  */
-z.service.world.CharacterFactory = function(services){
+z.service.world.CharacterFactory = function (services) {
   /**
    * @type {!Object}
    */
   var ruleset = /** @type {!Object} */services.get(z.common.Resources.RULESET);
 
   /**
-   * @type {z.common.rulebook.CharacterBase}
+   * @type {z.common.rulebook.CharacterGenerator}
    */
-  var characterBase = /** @type {z.common.rulebook.CharacterBase}*/ services.get(z.common.Resources.CHARACTER_GENERATOR);
-}
+  var characterGenerator = /** @type {z.common.rulebook.CharacterGenerator}*/ services.get(z.common.Resources.CHARACTER_GENERATOR);
+};

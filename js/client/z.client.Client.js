@@ -30,7 +30,7 @@ goog.require('z.client.facet.ActorFacet');
 goog.require('z.client.actions.EndTurn');
 
 goog.require('z.common.rulebook.Rulebook');
-goog.require('z.common.rulebook.CharacterBase');
+goog.require('z.common.rulebook.CharacterGenerator');
 goog.require('z.service.world.CharacterFactory');
 
 goog.require('z.common.EntityRepository');

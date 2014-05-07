@@ -101,6 +101,14 @@ z.common.rulebook.effect_terrain;
 z.common.rulebook.character_base;
 
 /**
+ * @typedef {{
+ *  type: string,
+ *  probability: number
+ * }}
+ */
+z.common.rulebook.possible_trait;
+
+/**
  * @enum {string}
  */
 z.common.rulebook.category = {
