@@ -115,3 +115,20 @@ z.common.EntityRepository.prototype.map = function (action, filter) {
 z.common.EntityRepository.prototype.filter = function (filter) {
   return this.map(goog.functions.identity, filter);
 };
+
+/**
+ * @param {number} number
+ * @param {!z.common.EntityQuery} query
+ * @return {!Array}
+ */
+z.common.EntityRepository.prototype.choose = function (number, query) {
+  var chosen = [];
+  var candidates = this.filter(query.match.bind(query));
+  while (number && candidates.length) {
+    var index = goog.math.randomInt(candidates.length);
+    var elements = candidates.splice(index, 1);
+    chosen.push(elements[0]);
+    number -= 1;
+  }
+  return chosen;
+};

@@ -47,9 +47,10 @@ z.service.world.CharacterGenerator = function (services) {
 
 /**
  * @param {string} archetypeType
+ * @param {!mugd.utils.guid} ownerId
  * @return {!z.common.entities.Character}
  */
-z.service.world.CharacterGenerator.prototype.getCharacterByArchetype = function (archetypeType) {
+z.service.world.CharacterGenerator.prototype.getCharacterByArchetype = function (archetypeType, ownerId) {
   var archetypeBase = null;
   if (this._archetypeData[archetypeType] && this._archetypeData[archetypeType].length) {
     archetypeBase = this._archetypeData[archetypeType].pop();
@@ -63,6 +64,7 @@ z.service.world.CharacterGenerator.prototype.getCharacterByArchetype = function 
 
   var characterData = new z.common.data.CharacterData(
     null,
+    ownerId,
     z.common.protocol.state.MODIFIED,
     archetypeBase.name,
     this._addStatVariation(archetypeBase.combat),

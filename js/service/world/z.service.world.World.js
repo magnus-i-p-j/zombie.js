@@ -50,11 +50,19 @@ z.service.world.World = function (services) {
    */
   this._playerActors = {};
   var worldActorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_world', {});
+
   /**
    * @type {!z.common.entities.Actor}
    * @private
    */
   this._worldActor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(worldActorData);
+
+  /**
+   * @type {!Object}
+   */
+  var characterGenerator = /** @type {!z.service.world.CharacterGenerator} */services.get(z.common.Resources.CHARACTER_GENERATOR);
+
+  this._createCharacters(this._rulebook, characterGenerator, this._worldActor);
 
   /**
    * @type {Object.<!mugd.utils.guid, function(!z.common.data.StartTurnData)>}
@@ -68,6 +76,24 @@ z.service.world.World = function (services) {
  * @protected
  */
 z.service.world.World.prototype._logger = goog.debug.Logger.getLogger('z.service.world.World');
+
+/**
+ *
+ * @param {!z.common.rulebook.Rulebook} rulebook
+ * @param {!z.service.world.CharacterGenerator} characterGenerator
+ * @param {!z.common.entities.Actor} owner
+ * @private
+ */
+z.service.world.World.prototype._createCharacters = function (rulebook, characterGenerator, owner) {
+
+  goog.array.forEach(rulebook.archetypes, function (archetype) {
+
+    for (var i = 0; i < archetype.frequency; i += 1) {
+      characterGenerator.getCharacterByArchetype(archetype.type, owner.guid)
+    }
+  });
+
+};
 
 /**
  * @param {function(!z.common.data.StartTurnData)} actorCallback
@@ -306,4 +332,3 @@ z.service.world.World.actionRange = function (entity) {
   }
   return 0;
 };
-
