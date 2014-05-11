@@ -5,6 +5,8 @@ goog.require("z.common.rulebook.Project");
 goog.require("z.common.rulebook.Terrain");
 goog.require("z.common.rulebook.Actor");
 goog.require("z.common.rulebook.Tile");
+goog.require("z.common.rulebook.Trait");
+goog.require("z.common.rulebook.Archetype");
 goog.require("z.common.rulebook.StockpiledResource");
 goog.require("z.common.rulebook.GameStartingData");
 

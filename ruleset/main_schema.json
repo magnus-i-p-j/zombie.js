@@ -10,7 +10,7 @@
     "tile",
     "stockpile",
     "archetype",
-    "traits",
+    "trait",
     "images",
     "character",
     "bounds"
@@ -400,7 +400,7 @@
         "href": "game://trait/{type}"
       }
     },
-    "traits": {
+    "trait": {
       "title": "Traits",
       "description": "The different traits a archetype can have",
       "type": "array",

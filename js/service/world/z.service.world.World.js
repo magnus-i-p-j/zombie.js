@@ -58,7 +58,7 @@ z.service.world.World = function (services) {
   this._worldActor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(worldActorData);
 
   /**
-   * @type {!Object}
+   * @type {!z.service.world.CharacterGenerator}
    */
   var characterGenerator = /** @type {!z.service.world.CharacterGenerator} */services.get(z.common.Resources.CHARACTER_GENERATOR);
 
@@ -85,14 +85,11 @@ z.service.world.World.prototype._logger = goog.debug.Logger.getLogger('z.service
  * @private
  */
 z.service.world.World.prototype._createCharacters = function (rulebook, characterGenerator, owner) {
-
   goog.array.forEach(rulebook.archetypes, function (archetype) {
-
     for (var i = 0; i < archetype.frequency; i += 1) {
       characterGenerator.getCharacterByArchetype(archetype.type, owner.guid)
     }
   });
-
 };
 
 /**
@@ -111,7 +108,6 @@ z.service.world.World.prototype.createPlayerActor = function (actorCallback) {
  * @param {z.common.data.ClientEndTurn} endTurnData
  */
 z.service.world.World.prototype.actorEndTurn = function (endTurnData) {
-  // TODO: store plan
   var actor = this._entityRepository.get(endTurnData.actorId);
   goog.array.forEach(endTurnData.projects,
     function (projectData) {
@@ -137,12 +133,27 @@ z.service.world.World.prototype.updateProject = function (projectData, actor) {
   }
 };
 
+z.service.world.World.prototype._doBeforeFirstTurn = function(){
+  var startingNumberOfCharacters = 3;
+  goog.object.forEach(this._playerActors, function(actor){
+    var query = new z.common.EntityQuery();
+    query.owner = this._worldActor.guid;
+    var characters = this._entityRepository.choose(startingNumberOfCharacters, query);
+    goog.array.forEach(characters, function(character){
+      character.update(null, null, actor);
+    })
+  }, this);
+};
+
 /**
  * @private
  */
 z.service.world.World.prototype.endTurn = function () {
   console.log('World.endTurn begins');
   this._logger.info('World.endTurn begins');
+  if(!this._turn){
+    this._doBeforeFirstTurn();
+  }
   var killed = this.tick();
   for (var actorGuid in this._playerActors) {
     if (this._playerActors.hasOwnProperty(actorGuid)) {

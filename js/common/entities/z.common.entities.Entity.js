@@ -38,7 +38,7 @@ z.common.entities.Entity = function (services) {
    * @private
    * @type {!z.common.protocol.state}
    */
-  if(!entityData.state){
+  if (!entityData.state) {
     throw {};
   }
   this._state = entityData.state;
@@ -66,18 +66,27 @@ z.common.entities.Entity.prototype.setState = function (state) {
 
 
 /**
- * @param {!z.common.data.EntityData} entityData
- * @param {!z.common.rulebook.meta} meta
+ * @param {z.common.data.EntityData} entityData
+ * @param {z.common.rulebook.meta} meta
  * @param {z.common.entities.Actor} owner
  * @return {boolean}
  */
 z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
   var updated = false;
-  var state = entityData.state;
-  if (this._state !== state) {
-    this._state = state;
+
+  if (entityData) {
+    var state = entityData.state;
+    if (this._state !== state) {
+      this._state = state;
+      updated = true;
+    }
+  }
+
+  if(owner && owner.guid !== this.owner.guid){
+    this.owner = owner;
     updated = true;
   }
+
   updated = this._update(entityData, meta, owner) || updated;
 
   if (updated) {

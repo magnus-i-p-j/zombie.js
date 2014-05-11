@@ -9,6 +9,7 @@ goog.require('z.common.data.EntityData');
  * @param {?mugd.utils.guid} ownerId
  * @param {!z.common.protocol.state} state
  * @param {string} name
+ * @param {string} gender
  * @param {number} combat
  * @param {number} knowledge
  * @param {number} labour
@@ -16,7 +17,7 @@ goog.require('z.common.data.EntityData');
  * @param {Array.<string>} traits
  * @constructor
  */
-z.common.data.CharacterData = function (guid, ownerId, state, name, combat, knowledge, labour, health, traits) {
+z.common.data.CharacterData = function (guid, ownerId, state, name, gender, combat, knowledge, labour, health, traits) {
   /**
    * @type {z.common.rulebook.category}
    */
@@ -26,6 +27,8 @@ z.common.data.CharacterData = function (guid, ownerId, state, name, combat, know
   this.ownerId = ownerId;
   this.state = state;
   this.name = name;
+  this.gender = gender;
+  this.type = gender;
   this.combat = combat;
   this.knowledge = knowledge;
   this.labour = labour;
@@ -44,6 +47,7 @@ z.common.data.CharacterData.fromEntity = function (character) {
     character.owner.guid,
     character.getState(),
     character.name,
+    character.gender,
     character.combat,
     character.knowledge,
     character.labour,

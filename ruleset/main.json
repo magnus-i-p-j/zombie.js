@@ -198,7 +198,7 @@
   }
 ], "archetype": [
   {
-    "type": "welder",
+    "type": "archetype_welder",
     "name": "Welder",
     "description": "An accomplished welder ",
     "frequency": 3,
@@ -215,7 +215,7 @@
     ]
   },
   {
-    "type": "farmer",
+    "type": "archetype_farmer",
     "name": "Farmer",
     "description": "A farmer of farms",
     "frequency": 10,
@@ -232,7 +232,7 @@
     ]
   },
   {
-    "type": "soldier",
+    "type": "archetype_soldier",
     "name": "Soldier",
     "description": "Trained by the old regime to fight",
     "frequency": 30,
@@ -244,7 +244,7 @@
     "traits": []
   },
   {
-    "type": "ordinary",
+    "type": "archetype_ordinary",
     "name": "Ordinary",
     "description": "This character probably did something important before; but now is just another body.",
     "frequency": 150,
@@ -255,7 +255,7 @@
     },
     "traits": []
   }
-], "traits": [
+], "trait": [
   {
     "type": "welder",
     "name": "Welder",

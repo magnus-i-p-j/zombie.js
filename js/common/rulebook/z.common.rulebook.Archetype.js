@@ -34,4 +34,9 @@ z.common.rulebook.Archetype = function(meta){
    */
   this.frequency = this._meta.frequency;
 
+  /**
+   *
+   * @type {Array.<z.common.rulebook.possible_trait>}
+   */
+  this.traits = this._meta.traits;
 };

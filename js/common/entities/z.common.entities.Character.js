@@ -19,7 +19,7 @@ z.common.entities.Character = function (services) {
   var characterData = /** @type {!z.common.data.CharacterData} */ services.get('entityData');
 
   this.name = characterData.name;
-
+  this.gender = characterData.gender;
   this.combat = characterData.combat;
   this.knowledge = characterData.knowledge;
   this.labour = characterData.labour;
