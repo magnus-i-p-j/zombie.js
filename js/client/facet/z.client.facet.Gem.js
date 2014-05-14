@@ -47,6 +47,11 @@ z.client.facet.Gem = function (services) {
   this['projectsFacet'] = /** @type {function(z.client.facet.ProjectListFacet=):z.client.facet.ProjectListFacet} */ services.get(z.client.Resources.PROJECT_LIST_FACET);
 
   /**
+   * @type {function(z.client.facet.CharacterListFacet=):z.client.facet.CharacterListFacet}
+   */
+  this['charactersFacet'] = /** @type {function(z.client.facet.CharacterListFacet=):z.client.facet.CharacterListFacet} */ services.get(z.client.Resources.CHARACTER_LIST_FACET);
+
+  /**
    * @type {!z.common.EntityRepository}
    */
   var repository = /** @type {!z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
@@ -62,6 +67,7 @@ z.client.facet.Gem = function (services) {
   this['infoFacet'].setParentEventTarget(this);
   this['messageLogFacet'].setParentEventTarget(this);
   this['projectsFacet'].setParentEventTarget(this);
+  this['charactersFacet'].setParentEventTarget(this);
 
   repository.setParentEventTarget(this);
   world.setParentEventTarget(this);
