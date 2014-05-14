@@ -10,6 +10,7 @@ goog.require('z.common.protocol');
 goog.require('z.common.EntityRepository');
 goog.require('goog.array');
 goog.require('mugd.utils.SimplexNoise');
+goog.require('z.common.EntityQuery');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -60,7 +61,7 @@ z.service.world.World = function (services) {
   /**
    * @type {!z.service.world.CharacterGenerator}
    */
-  var characterGenerator = /** @type {!z.service.world.CharacterGenerator} */services.get(z.common.Resources.CHARACTER_GENERATOR);
+  var characterGenerator = /** @type {!z.service.world.CharacterGenerator} */services.get(z.service.Resources.CHARACTER_GENERATOR);
 
   this._createCharacters(this._rulebook, characterGenerator, this._worldActor);
 

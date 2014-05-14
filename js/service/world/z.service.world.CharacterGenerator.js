@@ -62,15 +62,13 @@ z.service.world.CharacterGenerator.prototype.getCharacterByArchetype = function 
   }
 
   var archetype = this._ruleBook.getMetaClass(archetypeType);
-  console.log(archetypeType);
-  console.log(archetype);
   var self = this;
   var characterData = new z.common.data.CharacterData(
     null,
     ownerId,
     z.common.protocol.state.MODIFIED,
     characterBase.name,
-    characterBase.gender,
+    characterBase.type,
     this._addStatVariation(archetype.combat),
     this._addStatVariation(archetype.knowledge),
     this._addStatVariation(archetype.labour),
@@ -80,12 +78,10 @@ z.service.world.CharacterGenerator.prototype.getCharacterByArchetype = function 
           return trait.probability > Math.random();
         }
       ), function (/** @type {z.common.rulebook.possible_trait} */trait) {
-        console.log(trait);
         return self._ruleBook.getMetaClass(trait.type);
       }
     )
   );
-  console.log(characterData);
   return /** @type {!z.common.entities.Character} */ this._repository.put(characterData);
 };
 

@@ -6,6 +6,7 @@ goog.require("z.common.rulebook.Terrain");
 goog.require("z.common.rulebook.Actor");
 goog.require("z.common.rulebook.Tile");
 goog.require("z.common.rulebook.Trait");
+goog.require("z.common.rulebook.CharacterType");
 goog.require("z.common.rulebook.Archetype");
 goog.require("z.common.rulebook.StockpiledResource");
 goog.require("z.common.rulebook.GameStartingData");
@@ -37,6 +38,7 @@ z.common.rulebook.Rulebook = function (services) {
   this.tiles = this._parseCategoryData(ruleset[z.common.rulebook.category.TILE], z.common.rulebook.Tile);
   this.archetypes = this._parseCategoryData(ruleset[z.common.rulebook.category.ARCHETYPE], z.common.rulebook.Archetype);
   this.traits = this._parseCategoryData(ruleset[z.common.rulebook.category.TRAIT], z.common.rulebook.Trait);
+  this.characterTypes = this._parseCategoryData(ruleset[z.common.rulebook.category.CHARACTER_TYPE], z.common.rulebook.CharacterType);
   this.gameStartingData = new z.common.rulebook.GameStartingData(ruleset);
 
 };
@@ -50,6 +52,7 @@ z.common.rulebook.Rulebook.prototype.getMetaClass = function (type) {
   if (goog.isDefAndNotNull(meta)) {
     return  meta;
   } else {
+    debugger;
     throw 'type: ' + type + ' has no meta class';
   }
 };

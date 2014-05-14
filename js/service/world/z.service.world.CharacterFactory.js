@@ -12,7 +12,7 @@ z.service.world.CharacterFactory = function (services) {
   var ruleset = /** @type {!Object} */services.get(z.common.Resources.RULESET);
 
   /**
-   * @type {z.common.rulebook.CharacterGenerator}
+   * @type {z.service.rulebook.CharacterGenerator}
    */
-  var characterGenerator = /** @type {z.common.rulebook.CharacterGenerator}*/ services.get(z.common.Resources.CHARACTER_GENERATOR);
+  var characterGenerator = /** @type {z.service.rulebook.CharacterGenerator}*/ services.get(z.service.Resources.CHARACTER_GENERATOR);
 };

@@ -123,6 +123,7 @@ z.common.rulebook.category = {
   TILE: 'tile',
   ARCHETYPE: 'archetype',
   CHARACTER: 'character',
+  CHARACTER_TYPE: 'character_type',
   TRAIT: 'trait'
 };
 

@@ -6,7 +6,7 @@ goog.require('z.common.rulebook');
  * @param {z.common.rulebook.archetype} meta
  * @constructor
  */
-z.common.rulebook.Archetype = function(meta){
+z.common.rulebook.Archetype = function (meta) {
   /**
    * @type {z.common.rulebook.archetype}
    * @private
@@ -39,4 +39,8 @@ z.common.rulebook.Archetype = function(meta){
    * @type {Array.<z.common.rulebook.possible_trait>}
    */
   this.traits = this._meta.traits;
+
+  this.combat = this._meta.combat;
+  this.knowledge = this._meta.knowledge;
+  this.labour = this._meta.labour;
 };

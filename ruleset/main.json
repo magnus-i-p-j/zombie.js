@@ -274,811 +274,827 @@
 ], "character": [
   {
     "name": "William",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Lucas",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Oscar",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Hugo",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Elias",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Oliver",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Liam",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Alexander",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Viktor",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Emil",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Axel",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Anton",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Erik",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Leo",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Filip",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Vincent",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Olle",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Arvid",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Ludvig",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Theo",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Charlie",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Isak",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Edvin",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Albin",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Gustav",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Elliot",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Nils",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Adam",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Melvin",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Wilmer",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Max",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Viggo",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Noah",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Benjamin",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Alfred",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Alvin",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Leon",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Kevin",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Simon",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Theodor",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Casper",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Jonathan",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Melker",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Sixten",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Ville",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Rasmus",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Gabriel",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Carl",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Linus",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Jacob",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Malte",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Noel",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Love",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Felix",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Milo",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Adrian",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Sebastian",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Neo",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Valter",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Josef",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "David",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Jack",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Samuel",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Joel",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Harry",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Mohammed",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Wilhelm",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Loke",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Hampus",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Vilgot",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "August",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Vidar",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Sam",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Eddie",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Sigge",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Milton",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Elton",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Frank",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Daniel",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Elis",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Alex",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Tim",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Robin",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Maximilian",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "John",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Fabian",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Hjalmar",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Mio",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Hannes",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Elvin",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Tage",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Måns",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Aron",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Ivar",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Ali",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Otto",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Svante",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Marcus",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Ebbe",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Edward",
-    "gender": "male"
+    "type": "male"
   },
   {
     "name": "Alice",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Maja",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Elsa",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Julia",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Linnéa",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Ella",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Ebba",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Molly",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Wilma",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Emma",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Nellie",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Alva",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Isabelle",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Olivia",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Agnes",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Klara",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Elin",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Emilia",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Freja",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Ellen",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Lilly",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Nova",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Moa",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Ida",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Stella",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Alma",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Saga",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Amanda",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Alicia",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Astrid",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Vera",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Tuva",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Isabella",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Felicia",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Elvira",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Sara",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Selma",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Signe",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Matilda",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Hanna",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Ester",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Ellie",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Thea",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Tyra",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Tilde",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Lova",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Lea",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Minna",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Sofia",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Meja",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Nora",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Lovisa",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Inez",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Siri",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Filippa",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Emelie",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Nathalie",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Edith",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Liv",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Tindra",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Tilda",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Stina",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Leia",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Märta",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Ingrid",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Livia",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Emmy",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Cornelia",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Iris",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Jasmine",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Juni",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Melissa",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "My",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Tove",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Elise",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Linn",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Lisa",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Svea",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Joline",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Ronja",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Elina",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Mira",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Josefin",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Anna",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Evelina",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Hilda",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Rebecca",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Vilda",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Frida",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Lina",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Sigrid",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Greta",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Nicole",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Hedda",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Majken",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Sofie",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Annie",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Victoria",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Hedvig",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Hilma",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Maria",
-    "gender": "female"
+    "type": "female"
   },
   {
     "name": "Rut",
-    "gender": "female"
+    "type": "female"
+  }
+], "character_type": [
+  {
+    "type": "female",
+    "name": "Female",
+    "description": "Sugar and spice"
+  },
+  {
+    "type": "male",
+    "name": "Male",
+    "description": "Snails"
+  },
+  {
+    "type": "other",
+    "name": "Other",
+    "description": "Snails"
   }
 ], "images": [
   {

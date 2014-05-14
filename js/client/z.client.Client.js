@@ -38,6 +38,7 @@ goog.require('z.common.entities.Project');
 goog.require('z.common.entities.Actor');
 goog.require('z.common.entities.Tile');
 goog.require('z.common.entities.Project');
+goog.require('z.common.entities.Character');
 
 goog.require('mugd.injector.Injector');
 
@@ -126,7 +127,7 @@ z.client.Client.initWorldService = function (ruleset) {
   injector.addResource(z.common.Resources.RULESET, ruleset);
   injector.addProvider(z.common.Resources.WORLD, z.service.world.World);
   injector.addProvider(z.common.Resources.RULEBOOK, z.common.rulebook.Rulebook);
-  injector.addProvider(z.common.Resources.CHARACTER_GENERATOR, z.service.world.CharacterGenerator);
+  injector.addProvider(z.service.Resources.CHARACTER_GENERATOR, z.service.world.CharacterGenerator);
   injector.addProvider(z.common.Resources.REPOSITORY, z.common.EntityRepository);
   injector.addProvider(z.service.Resources.TERRAIN_GENERATOR, z.service.world.RandomTerrainGenerator);
   injector.addResource(z.service.Resources.TERRAIN_SEED, 'ASDGW3E45RG');
@@ -134,7 +135,7 @@ z.client.Client.initWorldService = function (ruleset) {
   injector.addFactory(z.common.rulebook.category.PROJECT, z.common.entities.Project);
   injector.addFactory(z.common.rulebook.category.TILE, z.common.entities.Tile);
 //  injector.addFactory(z.common.rulebook.category.ITEM, function(){throw 'not implemented] = item'});
-//  injector.addFactory(z.common.rulebook.category.CHARACTER, function(){throw 'not implemented] = character'});
+  injector.addFactory(z.common.rulebook.category.CHARACTER_TYPE, z.common.entities.Character );
 //  injector.addFactory(z.common.rulebook.category.ASSET, function(){throw 'not implemented] = asset'});
   injector.addFactory(z.common.rulebook.category.ACTOR, z.common.entities.Actor);
 //  injector.addFactory(z.common.rulebook.category.TECH, function(){throw 'not implemented] = tech'});

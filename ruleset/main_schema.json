@@ -11,6 +11,7 @@
     "stockpile",
     "archetype",
     "trait",
+    "character_type",
     "images",
     "character",
     "bounds"
@@ -439,7 +440,7 @@
         "title": "Character",
         "description": "A character",
         "type": "object",
-        "required": ["name"],
+        "required": ["name", "type"],
         "properties": {
           "name": {
             "title": "Name",
@@ -451,10 +452,14 @@
             "description": "Describes the character",
             "type": "string"
           },
-          "gender": {
+          "type": {
             "title": "Gender",
             "description": "Gender of the character",
-            "enum": ["male", "female", "other"]
+            "type": "string",
+            "links": {
+              "rel": "full",
+              "href": "game://character_type/{@}"
+            }
           },
           "archetype": {
             "title": "Archetype",
@@ -465,6 +470,37 @@
               "href": "game://archetype/{@}"
             }
           }
+        }
+      }
+    },
+    "character_type": {
+      "title": "Character types",
+      "description": "The basic types of characters that can exist",
+      "type": "array",
+      "items": {
+        "title": "Character type",
+        "description": "A character type",
+        "type": "object",
+        "required": ["type", "name", "description"],
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of type",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "description": "Describes the type",
+            "type": "string"
+          }
+        },
+        "links": {
+          "rel": "self",
+          "href": "game://character_type/{type}"
         }
       }
     },
