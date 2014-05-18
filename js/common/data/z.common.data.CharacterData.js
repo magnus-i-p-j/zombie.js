@@ -2,6 +2,7 @@ goog.provide('z.common.data.CharacterData');
 
 goog.require('z.common');
 goog.require('z.common.data.EntityData');
+goog.require('goog.object');
 
 /**
  * @implements {z.common.data.EntityData}
@@ -52,7 +53,7 @@ z.common.data.CharacterData.fromEntity = function (character) {
     character.knowledge,
     character.labour,
     character.health,
-    character.traits
+    goog.object.getKeys(character.traits)
   );
 };
 

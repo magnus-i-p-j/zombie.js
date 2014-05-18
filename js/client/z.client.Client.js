@@ -106,13 +106,12 @@ z.client.Client.prototype.startNewGame = function (ruleset, textures) {
   injector.addProvider(z.client.Resources.MESSAGE_LOG_FACET, z.client.facet.MessageLogFacet);
   injector.addProvider(z.client.Resources.END_TURN_ACTION, z.client.actions.EndTurn);
   injector.addProvider(z.client.Resources.PROJECT_LIST_FACET, z.client.facet.ProjectListFacet);
-  injector.addProvider(z.client.Resources.CHARACTER_LIST_FACET, z.client.facet.CharacterListFacet);
 
   injector.addProvider(z.client.Resources.PLAYER_FACET, z.client.facet.ActorFacet);
   injector.addFactory(z.common.rulebook.category.PROJECT, z.common.entities.Project);
   injector.addFactory(z.common.rulebook.category.TILE, z.common.entities.Tile);
 //  injector.addFactory(z.common.rulebook.category.ITEM, function(){throw 'not implemented] = item'});
-//  injector.addFactory(z.common.rulebook.category.CHARACTER, function(){throw 'not implemented] = character'});
+  injector.addFactory(z.common.rulebook.category.CHARACTER_TYPE, z.common.entities.Character );
 //  injector.addFactory(z.common.rulebook.category.ASSET, function(){throw 'not implemented] = asset'});
   injector.addFactory(z.common.rulebook.category.ACTOR, z.common.entities.Actor);
 

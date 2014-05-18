@@ -87,6 +87,7 @@ z.common.entities.Character.prototype._update = function (entityData, meta, owne
 
 z.common.entities.Character.prototype._parseTraits = function (characterData) {
   var traits = {};
+
   goog.array.forEach(characterData.traits, function (element) {
     var trait = /** @type{z.common.rulebook.Trait} */ element;
     traits[trait.type] = trait;

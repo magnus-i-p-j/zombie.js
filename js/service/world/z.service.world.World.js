@@ -62,7 +62,6 @@ z.service.world.World = function (services) {
    * @type {!z.service.world.CharacterGenerator}
    */
   var characterGenerator = /** @type {!z.service.world.CharacterGenerator} */services.get(z.service.Resources.CHARACTER_GENERATOR);
-
   this._createCharacters(this._rulebook, characterGenerator, this._worldActor);
 
   /**
@@ -158,34 +157,7 @@ z.service.world.World.prototype.endTurn = function () {
   var killed = this.tick();
   for (var actorGuid in this._playerActors) {
     if (this._playerActors.hasOwnProperty(actorGuid)) {
-      var tiles = this._entityRepository.map(
-        function (entity) {
-          var tile = /** @type {!z.common.entities.Tile} */ entity;
-          return z.common.data.TileData.fromEntity(tile);
-        },
-        function (entity) {
-          return entity.meta.category === z.common.rulebook.category.TILE;
-        }
-      );
-      var visibleProjects = this._entityRepository.map(
-        function (item) {
-          var project = /** @type {!z.common.entities.Project} */ item;
-          return z.common.data.ProjectData.fromEntity(project);
-        },
-        function (entity) {
-          if (entity instanceof z.common.entities.Project) {
-            return true;
-          }
-          return false;
-        });
-
-      var entities = [];
-      goog.array.extend(entities, tiles, visibleProjects);
-      entities.push(z.common.data.ActorData.fromEntity(this._playerActors[actorGuid]));
-      /**
-       * @type {!z.common.data.StartTurnData}
-       */
-      var startTurn = new z.common.data.StartTurnData(actorGuid, entities, killed, this._turn);
+      var startTurn = this.createStartTurnData(actorGuid, killed);
       this._actorCallbacks[actorGuid](startTurn);
     }
   }
@@ -193,6 +165,80 @@ z.service.world.World.prototype.endTurn = function () {
   console.log('World.endTurn ends');
 };
 
+/**
+ * @param  {Array.<!mugd.utils.guid>} killed
+ * @param {mugd.utils.guid} actorGuid
+ * @returns {!z.common.data.StartTurnData}
+ */
+z.service.world.World.prototype.createStartTurnData = function(actorGuid, killed){
+  var tiles = this.getVisibleTiles();
+  var visibleProjects = this.getVisibleProjects();
+  var characters = this.getVisibleCharacters();
+  var entities = [];
+  goog.array.extend(entities, tiles, visibleProjects, characters);
+  entities.push(z.common.data.ActorData.fromEntity(this._playerActors[actorGuid]));
+  /**
+   * @type {!z.common.data.StartTurnData}
+   */
+  var startTurn = new z.common.data.StartTurnData(actorGuid, entities, killed, this._turn);
+  return startTurn;
+};
+
+/**
+ * @returns {!Array.<z.common.data.TileData>}
+ */
+z.service.world.World.prototype.getVisibleTiles = function(){
+  var tiles = this._entityRepository.map(
+    function (entity) {
+      var tile = /** @type {!z.common.entities.Tile} */ entity;
+      return z.common.data.TileData.fromEntity(tile);
+    },
+    function (entity) {
+      return entity.meta.category === z.common.rulebook.category.TILE;
+    }
+  );
+  return tiles;
+}
+
+/**
+ * @returns {!Array.<z.common.data.ProjectData>}
+ */
+z.service.world.World.prototype.getVisibleProjects = function(){
+  var visibleProjects = this._entityRepository.map(
+    function (item) {
+      var project = /** @type {!z.common.entities.Project} */ item;
+      return z.common.data.ProjectData.fromEntity(project);
+    },
+    function (entity) {
+      if (entity instanceof z.common.entities.Project) {
+        return true;
+      }
+      return false;
+    });
+  return visibleProjects;
+};
+
+/**
+ * @returns {!Array.<z.common.data.CharacterData>}
+ */
+z.service.world.World.prototype.getVisibleCharacters = function(){
+  var characters = this._entityRepository.map(
+    function (item) {
+      var character = /** @type {!z.common.entities.Character} */ item;
+      return z.common.data.CharacterData.fromEntity(character);
+    },
+    function (entity) {
+      if (entity instanceof z.common.entities.Character) {
+        return true;
+      }
+      return false;
+    });
+  return characters;
+};
+
+/**
+ * @returns {Array.<!mugd.utils.guid>}
+ */
 z.service.world.World.prototype.tick = function () {
   var killed = this._setEntityState();
   this._expandWorld();
