@@ -14,11 +14,11 @@ z.init = function (initElement) {
 
   goog.net.XhrIo.send('all.html', function (e) {
     var xhr = /** @type {goog.net.XhrIo} */ (e.target);
-    if(xhr.isSuccess()){
+    if (xhr.isSuccess()) {
       var html = xhr.getResponseText();
       var targetElement = goog.dom.getElement(initElement);
       targetElement.innerHTML = html;
-    }else{
+    } else {
       infuser['defaults']['templatePrefix'] = 'tpl/';
     }
     console.log('running');
@@ -30,3 +30,7 @@ z.init = function (initElement) {
 
 goog.exportSymbol('zed.init', z.init);
 
+if (triggerZed) {
+  window['triggerZed']();
+  window['triggerZed'] = false;
+}
