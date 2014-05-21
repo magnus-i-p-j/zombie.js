@@ -1,4 +1,5 @@
 goog.provide('z.common.EntityQuery');
+goog.provide('z.common.EntityEmptyQuery');
 
 
 /**
@@ -20,11 +21,35 @@ z.common.EntityQuery = function () {
  * @return {boolean}
  */
 z.common.EntityQuery.prototype.match = function (entity) {
-  if (this.owner && entity.owner.guid !== this.owner) {
+  if (this.owner && entity.owner && entity.owner.guid !== this.owner) {
     return false;
   } else if (this.category && entity.meta.category !== this.category) {
     return false;
   } else {
     return true;
   }
+};
+
+/**
+ * @return {!z.common.EntityEmptyQuery}
+ */
+z.common.EntityQuery.empty = function () {
+  return new z.common.EntityEmptyQuery();
+};
+
+/**
+ * @constructor
+ */
+z.common.EntityEmptyQuery = function () {
+  goog.base(this);
+};
+
+goog.inherits(z.common.EntityEmptyQuery, z.common.EntityQuery);
+
+/**
+ * @param {!z.common.entities.Entity} entity
+ * @return {boolean}
+ */
+z.common.EntityEmptyQuery.prototype.match = function (entity) {
+  return true;
 };

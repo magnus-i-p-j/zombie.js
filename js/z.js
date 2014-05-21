@@ -30,7 +30,7 @@ z.init = function (initElement) {
 
 goog.exportSymbol('zed.init', z.init);
 
-if (triggerZed) {
+if (window['triggerZed']) {
   window['triggerZed']();
   window['triggerZed'] = false;
 }

@@ -49,13 +49,25 @@ z.client.facet.Gem = function (services) {
 
   /** @type {!mugd.injector.Injector} */
   var injector = /** @type {!mugd.injector.Injector} */ services.get(z.common.Resources.INJECTOR);
-  var entityQuery = new z.common.EntityQuery();
   var player = /** @type {!z.client.facet.ActorFacet}*/ services.get(z.client.Resources.PLAYER_FACET);
-  entityQuery.owner = player['guid'];
+
+
+  var entityQueryObservable = ko.computed(
+    function () {
+      var owner = player.entity();
+      if (owner) {
+        var entityQuery = new z.common.EntityQuery();
+        entityQuery.owner = player['guid'];
+        return entityQuery
+      } else {
+        return z.common.EntityQuery.empty();
+      }
+    });
+
   /**
    * @type {function(z.client.facet.CharacterListFacet=):z.client.facet.CharacterListFacet}
    */
-  this['ownedCharactersFacet'] = /** @type {function(z.client.facet.CharacterListFacet=):z.client.facet.CharacterListFacet} */ injector.Compose(z.client.facet.CharacterListFacet).With({'entityQuery': entityQuery}).New();
+  this['ownedCharactersFacet'] = /** @type {function(z.client.facet.CharacterListFacet=):z.client.facet.CharacterListFacet} */ injector.Compose(z.client.facet.CharacterListFacet).With({'entityQueryObservable': entityQueryObservable}).New();
 
   /**
    * @type {!z.common.EntityRepository}

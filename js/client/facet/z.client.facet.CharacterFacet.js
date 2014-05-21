@@ -8,10 +8,51 @@ goog.require('z.client.facet.EntityFacet');
  */
 z.client.facet.CharacterFacet = function () {
   goog.base(this);
+  this['health'] = ko.computed(this._getHealth, this);
+  this['combat'] = ko.computed(this._getCombat, this);
+  this['labour'] = ko.computed(this._getLabour, this);
+  this['knowledge'] = ko.computed(this._getKnowledge, this);
+  this['gender'] = ko.computed(this._getGender, this);
 };
 
 goog.inherits(z.client.facet.CharacterFacet, z.client.facet.EntityFacet);
 
-z.client.facet.CharacterFacet.prototype._update = function () {
-  var character = /** @type {z.common.entities.Character} */ this.entity;
+z.client.facet.CharacterFacet.prototype._getHealth = function () {
+  var character = /** @type {z.common.entities.Character} */ this.entity();
+  if (character) {
+    return character.health;
+  }
+  return 0;
+};
+
+z.client.facet.CharacterFacet.prototype._getCombat = function () {
+  var character = /** @type {z.common.entities.Character} */ this.entity();
+  if (character) {
+    return character.combat;
+  }
+  return 0;
+};
+
+z.client.facet.CharacterFacet.prototype._getLabour = function () {
+  var character = /** @type {z.common.entities.Character} */ this.entity();
+  if (character) {
+    return character.labour;
+  }
+  return 0;
+};
+
+z.client.facet.CharacterFacet.prototype._getKnowledge = function () {
+  var character = /** @type {z.common.entities.Character} */ this.entity();
+  if (character) {
+    return character.knowledge;
+  }
+  return 0;
+};
+
+z.client.facet.CharacterFacet.prototype._getGender = function () {
+  var character = /** @type {z.common.entities.Character} */ this.entity();
+  if (character) {
+    return character.gender;
+  }
+  return 0;
 };

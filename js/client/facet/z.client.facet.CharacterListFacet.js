@@ -14,14 +14,13 @@ goog.require('z.client.facet.ProjectFacet');
 z.client.facet.CharacterListFacet = function (services) {
   goog.base(this);
 
+  this._repo = /** @type {!z.commn.EntityRepository}*/ services.get(z.common.Resources.REPOSITORY);
+  this._entityQuery = /** @type {function():!z.common.EntityQuery} */ services.get('entityQueryObservable');
   /**
    * @expose
    * @type {function(Array.<!z.client.facet.CharacterFacet>=):!Array.<!z.client.facet.CharacterFacet>}
    */
-  this['characters'] = ko.observableArray();
-  this._repo = /** @type {!z.common.EntityRepository}*/ services.get(z.common.Resources.REPOSITORY);
-  this._entityQuery = /** @type {!z.common.EntityQuery}*/ services.get('entityQuery');
-  this._entityQuery.category = z.common.rulebook.category.CHARACTER_TYPE;
+  this['characters'] = ko.computed(this._getCharacterList, this);
 };
 
 goog.inherits(z.client.facet.CharacterListFacet, z.client.facet.Facet);
@@ -33,17 +32,15 @@ z.client.facet.CharacterListFacet.prototype.setParentEventTarget = function (par
   goog.base(this, 'setParentEventTarget', parent);
   this.eventHandler.listen(parent, z.common.events.EventType.ENTITY_CREATED, this.doEntityCreated);
   this.eventHandler.listen(parent, z.common.events.EventType.ENTITY_MODIFIED, this.doEntityModified);
-  this.eventHandler.listen(parent, z.client.events.EventType.START_TURN, this.doStartTurn);
+//  this.eventHandler.listen(parent, z.client.events.EventType.START_TURN, this.doStartTurn);
 };
 
-/**
- * @param {!z.common.events.EntityCreated} e
- */
-z.client.facet.CharacterListFacet.prototype.doStartTurn = function (e) {
-  this['characters'].removeAll();
-  var entities = this._repo.filter(this._entityQuery.match.bind(this._entityQuery));
+z.client.facet.CharacterListFacet.prototype._getCharacterList = function () {
+  var entityQuery = this._entityQuery();
+  entityQuery.category = z.common.rulebook.category.CHARACTER_TYPE;
+  var entities = this._repo.filter(entityQuery.match.bind(entityQuery));
   console.log(entities);
-  // TODO: something
+  return entities;
 };
 
 /**
