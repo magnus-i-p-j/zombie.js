@@ -17,6 +17,10 @@
              data-bind="template: {name: 'current_selection_info_widget', data: currentTarget}"
              class="layout">current_selection_info
     </section>
+    <section id="character_overview"
+             class="layout"
+             data-bind="template: {name: 'character_list_widget', data: ownedCharactersFacet}">character_overview
+    </section>
     <section id="project_overview"
              class="layout"
              data-bind="template: {name: 'project_list_widget', data: projectsFacet}">project_overview

@@ -46,10 +46,11 @@ z.client.actions.CreateProject.prototype._logger = goog.debug.Logger.getLogger('
  */
 z.client.actions.CreateProject.prototype._canExecuteInternal = function (args) {
   var target = args[z.client.action.ArgsType.TARGET];
-  if (goog.isNull(target.entity) || target.entity.meta.category !== z.common.rulebook.category.TILE) {
+  var entity = target.entity();
+  if (goog.isNull(entity) || entity.meta.category !== z.common.rulebook.category.TILE) {
     return false;
   }
-  return this.project.isApplicable(target.entity);
+  return this.project.isApplicable(entity);
 };
 
 /**
@@ -64,7 +65,7 @@ z.client.actions.CreateProject.prototype._executeInternal = function (args) {
   projectData.tileId = target['guid'];
   projectData.ownerId = this._playerFacet['guid'];
   this._repository.put(projectData);
-  this._logger.info('Create a ' + this.project.name + ' at target (' + target.entity.position.x + ';' + target.entity.position.y + ')');
+  this._logger.info('Create a ' + this.project.name + ' at target (' + target.entity().position.x + ';' + target.entity().position.y + ')');
 };
 
 z.client.actions.CreateProject.prototype.args = [

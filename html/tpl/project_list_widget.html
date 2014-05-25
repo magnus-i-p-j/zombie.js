@@ -1,6 +1,8 @@
-<!-- ko foreach: projects -->
-<section>
-  <h1><span data-bind="text: name"></span> <span data-bind="text: completionPercent"></span>%</h1>
-  <p><label>Delete project: <input type="checkbox" data-bind="checked: remove"/></label></p>
-</section>
-<!-- /ko -->
+<div class="scroller">
+  <!-- ko foreach: projects -->
+  <section>
+    <h1><span data-bind="text: name"></span> <span data-bind="text: completionPercent"></span>%</h1>
+    <p><label>Delete project: <input type="checkbox" data-bind="checked: remove"/></label></p>
+  </section>
+  <!-- /ko -->
+</div>

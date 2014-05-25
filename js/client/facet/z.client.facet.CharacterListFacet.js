@@ -6,7 +6,6 @@ goog.require('z.client.facet.ProjectFacet');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
- * @param {z.common.EntityQuery} entityQuery
  * @extends {z.client.facet.Facet}
  * @constructor
  * @implements mugd.injector.IInjectable
@@ -14,7 +13,7 @@ goog.require('z.client.facet.ProjectFacet');
 z.client.facet.CharacterListFacet = function (services) {
   goog.base(this);
 
-  this._repo = /** @type {!z.commn.EntityRepository}*/ services.get(z.common.Resources.REPOSITORY);
+  this._repo = /** @type {!z.common.EntityRepository}*/ services.get(z.common.Resources.REPOSITORY);
   this._entityQuery = /** @type {function():!z.common.EntityQuery} */ services.get('entityQueryObservable');
   /**
    * @expose
@@ -39,7 +38,6 @@ z.client.facet.CharacterListFacet.prototype._getCharacterList = function () {
   var entityQuery = this._entityQuery();
   entityQuery.category = z.common.rulebook.category.CHARACTER_TYPE;
   var entities = this._repo.filter(entityQuery.match.bind(entityQuery));
-  console.log(entities);
   return entities;
 };
 
