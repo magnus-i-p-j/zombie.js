@@ -21,9 +21,11 @@ z.common.EntityQuery = function () {
  * @return {boolean}
  */
 z.common.EntityQuery.prototype.match = function (entity) {
-  if (this.owner && entity.owner && entity.owner.guid !== this.owner) {
+  if (this.owner && !entity.owner) {
     return false;
-  } else if (this.category && entity.meta.category !== this.category) {
+  }else if (this.owner && entity.owner && entity.owner.guid !== this.owner) {
+    return false;
+  }else if (this.category && entity.meta.category !== this.category) {
     return false;
   } else {
     return true;
