@@ -9,13 +9,13 @@
     "name": "grass",
     "type": "transition",
     "zone": "base",
-    "uri": "..\/img\/tiles\/grass.png"
+    "uri": "..\/img\/tiles\/grass5.png"
   },
   {
     "name": "hills",
     "type": "single",
     "zone": "base",
-    "uri": "..\/img\/tiles\/hill.png"
+    "uri": "..\/img\/tiles\/hill2.png"
   },
   {
     "name": "house",
