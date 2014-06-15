@@ -173,6 +173,7 @@ z.service.world.World.prototype.endTurn = function () {
 z.service.world.World.prototype.createStartTurnData = function(actorGuid, killed){
   var tiles = this.getVisibleTiles();
   var visibleProjects = this.getVisibleProjects();
+  console.log(visibleProjects);
   var characters = this.getVisibleCharacters();
   var entities = [];
   goog.array.extend(entities, tiles, visibleProjects, characters);
@@ -273,7 +274,6 @@ z.service.world.World.prototype._setEntityState = function () {
  * @private
  */
 z.service.world.World.prototype._advanceProjects = function () {
-
   /**
    * @type {!Array.<!z.common.entities.Project>}
    */

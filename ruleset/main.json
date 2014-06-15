@@ -70,7 +70,12 @@
       "effect_terrain": "field"
     },
     "cost": {
-      "stockpile": []
+      "stockpile": [
+        {
+          "type": "food",
+          "amount": 1
+        }
+      ]
     }
   },
   {
@@ -85,7 +90,16 @@
       "effect_terrain": "fence"
     },
     "cost": {
-      "stockpile": []
+      "stockpile": [
+        {
+          "type": "wood",
+          "amount": 8
+        },
+        {
+          "type": "scrap",
+          "amount": 3
+        }
+      ]
     }
   },
   {
@@ -145,7 +159,16 @@
       "effect_terrain": "field"
     },
     "cost": {
-      "stockpile": []
+      "stockpile": [
+        {
+          "type": "wood",
+          "amount": 3
+        },
+        {
+          "type": "metal",
+          "amount": 1
+        }
+      ]
     }
   }
 ], "actor": [
