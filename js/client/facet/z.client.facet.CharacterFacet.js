@@ -13,6 +13,7 @@ z.client.facet.CharacterFacet = function () {
   this['labour'] = ko.computed(this._getLabour, this);
   this['knowledge'] = ko.computed(this._getKnowledge, this);
   this['gender'] = ko.computed(this._getGender, this);
+  this['assignedTo'] = ko.computed(this._getAssignedTo, this);
 };
 
 goog.inherits(z.client.facet.CharacterFacet, z.client.facet.EntityFacet);
@@ -53,6 +54,14 @@ z.client.facet.CharacterFacet.prototype._getGender = function () {
   var character = /** @type {z.common.entities.Character} */ this.entity();
   if (character) {
     return character.gender;
+  }
+  return 0;
+};
+
+z.client.facet.CharacterFacet.prototype._getAssignedTo = function () {
+  var character = /** @type {z.common.entities.Character} */ this.entity();
+  if (character) {
+    return character.assignedTo;
   }
   return 0;
 };

@@ -24,6 +24,7 @@ goog.require('z.client.facet.ContextMenuFacet');
 goog.require('z.client.facet.ToolbarFacet');
 goog.require('z.client.facet.InfoFacet');
 goog.require('z.client.facet.MessageLogFacet');
+goog.require('z.client.facet.ProjectFacet');
 goog.require('z.client.facet.ProjectListFacet');
 goog.require('z.client.facet.CharacterListFacet');
 goog.require('z.client.facet.ActorFacet');
@@ -105,6 +106,7 @@ z.client.Client.prototype.startNewGame = function (ruleset, textures) {
   injector.addProvider(z.client.Resources.INFO_FACET, z.client.facet.InfoFacet);
   injector.addProvider(z.client.Resources.MESSAGE_LOG_FACET, z.client.facet.MessageLogFacet);
   injector.addProvider(z.client.Resources.END_TURN_ACTION, z.client.actions.EndTurn);
+  injector.addProvider(z.client.Resources.PROJECT_FACET, z.client.facet.ProjectFacet);
   injector.addProvider(z.client.Resources.PROJECT_LIST_FACET, z.client.facet.ProjectListFacet);
 
   injector.addProvider(z.client.Resources.PLAYER_FACET, z.client.facet.ActorFacet);
