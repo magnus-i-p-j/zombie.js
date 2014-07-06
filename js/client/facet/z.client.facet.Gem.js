@@ -58,6 +58,7 @@ z.client.facet.Gem = function (services) {
       if (owner) {
         var entityQuery = new z.common.EntityQuery();
         entityQuery.owner = player['guid'];
+        entityQuery.category = z.common.rulebook.category.CHARACTER_TYPE;
         return entityQuery
       } else {
         return z.common.EntityQuery.empty();

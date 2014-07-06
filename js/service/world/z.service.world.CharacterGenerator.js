@@ -73,6 +73,7 @@ z.service.world.CharacterGenerator.prototype.getCharacterByArchetype = function 
     this._addStatVariation(archetype.knowledge),
     this._addStatVariation(archetype.labour),
     1,
+    null,
     goog.array.map(
       goog.array.filter(archetype.traits, function (/** @type {z.common.rulebook.possible_trait} */trait) {
           return trait.probability > Math.random();

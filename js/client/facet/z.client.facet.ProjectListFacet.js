@@ -19,8 +19,10 @@ z.client.facet.ProjectListFacet = function (services) {
    * @type {function(Array.<!z.client.facet.ProjectFacet>=):!Array.<!z.client.facet.ProjectFacet>}
    */
   this['projects'] = ko.observableArray();
-  this.newProjectFacet = function() {
-    var newFacet = services.get(z.client.Resources.PROJECT_FACET);
+
+  this.newProjectFacet = function(entity) {
+    var newFacet = services.get(z.client.Resources.PROJECT_FACET).New();
+    newFacet.setEntity(entity);
     return newFacet;
   };
 };
@@ -55,8 +57,7 @@ z.client.facet.ProjectListFacet.prototype.doEntityCreated = function (e) {
    */
   var entity = e.entity;
   if (entity instanceof z.common.entities.Project) {
-    var projectFacet = this.newProjectFacet();
-    projectFacet.setEntity(entity);
+    var projectFacet = this.newProjectFacet(entity);
     this['projects'].push(projectFacet);
   }
 };

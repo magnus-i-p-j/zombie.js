@@ -2,7 +2,9 @@ goog.provide('z.client.facet.CharacterListFacet');
 
 goog.require('z.client.facet.Facet');
 goog.require('z.common.events');
-goog.require('z.client.facet.ProjectFacet');
+goog.require('z.common');
+goog.require('mugd.injector.IInjectable');
+goog.require('z.common.EntityQuery');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -15,8 +17,10 @@ z.client.facet.CharacterListFacet = function (services) {
 
   this._repo = /** @type {!z.common.EntityRepository}*/ services.get(z.common.Resources.REPOSITORY);
   this._entityQuery = /** @type {function():!z.common.EntityQuery} */ services.get('entityQueryObservable');
+
+  this._refreshCharacterList = ko.observable(false);
+
   /**
-   * @expose
    * @type {function(Array.<!z.client.facet.CharacterFacet>=):!Array.<!z.client.facet.CharacterFacet>}
    */
   this['characters'] = ko.computed(this._getCharacterList, this);
@@ -35,6 +39,8 @@ z.client.facet.CharacterListFacet.prototype.setParentEventTarget = function (par
 };
 
 z.client.facet.CharacterListFacet.prototype._getCharacterList = function () {
+  this._refreshCharacterList();
+  console.log("?");
   var entityQuery = this._entityQuery();
   entityQuery.category = z.common.rulebook.category.CHARACTER_TYPE;
   var entities = this._repo.filter(entityQuery.match.bind(entityQuery));
@@ -59,5 +65,7 @@ z.client.facet.CharacterListFacet.prototype.doEntityModified = function (e) {
    * @type {!z.common.entities.Entity}
    */
   var entity = e.entity;
+  console.log("!");
+  this._refreshCharacterList(!this._refreshCharacterList());
 };
 

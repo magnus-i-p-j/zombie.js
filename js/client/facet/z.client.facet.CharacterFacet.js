@@ -63,5 +63,5 @@ z.client.facet.CharacterFacet.prototype._getAssignedTo = function () {
   if (character) {
     return character.assignedTo;
   }
-  return 0;
+  return null;
 };
