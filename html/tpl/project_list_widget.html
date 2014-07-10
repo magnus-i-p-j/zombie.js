@@ -2,6 +2,9 @@
   <!-- ko foreach: projects -->
   <section>
     <h1><span data-bind="text: name"></span> <span data-bind="text: completionPercent"></span>%</h1>
+    <!-- ko if: workforce.characters().length -->
+    <span data-bind="text: workforce.characters()[0].name"></span>
+    <!-- /ko -->
     <p><input type="button" value="Assign a worker" data-bind="click: assignFreeAgent"/></label></p>
     <p><label>Delete project: <input type="checkbox" data-bind="checked: remove"/></label></p>
   </section>

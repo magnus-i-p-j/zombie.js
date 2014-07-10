@@ -25,12 +25,10 @@ z.client.facet.ProjectFacet = function (services) {
     function() {
       var workforceQuery = new z.common.EntityQuery();
       workforceQuery.match = function (entity) {
-        console.log('Running workforceQuery');
         if (entity instanceof z.common.entities.Character) {
           var character = /** @type {!z.common.entities.Character} */ entity;
           if(character.assignedTo) {
             console.log('Character ' + character.name + ", assigned to: " + character.assignedTo);
-            console.log(character);
           }
           return self.entity() && character.assignedTo === self.entity().guid;
         }
@@ -52,8 +50,7 @@ z.client.facet.ProjectFacet = function (services) {
 
   this['assignFreeAgent'] = function(){
     console.log('Assigning a free agent!');
-    console.log(self['workforce']['characters'].length);
-    if(self['workforce']['characters'].length <= 0) {
+    if(self['workforce']['characters']().length <= 0) {
       var entityQuery = new z.common.EntityQuery();
       var player = /** @type {!z.client.facet.ActorFacet}*/ services.get(z.client.Resources.PLAYER_FACET);
       entityQuery.owner = player['guid'];
@@ -66,18 +63,27 @@ z.client.facet.ProjectFacet = function (services) {
       var freeAgent = null;
       var candidates = repository.choose(3, entityQuery);
       for (var i = 0; i < candidates.length; ++i) {
-        if (!candidates[i].assignedTo && self['workforce']['characters'].length <= 0) {
+        if (!candidates[i].assignedTo && self['workforce']['characters']().length <= 0) {
           freeAgent = candidates[i];
           var data = z.common.data.CharacterData.fromEntity(freeAgent);
           data.assignedTo = self.entity().guid;
           freeAgent.update(data);
         }
       }
+      console.log(self['workforce']['characters']().length);
     }
   };
 };
 
 goog.inherits(z.client.facet.ProjectFacet, z.client.facet.EntityFacet);
+
+/**
+ * @param {goog.events.EventTarget} parent
+ */
+z.client.facet.ProjectFacet.prototype.setParentEventTarget = function (parent) {
+  goog.base(this, 'setParentEventTarget', parent);
+  this['workforce'].setParentEventTarget(parent);
+};
 
 z.client.facet.ProjectFacet.prototype._update = function () {
   var project = /** @type {z.common.entities.Project} */ this.entity();

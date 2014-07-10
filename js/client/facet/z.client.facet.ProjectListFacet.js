@@ -58,6 +58,7 @@ z.client.facet.ProjectListFacet.prototype.doEntityCreated = function (e) {
   var entity = e.entity;
   if (entity instanceof z.common.entities.Project) {
     var projectFacet = this.newProjectFacet(entity);
+    projectFacet.setParentEventTarget(this.getParentEventTarget());
     this['projects'].push(projectFacet);
   }
 };
