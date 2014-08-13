@@ -47,7 +47,7 @@ z.common.data.CharacterData = function (guid, ownerId, state, name, gender, comb
 z.common.data.CharacterData.fromEntity = function (character) {
   return new z.common.data.CharacterData(
     character.guid,
-    character.owner.guid,
+    character.owner.guid, // TODO: fix so owner is good
     character.getState(),
     character.name,
     character.gender,

@@ -5,7 +5,7 @@ goog.require('goog.array');
 
 /**
  * @param {!mugd.utils.guid} actorId
- * @param {Array.<!z.common.data.TileData|!z.common.data.ActorData|!z.common.data.ProjectData>} entities
+ * @param {Array.<!z.common.data.TileData|!z.common.data.ActorData|!z.common.data.ProjectData|!z.common.data.CharacterData>} entities
  * @param {Array.<!mugd.utils.guid>} killed
  * @param {number} turn
  * @constructor

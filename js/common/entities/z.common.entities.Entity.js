@@ -59,8 +59,7 @@ z.common.entities.Entity.prototype.getState = function () {
 z.common.entities.Entity.prototype.setState = function (state) {
   if (this._state !== state && this._state !== z.common.protocol.state.DEAD) {
     this._state = state;
-    var event = new z.common.events.EntityModified(this);
-    this.dispatchEvent(event);
+    this._dispatchModified();
   }
 };
 
@@ -90,10 +89,17 @@ z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
   updated = this._update(entityData, meta, owner) || updated;
 
   if (updated) {
-    var event = new z.common.events.EntityModified(this);
-    this.dispatchEvent(event);
+    this._dispatchModified();
   }
   return updated;
+};
+
+/**
+ * @protected
+ */
+z.common.entities.Entity.prototype._dispatchModified = function() {
+  var event = new z.common.events.EntityModified(this);
+  this.dispatchEvent(event);
 };
 
 /**
@@ -108,3 +114,5 @@ z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
 z.common.entities.Entity.prototype._update = function (entityData, meta, owner) {
   throw {'name': 'NotImplementedException', 'message': 'update'};
 };
+
+

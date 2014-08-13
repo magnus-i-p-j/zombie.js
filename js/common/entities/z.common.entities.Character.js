@@ -105,3 +105,14 @@ z.common.entities.Character.prototype._parseTraits = function (characterData) {
 z.common.entities.Character.prototype.hasTrait = function (trait) {
   return this.traits[trait.type];
 };
+
+
+/**
+ * @param {!mugd.utils.guid} guid
+ */
+z.common.entities.Character.prototype.assignTo = function (guid) {
+  if(this.assignedTo !== guid){
+    this.assignedTo = guid;
+    this._dispatchModified();
+  }
+};
