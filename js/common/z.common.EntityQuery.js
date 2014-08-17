@@ -23,7 +23,7 @@ z.common.EntityQuery = function () {
 z.common.EntityQuery.prototype.match = function (entity) {
   if (this.owner && !entity.owner) {
     return false;
-  }else if (this.owner && entity.owner && entity.owner.guid !== this.owner) {
+  }else if (this.owner && entity.owner !== this.owner) {
     return false;
   }else if (this.category && entity.meta.category !== this.category) {
     return false;

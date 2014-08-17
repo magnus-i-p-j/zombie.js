@@ -132,3 +132,21 @@ z.common.EntityRepository.prototype.choose = function (number, query) {
   }
   return chosen;
 };
+
+/**
+ * @returns {Array.<!mugd.utils.guid>}
+ */
+z.common.EntityRepository.prototype.resetState = function () {
+  var killed = [];
+  this.map(
+    function (entity) {
+      var state = entity.getState();
+      if (state === z.common.protocol.state.MODIFIED) {
+        entity.setState(z.common.protocol.state.PASS);
+      } else if (state === z.common.protocol.state.KILL) {
+        entity.setState(z.common.protocol.state.DEAD);
+        killed.push(entity.guid);
+      }
+    });
+  return killed;
+};

@@ -144,7 +144,7 @@ z.service.world.World.prototype.updateProject = function(projectData, actor) {
  */
 z.service.world.World.prototype.updateCharacter = function(characterData, actor) {
   var character = this._entityRepository.get(characterData.guid);
-  if (goog.isDefAndNotNull(character) && character.owner !== actor) {
+  if (goog.isDefAndNotNull(character) && character.owner !== actor.guid) {
     this._logger.warning('character is not owned by the correct actor');
   } else {
     this._logger.info('Received character service side');
@@ -260,7 +260,7 @@ z.service.world.World.prototype.getVisibleCharacters = function() {
  * @returns {Array.<!mugd.utils.guid>}
  */
 z.service.world.World.prototype.tick = function() {
-  var killed = this._setEntityState();
+  var killed = this._entityRepository.resetState();
   this._expandWorld();
   //Calculate zombies
   //Zombie attack
@@ -268,24 +268,6 @@ z.service.world.World.prototype.tick = function() {
   this._turn += 1;
   //Special events
 
-  return killed;
-};
-
-/**
- * @returns {Array.<!mugd.utils.guid>}
- * @private
- */
-z.service.world.World.prototype._setEntityState = function() {
-  var killed = [];
-  this._entityRepository.map(
-    function(entity) {
-      if (entity.state === z.common.protocol.state.MODIFIED) {
-        entity.setState(z.common.protocol.state.PASS);
-      } else if (entity.state === z.common.protocol.state.KILL) {
-        entity.setState(z.common.protocol.state.DEAD);
-        killed.push(entity.guid);
-      }
-    });
   return killed;
 };
 
@@ -313,7 +295,7 @@ z.service.world.World.prototype._advanceProjects = function() {
     /**
      * @type {!z.common.entities.Actor}
      */
-    var owner = project.owner;
+    var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
     var stockpile = owner.stockpile;
     var cost = project.getRemainingCost();
     var cashier = new z.common.Cashier(stockpile);

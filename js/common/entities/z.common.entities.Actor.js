@@ -33,15 +33,20 @@ goog.inherits(z.common.entities.Actor, z.common.entities.Entity);
  * @inheritDoc
  */
 z.common.entities.Actor.prototype._update = function (entityData, meta, owner) {
-  if (!(entityData instanceof z.common.data.ActorData)) {
-    throw {'name': 'InvalidDataException', 'message': 'not a z.common.data.ActorData'};
+  var updated = false;
+  if(entityData) {
+    if (entityData instanceof z.common.data.ActorData) {
+      /**
+       * @type {!z.common.data.ActorData}
+       */
+      var actorData = /** @type {!z.common.data.ActorData} */ entityData;
+      this.stockpile.purgeAll();
+      this.stockpile.addAll(actorData.stockpile);
+      updated = true;
+    } else {
+      throw 'InvalidDataException: not a z.common.data.ActorData';
+    }
   }
-  /**
-   * @type {!z.common.data.ActorData}
-   */
-  var actorData = /** @type {!z.common.data.ActorData} */ entityData;
-  this.stockpile.purgeAll();
-  this.stockpile.addAll(actorData.stockpile);
-  return true;
+  return updated;
 };
 

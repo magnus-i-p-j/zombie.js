@@ -54,7 +54,7 @@ z.common.data.TileData.fromEntity = function (tile) {
   return new z.common.data.TileData(
       tile.guid,
       tile.getState(),
-      tile.owner.guid,
+      tile.owner,
       tile.position.x,
       tile.position.y,
       tile.terrain,
@@ -86,7 +86,7 @@ z.common.data.TileData.toProtocol = function (tile) {
   return {
       'tileId': tile.guid,
       'state': tile.getState(),
-      'ownerId': tile.owner.guid,
+      'ownerId': tile.owner,
       'x': tile.position.x,
       'y': tile.position.y,
       'terrain': tile.terrain,

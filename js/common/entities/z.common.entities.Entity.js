@@ -32,7 +32,11 @@ z.common.entities.Entity = function (services) {
   /**
    * @type {!z.common.entities.Actor}
    */
-  this.owner = /** @type {!z.common.entities.Actor} */ services.get('owner');
+  var owner = /** {!z.common.entities.Actor} */ services.get('owner');
+  /**
+   * @type {?mugd.utils.guid}
+   */
+  this.owner = owner ? owner.guid : null;
 
   /**
    * @private
@@ -81,8 +85,8 @@ z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
     }
   }
 
-  if(owner && owner.guid !== this.owner.guid){
-    this.owner = owner;
+  if(owner && owner.guid !== this.owner){
+    this.owner = owner.guid;
     updated = true;
   }
 
