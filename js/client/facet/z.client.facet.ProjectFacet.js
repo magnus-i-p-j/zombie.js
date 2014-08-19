@@ -27,9 +27,6 @@ z.client.facet.ProjectFacet = function (services) {
       workforceQuery.match = function (entity) {
         if (entity instanceof z.common.entities.Character) {
           var character = /** @type {!z.common.entities.Character} */ entity;
-          if(character.assignedTo) {
-            console.log('Character ' + character.name + ", assigned to: " + character.assignedTo);
-          }
           return self.entity() && character.assignedTo === self.entity().guid;
         }
         return false;
@@ -49,7 +46,6 @@ z.client.facet.ProjectFacet = function (services) {
 
 
   this['assignFreeAgent'] = function(){
-    console.log('Assigning a free agent!');
     if(self['workforce']['characters']().length <= 0) {
       var entityQuery = new z.common.EntityQuery();
       var player = /** @type {!z.client.facet.ActorFacet}*/ services.get(z.client.Resources.PLAYER_FACET);
@@ -70,7 +66,6 @@ z.client.facet.ProjectFacet = function (services) {
           freeAgent.update(data);
         }
       }
-      console.log(self['workforce']['characters']().length);
     }
   };
 };

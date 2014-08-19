@@ -62,7 +62,6 @@ z.client.facet.CharacterListFacet.prototype.doEntityModified = function (e) {
    * @type {!z.common.entities.Entity}
    */
   var entity = e.entity;
-  console.log('z.client.facet.CharacterListFacet.prototype.doEntityModified');
   this['characters'](this._getCharacterList());
 };
 

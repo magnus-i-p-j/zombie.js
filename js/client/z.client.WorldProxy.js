@@ -95,7 +95,6 @@ z.client.WorldProxy.prototype.endTurn = function() {
     function(entity) {
       if (entity instanceof z.common.entities.Project) {
         if (entityChanged(entity)) {
-          debugger;
           return true;
         }
       }
@@ -111,7 +110,6 @@ z.client.WorldProxy.prototype.endTurn = function() {
     function(entity) {
       if (entity instanceof z.common.entities.Character) {
         if (entityChanged(entity)) {
-          debugger;
           return true;
         }
       }
