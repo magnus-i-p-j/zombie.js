@@ -93,6 +93,7 @@ z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
   updated = this._update(entityData, meta, owner) || updated;
 
   if (updated) {
+    this._setModified();
     this._dispatchModified();
   }
   return updated;
@@ -104,6 +105,15 @@ z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
 z.common.entities.Entity.prototype._dispatchModified = function() {
   var event = new z.common.events.EntityModified(this);
   this.dispatchEvent(event);
+};
+
+/**
+ * @protected
+ */
+z.common.entities.Entity.prototype._setModified = function () {
+  if (this.getState() === z.common.protocol.state.PASS) {
+    this._state = z.common.protocol.state.MODIFIED;
+  }
 };
 
 /**

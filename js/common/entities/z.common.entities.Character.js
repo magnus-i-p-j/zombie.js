@@ -67,6 +67,7 @@ z.common.entities.Character.prototype._update = function (entityData, meta, owne
       updated = true;
     }
     if(this.assignedTo !== characterData.assignedTo){
+      debugger;
       this.assignedTo = characterData.assignedTo;
       updated = true;
     }

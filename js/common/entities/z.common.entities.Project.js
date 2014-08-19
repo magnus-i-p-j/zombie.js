@@ -99,12 +99,6 @@ z.common.entities.Project.prototype.advance = function (investment) {
   return effects;
 };
 
-z.common.entities.Project.prototype._setModified = function () {
-  if (this.state === z.common.protocol.state.PASS) {
-    this.state = z.common.protocol.state.MODIFIED;
-  }
-};
-
 /**
  * @inheritDoc
  */
