@@ -153,7 +153,7 @@ z.service.world.World.prototype.updateCharacter = function(characterData, actor)
 };
 
 z.service.world.World.prototype._doBeforeFirstTurn = function() {
-  var startingNumberOfCharacters = 3;
+  var startingNumberOfCharacters = 10;
   goog.object.forEach(this._playerActors, function(actor) {
     var query = new z.common.EntityQuery();
     query.owner = this._worldActor.guid;
@@ -295,11 +295,19 @@ z.service.world.World.prototype._advanceProjects = function() {
      * @type {!z.common.entities.Actor}
      */
     var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
-    var stockpile = owner.stockpile;
+    var stockpile = owner.stockpile.clone();
+
+    // TODO: Make cashier handle multiple stockpiles
+
     var cost = project.getRemainingCost();
+    // stockpile add transient resources
     var cashier = new z.common.Cashier(stockpile);
     var investment = cashier.withdraw(cost);
     var effects = project.advance(investment);
+
+    // investment remove transient resources
+    // owner.stockpile remove used resources
+
     results[project.guid] = this._applyEffects(effects, project);
   }, this);
 

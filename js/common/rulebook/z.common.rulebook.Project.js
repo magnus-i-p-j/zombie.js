@@ -10,7 +10,7 @@ goog.require('goog.array');
  * @param {!z.common.rulebook.project} project
  * @constructor
  */
-z.common.rulebook.Project = function (project) {
+z.common.rulebook.Project = function(project) {
   /**
    * @type {!z.common.rulebook.project}
    * @private
@@ -35,13 +35,29 @@ z.common.rulebook.Project = function (project) {
   this.description = this._project.description;
 
   this.cost = {};
-  goog.array.forEach(
-      this._project['cost']['stockpile'],
-      function (item) {
+  var stockpile = this._project['cost']['stockpile'];
+  if (stockpile) {
+    goog.array.forEach(
+      stockpile,
+      function(item) {
         var name = item['type'];
         this.cost[name] = item['amount'];
       }, this
-  );
+    );
+  }
+
+  var work = this._project['cost']['work'];
+  if (work) {
+    goog.object.forEach(
+      work,
+      function(value, key) {
+        var name = 'game://static/' + key;
+        this.cost[name] = value;
+      }, this
+    );
+  }
+
+
 
   this.effects = this._project['effects'];
 };
@@ -50,7 +66,7 @@ z.common.rulebook.Project = function (project) {
  * @param {!z.common.entities.Entity} target
  * @return {boolean}
  */
-z.common.rulebook.Project.prototype.isApplicable = function (target) {
+z.common.rulebook.Project.prototype.isApplicable = function(target) {
   for (var key in this._project['prerequisites']) {
     if (this._project['prerequisites'].hasOwnProperty(key)) {
       if (!z.common.rulebook.logic.prerequisites[key](this._project['prerequisites'][key], target)) {
@@ -61,9 +77,9 @@ z.common.rulebook.Project.prototype.isApplicable = function (target) {
   return true;
 };
 
-z.common.rulebook.Project.prototype.createNewProjectData = function () {
+z.common.rulebook.Project.prototype.createNewProjectData = function() {
   var projectData = new z.common.data.ProjectData(
-      null, null, this.type, z.common.protocol.state.MODIFIED, 0, null, [], {}
+    null, null, this.type, z.common.protocol.state.MODIFIED, 0, null, [], {}
   );
   return projectData;
 };

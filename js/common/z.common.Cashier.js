@@ -26,3 +26,4 @@ z.common.Cashier.prototype.withdraw = function (request) {
   );
   return response;
 };
+

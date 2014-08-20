@@ -91,6 +91,23 @@ z.common.Stockpile.prototype.ratio = function(name, amount){
   return this[name].peek() / amount;
 };
 
+z.common.Stockpile.prototype.clone = function(){
+  if (!this[name]) {
+    this[name] = new z.common.StockpiledResource();
+  }
+  return this[name].peek() / amount;
+};
+z.common.Stockpile.prototype.clone = function() {
+  var response = new z.common.Stockpile();
+  goog.object.forEach(this, function(amount, name) {
+    var value = this.peek(name);
+    if (value !== 0) {
+      response.add(name, value);
+    }
+  }, this);
+  return response;
+};
+
 /**
  * @constructor
  */

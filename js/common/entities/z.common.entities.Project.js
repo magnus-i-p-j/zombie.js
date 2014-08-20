@@ -51,7 +51,6 @@ z.common.entities.Project = function (services) {
 
   this.completion = 0;
 
-  //TODO: Find entities instead of id:s
   this.resources = projectData.resources;
 };
 
