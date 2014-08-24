@@ -3,7 +3,7 @@ test:
 exclude:
   - "z.service.mapRender.MapRenderService/*.js"
 load:
-  - ../libs/knockout-2.1.0.debug.js
+  - ../libs/knockout-3.1.0.debug.js
   - ../libs/jquery-1.7.2.js
   - ../libs/koExternalTemplateEngine_all.js
   - ../libs/tv4.js

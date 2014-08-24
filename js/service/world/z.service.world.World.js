@@ -300,8 +300,25 @@ z.service.world.World.prototype._advanceProjects = function() {
     // TODO: Make cashier handle multiple stockpiles
 
     var cost = project.getRemainingCost();
+
+    var isAssignedTo = function (entity) {
+      if (entity instanceof z.common.entities.Character) {
+        var character = /** @type {!z.common.entities.Character} */ entity;
+        return character.assignedTo === project.guid;
+      }
+      return false;
+    };
+    var work = new z.common.Stockpile();
+    var calculateWork = function(character) {
+      var prefix =  'game://static/';
+      work.add(prefix + 'combat', character.combat);
+      work.add(prefix + 'knowledge', character.knowledge);
+      work.add(prefix + 'labour', character.labour);
+    };
+    this._entityRepository.map(calculateWork, isAssignedTo);
+
     // stockpile add transient resources
-    var cashier = new z.common.Cashier(stockpile);
+    var cashier = new z.common.Cashier(work, stockpile);
     var investment = cashier.withdraw(cost);
     var effects = project.advance(investment);
 
