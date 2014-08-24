@@ -291,11 +291,12 @@ z.service.world.World.prototype._advanceProjects = function() {
   var results = {};
 
   goog.array.forEach(projects, function(project) {
+
     /**
      * @type {!z.common.entities.Actor}
      */
     var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
-    var stockpile = owner.stockpile.clone();
+    var stockpile = owner.stockpile;
 
     // TODO: Make cashier handle multiple stockpiles
 
@@ -317,13 +318,9 @@ z.service.world.World.prototype._advanceProjects = function() {
     };
     this._entityRepository.map(calculateWork, isAssignedTo);
 
-    // stockpile add transient resources
     var cashier = new z.common.Cashier(work, stockpile);
     var investment = cashier.withdraw(cost);
     var effects = project.advance(investment);
-
-    // investment remove transient resources
-    // owner.stockpile remove used resources
 
     results[project.guid] = this._applyEffects(effects, project);
   }, this);
@@ -354,7 +351,7 @@ z.service.world.World.prototype._applyEffects = function(effects, project) {
  * @param {z.common.entities.Project} project
  */
 z.service.world.World.prototype['_apply_effect_stockpile'] = function(effect, project) {
-  var owner = project.owner;
+  var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
   goog.array.forEach(effect, function(resource) {
     owner.stockpile.add(resource['type'], resource['magnitude']);
   }, this);
