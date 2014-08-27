@@ -99,5 +99,11 @@ TestCase("test z.common.Stockpile", {
     this.stockpile.add('wood', 5);
     var actual = this.stockpile.ratioAll({'scrap': 4, 'wood': 20});
     assertEquals(5 / 20, actual);
+  },
+  'test should handle zero denominator in ratioAll': function () {
+    this.stockpile.add('scrap', 34);
+    //this.stockpile.add('wood', 0);
+    var actual = this.stockpile.ratioAll({'scrap': 0, 'wood': 0, 'electronics':0});
+    assertEquals(1, actual);
   }
 });
