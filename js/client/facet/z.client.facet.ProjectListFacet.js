@@ -3,12 +3,15 @@ goog.provide('z.client.facet.ProjectListFacet');
 goog.require('z.client.facet.Facet');
 goog.require('z.common.events');
 goog.require('z.client.facet.ProjectFacet');
+goog.require('z.client');
 
 /**
+ * @param {!mugd.injector.MicroFactory} services
  * @extends {z.client.facet.Facet}
+ * @implements mugd.injector.IInjectable
  * @constructor
  */
-z.client.facet.ProjectListFacet = function () {
+z.client.facet.ProjectListFacet = function (services) {
   goog.base(this);
 
   /**
@@ -17,6 +20,11 @@ z.client.facet.ProjectListFacet = function () {
    */
   this['projects'] = ko.observableArray();
 
+  this.newProjectFacet = function(entity) {
+    var newFacet = services.get(z.client.Resources.PROJECT_FACET).New();
+    newFacet.setEntity(entity);
+    return newFacet;
+  };
 };
 
 goog.inherits(z.client.facet.ProjectListFacet, z.client.facet.Facet);
@@ -49,8 +57,8 @@ z.client.facet.ProjectListFacet.prototype.doEntityCreated = function (e) {
    */
   var entity = e.entity;
   if (entity instanceof z.common.entities.Project) {
-    var projectFacet = new z.client.facet.ProjectFacet();
-    projectFacet.setEntity(entity);
+    var projectFacet = this.newProjectFacet(entity);
+    projectFacet.setParentEventTarget(this.getParentEventTarget());
     this['projects'].push(projectFacet);
   }
 };

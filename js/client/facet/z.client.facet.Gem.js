@@ -3,6 +3,7 @@ goog.provide('z.client.facet.Gem');
 goog.require('z.client.facet.Facet');
 goog.require('mugd.injector.Injector');
 goog.require('z.client');
+goog.require('z.common.EntityQuery');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -46,6 +47,29 @@ z.client.facet.Gem = function (services) {
    */
   this['projectsFacet'] = /** @type {function(z.client.facet.ProjectListFacet=):z.client.facet.ProjectListFacet} */ services.get(z.client.Resources.PROJECT_LIST_FACET);
 
+  /** @type {!mugd.injector.Injector} */
+  var injector = /** @type {!mugd.injector.Injector} */ services.get(z.common.Resources.INJECTOR);
+  var player = /** @type {!z.client.facet.ActorFacet}*/ services.get(z.client.Resources.PLAYER_FACET);
+
+
+  var entityQueryObservable = ko.computed(
+    function () {
+      var owner = player.entity();
+      if (owner) {
+        var entityQuery = new z.common.EntityQuery();
+        entityQuery.owner = player['guid'];
+        entityQuery.category = z.common.rulebook.category.CHARACTER_TYPE;
+        return entityQuery
+      } else {
+        return z.common.EntityQuery.empty();
+      }
+    });
+
+  /**
+   * @type {function(z.client.facet.CharacterListFacet=):z.client.facet.CharacterListFacet}
+   */
+  this['ownedCharactersFacet'] = /** @type {function(z.client.facet.CharacterListFacet=):z.client.facet.CharacterListFacet} */ injector.Compose(z.client.facet.CharacterListFacet).With({'entityQueryObservable': entityQueryObservable}).New();
+
   /**
    * @type {!z.common.EntityRepository}
    */
@@ -62,6 +86,7 @@ z.client.facet.Gem = function (services) {
   this['infoFacet'].setParentEventTarget(this);
   this['messageLogFacet'].setParentEventTarget(this);
   this['projectsFacet'].setParentEventTarget(this);
+  this['ownedCharactersFacet'].setParentEventTarget(this);
 
   repository.setParentEventTarget(this);
   world.setParentEventTarget(this);

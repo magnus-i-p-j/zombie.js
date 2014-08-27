@@ -14,7 +14,7 @@ z.client.facet.ActorFacet = function () {
 goog.inherits(z.client.facet.ActorFacet, z.client.facet.EntityFacet);
 
 z.client.facet.ActorFacet.prototype._update = function () {
-  var actor = /** @type {z.common.entities.Actor} */ this.entity;
+  var actor = /** @type {z.common.entities.Actor} */ this.entity();
   this['resources'].update(actor.stockpile);
 };
 

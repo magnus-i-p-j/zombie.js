@@ -48,5 +48,15 @@ TestCase("test z.common.Cashier", {
     var actual = this.cashier.withdraw({"metal": 10, "wood": 0});
 
     assertEquals({"metal": 5, "wood": 0}, actual);
+  },
+  'test should combine two stockpiles': function() {
+    var work = new z.common.Stockpile();
+    work.add('knowledge', 6);
+    this.stockpile.add('metal', 5);
+    this.cashier = new z.common.Cashier(this.stockpile, work);
+
+    var actual = this.cashier.withdraw({"metal": 5, "knowledge": 4 });
+
+    assertEquals({"metal": 5, "knowledge": 4 }, actual);
   }
 });

@@ -3,13 +3,13 @@ goog.provide('z.common.data.ClientEndTurn');
 /**
  * @param {!mugd.utils.guid} actorId
  * @param {number} turn
- * @param {!Array.<!z.common.data.ProjectData>} projects
+ * @param {!Array.<!z.common.data.ProjectData|!z.common.data.CharacterData>} entities
  * @constructor
  */
-z.common.data.ClientEndTurn = function (actorId, turn, projects) {
+z.common.data.ClientEndTurn = function (actorId, turn, entities) {
   this.actorId = actorId;
   this.turn = turn;
-  this.projects = projects;
+  this.entities = entities;
 };
 
 /**
@@ -17,21 +17,9 @@ z.common.data.ClientEndTurn = function (actorId, turn, projects) {
  * @return {!z.common.data.ClientEndTurn}
  */
 z.common.data.ClientEndTurn.fromProtocol = function (protocol) {
-  return new z.common.data.ClientEndTurn(
-      protocol['actorId'],
-      protocol['turn'],
-      goog.array.map(protocol['projects'], function (projectData) {
-        return projectData.fromProtocol()
-      })
-  );
+  throw 'NotImplementedException';
 };
 
 z.common.data.ClientEndTurn.prototype.toProtocol = function () {
-  return {
-    'actorId': this.actorId,
-    'turn': this.turn,
-    'projects': goog.array.map(this.projects, function (project) {
-      return project.toProtocol();
-    })
-  };
+  throw 'NotImplementedException';
 };

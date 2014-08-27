@@ -97,6 +97,9 @@ body {
     box-sizing: border-box;
     overflow: hidden;
   }
+  .scroller {
+    overflow-y: scroll;
+  }
 
   #map {
     z-index: 1;
@@ -140,6 +143,7 @@ body {
     border: none;
   }
 
+
   #current_selection_info {
     top: @rightHorizontalFold;
     right: 0;
@@ -149,8 +153,18 @@ body {
     margin-right: 0;
   }
 
-  #project_overview {
+  @characterOverviewHeight: 120px;
+  #character_overview {
     top: @infobarHeight;
+    right: 0;
+    bottom: @height - @rightHorizontalFold - @characterOverviewHeight;
+    left: @verticalFold;
+    background-color: @basicBackground;
+    margin-right: 0;
+  }
+
+  #project_overview {
+    top: @infobarHeight + @characterOverviewHeight;
     right: 0;
     bottom: @height - @rightHorizontalFold;
     left: @verticalFold;

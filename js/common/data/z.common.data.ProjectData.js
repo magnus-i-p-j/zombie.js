@@ -47,7 +47,7 @@ z.common.data.ProjectData.fromProtocol = function (protocol) {
  */
 z.common.data.ProjectData.fromEntity = function (project) {
   var guid = project.guid;
-  var ownerId = project.owner.guid;
+  var ownerId = project.owner;
   var type = project.meta.type;
   var state = project.getState();
   var priority = project.priority;

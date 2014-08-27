@@ -24,6 +24,7 @@ z.common.entities.Character = function (services) {
   this.knowledge = characterData.knowledge;
   this.labour = characterData.labour;
   this.health = characterData.health;
+  this.assignedTo = characterData.assignedTo;
 
   this.traits = this._parseTraits(characterData);
 };
@@ -65,6 +66,10 @@ z.common.entities.Character.prototype._update = function (entityData, meta, owne
       this.health = characterData.health;
       updated = true;
     }
+    if(this.assignedTo !== characterData.assignedTo){
+      this.assignedTo = characterData.assignedTo;
+      updated = true;
+    }
 
     var newTraits = this._parseTraits(characterData);
     var hasNewTraits = !goog.object.every(newTraits, function (element) {
@@ -81,12 +86,12 @@ z.common.entities.Character.prototype._update = function (entityData, meta, owne
     }
   }
 
-
   return updated;
 };
 
 z.common.entities.Character.prototype._parseTraits = function (characterData) {
   var traits = {};
+
   goog.array.forEach(characterData.traits, function (element) {
     var trait = /** @type{z.common.rulebook.Trait} */ element;
     traits[trait.type] = trait;
@@ -99,4 +104,15 @@ z.common.entities.Character.prototype._parseTraits = function (characterData) {
  */
 z.common.entities.Character.prototype.hasTrait = function (trait) {
   return this.traits[trait.type];
+};
+
+
+/**
+ * @param {!mugd.utils.guid} guid
+ */
+z.common.entities.Character.prototype.assignTo = function (guid) {
+  if(this.assignedTo !== guid){
+    this.assignedTo = guid;
+    this._dispatchModified();
+  }
 };

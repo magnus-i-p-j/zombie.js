@@ -23,6 +23,8 @@ z.client.Resources = {
   CURRENT_ACTION:'client_current_action',
   END_TURN_ACTION:'client_end_turn_action',
   PROJECT_LIST_FACET: 'client_project_list_facet',
+  PROJECT_FACET: 'client_project_facet',
+  CHARACTER_LIST_FACET: 'client_character_list_facet',
   PLAYER_FACET:'client_player_facet',
   TEXTURES: 'client_textures',
   IMAP: 'client_imap'

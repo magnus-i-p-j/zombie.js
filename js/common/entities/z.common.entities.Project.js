@@ -51,7 +51,6 @@ z.common.entities.Project = function (services) {
 
   this.completion = 0;
 
-  //TODO: Find entities instead of id:s
   this.resources = projectData.resources;
 };
 
@@ -97,12 +96,6 @@ z.common.entities.Project.prototype.advance = function (investment) {
     }
   }
   return effects;
-};
-
-z.common.entities.Project.prototype._setModified = function () {
-  if (this.state === z.common.protocol.state.PASS) {
-    this.state = z.common.protocol.state.MODIFIED;
-  }
 };
 
 /**

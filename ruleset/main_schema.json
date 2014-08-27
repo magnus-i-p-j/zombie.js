@@ -197,6 +197,7 @@
             "description": "Lists the cost for the project",
             "title": "Costs",
             "type": "object",
+            "required": ["work"],
             "properties": {
               "stockpile": {
                 "type": "array",
@@ -222,6 +223,29 @@
                       "description": "The amount required",
                       "type": "number"
                     }
+                  }
+                }
+              },
+              "work": {
+                "title": "Work",
+                "description": "The quantity of work required",
+                "type": "object",
+                "required": ["combat", "knowledge", "labour"],
+                "properties": {
+                  "combat": {
+                    "title": "Combat",
+                    "description": "How much ass-kicking is needed",
+                    "type": "number"
+                  },
+                  "knowledge": {
+                    "title": "Knowledge",
+                    "description": "The amount of thought that goes into the project",
+                    "type": "number"
+                  },
+                  "labour": {
+                    "title": "Labour",
+                    "description": "Sweat, blood and tears used as mortar",
+                    "type": "number"
                   }
                 }
               }

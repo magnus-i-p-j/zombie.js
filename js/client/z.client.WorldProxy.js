@@ -18,7 +18,7 @@ goog.require('z.common.data.ActorData');
  * @constructor
  * @implements {mugd.injector.IInjectable}
  */
-z.client.WorldProxy = function (services) {
+z.client.WorldProxy = function(services) {
   goog.base(this);
   /**
    * @type {!Object}
@@ -45,7 +45,7 @@ z.client.WorldProxy = function (services) {
 
 goog.inherits(z.client.WorldProxy, goog.events.EventTarget);
 
-z.client.WorldProxy.prototype.firstTurn = function () {
+z.client.WorldProxy.prototype.firstTurn = function() {
   /**
    * @type {function (!z.common.data.StartTurnData)}
    */
@@ -59,44 +59,67 @@ z.client.WorldProxy.prototype.firstTurn = function () {
 /**
  * @param {!z.common.data.StartTurnData} startTurnData
  */
-z.client.WorldProxy.prototype.doStartTurn = function (startTurnData) {
+z.client.WorldProxy.prototype.doStartTurn = function(startTurnData) {
   this._turn = startTurnData.turn;
   goog.array.forEach(startTurnData.entities, this._repository.put, this._repository);
-
-  goog.array.forEach(startTurnData.killed, function(guid){
+  goog.array.forEach(startTurnData.killed, function(guid) {
     var entity = this.get(guid);
-    if(!goog.isNull(entity)){
+    if (!goog.isNull(entity)) {
       entity.setState(z.common.protocol.state.DEAD);
     }
   }, this._repository);
 
+  this._repository.resetState();
+
   var e = new z.client.events.StartTurn({
-        turn: this._turn
-      }
+      turn: this._turn
+    }
   );
   this.dispatchEvent(e);
 };
 
-z.client.WorldProxy.prototype.endTurn = function () {
+z.client.WorldProxy.prototype.endTurn = function() {
   if (goog.isNull(this._playerFacet['guid'])) {
     throw 'Tried to end turn with no actor';
   }
 
+  var entityChanged = function(entity) {
+    return !(entity.getState() === z.common.protocol.state.PASS ||
+    entity.getState() === z.common.protocol.state.DEAD);
+  };
   var projects = this._repository.map(
-      function (item) {
-        var project = /** @type {!z.common.entities.Project} */ item;
-        return z.common.data.ProjectData.fromEntity(project);
-      },
-      function (entity) {
-        if (entity instanceof z.common.entities.Project) {
-          if (entity.state !== z.common.protocol.state.PASS) {
-            return true;
-          }
+    function(item) {
+      var project = /** @type {!z.common.entities.Project} */ item;
+      return z.common.data.ProjectData.fromEntity(project);
+    },
+    function(entity) {
+      if (entity instanceof z.common.entities.Project) {
+        if (entityChanged(entity)) {
+          return true;
         }
-        return false;
-      });
+      }
+      return false;
+    }
+  );
 
-  var endTurnData = new z.common.data.ClientEndTurn(this._playerFacet['guid'], this._turn, projects);
+  var characters = this._repository.map(
+    function(item) {
+      var character = /** @type {!z.common.entities.Character} */ item;
+      return z.common.data.CharacterData.fromEntity(character);
+    },
+    function(entity) {
+      if (entity instanceof z.common.entities.Character) {
+        if (entityChanged(entity)) {
+          return true;
+        }
+      }
+      return false;
+    }
+  );
 
+  var data = [];
+  goog.array.extend(data, projects, characters);
+
+  var endTurnData = new z.common.data.ClientEndTurn(this._playerFacet['guid'], this._turn, data);
   this._world.actorEndTurn(endTurnData);
 };

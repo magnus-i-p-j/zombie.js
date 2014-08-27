@@ -40,7 +40,7 @@ z.common.rulebook.Archetype = function (meta) {
    */
   this.traits = this._meta.traits;
 
-  this.combat = this._meta.combat;
-  this.knowledge = this._meta.knowledge;
-  this.labour = this._meta.labour;
+  this.combat = this._meta.stats['combat'];
+  this.knowledge = this._meta.stats['knowledge'];
+  this.labour = this._meta.stats['labour'];
 };

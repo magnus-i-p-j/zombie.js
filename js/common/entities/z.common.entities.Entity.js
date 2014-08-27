@@ -32,7 +32,11 @@ z.common.entities.Entity = function (services) {
   /**
    * @type {!z.common.entities.Actor}
    */
-  this.owner = /** @type {!z.common.entities.Actor} */ services.get('owner');
+  var owner = /** {!z.common.entities.Actor} */ services.get('owner');
+  /**
+   * @type {?mugd.utils.guid}
+   */
+  this.owner = owner ? owner.guid : null;
 
   /**
    * @private
@@ -59,8 +63,7 @@ z.common.entities.Entity.prototype.getState = function () {
 z.common.entities.Entity.prototype.setState = function (state) {
   if (this._state !== state && this._state !== z.common.protocol.state.DEAD) {
     this._state = state;
-    var event = new z.common.events.EntityModified(this);
-    this.dispatchEvent(event);
+    this._dispatchModified();
   }
 };
 
@@ -82,18 +85,35 @@ z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
     }
   }
 
-  if(owner && owner.guid !== this.owner.guid){
-    this.owner = owner;
+  if(owner && owner.guid !== this.owner){
+    this.owner = owner.guid;
     updated = true;
   }
 
   updated = this._update(entityData, meta, owner) || updated;
 
   if (updated) {
-    var event = new z.common.events.EntityModified(this);
-    this.dispatchEvent(event);
+    this._setModified();
+    this._dispatchModified();
   }
   return updated;
+};
+
+/**
+ * @protected
+ */
+z.common.entities.Entity.prototype._dispatchModified = function() {
+  var event = new z.common.events.EntityModified(this);
+  this.dispatchEvent(event);
+};
+
+/**
+ * @protected
+ */
+z.common.entities.Entity.prototype._setModified = function () {
+  if (this.getState() === z.common.protocol.state.PASS) {
+    this._state = z.common.protocol.state.MODIFIED;
+  }
 };
 
 /**
@@ -108,3 +128,5 @@ z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
 z.common.entities.Entity.prototype._update = function (entityData, meta, owner) {
   throw {'name': 'NotImplementedException', 'message': 'update'};
 };
+
+

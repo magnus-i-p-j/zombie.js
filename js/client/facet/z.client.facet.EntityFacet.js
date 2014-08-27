@@ -13,13 +13,13 @@ z.client.facet.EntityFacet = function () {
   goog.base(this);
 
   /**
-   * @type {z.common.entities.Entity}
+   * @type {function(z.common.entities.Entity=):z.common.entities.Entity}
    */
-  this.entity = null;
+  this.entity = ko.observable();
   /**
-   * @type {function(z.common.rulebook.meta=):!z.common.rulebook.meta}
+   * @type {function(z.common.rulebook.meta=):z.common.rulebook.meta}
    */
-  this.meta = ko.observable();
+  this.meta = ko.computed(this._getMeta, this);
 
   /**
    * @type {?mugd.utils.guid}
@@ -50,14 +50,13 @@ goog.inherits(z.client.facet.EntityFacet, z.client.facet.Facet);
  * @param {!z.common.entities.Entity} entity
  */
 z.client.facet.EntityFacet.prototype.setEntity = function (entity) {
-  if (!this.entity || this.entity && this.entity.guid === entity.guid) {
-    this.entity = entity;
-    this['guid'] = this.entity.guid;
-    this.meta(entity.meta);
+  if (!this.entity() || this.entity() && this.entity().guid === entity.guid) {
+    this.entity(entity);
+    this['guid'] = this.entity().guid;
     this.eventHandler.listen(entity, z.common.events.EventType.ENTITY_MODIFIED, this.doEntityModified);
     this._update();
   } else {
-    throw ['Wrong entity, expected (', this.entity.guid , '), got (', entity.guid, ')'].join('');
+    throw ['Wrong entity, expected (', this.entity().guid , '), got (', entity.guid, ')'].join('');
   }
 };
 
@@ -73,4 +72,17 @@ z.client.facet.EntityFacet.prototype.doEntityModified = function (event) {
  */
 z.client.facet.EntityFacet.prototype._update = function () {
   throw {'name': 'NotImplementedException', 'message': '_setEntity'};
+};
+
+/**
+ * @returns {z.common.rulebook.meta}
+ * @private
+ */
+z.client.facet.EntityFacet.prototype._getMeta = function () {
+  var entity = this.entity();
+  if (entity) {
+    return entity.meta;
+  } else {
+    return undefined;
+  }
 };
