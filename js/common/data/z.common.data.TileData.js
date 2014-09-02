@@ -11,7 +11,7 @@ goog.require('z.common.data.EntityData');
  * @param {number} y
  * @param {z.common.terrain} terrain
  * @param {string} type
- * @param {!z.common.tile.zombiedata} zombieData
+ * @param {!z.common.zombiedata} zombieData
  * @constructor
  * @implements {z.common.data.EntityData}
  */
@@ -46,7 +46,7 @@ z.common.data.TileData = function (guid, state,ownerId, x, y, terrain, type, zom
    */
   this.category = z.common.rulebook.category.TILE;
   /**
-   * @type {!z.common.tile.zombiedata}
+   * @type {!z.common.zombiedata}
    */
   this.zombieData = zombieData;
 };

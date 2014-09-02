@@ -21,4 +21,4 @@ z.common.terrain;
  *  activity: number
  * }}
  */
-z.common.tile.zombiedata;
+z.common.zombiedata;

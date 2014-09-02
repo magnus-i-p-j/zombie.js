@@ -24,7 +24,7 @@ z.common.entities.Tile = function (services) {
   this.position = new goog.math.Coordinate(tileData.x, tileData.y);
 
   /**
-   * @type {!z.common.tile.zombiedata}
+   * @type {!z.common.zombiedata}
    */
   this.zombieData = this.newEmptyZombieData();
 };
@@ -82,7 +82,7 @@ z.common.entities.Tile.prototype._update = function (data, meta) {
 };
 
 /**
- * @returns {z.common.tile.zombiedata}
+ * @returns {z.common.zombiedata}
  */
 z.common.entities.Tile.prototype.newEmptyZombieData = function() {
   return {
@@ -91,4 +91,12 @@ z.common.entities.Tile.prototype.newEmptyZombieData = function() {
     attraction: 0,
     activity: 0
   };
+};
+
+/**
+ * @param {!z.common.zombiedata} data
+ */
+z.common.entities.Tile.prototype.setZombieData = function (data) {
+  this.zombieData = data;
+  this._dispatchModified();
 };

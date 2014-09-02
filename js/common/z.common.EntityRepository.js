@@ -90,6 +90,7 @@ z.common.EntityRepository.prototype.remove = function (guid) {
  * @return {!Array}
  */
 z.common.EntityRepository.prototype.map = function (action, filter) {
+  // TODO: Allow direct use of EntityQuery
   if (!goog.isDef(filter)) {
     filter = goog.functions.TRUE;
   }
