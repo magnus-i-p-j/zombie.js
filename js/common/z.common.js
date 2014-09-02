@@ -15,7 +15,7 @@ z.common.terrain;
 
 /**
  * @typedef{{
- *  danger: number,
+ *  density: number,
  *  defence: number,
  *  attraction: number,
  *  activity: number

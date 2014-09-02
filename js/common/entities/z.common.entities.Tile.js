@@ -86,7 +86,7 @@ z.common.entities.Tile.prototype._update = function (data, meta) {
  */
 z.common.entities.Tile.prototype.newEmptyZombieData = function() {
   return {
-    danger: 0,
+    density: 10,
     defence: 0,
     attraction: 0,
     activity: 0
