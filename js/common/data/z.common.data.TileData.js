@@ -11,10 +11,11 @@ goog.require('z.common.data.EntityData');
  * @param {number} y
  * @param {z.common.terrain} terrain
  * @param {string} type
+ * @param {!z.common.tile.zombiedata} zombieData
  * @constructor
  * @implements {z.common.data.EntityData}
  */
-z.common.data.TileData = function (guid, state,ownerId, x, y, terrain, type) {
+z.common.data.TileData = function (guid, state,ownerId, x, y, terrain, type, zombieData) {
   /**
    * @type {?mugd.utils.guid}
    */
@@ -44,6 +45,10 @@ z.common.data.TileData = function (guid, state,ownerId, x, y, terrain, type) {
    * @type {z.common.rulebook.category}
    */
   this.category = z.common.rulebook.category.TILE;
+  /**
+   * @type {!z.common.tile.zombiedata}
+   */
+  this.zombieData = zombieData;
 };
 
 /**
@@ -58,7 +63,8 @@ z.common.data.TileData.fromEntity = function (tile) {
       tile.position.x,
       tile.position.y,
       tile.terrain,
-      tile.meta.type
+      tile.meta.type,
+      tile.zombieData
   );
 };
 

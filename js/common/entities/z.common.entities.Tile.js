@@ -2,6 +2,7 @@ goog.provide('z.common.entities.Tile');
 goog.require('z.common.entities.Entity');
 goog.require('goog.math.Coordinate');
 goog.require('goog.object');
+goog.require('z.common');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -21,6 +22,11 @@ z.common.entities.Tile = function (services) {
   this.terrain = tileData.terrain;
   Object.freeze(this.terrain);
   this.position = new goog.math.Coordinate(tileData.x, tileData.y);
+
+  /**
+   * @type {!z.common.tile.zombiedata}
+   */
+  this.zombieData = this.newEmptyZombieData();
 };
 goog.inherits(z.common.entities.Tile, z.common.entities.Entity);
 
@@ -73,4 +79,16 @@ z.common.entities.Tile.prototype._update = function (data, meta) {
   this.meta = meta;
 
   return updated;
+};
+
+/**
+ * @returns {z.common.tile.zombiedata}
+ */
+z.common.entities.Tile.prototype.newEmptyZombieData = function() {
+  return {
+    danger: 0,
+    defence: 0,
+    attraction: 0,
+    activity: 0
+  };
 };
