@@ -1,31 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Test/demo of Z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet/less" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet/less" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
     <link rel="stylesheet/less" type="text/css" href="../css/all.less">
     <link rel="stylesheet/less" type="text/css" href="../css/plovr.less">
   </head>
-  <body id="z_client" class="game_container" style="display: none;" data-bind="visible: true">
+  <body id="z_client" class="game-container" style="display: none;" data-bind="visible: true">
     <noscript>You might not have script enabled in your browser.</noscript>
-
-    <section id="info_bar" class="layout" data-bind="template: {name: 'info_bar_widget', data: infoFacet}">info_bar
-    </section>
-    <section id="message_log" class="layout" data-bind="template: {name: 'message_log_widget', data: messageLogFacet}">
-      message_log
-    </section>
-    <section id="current_selection_info"
-             data-bind="template: {name: 'current_selection_info_widget', data: currentTarget}"
-             class="layout">current_selection_info
-    </section>
-    <section id="character_overview"
-             class="layout"
-             data-bind="template: {name: 'character_list_widget', data: ownedCharactersFacet}">character_overview
-    </section>
-    <section id="project_overview"
-             class="layout"
-             data-bind="template: {name: 'project_list_widget', data: projectsFacet}">project_overview
-    </section>
     <section id="map" class="layout"></section>
+    <div class="container-fluid layout" id="sidebar">
+      <div class="row">
+        <div class="panel col-md-12">
+          <div class="panel-body">
+            <section id="current_selection_info"
+                     data-bind="template: {name: 'current_selection_info_widget', data: currentTarget}">
+              current_selection_info
+            </section>
+            <section id="project_overview"
+                     data-bind="template: {name: 'project_list_widget', data: projectsFacet}">project_overview
+            </section>
+            <section id="character_overview"
+                     data-bind="template: {name: 'character_list_widget', data: ownedCharactersFacet}">
+              character_overview
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="message-bar" class="container-fluid layout">
+      <section id="info-bar"
+               class="row"
+               data-bind="template: {name: 'info_bar_widget', data: infoFacet}">info_bar
+      </section>
+      <section id="message-log"
+               class="row"
+               data-bind="template: {name: 'message_log_widget', data: messageLogFacet}">
+        message-log
+      </section>
+    </div>
     <section id="context_menu"
              class="context_menu"
              data-bind="template: {name: 'context_menu_widget', data: contextMenuFacet}"></section>
