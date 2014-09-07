@@ -1,0 +1,20 @@
+(A) 2014-09-07 Enable dev-info display on map +zombie.js-map @Magnus 
+(A) 2014-09-07 Colour scheme/style guide +zombie.js @Mattias
+(A) 2014-09-07 Do stuff, dude! +zombie.js @Ulrik
+(B) 2014-09-07 Look over UI changes and possibly merge to master +zombie.js @Ulrik @Magnus
+(B) 2014-09-07 Add defence to terrain and projects +zombie.js @Ulrik @Magnus
+(B) 2014-09-07 Add activity to terrain and projects +zombie.js @Ulrik @Magnus
+(C) 2014-09-07 Projects can only be started in safe tiles +zombie.js @Ulrik @Magnus
+(D) 2014-09-07 Design and evaluate ui +zombie.js @Magnus @Ulrik @Mattias 
+
+(X) 2014-09-07 Develop project management view +zombie.js @Magnus @Ulrik
+(X) 2014-09-07 Define/refine terrains in ruleset +zombie.js @Magnus @Ulrik
+(X) 2014-09-07 Define/refine projects in ruleset +zombie.js @Magnus @Ulrik
+(X) 2014-09-07 End game when no tiles are safe +zombie.js @Magnus @Ulrik
+(X) 2014-09-07 Deallocate project resources when finished +zombie.js @Magnus @Ulrik
+
+2014-09-07 Refine zombie density algorithm +zombie.js @Magnus @Ulrik
+2014-09-07 Setup website for mugd and especially z +zombie.js @Magnus @Ulrik
+2014-09-07 Script for deploying z automatically +zombie.js @Magnus @Ulrik
+
+2014-09-07 Brainzzzzz can be eaten +zombie.js @Magnus @Ulrik
