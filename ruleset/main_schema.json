@@ -25,7 +25,7 @@
         "title": "Terrain",
         "description": "Some sort of stuff to walk on.",
         "type": "object",
-        "required": ["name", "type", "description", "zone", "image"],
+        "required": ["name", "type", "description", "zone", "image", "defence", "activity"],
         "properties": {
           "type": {
             "title": "Type",
@@ -61,6 +61,14 @@
               "rel": "full",
               "href": "game://image/{@}"
             }
+          },
+          "activity": {
+            "title": "Activity",
+            "type": "number"
+          },
+          "defence": {
+            "title": "Defence",
+            "type": "number"
           }
         },
         "links": {
@@ -108,7 +116,7 @@
         "title": "Project",
         "description": "A project that does stuff",
         "type": "object",
-        "required": ["name", "type", "description", "prerequisites", "effects", "cost"],
+        "required": ["name", "type", "description", "prerequisites", "effects", "cost", "activity", "defence"],
         "properties": {
           "type": {
             "title": "Type",
@@ -124,10 +132,19 @@
             "description": "Describes the terrain",
             "type": "string"
           },
+          "activity": {
+            "title": "Activity",
+            "type": "number"
+          },
+          "defence": {
+            "title": "Defence",
+            "type": "number"
+          },
           "prerequisites": {
             "description": "Lists the prerequisites for the project",
             "title": "Prerequisites",
             "type": "object",
+            "required": ["danger"],
             "properties": {
               "terrain": {
                 "type": "array",
@@ -142,6 +159,11 @@
                     "href": "game://terrain/{@}"
                   }
                 }
+              },
+              "danger": {
+                "title": "Danger",
+                "description": "How dangerous the tile can be for the project",
+                "type": "number"
               }
             }
           },
