@@ -1,4 +1,11 @@
-Turn: <span data-bind="text: turn"></span>
-<!-- ko foreach: resources.resources -->
-<span class="resource"><span class="name" data-bind="text: name"></span>:<span class="amount" data-bind="text: amount"></span></span>
-<!-- /ko -->
+<div class="panel panel-default">
+  <div class="panel-body">
+    Turn: <span data-bind="text: turn"></span>
+    <!-- ko foreach: resources.resources -->
+    <div class="resource">
+      <span class="name" data-bind="text: name"></span>:
+      <span class="amount" data-bind="text: amount"></span>
+    </div>
+    <!-- /ko -->
+  </div>
+</div>
