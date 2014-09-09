@@ -22,7 +22,8 @@ z.service.world.ZombieDistributor.prototype.distribute = function(tiles) {
       density: 0,
       defence: 0,
       attraction: 0,
-      activity: 0
+      activity: 0,
+      danger: 0
     };
 
     grid.setNode(tile.position.x, tile.position.y, {

@@ -9,12 +9,18 @@ goog.require('z.common');
  * @extends {z.common.entities.Entity}
  * @constructor
  */
-z.common.entities.Tile = function (services) {
+z.common.entities.Tile = function(services) {
   goog.base(this, services);
   /**
    * @type {!z.common.data.TileData}
    */
   var tileData = /** @type {!z.common.data.TileData} */ services.get('entityData');
+
+  /**
+   * @type {!z.common.rulebook.Rulebook}
+   * @private
+   */
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
 
   /**
    * @type {z.common.terrain}
@@ -31,13 +37,15 @@ z.common.entities.Tile = function (services) {
 goog.inherits(z.common.entities.Tile, z.common.entities.Entity);
 
 
-
 /**
  * @inheritDoc
  */
-z.common.entities.Tile.prototype._update = function (data, meta) {
+z.common.entities.Tile.prototype._update = function(data, meta) {
   if (!(data instanceof z.common.data.TileData)) {
-    throw {'name': 'InvalidDataException', 'message': 'not a z.common.data.TileData'};
+    throw {
+      'name': 'InvalidDataException',
+      'message': 'not a z.common.data.TileData'
+    };
   }
 
   /**
@@ -63,15 +71,20 @@ z.common.entities.Tile.prototype._update = function (data, meta) {
    */
   var updated = !goog.object.every(
     this.terrain,
-    function(value, key){
+    function(value, key) {
       return tileData.terrain[key] === value;
     },
     this
   );
 
-  if(!updated){
+  if (z.common.entities.Tile.compareZombieData(tileData.zombieData, this.zombieData)) {
+    this.zombieData = tileData.zombieData;
+    updated = true;
+  }
+
+  if (!updated) {
     updated = goog.object.getCount(this.terrain) !==
-      goog.object.getCount(tileData.terrain);
+    goog.object.getCount(tileData.terrain);
   }
 
   this.terrain = tileData.terrain;
@@ -85,18 +98,68 @@ z.common.entities.Tile.prototype._update = function (data, meta) {
  * @returns {z.common.zombiedata}
  */
 z.common.entities.Tile.prototype.newEmptyZombieData = function() {
-  return {
+  return this._calculateZombieData({
     density: 10,
     defence: 0,
     attraction: 0,
-    activity: 0
-  };
+    activity: 0,
+    danger: 0
+  });
 };
 
 /**
  * @param {!z.common.zombiedata} data
  */
-z.common.entities.Tile.prototype.setZombieData = function (data) {
-  this.zombieData = data;
-  this._dispatchModified();
+z.common.entities.Tile.prototype.setZombieData = function(data) {
+  var newZombieData = this._calculateZombieData(data);
+  if (z.common.entities.Tile.compareZombieData(newZombieData, this.zombieData)) {
+    this.zombieData = newZombieData;
+    this._dispatchModified();
+  }
+};
+
+/**
+ * @param {!z.common.zombiedata} data
+ * @return {!z.common.zombiedata}
+ */
+z.common.entities.Tile.prototype._calculateZombieData = function(data) {
+  var totalDefence = 0;
+  var totalActivity = 0;
+  var zombieData = {
+    density: 0,
+    defence: 0,
+    attraction: 0,
+    activity: 0,
+    danger: 0
+  };
+  goog.object.map(this.terrain, function(terrain) {
+    /**
+     * @type {!z.common.rulebook.Terrain}
+     */
+    var metaClass = /** @type {!z.common.rulebook.Terrain} */ this._rulebook.getMetaClass(terrain);
+    totalDefence += metaClass.defence;
+    totalActivity += metaClass.activity;
+  }, this);
+  // TODO: add projects
+
+  zombieData.density = data.density;
+  zombieData.defence = totalDefence;
+  zombieData.attraction = data.attraction;
+  zombieData.activity = totalActivity;
+  zombieData.danger = Math.max(data.density - totalDefence, 0);
+  return zombieData;
+};
+
+/**
+ * @param {!z.common.zombiedata} lhs
+ * @param {!z.common.zombiedata} rhs
+ * @returns {boolean}
+ * @private
+ */
+z.common.entities.Tile.compareZombieData = function(lhs, rhs) {
+  return (lhs.density === rhs.density) &&
+  (lhs.defence === rhs.defence) &&
+  (lhs.attraction === rhs.attraction) &&
+  (lhs.activity === rhs.activity) &&
+  (lhs.danger === rhs.danger);
 };

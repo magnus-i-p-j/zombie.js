@@ -18,7 +18,8 @@ z.common.terrain;
  *  density: number,
  *  defence: number,
  *  attraction: number,
- *  activity: number
+ *  activity: number,
+ *  danger: number
  * }}
  */
 z.common.zombiedata;
