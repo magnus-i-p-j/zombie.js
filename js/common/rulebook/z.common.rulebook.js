@@ -160,7 +160,10 @@ z.common.rulebook.logic.prerequisites = {
     return false;
   },
   'danger': function(condition, target) {
-    return false;
+    if (!(target instanceof z.common.entities.Tile)) {
+      return false;
+    }
+    return condition >= target.zombieData.danger;
   }
 }
 ;
