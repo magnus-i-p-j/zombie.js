@@ -1,392 +1,84 @@
-@tileWidth: 72px;
-@tileHeight: 72px;
-//@basicBackground: Linen;
-@basicBackground: transparent;
-@darkerBackground: #eae0d6;
-@borderColour: #292929;
 
-@radialCenterColour: #5e0000;
-@radialEndColour: #000;
-
-@startColour: #16161c;
-@endColour: #01020a;
-
-@textColour: #afafaf;
-
-@buttonColour: #2e2f16;
-@buttonColourBorder: #2f2c1e;
-@buttonRadius: 3px;
-
-html,
-body {
-  height: 100%;
+.game-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-.game_container {
-
-  h1 {
-    margin: 0;
-    padding: 0;
-  }
-  font-family: "Lucida Grande", Verdana, "Sans-Serif";
-  font-size: 13px;
-  position: relative;
+.layout {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
   overflow: hidden;
-  display: block;
-  @leftHorizontalFold: 70%;
-  @rightHorizontalFold: 60%;
-  @verticalFold: 75%;
-  @infobarHeight: 20px;
-  @toolbarHeight: 40px;
-  @height: 100%;
-  @width: 100%;
-  width: @width;
-  height: @height;
-  margin: 0;
+  box-sizing: border-box;
+  z-index: 1;
+}
 
-  color: @textColour;
+#map {
+  z-index: 0;
+}
 
-  button {
-    height: 100%;
-    margin: 0 5px;
-    padding-left: 1em;
-    padding-right: 1em;
-    color: @textColour;
-    background-color: @buttonColour;
-    -webkit-border-radius: @buttonRadius;
-    border-radius: @buttonRadius;
-    background-clip: padding-box;
-    border: @buttonColourBorder 2px outset;
-    text-shadow: 2px 2px 2px black;
-    font-weight: bold;
-    background-color: #1F5210;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#1F5210), to(#0B2100));
-    background-image: -webkit-linear-gradient(top, #1F5210, #0B2100);
-    background-image: -moz-linear-gradient(top, #1F5210, #0B2100);
-    background-image: -ms-linear-gradient(top, #1F5210, #0B2100);
-    background-image: -o-linear-gradient(top, #1F5210, #0B2100);
-    background-image: linear-gradient(to bottom, #1F5210, #0B2100);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#1F5210, endColorstr=#0B2100);
-    &:hover {
-      background-color: #2b7316;
-      background-image: -webkit-gradient(linear, left top, left bottom, from(#2b7316), to(#0B2100));
-      background-image: -webkit-linear-gradient(top, #2b7316, #0B2100);
-      background-image: -moz-linear-gradient(top, #2b7316, #0B2100);
-      background-image: -ms-linear-gradient(top, #2b7316, #0B2100);
-      background-image: -o-linear-gradient(top, #2b7316, #0B2100);
-      background-image: linear-gradient(to bottom, #2b7316, #0B2100);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#2b7316, endColorstr=#0B2100);
-    }
-  }
+#sidebar {
+  right: 70%;
+  bottom: 20%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 
-  > .layout {
-    z-index: 2;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(@startColour), to(@endColour));
-    background-image: -webkit-linear-gradient(top, @startColour, @endColour);
-    background-image: -moz-linear-gradient(top, @startColour, @endColour);
-    background-image: -o-linear-gradient(top, @startColour, @endColour);
-    background-image: linear-gradient(to bottom, @startColour, @endColour);
-    -webkit-box-shadow: 2px 2px 20px 2px rgba(1, 2, 0, 1);
-    -moz-box-shadow: 2px 2px 20px 2px rgba(1, 2, 0, 1);
-    box-shadow: 2px 2px 20px 2px rgba(1, 2, 0, 1);
-    border: 1px @borderColour solid;
-    margin: 1px;
-  }
-  .layout {
-    position: absolute;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-  .scroller {
-    overflow-y: scroll;
-  }
+#message-bar {
+  left: 80%;
+  bottom: auto;
+}
 
-  #map {
-    z-index: 1;
-    font-size: xx-small;
-    background-color: @radialEndColour;
-    background: @radialCenterColour; /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover, @radialCenterColour 0%, @radialEndColour 100%); /* FF3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,@radialCenterColour), color-stop(100%,@radialEndColour)); /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover, @radialCenterColour 0%,@radialEndColour 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover, @radialCenterColour 0%,@radialEndColour 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover, @radialCenterColour 0%,@radialEndColour 100%); /* IE10+ */
-    background: radial-gradient(ellipse at center, @radialCenterColour 0%,@radialEndColour 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@radialCenterColour', endColorstr='@radialEndColour', GradientType=1); /* IE6-9 fallback on horizontal gradient */
-  }
+#toolbar {
+  top: 90%;
+}
 
-  #message_log {
-    top: @leftHorizontalFold;
-    right: @width - @verticalFold;
-    bottom: @toolbarHeight;
-    left: 0;
-    background-color: @basicBackground;
-    padding: 2px;
-  }
-
-  #toolbar {
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: @toolbarHeight;
-    background-color: @darkerBackground;
-    border: none;
-    margin-bottom: 0;
-  }
-
-  #info_bar {
-    top: 0;
-    right: 0;
-    height: @infobarHeight;
-    left: 0;
-    background-color: @darkerBackground;
-    border: none;
-  }
-
-
-  #current_selection_info {
-    top: @rightHorizontalFold;
-    right: 0;
-    bottom: @toolbarHeight;
-    left: @verticalFold;
-    background-color: @basicBackground;
-    margin-right: 0;
-  }
-
-  @characterOverviewHeight: 120px;
-  #character_overview {
-    top: @infobarHeight;
-    right: 0;
-    bottom: @height - @rightHorizontalFold - @characterOverviewHeight;
-    left: @verticalFold;
-    background-color: @basicBackground;
-    margin-right: 0;
-  }
-
-  #project_overview {
-    top: @infobarHeight + @characterOverviewHeight;
-    right: 0;
-    bottom: @height - @rightHorizontalFold;
-    left: @verticalFold;
-    background-color: @basicBackground;
-    margin-right: 0;
-  }
-
-  .map_widget {
-    cursor: default;
-    .focusedTile {
-      z-index: 50;
-      border-color: red;
-    }
-  }
-
-  .tile {
-    width: @tileWidth;
-    height: @tileHeight;
-    background: no-repeat top left;
-    border: 1px solid transparent;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
-    position: absolute;
-    .center_text {
-      line-height: 72px;
-      text-align: center;
-      vertical-align: middle;
-    }
-    &.grass {
-      background-image: url("../img/tiles/grass.png");
-    }
-    &.water {
-      background-image: url("../img/tiles/water.png");
-    }
-    &.hills {
-      background-image: url("../img/tiles/hill.png");
-    }
-    &.unknown {
-      background-image: url("../img/tiles/void.png");
-    }
-  }
-
-  .message_list {
-    height: 100%;
+#context_menu_widget {
+  z-index: 999;
+  position: fixed;
+  border: 1px solid #666;
+  background-color: #eee;
+  min-width: 150px;
+  ul {
     list-style: none;
-    margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    > li {
-    }
-  }
-
-  .time {
-    font-size: smaller;
-    color: #444444;
-  }
-
-  .resource {
-    margin-left: 1em;
-  }
-
-  #context_menu_widget {
-    z-index: 999;
-    position: fixed;
-    border: 1px solid #666;
-    background-color: #eee;
-    min-width: 150px;
-    ul {
-      list-style: none;
-      padding: 0;
+    margin: 0;
+    cursor: pointer;
+    li {
+      text-align: left;
+      padding: 3px 10px 3px 5px;
       margin: 0;
       cursor: pointer;
-      li {
-        text-align: left;
-        padding: 3px 10px 3px 5px;
-        margin: 0;
-        cursor: pointer;
-        text-decoration: none;
-        color: #333;
-        font-size: 12px;
-        font-weight: bold;
-      }
-      li.selected,
-      li:hover {
-        color: #fff;
-        background-color: #3875d7;
-        cursor: pointer;
-      }
-      li.selected:hover {
-        color: #333;
-        background-color: #eee;
-        cursor: pointer;
-      }
-      li.disabled,
-      li:hover.disabled {
-        background-color: #eee;
-        color: #999;
-        cursor: pointer;
-      }
+      text-decoration: none;
+      color: #333;
+      font-size: 12px;
+      font-weight: bold;
     }
-  }
-
-  #toolbar_widget {
-    height: 100%;
-    > ul {
-      display: block;
-      height: 100%;
-      padding: 0;
-      margin: 0;
-      li {
-        display: inline-block;
-        min-width: 5em;
-        height: 100%;
-        border: 1px solid gray;
-        outline: none;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
-        -webkit-border-radius: .5em;
-        -moz-border-radius: .5em;
-        border-radius: .5em;
-        -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
-        -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
-        box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
-
-        :hover {
-          text-decoration: none;
-        }
-        :active {
-          position: relative;
-          top: 1px;
-        }
-      }
+    li.selected,
+    li:hover {
+      color: #fff;
+      background-color: #3875d7;
+      cursor: pointer;
     }
-
-  }
-
-  .terrain_card {
-    @cardHeaderHeight: 30px;
-    @cardFooterHeight: 20px;
-    header {
-      top: 0;
-      left: 0;
-      right: 0;
-      height: @cardHeaderHeight;
-      vertical-align: top;
-      font-size: 1.2em;
-      padding: 2px 4px;
+    li.selected:hover {
+      color: #333;
+      background-color: #eee;
+      cursor: pointer;
     }
-    .body {
-      top: @cardHeaderHeight;
-      bottom: @cardFooterHeight;
-      width: 100%;
-      .image {
-        position: static;
-        float: right;
-        margin: 4px 0;
-      }
-      padding: 2px 4px;
+    li.disabled,
+    li:hover.disabled {
+      background-color: #eee;
+      color: #999;
+      cursor: pointer;
     }
-    footer {
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: @cardFooterHeight;
-      text-align: right;
-      vertical-align: bottom;
-      font-size: .8em;
-      padding: 2px 4px;
-    }
-  }
-
-}
-
-@cardWidth: 25em;
-@labelWidth: 10em;
-.ruleset_editor {
-  .source_selector {
-    label {
-      display: table-row;
-      > * {
-        display: table-cell;
-      }
-      > input {
-        width: 40em;
-      }
-    }
-  }
-  .card {
-    width: @cardWidth;
-    max-width: 100%;
-    .label {
-      width: @labelWidth;
-      font-size: .8em;
-    }
-    .value {
-      width: (@cardWidth - @labelWidth);
-      font-size: .8em;
-    }
-    .cell {
-      display: inline-block;
-    }
-    > .new {
-      background: #aab8ff;
-    }
-  }
-  label.line {
-    display: block;
   }
 }
 
-section section {
-  margin: .3em;
-  padding: .3em;
-  border: 1px solid #696969;
-  h1 {
-    margin: .1em 0 .1em 0
-  }
-  header p {
-    margin: 0;
-    font-size: .8em;
-  }
+.panel {
+  max-height: 100%;
 }

@@ -5,42 +5,54 @@
       "name": "Field",
       "description": "A patch of land where some beets are growing.",
       "zone": "content",
-      "image": "field"
+      "image": "field",
+      "activity": 0,
+      "defence": 0
     },
     {
       "type": "water",
       "name": "Water",
       "description": "A patch of blue water, untouched by the zombie apocalypse.",
       "zone": "base",
-      "image": "water"
+      "image": "water",
+      "activity": -10,
+      "defence": 0
     },
     {
       "type": "hills",
       "name": "Hills",
       "description": "A patch of high hill, untouched by the zombie apocalypse.",
       "zone": "base",
-      "image": "hill"
+      "image": "hill",
+      "activity": 0,
+      "defence": 1
     },
     {
       "type": "house",
       "name": "House",
       "description": "A house someone used to live in. Now they're still living in it...",
       "zone": "content",
-      "image": "house"
+      "image": "house",
+      "activity": 0,
+      "defence": 2
     },
     {
       "type": "grass",
       "name": "Grass",
       "description": "Some grass with only a few zombie bits.",
       "zone": "base",
-      "image": "grass"
+      "image": "grass",
+      "activity": 0,
+      "defence": 0
     },
     {
       "type": "fence",
       "name": "Fence",
       "description": "A rickety fence, suitable for delaying zombies while you leg it.",
       "zone": "perimeter",
-      "image": "fence"
+      "image": "fence",
+      "activity": 0,
+      "defence": 20
     }
   ],
   "zone": [
@@ -65,8 +77,9 @@
       "type": "look_at_area",
       "name": "Look at area",
       "description": "Look at stuff.",
-      "prerequisites": {
-      },
+      "activity": 5,
+      "defence": 0,
+      "prerequisites": {"danger": 10},
       "effects": {
         "effect_stockpile": [
           {
@@ -88,11 +101,14 @@
       "type": "secure_area",
       "name": "Secure area",
       "description": "Build a zombie-proofish fence around a tile and kill all zombies within.",
+      "activity": 10,
+      "defence": 0,
       "prerequisites": {
         "terrain": [
           "grass",
           "house"
-        ]
+        ],
+        "danger": 20
       },
       "effects": {
         "effect_stockpile": [],
@@ -116,13 +132,17 @@
       "type": "field_plant",
       "name": "Plant field",
       "description": "Plow a patch of land and plant some beets.",
-      "prerequisites": {"terrain": ["grass"]},
+      "activity": 5,
+      "defence": 0,
+      "prerequisites": {
+        "terrain": ["grass"],
+        "danger": 0
+      },
       "effects": {
         "effect_stockpile": [],
         "effect_terrain": "field"
       },
       "cost": {
-        "stockpile": [],
         "work": {
           "combat": 0,
           "knowledge": 0,
@@ -134,7 +154,12 @@
       "type": "field_tend",
       "name": "Tend field",
       "description": "Tend a patch of land and weed some beets.",
-      "prerequisites": {"terrain": []},
+      "activity": 3,
+      "defence": 0,
+      "prerequisites": {
+        "terrain": [],
+        "danger": 0
+      },
       "effects": {
         "effect_stockpile": [],
         "effect_terrain": "field"
@@ -152,7 +177,12 @@
       "type": "field_harvest",
       "name": "Harvest field",
       "description": "Harvest a patch of land and get some beets.",
-      "prerequisites": {"terrain": []},
+      "activity": 6,
+      "defence": 0,
+      "prerequisites": {
+        "terrain": [],
+        "danger": 0
+      },
       "effects": {
         "effect_stockpile": [],
         "effect_terrain": "field"
@@ -170,7 +200,12 @@
       "type": "fortify_house",
       "name": "Fortify",
       "description": "Fortify the house",
-      "prerequisites": {"terrain": ["house"]},
+      "activity": 8,
+      "defence": 0,
+      "prerequisites": {
+        "terrain": ["house"],
+        "danger": 0
+      },
       "effects": {
         "effect_stockpile": [],
         "effect_terrain": "field"
