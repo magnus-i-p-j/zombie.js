@@ -46,7 +46,19 @@ z.service.world.RandomTerrainGenerator.prototype.generateTerrain = function (x, 
     }
   }
 
-
-  var data = new z.common.data.TileData(null, z.common.protocol.state.MODIFIED, null, x, y, terrain, 'tile');
+  var data = new z.common.data.TileData(null, z.common.protocol.state.MODIFIED, null, x, y, terrain, 'tile', this.newEmptyZombieData());
   return data;
+};
+
+/**
+ * @returns {z.common.zombiedata}
+ */
+z.service.world.RandomTerrainGenerator.prototype.newEmptyZombieData = function() {
+  return {
+    density: 10,
+    defence: 0,
+    attraction: 0,
+    activity: 0,
+    danger: 0
+  };
 };

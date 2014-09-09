@@ -32,7 +32,7 @@ z.common.entities.Tile = function(services) {
   /**
    * @type {!z.common.zombiedata}
    */
-  this.zombieData = this.newEmptyZombieData();
+  this.zombieData = this._calculateZombieData(tileData.zombieData);
 };
 goog.inherits(z.common.entities.Tile, z.common.entities.Entity);
 
@@ -77,7 +77,7 @@ z.common.entities.Tile.prototype._update = function(data, meta) {
     this
   );
 
-  if (z.common.entities.Tile.compareZombieData(tileData.zombieData, this.zombieData)) {
+  if (!z.common.entities.Tile.equalZombieData(tileData.zombieData, this.zombieData)) {
     this.zombieData = tileData.zombieData;
     updated = true;
   }
@@ -94,25 +94,13 @@ z.common.entities.Tile.prototype._update = function(data, meta) {
   return updated;
 };
 
-/**
- * @returns {z.common.zombiedata}
- */
-z.common.entities.Tile.prototype.newEmptyZombieData = function() {
-  return this._calculateZombieData({
-    density: 10,
-    defence: 0,
-    attraction: 0,
-    activity: 0,
-    danger: 0
-  });
-};
 
 /**
  * @param {!z.common.zombiedata} data
  */
 z.common.entities.Tile.prototype.setZombieData = function(data) {
   var newZombieData = this._calculateZombieData(data);
-  if (z.common.entities.Tile.compareZombieData(newZombieData, this.zombieData)) {
+  if (!z.common.entities.Tile.equalZombieData(newZombieData, this.zombieData)) {
     this.zombieData = newZombieData;
     this._dispatchModified();
   }
@@ -156,7 +144,7 @@ z.common.entities.Tile.prototype._calculateZombieData = function(data) {
  * @returns {boolean}
  * @private
  */
-z.common.entities.Tile.compareZombieData = function(lhs, rhs) {
+z.common.entities.Tile.equalZombieData = function(lhs, rhs) {
   return (lhs.density === rhs.density) &&
   (lhs.defence === rhs.defence) &&
   (lhs.attraction === rhs.attraction) &&
