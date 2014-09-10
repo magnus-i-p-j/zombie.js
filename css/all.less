@@ -1,4 +1,21 @@
+/* Main layout
 
+```
+<div class="game-container">
+  <section id="map" class="layout">map</section>
+  <div class="layout" id="sidebar">
+    <section id="current_selection_info">current_selection_info</section>
+    <section id="project_overview">project_overview</section>
+    <section id="character_overview">character_overview</section>
+  </div>
+  <div id="message-bar" class="layout">
+    <section id="info-bar">info_bar</section>
+    <section id="message-log">message-log</section>
+  </div>
+  <section id="toolbar" class="toolbar layout"></section>
+</div>
+```
+*/
 .game-container {
   position: absolute;
   top: 0;
@@ -38,6 +55,17 @@
   top: 90%;
 }
 
+/* Context menu
+```
+<div id="context_menu_widget">
+  <ul>
+    <li>Plant field</li>
+    <li>Patrol</li>
+    <li>Undergo metamorphosis</li>
+  </ul>
+</div>
+```
+*/
 #context_menu_widget {
   z-index: 999;
   position: fixed;
@@ -79,6 +107,84 @@
   }
 }
 
+/* A basic panel that contains a block of information
+
+```
+<section class="panel">
+  <header><h1>Zombie ipsum</h1></header>
+  <section>
+    <p>Reversus ab viral inferno, nam rick grimes malum cerebro. De
+      carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? </p>
+
+    <p>Hi mindless mortuis soulless creaturas, imo evil stalking monstra adventus resi dentevil vultus comedat
+      cerebella viventium. </p>
+  </section>
+  <footer>De apocalypsi gorger omero undead survivor dictum mauris.</footer>
+</section>
+```
+*/
 .panel {
   max-height: 100%;
 }
+
+
+/* A block of buttons
+
+```
+<div class="btn-group">
+  <button class="btn action-end-turn">End turn</button>
+  <button class="btn action-something-else">Something else</button>
+  <button class="btn action-another-thing">Another thing</button>
+</div>
+```
+*/
+
+/* A message list
+
+```
+<ol class="message-list">
+  <li>
+    <span class="time">21:17:36</span>: <span>Stuff happened!</span>
+  </li>
+
+  <li>
+    <span class="time" data-bind="time: time">21:17:37</span>: <span data-bind="html: html">Turn started: 1</span>
+  </li>
+
+  <li>
+    <span class="time" data-bind="time: time">21:17:37</span>: <span data-bind="html: html">The last thing happened.</span>
+  </li>
+</ol>
+```
+*/
+
+/* A time
+
+```
+<span class="time">21:17:36</span>
+```
+*/
+
+/* A block resource
+
+```
+<div class="resource">
+  <span class="name" >Wood</span>: <span class="amount">20</span>
+</div>
+```
+*/
+
+/* An inline resource
+
+```
+<span class="resource"><span class="name" >Wood</span>: <span class="amount">20</span></span>
+```
+*/
+
+/* A coordinate
+
+```
+<span class="coordinate">(<span class="x">3</span>, <span class="y">7</span>)</span>
+```
+*/
+
