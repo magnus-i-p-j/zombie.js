@@ -34,7 +34,6 @@ z.client.facet.CharacterListFacet.prototype.setParentEventTarget = function (par
   goog.base(this, 'setParentEventTarget', parent);
   this.eventHandler.listen(parent, z.common.events.EventType.ENTITY_CREATED, this.doEntityCreated);
   this.eventHandler.listen(parent, z.common.events.EventType.ENTITY_MODIFIED, this.doEntityModified);
-//  this.eventHandler.listen(parent, z.client.events.EventType.START_TURN, this.doStartTurn);
 };
 
 z.client.facet.CharacterListFacet.prototype._getCharacterList = function () {
@@ -52,6 +51,8 @@ z.client.facet.CharacterListFacet.prototype.doEntityCreated = function (e) {
    * @type {!z.common.entities.Entity}
    */
   var entity = e.entity;
+  this['characters'](this._getCharacterList());
+
 };
 
 /**
@@ -63,5 +64,6 @@ z.client.facet.CharacterListFacet.prototype.doEntityModified = function (e) {
    */
   var entity = e.entity;
   this['characters'](this._getCharacterList());
+
 };
 
