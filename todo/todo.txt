@@ -1,10 +1,10 @@
-(A) 2014-09-07 Enable dev-info display on map +zombie.js-map @Magnus 
+x 2014-09-14 2014-09-07 Enable dev-info display on map +zombie.js-map @Magnus 
 (A) 2014-09-07 Colour scheme/style guide +zombie.js @Mattias
-(A) 2014-09-07 Do stuff, dude! +zombie.js @Ulrik
-(B) 2014-09-07 Look over UI changes and possibly merge to master +zombie.js @Ulrik @Magnus
+x 2014-09-14 2014-09-07 Do stuff, dude! +zombie.js @Ulrik
+x 2014-09-10 2014-09-07 Look over UI changes and possibly merge to master +zombie.js @Ulrik @Magnus
 (B) 2014-09-07 Add defence to terrain and projects +zombie.js @Ulrik @Magnus
 (B) 2014-09-07 Add activity to terrain and projects +zombie.js @Ulrik @Magnus
-(C) 2014-09-07 Projects can only be started in safe tiles +zombie.js @Ulrik @Magnus
+x 2014-09-10 2014-09-07 Projects can only be started in safe tiles +zombie.js @Ulrik @Magnus
 (D) 2014-09-07 Design and evaluate ui +zombie.js @Magnus @Ulrik @Mattias 
 
 (X) 2014-09-07 Develop project management view +zombie.js @Magnus @Ulrik
@@ -18,3 +18,4 @@
 2014-09-07 Script for deploying z automatically +zombie.js @Magnus @Ulrik
 
 2014-09-07 Brainzzzzz can be eaten +zombie.js @Magnus @Ulrik
+2014-09-14 Projects should clear when deleted +bug
