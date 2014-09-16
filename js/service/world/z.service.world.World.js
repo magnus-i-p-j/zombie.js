@@ -166,12 +166,7 @@ z.service.world.World.prototype._doBeforeFirstTurn = function() {
 
   this._expandWorld();
 
-  var distributor = new z.service.world.ZombieDistributor();
-  var query = new z.common.EntityQuery();
-  query.category = z.common.rulebook.category.TILE;
-  var tiles = this._entityRepository.filter(query.match.bind(query));
-  distributor.distribute(tiles);
-
+  this._distributeZombies();
 };
 
 /**
@@ -271,13 +266,24 @@ z.service.world.World.prototype.getVisibleCharacters = function() {
 z.service.world.World.prototype.tick = function() {
   var killed = this._entityRepository.resetState();
   this._expandWorld();
-  //Calculate zombies
+  this._distributeZombies();
   //Zombie attack
   this._advanceProjects();
   this._turn += 1;
   //Special events
 
   return killed;
+};
+
+/**
+ * @private
+ */
+z.service.world.World.prototype._distributeZombies = function () {
+  var distributor = new z.service.world.ZombieDistributor();
+  var query = new z.common.EntityQuery();
+  query.category = z.common.rulebook.category.TILE;
+  var tiles = this._entityRepository.filter(query.match.bind(query));
+  distributor.distribute(tiles);
 };
 
 /**
