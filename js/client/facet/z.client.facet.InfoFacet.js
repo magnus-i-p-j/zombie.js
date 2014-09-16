@@ -23,6 +23,7 @@ z.client.facet.InfoFacet = function (services) {
    */
   var player = /** @type {!z.client.facet.ActorFacet}*/ services.get(z.client.Resources.PLAYER_FACET);
   this['resources'] = player['resources'];
+  this['characters'] = player['ownedCharactersFacet'];
 };
 
 goog.inherits(z.client.facet.InfoFacet, z.client.facet.Facet);
