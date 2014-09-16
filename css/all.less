@@ -17,7 +17,11 @@
 ```
 */
 
-body { margin: 0; padding: 0;}
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .game-container {
   position: absolute;
   top: 0;
@@ -165,19 +169,66 @@ body { margin: 0; padding: 0;}
 ```
 <ol class="message-list">
   <li>
-    <span class="time">21:17:36</span>: <span>Stuff happened!</span>
+    <span class="time">21:17:36</span><span>Stuff happened!</span>
   </li>
-
   <li>
-    <span class="time" data-bind="time: time">21:17:37</span>: <span data-bind="html: html">Turn started: 1</span>
+    <span class="time">21:17:37</span><span data-bind="html: html">Turn started: 1</span>
   </li>
-
   <li>
-    <span class="time" data-bind="time: time">21:17:37</span>: <span data-bind="html: html">The last thing happened.</span>
+    <span class="time">21:17:37</span><span data-bind="html: html">Turn started: 2</span>
+  </li>
+  <li>
+    <span class="time">21:17:37</span><span data-bind="html: html">Turn started: 3</span>
+  </li>
+  <li>
+    <span class="time">21:17:37</span><span data-bind="html: html">Turn started: 4</span>
+  </li>
+  <li>
+    <span class="time">21:17:37</span><span data-bind="html: html">The last thing happened.</span>
   </li>
 </ol>
 ```
 */
+
+.message-list {
+  font-family: 'Reenie Beanie', cursive;
+  list-style: none;
+  color: #1717be;
+  text-shadow: 0px 0px 1px #10103b;
+  padding: 0;
+  margin: 0;
+  > li {
+    width: 140px;
+    height: 50px;
+    margin: .5em .5em -2em;
+    padding: 1.25em .5em .5em;
+    background: url("../img/background/paper.png") no-repeat;
+    position: relative;
+    border: 2px solid rgba(46, 46, 46, 0.67);
+    .time {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    & {
+      transform: rotate(-1deg);
+    }
+    &:nth-child(2n) {
+      transform: rotate(2.75deg);
+    }
+    &:nth-child(3n) {
+      transform: rotate(-2.5deg);
+    }
+    &:nth-child(5n) {
+      transform: rotate(-4.5deg);
+    }
+    &:nth-child(7n) {
+      transform: rotate(2.5deg);
+    }
+    z-index: 1;
+    &:hover { z-index: 5;}
+  }
+}
 
 /* A time
 
