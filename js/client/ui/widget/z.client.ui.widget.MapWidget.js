@@ -105,5 +105,18 @@ z.client.ui.widget.MapWidget.prototype._drawTile = function (tileFacet) {
       }
     );
     this._imap.drawTile(x, y, tileFacet['terrain'](), adjacent);
+    if(goog.DEBUG) {
+      var entity = tileFacet.entity();
+      if(entity) {
+        var data = entity.zombieData;
+        var lines = [
+          '{',
+          ' activity:' + data.activity,
+          ' density:' + data.density,
+          '}','',''
+        ];
+        this._imap.drawText(x, y, lines);
+      }
+    }
   }
 };

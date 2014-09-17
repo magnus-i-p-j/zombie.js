@@ -18,10 +18,25 @@ z.common.rulebook.meta;
  *   name: string,
  *   description: string,
  *   prerequisites: z.common.rulebook.prerequisites,
- *   cost: z.common.rulebook.cost
+ *   cost: z.common.rulebook.cost,
+ *   activity: number,
+ *   defence: number
  * }}
  */
 z.common.rulebook.project;
+
+/**
+ * @typedef {{
+ *   type: string,
+ *   category: z.common.rulebook.category,
+ *   name: string,
+ *   description: string,
+ *   activity: number,
+ *   defence: number,
+ *   zone: string
+ * }}
+ */
+z.common.rulebook.terrain;
 
 /**
  * @typedef {{
@@ -129,19 +144,26 @@ z.common.rulebook.category = {
 
 //noinspection JSUnusedLocalSymbols
 z.common.rulebook.logic.prerequisites = {
-  'terrain': function (condition, target) {
+  'terrain': function(condition, target) {
     if (!(target instanceof z.common.entities.Tile)) {
       return false;
     }
 
     var fulfilled = false;
-    goog.object.forEach(target.terrain, function (terrain) {
+    goog.object.forEach(target.terrain, function(terrain) {
       fulfilled = fulfilled || goog.array.contains(condition, terrain);
     });
 
     return fulfilled;
   },
-  'blocked': function (condition, target) {
+  'blocked': function(condition, target) {
     return false;
+  },
+  'danger': function(condition, target) {
+    if (!(target instanceof z.common.entities.Tile)) {
+      return false;
+    }
+    return condition >= target.zombieData.danger;
   }
-};
+}
+;

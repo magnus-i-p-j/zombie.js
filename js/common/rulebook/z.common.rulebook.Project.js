@@ -34,6 +34,16 @@ z.common.rulebook.Project = function(project) {
    */
   this.description = this._project.description;
 
+  /**
+   * @type {number}
+   */
+  this.activity = this._project.activity;
+
+  /**
+   * @type {number}
+   */
+  this.defence = this._project.defence;
+
   this.cost = {};
   var stockpile = this._project['cost']['stockpile'];
   if (stockpile) {

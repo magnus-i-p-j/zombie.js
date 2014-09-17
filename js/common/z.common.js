@@ -12,3 +12,14 @@ z.common.Resources = {
  * @typedef {!Object.<string, string>}
  */
 z.common.terrain;
+
+/**
+ * @typedef{{
+ *  density: number,
+ *  defence: number,
+ *  attraction: number,
+ *  activity: number,
+ *  danger: number
+ * }}
+ */
+z.common.zombiedata;

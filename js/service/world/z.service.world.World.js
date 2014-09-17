@@ -11,6 +11,7 @@ goog.require('z.common.EntityRepository');
 goog.require('goog.array');
 goog.require('mugd.utils.SimplexNoise');
 goog.require('z.common.EntityQuery');
+goog.require('z.service.world.ZombieDistributor');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -162,6 +163,10 @@ z.service.world.World.prototype._doBeforeFirstTurn = function() {
       character.update(null, null, actor);
     })
   }, this);
+
+  this._expandWorld();
+
+  this._distributeZombies();
 };
 
 /**
@@ -217,7 +222,7 @@ z.service.world.World.prototype.getVisibleTiles = function() {
     }
   );
   return tiles;
-}
+};
 
 /**
  * @returns {!Array.<z.common.data.ProjectData>}
@@ -261,13 +266,24 @@ z.service.world.World.prototype.getVisibleCharacters = function() {
 z.service.world.World.prototype.tick = function() {
   var killed = this._entityRepository.resetState();
   this._expandWorld();
-  //Calculate zombies
+  this._distributeZombies();
   //Zombie attack
   this._advanceProjects();
   this._turn += 1;
   //Special events
 
   return killed;
+};
+
+/**
+ * @private
+ */
+z.service.world.World.prototype._distributeZombies = function () {
+  var distributor = new z.service.world.ZombieDistributor();
+  var query = new z.common.EntityQuery();
+  query.category = z.common.rulebook.category.TILE;
+  var tiles = this._entityRepository.filter(query.match.bind(query));
+  distributor.distribute(tiles);
 };
 
 /**
@@ -302,7 +318,7 @@ z.service.world.World.prototype._advanceProjects = function() {
 
     var cost = project.getRemainingCost();
 
-    var isAssignedTo = function (entity) {
+    var isAssignedTo = function(entity) {
       if (entity instanceof z.common.entities.Character) {
         var character = /** @type {!z.common.entities.Character} */ entity;
         return character.assignedTo === project.guid;
@@ -311,7 +327,7 @@ z.service.world.World.prototype._advanceProjects = function() {
     };
     var work = new z.common.Stockpile();
     var calculateWork = function(character) {
-      var prefix =  'game://static/';
+      var prefix = 'game://static/';
       work.add(prefix + 'combat', character.combat);
       work.add(prefix + 'knowledge', character.knowledge);
       work.add(prefix + 'labour', character.labour);
