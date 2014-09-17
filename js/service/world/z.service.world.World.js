@@ -130,7 +130,7 @@ z.service.world.World.prototype.actorEndTurn = function(endTurnData) {
  */
 z.service.world.World.prototype.updateProject = function(projectData, actor) {
   var project = this._entityRepository.get(projectData.guid);
-  if (goog.isDefAndNotNull(project) && project.owner !== actor) {
+  if (goog.isDefAndNotNull(project) && project.owner !== actor.guid) {
     this._logger.warning('project is not owned by the correct actor');
   } else {
     this._logger.info('Received project service side');
