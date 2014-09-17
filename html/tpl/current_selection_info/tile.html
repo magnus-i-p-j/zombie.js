@@ -1,10 +1,10 @@
-<div class="panel">
-  <header class="name panel-heading"><h1 data-bind="text: name"></h1></header>
-  <section class="panel-body">
+<section class="panel">
+  <header><h1 data-bind="text: name"></h1></header>
+  <section>
     <div data-bind="attr: { class: terrain()['base'] + ' image tile', 'data-x': x, 'data-y': y }"></div>
     <p data-bind="text: description"></p>
   </section>
-  <footer class="panel-footer">
+  <footer>
     <div>(<span data-bind="text: x"></span>, <span data-bind="text: y"></span>)</div>
   </footer>
-</div>
+</section>

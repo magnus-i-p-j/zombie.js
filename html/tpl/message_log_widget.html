@@ -1,9 +1,5 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-    <ol class="message_list list-group" data-bind="foreach: messages">
-      <li data-bind="scrollIntoView: $data" class="list-group-item">
-        <span class="time" data-bind="time: time"></span>: <span data-bind="html: html"></span>
-      </li>
-    </ol>
-  </div>
-</div>
+<ol class="message-list" data-bind="foreach: messages">
+  <li data-bind="scrollIntoView: $data">
+    <span class="time" data-bind="time: time"></span>: <span data-bind="html: html"></span>
+  </li>
+</ol>

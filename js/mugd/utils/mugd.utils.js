@@ -52,3 +52,11 @@ mugd.utils.CHOOSE_CHARS = 'abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ012
 /** @typedef {string} */
 mugd.utils.guid;
 
+/**
+ * @param {string} text
+ */
+mugd.utils.makeCssClass = function(text) {
+  var lowered = text.toLocaleLowerCase();
+  var parts = lowered.split(' ');
+  return parts.join('-');
+};

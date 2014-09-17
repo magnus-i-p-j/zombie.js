@@ -1,11 +1,9 @@
 <div data-bind="with: position">
   <div id="context_menu_widget" data-bind="style: {top: ( y - 5) + 'px', left: (x - 5) + 'px'}">
-    <div data-bind="foreach: $parent.actionFacets">
-      <ul>
-        <li data-bind="click: $parents[1].executeAction.bind($parents[1])">
-          <span data-bind="text: name"></span>
-        </li>
-      </ul>
-    </div>
+    <ul data-bind="foreach: $parent.actionFacets">
+      <li data-bind="click: $parents[1].executeAction.bind($parents[1])">
+        <span data-bind="text: name"></span>
+      </li>
+    </ul>
   </div>
 </div>

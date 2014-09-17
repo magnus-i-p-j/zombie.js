@@ -1,7 +1,3 @@
-<div id="toolbar_widget" data-bind="foreach: actionFacets" class="panel panel-default">
-  <div class="panel-body">
-    <button data-bind="click: execute" class="btn btn-default">
-      <span data-bind="text: name"></span>
-    </button>
-  </div>
+<div id="toolbar_widget" data-bind="foreach: actionFacets" class="btn-group">
+  <button data-bind="click: execute, text: name, css: 'btn-'+$data.className" class="btn"></button>
 </div>

@@ -1,6 +1,6 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-    Turn: <span data-bind="text: turn"></span>
+<section class="panel">
+  <header>Turn: <span data-bind="text: turn"></span></header>
+  <section>
     <!-- ko foreach: resources.resources -->
     <div class="resource">
       <span class="name" data-bind="text: name"></span>:
@@ -11,5 +11,5 @@
       <span class="name">Characters</span>:
       <span class="amount" data-bind="text: unassignedCharacters.characters().length"></span>
     </div>
-  </div>
-</div>
+  </section>
+</section>
