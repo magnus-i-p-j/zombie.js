@@ -17,7 +17,9 @@ z.client.facet.ToolbarFacet = function (services) {
   this['actionFacets'] = ko.observableArray();
 
   var endTurnAction = services.get(z.client.Resources.END_TURN_ACTION);
+  var openTestAction = services.get(z.client.Resources.OPEN_TEST_ACTION);
   this['actionFacets'].push(new z.client.facet.ActionFacet(endTurnAction));
+  this['actionFacets'].push(new z.client.facet.ActionFacet(openTestAction));
 };
 
 goog.inherits(z.client.facet.ToolbarFacet, z.client.facet.Facet);

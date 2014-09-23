@@ -47,6 +47,11 @@ z.client.facet.Gem = function (services) {
    */
   this['projectsFacet'] = /** @type {function(z.client.facet.ProjectListFacet=):z.client.facet.ProjectListFacet} */ services.get(z.client.Resources.PROJECT_LIST_FACET);
 
+  /**
+   * @type {function(z.client.facet.ModalFacet=):z.client.facet.ModalFacet}
+   */
+  this['modalFacet'] = /** @type {function(z.client.facet.ModalFacet=):z.client.facet.ModalFacet} */ services.get(z.client.Resources.MODAL_FACET);
+
   /** @type {!mugd.injector.Injector} */
   this['playerFacet'] = /** @type {!z.client.facet.ActorFacet}*/ services.get(z.client.Resources.PLAYER_FACET);
 
@@ -67,6 +72,7 @@ z.client.facet.Gem = function (services) {
   this['messageLogFacet'].setParentEventTarget(this);
   this['projectsFacet'].setParentEventTarget(this);
   this['playerFacet'].setParentEventTarget(this);
+  this['modalFacet'].setParentEventTarget(this);
 
   repository.setParentEventTarget(this);
   world.setParentEventTarget(this);

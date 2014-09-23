@@ -1,0 +1,8 @@
+<!-- ko if: facet -->
+<div class="modal-backdrop" data-bind="click: close">
+  <div class="modal-close" data-bind="click: close">✗</div>
+  <div class="modal-content"
+       data-bind="template: {name: 'user_interface_facet/' + facet().template, data: facet},
+       click: function(){}, clickBubble: false"></div>
+</div>
+<!-- /ko -->
