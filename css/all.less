@@ -2,7 +2,7 @@
 
 ```
 <div class="game-container">
-  <section id="map" class="layout">map</section>
+  <section id="map" class="layout placeholder-map">map</section>
   <div class="layout" id="sidebar">
     <section id="current_selection_info">current_selection_info</section>
     <section id="project_overview">project_overview</section>
@@ -132,13 +132,13 @@ body {
   max-height: 100%;
   background: url("../img/background/blackboard.png") repeat;
   color: #ffffff;
-  font-family: 'Coming Soon', cursive;
+  font-family: "Coming Soon", cursive;
   border: 4px solid rgba(75, 75, 75, 0.76);
   border-radius: 2px;
   padding: 6px;
   section::before,
   footer::before {
-    content: '';
+    content: "";
     display: block;
     width: 75%;
     height: 5px;
@@ -171,44 +171,45 @@ body {
     <span class="time">21:17:36</span><span>Stuff happened!</span>
   </li>
   <li>
-    <span class="time">21:17:37</span><span data-bind="html: html">Turn started: 1</span>
+    <span class="time">21:17:37</span><span>Turn started: 1</span>
   </li>
   <li>
-    <span class="time">21:17:37</span><span data-bind="html: html">Turn started: 2</span>
+    <span class="time">21:17:37</span><span>Turn started: 2</span>
   </li>
   <li>
-    <span class="time">21:17:37</span><span data-bind="html: html">Turn started: 3</span>
+    <span class="time">21:17:37</span><span>Turn started: 3</span>
   </li>
   <li>
-    <span class="time">21:17:37</span><span data-bind="html: html">Turn started: 4</span>
+    <span class="time">21:17:37</span><span>Turn started: 4</span>
   </li>
   <li>
-    <span class="time">21:17:37</span><span data-bind="html: html">The last thing happened.</span>
+    <span class="time">21:17:37</span><span>The last thing happened.</span>
   </li>
 </ol>
 ```
 */
 
 .message-list {
-  font-family: 'Reenie Beanie', cursive;
+  font-family: "Reenie Beanie", cursive;
   list-style: none;
   color: #1717be;
   font-size: 120%;
-  padding: 0;
+  padding: 0 0 4em 0;
   margin: 0;
   > li {
-    width: 140px;
-    height: 50px;
     margin: .5em .5em -2em;
     padding: 1.25em .5em .5em;
-    background: url("../img/background/paper.png") no-repeat;
+    @borderWidth: 10px;
     position: relative;
-    border: 2px solid rgba(46, 46, 46, 0.67);
+    border-width: @borderWidth;
+    border-image: url("../img/background/paper-border.png") 5% fill round;
+
     .time {
       position: absolute;
       top: 0;
       left: 0;
     }
+    // Reduce repetition using cicada principle
     & {
       transform: rotate(-1deg);
     }
@@ -234,9 +235,13 @@ body {
 /* The modal that opens other pages
 
 ```
-<div class="modal-backdrop">
-  <div class="modal-close">✗</div>
-  <div class="modal-content">Some stuff that is in the modal</div>
+<div class="placeholder-map layout">
+  <div class="modal-backdrop">
+    <div class="modal-close">✗</div>
+    <div class="modal-content">
+      <div style="min-height: 400px; min-width: 400px;">Some stuff that is in the modal</div>
+    </div>
+  </div>
 </div>
 ```
 */
@@ -290,7 +295,7 @@ body {
 
 ```
 <div class="resource">
-  <span class="name" >Wood</span>: <span class="amount">24em</span>
+  <span class="name" >Wood</span>: <span class="amount">24</span>
 </div>
 ```
 */
@@ -333,3 +338,14 @@ body {
 ```
 */
 @import url("http://fonts.googleapis.com/css?family=Coming+Soon|Reenie+Beanie&subset=latin,latin-ext");
+
+/*
+An element that is used to show a substitute for the map in this documentation.
+
+```
+<div class="placeholder-map" style="min-height: 400px; min-width: 400px;"></div>
+```
+*/
+.placeholder-map {
+  background: repeat url("../docs/placeholder_map.jpg");
+}
