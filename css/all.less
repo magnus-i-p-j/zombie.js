@@ -193,7 +193,7 @@ body {
   font-family: 'Reenie Beanie', cursive;
   list-style: none;
   color: #1717be;
-  text-shadow: 0px 0px 1px #10103b;
+  font-size: 120%;
   padding: 0;
   margin: 0;
   > li {
@@ -225,7 +225,57 @@ body {
       transform: rotate(2.5deg);
     }
     z-index: 1;
-    &:hover { z-index: 5;}
+    &:hover {
+      z-index: 5;
+    }
+  }
+}
+
+/* The modal that opens other pages
+
+```
+<div class="modal-backdrop">
+  <div class="modal-close">✗</div>
+  <div class="modal-content">Some stuff that is in the modal</div>
+</div>
+```
+*/
+
+.modal-backdrop {
+  @paddingSize: 90px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  padding: @paddingSize;
+  z-index: 500;
+  background: rgba(46, 46, 46, 0.80);
+  .modal-content {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: #f5f5f5;
+    box-shadow: 20px 20px 20px 5px rgba(0,0,0,0.55);
+  }
+  @buttonSize: 30px;
+  .modal-close {
+    position: absolute;
+    right: @paddingSize - @buttonSize/2;
+    top: @paddingSize  - @buttonSize/2;
+    width: @buttonSize;
+    height: @buttonSize;
+    line-height: @buttonSize;
+    font-size: @buttonSize;
+    vertical-align: middle;
+    text-align: center;
+    color: #ff0000;
+    background: transparent;
+    cursor: pointer;
+    &:hover {
+      color: darkred;
+    }
   }
 }
 
@@ -240,7 +290,7 @@ body {
 
 ```
 <div class="resource">
-  <span class="name" >Wood</span>: <span class="amount">20</span>
+  <span class="name" >Wood</span>: <span class="amount">24em</span>
 </div>
 ```
 */

@@ -19,3 +19,7 @@ x 2014-09-10 2014-09-07 Projects can only be started in safe tiles +zombie.js @U
 
 2014-09-07 Brainzzzzz can be eaten +zombie.js @Magnus @Ulrik
 2014-09-14 Projects should clear when deleted +bug
+(A) 2010-09-23 Create modal @Ulrik @Magnus
+(A) 2010-09-23 Design modal @Ulrik
+(A) 2010-09-23 Create projects @Magnus
+
