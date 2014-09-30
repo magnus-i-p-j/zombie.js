@@ -1,32 +1,46 @@
-<!-- ko foreach: unassignedCharacters.characters -->
-<section>
-  <h1><span data-bind="text: name"></span></h1>
-</section>
-<!-- /ko -->
+<section class="project-manager layout">
+  <section class="all-projects layout" data-bind="foreach: projects.projects">
+    <section class="panel">
+      <header><h1><span data-bind="text: name"></span> <span data-bind="text: completionPercent"></span>%</h1></header>
+      <section>
 
-<section>
-  <!-- ko foreach: resources.resources -->
-  <div class="resource">
-    <span class="name" data-bind="text: name"></span>:
-    <span class="amount" data-bind="text: amount"></span>
-  </div>
-  <!-- /ko -->
-</section>
+        <!-- ko if: workforce.characters().length -->
+        <span data-bind="text: workforce.characters()[0].name"></span>
+        <!-- /ko -->
+        <p><input type="button" value="Assign a worker" data-bind="click: assignFreeAgent"/></p>
 
-<!-- ko foreach: projects.projects -->
-<section class="panel">
-  <header><h1><span data-bind="text: name"></span> <span data-bind="text: completionPercent"></span>%</h1></header>
-  <section>
-
-    <!-- ko if: workforce.characters().length -->
-    <span data-bind="text: workforce.characters()[0].name"></span>
-    <!-- /ko -->
-    <p><input type="button" value="Assign a worker" data-bind="click: assignFreeAgent"/></p>
-
+      </section>
+      <footer>
+        <p><label>Delete project: <input type="checkbox" data-bind="checked: remove"/></label></p>
+      </footer>
+    </section>
   </section>
-  <footer>
-    <p><label>Delete project: <input type="checkbox" data-bind="checked: remove"/></label></p>
-  </footer>
+  <section class="favorite-projects layout">
+    <section class="panel">
+      <header><h1><span>Secure area</span> <span>0</span>%</h1></header>
+    </section>
+  </section>
+  <section class="unassigned-characters layout" data-bind="foreach: unassignedCharacters.characters">
+    <section>
+      <h1><span data-bind="text: name"></span></h1>
+    </section>
+  </section>
+  <section class="current-selection layout">
+    <section class="panel">
+      <header><h1>Tile</h1></header>
+      <section>
+        <div class="grass image tile"></div>
+        <p>a tile</p>
+      </section>
+      <footer>
+        <div>(<span>0</span>, <span>0</span>)</div>
+      </footer>
+    </section>
+  </section>
+  <section class="resources layout" data-bind="foreach: resources.resources">
+    <div class="resource">
+      <span class="name" data-bind="text: name"></span>:
+      <span class="amount" data-bind="text: amount"></span>
+    </div>
+  </section>
 </section>
-<!-- /ko -->
-
