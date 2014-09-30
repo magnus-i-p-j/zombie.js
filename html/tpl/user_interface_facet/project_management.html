@@ -1,1 +1,32 @@
-Project Mangement
+<!-- ko foreach: unassignedCharacters.characters -->
+<section>
+  <h1><span data-bind="text: name"></span></h1>
+</section>
+<!-- /ko -->
+
+<section>
+  <!-- ko foreach: resources.resources -->
+  <div class="resource">
+    <span class="name" data-bind="text: name"></span>:
+    <span class="amount" data-bind="text: amount"></span>
+  </div>
+  <!-- /ko -->
+</section>
+
+<!-- ko foreach: projects.projects -->
+<section class="panel">
+  <header><h1><span data-bind="text: name"></span> <span data-bind="text: completionPercent"></span>%</h1></header>
+  <section>
+
+    <!-- ko if: workforce.characters().length -->
+    <span data-bind="text: workforce.characters()[0].name"></span>
+    <!-- /ko -->
+    <p><input type="button" value="Assign a worker" data-bind="click: assignFreeAgent"/></p>
+
+  </section>
+  <footer>
+    <p><label>Delete project: <input type="checkbox" data-bind="checked: remove"/></label></p>
+  </footer>
+</section>
+<!-- /ko -->
+
