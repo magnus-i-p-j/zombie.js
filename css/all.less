@@ -78,43 +78,63 @@ body {
     </section>
   </section>
   <section class="unassigned-characters layout">
-    <section class="panel">
-      <header><h1>Anna</h1></header>
+    <section>
+      <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone"/>
+
+      <div>Tim</div>
     </section>
-    <section class="panel">
-      <header><h1>Petra</h1></header>
+
+    <section>
+      <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone"/>
+
+      <div>Edward</div>
     </section>
-    <section class="panel">
-      <header><h1>Jonas</h1></header>
+
+    <section>
+      <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone"/>
+
+      <div>Felicia</div>
+    </section>
+
+    <section>
+      <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone"/>
+
+      <div>Jack</div>
+    </section>
+
+    <section>
+      <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone"/>
+
+      <div>Isabella</div>
     </section>
   </section>
   <section class="current-selection layout">
     <section class="panel">
-      <header><h1 >Tile</h1></header>
+      <header><h1>Tile</h1></header>
       <section>
         <div class="grass image tile"></div>
-        <p >a tile</p>
+        <p>a tile</p>
       </section>
       <footer>
-        <div>(<span >0</span>, <span >0</span>)</div>
+        <div>(<span>0</span>, <span>0</span>)</div>
       </footer>
     </section>
   </section>
   <section class="resources layout">
     <section>
       <div class="resource">
-        <span class="name" >Wood</span>:
-        <span class="amount" >20</span>
+        <span class="name">Wood</span>:
+        <span class="amount">20</span>
       </div>
 
       <div class="resource">
-        <span class="name" >Metal</span>:
-        <span class="amount" >2</span>
+        <span class="name">Metal</span>:
+        <span class="amount">2</span>
       </div>
 
       <div class="resource">
-        <span class="name" >Scrap</span>:
-        <span class="amount" >5</span>
+        <span class="name">Scrap</span>:
+        <span class="amount">5</span>
       </div>
     </section>
   </section>
@@ -138,6 +158,11 @@ body {
   }
   > .unassigned-characters {
     left: @leftColumn + @middleColumn;
+    .portrait {
+      @portraitSize: 60px;
+      width: @portraitSize;
+      height: @portraitSize;
+    }
   }
   > .current-selection {
     right: @middleColumn + @rightColumn;
