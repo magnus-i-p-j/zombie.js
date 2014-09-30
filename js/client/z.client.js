@@ -23,7 +23,7 @@ z.client.Resources = {
   CURRENT_TARGET:'client_current_target',
   CURRENT_ACTION:'client_current_action',
   END_TURN_ACTION:'client_end_turn_action',
-  OPEN_TEST_ACTION:'client_open_test_action',
+  OPEN_PROJECT_MANAGEMENT_ACTION:'client_open_project_management_action',
   PROJECT_LIST_FACET: 'client_project_list_facet',
   PROJECT_FACET: 'client_project_facet',
   CHARACTER_LIST_FACET: 'client_character_list_facet',

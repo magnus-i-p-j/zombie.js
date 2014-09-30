@@ -31,7 +31,7 @@ goog.require('z.client.facet.ActorFacet');
 goog.require('z.client.facet.ModalFacet');
 
 goog.require('z.client.actions.EndTurn');
-goog.require('z.client.actions.OpenTest');
+goog.require('z.client.actions.OpenProjectManagement');
 
 goog.require('z.common.rulebook.Rulebook');
 goog.require('z.service.world.CharacterGenerator');
@@ -108,7 +108,7 @@ z.client.Client.prototype.startNewGame = function (ruleset, textures) {
   injector.addProvider(z.client.Resources.INFO_FACET, z.client.facet.InfoFacet);
   injector.addProvider(z.client.Resources.MESSAGE_LOG_FACET, z.client.facet.MessageLogFacet);
   injector.addProvider(z.client.Resources.END_TURN_ACTION, z.client.actions.EndTurn);
-  injector.addProvider(z.client.Resources.OPEN_TEST_ACTION, z.client.actions.OpenTest);
+  injector.addProvider(z.client.Resources.OPEN_PROJECT_MANAGEMENT_ACTION, z.client.actions.OpenProjectManagement);
   injector.addFactory(z.client.Resources.PROJECT_FACET, z.client.facet.ProjectFacet);
   injector.addProvider(z.client.Resources.PROJECT_LIST_FACET, z.client.facet.ProjectListFacet);
   injector.addProvider(z.client.Resources.MODAL_FACET, z.client.facet.ModalFacet);
