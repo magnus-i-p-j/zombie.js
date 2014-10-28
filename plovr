@@ -1,1 +1,6 @@
-java -jar libs/plovr-eba786b34df9.jar serve z-config.json z-config.simple.json z-config.debug.json map_render-config.json
+java -jar libs/plovr-eba786b34df9.jar serve \
+  z-config.json \
+  z-config.simple.json \
+  z-config.debug.json \
+  map_render-config.json \
+  dragndroptest.json
