@@ -8,7 +8,7 @@
     <link rel="stylesheet/less" type="text/css" href="../css/all.less">
     <link rel="stylesheet/less" type="text/css" href="../css/plovr.less">
     <style>
-      .dropTarget {
+      .list {
         width: 100px;
         float: left;
         padding: 10px;
@@ -16,14 +16,20 @@
         min-height: 30px;
         border: 1px solid;
       }
+      .drag-target {
+        border: dashed 3px greenyellow;
+      }
+      .can-drop {
+        color: darkred;
+      }
     </style>
   </head>
   <body>
     <h1>Test of drag and drop with mugd and ko</h1>
-    <section class="dropTarget" data-bind="foreach: list_1">
+    <section class="list" data-bind="foreach: list_1">
       <div data-bind="text: $data, dragSource: $data"></div>
     </section>
-    <section class="dropTarget" data-bind="foreach: list_2, dragTarget">
+    <section class="list" data-bind="foreach: list_2, dragTarget">
       <div data-bind="text: $data, dragSource: $data" ></div>
     </section>
     <script src="../libs/less-1.3.0.min.js"></script>

@@ -25,6 +25,18 @@ Interact.prototype.draggable = function(options){};
  * @param {*} options
  * @return {!Interact}
  */
+Interact.prototype.dropzone = function(options){};
+
+/**
+ * @param {*} options
+ * @return {!Interact}
+ */
+Interact.prototype.dropChecker = function(options){};
+
+/**
+ * @param {*} options
+ * @return {!Interact}
+ */
 var interact = function(options){};
 
 

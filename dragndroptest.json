@@ -5,7 +5,7 @@
     "js/mugd",
     "js/common",
     "js/service"],
-  "mode":"SIMPLE",
+  "mode":"RAW",
   "level":"VERBOSE",
   "externs":[
     "libs/externs/knockout-externs.js",
