@@ -1,16 +1,17 @@
 goog.provide('dragndroptest');
-
+goog.require('mugd.bindings.dragndrop');
 
 dragndroptest.init = function(element) {
 
   var model = {
-    'list': ko.observableArray([])
+    'list_1': ko.observableArray(["Donald", "Scrooge", "Woody"]),
+    'list_2': ko.observableArray([])
   };
+  mugd.bindings.dragndrop.addDragNDrop();
+  ko.applyBindings(model, element);
 
-  // TODO: model
-  // TODO: html
   // TODO: drop/drag
 
 };
 
-dragndroptest.init();
+dragndroptest.init(document.body);
