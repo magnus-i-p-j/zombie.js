@@ -14,23 +14,32 @@
         padding: 10px;
         margin: 20px;
         min-height: 30px;
-        border: 1px solid;
+        border: 3px solid;
       }
-      .drag-target {
+
+      .mugd-dragged {
+        border: inset 3px deeppink;
+      }
+
+      .mugd-drag-target {
         border: dashed 3px greenyellow;
       }
-      .can-drop {
+
+      .mugd-can-drop {
         color: darkred;
       }
     </style>
   </head>
   <body>
     <h1>Test of drag and drop with mugd and ko</h1>
-    <section class="list" data-bind="foreach: list_1">
+    <section class="list" data-bind="foreach: list_1.data">
       <div data-bind="text: $data, dragSource: $data"></div>
     </section>
-    <section class="list" data-bind="foreach: list_2, dragTarget">
-      <div data-bind="text: $data, dragSource: $data" ></div>
+    <section class="list" data-bind="foreach: list_2.data, dragTarget: list_2">
+      <div data-bind="text: $data, dragSource: $data"></div>
+    </section>
+    <section class="list" data-bind="foreach: list_3.data, dragTarget: list_3">
+      <div data-bind="text: $data, dragSource: $data"></div>
     </section>
     <script src="../libs/less-1.3.0.min.js"></script>
     <script src="../libs/jquery-1.7.2.js"></script>
