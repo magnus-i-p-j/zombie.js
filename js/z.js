@@ -3,12 +3,14 @@ goog.provide('z');
 goog.require('z.client.Client');
 goog.require('goog.net.XhrIo');
 goog.require('goog.dom');
+goog.require('mugd.bindings.dragndrop');
 
 /**
  * @param {string} initElement
  * @return {z.client.Client}
  */
 z.init = function (initElement) {
+  mugd.bindings.dragndrop.addDragNDrop();
 
   var client = new z.client.Client(initElement);
 
@@ -24,7 +26,6 @@ z.init = function (initElement) {
     console.log('running');
     client.run();
   });
-
   return client;
 };
 

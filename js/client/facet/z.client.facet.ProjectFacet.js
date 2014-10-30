@@ -10,13 +10,14 @@ goog.require('z.common.data.CharacterData');
 /**
  * @param {!mugd.injector.MicroFactory} services
  * @implements mugd.injector.IInjectable
+ * @implements mugd.bindings.dragndrop.IDropZone
  * @extends {z.client.facet.EntityFacet}
  * @constructor
  */
-z.client.facet.ProjectFacet = function (services) {
+z.client.facet.ProjectFacet = function(services) {
   goog.base(this);
   this['completion'] = ko.observable(0);
-  this['completionPercent'] = ko.computed(function () {
+  this['completionPercent'] = ko.computed(function() {
     return this['completion']() * 100;
   }, this);
 
@@ -24,7 +25,7 @@ z.client.facet.ProjectFacet = function (services) {
   var entityQueryObservable = ko.computed(
     function() {
       var workforceQuery = new z.common.EntityQuery();
-      workforceQuery.match = function (entity) {
+      workforceQuery.match = function(entity) {
         if (entity instanceof z.common.entities.Character) {
           var character = /** @type {!z.common.entities.Character} */ entity;
           return self.entity() && character.assignedTo === self.entity().guid;
@@ -45,8 +46,8 @@ z.client.facet.ProjectFacet = function (services) {
   this['remove'].subscribe(this.handleRemoveSubscribe, this);
 
 
-  this['assignFreeAgent'] = function(){
-    if(self['workforce']['characters']().length <= 0) {
+  this['assignFreeAgent'] = function() {
+    if (self['workforce']['characters']().length <= 0) {
       var entityQuery = new z.common.EntityQuery();
       var player = /** @type {!z.client.facet.ActorFacet}*/ services.get(z.client.Resources.PLAYER_FACET);
       entityQuery.owner = player['guid'];
@@ -75,22 +76,32 @@ goog.inherits(z.client.facet.ProjectFacet, z.client.facet.EntityFacet);
 /**
  * @param {goog.events.EventTarget} parent
  */
-z.client.facet.ProjectFacet.prototype.setParentEventTarget = function (parent) {
+z.client.facet.ProjectFacet.prototype.setParentEventTarget = function(parent) {
   goog.base(this, 'setParentEventTarget', parent);
   this['workforce'].setParentEventTarget(parent);
 };
 
-z.client.facet.ProjectFacet.prototype._update = function () {
+z.client.facet.ProjectFacet.prototype._update = function() {
   var project = /** @type {z.common.entities.Project} */ this.entity();
   var state = project.getState();
   this['remove'](state === z.common.protocol.state.KILL || state === z.common.protocol.state.DEAD);
   this['completion'](project.completion);
 };
 
-z.client.facet.ProjectFacet.prototype.handleRemoveSubscribe = function (value) {
+z.client.facet.ProjectFacet.prototype.handleRemoveSubscribe = function(value) {
   if (value) {
     this.entity().setState(z.common.protocol.state.KILL);
   } else {
     this.entity().setState(z.common.protocol.state.MODIFIED);
   }
+};
+
+
+z.client.facet.ProjectFacet.prototype.canDrop = function(facet) {
+  console.log(facet);
+  return true;
+};
+z.client.facet.ProjectFacet.prototype.doDrop = function(facet) {
+  console.log(facet);
+  facet.assignTo(this.guid);
 };

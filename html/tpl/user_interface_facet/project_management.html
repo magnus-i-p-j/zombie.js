@@ -2,7 +2,7 @@
   <section class="all-projects layout" data-bind="foreach: projects.projects">
     <section class="panel">
       <header><h1><span data-bind="text: name"></span> <span data-bind="text: completionPercent"></span>%</h1></header>
-      <section>
+      <section data-bind="dragTarget: $data">
 
         <!-- ko if: workforce.characters().length -->
         <span data-bind="text: workforce.characters()[0].name"></span>
@@ -22,7 +22,10 @@
   </section>
   <section class="unassigned-characters layout" data-bind="foreach: unassignedCharacters.characters">
     <section>
-      <img class="portrait" src="../img/portraits/placeholder.png" alt="Someone"/>
+      <img class="portrait"
+           src="../img/portraits/placeholder.png"
+           alt="Someone"
+           data-bind="dragSource: $data"/>
 
       <div data-bind="text: name"></div>
     </section>
