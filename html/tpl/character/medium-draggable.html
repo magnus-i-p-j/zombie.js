@@ -1,0 +1,24 @@
+<section class="character-medium">
+  <div class="main">
+    <img class="portrait" src="../img/portraits/placeholder.png" alt="Someone" data-bind="dragSource: $data"/>
+
+    <div data-bind="text: name"></div>
+  </div>
+  <table class="attributes">
+    <tr>
+      <th class="attr-name">combat</th>
+      <td class="attr-value" data-bind="text: combat"></td>
+    </tr>
+    <tr>
+      <th class="attr-name">labour</th>
+      <td class="attr-value" data-bind="text: labour"></td>
+    </tr>
+    <tr>
+      <th class="attr-name">knowledge</th>
+      <td class="attr-value" data-bind="text: knowledge"></td>
+    </tr>
+  </table>
+  <div class="health-bar-vert">
+    <div class="value" data-bind="style: {height: health*100 + '%'}"></div>
+  </div>
+</section>
