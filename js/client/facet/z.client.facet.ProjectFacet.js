@@ -45,6 +45,7 @@ z.client.facet.ProjectFacet = function(services) {
   this['remove'] = ko.observable(false);
   this['remove'].subscribe(this.handleRemoveSubscribe, this);
 
+  this.assignCharacterAction = new z.client.actions.AssignCharacterToProject();
 
   this['assignFreeAgent'] = function() {
     if (self['workforce']['characters']().length <= 0) {
@@ -98,10 +99,18 @@ z.client.facet.ProjectFacet.prototype.handleRemoveSubscribe = function(value) {
 
 
 z.client.facet.ProjectFacet.prototype.canDrop = function(facet) {
-  console.log(facet);
-  return true;
+  if(facet instanceof z.client.facet.CharacterFacet) {
+    var args = {};
+    args[z.client.action.ArgsType.TARGET] = this;
+    args[z.client.action.ArgsType.ASSET] = facet;
+    return this.assignCharacterAction.canExecute(args);
+  }
+  return false;
 };
+
 z.client.facet.ProjectFacet.prototype.doDrop = function(facet) {
-  console.log(facet);
-  facet.assignTo(this.guid);
+  var args = {};
+  args[z.client.action.ArgsType.TARGET] = this;
+  args[z.client.action.ArgsType.ASSET] = facet;
+  return this.assignCharacterAction.execute(args);
 };

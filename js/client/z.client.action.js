@@ -11,5 +11,6 @@ z.client.action.Args;
  * @enum {string}
  */
 z.client.action.ArgsType = {
-  TARGET: 'target'
+  TARGET: 'target',
+  ASSET: 'asset'
 };

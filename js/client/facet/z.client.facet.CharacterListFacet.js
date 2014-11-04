@@ -1,11 +1,14 @@
 goog.provide('z.client.facet.CharacterListFacet');
 
 goog.require('z.client.facet.Facet');
+goog.require('z.client.facet.CharacterFacet');
 goog.require('z.common.events');
 goog.require('z.common');
 goog.require('z.client');
 goog.require('mugd.injector.IInjectable');
 goog.require('z.common.EntityQuery');
+goog.require('goog.array');
+
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -40,7 +43,13 @@ z.client.facet.CharacterListFacet.prototype._getCharacterList = function () {
   var entityQuery = this._entityQuery();
   entityQuery.category = z.common.rulebook.category.CHARACTER_TYPE;
   var entities = this._repo.filter(entityQuery.match.bind(entityQuery));
-  return entities;
+  var facets = goog.array.map(entities, function(character) {
+    var facet = new z.client.facet.CharacterFacet();
+    facet.setEntity(character);
+    return facet;
+  });
+
+  return facets;
 };
 
 /**
@@ -52,7 +61,6 @@ z.client.facet.CharacterListFacet.prototype.doEntityCreated = function (e) {
    */
   var entity = e.entity;
   this['characters'](this._getCharacterList());
-
 };
 
 /**
