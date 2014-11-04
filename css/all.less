@@ -1,3 +1,15 @@
+/* Micro ClearFix Mixin */
+.clearfix() {
+  zoom: 1;
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
 /* Main layout
 
 ```
@@ -27,6 +39,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
+  overflow: hidden;
 }
 
 .layout {
@@ -35,7 +48,8 @@ body {
   bottom: 0;
   left: 0;
   position: absolute;
-//  overflow: hidden;
+  .clearfix;
+  //  overflow: hidden;
   box-sizing: border-box;
   z-index: 1;
 }
@@ -67,6 +81,25 @@ body {
   <section class="all-projects layout">
     <section class="panel">
       <header><h1><span>Secure area</span> <span>0</span>%</h1></header>
+      <section class="drag-target">
+        <section>
+          <section class="icon">
+            <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone">
+
+            <div data-bind="text: name">Maria</div>
+          </section>
+          <section class="icon">
+            <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone">
+
+            <div data-bind="text: name">Vera</div>
+          </section>
+          <section class="icon">
+            <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone">
+
+            <div data-bind="text: name">Maximilian</div>
+          </section>
+        </section>
+      </section>
     </section>
     <section class="panel">
       <header><h1><span>Secure area</span> <span>0</span>%</h1></header>
@@ -78,32 +111,32 @@ body {
     </section>
   </section>
   <section class="unassigned-characters layout">
-    <section>
-      <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone"/>
+    <section class="icon">
+      <img src="../../img/portraits/placeholder.png" alt="Someone"/>
 
       <div>Tim</div>
     </section>
 
-    <section>
-      <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone"/>
+    <section class="icon">
+      <img src="../../img/portraits/placeholder.png" alt="Someone"/>
 
       <div>Edward</div>
     </section>
 
-    <section>
-      <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone"/>
+    <section class="icon">
+      <img src="../../img/portraits/placeholder.png" alt="Someone"/>
 
       <div>Felicia</div>
     </section>
 
-    <section>
-      <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone"/>
+    <section class="icon">
+      <img src="../../img/portraits/placeholder.png" alt="Someone"/>
 
       <div>Jack</div>
     </section>
 
-    <section>
-      <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone"/>
+    <section class="icon">
+      <img src="../../img/portraits/placeholder.png" alt="Someone"/>
 
       <div>Isabella</div>
     </section>
@@ -158,20 +191,18 @@ body {
   }
   > .unassigned-characters {
     left: @leftColumn + @middleColumn;
-    .portrait {
-      @portraitSize: 60px;
-      width: @portraitSize;
-      height: @portraitSize;
-    }
   }
   > .current-selection {
     right: @middleColumn + @rightColumn;
     top: @horizontalBreak;
   }
   > .resources {
-    left: @leftColumn ;
+    left: @leftColumn;
     right: @rightColumn;
     top: @horizontalBreak;
+  }
+  .drag-target {
+    min-height: 100px;
   }
 }
 
@@ -379,6 +410,7 @@ body {
     background: #f5f5f5;
     box-shadow: 20px 20px 20px 5px rgba(0, 0, 0, 0.55);
     position: relative;
+    overflow: hidden;
   }
   @buttonSize: 30px;
   .modal-close {
@@ -397,6 +429,148 @@ body {
     &:hover {
       color: darkred;
     }
+  }
+}
+
+/*
+An icon
+
+```
+<section class="icon">
+  <img src="../../img/portraits/placeholder.png" alt="Someone"/>
+
+  <div>Livia</div>
+</section>
+```
+*/
+
+/*
+Several icons
+
+```
+<section class="icon">
+  <img src="../../img/portraits/placeholder.png" alt="Someone"/>
+
+  <div>Livia</div>
+</section>
+<section class="icon">
+  <img src="../../img/portraits/placeholder.png" alt="Someone"/>
+
+  <div>Donald</div>
+</section>
+<section class="icon">
+  <img src="../../img/portraits/placeholder.png" alt="Someone"/>
+
+  <div>Olexi</div>
+</section>
+<section class="icon">
+  <img src="../../img/portraits/placeholder.png" alt="Someone"/>
+
+  <div>Mona</div>
+</section>
+<section class="icon">
+  <img src="../../img/portraits/placeholder.png" alt="Someone"/>
+
+  <div>Therese</div>
+</section>
+```
+*/
+
+.icon {
+  float: left;
+  margin: 5px;
+  img {
+    @iconImageSize: 60px;
+    max-width: @iconImageSize;
+    max-height: @iconImageSize;
+  }
+}
+
+/*
+A character, medium size presentation
+
+```
+<section class="character-medium">
+  <div class="main">
+    <img class="portrait" src="../../img/portraits/placeholder.png" alt="Someone">
+
+    <div>Isabella</div>
+  </div>
+  <table class="attributes">
+    <tbody>
+      <tr>
+        <th class="attr-name">combat</th>
+        <td class="attr-value">12</td>
+      </tr>
+      <tr>
+        <th class="attr-name">labour</th>
+        <td class="attr-value">9</td>
+      </tr>
+      <tr>
+        <th class="attr-name">knowledge</th>
+        <td class="attr-value">10</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="health-bar-vert">
+    <div class="value" style="height: 100%;">
+    </div>
+  </div>
+</section>
+```
+*/
+
+.character-medium {
+  .clearfix;
+  img {
+    @portraitImageSize: 100px;
+    max-width: @portraitImageSize;
+    max-height: @portraitImageSize;
+  }
+  .main, .attributes, .health-bar-vert {
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+  .attributes {
+    .attr-name {
+      font-weight: normal;
+      text-align: right;
+    }
+    .attr-value {
+      font-weight: normal;
+      text-align: right;
+      font-family: "Courier New", Courier, monospace;
+    }
+  }
+}
+
+/* Vertical health bars
+.health-bar-vert > .value height is set by code
+
+```
+<div class="health-bar-vert"><div class="value" style="height: 100%"></div></div>
+<div class="health-bar-vert"><div class="value" style="height: 80%"></div></div>
+<div class="health-bar-vert"><div class="value" style="height: 50%"></div></div>
+<div class="health-bar-vert"><div class="value" style="height: 10%"></div></div>
+```
+*/
+
+.health-bar-vert {
+
+  width: 10px;
+  height: 100px;
+  padding: 0;
+  background: red;
+  display: inline-block;
+  position: relative;
+  .value {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: darkgreen;
+    position: absolute;
+    bottom: 0;
   }
 }
 
@@ -466,7 +640,7 @@ An element that is used to show a substitute for the map in this documentation.
   background: repeat url("../docs/placeholder_map.jpg");
 }
 
-/**
+/*
 Drag n drop interactions
 */
 
