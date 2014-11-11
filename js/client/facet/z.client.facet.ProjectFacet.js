@@ -47,29 +47,6 @@ z.client.facet.ProjectFacet = function(services) {
 
   this.assignCharacterAction = new z.client.actions.AssignCharacterToProject();
 
-  this['assignFreeAgent'] = function() {
-    if (self['workforce']['characters']().length <= 0) {
-      var entityQuery = new z.common.EntityQuery();
-      var player = /** @type {!z.client.facet.ActorFacet}*/ services.get(z.client.Resources.PLAYER_FACET);
-      entityQuery.owner = player['guid'];
-      entityQuery.category = z.common.rulebook.category.CHARACTER_TYPE;
-      /**
-       * @type {!z.common.EntityRepository}
-       */
-      var repository = /** @type {!z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
-
-      var freeAgent = null;
-      var candidates = repository.choose(3, entityQuery);
-      for (var i = 0; i < candidates.length; ++i) {
-        if (!candidates[i].assignedTo && self['workforce']['characters']().length <= 0) {
-          freeAgent = candidates[i];
-          var data = z.common.data.CharacterData.fromEntity(freeAgent);
-          data.assignedTo = self.entity().guid;
-          freeAgent.update(data);
-        }
-      }
-    }
-  };
 };
 
 goog.inherits(z.client.facet.ProjectFacet, z.client.facet.EntityFacet);

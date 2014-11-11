@@ -59,7 +59,7 @@ z.client.actions.AssignCharacterToProject.prototype._executeInternal = function 
 
   this._logger.info('Assign ' + assetEntity.name + ' to ' + targetEntity.name);
 
-  assetEntity.assignTo(targetEntity);
+  assetEntity.assignTo(targetEntity.guid);
 };
 
 z.client.actions.AssignCharacterToProject.prototype.args = [
