@@ -1,0 +1,68 @@
+digraph {
+
+  subgraph {
+    scavenge
+    patrol
+    plant_turnips
+    harvest_turnips
+    trade
+    build_fence
+    build_wall
+    build_well
+  }
+
+  subgraph {
+    node [shape=diamond]
+    autumn
+    winter
+    spring
+    summer
+  }
+
+  subgraph {
+    node [shape=box]
+    field
+    turnip_field
+    turnip_field_ripe
+    house
+    fence
+    wall
+    well
+  }
+
+
+  subgraph {
+    node [shape=hexagon]
+    gloom
+    food
+    housing
+    root [label=""]
+  }
+
+  build_fence -> fence
+  fence -> build_wall
+  build_wall -> wall
+  build_well -> well
+
+  root -> house
+  root -> build_well
+  root -> field
+  root -> patrol
+  root -> scavenge
+  root -> build_fence
+
+  house -> trade
+  house -> housing
+
+  field -> plant_turnips -> turnip_field -> turnip_field_ripe -> harvest_turnips -> field
+  summer -> turnip_field_ripe
+
+  autumn -> winter -> spring  -> summer -> autumn
+
+  harvest_turnips -> food
+  scavenge -> food
+
+  well -> gloom [label="---"]
+  food -> gloom [label="--"]
+  housing -> gloom [label="-"]
+}
