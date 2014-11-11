@@ -19,15 +19,6 @@
       "defence": 0
     },
     {
-      "type": "hills",
-      "name": "Hills",
-      "description": "A patch of high hill, untouched by the zombie apocalypse.",
-      "zone": "base",
-      "image": "hill",
-      "activity": 0,
-      "defence": 1
-    },
-    {
       "type": "house",
       "name": "House",
       "description": "A house someone used to live in. Now they're still living in it...",
@@ -53,6 +44,33 @@
       "image": "fence",
       "activity": 0,
       "defence": 20
+    },
+    {
+      "type": "beet_field",
+      "name": "Beet field",
+      "description": "A field of ripening beets",
+      "zone": "content",
+      "image": "field",
+      "activity": 0,
+      "defence": 0
+    },
+    {
+      "type": "beet_field_ripe",
+      "name": "Ripe beet field",
+      "description": "A field of ripe beets. Yum...",
+      "zone": "content",
+      "image": "field",
+      "activity": 0,
+      "defence": 0
+    },
+    {
+      "type": "well",
+      "name": "Well",
+      "description": "Well, it's a hole with water in. Close enough.",
+      "zone": "content",
+      "image": "water",
+      "activity": 5,
+      "defence": 0
     }
   ],
   "zone": [
@@ -74,46 +92,18 @@
   ],
   "project": [
     {
-      "type": "look_at_area",
-      "name": "Look at area",
-      "description": "Look at stuff.",
-      "activity": 5,
-      "defence": 0,
-      "prerequisites": {"danger": 10},
-      "effects": {
-        "effect_stockpile": [
-          {
-            "type": "wood",
-            "magnitude": 5,
-            "variation": 2
-          }
-        ]
-      },
-      "cost": {
-        "work": {
-          "combat": 20,
-          "knowledge": 0,
-          "labour": 0
-        }
-      }
-    },
-    {
-      "type": "secure_area",
-      "name": "Secure area",
+      "type": "build_fence",
+      "name": "Build fence",
       "description": "Build a zombie-proofish fence around a tile and kill all zombies within.",
       "activity": 10,
       "defence": 0,
       "prerequisites": {
         "terrain": [
-          "grass",
-          "house"
+          "grass"
         ],
         "danger": 20
       },
-      "effects": {
-        "effect_stockpile": [],
-        "effect_terrain": "fence"
-      },
+      "effects": {"effect_terrain": "fence"},
       "cost": {
         "stockpile": [
           {
@@ -129,17 +119,42 @@
       }
     },
     {
-      "type": "field_plant",
-      "name": "Plant field",
+      "type": "build_beet_field",
+      "name": "Plant beets",
       "description": "Plow a patch of land and plant some beets.",
       "activity": 5,
       "defence": 0,
       "prerequisites": {
-        "terrain": ["grass"],
+        "terrain": ["field"],
+        "danger": 0
+      },
+      "effects": {"effect_terrain": "beet_field"},
+      "cost": {
+        "work": {
+          "combat": 0,
+          "knowledge": 0,
+          "labour": 20
+        }
+      }
+    },
+    {
+      "type": "harvest_beet_field",
+      "name": "Harvest beet field",
+      "description": "Harvest a patch of land and get some beets.",
+      "activity": 6,
+      "defence": 0,
+      "prerequisites": {
+        "terrain": [],
         "danger": 0
       },
       "effects": {
-        "effect_stockpile": [],
+        "effect_stockpile": [
+          {
+            "type": "food",
+            "magnitude": 20,
+            "variation": 5
+          }
+        ],
         "effect_terrain": "field"
       },
       "cost": {
@@ -151,70 +166,100 @@
       }
     },
     {
-      "type": "field_tend",
-      "name": "Tend field",
-      "description": "Tend a patch of land and weed some beets.",
-      "activity": 3,
+      "type": "scavenge",
+      "name": "Scavenge",
+      "description": "Scavenge for stuff.",
+      "activity": 20,
       "defence": 0,
-      "prerequisites": {
-        "terrain": [],
-        "danger": 0
-      },
+      "prerequisites": {"danger": 0},
       "effects": {
-        "effect_stockpile": [],
-        "effect_terrain": "field"
+        "effect_stockpile": [
+          {
+            "type": "wood",
+            "magnitude": 10,
+            "variation": 2
+          },
+          {
+            "type": "metal",
+            "magnitude": 5,
+            "variation": 5
+          },
+          {
+            "type": "scrap",
+            "magnitude": 10,
+            "variation": 10
+          },
+          {
+            "type": "food",
+            "magnitude": 5,
+            "variation": 15
+          }
+        ]
       },
       "cost": {
-        "stockpile": [],
         "work": {
           "combat": 0,
+          "knowledge": 0,
+          "labour": 10
+        }
+      }
+    },
+    {
+      "type": "build_well",
+      "name": "Dig well",
+      "description": "Dig a hole that attracts water.",
+      "activity": 12,
+      "defence": 0,
+      "prerequisites": {
+        "terrain": ["grass"],
+        "danger": 0
+      },
+      "effects": {"effect_terrain": "well"},
+      "cost": {
+        "stockpile": [
+          {
+            "type": "scrap",
+            "amount": 14
+          }
+        ],
+        "work": {
+          "combat": 0,
+          "knowledge": 0,
+          "labour": 35
+        }
+      }
+    },
+    {
+      "type": "patrol",
+      "name": "Patrol",
+      "description": "Patrol an area looking for trouble and chewing gum. We're all out of chewing gum.",
+      "activity": 23,
+      "defence": 0,
+      "prerequisites": {"danger": 500},
+      "effects": {},
+      "cost": {
+        "work": {
+          "combat": 23,
           "knowledge": 0,
           "labour": 0
         }
       }
     },
     {
-      "type": "field_harvest",
-      "name": "Harvest field",
-      "description": "Harvest a patch of land and get some beets.",
-      "activity": 6,
-      "defence": 0,
-      "prerequisites": {
-        "terrain": [],
-        "danger": 0
-      },
-      "effects": {
-        "effect_stockpile": [],
-        "effect_terrain": "field"
-      },
-      "cost": {
-        "stockpile": [],
-        "work": {
-          "combat": 0,
-          "knowledge": 0,
-          "labour": 0
-        }
-      }
-    },
-    {
-      "type": "fortify_house",
-      "name": "Fortify",
-      "description": "Fortify the house",
-      "activity": 8,
+      "type": "trade",
+      "name": "Trade",
+      "description": "Trade thingamagigs for doodads.",
+      "activity": 13,
       "defence": 0,
       "prerequisites": {
         "terrain": ["house"],
         "danger": 0
       },
-      "effects": {
-        "effect_stockpile": [],
-        "effect_terrain": "field"
-      },
+      "effects": {},
       "cost": {
-        "stockpile": [],
         "work": {
           "combat": 0,
-          "knowledge": 0,
+          "knowledge": 16,
           "labour": 0
         }
       }
