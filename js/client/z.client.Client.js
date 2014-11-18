@@ -18,6 +18,8 @@ goog.require('z.client.GameSession');
 goog.require('z.client.User');
 goog.require('z.client.WorldProxy');
 
+goog.require('z.service.world.RandomTerrainGenerator');
+
 goog.require('z.client.facet.Gem');
 goog.require('z.client.facet.MapFacet');
 goog.require('z.client.facet.ContextMenuFacet');

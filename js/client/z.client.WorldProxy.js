@@ -6,7 +6,6 @@ goog.require('mugd.injector.Injector');
 goog.require('z.client');
 goog.require('z.service.world.World');
 goog.require('z.client.events.StartTurn');
-goog.require('z.service.world.RandomTerrainGenerator');
 goog.require('z.common.data.StartTurnData');
 goog.require('goog.array');
 goog.require('z.common.data.ClientEndTurn');

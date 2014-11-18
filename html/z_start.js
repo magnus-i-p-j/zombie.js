@@ -1,7 +1,7 @@
 var triggerZed = function () {
   zed.init('z_client');
 };
-if (zed) {
+if (typeof zed !== 'undefined') {
   window.triggerZed();
   window.triggerZed = false;
 }

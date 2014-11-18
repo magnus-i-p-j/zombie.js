@@ -52,7 +52,6 @@ z.common.rulebook.Rulebook.prototype.getMetaClass = function (type) {
   if (goog.isDefAndNotNull(meta)) {
     return  meta;
   } else {
-    debugger;
     throw 'type: ' + type + ' has no meta class';
   }
 };

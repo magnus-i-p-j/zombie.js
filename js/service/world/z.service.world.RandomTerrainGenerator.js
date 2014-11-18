@@ -5,18 +5,35 @@ goog.require('z.service');
 goog.require('z.service.world.ITerrainGenerator');
 goog.require('z.common.data.TileData');
 
+goog.require('goog.array');
+
 /**
  * @param {!mugd.injector.MicroFactory} services
  * @constructor
  * @implements {z.service.world.ITerrainGenerator}
  * @implements {mugd.injector.IInjectable}
  */
-z.service.world.RandomTerrainGenerator = function (services) {
+z.service.world.RandomTerrainGenerator = function(services) {
   /**
    * @type {string}
    * @private
    */
   this._seed = /** @type {string} */ services.get(z.service.Resources.TERRAIN_SEED);
+
+  /**
+   * @type {!z.common.rulebook.Rulebook}
+   * @private
+   */
+  var rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
+
+  this._baseTerrains = [];
+
+  goog.array.forEach(rulebook.terrain, function(terrain) {
+    if (terrain.zone === 'base') {
+      this._baseTerrains.push(terrain);
+    }
+  }, this);
+
 
   /**
    * @type {mugd.utils.SimplexNoise}
@@ -28,7 +45,7 @@ z.service.world.RandomTerrainGenerator = function (services) {
 /**
  * @inheritDoc
  */
-z.service.world.RandomTerrainGenerator.prototype.generateTerrain = function (x, y) {
+z.service.world.RandomTerrainGenerator.prototype.generateTerrain = function(x, y) {
   var scale = .1;
   var waterLevel = -.2;
   var hillLevel = .6;
@@ -45,6 +62,10 @@ z.service.world.RandomTerrainGenerator.prototype.generateTerrain = function (x, 
       terrain['content'] = 'house';
     }
   }
+
+  var t = this._baseTerrains[(Math.random()*this._baseTerrains.length | 0)]
+  terrain = {};
+  terrain['base'] = t.type;
 
   var data = new z.common.data.TileData(null, z.common.protocol.state.MODIFIED, null, x, y, terrain, 'tile', this.newEmptyZombieData());
   return data;
