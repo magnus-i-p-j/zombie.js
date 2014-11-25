@@ -19,6 +19,7 @@ goog.require('z.client.User');
 goog.require('z.client.WorldProxy');
 
 goog.require('z.service.world.RandomTerrainGenerator');
+goog.require('z.service.world.StaticTerrainGenerator');
 
 goog.require('z.client.facet.Gem');
 goog.require('z.client.facet.MapFacet');
@@ -54,38 +55,77 @@ goog.require('mugd.injector.Injector');
  * @extends {goog.events.EventTarget}
  * @constructor
  */
-z.client.Client = function (targetId) {
+z.client.Client = function(targetId) {
   this.login();
   this.targetElement = goog.dom.getElement(targetId);
 };
 
 goog.inherits(z.client.Client, goog.events.EventTarget);
 
-z.client.Client.prototype.run = function () {
+z.client.Client.prototype.run = function() {
   // todo: 1. Show main menu
   // todo: 2. Choose game state
   // todo: 3. Start game.
   var self = this;
-  goog.net.XhrIo.send('../ruleset/main.json', function (r) {
-    var ruleset = r.target.getResponseJson();
-    console.log('ruleset', ruleset);
-    goog.net.XhrIo.send('../ruleset/textures.json',
-      function (t) {
-        var textures = t.target.getResponseJson();
-        console.log('textures', textures);
-        self.startNewGame(ruleset, textures);
+
+  var rulesetPromise = new Promise(function(resolve, reject) {
+    goog.net.XhrIo.send('../ruleset/main.json', function(r) {
+      var conn = r.target;
+      if (conn.isSuccess()) {
+        var ruleset = r.target.getResponseJson();
+        console.log('ruleset', ruleset);
+        resolve(ruleset);
+      } else {
+        reject(conn.getLastError());
       }
-    );
+    });
   });
+
+  var texturePromise = new Promise(function(resolve, reject) {
+    goog.net.XhrIo.send('../ruleset/textures.json', function(r) {
+      var conn = r.target;
+      if (conn.isSuccess()) {
+        var textures = r.target.getResponseJson();
+        console.log('textures', textures);
+        resolve(textures);
+      } else {
+        reject(conn.getLastError());
+      }
+    });
+  });
+
+  var mapPromise = new Promise(function(resolve, reject) {
+    goog.net.XhrIo.send('../ruleset/map.json', function(r) {
+      var conn = r.target;
+      if (conn.isSuccess()) {
+        var map = r.target.getResponseJson();
+        console.log('map', map);
+        resolve(map);
+      } else {
+        reject(conn.getLastError());
+      }
+    });
+  });
+
+  var allPromises = Promise.all([rulesetPromise, texturePromise, mapPromise]);
+
+  allPromises.then(function(param) {
+    var ruleset = param[0];
+    var textures = param[1];
+    var map = param[2];
+    console.log('startNewGame');
+    self.startNewGame(ruleset, textures, map);
+  });
+
 };
 
-z.client.Client.prototype.login = function () {
+z.client.Client.prototype.login = function() {
   // todo: 0. login user
   this.user = new z.client.User();
   this.user.name = 'John Doe';
 };
 
-z.client.Client.prototype.startNewGame = function (ruleset, textures) {
+z.client.Client.prototype.startNewGame = function(ruleset, textures, map) {
 
   var injector = new mugd.injector.Injector();
   injector.addResource(z.common.Resources.RULESET, ruleset);
@@ -94,7 +134,7 @@ z.client.Client.prototype.startNewGame = function (ruleset, textures) {
   injector.addProvider(z.common.Resources.RULEBOOK, z.common.rulebook.Rulebook);
   injector.addResource(z.client.Resources.TEXTURES, textures);
   injector.addResource(z.client.Resources.IMAP, IsogenicMap);
-  injector.addResource(z.client.Resources.WORLD_SERVICE, z.client.Client.initWorldService);
+  injector.addResource(z.client.Resources.WORLD_SERVICE, z.client.Client.newInitWorldService(ruleset, map));
   injector.addProvider(z.client.Resources.MAP_WIDGET, z.client.ui.widget.MapWidget);
   injector.addProvider(z.client.Resources.GAME_SESSION_WIDGET, z.client.ui.widget.GameSessionWidget);
   injector.addProvider(z.client.Resources.CONTEXT_MENU_WIDGET, z.client.ui.widget.ContextMenuWidget);
@@ -119,7 +159,7 @@ z.client.Client.prototype.startNewGame = function (ruleset, textures) {
   injector.addFactory(z.common.rulebook.category.PROJECT, z.common.entities.Project);
   injector.addFactory(z.common.rulebook.category.TILE, z.common.entities.Tile);
 //  injector.addFactory(z.common.rulebook.category.ITEM, function(){throw 'not implemented] = item'});
-  injector.addFactory(z.common.rulebook.category.CHARACTER_TYPE, z.common.entities.Character );
+  injector.addFactory(z.common.rulebook.category.CHARACTER_TYPE, z.common.entities.Character);
 //  injector.addFactory(z.common.rulebook.category.ASSET, function(){throw 'not implemented] = asset'});
   injector.addFactory(z.common.rulebook.category.ACTOR, z.common.entities.Actor);
 
@@ -130,7 +170,12 @@ z.client.Client.prototype.startNewGame = function (ruleset, textures) {
 
 };
 
-z.client.Client.initWorldService = function (ruleset) {
+z.client.Client.newInitWorldService = function(ruleset, map) {
+  return function() {
+    return z.client.Client.initWorldService(ruleset, map);
+  }
+};
+z.client.Client.initWorldService = function(ruleset, map) {
   // TODO: add server
   var injector = new mugd.injector.Injector();
   injector.addResource(z.common.Resources.RULESET, ruleset);
@@ -138,13 +183,15 @@ z.client.Client.initWorldService = function (ruleset) {
   injector.addProvider(z.common.Resources.RULEBOOK, z.common.rulebook.Rulebook);
   injector.addProvider(z.service.Resources.CHARACTER_GENERATOR, z.service.world.CharacterGenerator);
   injector.addProvider(z.common.Resources.REPOSITORY, z.common.EntityRepository);
-  injector.addProvider(z.service.Resources.TERRAIN_GENERATOR, z.service.world.RandomTerrainGenerator);
+  injector.addProvider(z.service.Resources.TERRAIN_GENERATOR, z.service.world.StaticTerrainGenerator);
+  injector.addProvider(z.service.Resources.TERRAIN_RANDOM_GENERATOR, z.service.world.RandomTerrainGenerator);
   injector.addResource(z.service.Resources.TERRAIN_SEED, 'ASDGW3E45RG');
+  injector.addResource(z.service.Resources.TERRAIN_MAP, map);
 
   injector.addFactory(z.common.rulebook.category.PROJECT, z.common.entities.Project);
   injector.addFactory(z.common.rulebook.category.TILE, z.common.entities.Tile);
 //  injector.addFactory(z.common.rulebook.category.ITEM, function(){throw 'not implemented] = item'});
-  injector.addFactory(z.common.rulebook.category.CHARACTER_TYPE, z.common.entities.Character );
+  injector.addFactory(z.common.rulebook.category.CHARACTER_TYPE, z.common.entities.Character);
 //  injector.addFactory(z.common.rulebook.category.ASSET, function(){throw 'not implemented] = asset'});
   injector.addFactory(z.common.rulebook.category.ACTOR, z.common.entities.Actor);
 //  injector.addFactory(z.common.rulebook.category.TECH, function(){throw 'not implemented] = tech'});

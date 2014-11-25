@@ -1,0 +1,20 @@
+{
+  "terrains": {
+    "g": "grass",
+    "w": "water"
+  },
+  "map": {
+    "base": [
+      "wwwwwwwwwwwww",
+      "wwwwwggggwwww",
+      "wwwwggggggwww",
+      "wggggggggggww",
+      "wwwgggggggwww",
+      "wwwwggggggwww",
+      "wwwwwggggwwww",
+      "wwwwwwwwwwwww",
+    ]
+  },
+  "left": -6,
+  "top": 6
+}

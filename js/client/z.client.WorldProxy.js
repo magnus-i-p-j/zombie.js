@@ -27,7 +27,7 @@ z.client.WorldProxy = function(services) {
    * @type {!z.service.world.World}
    * @private
    */
-  this._world = (/** @type {function(!Object):!z.service.world.World} */ services.get(z.client.Resources.WORLD_SERVICE))(ruleset);
+  this._world = (/** @type {function(!Object):!z.service.world.World} */ services.get(z.client.Resources.WORLD_SERVICE))();
   /**
    * @type {!z.common.EntityRepository}
    * @private

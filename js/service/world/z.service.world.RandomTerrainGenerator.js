@@ -22,7 +22,6 @@ z.service.world.RandomTerrainGenerator = function(services) {
 
   /**
    * @type {!z.common.rulebook.Rulebook}
-   * @private
    */
   var rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
 
@@ -46,22 +45,22 @@ z.service.world.RandomTerrainGenerator = function(services) {
  * @inheritDoc
  */
 z.service.world.RandomTerrainGenerator.prototype.generateTerrain = function(x, y) {
-  var scale = .1;
-  var waterLevel = -.2;
-  var hillLevel = .6;
-
-  var terrain = {};
-  var height = this._noise.noise(x * scale, y * scale);
-  if (height < waterLevel) {
-    terrain['base'] = 'water';
-  } else if (height > hillLevel) {
-    terrain['base'] = 'hills';
-  } else {
-    terrain['base'] = 'grass';
-    if (Math.random() <= 0.2) {
-      terrain['content'] = 'house';
-    }
-  }
+  //var scale = .1;
+  //var waterLevel = -.2;
+  //var hillLevel = .6;
+  //
+  //var terrain = {};
+  //var height = this._noise.noise(x * scale, y * scale);
+  //if (height < waterLevel) {
+  //  terrain['base'] = 'water';
+  //} else if (height > hillLevel) {
+  //  terrain['base'] = 'hills';
+  //} else {
+  //  terrain['base'] = 'grass';
+  //  if (Math.random() <= 0.2) {
+  //    terrain['content'] = 'house';
+  //  }
+  //}
 
   var t = this._baseTerrains[(Math.random()*this._baseTerrains.length | 0)]
   terrain = {};
