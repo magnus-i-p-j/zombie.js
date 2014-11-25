@@ -1,4 +1,4 @@
-java -jar libs/plovr-eba786b34df9.jar serve \
+java -jar libs/plovr-81ed862.jar serve \
   z-config.json \
   z-config.simple.json \
   z-config.debug.json \
