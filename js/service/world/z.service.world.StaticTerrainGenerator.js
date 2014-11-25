@@ -30,6 +30,11 @@ z.service.world.StaticTerrainGenerator = function(services) {
    * @private
    */
   this._baseTerrains = [];
+  /**
+   * @type {Object.<string,Array<string>>}
+   * @private
+   */
+  this._terrains = {};
 
   this._offset = {
     x: 0,
@@ -44,8 +49,12 @@ z.service.world.StaticTerrainGenerator = function(services) {
  */
 z.service.world.StaticTerrainGenerator.prototype.generateTerrain = function(x, y) {
   var data;
-  var terrain = {};
-  terrain['base'] = this.getTerrain(this._baseTerrains, x, y);
+  //var terrain = {};
+  //terrain['base'] = this.getTerrain(this._baseTerrains, x, y);
+
+  var terrain = goog.object.map(this._terrains, function(t) {
+    return this.getTerrain(t, x, y);
+  }, this);
 
   if (terrain['base']) {
     data = new z.common.data.TileData(null, z.common.protocol.state.MODIFIED, null, x, y, terrain, 'tile', this.newEmptyZombieData());
@@ -63,7 +72,7 @@ z.service.world.StaticTerrainGenerator.prototype.getTerrain = function(source, x
   if (source[_y] && source[_y][_x]) {
     return source[_y][_x];
   } else {
-    return false;left
+    return '';
   }
 
 };
@@ -82,7 +91,15 @@ z.service.world.StaticTerrainGenerator.prototype.parseMap = function(map) {
     return goog.array.map(str, terrainFromChar);
   }
 
-  this._baseTerrains = goog.array.map(map['map']['base'], terrainRowFromString);
+  var parseTerrain = function(arr) {
+    return goog.array.map(arr, terrainRowFromString);
+  }
+
+  //this._baseTerrains = goog.array.map(map['map']['base'], terrainRowFromString);
+
+  this._terrains = goog.object.map(map['map'], parseTerrain);
+
+  console.log(this._terrains);
 
 };
 

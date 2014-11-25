@@ -25,8 +25,8 @@ z.common.entities.Tile = function(services) {
   /**
    * @type {z.common.terrain}
    */
-  this.terrain = tileData.terrain;
-  Object.freeze(this.terrain);
+  this.terrain;
+  this._setTerrain(tileData.terrain);
   this.position = new goog.math.Coordinate(tileData.x, tileData.y);
 
   /**
@@ -87,13 +87,26 @@ z.common.entities.Tile.prototype._update = function(data, meta) {
     goog.object.getCount(tileData.terrain);
   }
 
-  this.terrain = tileData.terrain;
-  Object.freeze(this.terrain);
+  this._setTerrain(tileData.terrain);
   this.meta = meta;
 
   return updated;
 };
 
+/**
+ * @param {!Object<string,?string>} data
+ * @return {!Object<string,string>}
+ */
+z.common.entities.Tile.prototype._setTerrain = function(inTerrain) {
+  var terrain = {};
+  goog.object.forEach(inTerrain, function(value, index) {
+    if (value) {
+      terrain[index] = value;
+    }
+  });
+  this.terrain = terrain;
+  Object.freeze(this.terrain);
+};
 
 /**
  * @param {!z.common.zombiedata} data

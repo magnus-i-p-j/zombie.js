@@ -1,7 +1,9 @@
 {
   "terrains": {
     "g": "grass",
-    "w": "water"
+    "w": "water",
+    "h":"house",
+    "f":"fence"
   },
   "map": {
     "base": [
@@ -13,6 +15,26 @@
       "wwwwggggggwww",
       "wwwwwggggwwww",
       "wwwwwwwwwwwww",
+    ],
+    "content": [
+      "             ",
+      "             ",
+      "     hh      ",
+      "     hh      ",
+      "      h      ",
+      "             ",
+      "             ",
+      "             ",
+    ],
+    "perimeter": [
+      "             ",
+      "             ",
+      "     ff      ",
+      "     fff     ",
+      "             ",
+      "             ",
+      "             ",
+      "             ",
     ]
   },
   "left": -6,
