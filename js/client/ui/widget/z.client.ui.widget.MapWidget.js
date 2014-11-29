@@ -32,6 +32,12 @@ z.client.ui.widget.MapWidget = function (services) {
    * @type {Object}
    */
   var textures = /** @type {Object} */  services.get(z.client.Resources.TEXTURES);
+
+  /**
+   * @type {!function(number, number):number}
+   */
+  var tileVariationStrategy = /** @type {!function(number, number):number} */  services.get(z.client.Resources.TILE_VARIATION_STRATEGY);
+
   /**
    * @private
    * @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet}
@@ -40,7 +46,7 @@ z.client.ui.widget.MapWidget = function (services) {
 
 
   var imapClass = /** @type {function(new:IMap,Object,Object)} */ services.get(z.client.Resources.IMAP);
-  this._imap = /** @type {IMap} */ new imapClass({}, textures);
+  this._imap = /** @type {IMap} */ new imapClass({}, textures, tileVariationStrategy);
 
   /**
    * @type {goog.events.EventHandler}

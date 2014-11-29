@@ -29,7 +29,8 @@ z.client.Resources = {
   CHARACTER_LIST_FACET: 'client_character_list_facet',
   PLAYER_FACET:'client_player_facet',
   TEXTURES: 'client_textures',
-  IMAP: 'client_imap'
+  IMAP: 'client_imap',
+  TILE_VARIATION_STRATEGY: 'client_tile_variation_strategy'
 };
 
 /**
