@@ -3,36 +3,70 @@
     "name": "water",
     "type": "single",
     "zone": "base",
-    "uri": "..\/img\/tiles\/water5.png"
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/water5.png",
+        "weight": 1
+      }
+    ]
   },
   {
     "name": "grass",
     "type": "transition",
     "zone": "base",
-    "uri": "..\/img\/tiles\/grass5.png"
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/grass5.png",
+        "weight": 3
+      },
+      {
+        "uri": "..\/img\/tiles\/grass6.png",
+        "weight": 1
+      }
+    ]
   },
   {
     "name": "hills",
     "type": "single",
     "zone": "base",
-    "uri": "..\/img\/tiles\/hill2.png"
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/hill2.png",
+        "weight": 1
+      }
+    ]
   },
   {
     "name": "house",
     "type": "single",
     "zone": "content",
-    "uri": "..\/img\/tiles\/house.png"
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/house.png",
+        "weight": 1
+      }
+    ]
   },
   {
     "name": "field",
     "type": "single",
     "zone": "content",
-    "uri": "..\/img\/tiles\/field.png"
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/field.png",
+        "weight": 1
+      }
+    ]
   },
   {
     "name": "fence",
     "type": "single",
     "zone": "perimeter",
-    "uri": "..\/img\/tiles\/fence.png"
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/fence.png",
+        "weight": 1
+      }
+    ]
   }
 ]
