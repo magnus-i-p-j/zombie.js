@@ -10,6 +10,7 @@ goog.require('z.common');
 
 goog.require('z.client.ui.widget.MapWidget');
 goog.require('mugd.utils.MersenneTwister');
+goog.require('mugd.utils.SimplexNoise');
 goog.require('z.client.ui.widget.GameSessionWidget');
 goog.require('z.client.ui.widget.ContextMenuWidget');
 goog.require('z.client.ui.widget.MessageLogWidget');
@@ -137,10 +138,14 @@ z.client.Client.prototype.startNewGame = function(ruleset, textures, map) {
   injector.addResource(z.client.Resources.IMAP, IsogenicMap);
   injector.addResource(z.client.Resources.WORLD_SERVICE, z.client.Client.newInitWorldService(ruleset, map));
 
-  var tileVariationStrategy = function(x, y){
-    var twister = new mugd.utils.MersenneTwister(x+y);
-    return twister.genrand_int32();
-  };
+  var tileVariationStrategy = (function(seed) {
+    var twister = new mugd.utils.MersenneTwister(seed);
+    var noise = new mugd.utils.SimplexNoise(twister);
+    var ret = function(x, y) {
+      return Math.abs((noise.noise(x, y) * 1000000) | 0);
+    }
+    return ret;
+  })(34567893657824);
   injector.addResource(z.client.Resources.TILE_VARIATION_STRATEGY, tileVariationStrategy);
 
   injector.addProvider(z.client.Resources.MAP_WIDGET, z.client.ui.widget.MapWidget);

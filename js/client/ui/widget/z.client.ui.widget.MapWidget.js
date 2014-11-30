@@ -38,6 +38,9 @@ z.client.ui.widget.MapWidget = function (services) {
    */
   var tileVariationStrategy = /** @type {!function(number, number):number} */  services.get(z.client.Resources.TILE_VARIATION_STRATEGY);
 
+  // Temporary for dev
+  this._tileVariationStrategy = tileVariationStrategy;
+
   /**
    * @private
    * @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet}
@@ -121,6 +124,7 @@ z.client.ui.widget.MapWidget.prototype._drawTile = function (tileFacet) {
           ' density:' + data.density,
           '}','',''
         ];
+        lines = [x + ', ' +y, this._tileVariationStrategy(x,y)];
         this._imap.drawText(x, y, lines);
       }
     }
