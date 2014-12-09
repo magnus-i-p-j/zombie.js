@@ -119,11 +119,19 @@
       "description": "Build a zombie-proofish fence around a tile and kill all zombies within.",
       "activity": 10,
       "defence": 0,
+      "triggers": [
+        {
+          "predicate": {"type": "complete"},
+          "effects": {
+            "effect_terrain": "fence",
+            "effect_end": false
+          }
+        }
+      ],
       "prerequisites": {
         "terrain": ["grass"],
         "danger": 20
       },
-      "effects": {"effect_terrain": "fence"},
       "cost": {
         "stockpile": [
           {
@@ -135,7 +143,8 @@
           "combat": 5,
           "knowledge": 5,
           "labour": 15
-        }
+        },
+        "time": 0
       }
     },
     {
@@ -144,17 +153,26 @@
       "description": "Plow a patch of land and plant some beets.",
       "activity": 5,
       "defence": 0,
+      "triggers": [
+        {
+          "predicate": {"type": "complete"},
+          "effects": {
+            "effect_terrain": "beet_field",
+            "effect_end": false
+          }
+        }
+      ],
       "prerequisites": {
         "terrain": ["field"],
         "danger": 0
       },
-      "effects": {"effect_terrain": "beet_field"},
       "cost": {
         "work": {
           "combat": 0,
           "knowledge": 0,
           "labour": 20
-        }
+        },
+        "time": 0
       }
     },
     {
@@ -163,26 +181,33 @@
       "description": "Harvest a patch of land and get some beets.",
       "activity": 6,
       "defence": 0,
+      "triggers": [
+        {
+          "predicate": {"type": "complete"},
+          "effects": {
+            "effect_stockpile": [
+              {
+                "type": "food",
+                "magnitude": 20,
+                "variation": 5
+              }
+            ],
+            "effect_terrain": "field",
+            "effect_end": false
+          }
+        }
+      ],
       "prerequisites": {
         "terrain": [],
         "danger": 0
-      },
-      "effects": {
-        "effect_stockpile": [
-          {
-            "type": "food",
-            "magnitude": 20,
-            "variation": 5
-          }
-        ],
-        "effect_terrain": "field"
       },
       "cost": {
         "work": {
           "combat": 0,
           "knowledge": 0,
           "labour": 20
-        }
+        },
+        "time": 0
       }
     },
     {
@@ -191,37 +216,44 @@
       "description": "Scavenge for stuff.",
       "activity": 20,
       "defence": 0,
-      "prerequisites": {"danger": 0},
-      "effects": {
-        "effect_stockpile": [
-          {
-            "type": "wood",
-            "magnitude": 10,
-            "variation": 2
-          },
-          {
-            "type": "metal",
-            "magnitude": 5,
-            "variation": 5
-          },
-          {
-            "type": "scrap",
-            "magnitude": 10,
-            "variation": 10
-          },
-          {
-            "type": "food",
-            "magnitude": 5,
-            "variation": 15
+      "triggers": [
+        {
+          "predicate": {"type": "complete"},
+          "effects": {
+            "effect_stockpile": [
+              {
+                "type": "wood",
+                "magnitude": 10,
+                "variation": 2
+              },
+              {
+                "type": "metal",
+                "magnitude": 5,
+                "variation": 5
+              },
+              {
+                "type": "scrap",
+                "magnitude": 10,
+                "variation": 10
+              },
+              {
+                "type": "food",
+                "magnitude": 5,
+                "variation": 15
+              }
+            ],
+            "effect_end": false
           }
-        ]
-      },
+        }
+      ],
+      "prerequisites": {"danger": 0},
       "cost": {
         "work": {
           "combat": 0,
           "knowledge": 0,
           "labour": 10
-        }
+        },
+        "time": 0
       }
     },
     {
@@ -230,11 +262,19 @@
       "description": "Dig a hole that attracts water.",
       "activity": 12,
       "defence": 0,
+      "triggers": [
+        {
+          "predicate": {"type": "complete"},
+          "effects": {
+            "effect_terrain": "well",
+            "effect_end": false
+          }
+        }
+      ],
       "prerequisites": {
         "terrain": ["grass"],
         "danger": 0
       },
-      "effects": {"effect_terrain": "well"},
       "cost": {
         "stockpile": [
           {
@@ -246,7 +286,8 @@
           "combat": 0,
           "knowledge": 0,
           "labour": 35
-        }
+        },
+        "time": 0
       }
     },
     {
@@ -255,14 +296,20 @@
       "description": "Patrol an area looking for trouble and chewing gum. We're all out of chewing gum.",
       "activity": 23,
       "defence": 0,
+      "triggers": [
+        {
+          "predicate": {"type": "complete"},
+          "effects": {"effect_end": false}
+        }
+      ],
       "prerequisites": {"danger": 500},
-      "effects": {},
       "cost": {
         "work": {
           "combat": 23,
           "knowledge": 0,
           "labour": 0
-        }
+        },
+        "time": 0
       }
     },
     {
@@ -271,17 +318,97 @@
       "description": "Trade thingamagigs for doodads.",
       "activity": 13,
       "defence": 0,
+      "triggers": [
+        {
+          "predicate": {"type": "complete"},
+          "effects": {"effect_end": false}
+        }
+      ],
       "prerequisites": {
         "terrain": ["house"],
         "danger": 0
       },
-      "effects": {},
       "cost": {
         "work": {
           "combat": 0,
           "knowledge": 16,
           "labour": 0
+        },
+        "time": 0
+      }
+    },
+    {
+      "type": "grow_wheat",
+      "name": "Grow wheat",
+      "description": "Grow wheat for great justice.",
+      "activity": 20,
+      "defence": 0,
+      "triggers": [
+        {
+          "predicate": {"type": "complete"},
+          "effects": {
+            "effect_stockpile": [
+              {
+                "type": "food",
+                "magnitude": 12,
+                "variation": 5
+              }
+            ],
+            "effect_end": true
+          }
+        },
+        {
+          "predicate": {"type": "end"},
+          "effects": {
+            "effect_terrain": "field",
+            "effect_end": false
+          }
+        },
+        {
+          "predicate": {
+            "type": "season",
+            "season": "winter"
+          },
+          "effects": {"effect_end": true}
+        },
+        {
+          "predicate": {
+            "type": "duration",
+            "duration": 0
+          },
+          "effects": {
+            "effect_terrain": "beet_field",
+            "effect_end": false
+          }
+        },
+        {
+          "predicate": {
+            "type": "duration",
+            "duration": 1
+          },
+          "effects": {
+            "effect_terrain": "beet_field_ripe",
+            "effect_end": false
+          }
         }
+      ],
+      "prerequisites": {
+        "terrain": ["field"],
+        "danger": 0
+      },
+      "cost": {
+        "stockpile": [
+          {
+            "type": "food",
+            "amount": 1
+          }
+        ],
+        "work": {
+          "combat": 5,
+          "knowledge": 10,
+          "labour": 20
+        },
+        "time": 3
       }
     }
   ],

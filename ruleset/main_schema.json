@@ -6,6 +6,7 @@
     "terrain",
     "zone",
     "project",
+    "season",
     "actor",
     "tile",
     "stockpile",
@@ -25,7 +26,15 @@
         "title": "Terrain",
         "description": "Some sort of stuff to walk on.",
         "type": "object",
-        "required": ["name", "type", "description", "zone", "image", "defence", "activity"],
+        "required": [
+          "name",
+          "type",
+          "description",
+          "zone",
+          "image",
+          "defence",
+          "activity"
+        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -85,7 +94,11 @@
         "title": "Zone",
         "description": "A part of the stuff you walk on.",
         "type": "object",
-        "required": ["name", "type", "description"],
+        "required": [
+          "name",
+          "type",
+          "description"
+        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -108,6 +121,41 @@
         }
       }
     },
+    "season": {
+      "title": "Seasons",
+      "description": "The seasons of a year",
+      "type": "array",
+      "items": {
+        "title": "Season",
+        "description": "A period of the year",
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "description"
+        ],
+        "properties": {
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "description": "Visible name of season",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "description": "Describes the season",
+            "type": "string"
+          }
+        },
+        "links": {
+          "rel": "self",
+          "href": "game://season/{type}"
+        }
+      }
+    },
     "project": {
       "title": "Projects",
       "description": "Change things for the better",
@@ -116,7 +164,17 @@
         "title": "Project",
         "description": "A project that does stuff",
         "type": "object",
-        "required": ["name", "type", "description", "prerequisites", "effects", "cost", "activity", "defence"],
+        "required": [
+          "name",
+          "type",
+          "description",
+          "prerequisites",
+          "effects",
+          "cost",
+          "activity",
+          "triggers",
+          "defence"
+        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -140,6 +198,113 @@
             "title": "Defence",
             "type": "number"
           },
+          "triggers": {
+            "title": "Triggers",
+            "description": "Lists the triggers for the project",
+            "type": "array",
+            "items": {
+              "title": "Trigger",
+              "description": "A trigger",
+              "type": "object",
+              "required": [
+                "predicate",
+                "effects"
+              ],
+              "properties": {
+                "predicate": {
+                  "title": "Predicate",
+                  "description": "The predicate for the trigger",
+                  "required": ["type"],
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "title": "Predicate type",
+                      "description": "The type of predicate",
+                      "type": "string",
+                      "enum": [
+                        "complete",
+                        "season",
+                        "end",
+                        "duration"
+                      ]
+                    },
+                    "season": {
+                      "title": "Season parameter",
+                      "description": "The season the predicate uses",
+                      "type": "string",
+                      "links": {
+                        "rel": "full",
+                        "href": "game://season/{@}"
+                      }
+                    },
+                    "duration": {
+                      "title": "Duration",
+                      "description": "Has this effect after a number of turns",
+                      "type": "number"
+                    }
+                  }
+                },
+                "effects": {
+                  "title": "Effects",
+                  "description": "The effects this project has",
+                  "type": "object",
+                  "required": ["effect_end"],
+                  "properties": {
+                    "effect_stockpile": {
+                      "title": "Change stockpile",
+                      "type": "array",
+                      "items": {
+                        "title": "Resource",
+                        "description": "One of the resources",
+                        "type": "object",
+                        "required": [
+                          "type",
+                          "magnitude",
+                          "variation"
+                        ],
+                        "properties": {
+                          "type": {
+                            "title": "Resource",
+                            "description": "The gained resource",
+                            "type": "string",
+                            "links": {
+                              "rel": "full",
+                              "href": "game://stockpile/{@}"
+                            }
+                          },
+                          "magnitude": {
+                            "title": "Magnitude",
+                            "description": "The amount gained",
+                            "type": "number"
+                          },
+                          "variation": {
+                            "title": "Variation",
+                            "description": "The variation in amount gained",
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "description": "Gain this stuff"
+                    },
+                    "effect_terrain": {
+                      "title": "Change terrain",
+                      "description": "Change to this terrain",
+                      "type": "string",
+                      "links": {
+                        "rel": "full",
+                        "href": "game://terrain/{@}"
+                      }
+                    },
+                    "effect_end": {
+                      "title": "End project",
+                      "description": "End the project",
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "prerequisites": {
             "description": "Lists the prerequisites for the project",
             "title": "Prerequisites",
@@ -147,9 +312,9 @@
             "required": ["danger"],
             "properties": {
               "terrain": {
-                "type": "array",
                 "title": "Terrains",
                 "description": "The terrain types this project is applicable to",
+                "type": "array",
                 "items": {
                   "title": "Terrain",
                   "description": "One of the possible terrains",
@@ -167,59 +332,14 @@
               }
             }
           },
-          "effects": {
-            "type": "object",
-            "title": "Effects",
-            "description": "The effects this project has",
-            "properties": {
-              "effect_stockpile": {
-                "title": "Change stockpile",
-                "type": "array",
-                "items": {
-                  "title": "Resource",
-                  "description": "One of the resources",
-                  "type": "object",
-                  "required": ["type", "magnitude", "variation"],
-                  "properties": {
-                    "type": {
-                      "title": "Resource",
-                      "description": "The gained resource",
-                      "type": "string",
-                      "links": {
-                        "rel": "full",
-                        "href": "game://stockpile/{@}"
-                      }
-                    },
-                    "magnitude": {
-                      "title": "Magnitude",
-                      "description": "The amount gained",
-                      "type": "number"
-                    },
-                    "variation": {
-                      "title": "Variation",
-                      "description": "The variation in amount gained",
-                      "type": "number"
-                    }
-                  }
-                },
-                "description": "Gain this stuff"
-              },
-              "effect_terrain": {
-                "title": "Change terrain",
-                "description": "Change to this terrain",
-                "type": "string",
-                "links": {
-                  "rel": "full",
-                  "href": "game://terrain/{@}"
-                }
-              }
-            }
-          },
           "cost": {
             "description": "Lists the cost for the project",
             "title": "Costs",
             "type": "object",
-            "required": ["work"],
+            "required": [
+              "work",
+              "time"
+            ],
             "properties": {
               "stockpile": {
                 "type": "array",
@@ -229,7 +349,10 @@
                   "title": "Resource",
                   "description": "One of the required resources",
                   "type": "object",
-                  "required": ["type", "amount"],
+                  "required": [
+                    "type",
+                    "amount"
+                  ],
                   "properties": {
                     "type": {
                       "title": "Resource",
@@ -252,7 +375,11 @@
                 "title": "Work",
                 "description": "The quantity of work required",
                 "type": "object",
-                "required": ["combat", "knowledge", "labour"],
+                "required": [
+                  "combat",
+                  "knowledge",
+                  "labour"
+                ],
                 "properties": {
                   "combat": {
                     "title": "Combat",
@@ -270,6 +397,11 @@
                     "type": "number"
                   }
                 }
+              },
+              "time": {
+                "title": "Time",
+                "description": "The number of turns that must be invested",
+                "type": "number"
               }
             }
           }
@@ -284,7 +416,11 @@
         "title": "Actor",
         "description": "An actor",
         "type": "object",
-        "required": ["name", "type", "description"],
+        "required": [
+          "name",
+          "type",
+          "description"
+        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -311,7 +447,11 @@
         "title": "Tile",
         "description": "A tile",
         "type": "object",
-        "required": ["name", "type", "description"],
+        "required": [
+          "name",
+          "type",
+          "description"
+        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -338,7 +478,11 @@
         "title": "Stockpile",
         "description": "A stockpiled resource",
         "type": "object",
-        "required": ["name", "type", "description"],
+        "required": [
+          "name",
+          "type",
+          "description"
+        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -369,7 +513,14 @@
         "title": "Archetype",
         "description": "A archetype",
         "type": "object",
-        "required": ["type", "name", "description", "stats", "traits", "frequency"],
+        "required": [
+          "type",
+          "name",
+          "description",
+          "stats",
+          "traits",
+          "frequency"
+        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -394,7 +545,11 @@
             "title": "Stats",
             "description": "A quantifiable characteristic",
             "type": "object",
-            "required": ["combat", "knowledge", "labour"],
+            "required": [
+              "combat",
+              "knowledge",
+              "labour"
+            ],
             "properties": {
               "combat": {
                 "title": "Combat",
@@ -421,7 +576,10 @@
               "title": "Trait",
               "description": "A trait",
               "type": "object",
-              "required": ["type", "probability"],
+              "required": [
+                "type",
+                "probability"
+              ],
               "properties": {
                 "type": {
                   "title": "Trait type",
@@ -455,7 +613,11 @@
         "title": "Trait",
         "description": "A trait",
         "type": "object",
-        "required": ["type", "name", "description"],
+        "required": [
+          "type",
+          "name",
+          "description"
+        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -486,7 +648,10 @@
         "title": "Character",
         "description": "A character",
         "type": "object",
-        "required": ["name", "type"],
+        "required": [
+          "name",
+          "type"
+        ],
         "properties": {
           "name": {
             "title": "Name",
@@ -527,7 +692,11 @@
         "title": "Character type",
         "description": "A character type",
         "type": "object",
-        "required": ["type", "name", "description"],
+        "required": [
+          "type",
+          "name",
+          "description"
+        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -558,7 +727,10 @@
         "title": "Image",
         "description": "An image",
         "type": "object",
-        "required": ["url", "type"],
+        "required": [
+          "url",
+          "type"
+        ],
         "properties": {
           "type": {
             "title": "Type",
@@ -580,7 +752,10 @@
       "title": "Bounds",
       "description": "Rules affecting the start and end of the game",
       "type": "object",
-      "required": ["starting_resources"],
+      "required": [
+        "starting_resources",
+        "year"
+      ],
       "properties": {
         "starting_resources": {
           "type": "array",
@@ -590,7 +765,10 @@
             "title": "Resource",
             "description": "One of the provided resources",
             "type": "object",
-            "required": ["type", "amount"],
+            "required": [
+              "type",
+              "amount"
+            ],
             "properties": {
               "type": {
                 "title": "Resource",
@@ -604,6 +782,20 @@
                 "title": "Amount",
                 "type": "number"
               }
+            }
+          }
+        },
+        "year": {
+          "type": "array",
+          "title": "Year",
+          "description": "The order of seasons",
+          "items": {
+            "title": "Season",
+            "description": "One of the provided seasons",
+            "type": "string",
+            "links": {
+              "rel": "full",
+              "href": "game://season/{@}"
             }
           }
         }
