@@ -2,8 +2,12 @@
   "terrains": {
     "g": "grass",
     "w": "water",
-    "h":"house",
-    "f":"fence"
+    "h": "house",
+    "v": "well",
+    "i": "field",
+    "j": "beet_field",
+    "k": "beet_field_ripe",
+    "f": "fence"
   },
   "map": {
     "base": [
@@ -11,20 +15,20 @@
       "wwwwwggggwwww",
       "wwwwggggggwww",
       "wggggggggggww",
-      "wwwgggggggwww",
-      "wwwwggggggwww",
-      "wwwwwggggwwww",
-      "wwwwwwwwwwwww",
+      "wwwgggggggwgw",
+      "wwwwggggggggw",
+      "wwwwwgggggggw",
+      "wwwwwwwwwwwww"
     ],
     "content": [
       "             ",
       "             ",
-      "     hh      ",
-      "     hh      ",
-      "      h      ",
-      "             ",
-      "             ",
-      "             ",
+      "     hhi     ",
+      "     hhj     ",
+      "    vhhk     ",
+      "       h  h  ",
+      "        hh   ",
+      "             "
     ],
     "perimeter": [
       "             ",
@@ -34,7 +38,7 @@
       "             ",
       "             ",
       "             ",
-      "             ",
+      "             "
     ]
   },
   "left": -6,

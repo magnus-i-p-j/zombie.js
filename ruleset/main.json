@@ -90,6 +90,28 @@
       "description": "The stuff the tile is made of"
     }
   ],
+  "season": [
+    {
+      "type": "winter",
+      "name": "Winter",
+      "description": "Cold, snowy, white..."
+    },
+    {
+      "type": "spring",
+      "name": "Spring",
+      "description": "Bouncy!"
+    },
+    {
+      "type": "summer",
+      "name": "Summer",
+      "description": "Warm, rainy, green..."
+    },
+    {
+      "type": "autumn",
+      "name": "Autumn",
+      "description": "The best season!"
+    }
+  ],
   "project": [
     {
       "type": "build_fence",
@@ -98,9 +120,7 @@
       "activity": 10,
       "defence": 0,
       "prerequisites": {
-        "terrain": [
-          "grass"
-        ],
+        "terrain": ["grass"],
         "danger": 20
       },
       "effects": {"effect_terrain": "fence"},
@@ -1222,10 +1242,6 @@
   ],
   "images": [
     {
-      "type": "fence_2",
-      "url": "tiles/fence_2.png"
-    },
-    {
       "type": "fence",
       "url": "tiles/fence.png"
     },
@@ -1238,16 +1254,8 @@
       "url": "tiles/grass.png"
     },
     {
-      "type": "hill",
-      "url": "tiles/hill.png"
-    },
-    {
       "type": "house",
-      "url": "tiles/house.png"
-    },
-    {
-      "type": "tiles",
-      "url": "tiles/tiles.png"
+      "url": "tiles/house1.png"
     },
     {
       "type": "water",
@@ -1268,6 +1276,12 @@
         "type": "scrap",
         "amount": 5
       }
+    ],
+    "year": [
+      "autumn",
+      "winter",
+      "spring",
+      "summer"
     ]
   }
 }

@@ -5,7 +5,7 @@
     "zone": "base",
     "textures": [
       {
-        "uri": "..\/img\/tiles\/water5.png",
+        "uri": "..\/img\/tiles\/water.png",
         "weight": 1
       }
     ]
@@ -16,22 +16,7 @@
     "zone": "base",
     "textures": [
       {
-        "uri": "..\/img\/tiles\/grass5.png",
-        "weight": 2
-      },
-      {
-        "uri": "..\/img\/tiles\/grass6.png",
-        "weight": 1
-      }
-    ]
-  },
-  {
-    "name": "hills",
-    "type": "single",
-    "zone": "base",
-    "textures": [
-      {
-        "uri": "..\/img\/tiles\/hill2.png",
+        "uri": "..\/img\/tiles\/grass_reworked.png",
         "weight": 1
       }
     ]
@@ -42,7 +27,13 @@
     "zone": "content",
     "textures": [
       {
-        "uri": "..\/img\/tiles\/house.png",
+        "uri": "..\/img\/tiles\/house1.png",
+        "weight": 1
+      },{
+        "uri": "..\/img\/tiles\/house2.png",
+        "weight": 1
+      },{
+        "uri": "..\/img\/tiles\/house3.png",
         "weight": 1
       }
     ]
@@ -53,7 +44,27 @@
     "zone": "content",
     "textures": [
       {
-        "uri": "..\/img\/tiles\/field.png",
+        "uri": "..\/img\/tiles\/field_empty.png",
+        "weight": 1
+      }
+    ]
+  },{
+    "name": "beet_field",
+    "type": "single",
+    "zone": "content",
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/field_started.png",
+        "weight": 1
+      }
+    ]
+  },{
+    "name": "beet_field_ripe",
+    "type": "single",
+    "zone": "content",
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/field_full.png",
         "weight": 1
       }
     ]
@@ -65,6 +76,17 @@
     "textures": [
       {
         "uri": "..\/img\/tiles\/fence.png",
+        "weight": 1
+      }
+    ]
+  },
+  {
+    "name": "well",
+    "type": "single",
+    "zone": "perimeter",
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/well.png",
         "weight": 1
       }
     ]
