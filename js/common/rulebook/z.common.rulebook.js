@@ -78,7 +78,7 @@ z.common.rulebook.stats;
 /**
  * @typedef {{
  *   type: string,
- *   args: (z.common.rulebook.effect_stockpile|z.common.rulebook.effect_terrain)
+ *   args: (z.common.rulebook.effect_stockpile|z.common.rulebook.effect_terrain|z.common.rulebook.effect_end)
  * }}
  */
 z.common.rulebook.effect;
@@ -104,6 +104,10 @@ z.common.rulebook.effect_stockpile;
  * @typedef {string}
  */
 z.common.rulebook.effect_terrain;
+/**
+ * @typedef {bool}
+ */
+z.common.rulebook.effect_end;
 
 /**
  * @typedef {{
@@ -122,6 +126,44 @@ z.common.rulebook.character_base;
  * }}
  */
 z.common.rulebook.possible_trait;
+
+/**
+ * @typedef {{
+ *   predicate: !z.common.rulebook.predicate,
+ *   effects: Array.<!z.common.rulebook.effect>
+ * }}
+ */
+z.common.rulebook.trigger;
+
+/**
+ * @typedef {{
+ *  type: !z.common.rulebook.predicate_type,
+ *  season: ?string,
+ *  duration: ?number
+ * }}
+ */
+z.common.rulebook.predicate;
+
+/**
+ * @enum {string}
+ */
+z.common.rulebook.predicate_type = {
+  COMPLETE: 'complete',
+  END: 'end',
+  SEASON: 'season',
+  DURATION: 'duration'
+};
+
+
+/**
+ * @typedef {{
+ *   duration: ?number,
+ *   complete: ?boolean,
+ *   end: ?boolean,
+ *   season: ?string
+ * }}
+ */
+z.common.rulebook.trigger_args;
 
 /**
  * @enum {string}
@@ -165,5 +207,42 @@ z.common.rulebook.logic.prerequisites = {
     }
     return condition >= target.zombieData.danger;
   }
-}
-;
+};
+
+z.common.rulebook.logic.predicates = {};
+
+/**
+ * @param triggerArgs {!z.common.rulebook.trigger_args}
+ * @param predicate {!z.common.rulebook.predicate}
+ * @returns {boolean}
+ */
+z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.COMPLETE] = function(triggerArgs, predicate) {
+  return !!triggerArgs['complete'];
+};
+
+/**
+ * @param triggerArgs {!z.common.rulebook.trigger_args}
+ * @param predicate {!z.common.rulebook.predicate}
+ * @returns {boolean}
+ */
+z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.END] = function(triggerArgs, predicate) {
+  return !!triggerArgs['end'];
+};
+
+/**
+ * @param triggerArgs {!z.common.rulebook.trigger_args}
+ * @param predicate {!z.common.rulebook.predicate}
+ * @returns {boolean}
+ */
+z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.DURATION] = function(triggerArgs, predicate) {
+  return triggerArgs['duration'] === predicate.duration;
+};
+
+/**
+ * @param triggerArgs {!z.common.rulebook.trigger_args}
+ * @param predicate {!z.common.rulebook.predicate}
+ * @returns {boolean}
+ */
+z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.SEASON] = function(triggerArgs, predicate) {
+  return triggerArgs['season'] === predicate.season;
+};

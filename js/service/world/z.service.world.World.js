@@ -278,7 +278,7 @@ z.service.world.World.prototype.tick = function() {
 /**
  * @private
  */
-z.service.world.World.prototype._distributeZombies = function () {
+z.service.world.World.prototype._distributeZombies = function() {
   var distributor = new z.service.world.ZombieDistributor();
   var query = new z.common.EntityQuery();
   query.category = z.common.rulebook.category.TILE;
@@ -314,8 +314,6 @@ z.service.world.World.prototype._advanceProjects = function() {
     var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
     var stockpile = owner.stockpile;
 
-    // TODO: Make cashier handle multiple stockpiles
-
     var cost = project.getRemainingCost();
 
     var isAssignedTo = function(entity) {
@@ -336,7 +334,16 @@ z.service.world.World.prototype._advanceProjects = function() {
 
     var cashier = new z.common.Cashier(work, stockpile);
     var investment = cashier.withdraw(cost);
-    var effects = project.advance(investment);
+
+
+    var shouldTriggerComplete = project.advance(investment);
+
+    var triggerParams = {
+      'complete': shouldTriggerComplete,
+      'season': 'todo',
+      'end': false
+    };
+    var effects = project.trigger(triggerParams);
 
     results[project.guid] = this._applyEffects(effects, project);
   }, this);
@@ -384,6 +391,16 @@ z.service.world.World.prototype['_apply_effect_terrain'] = function(effect, proj
   tileData.terrain = /** @type {z.common.terrain} */ goog.object.unsafeClone(tileData.terrain);
   tileData.terrain[effectMeta.zone] = effect;
   this._entityRepository.put(tileData);
+};
+
+/**
+ * @param {z.common.rulebook.effect_end} effect
+ * @param {z.common.entities.Project} project
+ */
+z.service.world.World.prototype['_apply_effect_end'] = function(effect, project) {
+  if (effect) {
+    // TODO: implement effect end
+  }
 };
 
 /**

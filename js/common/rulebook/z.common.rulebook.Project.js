@@ -2,6 +2,7 @@ goog.provide('z.common.rulebook.Project');
 
 goog.require('z.common.rulebook');
 goog.require('z.common.rulebook.logic');
+goog.require('z.common.rulebook.Trigger');
 
 goog.require('goog.array');
 
@@ -67,9 +68,13 @@ z.common.rulebook.Project = function(project) {
     );
   }
 
+  /**
+   * @type {Array.<!z.common.rulebook.Trigger>}
+   */
+  this.triggers = goog.array.map(this._project.triggers, function(trigger) {
+    return new z.common.rulebook.Trigger(trigger);
+  });
 
-
-  this.effects = this._project['effects'];
 };
 
 /**

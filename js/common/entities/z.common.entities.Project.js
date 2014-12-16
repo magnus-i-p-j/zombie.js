@@ -9,7 +9,7 @@ goog.require('goog.functions');
  * @extends {z.common.entities.Entity}
  * @constructor
  */
-z.common.entities.Project = function (services) {
+z.common.entities.Project = function(services) {
   goog.base(this, services);
 
   this.name = this.meta.name;
@@ -50,20 +50,21 @@ z.common.entities.Project = function (services) {
   this.investment.addAll(projectData.investment);
 
   this.completion = 0;
+  this.duration = 0;
 
   this.resources = projectData.resources;
 };
 
 goog.inherits(z.common.entities.Project, z.common.entities.Entity);
 
-z.common.entities.Project.prototype.getRemainingCost = function () {
+z.common.entities.Project.prototype.getRemainingCost = function() {
   return this.investment.diffAll(this.meta.cost);
 };
 
-z.common.entities.Project.prototype.deriveValues = function () {
+z.common.entities.Project.prototype.deriveValues = function() {
   this.completion = this.investment.ratioAll(this.meta.cost);
 };
-z.common.entities.Project.prototype.invest = function (investment) {
+z.common.entities.Project.prototype.invest = function(investment) {
   var previous = this.completion;
   this.investment.addAll(investment);
   this.deriveValues();
@@ -73,37 +74,53 @@ z.common.entities.Project.prototype.invest = function (investment) {
 };
 
 /**
- * @return {Array.<Object>}
+ * @return {boolean}
  */
-z.common.entities.Project.prototype.advance = function (investment) {
+z.common.entities.Project.prototype.advance = function(investment, season) {
+  var shouldTriggerComplete;
   var wasDone = !goog.object.some(this.getRemainingCost(), goog.functions.identity);
   this.invest(investment);
+  this.duration += 1;
   var effects = [];
   if (!wasDone) {
-    var done = !goog.object.some(this.getRemainingCost(), goog.functions.identity);
-    if (done) {
-      goog.object.forEach(
-        this.meta.effects,
-        function (effect, key) {
-          var tmp = {};
-          tmp['type'] = key;
-          tmp['args'] = goog.object.unsafeClone(effect);
-          effects.push(tmp);
-        },
-        this
-      );
-      this._setModified();
-    }
+    shouldTriggerComplete = !goog.object.some(this.getRemainingCost(), goog.functions.identity);
+    this._setModified();
+  } else {
+    shouldTriggerComplete = false;
   }
+  return shouldTriggerComplete;
+};
+
+/**
+ * @param triggerArgs {z.common.rulebook.trigger_args}
+ * @return {Array.<Object>}
+ */
+z.common.entities.Project.prototype.trigger = function(triggerArgs) {
+  triggerArgs['duration'] = this.duration;
+  var effects = [];
+
+  goog.array.some(this.meta.triggers, function(trigger) {
+    if (trigger.test(triggerArgs)) {
+      effects = trigger.effects();
+      return true;
+    } else {
+      return false;
+    }
+  });
+
   return effects;
 };
+
 
 /**
  * @inheritDoc
  */
-z.common.entities.Project.prototype._update = function (entityData, meta, owner) {
+z.common.entities.Project.prototype._update = function(entityData, meta, owner) {
   if (!(entityData instanceof z.common.data.ProjectData)) {
-    throw {'name': 'InvalidDataException', 'message': 'not a z.common.data.ProjectData'};
+    throw {
+      'name': 'InvalidDataException',
+      'message': 'not a z.common.data.ProjectData'
+    };
   }
 
   var projectData = /** @type {!z.common.data.ProjectData} */ entityData;
