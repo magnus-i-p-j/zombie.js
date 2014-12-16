@@ -124,7 +124,7 @@
           "predicate": {"type": "complete"},
           "effects": {
             "effect_terrain": "fence",
-            "effect_end": false
+            "effect_end": true
           }
         }
       ],
@@ -158,7 +158,7 @@
           "predicate": {"type": "complete"},
           "effects": {
             "effect_terrain": "beet_field",
-            "effect_end": false
+            "effect_end": true
           }
         }
       ],
@@ -193,7 +193,7 @@
               }
             ],
             "effect_terrain": "field",
-            "effect_end": false
+            "effect_end": true
           }
         }
       ],
@@ -242,7 +242,7 @@
                 "variation": 15
               }
             ],
-            "effect_end": false
+            "effect_end": true
           }
         }
       ],
@@ -267,7 +267,7 @@
           "predicate": {"type": "complete"},
           "effects": {
             "effect_terrain": "well",
-            "effect_end": false
+            "effect_end": true
           }
         }
       ],
@@ -299,7 +299,7 @@
       "triggers": [
         {
           "predicate": {"type": "complete"},
-          "effects": {"effect_end": false}
+          "effects": {"effect_end": true}
         }
       ],
       "prerequisites": {"danger": 500},
@@ -321,7 +321,7 @@
       "triggers": [
         {
           "predicate": {"type": "complete"},
-          "effects": {"effect_end": false}
+          "effects": {"effect_end": true}
         }
       ],
       "prerequisites": {
