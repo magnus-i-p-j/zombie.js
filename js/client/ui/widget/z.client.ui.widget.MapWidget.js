@@ -120,11 +120,11 @@ z.client.ui.widget.MapWidget.prototype._drawTile = function (tileFacet) {
         var data = entity.zombieData;
         var lines = [
           '[ ' + x + '; ' + y + ' ]',
-          '',
-          '{',
-          ' activity:' + data.activity,
-          ' density:' + data.density,
-          '}','',''
+          //'',
+          //'{',
+          //' activity:' + data.activity,
+          //' density:' + data.density,
+          //'}','',''
         ];
         this._imap.drawText(x, y, lines);
       }

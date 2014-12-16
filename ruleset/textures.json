@@ -27,13 +27,23 @@
     "zone": "content",
     "textures": [
       {
-        "uri": "..\/img\/tiles\/house1.png",
+        "uri": "..\/img\/tiles\/house1_mini.png",
         "weight": 1
-      },{
-        "uri": "..\/img\/tiles\/house2.png",
+      },
+      {
+        "uri": "..\/img\/tiles\/house2_mini.png",
         "weight": 1
-      },{
-        "uri": "..\/img\/tiles\/house3.png",
+      },
+      {
+        "uri": "..\/img\/tiles\/house3_mini.png",
+        "weight": 1
+      },
+      {
+        "uri": "..\/img\/tiles\/house2_mini_side.png",
+        "weight": 1
+      },
+      {
+        "uri": "..\/img\/tiles\/house3_mini_side.png",
         "weight": 1
       }
     ]
@@ -44,27 +54,29 @@
     "zone": "content",
     "textures": [
       {
-        "uri": "..\/img\/tiles\/field_empty.png",
+        "uri": "..\/img\/tiles\/field_empty2.png",
         "weight": 1
       }
     ]
-  },{
+  },
+  {
     "name": "beet_field",
     "type": "single",
     "zone": "content",
     "textures": [
       {
-        "uri": "..\/img\/tiles\/field_started.png",
+        "uri": "..\/img\/tiles\/field_started2.png",
         "weight": 1
       }
     ]
-  },{
+  },
+  {
     "name": "beet_field_ripe",
     "type": "single",
     "zone": "content",
     "textures": [
       {
-        "uri": "..\/img\/tiles\/field_full.png",
+        "uri": "..\/img\/tiles\/field_full2.png",
         "weight": 1
       }
     ]
@@ -83,7 +95,7 @@
   {
     "name": "well",
     "type": "single",
-    "zone": "perimeter",
+    "zone": "content",
     "textures": [
       {
         "uri": "..\/img\/tiles\/well.png",
