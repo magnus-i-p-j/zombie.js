@@ -269,12 +269,11 @@ z.service.world.World.prototype.tick = function() {
 
   var killed = this._entityRepository.resetState();
   this._expandWorld();
-  this._distributeZombies();
-  //Zombie attack
   this._advanceProjects();
-
-
   this._endProjects();
+
+
+  this._distributeZombies();
   this._turn += 1;
   //Special events
   this._entityRepository.cleanUp();
