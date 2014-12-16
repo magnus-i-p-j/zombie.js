@@ -81,7 +81,7 @@ z.common.entities.Project.prototype.advance = function(investment, season) {
   var wasDone = !goog.object.some(this.getRemainingCost(), goog.functions.identity);
   this.invest(investment);
   this.duration += 1;
-  var effects = [];
+
   if (!wasDone) {
     shouldTriggerComplete = !goog.object.some(this.getRemainingCost(), goog.functions.identity);
     this._setModified();

@@ -106,9 +106,18 @@ z.common.entities.Character.prototype.hasTrait = function (trait) {
   return this.traits[trait.type];
 };
 
+/**
+ * @param guid {!mugd.utils.guid}
+ */
+z.common.entities.Character.prototype.entityKilled = function(guid) {
+  if(guid === this.assignedTo) {
+    this.assignTo(null);
+  }
+};
+
 
 /**
- * @param {!mugd.utils.guid} guid
+ * @param {?mugd.utils.guid} guid
  */
 z.common.entities.Character.prototype.assignTo = function (guid) {
   if(this.assignedTo !== guid){

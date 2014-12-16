@@ -84,6 +84,18 @@ z.common.EntityRepository.prototype.remove = function (guid) {
   }
 };
 
+z.common.EntityRepository.prototype.cleanUp = function(){
+  var killed = this.filter(
+    function(entity){
+      return entity.getState() === z.common.protocol.state.KILL;
+    });
+  goog.array.forEach(killed, function(killedEntity) {
+    this.map(function(entity){
+      entity.entityKilled(killedEntity.guid);
+    });
+  }, this);
+};
+
 /**
  * @param {function(!z.common.entities.Entity):*} action
  * @param {(function(!z.common.entities.Entity):boolean)=} filter

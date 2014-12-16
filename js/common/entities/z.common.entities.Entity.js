@@ -66,6 +66,10 @@ z.common.entities.Entity.prototype.setState = function (state) {
   }
 };
 
+/**
+ * @param guid {!mugd.utils.guid}
+ */
+z.common.entities.Entity.prototype.entityKilled = function(guid) {};
 
 /**
  * @param {z.common.data.EntityData} entityData

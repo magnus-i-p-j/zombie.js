@@ -374,7 +374,7 @@
         {
           "predicate": {
             "type": "duration",
-            "duration": 0
+            "duration": 1
           },
           "effects": {
             "effect_terrain": "beet_field",
@@ -384,7 +384,7 @@
         {
           "predicate": {
             "type": "duration",
-            "duration": 1
+            "duration": 2
           },
           "effects": {
             "effect_terrain": "beet_field_ripe",
@@ -1393,6 +1393,10 @@
     "starting_resources": [
       {
         "type": "wood",
+        "amount": 20
+      },
+      {
+        "type": "food",
         "amount": 20
       },
       {

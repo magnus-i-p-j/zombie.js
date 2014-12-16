@@ -264,14 +264,20 @@ z.service.world.World.prototype.getVisibleCharacters = function() {
  * @returns {Array.<!mugd.utils.guid>}
  */
 z.service.world.World.prototype.tick = function() {
+  this._entityRepository.cleanUp();
+  this._endProjects();
+
   var killed = this._entityRepository.resetState();
   this._expandWorld();
   this._distributeZombies();
   //Zombie attack
   this._advanceProjects();
+
+
+  this._endProjects();
   this._turn += 1;
   //Special events
-
+  this._entityRepository.cleanUp();
   return killed;
 };
 
@@ -284,6 +290,24 @@ z.service.world.World.prototype._distributeZombies = function() {
   query.category = z.common.rulebook.category.TILE;
   var tiles = this._entityRepository.filter(query.match.bind(query));
   distributor.distribute(tiles);
+};
+
+z.service.world.World.prototype._endProjects = function() {
+  var projects = this._entityRepository.filter(function(entity) {
+    if (entity instanceof z.common.entities.Project && entity.getState() === z.common.protocol.state.KILL) {
+      return true;
+    }
+    return false
+  });
+
+  goog.array.forEach(projects, function(project) {
+    var triggerParams = {
+      'end': true
+    };
+    var effects = project.trigger(triggerParams);
+    this._applyEffects(effects, project);
+  }, this);
+
 };
 
 /**
@@ -399,7 +423,7 @@ z.service.world.World.prototype['_apply_effect_terrain'] = function(effect, proj
  */
 z.service.world.World.prototype['_apply_effect_end'] = function(effect, project) {
   if (effect) {
-    // TODO: implement effect end
+    project.setState(z.common.protocol.state.KILL);
   }
 };
 
