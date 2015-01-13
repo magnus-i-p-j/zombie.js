@@ -42,6 +42,12 @@ z.service.world.World = function(services) {
   this._turn = 0;
 
   /**
+   * @type {string}
+   * @private
+   */
+  this._season = null;
+
+  /**
    * @type {mugd.utils.Grid}
    * @private
    */
@@ -204,7 +210,7 @@ z.service.world.World.prototype.createStartTurnData = function(actorGuid, killed
   /**
    * @type {!z.common.data.StartTurnData}
    */
-  var startTurn = new z.common.data.StartTurnData(actorGuid, entities, killed, this._turn);
+  var startTurn = new z.common.data.StartTurnData(actorGuid, entities, killed, this._turn, this._season);
   return startTurn;
 };
 
@@ -274,7 +280,8 @@ z.service.world.World.prototype.tick = function() {
 
 
   this._distributeZombies();
-  this._turn += 1;
+  this._advanceTime();
+
   //Special events
   this._entityRepository.cleanUp();
   return killed;
@@ -289,6 +296,12 @@ z.service.world.World.prototype._distributeZombies = function() {
   query.category = z.common.rulebook.category.TILE;
   var tiles = this._entityRepository.filter(query.match.bind(query));
   distributor.distribute(tiles);
+};
+
+z.service.world.World.prototype._advanceTime = function() {
+  this._turn += 1;
+  var year = this._rulebook.year;
+  this._season = year[(this._turn - 1) % year.length];
 };
 
 z.service.world.World.prototype._endProjects = function() {

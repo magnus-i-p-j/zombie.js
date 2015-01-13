@@ -10,10 +10,11 @@ goog.require('goog.array');
  * @param {number} turn
  * @constructor
  */
-z.common.data.StartTurnData= function (actorId, entities, killed, turn) {
+z.common.data.StartTurnData= function (actorId, entities, killed, turn, season) {
   this.actorId = actorId;
   this.entities = entities;
   this.turn = turn;
+  this.season = season;
   this.killed = killed;
 };
 

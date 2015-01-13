@@ -17,6 +17,10 @@ z.client.facet.InfoFacet = function (services) {
    * @type {function(number=):number}
    */
   this['turn'] = ko.observable();
+  /**
+   * @type {function(string=):string}
+   */
+  this['season'] = ko.observable();
 
   /**
    * @type {!z.client.facet.ActorFacet}
@@ -41,4 +45,5 @@ z.client.facet.InfoFacet.prototype.setParentEventTarget = function (parent) {
  */
 z.client.facet.InfoFacet.prototype.doStartTurn = function (e) {
   this['turn'](e.data.turn);
+  this['season'](e.data.season);
 };

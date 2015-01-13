@@ -12,7 +12,8 @@ z.common.protocol.clientEndTurn;
  * @typedef {{
  *  actorId: !mugd.utils.guid,
  *  entities: Array.<!z.common.protocol.entity>,
- *  turn: number
+ *  turn: number,
+ *  season: string
  * }}
  */
 z.common.protocol.startTurn;

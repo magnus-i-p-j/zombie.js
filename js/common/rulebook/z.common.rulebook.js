@@ -76,6 +76,11 @@ z.common.rulebook.archetype;
 z.common.rulebook.stats;
 
 /**
+ * @typedef {Array.<string>}
+ */
+z.common.rulebook.year;
+
+/**
  * @typedef {{
  *   type: string,
  *   args: (z.common.rulebook.effect_stockpile|z.common.rulebook.effect_terrain|z.common.rulebook.effect_end)

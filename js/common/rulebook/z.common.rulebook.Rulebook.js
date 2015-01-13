@@ -40,7 +40,7 @@ z.common.rulebook.Rulebook = function (services) {
   this.traits = this._parseCategoryData(ruleset[z.common.rulebook.category.TRAIT], z.common.rulebook.Trait);
   this.characterTypes = this._parseCategoryData(ruleset[z.common.rulebook.category.CHARACTER_TYPE], z.common.rulebook.CharacterType);
   this.gameStartingData = new z.common.rulebook.GameStartingData(ruleset);
-
+  this.year = ruleset[z.common.rulebook.category.BOUNDS]['year'];
 };
 
 /**

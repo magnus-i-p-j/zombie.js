@@ -60,6 +60,7 @@ z.client.WorldProxy.prototype.firstTurn = function() {
  */
 z.client.WorldProxy.prototype.doStartTurn = function(startTurnData) {
   this._turn = startTurnData.turn;
+  this._season = startTurnData.season;
   goog.array.forEach(startTurnData.entities, this._repository.put, this._repository);
   goog.array.forEach(startTurnData.killed, function(guid) {
     var entity = this.get(guid);
@@ -71,7 +72,8 @@ z.client.WorldProxy.prototype.doStartTurn = function(startTurnData) {
   this._repository.resetState();
 
   var e = new z.client.events.StartTurn({
-      turn: this._turn
+      turn: this._turn,
+      season: this._season
     }
   );
   this.dispatchEvent(e);
