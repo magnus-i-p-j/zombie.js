@@ -376,7 +376,7 @@ z.service.world.World.prototype._advanceProjects = function() {
 
     var triggerParams = {
       'complete': shouldTriggerComplete,
-      'season': 'todo',
+      'season': this._season,
       'end': false
     };
     var effects = project.trigger(triggerParams);
