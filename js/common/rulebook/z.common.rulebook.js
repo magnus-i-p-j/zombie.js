@@ -113,6 +113,13 @@ z.common.rulebook.effect_terrain;
  * @typedef {bool}
  */
 z.common.rulebook.effect_end;
+/**
+ * @typedef {{
+ *   magnitude: ?number,
+ *   skill: ?number
+ * }}
+ */
+z.common.rulebook.effect_cull_zombies;
 
 /**
  * @typedef {{

@@ -431,10 +431,39 @@ z.service.world.World.prototype['_apply_effect_stockpile'] = function(effect, pr
 z.service.world.World.prototype['_apply_effect_terrain'] = function(effect, project) {
   var tile = /** @type {!z.common.entities.Tile}*/ this._entityRepository.get(project.tile);
   var tileData = z.common.data.TileData.fromEntity(tile);
-  var effectMeta = this._rulebook.getMetaClass(effect);
+  var terrainMeta = this._rulebook.getMetaClass(effect);
   tileData.terrain = /** @type {z.common.terrain} */ goog.object.unsafeClone(tileData.terrain);
-  tileData.terrain[effectMeta.zone] = effect;
+  tileData.terrain[terrainMeta.zone] = effect;
   this._entityRepository.put(tileData);
+};
+
+/**
+ * @param {z.common.rulebook.effect_cull_zombies} effect
+ * @param {z.common.entities.Project} project
+ */
+z.service.world.World.prototype['_apply_effect_cull_zombies'] = function(effect, project) {
+  // TODO: continue and add to ruleset
+  var tile = /** @type {!z.common.entities.Tile} */ this._entityRepository.get(project.tile);
+  var isAssignedTo = function(entity) {
+    if (entity instanceof z.common.entities.Character) {
+      var character = /** @type {!z.common.entities.Character} */ entity;
+      return character.assignedTo === project.guid;
+    }
+    return false;
+  };
+  var getCombat = function(character) {
+    return character.combat;
+  };
+
+  var add = function(x, y) {
+    return x + y;
+  };
+
+  var totalCombat = goog.array.reduce(this._entityRepository.map(getCombat, isAssignedTo), add, 0, this);
+
+  var magnitude = -1 * (totalCombat * effect.skill + effect.magnitude);
+  tile.addZombieDensity(magnitude);
+
 };
 
 /**

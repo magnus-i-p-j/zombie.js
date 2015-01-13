@@ -132,6 +132,18 @@ z.common.entities.Tile.prototype.addZombieActivity = function(magnitude) {
 };
 
 /**
+ * @param {number} magnitude
+ */
+z.common.entities.Tile.prototype.addZombieDensity = function(magnitude) {
+  if (magnitude) {
+    var zombieData = goog.object.unsafeClone(this.zombieData);
+    zombieData.density = Math.max(zombieData.density + magnitude, 0);
+    this.zombieData = zombieData;
+    this._dispatchModified();
+  }
+};
+
+/**
  * @param {!z.common.zombiedata} data
  * @return {!z.common.zombiedata}
  */
