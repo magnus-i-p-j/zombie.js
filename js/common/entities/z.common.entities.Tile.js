@@ -120,6 +120,18 @@ z.common.entities.Tile.prototype.setZombieData = function(data) {
 };
 
 /**
+ * @param {number} magnitude
+ */
+z.common.entities.Tile.addZombieActivity = function(magnitude) {
+  if (magnitude) {
+    var zombieData = goog.object.unsafeClone(this.zombieData);
+    zombieData.activity = zombieData.activity + magnitude;
+    this.zombieData = zombieData;
+    this._dispatchModified();
+  }
+};
+
+/**
  * @param {!z.common.zombiedata} data
  * @return {!z.common.zombiedata}
  */
@@ -141,7 +153,6 @@ z.common.entities.Tile.prototype._calculateZombieData = function(data) {
     totalDefence += metaClass.defence;
     totalActivity += metaClass.activity;
   }, this);
-  // TODO: add projects
 
   zombieData.density = data.density;
   zombieData.defence = totalDefence;

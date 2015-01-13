@@ -343,51 +343,52 @@ z.service.world.World.prototype._advanceProjects = function() {
   var results = {};
 
   goog.array.forEach(projects, function(project) {
-
-    /**
-     * @type {!z.common.entities.Actor}
-     */
-    var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
-    var stockpile = owner.stockpile;
-
-    var cost = project.getRemainingCost();
-
-    var isAssignedTo = function(entity) {
-      if (entity instanceof z.common.entities.Character) {
-        var character = /** @type {!z.common.entities.Character} */ entity;
-        return character.assignedTo === project.guid;
-      }
-      return false;
-    };
-    var work = new z.common.Stockpile();
-    var prefix = 'game://static/';
-    var calculateWork = function(character) {
-      work.add(prefix + 'combat', character.combat);
-      work.add(prefix + 'knowledge', character.knowledge);
-      work.add(prefix + 'labour', character.labour);
-    };
-    this._entityRepository.map(calculateWork, isAssignedTo);
-
-    var time = new z.common.Stockpile();
-    time.add(prefix + 'time', 1);
-
-    var cashier = new z.common.Cashier(work, time, stockpile);
-    var investment = cashier.withdraw(cost);
-
-
-    var shouldTriggerComplete = project.advance(investment);
-
-    var triggerParams = {
-      'complete': shouldTriggerComplete,
-      'season': this._season,
-      'end': false
-    };
-    var effects = project.trigger(triggerParams);
-
-    results[project.guid] = this._applyEffects(effects, project);
+    results[project.guid] = this._advanceProject(project);
   }, this);
 
   return results;
+};
+
+z.service.world.World.prototype._advanceProject = function(project) {
+  /**
+   * @type {!z.common.entities.Actor}
+   */
+  var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
+  var stockpile = owner.stockpile;
+
+  var cost = project.getRemainingCost();
+
+  var isAssignedTo = function(entity) {
+    if (entity instanceof z.common.entities.Character) {
+      var character = /** @type {!z.common.entities.Character} */ entity;
+      return character.assignedTo === project.guid;
+    }
+    return false;
+  };
+  var work = new z.common.Stockpile();
+  var calculateWork = function(character) {
+    work.add(z.common.STATIC + 'combat', character.combat);
+    work.add(z.common.STATIC + 'knowledge', character.knowledge);
+    work.add(z.common.STATIC + 'labour', character.labour);
+  };
+  this._entityRepository.map(calculateWork, isAssignedTo);
+
+  var time = new z.common.Stockpile();
+  time.add(z.common.STATIC + 'time', 1);
+
+  var cashier = new z.common.Cashier(work, time, stockpile);
+  var investment = cashier.withdraw(cost);
+
+  var shouldTriggerComplete = project.advance(investment);
+
+  var triggerParams = {
+    'complete': shouldTriggerComplete,
+    'season': this._season,
+    'end': false
+  };
+  var effects = project.trigger(triggerParams);
+
+  return this._applyEffects(effects, project);
 };
 
 /**

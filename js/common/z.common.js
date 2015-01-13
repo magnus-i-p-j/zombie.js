@@ -9,12 +9,18 @@ z.common.Resources = {
 };
 
 /**
+ * @type {string}
+ * @const
+ */
+z.common.STATIC = 'game://static/';
+
+/**
  * @typedef {!Object.<string, string>}
  */
 z.common.terrain;
 
 /**
- * @typedef{{
+ * @typedef {{
  *  density: number,
  *  defence: number,
  *  attraction: number,

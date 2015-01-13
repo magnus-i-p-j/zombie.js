@@ -57,13 +57,12 @@ z.common.rulebook.Project = function(project) {
     );
   }
 
-  var prefix = 'game://static/';
   var work = this._project['cost']['work'];
   if (work) {
     goog.object.forEach(
       work,
       function(value, key) {
-        var name = prefix + key;
+        var name = z.common.STATIC + key;
         this.cost[name] = value;
       }, this
     );
@@ -71,7 +70,7 @@ z.common.rulebook.Project = function(project) {
 
   var time = this._project['cost']['time'];
   if(time) {
-    this.cost[prefix + 'time'] = time;
+    this.cost[z.common.STATIC + 'time'] = time;
   }
 
 
