@@ -360,15 +360,18 @@ z.service.world.World.prototype._advanceProjects = function() {
       return false;
     };
     var work = new z.common.Stockpile();
+    var prefix = 'game://static/';
     var calculateWork = function(character) {
-      var prefix = 'game://static/';
       work.add(prefix + 'combat', character.combat);
       work.add(prefix + 'knowledge', character.knowledge);
       work.add(prefix + 'labour', character.labour);
     };
     this._entityRepository.map(calculateWork, isAssignedTo);
 
-    var cashier = new z.common.Cashier(work, stockpile);
+    var time = new z.common.Stockpile();
+    time.add(prefix + 'time', 1);
+
+    var cashier = new z.common.Cashier(work, time, stockpile);
     var investment = cashier.withdraw(cost);
 
 

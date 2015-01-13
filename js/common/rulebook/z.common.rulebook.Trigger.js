@@ -9,14 +9,14 @@ z.common.rulebook.Trigger = function(trigger) {
   var triggerType = trigger['predicate']['type'];
   this._predicateConfig = trigger['predicate'];
   this._predicate = z.common.rulebook.logic.predicates[triggerType];
-}
+};
 
 /**
  * @param triggerArgs {z.common.rulebook.trigger_args}
  */
 z.common.rulebook.Trigger.prototype.test = function(triggerArgs) {
   return this._predicate(triggerArgs, this._predicateConfig);
-}
+};
 
 /**
  * @return {Array.<Object>}
@@ -32,7 +32,7 @@ z.common.rulebook.Trigger.prototype.effects = function() {
       effects.push(tmp);
     },
     this
-  )
+  );
   return effects;
-}
+};
 
