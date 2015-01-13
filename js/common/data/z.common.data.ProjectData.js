@@ -23,6 +23,9 @@ z.common.data.ProjectData = function (guid, ownerId, type, state, priority, tile
   this.tileId = tileId;
   this.resources = resources;
   this.investment = investment;
+  //if (!tileId) {
+  //  debugger;
+  //}
 };
 
 /**
@@ -51,7 +54,7 @@ z.common.data.ProjectData.fromEntity = function (project) {
   var type = project.meta.type;
   var state = project.getState();
   var priority = project.priority;
-  var tileId = project.tile.guid;
+  var tileId = project.tile;
   var resources = project.resources;
   var investment = project.investment.peekAll();
   return new z.common.data.ProjectData(guid, ownerId, type, state, priority, tileId, resources, investment);

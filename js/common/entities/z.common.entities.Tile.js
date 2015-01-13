@@ -122,7 +122,7 @@ z.common.entities.Tile.prototype.setZombieData = function(data) {
 /**
  * @param {number} magnitude
  */
-z.common.entities.Tile.addZombieActivity = function(magnitude) {
+z.common.entities.Tile.prototype.addZombieActivity = function(magnitude) {
   if (magnitude) {
     var zombieData = goog.object.unsafeClone(this.zombieData);
     zombieData.activity = zombieData.activity + magnitude;

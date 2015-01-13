@@ -17,6 +17,12 @@ z.service.world.ZombieDistributor.prototype.distribute = function(tiles) {
   var grid = new mugd.utils.Grid();
 
   goog.array.forEach(tiles, function(tile) {
+
+    if (tile.position.x === 1 && tile.position.y === 4) {
+      // TESTRUTA
+      console.log(tile.zombieData);
+    }
+
     var pre = tile.zombieData;
     var post = {
       density: 0,

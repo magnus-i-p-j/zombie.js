@@ -354,9 +354,11 @@ z.service.world.World.prototype._advanceProject = function(project) {
    * @type {!z.common.entities.Actor}
    */
   var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
+  var tile = /** @type {!z.common.entities.Tile}*/ this._entityRepository.get(project.tile);
   var stockpile = owner.stockpile;
 
   var cost = project.getRemainingCost();
+  var initialCompletion = project.completion;
 
   var isAssignedTo = function(entity) {
     if (entity instanceof z.common.entities.Character) {
@@ -380,6 +382,8 @@ z.service.world.World.prototype._advanceProject = function(project) {
   var investment = cashier.withdraw(cost);
 
   var shouldTriggerComplete = project.advance(investment);
+
+  tile.addZombieActivity(((project.completion - initialCompletion) * project.activity) | 0);
 
   var triggerParams = {
     'complete': shouldTriggerComplete,
@@ -425,7 +429,7 @@ z.service.world.World.prototype['_apply_effect_stockpile'] = function(effect, pr
  * @param {z.common.entities.Project} project
  */
 z.service.world.World.prototype['_apply_effect_terrain'] = function(effect, project) {
-  var tile = project.tile;
+  var tile = /** @type {!z.common.entities.Tile}*/ this._entityRepository.get(project.tile);
   var tileData = z.common.data.TileData.fromEntity(tile);
   var effectMeta = this._rulebook.getMetaClass(effect);
   tileData.terrain = /** @type {z.common.terrain} */ goog.object.unsafeClone(tileData.terrain);

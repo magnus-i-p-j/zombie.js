@@ -32,16 +32,19 @@ z.common.entities.Project = function(services) {
   /**
    * @type {number}
    */
+  this.activity = this.meta.activity;
+
+  /**
+   * @type {number}
+   */
   this.priority = projectData.priority;
 
-  if (goog.isDefAndNotNull(projectData.tileId)) {
-    /**
-     * @type {!z.common.entities.Tile}
-     */
-    this.tile = /** @type {!z.common.entities.Tile} */ entityRepository.get(projectData.tileId);
-  }
 
-  this.position = this.tile.position;
+
+  /**
+   * @type {mugd.utils.guid}
+   */
+  this.tile = projectData.tileId;
 
   /**
    * @type {!z.common.Stockpile}
