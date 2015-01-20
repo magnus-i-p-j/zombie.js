@@ -38,7 +38,10 @@ z.client.facet.ActorFacet.prototype._update = function () {
   entityQuery.match = function(entity) {
     return entity.owner === actor.guid
       && entity.meta.category === z.common.rulebook.category.CHARACTER_TYPE
-      && !entity.assignedTo;
+      && !entity.assignedTo
+        // TODO: make state queries easier to not get wrong
+      && entity.getState() !== z.common.protocol.state.KILL
+      && entity.getState() !== z.common.protocol.state.DEAD;
   };
 
   this._entityQueryObservable(entityQuery);

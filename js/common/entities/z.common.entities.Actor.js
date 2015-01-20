@@ -11,7 +11,7 @@ goog.require('z.common.Stockpile');
 z.common.entities.Actor = function (services) {
   goog.base(this, services);
   this.name = null;
-  this.owner = this;
+  this.owner = this.guid;
 
   /**
    * @type {!z.common.data.ActorData}

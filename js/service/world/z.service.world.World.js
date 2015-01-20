@@ -273,11 +273,12 @@ z.service.world.World.prototype.tick = function() {
   this._entityRepository.cleanUp();
   this._endProjects();
 
+  this._consumeUpkeep();
   var killed = this._entityRepository.resetState();
   this._expandWorld();
+
   this._advanceProjects();
   this._endProjects();
-
 
   this._distributeZombies();
   this._advanceTime();
@@ -320,6 +321,25 @@ z.service.world.World.prototype._endProjects = function() {
     this._applyEffects(effects, project);
   }, this);
 
+};
+
+/**
+ * @private
+ */
+z.service.world.World.prototype._consumeUpkeep = function() {
+  var self = this;
+  self._entityRepository.map(function(entity) {
+    var owner = self._entityRepository.get(entity.owner);
+    var stockpile = owner.stockpile;
+    goog.object.forEach(entity.meta.upkeep, function(value, name) {
+      var taken = stockpile.take(name, value);
+      if (taken !== value) {
+        entity.setState(z.common.protocol.state.KILL);
+      }
+    });
+  }, function(entity) {
+    return entity.owner !== self._worldActor.guid;
+  });
 };
 
 /**

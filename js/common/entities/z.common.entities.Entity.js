@@ -8,7 +8,7 @@ goog.require('goog.events.EventTarget');
  * @implements mugd.injector.IInjectable
  * @constructor
  */
-z.common.entities.Entity = function (services) {
+z.common.entities.Entity = function(services) {
   goog.base(this);
   /**
    * @type {!z.common.data.EntityData}
@@ -53,15 +53,18 @@ goog.inherits(z.common.entities.Entity, goog.events.EventTarget);
 /**
  * @return {!z.common.protocol.state} state
  */
-z.common.entities.Entity.prototype.getState = function () {
+z.common.entities.Entity.prototype.getState = function() {
   return this._state;
 };
 
 /**
  * @param {!z.common.protocol.state} state
  */
-z.common.entities.Entity.prototype.setState = function (state) {
+z.common.entities.Entity.prototype.setState = function(state) {
   if (this._state !== state && this._state !== z.common.protocol.state.DEAD) {
+    if (this._state === z.common.protocol.state.KILL && z.common.protocol.state.DEAD !== state) {
+      console.log('Resurrected entity ', this);
+    }
     this._state = state;
   }
 };
@@ -69,7 +72,8 @@ z.common.entities.Entity.prototype.setState = function (state) {
 /**
  * @param guid {!mugd.utils.guid}
  */
-z.common.entities.Entity.prototype.entityKilled = function(guid) {};
+z.common.entities.Entity.prototype.entityKilled = function(guid) {
+};
 
 /**
  * @param {z.common.data.EntityData} entityData
@@ -77,7 +81,7 @@ z.common.entities.Entity.prototype.entityKilled = function(guid) {};
  * @param {z.common.entities.Actor} owner
  * @return {boolean}
  */
-z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
+z.common.entities.Entity.prototype.update = function(entityData, meta, owner) {
   var updated = false;
 
   if (entityData) {
@@ -88,7 +92,7 @@ z.common.entities.Entity.prototype.update = function (entityData, meta, owner) {
     }
   }
 
-  if(owner && owner.guid !== this.owner){
+  if (owner && owner.guid !== this.owner) {
     this.owner = owner.guid;
     updated = true;
   }
@@ -113,7 +117,7 @@ z.common.entities.Entity.prototype._dispatchModified = function() {
 /**
  * @protected
  */
-z.common.entities.Entity.prototype._setModified = function () {
+z.common.entities.Entity.prototype._setModified = function() {
   if (this.getState() === z.common.protocol.state.PASS) {
     this._state = z.common.protocol.state.MODIFIED;
   }
@@ -128,8 +132,11 @@ z.common.entities.Entity.prototype._setModified = function () {
  * @return {boolean}
  * @protected
  */
-z.common.entities.Entity.prototype._update = function (entityData, meta, owner) {
-  throw {'name': 'NotImplementedException', 'message': 'update'};
+z.common.entities.Entity.prototype._update = function(entityData, meta, owner) {
+  throw {
+    'name': 'NotImplementedException',
+    'message': 'update'
+  };
 };
 
 
