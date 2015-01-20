@@ -295,6 +295,27 @@
                         "href": "game://terrain/{@}"
                       }
                     },
+                    "effect_cull_zombies": {
+                      "title": "Cull zombies",
+                      "description": "The effectiveness of the cull",
+                      "type": "object",
+                      "required": [
+                        "skill",
+                        "magnitude"
+                      ],
+                      "properties": {
+                        "skill": {
+                          "title": "Skill",
+                          "description": "How skilled the cull is",
+                          "type": "number"
+                        },
+                        "magnitude": {
+                          "title": "Magnitude",
+                          "description": "The number culled automatically",
+                          "type": "number"
+                        }
+                      }
+                    },
                     "effect_end": {
                       "title": "End project",
                       "description": "End the project",

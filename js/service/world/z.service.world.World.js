@@ -350,6 +350,7 @@ z.service.world.World.prototype._advanceProjects = function() {
 };
 
 z.service.world.World.prototype._advanceProject = function(project) {
+
   /**
    * @type {!z.common.entities.Actor}
    */
@@ -442,7 +443,6 @@ z.service.world.World.prototype['_apply_effect_terrain'] = function(effect, proj
  * @param {z.common.entities.Project} project
  */
 z.service.world.World.prototype['_apply_effect_cull_zombies'] = function(effect, project) {
-  // TODO: continue and add to ruleset
   var tile = /** @type {!z.common.entities.Tile} */ this._entityRepository.get(project.tile);
   var isAssignedTo = function(entity) {
     if (entity instanceof z.common.entities.Character) {
