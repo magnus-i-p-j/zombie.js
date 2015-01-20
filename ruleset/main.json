@@ -1,95 +1,93 @@
-{
-  "terrain": [
-    {
-      "type": "field",
-      "name": "Field",
-      "description": "A patch of land where some beets are growing.",
-      "zone": "content",
-      "image": "field",
-      "activity": 0,
-      "defence": 0
-    },
-    {
-      "type": "water",
-      "name": "Water",
-      "description": "A patch of blue water, untouched by the zombie apocalypse.",
-      "zone": "base",
-      "image": "water",
-      "activity": -10,
-      "defence": 0
-    },
-    {
-      "type": "house",
-      "name": "House",
-      "description": "A house someone used to live in. Now they're still living in it...",
-      "zone": "content",
-      "image": "house",
-      "activity": 0,
-      "defence": 2
-    },
-    {
-      "type": "grass",
-      "name": "Grass",
-      "description": "Some grass with only a few zombie bits.",
-      "zone": "base",
-      "image": "grass",
-      "activity": 0,
-      "defence": 0
-    },
-    {
-      "type": "fence",
-      "name": "Fence",
-      "description": "A rickety fence, suitable for delaying zombies while you leg it.",
-      "zone": "perimeter",
-      "image": "fence",
-      "activity": 0,
-      "defence": 20
-    },
-    {
-      "type": "beet_field",
-      "name": "Beet field",
-      "description": "A field of ripening beets",
-      "zone": "content",
-      "image": "field",
-      "activity": 0,
-      "defence": 0
-    },
-    {
-      "type": "beet_field_ripe",
-      "name": "Ripe beet field",
-      "description": "A field of ripe beets. Yum...",
-      "zone": "content",
-      "image": "field",
-      "activity": 0,
-      "defence": 0
-    },
-    {
-      "type": "well",
-      "name": "Well",
-      "description": "Well, it's a hole with water in. Close enough.",
-      "zone": "content",
-      "image": "water",
-      "activity": 5,
-      "defence": 0
-    }
-  ],
-  "zone": [
-    {
-      "type": "content",
-      "name": "Content",
-      "description": "Inner parts of tile"
-    },
-    {
-      "type": "perimeter",
-      "name": "Perimeter",
-      "description": "The stuff around the tile"
-    },
-    {
-      "type": "base",
-      "name": "Base",
-      "description": "The stuff the tile is made of"
-    }
-  ], "season": [
+{"terrain": [
+  {
+    "type": "field",
+    "name": "Field",
+    "description": "A patch of land where some beets are growing.",
+    "zone": "content",
+    "image": "field",
+    "activity": 0,
+    "defence": 0
+  },
+  {
+    "type": "water",
+    "name": "Water",
+    "description": "A patch of blue water, untouched by the zombie apocalypse.",
+    "zone": "base",
+    "image": "water",
+    "activity": -10,
+    "defence": 0
+  },
+  {
+    "type": "house",
+    "name": "House",
+    "description": "A house someone used to live in. Now they're still living in it...",
+    "zone": "content",
+    "image": "house",
+    "activity": 0,
+    "defence": 2
+  },
+  {
+    "type": "grass",
+    "name": "Grass",
+    "description": "Some grass with only a few zombie bits.",
+    "zone": "base",
+    "image": "grass",
+    "activity": 0,
+    "defence": 0
+  },
+  {
+    "type": "fence",
+    "name": "Fence",
+    "description": "A rickety fence, suitable for delaying zombies while you leg it.",
+    "zone": "perimeter",
+    "image": "fence",
+    "activity": 0,
+    "defence": 20
+  },
+  {
+    "type": "beet_field",
+    "name": "Beet field",
+    "description": "A field of ripening beets",
+    "zone": "content",
+    "image": "field",
+    "activity": 0,
+    "defence": 0
+  },
+  {
+    "type": "beet_field_ripe",
+    "name": "Ripe beet field",
+    "description": "A field of ripe beets. Yum...",
+    "zone": "content",
+    "image": "field",
+    "activity": 0,
+    "defence": 0
+  },
+  {
+    "type": "well",
+    "name": "Well",
+    "description": "Well, it's a hole with water in. Close enough.",
+    "zone": "content",
+    "image": "water",
+    "activity": 5,
+    "defence": 0
+  }
+], "zone": [
+  {
+    "type": "content",
+    "name": "Content",
+    "description": "Inner parts of tile"
+  },
+  {
+    "type": "perimeter",
+    "name": "Perimeter",
+    "description": "The stuff around the tile"
+  },
+  {
+    "type": "base",
+    "name": "Base",
+    "description": "The stuff the tile is made of"
+  }
+], "season": [
   {
     "type": "winter",
     "name": "Winter",
@@ -505,6 +503,12 @@
         "type": "welder",
         "probability": 1
       }
+    ],
+    "upkeep": [
+      {
+        "type": "food",
+        "amount": 1
+      }
     ]
   },
   {
@@ -522,6 +526,12 @@
         "type": "farmer",
         "probability": 1
       }
+    ],
+    "upkeep": [
+      {
+        "type": "food",
+        "amount": 1
+      }
     ]
   },
   {
@@ -534,7 +544,13 @@
       "knowledge": 8,
       "labour": 8
     },
-    "traits": []
+    "traits": [],
+    "upkeep": [
+      {
+        "type": "food",
+        "amount": 1
+      }
+    ]
   },
   {
     "type": "archetype_ordinary",
@@ -546,7 +562,13 @@
       "knowledge": 10,
       "labour": 10
     },
-    "traits": []
+    "traits": [],
+    "upkeep": [
+      {
+        "type": "food",
+        "amount": 1
+      }
+    ]
   }
 ], "trait": [
   {
@@ -1423,6 +1445,10 @@
     {
       "type": "scrap",
       "amount": 5
+    },
+    {
+      "type": "food",
+      "amount": 40
     }
   ],
   "year": ["autumn", "winter", "spring", "summer"]
