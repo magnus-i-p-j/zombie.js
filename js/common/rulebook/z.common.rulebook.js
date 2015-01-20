@@ -6,7 +6,8 @@ goog.provide('z.common.rulebook.logic');
  *   type: string,
  *   category: z.common.rulebook.category,
  *   name: string,
- *   description: string
+ *   description: string,
+ *   upkeep: z.common.rulebook.upkeep_stockpile
  * }}
  */
 z.common.rulebook.meta;
@@ -17,6 +18,7 @@ z.common.rulebook.meta;
  *   category: z.common.rulebook.category,
  *   name: string,
  *   description: string,
+ *   upkeep: z.common.rulebook.upkeep_stockpile,
  *   prerequisites: z.common.rulebook.prerequisites,
  *   cost: z.common.rulebook.cost,
  *   activity: number,
@@ -31,6 +33,7 @@ z.common.rulebook.project;
  *   category: z.common.rulebook.category,
  *   name: string,
  *   description: string,
+ *   upkeep: z.common.rulebook.upkeep_stockpile,
  *   activity: number,
  *   defence: number,
  *   zone: string
@@ -59,6 +62,7 @@ z.common.rulebook.cost;
  *   category: z.common.rulebook.category,
  *   name: string,
  *   description: string,
+ *   upkeep: z.common.rulebook.upkeep_stockpile,
  *   frequency: number,
  *   stats : z.common.rulebook.stats,
  *   traits: Array.<string>
@@ -104,6 +108,11 @@ z.common.rulebook.result;
  * }>}
  */
 z.common.rulebook.effect_stockpile;
+
+/**
+ * @typedef {Object.<string, number>}
+ */
+z.common.rulebook.upkeep;
 
 /**
  * @typedef {string}

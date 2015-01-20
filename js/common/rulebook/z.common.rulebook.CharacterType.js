@@ -6,7 +6,7 @@ goog.require('z.common.rulebook');
  * @param {z.common.rulebook.meta} meta
  * @constructor
  */
-z.common.rulebook.CharacterType = function(meta){
+z.common.rulebook.CharacterType = function(meta) {
   /**
    * @type {z.common.rulebook.meta}
    * @private
@@ -28,5 +28,14 @@ z.common.rulebook.CharacterType = function(meta){
    * @type {string}
    */
   this.description = this._meta.description;
+
+  /**
+   * @type {z.common.rulebook.upkeep}
+   */
+  this.upkeep = {};
+
+  goog.array.forEach(this._meta.upkeep, function(resourceDesc) {
+    this.upkeep[resourceDesc['type']] = resourceDesc['amount'];
+  }, this);
 
 };

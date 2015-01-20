@@ -540,8 +540,7 @@
           "description",
           "stats",
           "traits",
-          "frequency",
-          "upkeep"
+          "frequency"
         ],
         "properties": {
           "type": {
@@ -616,37 +615,6 @@
                   "description": "The chance that the character starts with this trait.",
                   "type": "number",
                   "format": "probability"
-                }
-              }
-            }
-          },
-          "upkeep":
-          {
-            "type": "array",
-            "title": "Upkeep",
-            "description": "Resources needed to keep alive",
-            "items": {
-              "title": "Resource",
-              "description": "One of the required resources",
-              "type": "object",
-              "required": [
-                "type",
-                "amount"
-              ],
-              "properties": {
-                "type": {
-                  "title": "Resource",
-                  "description": "The required resource",
-                  "type": "string",
-                  "links": {
-                    "rel": "full",
-                    "href": "game://stockpile/{@}"
-                  }
-                },
-                "amount": {
-                  "title": "Amount",
-                  "description": "The amount required",
-                  "type": "number"
                 }
               }
             }
@@ -748,7 +716,8 @@
         "required": [
           "type",
           "name",
-          "description"
+          "description",
+          "upkeep"
         ],
         "properties": {
           "type": {
@@ -764,6 +733,36 @@
             "title": "Description",
             "description": "Describes the type",
             "type": "string"
+          },
+          "upkeep": {
+            "type": "array",
+            "title": "Upkeep",
+            "description": "Resources needed to keep alive",
+            "items": {
+              "title": "Resource",
+              "description": "One of the required resources",
+              "type": "object",
+              "required": [
+                "type",
+                "amount"
+              ],
+              "properties": {
+                "type": {
+                  "title": "Resource",
+                  "description": "The required resource",
+                  "type": "string",
+                  "links": {
+                    "rel": "full",
+                    "href": "game://stockpile/{@}"
+                  }
+                },
+                "amount": {
+                  "title": "Amount",
+                  "description": "The amount required",
+                  "type": "number"
+                }
+              }
+            }
           }
         },
         "links": {

@@ -36,6 +36,11 @@ z.common.rulebook.Project = function(project) {
   this.description = this._project.description;
 
   /**
+   * @type {z.common.rulebook.upkeep}
+   */
+  this.upkeep = {};
+
+  /**
    * @type {number}
    */
   this.activity = this._project.activity;

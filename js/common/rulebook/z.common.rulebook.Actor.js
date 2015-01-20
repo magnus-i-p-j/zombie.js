@@ -29,4 +29,8 @@ z.common.rulebook.Actor = function(meta){
    */
   this.description = this._meta.description;
 
+  /**
+   * @type {z.common.rulebook.upkeep}
+   */
+  this.upkeep = {};
 };
