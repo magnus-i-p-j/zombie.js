@@ -806,7 +806,8 @@
       "type": "object",
       "required": [
         "starting_resources",
-        "year"
+        "year",
+        "game_over"
       ],
       "properties": {
         "starting_resources": {
@@ -833,6 +834,66 @@
               "amount": {
                 "title": "Amount",
                 "type": "number"
+              }
+            }
+          }
+        },
+        "game_over": {
+          "type": "array",
+          "title": "Game over",
+          "description": "Game over conditions",
+          "items": {
+            "title": "Trigger",
+            "description": "A trigger",
+            "type": "object",
+            "required": [
+              "predicate",
+              "effects"
+            ],
+            "properties": {
+              "predicate": {
+                "title": "Predicate",
+                "description": "The predicate for the trigger",
+                "required": ["type"],
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "title": "Predicate type",
+                    "description": "The type of predicate",
+                    "type": "string",
+                    "enum": [
+                      "people",
+                      "time"
+                    ]
+                  },
+                  "min": {
+                    "title": "Minimum",
+                    "description": "Minimum required for trigger",
+                    "type": "number"
+                  },
+                  "max": {
+                    "title": "Maximum",
+                    "description": "Maximum required for trigger",
+                    "type": "number"
+                  }
+                }
+              },
+              "effects": {
+                "title": "Effects",
+                "description": "The effect this ending has",
+                "type": "object",
+                "required": ["effect_end"],
+                "properties": {
+                  "effect_end": {
+                    "title": "End game",
+                    "description": "End the game in victory or loss",
+                    "type": "string",
+                    "enum": [
+                      "victory",
+                      "defeat"
+                    ]
+                  }
+                }
               }
             }
           }

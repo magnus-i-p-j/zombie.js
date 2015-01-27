@@ -1433,6 +1433,22 @@
         "amount": 40
       }
     ],
+    "game_over": [
+      {
+        "predicate": {
+          "type": "people",
+          "max": 4
+        },
+        "effects": {"effect_end": "defeat"}
+      },
+      {
+        "predicate": {
+          "type": "time",
+          "min": 40
+        },
+        "effects": {"effect_end": "victory"}
+      }
+    ],
     "year": [
       "autumn",
       "winter",
