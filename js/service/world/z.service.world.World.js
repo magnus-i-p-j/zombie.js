@@ -284,6 +284,10 @@ z.service.world.World.prototype.tick = function() {
   this._advanceTime();
 
   //Special events
+  var globalEffects = [];
+
+  globalEffects = globalEffects.concat(this._checkGameOver());
+
   this._entityRepository.cleanUp();
   return killed;
 };
@@ -303,6 +307,12 @@ z.service.world.World.prototype._advanceTime = function() {
   this._turn += 1;
   var year = this._rulebook.year;
   this._season = year[(this._turn - 1) % year.length];
+};
+
+z.service.world.World.prototype._checkGameOver = function() {
+
+
+
 };
 
 z.service.world.World.prototype._endProjects = function() {

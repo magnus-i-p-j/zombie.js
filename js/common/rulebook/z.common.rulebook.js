@@ -172,7 +172,9 @@ z.common.rulebook.predicate_type = {
   COMPLETE: 'complete',
   END: 'end',
   SEASON: 'season',
-  DURATION: 'duration'
+  DURATION: 'duration',
+  PEOPLE: 'people',
+  TIME: 'time'
 };
 
 
@@ -181,7 +183,9 @@ z.common.rulebook.predicate_type = {
  *   duration: ?number,
  *   complete: ?boolean,
  *   end: ?boolean,
- *   season: ?string
+ *   season: ?string,
+ *   people: ?number,
+ *   turn: ?number
  * }}
  */
 z.common.rulebook.trigger_args;
@@ -195,14 +199,21 @@ z.common.rulebook.category = {
   ZONE: 'zone',
   ACTOR: 'actor',
   STOCKPILE: 'stockpile',
-  STARTING_RESOURCES: 'starting_resources',
   ACTION: 'action',
   BOUNDS: 'bounds',
   TILE: 'tile',
   ARCHETYPE: 'archetype',
   CHARACTER: 'character',
   CHARACTER_TYPE: 'character_type',
-  TRAIT: 'trait'
+  TRAIT: 'trait',
+};
+/**
+ * @enum {string}
+ */
+z.common.rulebook.bounds = {
+  GAME_OVER: 'game_over',
+  STARTING_RESOURCES: 'starting_resources',
+  YEAR: 'year'
 };
 
 //noinspection JSUnusedLocalSymbols
@@ -266,4 +277,28 @@ z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.DURATION] = 
  */
 z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.SEASON] = function(triggerArgs, predicate) {
   return triggerArgs['season'] === predicate.season;
+};
+
+/**
+ * @param triggerArgs {!z.common.rulebook.trigger_args}
+ * @param predicate {!z.common.rulebook.predicate}
+ * @returns {boolean}
+ */
+z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.PEOPLE] = function(triggerArgs, predicate) {
+  var people = triggerArgs['people'];
+  var min = goog.isDefAndNotNull(predicate['min']) ? predicate['min'] : Number.NEGATIVE_INFINITY;
+  var max = goog.isDefAndNotNull(predicate['max']) ? predicate['max'] : Number.POSITIVE_INFINITY;
+  return (people >= min ) && ( people <= max ) ;
+};
+
+/**
+ * @param triggerArgs {!z.common.rulebook.trigger_args}
+ * @param predicate {!z.common.rulebook.predicate}
+ * @returns {boolean}
+ */
+z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.TIME] = function(triggerArgs, predicate) {
+  var turn = triggerArgs['turn'];
+  var min = goog.isDefAndNotNull(predicate['min']) ? predicate['min'] : Number.NEGATIVE_INFINITY;
+  var max = goog.isDefAndNotNull(predicate['max']) ? predicate['max'] : Number.POSITIVE_INFINITY;
+  return (turn >= min ) && ( turn <= max ) ;
 };

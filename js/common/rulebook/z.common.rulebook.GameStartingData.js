@@ -10,7 +10,7 @@ z.common.rulebook.GameStartingData = function (ruleset) {
   this.startingResources = {};
 
   var bounds = ruleset[z.common.rulebook.category.BOUNDS];
-  var startingResource = bounds[z.common.rulebook.category.STARTING_RESOURCES];
+  var startingResource = bounds[z.common.rulebook.bounds.STARTING_RESOURCES];
   goog.array.forEach(startingResource, function (resource) {
     this.startingResources[resource['type']] = resource['amount'];
   }, this);
