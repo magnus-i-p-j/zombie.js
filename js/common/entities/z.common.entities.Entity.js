@@ -70,6 +70,15 @@ z.common.entities.Entity.prototype.setState = function(state) {
 };
 
 /**
+ * @returns {boolean}
+ */
+z.common.entities.Entity.prototype.isAlive = function() {
+  var state = this.getState();
+  return !(state === z.common.protocol.state.KILL ||
+    state === z.common.protocol.state.DEAD);
+};
+
+/**
  * @param guid {!mugd.utils.guid}
  */
 z.common.entities.Entity.prototype.entityKilled = function(guid) {

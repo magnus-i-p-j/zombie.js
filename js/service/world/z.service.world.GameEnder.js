@@ -22,9 +22,9 @@ z.service.world.GameEnder = function(services) {
     return new z.common.rulebook.Trigger(trigger);
   });
 
-}
+};
 
-z.service.world.GameEnder.prototype = function(triggerArgs) {
+z.service.world.GameEnder.prototype.getEffects = function(triggerArgs) {
   return goog.array.flatten(
     goog.array.map(
       this.triggers, function(trigger) {
@@ -36,4 +36,4 @@ z.service.world.GameEnder.prototype = function(triggerArgs) {
       }
     )
   );
-}
+};

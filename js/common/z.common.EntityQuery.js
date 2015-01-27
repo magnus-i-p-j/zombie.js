@@ -14,6 +14,12 @@ z.common.EntityQuery = function () {
    * @type {?z.common.rulebook.category}
    */
   this.category = null;
+
+  //TODO: Assume alive is true instead
+  /**
+   * @type {boolean}
+   */
+  this.alive = false;
 };
 
 /**
@@ -21,16 +27,19 @@ z.common.EntityQuery = function () {
  * @return {boolean}
  */
 z.common.EntityQuery.prototype.match = function (entity) {
-  if (this.owner && !entity.owner) {
+  if (this.alive && !entity.isAlive()) {
     return false;
-  }else if (this.owner && entity.owner !== this.owner) {
+  } else if (this.owner && !entity.owner) {
     return false;
-  }else if (this.category && entity.meta.category !== this.category) {
+  } else if (this.owner && entity.owner !== this.owner) {
+    return false;
+  } else if (this.category && entity.meta.category !== this.category) {
     return false;
   } else {
     return true;
   }
 };
+
 
 /**
  * @return {!z.common.EntityEmptyQuery}

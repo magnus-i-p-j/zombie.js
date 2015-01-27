@@ -1439,14 +1439,14 @@
           "type": "people",
           "max": 4
         },
-        "effects": {"effect_end": "defeat"}
+        "effects": {"effect_game_over": "defeat"}
       },
       {
         "predicate": {
           "type": "time",
-          "min": 40
+          "min": 4
         },
-        "effects": {"effect_end": "victory"}
+        "effects": {"effect_game_over": "victory"}
       }
     ],
     "year": [

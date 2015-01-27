@@ -9,6 +9,7 @@ goog.require('z.common.rulebook');
 goog.require('z.common.protocol');
 goog.require('z.common.EntityRepository');
 goog.require('goog.array');
+goog.require('goog.object');
 goog.require('mugd.utils.SimplexNoise');
 goog.require('z.common.EntityQuery');
 goog.require('z.service.world.ZombieDistributor');
@@ -76,6 +77,8 @@ z.service.world.World = function(services) {
    * @private
    */
   this._actorCallbacks = {};
+
+  this._gameEnder = /** @type {!z.service.world.GameEnder} */ services.get(z.service.Resources.GAME_ENDER);
 };
 
 /**
@@ -283,10 +286,10 @@ z.service.world.World.prototype.tick = function() {
   this._distributeZombies();
   this._advanceTime();
 
-  //Special events
-  var globalEffects = [];
-
-  globalEffects = globalEffects.concat(this._checkGameOver());
+  goog.object.forEach(this._playerActors, function(actor) {
+    var effects = this._checkGameOver(actor);
+    this._applyEffects(effects, actor);
+  }, this);
 
   this._entityRepository.cleanUp();
   return killed;
@@ -309,10 +312,15 @@ z.service.world.World.prototype._advanceTime = function() {
   this._season = year[(this._turn - 1) % year.length];
 };
 
-z.service.world.World.prototype._checkGameOver = function() {
-
-
-
+z.service.world.World.prototype._checkGameOver = function(actor) {
+  var query = new z.common.EntityQuery();
+  query.owner = actor.guid;
+  var people = this._entityRepository.filter(query);
+  var triggerArgs = {
+    'turn': this._turn,
+    'people': people.length
+  };
+  return this._gameEnder.getEffects(triggerArgs);
 };
 
 z.service.world.World.prototype._endProjects = function() {
@@ -428,15 +436,15 @@ z.service.world.World.prototype._advanceProject = function(project) {
 
 /**
  * @param {Array.<z.common.rulebook.effect>} effects
- * @param {z.common.entities.Project} project
+ * @param {z.common.entities.Entity} entity
  * @returns {Array.<z.common.rulebook.result>}
  * @private
  */
-z.service.world.World.prototype._applyEffects = function(effects, project) {
+z.service.world.World.prototype._applyEffects = function(effects, entity) {
   var results = goog.array.map(
     effects,
     function(effect) {
-      return this['_apply_' + effect['type']](effect['args'], project);
+      return this['_apply_' + effect['type']](effect['args'], entity);
     },
     this
   );
@@ -505,6 +513,19 @@ z.service.world.World.prototype['_apply_effect_end'] = function(effect, project)
     project.setState(z.common.protocol.state.KILL);
   }
 };
+
+/**
+ * @param {z.common.entities.Actor} actor
+ */
+z.service.world.World.prototype['_apply_effect_game_over'] = function(effect, actor) {
+  //TODO: Actually do something after a loss/win
+  if (effect === 'victory') {
+    console.log('Victory!');
+  }else {
+    console.log('Defeat!');
+  }
+};
+
 
 /**
  * @private

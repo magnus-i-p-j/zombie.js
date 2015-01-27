@@ -122,6 +122,12 @@ z.common.rulebook.effect_terrain;
  * @typedef {bool}
  */
 z.common.rulebook.effect_end;
+
+/**
+ * @typedef {string}
+ */
+z.common.rulebook.effect_game_over;
+
 /**
  * @typedef {{
  *   magnitude: ?number,
@@ -205,7 +211,7 @@ z.common.rulebook.category = {
   ARCHETYPE: 'archetype',
   CHARACTER: 'character',
   CHARACTER_TYPE: 'character_type',
-  TRAIT: 'trait',
+  TRAIT: 'trait'
 };
 /**
  * @enum {string}

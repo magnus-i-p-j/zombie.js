@@ -6,6 +6,7 @@ goog.require('goog.functions');
 goog.require('z.common.events');
 goog.require('z.common.events.EntityCreated');
 goog.require('z.common.events.EntityModified');
+goog.require('z.common.EntityQuery');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -98,14 +99,16 @@ z.common.EntityRepository.prototype.cleanUp = function(){
 
 /**
  * @param {function(!z.common.entities.Entity):*} action
- * @param {(function(!z.common.entities.Entity):boolean)=} filter
+ * @param {(function(!z.common.entities.Entity):boolean|z.common.EntityQuery)=} filter
  * @return {!Array}
  */
 z.common.EntityRepository.prototype.map = function (action, filter) {
-  // TODO: Allow direct use of EntityQuery
   if (!goog.isDef(filter)) {
     filter = goog.functions.TRUE;
+  }else if(filter instanceof z.common.EntityQuery) {
+    filter = filter.match.bind(filter);
   }
+
   var result = [];
   for (var i in this._repo) {
     if (this._repo.hasOwnProperty(i)) {
@@ -122,7 +125,7 @@ z.common.EntityRepository.prototype.map = function (action, filter) {
 };
 
 /**
- * @param {(function(!z.common.entities.Entity):boolean)=} filter
+ * @param {(function(!z.common.entities.Entity):boolean|z.common.EntityQuery)=} filter
  * @return {!Array}
  */
 z.common.EntityRepository.prototype.filter = function (filter) {
