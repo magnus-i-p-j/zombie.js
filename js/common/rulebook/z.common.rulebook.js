@@ -93,15 +93,6 @@ z.common.rulebook.year;
 z.common.rulebook.effect;
 
 /**
- * @typedef {{
- *   type: string,
- *   change: *
- * }}
- */
-z.common.rulebook.result;
-
-
-/**
  * @typedef {Array.<{
  *   type: string,
  *   magnitude: number
@@ -118,6 +109,7 @@ z.common.rulebook.upkeep;
  * @typedef {string}
  */
 z.common.rulebook.effect_terrain;
+
 /**
  * @typedef {bool}
  */
@@ -135,6 +127,51 @@ z.common.rulebook.effect_game_over;
  * }}
  */
 z.common.rulebook.effect_cull_zombies;
+
+
+/**
+ * @typedef {Object.<string, number>}
+ */
+z.common.rulebook.result_effect_stockpile;
+
+/**
+ * @typedef {string}
+ */
+z.common.rulebook.result_effect_terrain;
+
+/**
+ * @typedef {bool}
+ */
+z.common.rulebook.result_effect_end;
+
+/**
+ * @typedef {string}
+ */
+z.common.rulebook.result_effect_game_over;
+
+/**
+ * @typedef {number}
+ */
+z.common.rulebook.result_effect_cull_zombies;
+
+/**
+ * @typedef {string}
+ */
+z.common.rulebook.result_effect_message;
+
+/**
+ * @typedef{{
+ *  entity: mugd.utils.guid,
+ *  level: string,
+ *  effect_stockpile: z.common.rulebook.result_effect_stockpile,
+ *  effect_terrain: z.common.rulebook.result_effect_terrain,
+ *  effect_end: z.common.rulebook.result_effect_end,
+ *  effect_game_over: z.common.rulebook.result_effect_game_over,
+ *  effect_cull_zombies: z.common.rulebook.result_effect_cull_zombies,
+ *  effect_message: z.common.rulebook.result_effect_message
+ * }}
+ */
+z.common.rulebook.effect_result;
 
 /**
  * @typedef {{

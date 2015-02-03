@@ -439,35 +439,43 @@ z.service.world.World.prototype._advanceProject = function(project) {
 /**
  * @param {Array.<z.common.rulebook.effect>} effects
  * @param {z.common.entities.Entity} entity
- * @returns {Array.<z.common.rulebook.result>}
+ * @returns {z.common.rulebook.effect_result}
  * @private
  */
 z.service.world.World.prototype._applyEffects = function(effects, entity) {
-  var results = goog.array.map(
+  /**
+   * @type {z.common.rulebook.effect_result}
+   */
+  var result = /** @type {z.common.rulebook.effect_result}*/ {};
+  goog.array.forEach(
     effects,
     function(effect) {
-      return this['_apply_' + effect['type']](effect['args'], entity);
+      result[effect['type']] =  this['_apply_' + effect['type']](effect['args'], entity);
     },
     this
   );
-  return results;
+  return result;
 };
 
 /**
- *
  * @param {z.common.rulebook.effect_stockpile} effect
  * @param {z.common.entities.Project} project
+ * @return {z.common.rulebook.result_effect_stockpile}
  */
 z.service.world.World.prototype['_apply_effect_stockpile'] = function(effect, project) {
   var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
+  var result = {};
   goog.array.forEach(effect, function(resource) {
     owner.stockpile.add(resource['type'], resource['magnitude']);
+    result[resource['type']] = resource['magnitude'];
   }, this);
+  return result;
 };
 
 /**
  * @param {z.common.rulebook.effect_terrain} effect
  * @param {z.common.entities.Project} project
+ * @return {z.common.rulebook.result_effect_terrain}
  */
 z.service.world.World.prototype['_apply_effect_terrain'] = function(effect, project) {
   var tile = /** @type {!z.common.entities.Tile}*/ this._entityRepository.get(project.tile);
@@ -476,11 +484,13 @@ z.service.world.World.prototype['_apply_effect_terrain'] = function(effect, proj
   tileData.terrain = /** @type {z.common.terrain} */ goog.object.unsafeClone(tileData.terrain);
   tileData.terrain[terrainMeta.zone] = effect;
   this._entityRepository.put(tileData);
+  return effect;
 };
 
 /**
  * @param {z.common.rulebook.effect_cull_zombies} effect
  * @param {z.common.entities.Project} project
+ * @return {z.common.rulebook.result_effect_cull_zombies}
  */
 z.service.world.World.prototype['_apply_effect_cull_zombies'] = function(effect, project) {
   var tile = /** @type {!z.common.entities.Tile} */ this._entityRepository.get(project.tile);
@@ -504,20 +514,24 @@ z.service.world.World.prototype['_apply_effect_cull_zombies'] = function(effect,
   var magnitude = -1 * (totalCombat * effect.skill + effect.magnitude);
   tile.addZombieDensity(magnitude);
 
+  return magnitude;
 };
 
 /**
  * @param {z.common.rulebook.effect_end} effect
  * @param {z.common.entities.Project} project
+ * @return {z.common.rulebook.result_effect_end}
  */
 z.service.world.World.prototype['_apply_effect_end'] = function(effect, project) {
   if (effect) {
     project.setState(z.common.protocol.state.KILL);
   }
+  return effect;
 };
 
 /**
  * @param {z.common.entities.Actor} actor
+ * @return {z.common.rulebook.result_effect_game_over}
  */
 z.service.world.World.prototype['_apply_effect_game_over'] = function(effect, actor) {
   //TODO: Actually do something after a loss/win
@@ -526,14 +540,17 @@ z.service.world.World.prototype['_apply_effect_game_over'] = function(effect, ac
   }else {
     console.log('Defeat!');
   }
+  return effect;
 };
 
 /**
  * @param {z.common.entities.Actor} actor
+ * @return {z.common.rulebook.result_effect_message}
  */
 z.service.world.World.prototype['_apply_effect_message'] = function(effect, actor) {
   //TODO: Actually show message
   console.log(effect, actor);
+  return effect;
 };
 
 
