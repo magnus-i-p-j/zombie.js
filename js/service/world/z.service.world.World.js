@@ -528,6 +528,14 @@ z.service.world.World.prototype['_apply_effect_game_over'] = function(effect, ac
   }
 };
 
+/**
+ * @param {z.common.entities.Actor} actor
+ */
+z.service.world.World.prototype['_apply_effect_message'] = function(effect, actor) {
+  //TODO: Actually show message
+  console.log(effect, actor);
+};
+
 
 /**
  * @private

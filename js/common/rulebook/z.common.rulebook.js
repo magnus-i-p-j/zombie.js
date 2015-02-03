@@ -180,7 +180,7 @@ z.common.rulebook.predicate_type = {
   SEASON: 'season',
   DURATION: 'duration',
   PEOPLE: 'people',
-  TIME: 'time'
+  TURN: 'turn'
 };
 
 
@@ -302,7 +302,7 @@ z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.PEOPLE] = fu
  * @param predicate {!z.common.rulebook.predicate}
  * @returns {boolean}
  */
-z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.TIME] = function(triggerArgs, predicate) {
+z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.TURN] = function(triggerArgs, predicate) {
   var turn = triggerArgs['turn'];
   var min = goog.isDefAndNotNull(predicate['min']) ? predicate['min'] : Number.NEGATIVE_INFINITY;
   var max = goog.isDefAndNotNull(predicate['max']) ? predicate['max'] : Number.POSITIVE_INFINITY;

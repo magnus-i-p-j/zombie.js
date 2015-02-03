@@ -3,7 +3,7 @@
     {
       "type": "field",
       "name": "Field",
-      "description": "A patch of land where some beets are growing.",
+      "description": "A patch of land where something can be planted.",
       "zone": "content",
       "image": "field",
       "activity": 0,
@@ -46,18 +46,18 @@
       "defence": 20
     },
     {
-      "type": "beet_field",
-      "name": "Beet field",
-      "description": "A field of ripening beets",
+      "type": "wheat_field",
+      "name": "Wheat field",
+      "description": "A field of ripening wheats",
       "zone": "content",
       "image": "field",
       "activity": 0,
       "defence": 0
     },
     {
-      "type": "beet_field_ripe",
-      "name": "Ripe beet field",
-      "description": "A field of ripe beets. Yum...",
+      "type": "wheat_field_ripe",
+      "name": "Ripe wheat field",
+      "description": "Unprocessed bread.",
       "zone": "content",
       "image": "field",
       "activity": 0,
@@ -124,7 +124,11 @@
           "predicate": {"type": "complete"},
           "effects": {
             "effect_terrain": "fence",
-            "effect_end": true
+            "effect_end": true,
+            "effect_message": {
+              "text": "text/project_complete",
+              "level": "usual"
+            }
           }
         }
       ],
@@ -143,69 +147,6 @@
           "combat": 5,
           "knowledge": 5,
           "labour": 15
-        },
-        "time": 0
-      }
-    },
-    {
-      "type": "build_beet_field",
-      "name": "Plant beets",
-      "description": "Plow a patch of land and plant some beets.",
-      "activity": 5,
-      "defence": 0,
-      "triggers": [
-        {
-          "predicate": {"type": "complete"},
-          "effects": {
-            "effect_terrain": "beet_field",
-            "effect_end": true
-          }
-        }
-      ],
-      "prerequisites": {
-        "terrain": ["field"],
-        "danger": 0
-      },
-      "cost": {
-        "work": {
-          "combat": 0,
-          "knowledge": 0,
-          "labour": 20
-        },
-        "time": 0
-      }
-    },
-    {
-      "type": "harvest_beet_field",
-      "name": "Harvest beet field",
-      "description": "Harvest a patch of land and get some beets.",
-      "activity": 6,
-      "defence": 0,
-      "triggers": [
-        {
-          "predicate": {"type": "complete"},
-          "effects": {
-            "effect_stockpile": [
-              {
-                "type": "food",
-                "magnitude": 20,
-                "variation": 5
-              }
-            ],
-            "effect_terrain": "field",
-            "effect_end": true
-          }
-        }
-      ],
-      "prerequisites": {
-        "terrain": [],
-        "danger": 0
-      },
-      "cost": {
-        "work": {
-          "combat": 0,
-          "knowledge": 0,
-          "labour": 20
         },
         "time": 0
       }
@@ -242,7 +183,11 @@
                 "variation": 15
               }
             ],
-            "effect_end": true
+            "effect_end": true,
+            "effect_message": {
+              "text": "text/project_complete",
+              "level": "usual"
+            }
           }
         }
       ],
@@ -267,7 +212,11 @@
           "predicate": {"type": "complete"},
           "effects": {
             "effect_terrain": "well",
-            "effect_end": true
+            "effect_end": true,
+            "effect_message": {
+              "text": "text/project_complete",
+              "level": "usual"
+            }
           }
         }
       ],
@@ -304,7 +253,11 @@
               "skill": 0.5,
               "magnitude": 1
             },
-            "effect_end": true
+            "effect_end": true,
+            "effect_message": {
+              "text": "text/project_complete",
+              "level": "usual"
+            }
           }
         }
       ],
@@ -316,31 +269,6 @@
           "labour": 0
         },
         "time": 1
-      }
-    },
-    {
-      "type": "trade",
-      "name": "Trade",
-      "description": "Trade thingamagigs for doodads.",
-      "activity": 13,
-      "defence": 0,
-      "triggers": [
-        {
-          "predicate": {"type": "complete"},
-          "effects": {"effect_end": true}
-        }
-      ],
-      "prerequisites": {
-        "terrain": ["house"],
-        "danger": 0
-      },
-      "cost": {
-        "work": {
-          "combat": 0,
-          "knowledge": 16,
-          "labour": 0
-        },
-        "time": 0
       }
     },
     {
@@ -360,7 +288,11 @@
                 "variation": 5
               }
             ],
-            "effect_end": true
+            "effect_end": true,
+            "effect_message": {
+              "text": "text/project_complete",
+              "level": "usual"
+            }
           }
         },
         {
@@ -375,7 +307,13 @@
             "type": "season",
             "season": "winter"
           },
-          "effects": {"effect_end": true}
+          "effects": {
+            "effect_end": true,
+            "effect_message": {
+              "text": "text/project_fail",
+              "level": "usual"
+            }
+          }
         },
         {
           "predicate": {
@@ -383,7 +321,7 @@
             "duration": 0
           },
           "effects": {
-            "effect_terrain": "beet_field",
+            "effect_terrain": "wheat_field",
             "effect_end": false
           }
         },
@@ -393,7 +331,7 @@
             "duration": 1
           },
           "effects": {
-            "effect_terrain": "beet_field_ripe",
+            "effect_terrain": "wheat_field_ripe",
             "effect_end": false
           }
         }
@@ -1439,14 +1377,26 @@
           "type": "people",
           "max": 4
         },
-        "effects": {"effect_game_over": "defeat"}
+        "effects": {
+          "effect_game_over": "defeat",
+          "effect_message": {
+            "text": "text/defeat",
+            "level": "important"
+          }
+        }
       },
       {
         "predicate": {
-          "type": "time",
+          "type": "turn",
           "min": 40
         },
-        "effects": {"effect_game_over": "victory"}
+        "effects": {
+          "effect_game_over": "victory",
+          "effect_message": {
+            "text": "text/victory",
+            "level": "important"
+          }
+        }
       }
     ],
     "year": [

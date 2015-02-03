@@ -60,7 +60,7 @@
     ]
   },
   {
-    "name": "beet_field",
+    "name": "wheat_field",
     "type": "single",
     "zone": "content",
     "textures": [
@@ -71,7 +71,7 @@
     ]
   },
   {
-    "name": "beet_field_ripe",
+    "name": "wheat_field_ripe",
     "type": "single",
     "zone": "content",
     "textures": [
