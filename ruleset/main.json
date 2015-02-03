@@ -1444,7 +1444,7 @@
       {
         "predicate": {
           "type": "time",
-          "min": 4
+          "min": 40
         },
         "effects": {"effect_game_over": "victory"}
       }

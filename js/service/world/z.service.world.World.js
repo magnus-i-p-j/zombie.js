@@ -315,6 +315,8 @@ z.service.world.World.prototype._advanceTime = function() {
 z.service.world.World.prototype._checkGameOver = function(actor) {
   var query = new z.common.EntityQuery();
   query.owner = actor.guid;
+  query.alive = true;
+  query.category = z.common.rulebook.category.CHARACTER_TYPE;
   var people = this._entityRepository.filter(query);
   var triggerArgs = {
     'turn': this._turn,
