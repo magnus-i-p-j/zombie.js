@@ -77,6 +77,8 @@ z.client.WorldProxy.prototype.doStartTurn = function(startTurnData) {
     }
   );
   this.dispatchEvent(e);
+
+  console.log(startTurnData.messages);
 };
 
 z.client.WorldProxy.prototype.endTurn = function() {
