@@ -8,3 +8,14 @@ z.common.messages.level = {
   IMPORTANT: 'important',
   TRIVIAL: 'trivial'
 };
+
+/**
+ * @enum {{
+ *   stockpile: Object.<string, number>,
+ *   terrain: ?string,
+ *   culled: ?number,
+ *   text: ?string,
+ *   level: z.common.messages.level
+ * }}
+ */
+z.common.messages.message;

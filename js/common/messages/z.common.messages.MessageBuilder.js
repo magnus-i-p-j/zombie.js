@@ -1,6 +1,7 @@
 goog.provide('z.common.messages.MessageBuilder');
 
 goog.require('goog.array');
+goog.require('goog.object');
 goog.require('z.common.messages');
 
 /**
@@ -10,53 +11,81 @@ goog.require('z.common.messages');
 z.common.messages.MessageBuilder = function(cause) {
   this.cause = cause;
   this.args = [];
+  this.stockpile = {};
+  this.terrain = null;
+  this.culled = null;
+  this.text = null;
+  this.level = z.common.messages.level.USUAL;
+  this._empty = true;
 };
 
 z.common.messages.MessageBuilder.prototype.addStockpileMessage = function(owner, type, amount) {
-  this.args.push({
-    owner: owner.guid,
-    type: type,
-    amount: amount
-  });
+  if (this.stockpile[type]) {
+    this.stockpile[type] = this.stockpile[type] + amount;
+  } else {
+    this.stockpile[type] = amount;
+  }
+  this._empty = false;
 };
 
 z.common.messages.MessageBuilder.prototype.addTerrainMessage = function(tile, terrain) {
-  this.args.push({
-    pos: tile.position,
-    terrain: terrain
-  });
+  this.terrain = terrain;
+  this._empty = false;
 };
 
 z.common.messages.MessageBuilder.prototype.addCullZombieMessage = function(tile, culled) {
-  this.args.push({
-    pos: tile.position,
-    culled: culled
-  });
+  this.culled = culled;
+  this._empty = false;
 };
 
 z.common.messages.MessageBuilder.prototype.addProjectEndedMessage = function(project) {
-  this.args.push('Project ended ' + project.name);
+  // pass
 };
 
 z.common.messages.MessageBuilder.prototype.addGameOverMessage = function(actor, won) {
-  if (won) {
-    this.args.push('You won');
-  } else {
-    this.args.push('You lost');
-  }
+  // pass
 };
 
 z.common.messages.MessageBuilder.prototype.addMessage = function(actor, message) {
-  this.args.push(message);
+  this.text = message;
+  this._empty = false;
 };
 
 /**
  * @param {z.common.messages.level} level
  */
 z.common.messages.MessageBuilder.prototype.setLevel = function(level) {
-  this.args.push(level);
+  this.level = level;
 };
 
+/**
+ * @returns {z.common.messages.message}
+ */
 z.common.messages.MessageBuilder.prototype.build = function() {
-  return JSON.stringify(this.args, null, 2);
+  var message = {
+    level: this.level
+  };
+
+  if (!goog.object.isEmpty(this.stockpile)) {
+    message.stockpile = this.stockpile;
+  }
+
+  if (this.terrain) {
+    message.terrain = this.terrain;
+  }
+  if (this.culled) {
+    message.culled = this.culled;
+  }
+  if (this.text) {
+    message.text = this.text;
+  }
+
+  return /** @type {z.common.messages.message} */ message;
+};
+
+/**
+ * @returns {boolean}
+ */
+z.common.messages.MessageBuilder.prototype.empty = function() {
+  return this._empty;
 };

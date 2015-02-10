@@ -207,11 +207,29 @@ z.service.world.World.prototype.endTurn = function() {
  * @param {mugd.utils.guid} actorGuid
  * @returns {!z.common.data.StartTurnData}
  */
-z.service.world.World.prototype.createStartTurnData = function(actorGuid, killed, messages) {
+z.service.world.World.prototype.createStartTurnData = function(actorGuid, killed, messageBuilders) {
   var tiles = this.getVisibleTiles();
   var visibleProjects = this.getVisibleProjects();
   var characters = this.getVisibleCharacters();
   var entities = [];
+  var messages = goog.array.map(
+    goog.array.filter(messageBuilders,
+      /**
+       * @param {z.common.messages.MessageBuilder} mb
+       * @returns {boolean}
+       */
+      function(mb) {
+        return !mb.empty();
+      }
+    ),
+    /**
+     * @param {z.common.messages.MessageBuilder} mb
+     * @returns {z.common.messages.message}
+     */
+    function(mb) {
+      return mb.build();
+    }
+  );
   goog.array.extend(entities, tiles, visibleProjects, characters);
   entities.push(z.common.data.ActorData.fromEntity(this._playerActors[actorGuid]));
   /**
@@ -288,8 +306,8 @@ z.service.world.World.prototype.tick = function() {
   this._expandWorld();
 
   var messages = [];
-  messages = goog.array.concat( messages, this._advanceProjects());
-  messages = goog.array.concat( messages, this._endProjects());
+  messages = goog.array.concat(messages, this._advanceProjects());
+  messages = goog.array.concat(messages, this._endProjects());
 
   this._distributeZombies();
   this._advanceTime();
@@ -298,12 +316,15 @@ z.service.world.World.prototype.tick = function() {
     var effects = this._checkGameOver(actor);
     var msg = new z.common.messages.MessageBuilder(actor);
     this._applyEffects(effects, actor, msg);
-    messages.push(msg.build());
+    messages.push(msg);
   }, this);
 
   this._entityRepository.cleanUp();
 
-  return {killed: killed, messages: messages};
+  return {
+    killed: killed,
+    messages: messages
+  };
 };
 
 /**
@@ -351,7 +372,7 @@ z.service.world.World.prototype._endProjects = function() {
     var msg = new z.common.messages.MessageBuilder(project);
     var effects = project.trigger(triggerParams);
     this._applyEffects(effects, project, msg);
-    return msg.build();
+    return msg;
   }, this);
 
   return messages;
@@ -397,7 +418,7 @@ z.service.world.World.prototype._advanceProjects = function() {
   var messages = goog.array.map(projects, function(project) {
     var msg = new z.common.messages.MessageBuilder(project);
     this._advanceProject(project, msg);
-    return msg.build();
+    return msg;
   }, this);
 
   return messages;
@@ -464,7 +485,7 @@ z.service.world.World.prototype._applyEffects = function(effects, entity, messag
   goog.array.forEach(
     effects,
     function(effect) {
-      result[effect['type']] =  this['_apply_' + effect['type']](effect['args'], entity, message);
+      result[effect['type']] = this['_apply_' + effect['type']](effect['args'], entity, message);
     },
     this
   );
@@ -549,7 +570,7 @@ z.service.world.World.prototype['_apply_effect_game_over'] = function(effect, ac
   //TODO: Actually do something after a loss/win
   if (effect === 'victory') {
     console.log('Victory!');
-  }else {
+  } else {
     console.log('Defeat!');
   }
   message.addGameOverMessage(actor, effect === 'victory');
@@ -561,7 +582,7 @@ z.service.world.World.prototype['_apply_effect_game_over'] = function(effect, ac
  * @param {z.common.messages.MessageBuilder} message
  */
 z.service.world.World.prototype['_apply_effect_message'] = function(effect, actor, message) {
-  message.addMessage(actor, effect);
+  message.addMessage(actor, effect.text);
   message.setLevel(effect.level);
 };
 
