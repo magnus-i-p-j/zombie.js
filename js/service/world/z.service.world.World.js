@@ -544,7 +544,7 @@ z.service.world.World.prototype['_apply_effect_cull_zombies'] = function(effect,
 
   var totalCombat = goog.array.reduce(this._entityRepository.map(getCombat, isAssignedTo), add, 0, this);
 
-  var magnitude = -1 * (totalCombat * effect.skill + effect.magnitude);
+  var magnitude = (-1 * (totalCombat * effect.skill + effect.magnitude)) | 0;
   tile.addZombieDensity(magnitude);
   message.addCullZombieMessage(tile, magnitude);
 };

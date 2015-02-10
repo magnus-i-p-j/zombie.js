@@ -1,5 +1,6 @@
 goog.provide('z.client');
 goog.require('mugd.injector.Injector');
+goog.require('z.common.messages');
 
 /**
  * @enum {string}
@@ -10,6 +11,7 @@ z.client.Resources = {
   GAME_SESSION_WIDGET:'client_game_session_widget',
   CONTEXT_MENU_WIDGET:'client_context_menu_widget',
   MESSAGE_LOG_WIDGET: 'client_message_log_widget',
+  DEBUG_LOG_WIDGET: 'client_debug_log_widget',
   GEM:'client_gem',
   MAP_FACET:'client_map_facet',
   CONTEXT_MENU_FACET:'client_context_menu_facet',
@@ -50,5 +52,8 @@ z.client.Tags = {
   INFO:'info',
   DEBUG:'debug',
   WARNING:'warning',
-  ERROR:'error'
+  ERROR:'error',
+  USUAL: z.common.messages.level.USUAL,
+  IMPORTANT: z.common.messages.level.IMPORTANT,
+  TRIVIAL: z.common.messages.level.TRIVIAL
 };

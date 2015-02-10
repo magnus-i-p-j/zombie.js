@@ -152,6 +152,7 @@ z.client.Client.prototype.startNewGame = function(ruleset, textures, map) {
   injector.addProvider(z.client.Resources.MAP_WIDGET, z.client.ui.widget.MapWidget);
   injector.addProvider(z.client.Resources.GAME_SESSION_WIDGET, z.client.ui.widget.GameSessionWidget);
   injector.addProvider(z.client.Resources.CONTEXT_MENU_WIDGET, z.client.ui.widget.ContextMenuWidget);
+  injector.addProvider(z.client.Resources.DEBUG_LOG_WIDGET, z.client.ui.widget.MessageLogWidget);
   injector.addProvider(z.client.Resources.MESSAGE_LOG_WIDGET, z.client.ui.widget.MessageLogWidget);
   injector.addProvider(z.client.Resources.GEM, z.client.facet.Gem);
   injector.addProvider(z.client.Resources.ACTION_FACTORY, z.client.ActionFactory);

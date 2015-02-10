@@ -35,6 +35,12 @@ z.client.WorldProxy = function(services) {
   this._repository = /** @type {!z.common.EntityRepository} */services.get(z.common.Resources.REPOSITORY);
 
   /**
+   * @type {z.client.facet.MessageLogFacet}
+   * @private
+   */
+  this._messageLogFacet = /** @type {z.client.facet.MessageLogFacet} */ services.get(z.client.Resources.MESSAGE_LOG_FACET);
+
+  /**
    * @type {!z.client.facet.ActorFacet}
    * @private
    */
@@ -71,6 +77,8 @@ z.client.WorldProxy.prototype.doStartTurn = function(startTurnData) {
 
   this._repository.resetState();
 
+  this.sendMessages(startTurnData.messages);
+
   var e = new z.client.events.StartTurn({
       turn: this._turn,
       season: this._season
@@ -79,6 +87,20 @@ z.client.WorldProxy.prototype.doStartTurn = function(startTurnData) {
   this.dispatchEvent(e);
 
   console.log(startTurnData.messages);
+};
+
+z.client.WorldProxy.prototype.sendMessages = function(messages) {
+  goog.array.forEach(
+    messages,
+    function(message) {
+      this._messageLogFacet.addMessage(
+        JSON.stringify(message, null, 2),
+        [message.level],
+        message
+      );
+    },
+    this
+  );
 };
 
 z.client.WorldProxy.prototype.endTurn = function() {

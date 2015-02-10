@@ -42,13 +42,15 @@ z.client.facet.MessageLogFacet.prototype.doStartTurn = function (e) {
 
 /**
  * @param {string} html
+ * @param {z.common.messages.message} message
  * @param {Array.<!z.client.Tags>} tags
  */
-z.client.facet.MessageLogFacet.prototype.addMessage = function (html, tags) {
+z.client.facet.MessageLogFacet.prototype.addMessage = function (html, tags, message) {
   var messageItem = {};
   messageItem['turn'] = this.info['turn']();
   messageItem['time'] = new Date();
   messageItem['html'] = html;
+  messageItem['message'] = message;
   messageItem['tags'] = {};
   goog.array.forEach(tags, function (tag) {
         messageItem['tags'][tag] = true;
