@@ -13,36 +13,50 @@ z.common.messages.MessageBuilder = function(cause) {
 };
 
 z.common.messages.MessageBuilder.prototype.addStockpileMessage = function(owner, type, amount) {
-  this.args.push(goog.array.clone(arguments));
+  this.args.push({
+    owner: owner.guid,
+    type: type,
+    amount: amount
+  });
 };
 
 z.common.messages.MessageBuilder.prototype.addTerrainMessage = function(tile, terrain) {
-  this.args.push(goog.array.clone(arguments));
+  this.args.push({
+    pos: tile.position,
+    terrain: terrain
+  });
 };
 
 z.common.messages.MessageBuilder.prototype.addCullZombieMessage = function(tile, culled) {
-  this.args.push(goog.array.clone(arguments));
+  this.args.push({
+    pos: tile.position,
+    culled: culled
+  });
 };
 
 z.common.messages.MessageBuilder.prototype.addProjectEndedMessage = function(project) {
-  this.args.push(goog.array.clone(arguments));
+  this.args.push('Project ended ' + project.name);
 };
 
 z.common.messages.MessageBuilder.prototype.addGameOverMessage = function(actor, won) {
-  this.args.push(goog.array.clone(arguments));
+  if (won) {
+    this.args.push('You won');
+  } else {
+    this.args.push('You lost');
+  }
 };
 
 z.common.messages.MessageBuilder.prototype.addMessage = function(actor, message) {
-  this.args.push(goog.array.clone(arguments));
+  this.args.push(message);
 };
 
 /**
  * @param {z.common.messages.level} level
  */
 z.common.messages.MessageBuilder.prototype.setLevel = function(level) {
-  this.args.push(goog.array.clone(arguments));
+  this.args.push(level);
 };
 
 z.common.messages.MessageBuilder.prototype.build = function() {
-  return this.args;
+  return JSON.stringify(this.args, null, 2);
 };

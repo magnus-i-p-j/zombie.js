@@ -561,9 +561,7 @@ z.service.world.World.prototype['_apply_effect_game_over'] = function(effect, ac
  * @param {z.common.messages.MessageBuilder} message
  */
 z.service.world.World.prototype['_apply_effect_message'] = function(effect, actor, message) {
-  //TODO: Actually show message
-  console.log(effect, actor);
-  message.addMessage(actor, message);
+  message.addMessage(actor, effect);
   message.setLevel(effect.level);
 };
 
