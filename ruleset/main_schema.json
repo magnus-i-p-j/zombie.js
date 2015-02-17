@@ -316,6 +316,11 @@
                         }
                       }
                     },
+                    "effect_points": {
+                      "title": "Effect points",
+                      "description": "The amount of points gained",
+                      "type": "number"
+                    },
                     "effect_end": {
                       "title": "End project",
                       "description": "End the project",
@@ -889,7 +894,7 @@
                     "type": "string",
                     "enum": [
                       "people",
-                      "turn"
+                      "time"
                     ]
                   },
                   "min": {
@@ -908,7 +913,7 @@
                 "title": "Effects",
                 "description": "The effect this ending has",
                 "type": "object",
-                "required": ["effect_game_over"],
+                "required": [],
                 "properties": {
                   "effect_game_over": {
                     "title": "End game",
@@ -918,6 +923,16 @@
                       "victory",
                       "defeat"
                     ]
+                  },
+                  "effect_points": {
+                    "title": "Effect points",
+                    "description": "The amount of points gained",
+                    "type": "number"
+                  },
+                  "effect_points_per_character": {
+                    "title": "Effect points per character",
+                    "description": "The amount of points gained per character",
+                    "type": "number"
                   },
                   "effect_message": {
                     "title": "Send message",

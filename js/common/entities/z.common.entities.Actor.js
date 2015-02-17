@@ -25,9 +25,18 @@ z.common.entities.Actor = function (services) {
 
   this.stockpile.addAll(actorData.stockpile);
 
+  this._points = actorData.points;
 };
 
 goog.inherits(z.common.entities.Actor, z.common.entities.Entity);
+
+z.common.entities.Actor.prototype.addPoints = function (points) {
+  this._points += points;
+};
+
+z.common.entities.Actor.prototype.getPoints = function () {
+  return this._points;
+};
 
 /**
  * @inheritDoc
@@ -42,6 +51,7 @@ z.common.entities.Actor.prototype._update = function (entityData, meta, owner) {
       var actorData = /** @type {!z.common.data.ActorData} */ entityData;
       this.stockpile.purgeAll();
       this.stockpile.addAll(actorData.stockpile);
+      this._points = actorData.points;
       updated = true;
     } else {
       throw 'InvalidDataException: not a z.common.data.ActorData';

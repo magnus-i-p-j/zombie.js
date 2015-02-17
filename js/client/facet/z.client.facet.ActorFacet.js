@@ -12,6 +12,7 @@ goog.require('z.common');
 z.client.facet.ActorFacet = function (services) {
   goog.base(this);
   this['resources'] = new z.client.facet.StockpileFacet();
+  this['points'] = ko.observable(0);
 
   /** @type {!mugd.injector.Injector} */
   var injector = /** @type {!mugd.injector.Injector} */ services.get(z.common.Resources.INJECTOR);
@@ -34,6 +35,7 @@ z.client.facet.ActorFacet.prototype.setParentEventTarget = function (parent) {
 z.client.facet.ActorFacet.prototype._update = function () {
   var actor = /** @type {z.common.entities.Actor} */ this.entity();
   this['resources'].update(actor.stockpile);
+  this['points'](actor.getPoints());
   var entityQuery = new z.common.EntityQuery();
   entityQuery.match = function(entity) {
     return entity.owner === actor.guid

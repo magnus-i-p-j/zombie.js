@@ -10,13 +10,14 @@ goog.require('z.common.data.EntityData');
  * @constructor
  * @implements {z.common.data.EntityData}
  */
-z.common.data.ActorData = function (guid, state, type, stockpile) {
+z.common.data.ActorData = function (guid, state, type, stockpile, points) {
   this.guid = guid;
   this.ownerId = guid;
   this.state = state;
   this.type = type;
   this.stockpile = stockpile;
   this.category = z.common.rulebook.category.ACTOR;
+  this.points = points;
 };
 
 /**
@@ -28,7 +29,8 @@ z.common.data.ActorData.fromEntity = function (actor) {
       actor.guid,
       actor.getState(),
       actor.meta.type,
-      actor.stockpile.peekAll()
+      actor.stockpile.peekAll(),
+      actor.getPoints()
   );
 };
 
@@ -41,7 +43,8 @@ z.common.data.ActorData.fromProtocol = function (protocol) {
       protocol['actorId'],
       protocol['state'],
       protocol['type'],
-      protocol['stockpile']
+      protocol['stockpile'],
+      protocol['points']
   );
 };
 

@@ -139,6 +139,11 @@ z.common.rulebook.effect_cull_zombies;
 z.common.rulebook.effect_message;
 
 /**
+ * @typedef {number}
+ */
+z.common.rulebook.effect_points;
+
+/**
  * @typedef {{
  *  name: string,
  *  description: ?string,

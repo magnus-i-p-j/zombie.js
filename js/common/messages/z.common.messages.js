@@ -16,6 +16,7 @@ z.common.messages.level = {
  *   culled: ?number,
  *   text: ?string,
  *   level: z.common.messages.level
+ *   points: ?number,
  * }}
  */
 z.common.messages.message;

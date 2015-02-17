@@ -60,7 +60,7 @@ z.service.world.World = function(services) {
    * @private
    */
   this._playerActors = {};
-  var worldActorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_world', {});
+  var worldActorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_world', {}, 0);
 
   /**
    * @type {!z.common.entities.Actor}
@@ -109,7 +109,7 @@ z.service.world.World.prototype._createCharacters = function(rulebook, character
  * @return {!z.common.data.ActorData}
  */
 z.service.world.World.prototype.createPlayerActor = function(actorCallback) {
-  var actorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_player', this._rulebook.gameStartingData.startingResources);
+  var actorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_player', this._rulebook.gameStartingData.startingResources, 0);
   var actor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(actorData);
   this._playerActors[actor.guid] = actor;
   this._actorCallbacks[actor.guid] = actorCallback;
@@ -478,18 +478,14 @@ z.service.world.World.prototype._advanceProject = function(project, message) {
  * @private
  */
 z.service.world.World.prototype._applyEffects = function(effects, entity, message) {
-  /**
-   * @type {z.common.rulebook.effect_result}
-   */
-  var result = /** @type {z.common.rulebook.effect_result}*/ {};
+
   goog.array.forEach(
     effects,
     function(effect) {
-      result[effect['type']] = this['_apply_' + effect['type']](effect['args'], entity, message);
+      this['_apply_' + effect['type']](effect['args'], entity, message);
     },
     this
   );
-  return result;
 };
 
 /**
@@ -586,6 +582,32 @@ z.service.world.World.prototype['_apply_effect_message'] = function(effect, acto
   message.setLevel(effect.level);
 };
 
+/**
+ * @param {z.common.rulebook.effect_points} effect
+ * @param {z.common.entities.Entity} entity
+ * @param {z.common.messages.MessageBuilder} message
+ */
+z.service.world.World.prototype['_apply_effect_points'] = function(effect, entity, message) {
+  var actor = this._entityRepository.get(entity.owner);
+  actor.addPoints(effect);
+  message.addPointsMessage(actor, effect);
+};
+
+/**
+ * @param {z.common.rulebook.effect_points} effect
+ * @param {z.common.entities.Actor} actor
+ * @param {z.common.messages.MessageBuilder} message
+ */
+z.service.world.World.prototype['_apply_effect_points_per_character'] = function(effect, actor, message) {
+  var query = new z.common.EntityQuery();
+  query.owner = actor.guid;
+  query.alive = true;
+  query.category = z.common.rulebook.category.CHARACTER_TYPE;
+  var people = this._entityRepository.filter(query);
+  var points = people.length * effect;
+  actor.addPoints(points);
+  message.addPointsMessage(actor, points);
+};
 
 /**
  * @private

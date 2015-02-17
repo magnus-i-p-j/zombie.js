@@ -16,6 +16,7 @@ z.common.messages.MessageBuilder = function(cause) {
   this.culled = null;
   this.text = null;
   this.level = z.common.messages.level.USUAL;
+  this.points = 0;
   this._empty = true;
 };
 
@@ -51,6 +52,11 @@ z.common.messages.MessageBuilder.prototype.addMessage = function(actor, message)
   this._empty = false;
 };
 
+z.common.messages.MessageBuilder.prototype.addPointsMessage = function(actor, points) {
+  this.points += points;
+  this._empty = false;
+};
+
 /**
  * @param {z.common.messages.level} level
  */
@@ -78,6 +84,9 @@ z.common.messages.MessageBuilder.prototype.build = function() {
   }
   if (this.text) {
     message.text = this.text;
+  }
+  if(this.points) {
+    message.points = this.points;
   }
 
   return /** @type {z.common.messages.message} */ message;

@@ -1,1409 +1,1419 @@
-{
-  "terrain": [
-    {
-      "type": "field",
-      "name": "Field",
-      "description": "A patch of land where something can be planted.",
-      "zone": "content",
-      "image": "field",
-      "activity": 0,
-      "defence": 0
-    },
-    {
-      "type": "water",
-      "name": "Water",
-      "description": "A patch of blue water, untouched by the zombie apocalypse.",
-      "zone": "base",
-      "image": "water",
-      "activity": -10,
-      "defence": 0
-    },
-    {
-      "type": "house",
-      "name": "House",
-      "description": "A house someone used to live in. Now they're still living in it...",
-      "zone": "content",
-      "image": "house",
-      "activity": 0,
-      "defence": 2
-    },
-    {
-      "type": "grass",
-      "name": "Grass",
-      "description": "Some grass with only a few zombie bits.",
-      "zone": "base",
-      "image": "grass",
-      "activity": 0,
-      "defence": 0
-    },
-    {
-      "type": "fence",
-      "name": "Fence",
-      "description": "A rickety fence, suitable for delaying zombies while you leg it.",
-      "zone": "perimeter",
-      "image": "fence",
-      "activity": 0,
-      "defence": 20
-    },
-    {
-      "type": "wheat_field",
-      "name": "Wheat field",
-      "description": "A field of ripening wheats",
-      "zone": "content",
-      "image": "field",
-      "activity": 0,
-      "defence": 0
-    },
-    {
-      "type": "wheat_field_ripe",
-      "name": "Ripe wheat field",
-      "description": "Unprocessed bread.",
-      "zone": "content",
-      "image": "field",
-      "activity": 0,
-      "defence": 0
-    },
-    {
-      "type": "well",
-      "name": "Well",
-      "description": "Well, it's a hole with water in. Close enough.",
-      "zone": "content",
-      "image": "water",
-      "activity": 5,
-      "defence": 0
-    }
-  ],
-  "zone": [
-    {
-      "type": "content",
-      "name": "Content",
-      "description": "Inner parts of tile"
-    },
-    {
-      "type": "perimeter",
-      "name": "Perimeter",
-      "description": "The stuff around the tile"
-    },
-    {
-      "type": "base",
-      "name": "Base",
-      "description": "The stuff the tile is made of"
-    }
-  ],
-  "season": [
-    {
-      "type": "winter",
-      "name": "Winter",
-      "description": "Cold, snowy, white..."
-    },
-    {
-      "type": "spring",
-      "name": "Spring",
-      "description": "Bouncy!"
-    },
-    {
-      "type": "summer",
-      "name": "Summer",
-      "description": "Warm, rainy, green..."
-    },
-    {
-      "type": "autumn",
-      "name": "Autumn",
-      "description": "The best season!"
-    }
-  ],
-  "project": [
-    {
-      "type": "build_fence",
-      "name": "Build fence",
-      "description": "Build a zombie-proofish fence around a tile and kill all zombies within.",
-      "activity": 10,
-      "defence": 0,
-      "triggers": [
-        {
-          "predicate": {"type": "complete"},
-          "effects": {
-            "effect_terrain": "fence",
-            "effect_end": true,
-            "effect_message": {
-              "text": "text/project_complete",
-              "level": "usual"
-            }
+{"terrain": [
+  {
+    "type": "field",
+    "name": "Field",
+    "description": "A patch of land where something can be planted.",
+    "zone": "content",
+    "image": "field",
+    "activity": 0,
+    "defence": 0
+  },
+  {
+    "type": "water",
+    "name": "Water",
+    "description": "A patch of blue water, untouched by the zombie apocalypse.",
+    "zone": "base",
+    "image": "water",
+    "activity": -10,
+    "defence": 0
+  },
+  {
+    "type": "house",
+    "name": "House",
+    "description": "A house someone used to live in. Now they're still living in it...",
+    "zone": "content",
+    "image": "house",
+    "activity": 0,
+    "defence": 2
+  },
+  {
+    "type": "grass",
+    "name": "Grass",
+    "description": "Some grass with only a few zombie bits.",
+    "zone": "base",
+    "image": "grass",
+    "activity": 0,
+    "defence": 0
+  },
+  {
+    "type": "fence",
+    "name": "Fence",
+    "description": "A rickety fence, suitable for delaying zombies while you leg it.",
+    "zone": "perimeter",
+    "image": "fence",
+    "activity": 0,
+    "defence": 20
+  },
+  {
+    "type": "wheat_field",
+    "name": "Wheat field",
+    "description": "A field of ripening wheats",
+    "zone": "content",
+    "image": "field",
+    "activity": 0,
+    "defence": 0
+  },
+  {
+    "type": "wheat_field_ripe",
+    "name": "Ripe wheat field",
+    "description": "Unprocessed bread.",
+    "zone": "content",
+    "image": "field",
+    "activity": 0,
+    "defence": 0
+  },
+  {
+    "type": "well",
+    "name": "Well",
+    "description": "Well, it's a hole with water in. Close enough.",
+    "zone": "content",
+    "image": "water",
+    "activity": 5,
+    "defence": 0
+  }
+], "zone": [
+  {
+    "type": "content",
+    "name": "Content",
+    "description": "Inner parts of tile"
+  },
+  {
+    "type": "perimeter",
+    "name": "Perimeter",
+    "description": "The stuff around the tile"
+  },
+  {
+    "type": "base",
+    "name": "Base",
+    "description": "The stuff the tile is made of"
+  }
+], "season": [
+  {
+    "type": "winter",
+    "name": "Winter",
+    "description": "Cold, snowy, white..."
+  },
+  {
+    "type": "spring",
+    "name": "Spring",
+    "description": "Bouncy!"
+  },
+  {
+    "type": "summer",
+    "name": "Summer",
+    "description": "Warm, rainy, green..."
+  },
+  {
+    "type": "autumn",
+    "name": "Autumn",
+    "description": "The best season!"
+  }
+], "project": [
+  {
+    "type": "build_fence",
+    "name": "Build fence",
+    "description": "Build a zombie-proofish fence around a tile and kill all zombies within.",
+    "activity": 10,
+    "defence": 0,
+    "triggers": [
+      {
+        "predicate": {
+          "type": "complete"
+        },
+        "effects": {
+          "effect_terrain": "fence",
+          "effect_points": 1,
+          "effect_end": true,
+          "effect_message": {
+            "text": "text/project_complete",
+            "level": "usual"
           }
         }
+      }
+    ],
+    "prerequisites": {
+      "terrain": ["grass"],
+      "danger": 20
+    },
+    "cost": {
+      "stockpile": [
+        {
+          "type": "wood",
+          "amount": 5
+        }
       ],
-      "prerequisites": {
-        "terrain": ["grass"],
-        "danger": 20
+      "work": {
+        "combat": 5,
+        "knowledge": 5,
+        "labour": 15
       },
-      "cost": {
-        "stockpile": [
-          {
-            "type": "wood",
-            "amount": 5
-          }
-        ],
-        "work": {
-          "combat": 5,
-          "knowledge": 5,
-          "labour": 15
+      "time": 0
+    }
+  },
+  {
+    "type": "scavenge",
+    "name": "Scavenge",
+    "description": "Scavenge for stuff.",
+    "activity": 20,
+    "defence": 0,
+    "triggers": [
+      {
+        "predicate": {
+          "type": "complete"
         },
-        "time": 0
-      }
-    },
-    {
-      "type": "scavenge",
-      "name": "Scavenge",
-      "description": "Scavenge for stuff.",
-      "activity": 20,
-      "defence": 0,
-      "triggers": [
-        {
-          "predicate": {"type": "complete"},
-          "effects": {
-            "effect_stockpile": [
-              {
-                "type": "wood",
-                "magnitude": 10,
-                "variation": 2
-              },
-              {
-                "type": "metal",
-                "magnitude": 5,
-                "variation": 5
-              },
-              {
-                "type": "scrap",
-                "magnitude": 10,
-                "variation": 10
-              },
-              {
-                "type": "food",
-                "magnitude": 5,
-                "variation": 15
-              }
-            ],
-            "effect_end": true,
-            "effect_message": {
-              "text": "text/project_complete",
-              "level": "usual"
-            }
-          }
-        }
-      ],
-      "prerequisites": {"danger": 0},
-      "cost": {
-        "work": {
-          "combat": 0,
-          "knowledge": 0,
-          "labour": 10
-        },
-        "time": 0
-      }
-    },
-    {
-      "type": "build_well",
-      "name": "Dig well",
-      "description": "Dig a hole that attracts water.",
-      "activity": 12,
-      "defence": 0,
-      "triggers": [
-        {
-          "predicate": {"type": "complete"},
-          "effects": {
-            "effect_terrain": "well",
-            "effect_end": true,
-            "effect_message": {
-              "text": "text/project_complete",
-              "level": "usual"
-            }
-          }
-        }
-      ],
-      "prerequisites": {
-        "terrain": ["grass"],
-        "danger": 0
-      },
-      "cost": {
-        "stockpile": [
-          {
-            "type": "scrap",
-            "amount": 14
-          }
-        ],
-        "work": {
-          "combat": 0,
-          "knowledge": 0,
-          "labour": 35
-        },
-        "time": 0
-      }
-    },
-    {
-      "type": "patrol",
-      "name": "Patrol",
-      "description": "Patrol an area looking for trouble and chewing gum. We're all out of chewing gum.",
-      "activity": 23,
-      "defence": 0,
-      "triggers": [
-        {
-          "predicate": {"type": "complete"},
-          "effects": {
-            "effect_cull_zombies": {
-              "skill": 0.5,
-              "magnitude": 1
+        "effects": {
+          "effect_stockpile": [
+            {
+              "type": "wood",
+              "magnitude": 10,
+              "variation": 2
             },
-            "effect_end": true,
-            "effect_message": {
-              "text": "text/project_complete",
-              "level": "usual"
+            {
+              "type": "metal",
+              "magnitude": 5,
+              "variation": 5
+            },
+            {
+              "type": "scrap",
+              "magnitude": 10,
+              "variation": 10
+            },
+            {
+              "type": "food",
+              "magnitude": 5,
+              "variation": 15
             }
+          ],
+          "effect_points": 1,
+          "effect_end": true,
+          "effect_message": {
+            "text": "text/project_complete",
+            "level": "usual"
           }
         }
-      ],
-      "prerequisites": {"danger": 500},
-      "cost": {
-        "work": {
-          "combat": 0,
-          "knowledge": 0,
-          "labour": 0
-        },
-        "time": 1
       }
+    ],
+    "prerequisites": {
+      "danger": 0
     },
-    {
-      "type": "grow_wheat",
-      "name": "Grow wheat",
-      "description": "Grow wheat for great justice.",
-      "activity": 20,
-      "defence": 0,
-      "triggers": [
-        {
-          "predicate": {"type": "complete"},
-          "effects": {
-            "effect_stockpile": [
-              {
-                "type": "food",
-                "magnitude": 12,
-                "variation": 5
-              }
-            ],
-            "effect_end": true,
-            "effect_message": {
-              "text": "text/project_complete",
-              "level": "usual"
-            }
-          }
-        },
-        {
-          "predicate": {"type": "end"},
-          "effects": {
-            "effect_terrain": "field",
-            "effect_end": false
-          }
-        },
-        {
-          "predicate": {
-            "type": "season",
-            "season": "winter"
-          },
-          "effects": {
-            "effect_end": true,
-            "effect_message": {
-              "text": "text/project_fail",
-              "level": "usual"
-            }
-          }
-        },
-        {
-          "predicate": {
-            "type": "duration",
-            "duration": 0
-          },
-          "effects": {
-            "effect_terrain": "wheat_field",
-            "effect_end": false
-          }
-        },
-        {
-          "predicate": {
-            "type": "duration",
-            "duration": 1
-          },
-          "effects": {
-            "effect_terrain": "wheat_field_ripe",
-            "effect_end": false
-          }
-        }
-      ],
-      "prerequisites": {
-        "terrain": ["field"],
-        "danger": 0
+    "cost": {
+      "work": {
+        "combat": 0,
+        "knowledge": 0,
+        "labour": 10
       },
-      "cost": {
-        "stockpile": [
-          {
-            "type": "food",
-            "amount": 1
-          }
-        ],
-        "work": {
-          "combat": 5,
-          "knowledge": 10,
-          "labour": 20
+      "time": 0
+    }
+  },
+  {
+    "type": "build_well",
+    "name": "Dig well",
+    "description": "Dig a hole that attracts water.",
+    "activity": 12,
+    "defence": 0,
+    "triggers": [
+      {
+        "predicate": {
+          "type": "complete"
         },
-        "time": 3
+        "effects": {
+          "effect_terrain": "well",
+          "effect_points": 3,
+          "effect_end": true,
+          "effect_message": {
+            "text": "text/project_complete",
+            "level": "usual"
+          }
+        }
       }
-    }
-  ],
-  "actor": [
-    {
-      "type": "actor_player",
-      "name": "A player",
-      "description": "a player"
+    ],
+    "prerequisites": {
+      "terrain": ["grass"],
+      "danger": 0
     },
-    {
-      "type": "actor_world",
-      "name": "World",
-      "description": "the world"
+    "cost": {
+      "stockpile": [
+        {
+          "type": "scrap",
+          "amount": 14
+        }
+      ],
+      "work": {
+        "combat": 0,
+        "knowledge": 0,
+        "labour": 35
+      },
+      "time": 0
     }
-  ],
-  "tile": [
-    {
-      "type": "tile",
-      "name": "Tile",
-      "description": "a tile"
+  },
+  {
+    "type": "patrol",
+    "name": "Patrol",
+    "description": "Patrol an area looking for trouble and chewing gum. We're all out of chewing gum.",
+    "activity": 23,
+    "defence": 0,
+    "triggers": [
+      {
+        "predicate": {
+          "type": "complete"
+        },
+        "effects": {
+          "effect_cull_zombies": {
+            "skill": 0.5,
+            "magnitude": 1
+          },
+          "effect_points": 1,
+          "effect_end": true,
+          "effect_message": {
+            "text": "text/project_complete",
+            "level": "usual"
+          }
+        }
+      }
+    ],
+    "prerequisites": {
+      "danger": 500
+    },
+    "cost": {
+      "work": {
+        "combat": 0,
+        "knowledge": 0,
+        "labour": 0
+      },
+      "time": 1
     }
-  ],
-  "stockpile": [
+  },
+  {
+    "type": "grow_wheat",
+    "name": "Grow wheat",
+    "description": "Grow wheat for great justice.",
+    "activity": 20,
+    "defence": 0,
+    "triggers": [
+      {
+        "predicate": {
+          "type": "complete"
+        },
+        "effects": {
+          "effect_stockpile": [
+            {
+              "type": "food",
+              "magnitude": 12,
+              "variation": 5
+            }
+          ],
+          "effect_points": 3,
+          "effect_end": true,
+          "effect_message": {
+            "text": "text/project_complete",
+            "level": "usual"
+          }
+        }
+      },
+      {
+        "predicate": {
+          "type": "end"
+        },
+        "effects": {
+          "effect_terrain": "field",
+          "effect_end": false
+        }
+      },
+      {
+        "predicate": {
+          "type": "season",
+          "season": "winter"
+        },
+        "effects": {
+          "effect_end": true,
+          "effect_message": {
+            "text": "text/project_fail",
+            "level": "usual"
+          }
+        }
+      },
+      {
+        "predicate": {
+          "type": "duration",
+          "duration": 0
+        },
+        "effects": {
+          "effect_terrain": "wheat_field",
+          "effect_end": false
+        }
+      },
+      {
+        "predicate": {
+          "type": "duration",
+          "duration": 1
+        },
+        "effects": {
+          "effect_terrain": "wheat_field_ripe",
+          "effect_end": false
+        }
+      }
+    ],
+    "prerequisites": {
+      "terrain": ["field"],
+      "danger": 0
+    },
+    "cost": {
+      "stockpile": [
+        {
+          "type": "food",
+          "amount": 1
+        }
+      ],
+      "work": {
+        "combat": 5,
+        "knowledge": 10,
+        "labour": 20
+      },
+      "time": 3
+    }
+  }
+], "actor": [
+  {
+    "type": "actor_player",
+    "name": "A player",
+    "description": "a player"
+  },
+  {
+    "type": "actor_world",
+    "name": "World",
+    "description": "the world"
+  }
+], "tile": [
+  {
+    "type": "tile",
+    "name": "Tile",
+    "description": "a tile"
+  }
+], "stockpile": [
+  {
+    "type": "wood",
+    "name": "Wood",
+    "description": "Wooden stuff"
+  },
+  {
+    "type": "metal",
+    "name": "Metal",
+    "description": "Shiny!!!"
+  },
+  {
+    "type": "ammo",
+    "name": "Ammo",
+    "description": "Various stuff useful for killing zombies"
+  },
+  {
+    "type": "scrap",
+    "name": "Scrap",
+    "description": "Various bits and bobs"
+  },
+  {
+    "type": "fuel",
+    "name": "Fuel",
+    "description": "Firey stuff"
+  },
+  {
+    "type": "food",
+    "name": "Food",
+    "description": "Turnips"
+  }
+], "archetype": [
+  {
+    "type": "archetype_welder",
+    "name": "Welder",
+    "description": "An accomplished welder ",
+    "frequency": 3,
+    "stats": {
+      "combat": 8,
+      "knowledge": 15,
+      "labour": 8
+    },
+    "traits": [
+      {
+        "type": "welder",
+        "probability": 1
+      }
+    ]
+  },
+  {
+    "type": "archetype_farmer",
+    "name": "Farmer",
+    "description": "A farmer of farms",
+    "frequency": 10,
+    "stats": {
+      "combat": 11,
+      "knowledge": 6,
+      "labour": 15
+    },
+    "traits": [
+      {
+        "type": "farmer",
+        "probability": 1
+      }
+    ]
+  },
+  {
+    "type": "archetype_soldier",
+    "name": "Soldier",
+    "description": "Trained by the old regime to fight",
+    "frequency": 30,
+    "stats": {
+      "combat": 14,
+      "knowledge": 8,
+      "labour": 8
+    },
+    "traits": []
+  },
+  {
+    "type": "archetype_ordinary",
+    "name": "Ordinary",
+    "description": "This character probably did something important before; but now is just another body.",
+    "frequency": 150,
+    "stats": {
+      "combat": 10,
+      "knowledge": 10,
+      "labour": 10
+    },
+    "traits": []
+  }
+], "trait": [
+  {
+    "type": "welder",
+    "name": "Welder",
+    "description": "Knows how to work a welding power supply"
+  },
+  {
+    "type": "farmer",
+    "name": "Farmer",
+    "description": "Can grow turnips"
+  },
+  {
+    "type": "survivor",
+    "name": "Survivor",
+    "description": "Coolheaded and collected, this character will do what's necessary to survive the zombie hordes."
+  }
+], "character": [
+  {
+    "name": "William",
+    "type": "male"
+  },
+  {
+    "name": "Lucas",
+    "type": "male"
+  },
+  {
+    "name": "Oscar",
+    "type": "male"
+  },
+  {
+    "name": "Hugo",
+    "type": "male"
+  },
+  {
+    "name": "Elias",
+    "type": "male"
+  },
+  {
+    "name": "Oliver",
+    "type": "male"
+  },
+  {
+    "name": "Liam",
+    "type": "male"
+  },
+  {
+    "name": "Alexander",
+    "type": "male"
+  },
+  {
+    "name": "Viktor",
+    "type": "male"
+  },
+  {
+    "name": "Emil",
+    "type": "male"
+  },
+  {
+    "name": "Axel",
+    "type": "male"
+  },
+  {
+    "name": "Anton",
+    "type": "male"
+  },
+  {
+    "name": "Erik",
+    "type": "male"
+  },
+  {
+    "name": "Leo",
+    "type": "male"
+  },
+  {
+    "name": "Filip",
+    "type": "male"
+  },
+  {
+    "name": "Vincent",
+    "type": "male"
+  },
+  {
+    "name": "Olle",
+    "type": "male"
+  },
+  {
+    "name": "Arvid",
+    "type": "male"
+  },
+  {
+    "name": "Ludvig",
+    "type": "male"
+  },
+  {
+    "name": "Theo",
+    "type": "male"
+  },
+  {
+    "name": "Charlie",
+    "type": "male"
+  },
+  {
+    "name": "Isak",
+    "type": "male"
+  },
+  {
+    "name": "Edvin",
+    "type": "male"
+  },
+  {
+    "name": "Albin",
+    "type": "male"
+  },
+  {
+    "name": "Gustav",
+    "type": "male"
+  },
+  {
+    "name": "Elliot",
+    "type": "male"
+  },
+  {
+    "name": "Nils",
+    "type": "male"
+  },
+  {
+    "name": "Adam",
+    "type": "male"
+  },
+  {
+    "name": "Melvin",
+    "type": "male"
+  },
+  {
+    "name": "Wilmer",
+    "type": "male"
+  },
+  {
+    "name": "Max",
+    "type": "male"
+  },
+  {
+    "name": "Viggo",
+    "type": "male"
+  },
+  {
+    "name": "Noah",
+    "type": "male"
+  },
+  {
+    "name": "Benjamin",
+    "type": "male"
+  },
+  {
+    "name": "Alfred",
+    "type": "male"
+  },
+  {
+    "name": "Alvin",
+    "type": "male"
+  },
+  {
+    "name": "Leon",
+    "type": "male"
+  },
+  {
+    "name": "Kevin",
+    "type": "male"
+  },
+  {
+    "name": "Simon",
+    "type": "male"
+  },
+  {
+    "name": "Theodor",
+    "type": "male"
+  },
+  {
+    "name": "Casper",
+    "type": "male"
+  },
+  {
+    "name": "Jonathan",
+    "type": "male"
+  },
+  {
+    "name": "Melker",
+    "type": "male"
+  },
+  {
+    "name": "Sixten",
+    "type": "male"
+  },
+  {
+    "name": "Ville",
+    "type": "male"
+  },
+  {
+    "name": "Rasmus",
+    "type": "male"
+  },
+  {
+    "name": "Gabriel",
+    "type": "male"
+  },
+  {
+    "name": "Carl",
+    "type": "male"
+  },
+  {
+    "name": "Linus",
+    "type": "male"
+  },
+  {
+    "name": "Jacob",
+    "type": "male"
+  },
+  {
+    "name": "Malte",
+    "type": "male"
+  },
+  {
+    "name": "Noel",
+    "type": "male"
+  },
+  {
+    "name": "Love",
+    "type": "male"
+  },
+  {
+    "name": "Felix",
+    "type": "male"
+  },
+  {
+    "name": "Milo",
+    "type": "male"
+  },
+  {
+    "name": "Adrian",
+    "type": "male"
+  },
+  {
+    "name": "Sebastian",
+    "type": "male"
+  },
+  {
+    "name": "Neo",
+    "type": "male"
+  },
+  {
+    "name": "Valter",
+    "type": "male"
+  },
+  {
+    "name": "Josef",
+    "type": "male"
+  },
+  {
+    "name": "David",
+    "type": "male"
+  },
+  {
+    "name": "Jack",
+    "type": "male"
+  },
+  {
+    "name": "Samuel",
+    "type": "male"
+  },
+  {
+    "name": "Joel",
+    "type": "male"
+  },
+  {
+    "name": "Harry",
+    "type": "male"
+  },
+  {
+    "name": "Mohammed",
+    "type": "male"
+  },
+  {
+    "name": "Wilhelm",
+    "type": "male"
+  },
+  {
+    "name": "Loke",
+    "type": "male"
+  },
+  {
+    "name": "Hampus",
+    "type": "male"
+  },
+  {
+    "name": "Vilgot",
+    "type": "male"
+  },
+  {
+    "name": "August",
+    "type": "male"
+  },
+  {
+    "name": "Vidar",
+    "type": "male"
+  },
+  {
+    "name": "Sam",
+    "type": "male"
+  },
+  {
+    "name": "Eddie",
+    "type": "male"
+  },
+  {
+    "name": "Sigge",
+    "type": "male"
+  },
+  {
+    "name": "Milton",
+    "type": "male"
+  },
+  {
+    "name": "Elton",
+    "type": "male"
+  },
+  {
+    "name": "Frank",
+    "type": "male"
+  },
+  {
+    "name": "Daniel",
+    "type": "male"
+  },
+  {
+    "name": "Elis",
+    "type": "male"
+  },
+  {
+    "name": "Alex",
+    "type": "male"
+  },
+  {
+    "name": "Tim",
+    "type": "male"
+  },
+  {
+    "name": "Robin",
+    "type": "male"
+  },
+  {
+    "name": "Maximilian",
+    "type": "male"
+  },
+  {
+    "name": "John",
+    "type": "male"
+  },
+  {
+    "name": "Fabian",
+    "type": "male"
+  },
+  {
+    "name": "Hjalmar",
+    "type": "male"
+  },
+  {
+    "name": "Mio",
+    "type": "male"
+  },
+  {
+    "name": "Hannes",
+    "type": "male"
+  },
+  {
+    "name": "Elvin",
+    "type": "male"
+  },
+  {
+    "name": "Tage",
+    "type": "male"
+  },
+  {
+    "name": "Måns",
+    "type": "male"
+  },
+  {
+    "name": "Aron",
+    "type": "male"
+  },
+  {
+    "name": "Ivar",
+    "type": "male"
+  },
+  {
+    "name": "Ali",
+    "type": "male"
+  },
+  {
+    "name": "Otto",
+    "type": "male"
+  },
+  {
+    "name": "Svante",
+    "type": "male"
+  },
+  {
+    "name": "Marcus",
+    "type": "male"
+  },
+  {
+    "name": "Ebbe",
+    "type": "male"
+  },
+  {
+    "name": "Edward",
+    "type": "male"
+  },
+  {
+    "name": "Alice",
+    "type": "female"
+  },
+  {
+    "name": "Maja",
+    "type": "female"
+  },
+  {
+    "name": "Elsa",
+    "type": "female"
+  },
+  {
+    "name": "Julia",
+    "type": "female"
+  },
+  {
+    "name": "Linnéa",
+    "type": "female"
+  },
+  {
+    "name": "Ella",
+    "type": "female"
+  },
+  {
+    "name": "Ebba",
+    "type": "female"
+  },
+  {
+    "name": "Molly",
+    "type": "female"
+  },
+  {
+    "name": "Wilma",
+    "type": "female"
+  },
+  {
+    "name": "Emma",
+    "type": "female"
+  },
+  {
+    "name": "Nellie",
+    "type": "female"
+  },
+  {
+    "name": "Alva",
+    "type": "female"
+  },
+  {
+    "name": "Isabelle",
+    "type": "female"
+  },
+  {
+    "name": "Olivia",
+    "type": "female"
+  },
+  {
+    "name": "Agnes",
+    "type": "female"
+  },
+  {
+    "name": "Klara",
+    "type": "female"
+  },
+  {
+    "name": "Elin",
+    "type": "female"
+  },
+  {
+    "name": "Emilia",
+    "type": "female"
+  },
+  {
+    "name": "Freja",
+    "type": "female"
+  },
+  {
+    "name": "Ellen",
+    "type": "female"
+  },
+  {
+    "name": "Lilly",
+    "type": "female"
+  },
+  {
+    "name": "Nova",
+    "type": "female"
+  },
+  {
+    "name": "Moa",
+    "type": "female"
+  },
+  {
+    "name": "Ida",
+    "type": "female"
+  },
+  {
+    "name": "Stella",
+    "type": "female"
+  },
+  {
+    "name": "Alma",
+    "type": "female"
+  },
+  {
+    "name": "Saga",
+    "type": "female"
+  },
+  {
+    "name": "Amanda",
+    "type": "female"
+  },
+  {
+    "name": "Alicia",
+    "type": "female"
+  },
+  {
+    "name": "Astrid",
+    "type": "female"
+  },
+  {
+    "name": "Vera",
+    "type": "female"
+  },
+  {
+    "name": "Tuva",
+    "type": "female"
+  },
+  {
+    "name": "Isabella",
+    "type": "female"
+  },
+  {
+    "name": "Felicia",
+    "type": "female"
+  },
+  {
+    "name": "Elvira",
+    "type": "female"
+  },
+  {
+    "name": "Sara",
+    "type": "female"
+  },
+  {
+    "name": "Selma",
+    "type": "female"
+  },
+  {
+    "name": "Signe",
+    "type": "female"
+  },
+  {
+    "name": "Matilda",
+    "type": "female"
+  },
+  {
+    "name": "Hanna",
+    "type": "female"
+  },
+  {
+    "name": "Ester",
+    "type": "female"
+  },
+  {
+    "name": "Ellie",
+    "type": "female"
+  },
+  {
+    "name": "Thea",
+    "type": "female"
+  },
+  {
+    "name": "Tyra",
+    "type": "female"
+  },
+  {
+    "name": "Tilde",
+    "type": "female"
+  },
+  {
+    "name": "Lova",
+    "type": "female"
+  },
+  {
+    "name": "Lea",
+    "type": "female"
+  },
+  {
+    "name": "Minna",
+    "type": "female"
+  },
+  {
+    "name": "Sofia",
+    "type": "female"
+  },
+  {
+    "name": "Meja",
+    "type": "female"
+  },
+  {
+    "name": "Nora",
+    "type": "female"
+  },
+  {
+    "name": "Lovisa",
+    "type": "female"
+  },
+  {
+    "name": "Inez",
+    "type": "female"
+  },
+  {
+    "name": "Siri",
+    "type": "female"
+  },
+  {
+    "name": "Filippa",
+    "type": "female"
+  },
+  {
+    "name": "Emelie",
+    "type": "female"
+  },
+  {
+    "name": "Nathalie",
+    "type": "female"
+  },
+  {
+    "name": "Edith",
+    "type": "female"
+  },
+  {
+    "name": "Liv",
+    "type": "female"
+  },
+  {
+    "name": "Tindra",
+    "type": "female"
+  },
+  {
+    "name": "Tilda",
+    "type": "female"
+  },
+  {
+    "name": "Stina",
+    "type": "female"
+  },
+  {
+    "name": "Leia",
+    "type": "female"
+  },
+  {
+    "name": "Märta",
+    "type": "female"
+  },
+  {
+    "name": "Ingrid",
+    "type": "female"
+  },
+  {
+    "name": "Livia",
+    "type": "female"
+  },
+  {
+    "name": "Emmy",
+    "type": "female"
+  },
+  {
+    "name": "Cornelia",
+    "type": "female"
+  },
+  {
+    "name": "Iris",
+    "type": "female"
+  },
+  {
+    "name": "Jasmine",
+    "type": "female"
+  },
+  {
+    "name": "Juni",
+    "type": "female"
+  },
+  {
+    "name": "Melissa",
+    "type": "female"
+  },
+  {
+    "name": "My",
+    "type": "female"
+  },
+  {
+    "name": "Tove",
+    "type": "female"
+  },
+  {
+    "name": "Elise",
+    "type": "female"
+  },
+  {
+    "name": "Linn",
+    "type": "female"
+  },
+  {
+    "name": "Lisa",
+    "type": "female"
+  },
+  {
+    "name": "Svea",
+    "type": "female"
+  },
+  {
+    "name": "Joline",
+    "type": "female"
+  },
+  {
+    "name": "Ronja",
+    "type": "female"
+  },
+  {
+    "name": "Elina",
+    "type": "female"
+  },
+  {
+    "name": "Mira",
+    "type": "female"
+  },
+  {
+    "name": "Josefin",
+    "type": "female"
+  },
+  {
+    "name": "Anna",
+    "type": "female"
+  },
+  {
+    "name": "Evelina",
+    "type": "female"
+  },
+  {
+    "name": "Hilda",
+    "type": "female"
+  },
+  {
+    "name": "Rebecca",
+    "type": "female"
+  },
+  {
+    "name": "Vilda",
+    "type": "female"
+  },
+  {
+    "name": "Frida",
+    "type": "female"
+  },
+  {
+    "name": "Lina",
+    "type": "female"
+  },
+  {
+    "name": "Sigrid",
+    "type": "female"
+  },
+  {
+    "name": "Greta",
+    "type": "female"
+  },
+  {
+    "name": "Nicole",
+    "type": "female"
+  },
+  {
+    "name": "Hedda",
+    "type": "female"
+  },
+  {
+    "name": "Majken",
+    "type": "female"
+  },
+  {
+    "name": "Sofie",
+    "type": "female",
+    "archetype": "welder"
+  },
+  {
+    "name": "Annie",
+    "type": "female"
+  },
+  {
+    "name": "Victoria",
+    "type": "female"
+  },
+  {
+    "name": "Hedvig",
+    "type": "female"
+  },
+  {
+    "name": "Hilma",
+    "type": "female"
+  },
+  {
+    "name": "Maria",
+    "type": "female"
+  },
+  {
+    "name": "Rut",
+    "type": "female"
+  }
+], "character_type": [
+  {
+    "type": "female",
+    "name": "Female",
+    "description": "Sugar and spice",
+    "upkeep": [
+      {
+        "type": "food",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "type": "male",
+    "name": "Male",
+    "description": "Snails",
+    "upkeep": [
+      {
+        "type": "food",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "type": "other",
+    "name": "Other",
+    "description": "Snails",
+    "upkeep": [
+      {
+        "type": "food",
+        "amount": 1
+      }
+    ]
+  }
+], "images": [
+  {
+    "type": "fence",
+    "url": "tiles/fence.png"
+  },
+  {
+    "type": "field",
+    "url": "tiles/field.png"
+  },
+  {
+    "type": "grass",
+    "url": "tiles/grass.png"
+  },
+  {
+    "type": "house",
+    "url": "tiles/house1.png"
+  },
+  {
+    "type": "water",
+    "url": "tiles/water.png"
+  }
+], "bounds": {
+  "starting_resources": [
     {
       "type": "wood",
-      "name": "Wood",
-      "description": "Wooden stuff"
+      "amount": 20
     },
     {
       "type": "metal",
-      "name": "Metal",
-      "description": "Shiny!!!"
-    },
-    {
-      "type": "ammo",
-      "name": "Ammo",
-      "description": "Various stuff useful for killing zombies"
+      "amount": 2
     },
     {
       "type": "scrap",
-      "name": "Scrap",
-      "description": "Various bits and bobs"
-    },
-    {
-      "type": "fuel",
-      "name": "Fuel",
-      "description": "Firey stuff"
+      "amount": 5
     },
     {
       "type": "food",
-      "name": "Food",
-      "description": "Turnips"
+      "amount": 40
     }
   ],
-  "archetype": [
+  "game_over": [
     {
-      "type": "archetype_welder",
-      "name": "Welder",
-      "description": "An accomplished welder ",
-      "frequency": 3,
-      "stats": {
-        "combat": 8,
-        "knowledge": 15,
-        "labour": 8
+      "predicate": {
+        "type": "people",
+        "max": 4
       },
-      "traits": [
-        {
-          "type": "welder",
-          "probability": 1
-        }
-      ]
-    },
-    {
-      "type": "archetype_farmer",
-      "name": "Farmer",
-      "description": "A farmer of farms",
-      "frequency": 10,
-      "stats": {
-        "combat": 11,
-        "knowledge": 6,
-        "labour": 15
-      },
-      "traits": [
-        {
-          "type": "farmer",
-          "probability": 1
-        }
-      ]
-    },
-    {
-      "type": "archetype_soldier",
-      "name": "Soldier",
-      "description": "Trained by the old regime to fight",
-      "frequency": 30,
-      "stats": {
-        "combat": 14,
-        "knowledge": 8,
-        "labour": 8
-      },
-      "traits": []
-    },
-    {
-      "type": "archetype_ordinary",
-      "name": "Ordinary",
-      "description": "This character probably did something important before; but now is just another body.",
-      "frequency": 150,
-      "stats": {
-        "combat": 10,
-        "knowledge": 10,
-        "labour": 10
-      },
-      "traits": []
-    }
-  ],
-  "trait": [
-    {
-      "type": "welder",
-      "name": "Welder",
-      "description": "Knows how to work a welding power supply"
-    },
-    {
-      "type": "farmer",
-      "name": "Farmer",
-      "description": "Can grow turnips"
-    },
-    {
-      "type": "survivor",
-      "name": "Survivor",
-      "description": "Coolheaded and collected, this character will do what's necessary to survive the zombie hordes."
-    }
-  ],
-  "character": [
-    {
-      "name": "William",
-      "type": "male"
-    },
-    {
-      "name": "Lucas",
-      "type": "male"
-    },
-    {
-      "name": "Oscar",
-      "type": "male"
-    },
-    {
-      "name": "Hugo",
-      "type": "male"
-    },
-    {
-      "name": "Elias",
-      "type": "male"
-    },
-    {
-      "name": "Oliver",
-      "type": "male"
-    },
-    {
-      "name": "Liam",
-      "type": "male"
-    },
-    {
-      "name": "Alexander",
-      "type": "male"
-    },
-    {
-      "name": "Viktor",
-      "type": "male"
-    },
-    {
-      "name": "Emil",
-      "type": "male"
-    },
-    {
-      "name": "Axel",
-      "type": "male"
-    },
-    {
-      "name": "Anton",
-      "type": "male"
-    },
-    {
-      "name": "Erik",
-      "type": "male"
-    },
-    {
-      "name": "Leo",
-      "type": "male"
-    },
-    {
-      "name": "Filip",
-      "type": "male"
-    },
-    {
-      "name": "Vincent",
-      "type": "male"
-    },
-    {
-      "name": "Olle",
-      "type": "male"
-    },
-    {
-      "name": "Arvid",
-      "type": "male"
-    },
-    {
-      "name": "Ludvig",
-      "type": "male"
-    },
-    {
-      "name": "Theo",
-      "type": "male"
-    },
-    {
-      "name": "Charlie",
-      "type": "male"
-    },
-    {
-      "name": "Isak",
-      "type": "male"
-    },
-    {
-      "name": "Edvin",
-      "type": "male"
-    },
-    {
-      "name": "Albin",
-      "type": "male"
-    },
-    {
-      "name": "Gustav",
-      "type": "male"
-    },
-    {
-      "name": "Elliot",
-      "type": "male"
-    },
-    {
-      "name": "Nils",
-      "type": "male"
-    },
-    {
-      "name": "Adam",
-      "type": "male"
-    },
-    {
-      "name": "Melvin",
-      "type": "male"
-    },
-    {
-      "name": "Wilmer",
-      "type": "male"
-    },
-    {
-      "name": "Max",
-      "type": "male"
-    },
-    {
-      "name": "Viggo",
-      "type": "male"
-    },
-    {
-      "name": "Noah",
-      "type": "male"
-    },
-    {
-      "name": "Benjamin",
-      "type": "male"
-    },
-    {
-      "name": "Alfred",
-      "type": "male"
-    },
-    {
-      "name": "Alvin",
-      "type": "male"
-    },
-    {
-      "name": "Leon",
-      "type": "male"
-    },
-    {
-      "name": "Kevin",
-      "type": "male"
-    },
-    {
-      "name": "Simon",
-      "type": "male"
-    },
-    {
-      "name": "Theodor",
-      "type": "male"
-    },
-    {
-      "name": "Casper",
-      "type": "male"
-    },
-    {
-      "name": "Jonathan",
-      "type": "male"
-    },
-    {
-      "name": "Melker",
-      "type": "male"
-    },
-    {
-      "name": "Sixten",
-      "type": "male"
-    },
-    {
-      "name": "Ville",
-      "type": "male"
-    },
-    {
-      "name": "Rasmus",
-      "type": "male"
-    },
-    {
-      "name": "Gabriel",
-      "type": "male"
-    },
-    {
-      "name": "Carl",
-      "type": "male"
-    },
-    {
-      "name": "Linus",
-      "type": "male"
-    },
-    {
-      "name": "Jacob",
-      "type": "male"
-    },
-    {
-      "name": "Malte",
-      "type": "male"
-    },
-    {
-      "name": "Noel",
-      "type": "male"
-    },
-    {
-      "name": "Love",
-      "type": "male"
-    },
-    {
-      "name": "Felix",
-      "type": "male"
-    },
-    {
-      "name": "Milo",
-      "type": "male"
-    },
-    {
-      "name": "Adrian",
-      "type": "male"
-    },
-    {
-      "name": "Sebastian",
-      "type": "male"
-    },
-    {
-      "name": "Neo",
-      "type": "male"
-    },
-    {
-      "name": "Valter",
-      "type": "male"
-    },
-    {
-      "name": "Josef",
-      "type": "male"
-    },
-    {
-      "name": "David",
-      "type": "male"
-    },
-    {
-      "name": "Jack",
-      "type": "male"
-    },
-    {
-      "name": "Samuel",
-      "type": "male"
-    },
-    {
-      "name": "Joel",
-      "type": "male"
-    },
-    {
-      "name": "Harry",
-      "type": "male"
-    },
-    {
-      "name": "Mohammed",
-      "type": "male"
-    },
-    {
-      "name": "Wilhelm",
-      "type": "male"
-    },
-    {
-      "name": "Loke",
-      "type": "male"
-    },
-    {
-      "name": "Hampus",
-      "type": "male"
-    },
-    {
-      "name": "Vilgot",
-      "type": "male"
-    },
-    {
-      "name": "August",
-      "type": "male"
-    },
-    {
-      "name": "Vidar",
-      "type": "male"
-    },
-    {
-      "name": "Sam",
-      "type": "male"
-    },
-    {
-      "name": "Eddie",
-      "type": "male"
-    },
-    {
-      "name": "Sigge",
-      "type": "male"
-    },
-    {
-      "name": "Milton",
-      "type": "male"
-    },
-    {
-      "name": "Elton",
-      "type": "male"
-    },
-    {
-      "name": "Frank",
-      "type": "male"
-    },
-    {
-      "name": "Daniel",
-      "type": "male"
-    },
-    {
-      "name": "Elis",
-      "type": "male"
-    },
-    {
-      "name": "Alex",
-      "type": "male"
-    },
-    {
-      "name": "Tim",
-      "type": "male"
-    },
-    {
-      "name": "Robin",
-      "type": "male"
-    },
-    {
-      "name": "Maximilian",
-      "type": "male"
-    },
-    {
-      "name": "John",
-      "type": "male"
-    },
-    {
-      "name": "Fabian",
-      "type": "male"
-    },
-    {
-      "name": "Hjalmar",
-      "type": "male"
-    },
-    {
-      "name": "Mio",
-      "type": "male"
-    },
-    {
-      "name": "Hannes",
-      "type": "male"
-    },
-    {
-      "name": "Elvin",
-      "type": "male"
-    },
-    {
-      "name": "Tage",
-      "type": "male"
-    },
-    {
-      "name": "Måns",
-      "type": "male"
-    },
-    {
-      "name": "Aron",
-      "type": "male"
-    },
-    {
-      "name": "Ivar",
-      "type": "male"
-    },
-    {
-      "name": "Ali",
-      "type": "male"
-    },
-    {
-      "name": "Otto",
-      "type": "male"
-    },
-    {
-      "name": "Svante",
-      "type": "male"
-    },
-    {
-      "name": "Marcus",
-      "type": "male"
-    },
-    {
-      "name": "Ebbe",
-      "type": "male"
-    },
-    {
-      "name": "Edward",
-      "type": "male"
-    },
-    {
-      "name": "Alice",
-      "type": "female"
-    },
-    {
-      "name": "Maja",
-      "type": "female"
-    },
-    {
-      "name": "Elsa",
-      "type": "female"
-    },
-    {
-      "name": "Julia",
-      "type": "female"
-    },
-    {
-      "name": "Linnéa",
-      "type": "female"
-    },
-    {
-      "name": "Ella",
-      "type": "female"
-    },
-    {
-      "name": "Ebba",
-      "type": "female"
-    },
-    {
-      "name": "Molly",
-      "type": "female"
-    },
-    {
-      "name": "Wilma",
-      "type": "female"
-    },
-    {
-      "name": "Emma",
-      "type": "female"
-    },
-    {
-      "name": "Nellie",
-      "type": "female"
-    },
-    {
-      "name": "Alva",
-      "type": "female"
-    },
-    {
-      "name": "Isabelle",
-      "type": "female"
-    },
-    {
-      "name": "Olivia",
-      "type": "female"
-    },
-    {
-      "name": "Agnes",
-      "type": "female"
-    },
-    {
-      "name": "Klara",
-      "type": "female"
-    },
-    {
-      "name": "Elin",
-      "type": "female"
-    },
-    {
-      "name": "Emilia",
-      "type": "female"
-    },
-    {
-      "name": "Freja",
-      "type": "female"
-    },
-    {
-      "name": "Ellen",
-      "type": "female"
-    },
-    {
-      "name": "Lilly",
-      "type": "female"
-    },
-    {
-      "name": "Nova",
-      "type": "female"
-    },
-    {
-      "name": "Moa",
-      "type": "female"
-    },
-    {
-      "name": "Ida",
-      "type": "female"
-    },
-    {
-      "name": "Stella",
-      "type": "female"
-    },
-    {
-      "name": "Alma",
-      "type": "female"
-    },
-    {
-      "name": "Saga",
-      "type": "female"
-    },
-    {
-      "name": "Amanda",
-      "type": "female"
-    },
-    {
-      "name": "Alicia",
-      "type": "female"
-    },
-    {
-      "name": "Astrid",
-      "type": "female"
-    },
-    {
-      "name": "Vera",
-      "type": "female"
-    },
-    {
-      "name": "Tuva",
-      "type": "female"
-    },
-    {
-      "name": "Isabella",
-      "type": "female"
-    },
-    {
-      "name": "Felicia",
-      "type": "female"
-    },
-    {
-      "name": "Elvira",
-      "type": "female"
-    },
-    {
-      "name": "Sara",
-      "type": "female"
-    },
-    {
-      "name": "Selma",
-      "type": "female"
-    },
-    {
-      "name": "Signe",
-      "type": "female"
-    },
-    {
-      "name": "Matilda",
-      "type": "female"
-    },
-    {
-      "name": "Hanna",
-      "type": "female"
-    },
-    {
-      "name": "Ester",
-      "type": "female"
-    },
-    {
-      "name": "Ellie",
-      "type": "female"
-    },
-    {
-      "name": "Thea",
-      "type": "female"
-    },
-    {
-      "name": "Tyra",
-      "type": "female"
-    },
-    {
-      "name": "Tilde",
-      "type": "female"
-    },
-    {
-      "name": "Lova",
-      "type": "female"
-    },
-    {
-      "name": "Lea",
-      "type": "female"
-    },
-    {
-      "name": "Minna",
-      "type": "female"
-    },
-    {
-      "name": "Sofia",
-      "type": "female"
-    },
-    {
-      "name": "Meja",
-      "type": "female"
-    },
-    {
-      "name": "Nora",
-      "type": "female"
-    },
-    {
-      "name": "Lovisa",
-      "type": "female"
-    },
-    {
-      "name": "Inez",
-      "type": "female"
-    },
-    {
-      "name": "Siri",
-      "type": "female"
-    },
-    {
-      "name": "Filippa",
-      "type": "female"
-    },
-    {
-      "name": "Emelie",
-      "type": "female"
-    },
-    {
-      "name": "Nathalie",
-      "type": "female"
-    },
-    {
-      "name": "Edith",
-      "type": "female"
-    },
-    {
-      "name": "Liv",
-      "type": "female"
-    },
-    {
-      "name": "Tindra",
-      "type": "female"
-    },
-    {
-      "name": "Tilda",
-      "type": "female"
-    },
-    {
-      "name": "Stina",
-      "type": "female"
-    },
-    {
-      "name": "Leia",
-      "type": "female"
-    },
-    {
-      "name": "Märta",
-      "type": "female"
-    },
-    {
-      "name": "Ingrid",
-      "type": "female"
-    },
-    {
-      "name": "Livia",
-      "type": "female"
-    },
-    {
-      "name": "Emmy",
-      "type": "female"
-    },
-    {
-      "name": "Cornelia",
-      "type": "female"
-    },
-    {
-      "name": "Iris",
-      "type": "female"
-    },
-    {
-      "name": "Jasmine",
-      "type": "female"
-    },
-    {
-      "name": "Juni",
-      "type": "female"
-    },
-    {
-      "name": "Melissa",
-      "type": "female"
-    },
-    {
-      "name": "My",
-      "type": "female"
-    },
-    {
-      "name": "Tove",
-      "type": "female"
-    },
-    {
-      "name": "Elise",
-      "type": "female"
-    },
-    {
-      "name": "Linn",
-      "type": "female"
-    },
-    {
-      "name": "Lisa",
-      "type": "female"
-    },
-    {
-      "name": "Svea",
-      "type": "female"
-    },
-    {
-      "name": "Joline",
-      "type": "female"
-    },
-    {
-      "name": "Ronja",
-      "type": "female"
-    },
-    {
-      "name": "Elina",
-      "type": "female"
-    },
-    {
-      "name": "Mira",
-      "type": "female"
-    },
-    {
-      "name": "Josefin",
-      "type": "female"
-    },
-    {
-      "name": "Anna",
-      "type": "female"
-    },
-    {
-      "name": "Evelina",
-      "type": "female"
-    },
-    {
-      "name": "Hilda",
-      "type": "female"
-    },
-    {
-      "name": "Rebecca",
-      "type": "female"
-    },
-    {
-      "name": "Vilda",
-      "type": "female"
-    },
-    {
-      "name": "Frida",
-      "type": "female"
-    },
-    {
-      "name": "Lina",
-      "type": "female"
-    },
-    {
-      "name": "Sigrid",
-      "type": "female"
-    },
-    {
-      "name": "Greta",
-      "type": "female"
-    },
-    {
-      "name": "Nicole",
-      "type": "female"
-    },
-    {
-      "name": "Hedda",
-      "type": "female"
-    },
-    {
-      "name": "Majken",
-      "type": "female"
-    },
-    {
-      "name": "Sofie",
-      "type": "female",
-      "archetype": "welder"
-    },
-    {
-      "name": "Annie",
-      "type": "female"
-    },
-    {
-      "name": "Victoria",
-      "type": "female"
-    },
-    {
-      "name": "Hedvig",
-      "type": "female"
-    },
-    {
-      "name": "Hilma",
-      "type": "female"
-    },
-    {
-      "name": "Maria",
-      "type": "female"
-    },
-    {
-      "name": "Rut",
-      "type": "female"
-    }
-  ],
-  "character_type": [
-    {
-      "type": "female",
-      "name": "Female",
-      "description": "Sugar and spice",
-      "upkeep": [
-        {
-          "type": "food",
-          "amount": 1
-        }
-      ]
-    },
-    {
-      "type": "male",
-      "name": "Male",
-      "description": "Snails",
-      "upkeep": [
-        {
-          "type": "food",
-          "amount": 1
-        }
-      ]
-    },
-    {
-      "type": "other",
-      "name": "Other",
-      "description": "Snails",
-      "upkeep": [
-        {
-          "type": "food",
-          "amount": 1
-        }
-      ]
-    }
-  ],
-  "images": [
-    {
-      "type": "fence",
-      "url": "tiles/fence.png"
-    },
-    {
-      "type": "field",
-      "url": "tiles/field.png"
-    },
-    {
-      "type": "grass",
-      "url": "tiles/grass.png"
-    },
-    {
-      "type": "house",
-      "url": "tiles/house1.png"
-    },
-    {
-      "type": "water",
-      "url": "tiles/water.png"
-    }
-  ],
-  "bounds": {
-    "starting_resources": [
-      {
-        "type": "wood",
-        "amount": 20
-      },
-      {
-        "type": "metal",
-        "amount": 2
-      },
-      {
-        "type": "scrap",
-        "amount": 5
-      },
-      {
-        "type": "food",
-        "amount": 40
-      }
-    ],
-    "game_over": [
-      {
-        "predicate": {
-          "type": "people",
-          "max": 4
-        },
-        "effects": {
-          "effect_game_over": "defeat",
-          "effect_message": {
-            "text": "text/defeat",
-            "level": "important"
-          }
-        }
-      },
-      {
-        "predicate": {
-          "type": "turn",
-          "min": 40
-        },
-        "effects": {
-          "effect_game_over": "victory",
-          "effect_message": {
-            "text": "text/victory",
-            "level": "important"
-          }
+      "effects": {
+        "effect_game_over": "defeat",
+        "effect_message": {
+          "text": "text/defeat",
+          "level": "important"
         }
       }
-    ],
-    "year": [
-      "autumn",
-      "winter",
-      "spring",
-      "summer"
-    ]
-  }
-}
+    },
+    {
+      "predicate": {
+        "type": "people",
+        "min": 40
+      },
+      "effects": {
+        "effect_game_over": "victory",
+        "effect_message": {
+          "text": "text/victory",
+          "level": "important"
+        }
+      }
+    },
+    {
+      "predicate": {
+        "type": "turn"
+      },
+      "effects": {
+        "effect_points_per_character": 1
+      }
+    }
+  ],
+  "year": ["autumn", "winter", "spring", "summer"]
+}}
