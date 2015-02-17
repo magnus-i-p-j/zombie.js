@@ -7,5 +7,6 @@ goog.require('goog.events');
  */
 z.client.events.EventType = {
   START_TURN: goog.events.getUniqueId('start_turn'),
+  BEFORE_START_TURN: goog.events.getUniqueId('before_start_turn'),
   SHOW_CONTEXT_MENU: goog.events.getUniqueId('show_context_menu')
 };

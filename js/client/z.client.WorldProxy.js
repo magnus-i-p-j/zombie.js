@@ -6,6 +6,7 @@ goog.require('mugd.injector.Injector');
 goog.require('z.client');
 goog.require('z.service.world.World');
 goog.require('z.client.events.StartTurn');
+goog.require('z.client.events.BeforeStartTurn');
 goog.require('z.common.data.StartTurnData');
 goog.require('goog.array');
 goog.require('z.common.data.ClientEndTurn');
@@ -76,15 +77,21 @@ z.client.WorldProxy.prototype.doStartTurn = function(startTurnData) {
   }, this._repository);
 
   this._repository.resetState();
-
-  this.sendMessages(startTurnData.messages);
-
-  var e = new z.client.events.StartTurn({
+  var beforeStartTurnEvent = new z.client.events.BeforeStartTurn({
       turn: this._turn,
       season: this._season
     }
   );
-  this.dispatchEvent(e);
+  this.dispatchEvent(beforeStartTurnEvent);
+
+  this.sendMessages(startTurnData.messages);
+
+  var startTurnEvent = new z.client.events.StartTurn({
+      turn: this._turn,
+      season: this._season
+    }
+  );
+  this.dispatchEvent(startTurnEvent);
 
   console.log(startTurnData.messages);
 };
