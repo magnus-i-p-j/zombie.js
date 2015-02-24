@@ -15,8 +15,9 @@ z.common.messages.level = {
  *   terrain: ?string,
  *   culled: ?number,
  *   text: ?string,
- *   level: z.common.messages.level
+ *   level: z.common.messages.level,
  *   points: ?number,
+ *   template: string
  * }}
  */
 z.common.messages.message;

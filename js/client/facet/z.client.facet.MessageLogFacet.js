@@ -11,7 +11,7 @@ goog.require('z.client');
  */
 z.client.facet.MessageLogFacet = function(services) {
   goog.base(this);
-
+  this['template'] = 'message_log';
   /**
    * @type {function(Array.<!z.client.logItem>):Array.<!z.client.logItem>}
    */
@@ -21,6 +21,8 @@ z.client.facet.MessageLogFacet = function(services) {
    * @type {!z.client.facet.InfoFacet}
    */
   this.info = /** @type {!z.client.facet.InfoFacet} */ services.get(z.client.Resources.INFO_FACET);
+
+  this['any'] = ko.observable({});
 };
 
 goog.inherits(z.client.facet.MessageLogFacet, z.client.facet.Facet);
@@ -46,6 +48,7 @@ z.client.facet.MessageLogFacet.prototype.doStartTurn = function (e) {
  */
 z.client.facet.MessageLogFacet.prototype.doBeforeStartTurn = function(e) {
   this['messages'].removeAll();
+  this['any']({});
 };
 
 
@@ -65,7 +68,10 @@ z.client.facet.MessageLogFacet.prototype.addMessage = function(html, tags, messa
   goog.array.forEach(tags, function(tag) {
       messageItem['tags'][tag] = true;
       messageItem['class_tags'].push(tag);
-    }
+      var any = this['any']();
+      any[tag]= true;
+      this['any'](any);
+    }, this
   );
   if (
     !(

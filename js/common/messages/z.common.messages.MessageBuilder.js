@@ -85,11 +85,23 @@ z.common.messages.MessageBuilder.prototype.build = function() {
   if (this.text) {
     message.text = this.text;
   }
-  if(this.points) {
+  if (this.points) {
     message.points = this.points;
   }
+  message.template = this.getTemplate();
 
   return /** @type {z.common.messages.message} */ message;
+};
+
+/**
+ * @returns {string}
+ */
+z.common.messages.MessageBuilder.prototype.getTemplate = function() {
+  if (this.level === z.common.messages.level.IMPORTANT) {
+    return 'game_over';
+  } else {
+    return 'chatter';
+  }
 };
 
 /**

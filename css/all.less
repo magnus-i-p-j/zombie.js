@@ -15,14 +15,11 @@
 ```
 <div class="game-container">
   <section id="map" class="layout placeholder-map">map</section>
-  <div class="layout" id="sidebar">
-    <section id="current_selection_info">current_selection_info</section>
-    <section id="project_overview">project_overview</section>
-  </div>
   <div id="message-bar" class="layout">
     <section id="info-bar">info_bar</section>
     <section id="message-log">message-log</section>
   </div>
+  <section id="message-modal" class="layout">message-modal</section>
   <section id="toolbar" class="toolbar layout"></section>
 </div>
 ```
@@ -66,6 +63,11 @@ body {
 }
 
 #message-bar {
+  left: 80%;
+  bottom: auto;
+}
+
+#message-modal {
   left: 80%;
   bottom: auto;
 }
