@@ -316,10 +316,41 @@
                         }
                       }
                     },
+                    "effect_points": {
+                      "title": "Effect points",
+                      "description": "The amount of points gained",
+                      "type": "number"
+                    },
                     "effect_end": {
                       "title": "End project",
                       "description": "End the project",
                       "type": "boolean"
+                    },
+                    "effect_message": {
+                      "title": "Send message",
+                      "description": "Send a message",
+                      "type": "object",
+                      "required": [
+                        "text",
+                        "level"
+                      ],
+                      "properties": {
+                        "text": {
+                          "title": "Text",
+                          "description": "The text shown",
+                          "type": "string"
+                        },
+                        "level": {
+                          "title": "Level",
+                          "description": "The display level",
+                          "type": "string",
+                          "enum": [
+                            "usual",
+                            "important",
+                            "trivial"
+                          ]
+                        }
+                      }
                     }
                   }
                 }
@@ -882,9 +913,9 @@
                 "title": "Effects",
                 "description": "The effect this ending has",
                 "type": "object",
-                "required": ["effect_end"],
+                "required": [],
                 "properties": {
-                  "effect_end": {
+                  "effect_game_over": {
                     "title": "End game",
                     "description": "End the game in victory or loss",
                     "type": "string",
@@ -892,6 +923,42 @@
                       "victory",
                       "defeat"
                     ]
+                  },
+                  "effect_points": {
+                    "title": "Effect points",
+                    "description": "The amount of points gained",
+                    "type": "number"
+                  },
+                  "effect_points_per_character": {
+                    "title": "Effect points per character",
+                    "description": "The amount of points gained per character",
+                    "type": "number"
+                  },
+                  "effect_message": {
+                    "title": "Send message",
+                    "description": "Send a message",
+                    "type": "object",
+                    "required": [
+                      "text",
+                      "level"
+                    ],
+                    "properties": {
+                      "text": {
+                        "title": "Text",
+                        "description": "The text shown",
+                        "type": "string"
+                      },
+                      "level": {
+                        "title": "Level",
+                        "description": "The display level",
+                        "type": "string",
+                        "enum": [
+                          "usual",
+                          "important",
+                          "trivial"
+                        ]
+                      }
+                    }
                   }
                 }
               }

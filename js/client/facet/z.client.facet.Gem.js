@@ -3,6 +3,7 @@ goog.provide('z.client.facet.Gem');
 goog.require('z.client.facet.Facet');
 goog.require('mugd.injector.Injector');
 goog.require('z.client');
+goog.require('z.client.events');
 goog.require('z.common.EntityQuery');
 
 /**
@@ -11,7 +12,7 @@ goog.require('z.common.EntityQuery');
  * @implements mugd.injector.IInjectable
  * @constructor
  */
-z.client.facet.Gem = function (services) {
+z.client.facet.Gem = function(services) {
   goog.base(this);
   /**
    * @type {!z.client.facet.MapFacet}
@@ -76,7 +77,17 @@ z.client.facet.Gem = function (services) {
 
   repository.setParentEventTarget(this);
   world.setParentEventTarget(this);
+
+  this.eventHandler.listen(this, z.client.events.EventType.START_TURN, this.doStartTurn);
 };
 
 goog.inherits(z.client.facet.Gem, z.client.facet.Facet);
 
+/**
+ * @param  {!z.client.events.StartTurn} e
+ */
+z.client.facet.Gem.prototype.doStartTurn = function(e) {
+  if (this['messageLogFacet']['any']()['important']){
+    this['modalFacet']['facet'](this['messageLogFacet']);
+  }
+};

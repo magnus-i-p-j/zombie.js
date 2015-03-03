@@ -11,6 +11,7 @@ z.service.Resources = {
   TERRAIN_GENERATOR: 'service_terrain_generator',
   TERRAIN_RANDOM_GENERATOR: 'service_terrain_random_generator',
   CHARACTER_GENERATOR: 'service_character_generator',
-  CHARACTER_FACTORY: 'service_character_factory'
+  CHARACTER_FACTORY: 'service_character_factory',
+  GAME_ENDER: 'game_ender'
 };
 

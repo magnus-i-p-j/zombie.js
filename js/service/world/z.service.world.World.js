@@ -9,9 +9,12 @@ goog.require('z.common.rulebook');
 goog.require('z.common.protocol');
 goog.require('z.common.EntityRepository');
 goog.require('goog.array');
+goog.require('goog.object');
 goog.require('mugd.utils.SimplexNoise');
 goog.require('z.common.EntityQuery');
 goog.require('z.service.world.ZombieDistributor');
+goog.require('z.common.messages');
+goog.require('z.common.messages.MessageBuilder');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -57,7 +60,7 @@ z.service.world.World = function(services) {
    * @private
    */
   this._playerActors = {};
-  var worldActorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_world', {});
+  var worldActorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_world', {}, 0);
 
   /**
    * @type {!z.common.entities.Actor}
@@ -76,6 +79,8 @@ z.service.world.World = function(services) {
    * @private
    */
   this._actorCallbacks = {};
+
+  this._gameEnder = /** @type {!z.service.world.GameEnder} */ services.get(z.service.Resources.GAME_ENDER);
 };
 
 /**
@@ -104,7 +109,7 @@ z.service.world.World.prototype._createCharacters = function(rulebook, character
  * @return {!z.common.data.ActorData}
  */
 z.service.world.World.prototype.createPlayerActor = function(actorCallback) {
-  var actorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_player', this._rulebook.gameStartingData.startingResources);
+  var actorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_player', this._rulebook.gameStartingData.startingResources, 0);
   var actor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(actorData);
   this._playerActors[actor.guid] = actor;
   this._actorCallbacks[actor.guid] = actorCallback;
@@ -184,10 +189,12 @@ z.service.world.World.prototype.endTurn = function() {
   if (!this._turn) {
     this._doBeforeFirstTurn();
   }
-  var killed = this.tick();
+  var tickResult = this.tick();
+  var killed = tickResult.killed;
+  var messages = tickResult.messages;
   for (var actorGuid in this._playerActors) {
     if (this._playerActors.hasOwnProperty(actorGuid)) {
-      var startTurn = this.createStartTurnData(actorGuid, killed);
+      var startTurn = this.createStartTurnData(actorGuid, killed, messages);
       this._actorCallbacks[actorGuid](startTurn);
     }
   }
@@ -200,17 +207,35 @@ z.service.world.World.prototype.endTurn = function() {
  * @param {mugd.utils.guid} actorGuid
  * @returns {!z.common.data.StartTurnData}
  */
-z.service.world.World.prototype.createStartTurnData = function(actorGuid, killed) {
+z.service.world.World.prototype.createStartTurnData = function(actorGuid, killed, messageBuilders) {
   var tiles = this.getVisibleTiles();
   var visibleProjects = this.getVisibleProjects();
   var characters = this.getVisibleCharacters();
   var entities = [];
+  var messages = goog.array.map(
+    goog.array.filter(messageBuilders,
+      /**
+       * @param {z.common.messages.MessageBuilder} mb
+       * @returns {boolean}
+       */
+      function(mb) {
+        return !mb.empty();
+      }
+    ),
+    /**
+     * @param {z.common.messages.MessageBuilder} mb
+     * @returns {z.common.messages.message}
+     */
+    function(mb) {
+      return mb.build();
+    }
+  );
   goog.array.extend(entities, tiles, visibleProjects, characters);
   entities.push(z.common.data.ActorData.fromEntity(this._playerActors[actorGuid]));
   /**
    * @type {!z.common.data.StartTurnData}
    */
-  var startTurn = new z.common.data.StartTurnData(actorGuid, entities, killed, this._turn, this._season);
+  var startTurn = new z.common.data.StartTurnData(actorGuid, entities, killed, messages, this._turn, this._season);
   return startTurn;
 };
 
@@ -267,7 +292,10 @@ z.service.world.World.prototype.getVisibleCharacters = function() {
 };
 
 /**
- * @returns {Array.<!mugd.utils.guid>}
+ * @returns {{
+ * killed: Array.<!mugd.utils.guid>,
+ * messages: Array.<Object>
+ * }}
  */
 z.service.world.World.prototype.tick = function() {
   this._entityRepository.cleanUp();
@@ -277,15 +305,26 @@ z.service.world.World.prototype.tick = function() {
   var killed = this._entityRepository.resetState();
   this._expandWorld();
 
-  this._advanceProjects();
-  this._endProjects();
+  var messages = [];
+  messages = goog.array.concat(messages, this._advanceProjects());
+  messages = goog.array.concat(messages, this._endProjects());
 
   this._distributeZombies();
   this._advanceTime();
 
-  //Special events
+  goog.object.forEach(this._playerActors, function(actor) {
+    var effects = this._checkGameOver(actor);
+    var msg = new z.common.messages.MessageBuilder(actor);
+    this._applyEffects(effects, actor, msg);
+    messages.push(msg);
+  }, this);
+
   this._entityRepository.cleanUp();
-  return killed;
+
+  return {
+    killed: killed,
+    messages: messages
+  };
 };
 
 /**
@@ -305,6 +344,19 @@ z.service.world.World.prototype._advanceTime = function() {
   this._season = year[(this._turn - 1) % year.length];
 };
 
+z.service.world.World.prototype._checkGameOver = function(actor) {
+  var query = new z.common.EntityQuery();
+  query.owner = actor.guid;
+  query.alive = true;
+  query.category = z.common.rulebook.category.CHARACTER_TYPE;
+  var people = this._entityRepository.filter(query);
+  var triggerArgs = {
+    'turn': this._turn,
+    'people': people.length
+  };
+  return this._gameEnder.getEffects(triggerArgs);
+};
+
 z.service.world.World.prototype._endProjects = function() {
   var projects = this._entityRepository.filter(function(entity) {
     if (entity instanceof z.common.entities.Project && entity.getState() === z.common.protocol.state.KILL) {
@@ -313,14 +365,17 @@ z.service.world.World.prototype._endProjects = function() {
     return false
   });
 
-  goog.array.forEach(projects, function(project) {
+  var messages = goog.array.map(projects, function(project) {
     var triggerParams = {
       'end': true
     };
+    var msg = new z.common.messages.MessageBuilder(project);
     var effects = project.trigger(triggerParams);
-    this._applyEffects(effects, project);
+    this._applyEffects(effects, project, msg);
+    return msg;
   }, this);
 
+  return messages;
 };
 
 /**
@@ -360,16 +415,16 @@ z.service.world.World.prototype._advanceProjects = function() {
     return lhs.priority - rhs.priority;
   });
 
-  var results = {};
-
-  goog.array.forEach(projects, function(project) {
-    results[project.guid] = this._advanceProject(project);
+  var messages = goog.array.map(projects, function(project) {
+    var msg = new z.common.messages.MessageBuilder(project);
+    this._advanceProject(project, msg);
+    return msg;
   }, this);
 
-  return results;
+  return messages;
 };
 
-z.service.world.World.prototype._advanceProject = function(project) {
+z.service.world.World.prototype._advanceProject = function(project, message) {
 
   /**
    * @type {!z.common.entities.Actor}
@@ -413,56 +468,60 @@ z.service.world.World.prototype._advanceProject = function(project) {
   };
   var effects = project.trigger(triggerParams);
 
-  return this._applyEffects(effects, project);
+  return this._applyEffects(effects, project, message);
 };
 
 /**
  * @param {Array.<z.common.rulebook.effect>} effects
- * @param {z.common.entities.Project} project
- * @returns {Array.<z.common.rulebook.result>}
+ * @param {z.common.entities.Entity} entity
+ * @param {z.common.messages.MessageBuilder} message
  * @private
  */
-z.service.world.World.prototype._applyEffects = function(effects, project) {
-  var results = goog.array.map(
+z.service.world.World.prototype._applyEffects = function(effects, entity, message) {
+
+  goog.array.forEach(
     effects,
     function(effect) {
-      return this['_apply_' + effect['type']](effect['args'], project);
+      this['_apply_' + effect['type']](effect['args'], entity, message);
     },
     this
   );
-  return results;
 };
 
 /**
- *
  * @param {z.common.rulebook.effect_stockpile} effect
  * @param {z.common.entities.Project} project
+ * @param {z.common.messages.MessageBuilder} message
  */
-z.service.world.World.prototype['_apply_effect_stockpile'] = function(effect, project) {
+z.service.world.World.prototype['_apply_effect_stockpile'] = function(effect, project, message) {
   var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
   goog.array.forEach(effect, function(resource) {
     owner.stockpile.add(resource['type'], resource['magnitude']);
+    message.addStockpileMessage(owner, resource['type'], resource['magnitude']);
   }, this);
 };
 
 /**
  * @param {z.common.rulebook.effect_terrain} effect
  * @param {z.common.entities.Project} project
+ * @param {z.common.messages.MessageBuilder} message
  */
-z.service.world.World.prototype['_apply_effect_terrain'] = function(effect, project) {
+z.service.world.World.prototype['_apply_effect_terrain'] = function(effect, project, message) {
   var tile = /** @type {!z.common.entities.Tile}*/ this._entityRepository.get(project.tile);
   var tileData = z.common.data.TileData.fromEntity(tile);
   var terrainMeta = this._rulebook.getMetaClass(effect);
   tileData.terrain = /** @type {z.common.terrain} */ goog.object.unsafeClone(tileData.terrain);
   tileData.terrain[terrainMeta.zone] = effect;
   this._entityRepository.put(tileData);
+  message.addTerrainMessage(tile, effect);
 };
 
 /**
  * @param {z.common.rulebook.effect_cull_zombies} effect
  * @param {z.common.entities.Project} project
+ * @param {z.common.messages.MessageBuilder} message
  */
-z.service.world.World.prototype['_apply_effect_cull_zombies'] = function(effect, project) {
+z.service.world.World.prototype['_apply_effect_cull_zombies'] = function(effect, project, message) {
   var tile = /** @type {!z.common.entities.Tile} */ this._entityRepository.get(project.tile);
   var isAssignedTo = function(entity) {
     if (entity instanceof z.common.entities.Character) {
@@ -481,19 +540,73 @@ z.service.world.World.prototype['_apply_effect_cull_zombies'] = function(effect,
 
   var totalCombat = goog.array.reduce(this._entityRepository.map(getCombat, isAssignedTo), add, 0, this);
 
-  var magnitude = -1 * (totalCombat * effect.skill + effect.magnitude);
+  var magnitude = (-1 * (totalCombat * effect.skill + effect.magnitude)) | 0;
   tile.addZombieDensity(magnitude);
-
+  message.addCullZombieMessage(tile, magnitude);
 };
 
 /**
  * @param {z.common.rulebook.effect_end} effect
  * @param {z.common.entities.Project} project
+ * @param {z.common.messages.MessageBuilder} message
  */
-z.service.world.World.prototype['_apply_effect_end'] = function(effect, project) {
+z.service.world.World.prototype['_apply_effect_end'] = function(effect, project, message) {
   if (effect) {
     project.setState(z.common.protocol.state.KILL);
+    message.addProjectEndedMessage(project);
   }
+};
+
+/**
+ * @param {z.common.entities.Actor} actor
+ * @param {z.common.rulebook.effect_game_over} effect
+ * @param {z.common.messages.MessageBuilder} message
+ */
+z.service.world.World.prototype['_apply_effect_game_over'] = function(effect, actor, message) {
+  //TODO: Actually do something after a loss/win
+  if (effect === 'victory') {
+    console.log('Victory!');
+  } else {
+    console.log('Defeat!');
+  }
+  message.addGameOverMessage(actor, effect === 'victory');
+};
+
+/**
+ * @param {z.common.rulebook.effect_message} effect
+ * @param {z.common.entities.Actor} actor
+ * @param {z.common.messages.MessageBuilder} message
+ */
+z.service.world.World.prototype['_apply_effect_message'] = function(effect, actor, message) {
+  message.addMessage(actor, effect.text);
+  message.setLevel(effect.level);
+};
+
+/**
+ * @param {z.common.rulebook.effect_points} effect
+ * @param {z.common.entities.Entity} entity
+ * @param {z.common.messages.MessageBuilder} message
+ */
+z.service.world.World.prototype['_apply_effect_points'] = function(effect, entity, message) {
+  var actor = this._entityRepository.get(entity.owner);
+  actor.addPoints(effect);
+  message.addPointsMessage(actor, effect);
+};
+
+/**
+ * @param {z.common.rulebook.effect_points} effect
+ * @param {z.common.entities.Actor} actor
+ * @param {z.common.messages.MessageBuilder} message
+ */
+z.service.world.World.prototype['_apply_effect_points_per_character'] = function(effect, actor, message) {
+  var query = new z.common.EntityQuery();
+  query.owner = actor.guid;
+  query.alive = true;
+  query.category = z.common.rulebook.category.CHARACTER_TYPE;
+  var people = this._entityRepository.filter(query);
+  var points = people.length * effect;
+  actor.addPoints(points);
+  message.addPointsMessage(actor, points);
 };
 
 /**

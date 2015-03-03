@@ -6,6 +6,7 @@ goog.require('mugd.injector.Injector');
 goog.require('z.client');
 goog.require('z.service.world.World');
 goog.require('z.client.events.StartTurn');
+goog.require('z.client.events.BeforeStartTurn');
 goog.require('z.common.data.StartTurnData');
 goog.require('goog.array');
 goog.require('z.common.data.ClientEndTurn');
@@ -33,6 +34,12 @@ z.client.WorldProxy = function(services) {
    * @private
    */
   this._repository = /** @type {!z.common.EntityRepository} */services.get(z.common.Resources.REPOSITORY);
+
+  /**
+   * @type {z.client.facet.MessageLogFacet}
+   * @private
+   */
+  this._messageLogFacet = /** @type {z.client.facet.MessageLogFacet} */ services.get(z.client.Resources.MESSAGE_LOG_FACET);
 
   /**
    * @type {!z.client.facet.ActorFacet}
@@ -70,13 +77,37 @@ z.client.WorldProxy.prototype.doStartTurn = function(startTurnData) {
   }, this._repository);
 
   this._repository.resetState();
-
-  var e = new z.client.events.StartTurn({
+  var beforeStartTurnEvent = new z.client.events.BeforeStartTurn({
       turn: this._turn,
       season: this._season
     }
   );
-  this.dispatchEvent(e);
+  this.dispatchEvent(beforeStartTurnEvent);
+
+  this.sendMessages(startTurnData.messages);
+
+  var startTurnEvent = new z.client.events.StartTurn({
+      turn: this._turn,
+      season: this._season
+    }
+  );
+  this.dispatchEvent(startTurnEvent);
+
+  console.log(startTurnData.messages);
+};
+
+z.client.WorldProxy.prototype.sendMessages = function(messages) {
+  goog.array.forEach(
+    messages,
+    function(message) {
+      this._messageLogFacet.addMessage(
+        JSON.stringify(message, null, 2),
+        [message.level],
+        message
+      );
+    },
+    this
+  );
 };
 
 z.client.WorldProxy.prototype.endTurn = function() {

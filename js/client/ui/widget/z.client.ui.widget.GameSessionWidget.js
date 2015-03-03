@@ -21,10 +21,10 @@ z.client.ui.widget.GameSessionWidget = function (services) {
    * @type {!z.client.ui.widget.ContextMenuWidget}
    */
   this.contextMenuWidget = /** @type {!z.client.ui.widget.ContextMenuWidget} */ services.get(z.client.Resources.CONTEXT_MENU_WIDGET);
-  /**
-   * @type {!z.client.ui.widget.MessageLogWidget}
-   */
-  this.messageLogWidget = /** @type {!z.client.ui.widget.MessageLogWidget} */ services.get(z.client.Resources.MESSAGE_LOG_WIDGET);
+  ///**
+  // * @type {!z.client.ui.widget.MessageLogWidget}
+  // */
+  //this.messageLogWidget = /** @type {!z.client.ui.widget.MessageLogWidget} */ services.get(z.client.Resources.MESSAGE_LOG_WIDGET);
 };
 
 /**

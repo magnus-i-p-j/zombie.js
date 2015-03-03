@@ -12,15 +12,6 @@
     <div id="z_client" class="game-container" style="display: none;" data-bind="visible: true">
       <noscript>You might not have script enabled in your browser.</noscript>
       <section id="map" class="layout"></section>
-      <div id="sidebar" class="layout">
-        <section id="current_selection_info"
-                 data-bind="template: {name: 'current_selection_info_widget', data: currentTarget}">
-          current_selection_info
-        </section>
-        <section id="project_overview"
-                 data-bind="template: {name: 'project_list_widget', data: projectsFacet}">project_overview
-        </section>
-      </div>
       <div id="message-bar" class="layout">
         <section id="info-bar"
                  data-bind="template: {name: 'info_bar_widget', data: infoFacet}">info_bar

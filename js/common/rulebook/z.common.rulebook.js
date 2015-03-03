@@ -1,6 +1,8 @@
 goog.provide('z.common.rulebook');
 goog.provide('z.common.rulebook.logic');
 
+goog.require('z.common.messages');
+
 /**
  * @typedef {{
  *   type: string,
@@ -93,15 +95,6 @@ z.common.rulebook.year;
 z.common.rulebook.effect;
 
 /**
- * @typedef {{
- *   type: string,
- *   change: *
- * }}
- */
-z.common.rulebook.result;
-
-
-/**
  * @typedef {Array.<{
  *   type: string,
  *   magnitude: number
@@ -118,10 +111,17 @@ z.common.rulebook.upkeep;
  * @typedef {string}
  */
 z.common.rulebook.effect_terrain;
+
 /**
  * @typedef {bool}
  */
 z.common.rulebook.effect_end;
+
+/**
+ * @typedef {string}
+ */
+z.common.rulebook.effect_game_over;
+
 /**
  * @typedef {{
  *   magnitude: ?number,
@@ -129,6 +129,19 @@ z.common.rulebook.effect_end;
  * }}
  */
 z.common.rulebook.effect_cull_zombies;
+
+/**
+ * @typedef {{
+ *  text: string,
+ *  level: z.common.messages.level
+ * }}
+ */
+z.common.rulebook.effect_message;
+
+/**
+ * @typedef {number}
+ */
+z.common.rulebook.effect_points;
 
 /**
  * @typedef {{
@@ -172,7 +185,9 @@ z.common.rulebook.predicate_type = {
   COMPLETE: 'complete',
   END: 'end',
   SEASON: 'season',
-  DURATION: 'duration'
+  DURATION: 'duration',
+  PEOPLE: 'people',
+  TURN: 'turn'
 };
 
 
@@ -181,7 +196,9 @@ z.common.rulebook.predicate_type = {
  *   duration: ?number,
  *   complete: ?boolean,
  *   end: ?boolean,
- *   season: ?string
+ *   season: ?string,
+ *   people: ?number,
+ *   turn: ?number
  * }}
  */
 z.common.rulebook.trigger_args;
@@ -195,7 +212,6 @@ z.common.rulebook.category = {
   ZONE: 'zone',
   ACTOR: 'actor',
   STOCKPILE: 'stockpile',
-  STARTING_RESOURCES: 'starting_resources',
   ACTION: 'action',
   BOUNDS: 'bounds',
   TILE: 'tile',
@@ -203,6 +219,14 @@ z.common.rulebook.category = {
   CHARACTER: 'character',
   CHARACTER_TYPE: 'character_type',
   TRAIT: 'trait'
+};
+/**
+ * @enum {string}
+ */
+z.common.rulebook.bounds = {
+  GAME_OVER: 'game_over',
+  STARTING_RESOURCES: 'starting_resources',
+  YEAR: 'year'
 };
 
 //noinspection JSUnusedLocalSymbols
@@ -266,4 +290,28 @@ z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.DURATION] = 
  */
 z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.SEASON] = function(triggerArgs, predicate) {
   return triggerArgs['season'] === predicate.season;
+};
+
+/**
+ * @param triggerArgs {!z.common.rulebook.trigger_args}
+ * @param predicate {!z.common.rulebook.predicate}
+ * @returns {boolean}
+ */
+z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.PEOPLE] = function(triggerArgs, predicate) {
+  var people = triggerArgs['people'];
+  var min = goog.isDefAndNotNull(predicate['min']) ? predicate['min'] : Number.NEGATIVE_INFINITY;
+  var max = goog.isDefAndNotNull(predicate['max']) ? predicate['max'] : Number.POSITIVE_INFINITY;
+  return (people >= min ) && ( people <= max ) ;
+};
+
+/**
+ * @param triggerArgs {!z.common.rulebook.trigger_args}
+ * @param predicate {!z.common.rulebook.predicate}
+ * @returns {boolean}
+ */
+z.common.rulebook.logic.predicates[z.common.rulebook.predicate_type.TURN] = function(triggerArgs, predicate) {
+  var turn = triggerArgs['turn'];
+  var min = goog.isDefAndNotNull(predicate['min']) ? predicate['min'] : Number.NEGATIVE_INFINITY;
+  var max = goog.isDefAndNotNull(predicate['max']) ? predicate['max'] : Number.POSITIVE_INFINITY;
+  return (turn >= min ) && ( turn <= max ) ;
 };

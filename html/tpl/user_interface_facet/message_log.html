@@ -1,0 +1,6 @@
+<ol data-bind="foreach: messages">
+  <!--ko if: tags.important -->
+  <li data-bind="template: {name: 'message/' + message.template, data: $data}, attr: {'class': class_tags.join(' ')}"></li>
+  <pre data-bind="text: ko.toJSON($data, null, 2)"></pre>
+  <!-- /ko --><
+</ol>

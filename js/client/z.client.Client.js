@@ -22,6 +22,7 @@ goog.require('z.client.WorldProxy');
 
 goog.require('z.service.world.RandomTerrainGenerator');
 goog.require('z.service.world.StaticTerrainGenerator');
+goog.require('z.service.world.GameEnder');
 
 goog.require('z.client.facet.Gem');
 goog.require('z.client.facet.MapFacet');
@@ -151,6 +152,7 @@ z.client.Client.prototype.startNewGame = function(ruleset, textures, map) {
   injector.addProvider(z.client.Resources.MAP_WIDGET, z.client.ui.widget.MapWidget);
   injector.addProvider(z.client.Resources.GAME_SESSION_WIDGET, z.client.ui.widget.GameSessionWidget);
   injector.addProvider(z.client.Resources.CONTEXT_MENU_WIDGET, z.client.ui.widget.ContextMenuWidget);
+  injector.addProvider(z.client.Resources.DEBUG_LOG_WIDGET, z.client.ui.widget.MessageLogWidget);
   injector.addProvider(z.client.Resources.MESSAGE_LOG_WIDGET, z.client.ui.widget.MessageLogWidget);
   injector.addProvider(z.client.Resources.GEM, z.client.facet.Gem);
   injector.addProvider(z.client.Resources.ACTION_FACTORY, z.client.ActionFactory);
@@ -200,6 +202,7 @@ z.client.Client.initWorldService = function(ruleset, map) {
   injector.addProvider(z.service.Resources.TERRAIN_RANDOM_GENERATOR, z.service.world.RandomTerrainGenerator);
   injector.addResource(z.service.Resources.TERRAIN_SEED, 'ASDGW3E45RG');
   injector.addResource(z.service.Resources.TERRAIN_MAP, map);
+  injector.addProvider(z.service.Resources.GAME_ENDER, z.service.world.GameEnder);
 
   injector.addFactory(z.common.rulebook.category.PROJECT, z.common.entities.Project);
   injector.addFactory(z.common.rulebook.category.TILE, z.common.entities.Tile);

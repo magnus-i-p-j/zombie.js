@@ -5,8 +5,8 @@
     "h": "house",
     "v": "well",
     "i": "field",
-    "j": "beet_field",
-    "k": "beet_field_ripe",
+    "j": "wheat_field",
+    "k": "wheat_field_ripe",
     "f": "fence"
   },
   "map": {
