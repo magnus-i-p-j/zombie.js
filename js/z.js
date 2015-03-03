@@ -4,6 +4,7 @@ goog.require('z.client.Client');
 goog.require('goog.net.XhrIo');
 goog.require('goog.dom');
 goog.require('mugd.bindings.dragndrop');
+goog.require('mugd.bindings.markdown');
 
 /**
  * @param {string} initElement
@@ -11,6 +12,7 @@ goog.require('mugd.bindings.dragndrop');
  */
 z.init = function (initElement) {
   mugd.bindings.dragndrop.addDragNDrop();
+  mugd.bindings.markdown.addMarkdown();
 
   var client = new z.client.Client(initElement);
 
