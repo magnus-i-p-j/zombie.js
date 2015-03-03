@@ -10,6 +10,25 @@
   }
 }
 
+.shitty-paper(@borderWidth) {
+  border-width: @borderWidth;
+  border-image: url("../img/background/paper-border.png") 5% fill round;
+  font-family: "Reenie Beanie", cursive;
+  color: rgba(26, 26, 189, 0.8);
+  font-size: 1.3em;
+  text-shadow: 0 0 .1px rgba(0, 0, 0, 0.2);
+  h1 {
+    font-weight: bolder;
+    text-align: center;
+    color: rgba(128, 11, 17, 0.8);
+    text-shadow: 0 0 3px rgba(199, 0, 13, 0.8),0 0 1px rgba(52, 0, 3, 0.80);
+  }
+  strong {
+    text-decoration: underline;
+    font-weight: normal;
+  }
+}
+
 /* Main layout
 
 ```
@@ -312,7 +331,9 @@ body {
 ```
 */
 
-/* A message list
+/* A message list displaying without context
+This is just the _common_ display functionality of all message lists; it will ususally have a
+context as well; for instance message-list-log or message-list-modal .
 
 ```
 <ol class="message-list">
@@ -337,12 +358,50 @@ body {
 </ol>
 ```
 */
-
 .message-list {
-  font-family: "Reenie Beanie", cursive;
   list-style: none;
-  color: #1717be;
-  font-size: 120%;
+  padding: 0 0 4em 0;
+  margin: 0;
+  > li {
+    margin: .5em .5em;
+    padding: 1.25em .5em .5em;
+    position: relative;
+
+    .time {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+/* A message list displaying a log
+
+```
+<ol class="message-list message-list-log">
+  <li>
+    <span class="time">21:17:36</span><span>Stuff happened!</span>
+  </li>
+  <li>
+    <span class="time">21:17:37</span><span>Turn started: 1</span>
+  </li>
+  <li>
+    <span class="time">21:17:37</span><span>Turn started: 2</span>
+  </li>
+  <li>
+    <span class="time">21:17:37</span><span>Turn started: 3</span>
+  </li>
+  <li>
+    <span class="time">21:17:37</span><span>Turn started: 4</span>
+  </li>
+  <li>
+    <span class="time">21:17:37</span><span>The last thing happened.</span>
+  </li>
+</ol>
+```
+*/
+
+.message-list-log {
   padding: 0 0 4em 0;
   margin: 0;
   > li {
@@ -350,14 +409,8 @@ body {
     padding: 1.25em .5em .5em;
     @borderWidth: 10px;
     position: relative;
-    border-width: @borderWidth;
-    border-image: url("../img/background/paper-border.png") 5% fill round;
+    .shitty-paper(@borderWidth);
 
-    .time {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
     // Reduce repetition using cicada principle
     & {
       transform: rotate(-1deg);
@@ -381,14 +434,43 @@ body {
   }
 }
 
+/* Message list opened in modal
+```
+<ol class="message-list message-list-modal">
+  <li class="important">
+    <h1>Game Over!</h1>
+    <section>
+      <p>As the sun rises, you look at the few remaining survivors. So few; not enough to defend the
+        smallest of bases.
+      </p>
+
+      <p>During the day, you collect what supplies you can and set off, hoping to outrun the
+        hordes.
+      </p>
+
+      <p>In your heart, though, you know that humanity cant survive as roving nomads.</p>
+
+      <p><strong>You have failed.</strong></p>
+    </section>
+  </li>
+</ol>
+```
+*/
+
+.message-list-modal {
+  .shitty-paper(20px);
+}
+
 /* The modal that opens other pages
 
 ```
 <div class="placeholder-map layout">
   <div class="modal-backdrop">
     <div class="modal-close">✗</div>
-    <div class="modal-content">
-      <div style="min-height: 400px; min-width: 400px;">Some stuff that is in the modal</div>
+    <div class="modal-shadow">
+      <div class="modal-content">
+        <div style="min-height: 400px; min-width: 400px; background: #f5f5f5">Some stuff that is in the modal</div>
+      </div>
     </div>
   </div>
 </div>
@@ -397,6 +479,10 @@ body {
 
 .modal-backdrop {
   @paddingSize: 90px;
+  @shadowOffset: 20px;
+  @shadowBlur: 20px;
+  @shadowSpread: 5px;
+  @shadowColour: rgba(0, 0, 0, 0.55);
   top: 0;
   right: 0;
   bottom: 0;
@@ -405,15 +491,32 @@ body {
   padding: @paddingSize;
   z-index: 500;
   background: rgba(46, 46, 46, 0.80);
+
   .modal-content {
     margin: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background: #f5f5f5;
-    box-shadow: 20px 20px 20px 5px rgba(0, 0, 0, 0.55);
+//    background: #f5f5f5;
+    background: transparent;
     position: relative;
     overflow: hidden;
+    top: -@shadowOffset;
+    left: -@shadowOffset;
+//    top: 0;
+//    left: 0;
+  }
+  .modal-shadow {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: @shadowColour;
+    top: @shadowOffset;
+    left: @shadowOffset;
+    box-shadow: 0 0 @shadowBlur @shadowSpread @shadowColour;
+    position: relative;
+    overflow: visible;
   }
   @buttonSize: 30px;
   .modal-close {
