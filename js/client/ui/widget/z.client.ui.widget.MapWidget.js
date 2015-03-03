@@ -7,6 +7,7 @@ goog.require('goog.style');
 goog.require('goog.math');
 goog.require('goog.math.Coordinate');
 goog.require('goog.array');
+goog.require('goog.object');
 goog.require('mugd.injector.Injector');
 goog.require('z.client');
 goog.require('z.client.events.ShowContextMenu');
@@ -102,18 +103,39 @@ z.client.ui.widget.MapWidget.prototype.doStartTurn = function (e) {
  * @param  {!z.client.facet.TileFacet} tileFacet
  */
 z.client.ui.widget.MapWidget.prototype._drawTile = function (tileFacet) {
+
+  var getTerrainWithOverlay = function(tileFacet) {
+    var terrain = tileFacet['terrain'](); //frozen...
+    terrain = goog.object.unsafeClone(terrain);
+    var tile = tileFacet.entity();
+    if(tile) {
+      var data = tile.zombieData;
+
+      if(data.density >= 10 && data.density < 15) {
+        terrain['overlay'] = 'zombie_density_low';
+      }else if(data.density >= 15 && data.density < 20) {
+        terrain['overlay'] = 'zombie_density_medium';
+      }else if(data.density >= 20) {
+        terrain['overlay'] = 'zombie_density_high';
+      }
+    }
+
+    return terrain;
+  };
+
+
   if (tileFacet) {
     var x = tileFacet.x;
     var y = tileFacet.y;
     var adjacent = goog.array.map(this._mapFacet.getAdjacent(x, y), function (tileFacet) {
         if (tileFacet) {
-          return tileFacet['terrain']();
+          return getTerrainWithOverlay(tileFacet);
         } else {
           return {};
         }
       }
     );
-    this._imap.drawTile(x, y, tileFacet['terrain'](), adjacent);
+    this._imap.drawTile(x, y, getTerrainWithOverlay(tileFacet), adjacent);
     if(goog.DEBUG) {
       var entity = tileFacet.entity();
       if(entity) {
@@ -125,7 +147,7 @@ z.client.ui.widget.MapWidget.prototype._drawTile = function (tileFacet) {
           'danger:' + data.danger,
           '',
           '',
-          '',
+          ''
         ];
         this._imap.drawText(x, y, lines);
       }

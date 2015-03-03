@@ -102,5 +102,38 @@
         "weight": 1
       }
     ]
+  },
+  {
+    "name": "zombie_density_low",
+    "type": "transition",
+    "zone": "overlay",
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/zombie_density_low.png",
+        "weight": 1
+      }
+    ]
+  },
+  {
+    "name": "zombie_density_medium",
+    "type": "transition",
+    "zone": "overlay",
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/zombie_density_medium.png",
+        "weight": 1
+      }
+    ]
+  },
+  {
+    "name": "zombie_density_high",
+    "type": "transition",
+    "zone": "overlay",
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/zombie_density_high.png",
+        "weight": 1
+      }
+    ]
   }
 ]
