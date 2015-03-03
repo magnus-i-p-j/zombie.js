@@ -8,5 +8,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "markdown": "~0.5.0"
+  }
 }

@@ -14,6 +14,7 @@
     "libs/externs/templates-externs.js",
     "libs/externs/knockout-external_template-externs.js",
     "libs/externs/IMap-externs.js",
-    "libs/externs/isogenic_map-externs.js"
+    "libs/externs/isogenic_map-externs.js",
+    "libs/externs/markdown-externs.js"
   ]
 }
