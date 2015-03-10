@@ -13,8 +13,12 @@ goog.require('goog.object');
 goog.require('mugd.utils.SimplexNoise');
 goog.require('z.common.EntityQuery');
 goog.require('z.service.world.ZombieDistributor');
+goog.require('z.service.world.WorkCalculator');
 goog.require('z.common.messages');
 goog.require('z.common.messages.MessageBuilder');
+goog.require('z.common.Stockpile');
+goog.require('z.common.queries');
+
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -415,16 +419,33 @@ z.service.world.World.prototype._advanceProjects = function() {
     return lhs.priority - rhs.priority;
   });
 
+  var globalWork = {};
   var messages = goog.array.map(projects, function(project) {
+    if (!globalWork[project.owner]) {
+      globalWork[project.owner] = z.service.world.WorkCalculator.calculateWithRepository(
+        this._entityRepository,
+        z.common.queries.getUnassignedQuery(project.owner)
+      );
+    }
+
     var msg = new z.common.messages.MessageBuilder(project);
-    this._advanceProject(project, msg);
+    this._advanceProject(project, msg, globalWork[project.owner]);
+    console.log('globalWork', globalWork[project.owner].peekAll());
     return msg;
   }, this);
+
 
   return messages;
 };
 
-z.service.world.World.prototype._advanceProject = function(project, message) {
+/**
+ * @param {!z.common.entities.Project} project
+ * @param {!z.common.messages.MessageBuilder} message
+ * @param {!z.common.Stockpile} globalWork
+ * @returns {*}
+ * @private
+ */
+z.service.world.World.prototype._advanceProject = function(project, message, globalWork) {
 
   /**
    * @type {!z.common.entities.Actor}
@@ -443,18 +464,13 @@ z.service.world.World.prototype._advanceProject = function(project, message) {
     }
     return false;
   };
-  var work = new z.common.Stockpile();
-  var calculateWork = function(character) {
-    work.add(z.common.STATIC + 'combat', character.combat);
-    work.add(z.common.STATIC + 'knowledge', character.knowledge);
-    work.add(z.common.STATIC + 'labour', character.labour);
-  };
-  this._entityRepository.map(calculateWork, isAssignedTo);
+
+  var work = z.service.world.WorkCalculator.calculateWithRepository(this._entityRepository, isAssignedTo);
 
   var time = new z.common.Stockpile();
   time.add(z.common.STATIC + 'time', 1);
 
-  var cashier = new z.common.Cashier(work, time, stockpile);
+  var cashier = new z.common.Cashier(work, time, stockpile, globalWork);
   var investment = cashier.withdraw(cost);
 
   var shouldTriggerComplete = project.advance(investment);
