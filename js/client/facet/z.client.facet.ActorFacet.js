@@ -2,6 +2,7 @@ goog.provide('z.client.facet.ActorFacet');
 
 goog.require('z.client.facet.EntityFacet');
 goog.require('z.common');
+goog.require('z.common.queries');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -36,15 +37,7 @@ z.client.facet.ActorFacet.prototype._update = function () {
   var actor = /** @type {z.common.entities.Actor} */ this.entity();
   this['resources'].update(actor.stockpile);
   this['points'](actor.getPoints());
-  var entityQuery = new z.common.EntityQuery();
-  entityQuery.match = function(entity) {
-    return entity.owner === actor.guid
-      && entity.meta.category === z.common.rulebook.category.CHARACTER_TYPE
-      && !entity.assignedTo
-        // TODO: make state queries easier to not get wrong
-      && entity.getState() !== z.common.protocol.state.KILL
-      && entity.getState() !== z.common.protocol.state.DEAD;
-  };
+  var entityQuery = z.common.queries.getUnassignedQuery(actor.guid);
 
   this._entityQueryObservable(entityQuery);
 };
