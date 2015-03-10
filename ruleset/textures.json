@@ -127,11 +127,22 @@
   },
   {
     "name": "zombie_density_high",
-    "type": "transition",
+    "type": "single",
     "zone": "overlay",
     "textures": [
       {
-        "uri": "..\/img\/tiles\/zombie_density_high.png",
+        "uri": "..\/img\/tiles\/zombie_density_high_2.png",
+        "weight": 1
+      }
+    ]
+  },
+  {
+    "name": "project_notice",
+    "type": "single",
+    "zone": "notice",
+    "textures": [
+      {
+        "uri": "..\/img\/tiles\/project_notice.png",
         "weight": 1
       }
     ]

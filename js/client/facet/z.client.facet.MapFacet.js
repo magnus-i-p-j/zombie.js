@@ -5,6 +5,7 @@ goog.require('goog.math.Rect');
 
 goog.require('z.client.facet.Facet');
 goog.require('z.client.facet.TileFacet');
+goog.require('z.client.facet.ProjectListFacet');
 
 goog.require('mugd.injector.Injector');
 goog.require('mugd.utils.Grid');
@@ -28,6 +29,9 @@ z.client.facet.MapFacet = function (services) {
   this._grid = new mugd.utils.Grid();
 
   this['tiles'] = ko.observableArray();
+
+  var projects = /** @type {!z.client.facet.ProjectListFacet} */ services.get(z.client.Resources.PROJECT_LIST_FACET);
+  this['projects'] = projects['projects'];
 };
 
 goog.inherits(z.client.facet.MapFacet, z.client.facet.Facet);
