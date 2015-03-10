@@ -30,7 +30,7 @@ goog.inherits(z.client.facet.MessageLogFacet, z.client.facet.Facet);
 /**
  * @param {goog.events.EventTarget} parent
  */
-z.client.facet.MessageLogFacet.prototype.setParentEventTarget = function (parent) {
+z.client.facet.MessageLogFacet.prototype.setParentEventTarget = function(parent) {
   goog.base(this, 'setParentEventTarget', parent);
   this.eventHandler.listen(parent, z.client.events.EventType.START_TURN, this.doStartTurn);
   this.eventHandler.listen(parent, z.client.events.EventType.BEFORE_START_TURN, this.doBeforeStartTurn);
@@ -39,8 +39,8 @@ z.client.facet.MessageLogFacet.prototype.setParentEventTarget = function (parent
 /**
  * @param  {!z.client.events.StartTurn} e
  */
-z.client.facet.MessageLogFacet.prototype.doStartTurn = function (e) {
-  this.addMessage('Turn started: ' + e.data.turn, []);
+z.client.facet.MessageLogFacet.prototype.doStartTurn = function(e) {
+  this.addMessage('Turn started: ' + e.data.turn, [], {'template': 'start_turn'});
 };
 
 /**
@@ -54,8 +54,8 @@ z.client.facet.MessageLogFacet.prototype.doBeforeStartTurn = function(e) {
 
 /**
  * @param {string} html
- * @param {z.common.messages.message} message
  * @param {Array.<!z.client.Tags>} tags
+ * @param {z.common.messages.message} message
  */
 z.client.facet.MessageLogFacet.prototype.addMessage = function(html, tags, message) {
   var messageItem = {};
@@ -63,13 +63,17 @@ z.client.facet.MessageLogFacet.prototype.addMessage = function(html, tags, messa
   messageItem['time'] = new Date();
   messageItem['html'] = html;
   messageItem['message'] = message;
+
+  if (!messageItem['message']['template']) {
+    messageItem['message']['template'] = 'chatter';
+  }
   messageItem['tags'] = {};
   messageItem['class_tags'] = [];
   goog.array.forEach(tags, function(tag) {
       messageItem['tags'][tag] = true;
       messageItem['class_tags'].push(tag);
       var any = this['any']();
-      any[tag]= true;
+      any[tag] = true;
       this['any'](any);
     }, this
   );

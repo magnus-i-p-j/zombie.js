@@ -1,8 +1,12 @@
 <ol class="message-list message-list-log" data-bind="foreach: messages">
   <!--ko if: tags.usual -->
-  <li data-bind="attr: {'class': class_tags.join(' ')}">
-    <span class="time" data-bind="time: time"></span>
-    <span data-bind="html: html"></span>
-  </li>
+  <!--<li data-bind="attr: {'class': class_tags.join(' ')}">-->
+    <!--<span class="time" data-bind="time: time"></span>-->
+    <!--<span data-bind="html: html"></span>-->
+    <!--<pre data-bind="text: 'message/' + message.template"></pre>-->
+    <!--<pre data-bind="text: ko.toJSON($data, null, 2);"></pre>-->
+<!---->
+  <!--</li>-->
+  <li data-bind="template: {name: 'message/' + message.template, data: $data}, attr: {'class': class_tags.join(' ')}"></li>
   <!-- /ko -->
 </ol>
