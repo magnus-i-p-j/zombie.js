@@ -338,7 +338,8 @@
                         "text": {
                           "title": "Text",
                           "description": "The text shown",
-                          "type": "string"
+                          "type": "string",
+                          "format": "markdown"
                         },
                         "level": {
                           "title": "Level",
@@ -894,7 +895,7 @@
                     "type": "string",
                     "enum": [
                       "people",
-                      "time"
+                      "turn"
                     ]
                   },
                   "min": {
