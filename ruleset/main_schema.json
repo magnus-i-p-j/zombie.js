@@ -169,7 +169,6 @@
           "type",
           "description",
           "prerequisites",
-          "effects",
           "cost",
           "activity",
           "triggers",
