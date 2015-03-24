@@ -23,7 +23,7 @@ z.client.ui.widget.MapWidget = function (services) {
    * @type {!z.client.facet.MapFacet}
    * @private
    */
-  this._mapFacet = /** @type {!z.client.facet.MapFacet} */ services.get(z.client.Resources.MAP_FACET);
+  this._mapFacet = /** @type {!z.client.facet.MapFacet} */ (services.get(z.client.Resources.MAP_FACET));
 
   this._mapFacet['projects'].subscribe(function(arrayChange){
     goog.array.forEach(arrayChange, function(item) {
@@ -36,16 +36,16 @@ z.client.ui.widget.MapWidget = function (services) {
    * @type {!z.client.facet.Gem}
    * @private
    */
-  this._gem = /** @type {!z.client.facet.Gem} */ services.get(z.client.Resources.GEM);
+  this._gem = /** @type {!z.client.facet.Gem} */ (services.get(z.client.Resources.GEM));
   /**
    * @type {Object}
    */
-  var textures = /** @type {Object} */  services.get(z.client.Resources.TEXTURES);
+  var textures = /** @type {Object} */  (services.get(z.client.Resources.TEXTURES));
 
   /**
    * @type {!function(number, number):number}
    */
-  var tileVariationStrategy = /** @type {!function(number, number):number} */  services.get(z.client.Resources.TILE_VARIATION_STRATEGY);
+  var tileVariationStrategy = /** @type {!function(number, number):number} */  (services.get(z.client.Resources.TILE_VARIATION_STRATEGY));
 
   // Temporary for dev
   this._tileVariationStrategy = tileVariationStrategy;
@@ -54,12 +54,12 @@ z.client.ui.widget.MapWidget = function (services) {
    * @private
    * @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet}
    */
-  this._currentTarget = /** @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet} */services.get(z.client.Resources.CURRENT_TARGET);
+  this._currentTarget = /** @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet} */ (services.get(z.client.Resources.CURRENT_TARGET));
 
 
-  var imapClass = /** @type {function(new:IMap,Object,Object)} */ services.get(z.client.Resources.IMAP);
-  this._mapConfig = /** @type {mapConfig} */ {tileSize: 100};
-  this._imap = /** @type {IMap} */ new imapClass(this._mapConfig, textures, tileVariationStrategy);
+  var imapClass = /** @type {function(new:IMap,Object,Object,Object)} */ (services.get(z.client.Resources.IMAP));
+  this._mapConfig = /** @type {Object} */ ({tileSize: 100});
+  this._imap = /** @type {IMap} */ (new imapClass(this._mapConfig, textures, tileVariationStrategy));
 
   /**
    * @type {goog.events.EventHandler}
@@ -125,9 +125,9 @@ z.client.ui.widget.MapWidget.prototype._drawTile = function (tileFacet) {
     );
     this._imap.drawTile(x, y, this._getTerrain(tileFacet), adjacent);
 
-    if(goog.DEBUG) {
+    //if(goog.DEBUG) {
       //this._drawDebugInfo(tileFacet);
-    }
+    //}
   }
 };
 

@@ -23,29 +23,33 @@ z.client.WorldProxy = function(services) {
   /**
    * @type {!Object}
    */
-  var ruleset = /** @type {!Object} */services.get(z.common.Resources.RULESET);
+  var ruleset = /** @type {!Object} */ (services.get(z.common.Resources.RULESET));
+
+
+  var initWorldService = /** @type {function():!z.service.world.World} */ (services.get(z.client.Resources.WORLD_SERVICE));
   /**
    * @type {!z.service.world.World}
    * @private
    */
-  this._world = (/** @type {function(!Object):!z.service.world.World} */ services.get(z.client.Resources.WORLD_SERVICE))();
+  this._world = initWorldService();
+
   /**
    * @type {!z.common.EntityRepository}
    * @private
    */
-  this._repository = /** @type {!z.common.EntityRepository} */services.get(z.common.Resources.REPOSITORY);
+  this._repository = /** @type {!z.common.EntityRepository} */ (services.get(z.common.Resources.REPOSITORY));
 
   /**
    * @type {z.client.facet.MessageLogFacet}
    * @private
    */
-  this._messageLogFacet = /** @type {z.client.facet.MessageLogFacet} */ services.get(z.client.Resources.MESSAGE_LOG_FACET);
+  this._messageLogFacet = /** @type {z.client.facet.MessageLogFacet} */ (services.get(z.client.Resources.MESSAGE_LOG_FACET));
 
   /**
    * @type {!z.client.facet.ActorFacet}
    * @private
    */
-  this._playerFacet = /** @type {!z.client.facet.ActorFacet} */ services.get(z.client.Resources.PLAYER_FACET);
+  this._playerFacet = /** @type {!z.client.facet.ActorFacet} */ (services.get(z.client.Resources.PLAYER_FACET));
   this._turn = 0;
 };
 
@@ -121,7 +125,7 @@ z.client.WorldProxy.prototype.endTurn = function() {
   };
   var projects = this._repository.map(
     function(item) {
-      var project = /** @type {!z.common.entities.Project} */ item;
+      var project = /** @type {!z.common.entities.Project} */ (item);
       return z.common.data.ProjectData.fromEntity(project);
     },
     function(entity) {
@@ -136,7 +140,7 @@ z.client.WorldProxy.prototype.endTurn = function() {
 
   var characters = this._repository.map(
     function(item) {
-      var character = /** @type {!z.common.entities.Character} */ item;
+      var character = /** @type {!z.common.entities.Character} */ (item);
       return z.common.data.CharacterData.fromEntity(character);
     },
     function(entity) {

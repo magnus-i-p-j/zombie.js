@@ -16,8 +16,8 @@ z.client.facet.ToolbarFacet = function (services) {
    */
   this['actionFacets'] = ko.observableArray();
 
-  var endTurnAction = services.get(z.client.Resources.END_TURN_ACTION);
-  var openProjectManagementAction = services.get(z.client.Resources.OPEN_PROJECT_MANAGEMENT_ACTION);
+  var endTurnAction = /** @type{!z.client.action.Action} */ (services.get(z.client.Resources.END_TURN_ACTION));
+  var openProjectManagementAction = /** @type{!z.client.action.Action} */ (services.get(z.client.Resources.OPEN_PROJECT_MANAGEMENT_ACTION));
   this['actionFacets'].push(new z.client.facet.ActionFacet(endTurnAction));
   this['actionFacets'].push(new z.client.facet.ActionFacet(openProjectManagementAction));
 };

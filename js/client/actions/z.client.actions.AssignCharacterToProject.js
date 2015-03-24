@@ -5,7 +5,6 @@ goog.require('goog.debug.Logger');
 goog.require('z.common');
 
 /**
- * @param {!z.client.facet.CharacterFacet} character
  * @extends {z.client.action.Action}
  * @constructor
  */
@@ -27,7 +26,7 @@ goog.inherits(z.client.actions.AssignCharacterToProject, z.client.action.Action)
  * @type {!goog.debug.Logger}
  * @protected
  */
-z.client.actions.AssignCharacterToProject.prototype._logger = goog.debug.Logger.getLogger('z.client.actions.AssignCharacterToProject');
+z.client.actions.AssignCharacterToProject.prototype._logger = goog.debug.LogManager.getLogger('z.client.actions.AssignCharacterToProject');
 
 /**
  * @override

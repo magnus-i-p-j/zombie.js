@@ -14,10 +14,10 @@ z.client.actions.OpenProjectManagement = function(services) {
    * @type {!z.client.facet.ModalFacet}
    * @private
    */
-  this._modalFacet = /** @type {!z.client.facet.ModalFacet} */ services.get(z.client.Resources.MODAL_FACET);
+  this._modalFacet = /** @type {!z.client.facet.ModalFacet} */ (services.get(z.client.Resources.MODAL_FACET));
 
   /** @type {!mugd.injector.Injector} */
-  this.injector = /** @type {!mugd.injector.Injector} */ services.get(z.common.Resources.INJECTOR);
+  this.injector = /** @type {!mugd.injector.Injector} */ (services.get(z.common.Resources.INJECTOR));
 
   this.meta = {
     'type': 'action_open_project_management',
@@ -48,7 +48,7 @@ z.client.actions.OpenProjectManagement.prototype._executeInternal = function(arg
  * @type {!goog.debug.Logger}
  * @protected
  */
-z.client.actions.OpenProjectManagement.prototype._logger = goog.debug.Logger.getLogger('z.client.actions.OpenProjectManagement');
+z.client.actions.OpenProjectManagement.prototype._logger = goog.debug.LogManager.getLogger('z.client.actions.OpenProjectManagement');
 
 
 

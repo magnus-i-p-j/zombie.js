@@ -14,9 +14,16 @@ z.service.world.WorkCalculator = function() {
 }
 
 /**
- * @param {!z.common.entities.Character} character
+ * @param {!z.common.entities.Entity} entity
+ * @return {*}
  */
-z.service.world.WorkCalculator.prototype.calculateWork = function(character) {
+z.service.world.WorkCalculator.prototype.calculateWork = function(entity) {
+
+  if (!(entity instanceof z.common.entities.Character)) {
+    throw {'name': 'InvalidDataException', 'message': 'not a z.common.entities.Character'};
+  }
+
+  var character = /** @type{z.common.entities.Character} */ (entity);
   this._work.add(z.common.STATIC + 'combat', character.combat);
   this._work.add(z.common.STATIC + 'knowledge', character.knowledge);
   this._work.add(z.common.STATIC + 'labour', character.labour);
@@ -31,7 +38,7 @@ z.service.world.WorkCalculator.prototype.getWork = function() {
 
 /**
  * @param {!z.common.EntityRepository} repository
- * @param @param {(function(!z.common.entities.Entity):boolean|z.common.EntityQuery)=} filter
+ * @param {(function(!z.common.entities.Entity):boolean|z.common.EntityQuery)=} filter
  * @returns {!z.common.Stockpile}
  */
 z.service.world.WorkCalculator.calculateWithRepository = function(repository, filter) {

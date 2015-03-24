@@ -22,13 +22,13 @@ z.client.facet.ContextMenuFacet = function (services) {
    * @type {!z.client.ActionFactory}
    * @private
    */
-  this._actionFactory = /** @type {!z.client.ActionFactory} */ services.get(z.client.Resources.ACTION_FACTORY);
+  this._actionFactory = /** @type {!z.client.ActionFactory} */ (services.get(z.client.Resources.ACTION_FACTORY));
 
   /**
    * @private
    * @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet}
    */
-  this._currentTarget = /** @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet} */services.get(z.client.Resources.CURRENT_TARGET);
+  this._currentTarget = /** @type {function(z.client.facet.EntityFacet=):z.client.facet.EntityFacet} */ (services.get(z.client.Resources.CURRENT_TARGET));
 
   /**
    * @expose

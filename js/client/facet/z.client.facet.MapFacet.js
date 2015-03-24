@@ -24,13 +24,13 @@ z.client.facet.MapFacet = function (services) {
    * @type {!z.common.rulebook.Rulebook}
    * @private
    */
-  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ (services.get(z.common.Resources.RULEBOOK));
 
   this._grid = new mugd.utils.Grid();
 
   this['tiles'] = ko.observableArray();
 
-  var projects = /** @type {!z.client.facet.ProjectListFacet} */ services.get(z.client.Resources.PROJECT_LIST_FACET);
+  var projects = /** @type {!z.client.facet.ProjectListFacet} */ (services.get(z.client.Resources.PROJECT_LIST_FACET));
   this['projects'] = projects['projects'];
 };
 

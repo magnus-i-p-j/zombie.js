@@ -66,7 +66,7 @@ mugd.injector.MicroFactory.prototype.get = function (key) {
  * @returns {!mugd.injector.IInjectable}
  */
 mugd.injector.MicroFactory.prototype.New = function () {
-  return /** @type {!mugd.injector.IInjectable} */ new this.Ctor(this);
+  return /** @type {!mugd.injector.IInjectable} */ (new this.Ctor(this));
 };
 
 /**

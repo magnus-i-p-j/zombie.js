@@ -15,18 +15,18 @@ z.service.world.CharacterGenerator = function (services) {
   /**
    * @type {!Object}
    */
-  var ruleset = /** @type {!Object} */services.get(z.common.Resources.RULESET);
+  var ruleset = /** @type {!Object} */ (services.get(z.common.Resources.RULESET));
 
 
   /**
    * @type {!z.common.rulebook.Rulebook}
    */
-  this._ruleBook = /** @type {!z.common.rulebook.Rulebook} */services.get(z.common.Resources.RULEBOOK);
+  this._ruleBook = /** @type {!z.common.rulebook.Rulebook} */ (services.get(z.common.Resources.RULEBOOK));
 
   /**
    * @type {!z.common.EntityRepository}
    */
-  this._repository = /** @type {!z.common.EntityRepository} */services.get(z.common.Resources.REPOSITORY);
+  this._repository = /** @type {!z.common.EntityRepository} */ (services.get(z.common.Resources.REPOSITORY));
 
   this._characterDataByArchetype = {};
   this._anyArchetypeCharacterData = [];
@@ -61,7 +61,7 @@ z.service.world.CharacterGenerator.prototype.getCharacterByArchetype = function 
     throw "No more characters left";
   }
 
-  var archetype = this._ruleBook.getMetaClass(archetypeType);
+  var archetype = /** @type{z.common.rulebook.Archetype} */ (this._ruleBook.getMetaClass(archetypeType));
   var self = this;
   var characterData = new z.common.data.CharacterData(
     null,
@@ -75,15 +75,25 @@ z.service.world.CharacterGenerator.prototype.getCharacterByArchetype = function 
     1,
     null,
     goog.array.map(
-      goog.array.filter(archetype.traits, function (/** @type {z.common.rulebook.possible_trait} */trait) {
+      goog.array.filter(archetype.traits,
+        /**
+         * @param {z.common.rulebook.possible_trait} trait
+         * @returns {boolean}
+         */
+        function (trait) {
           return trait.probability > Math.random();
         }
-      ), function (/** @type {z.common.rulebook.possible_trait} */trait) {
-        return self._ruleBook.getMetaClass(trait.type);
+      ),
+      /**
+       * @param {z.common.rulebook.possible_trait} trait
+       * @returns {!string}
+       */
+      function (trait) {
+        return trait.type;
       }
     )
   );
-  return /** @type {!z.common.entities.Character} */ this._repository.put(characterData);
+  return /** @type {!z.common.entities.Character} */ (this._repository.put(characterData));
 };
 
 /**

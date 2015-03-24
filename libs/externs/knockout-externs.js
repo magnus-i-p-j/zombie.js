@@ -88,6 +88,10 @@ ko.utils.arrayMap = function (array, mapping) {
 ko.utils.arrayFilter = function (array, predicate) {
 };
 
+ko.utils.domNodeDisposal = function(){};
+
+ko.utils.addDisposeCallback = function(){};
+
 /**
  * @type {function(!Array,Array)}
  */

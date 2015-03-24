@@ -20,13 +20,13 @@ z.common.EntityRepository = function (services) {
    * @type {!z.common.rulebook.Rulebook}
    * @private
    */
-  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ (services.get(z.common.Resources.RULEBOOK));
 
   /**
    * @type {!mugd.injector.Injector}
    * @private
    */
-  this._injector = /** @type {!mugd.injector.Injector} */ services.get(z.common.Resources.INJECTOR);
+  this._injector = /** @type {!mugd.injector.Injector} */ (services.get(z.common.Resources.INJECTOR));
 
   this._repo = {};
 };
@@ -43,7 +43,7 @@ z.common.EntityRepository.prototype.put = function (entityData) {
   /**
    * @type {z.common.entities.Actor}
    */
-  var owner = /** @type {z.common.entities.Actor} */ this.get(entityData.ownerId);
+  var owner = /** @type {z.common.entities.Actor} */ (this.get(entityData.ownerId));
   if (goog.isNull(entity)) {
     if (goog.isNull(entityData.guid)) {
       entityData.guid = mugd.utils.getGuid();
@@ -56,7 +56,7 @@ z.common.EntityRepository.prototype.put = function (entityData) {
     var event = new z.common.events.EntityCreated(entity);
     this.dispatchEvent(event);
   } else {
-    entity.update(entityData, meta, owner);
+    entity.update(entityData, meta, owner.guid);
   }
   return entity;
 };

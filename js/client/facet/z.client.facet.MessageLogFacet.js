@@ -20,7 +20,7 @@ z.client.facet.MessageLogFacet = function(services) {
   /**
    * @type {!z.client.facet.InfoFacet}
    */
-  this.info = /** @type {!z.client.facet.InfoFacet} */ services.get(z.client.Resources.INFO_FACET);
+  this.info = /** @type {!z.client.facet.InfoFacet} */ (services.get(z.client.Resources.INFO_FACET));
 
   this['any'] = ko.observable({});
 };
@@ -40,7 +40,7 @@ z.client.facet.MessageLogFacet.prototype.setParentEventTarget = function(parent)
  * @param  {!z.client.events.StartTurn} e
  */
 z.client.facet.MessageLogFacet.prototype.doStartTurn = function(e) {
-  this.addMessage('Turn started: ' + e.data.turn, [], {'template': 'start_turn'});
+  this.addMessage('Turn started: ' + e.data.turn, [], /**  @type{z.common.messages.message} */ ({'template': 'start_turn'}));
 };
 
 /**

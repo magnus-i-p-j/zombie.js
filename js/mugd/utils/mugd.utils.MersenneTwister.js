@@ -89,10 +89,10 @@ mugd.utils.MersenneTwister = function(seed) {
 
 /**
  * initializes mt[N] with a seed
- * @param {number} s
+ * @param {number} seed
  */
-mugd.utils.MersenneTwister.prototype.init_genrand = function(s) {
-  this.mt[0] = s >>> 0;
+mugd.utils.MersenneTwister.prototype.init_genrand = function(seed) {
+  this.mt[0] = seed >>> 0;
   for (this.mti=1; this.mti<this.N; this.mti++) {
     var s = this.mt[this.mti-1] ^ (this.mt[this.mti-1] >>> 30);
     this.mt[this.mti] = (((((s & 0xffff0000) >>> 16) * 1812433253) << 16) + (s & 0x0000ffff) * 1812433253)

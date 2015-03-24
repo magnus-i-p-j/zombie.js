@@ -20,8 +20,8 @@ goog.require('goog.array');
 z.client.facet.CharacterListFacet = function(services) {
   goog.base(this);
 
-  this._repo = /** @type {!z.common.EntityRepository}*/ services.get(z.common.Resources.REPOSITORY);
-  this._entityQuery = /** @type {function():!z.common.EntityQuery} */ services.get('entityQueryObservable');
+  this._repo = /** @type {!z.common.EntityRepository}*/ (services.get(z.common.Resources.REPOSITORY));
+  this._entityQuery = /** @type {function():!z.common.EntityQuery} */ (services.get('entityQueryObservable'));
 
   /**
    * @type {function(Array.<!z.client.facet.CharacterFacet>=):!Array.<!z.client.facet.CharacterFacet>}

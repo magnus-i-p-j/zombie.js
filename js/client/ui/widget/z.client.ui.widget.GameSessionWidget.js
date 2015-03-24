@@ -12,15 +12,15 @@ z.client.ui.widget.GameSessionWidget = function (services) {
   /**
    * @type {!z.client.facet.Gem}
    */
-  this.gem = /** @type {!z.client.facet.Gem} */ services.get(z.client.Resources.GEM);
+  this.gem = /** @type {!z.client.facet.Gem} */ (services.get(z.client.Resources.GEM));
   /**
    * @type {!z.client.ui.widget.MapWidget}
    */
-  this.mapWidget = /** @type {!z.client.ui.widget.MapWidget} */ services.get(z.client.Resources.MAP_WIDGET);
+  this.mapWidget = /** @type {!z.client.ui.widget.MapWidget} */ (services.get(z.client.Resources.MAP_WIDGET));
   /**
    * @type {!z.client.ui.widget.ContextMenuWidget}
    */
-  this.contextMenuWidget = /** @type {!z.client.ui.widget.ContextMenuWidget} */ services.get(z.client.Resources.CONTEXT_MENU_WIDGET);
+  this.contextMenuWidget = /** @type {!z.client.ui.widget.ContextMenuWidget} */ (services.get(z.client.Resources.CONTEXT_MENU_WIDGET));
   ///**
   // * @type {!z.client.ui.widget.MessageLogWidget}
   // */

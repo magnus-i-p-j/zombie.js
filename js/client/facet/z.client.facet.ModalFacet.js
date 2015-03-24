@@ -24,7 +24,7 @@ goog.inherits(z.client.facet.ModalFacet, z.client.facet.Facet);
  * @type {!goog.debug.Logger}
  * @protected
  */
-z.client.facet.ModalFacet.prototype._logger = goog.debug.Logger.getLogger('z.client.facet.ModalFacet');
+z.client.facet.ModalFacet.prototype._logger = goog.debug.LogManager.getLogger('z.client.facet.ModalFacet');
 
 z.client.facet.ModalFacet.prototype['openTest'] = function() {
 };

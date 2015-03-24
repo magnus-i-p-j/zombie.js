@@ -3,6 +3,7 @@ goog.provide('z.client.Client');
 goog.require('goog.dom');
 goog.require('goog.net.XhrIo');
 goog.require('goog.events.EventTarget');
+goog.require('goog.Promise');
 
 goog.require('z.client');
 goog.require('z.service');
@@ -71,7 +72,7 @@ z.client.Client.prototype.run = function() {
   // todo: 3. Start game.
   var self = this;
 
-  var rulesetPromise = new Promise(function(resolve, reject) {
+  var rulesetPromise = new goog.Promise(function(resolve, reject) {
     goog.net.XhrIo.send('../ruleset/main.json', function(r) {
       var conn = r.target;
       if (conn.isSuccess()) {
@@ -84,7 +85,7 @@ z.client.Client.prototype.run = function() {
     });
   });
 
-  var texturePromise = new Promise(function(resolve, reject) {
+  var texturePromise = new goog.Promise(function(resolve, reject) {
     goog.net.XhrIo.send('../ruleset/textures.json', function(r) {
       var conn = r.target;
       if (conn.isSuccess()) {
@@ -97,7 +98,7 @@ z.client.Client.prototype.run = function() {
     });
   });
 
-  var mapPromise = new Promise(function(resolve, reject) {
+  var mapPromise = new goog.Promise(function(resolve, reject) {
     goog.net.XhrIo.send('../ruleset/map.json', function(r) {
       var conn = r.target;
       if (conn.isSuccess()) {
@@ -110,7 +111,7 @@ z.client.Client.prototype.run = function() {
     });
   });
 
-  var allPromises = Promise.all([rulesetPromise, texturePromise, mapPromise]);
+  var allPromises = goog.Promise.all([rulesetPromise, texturePromise, mapPromise]);
 
   allPromises.then(function(param) {
     var ruleset = param[0];

@@ -59,21 +59,3 @@ z.common.data.CharacterData.fromEntity = function (character) {
     goog.object.getKeys(character.traits)
   );
 };
-
-/**
- * @param {!z.common.protocol.character} protocol
- * @return {!z.common.data.CharacterData}
- */
-z.common.data.CharacterData.fromProtocol = function (protocol) {
-  return new z.common.data.CharacterData(
-  );
-};
-
-/**
- * @param {!z.common.entities.Character} character
- * @return {!z.common.protocol.character}
- */
-z.common.data.CharacterData.toProtocol = function (character) {
-  return {
-  };
-};

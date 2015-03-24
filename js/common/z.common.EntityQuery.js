@@ -42,13 +42,14 @@ z.common.EntityQuery.prototype.match = function (entity) {
 
 
 /**
- * @return {!z.common.EntityEmptyQuery}
+ * @return {!z.common.EntityQuery}
  */
 z.common.EntityQuery.empty = function () {
   return new z.common.EntityEmptyQuery();
 };
 
 /**
+ * @extends {z.common.EntityQuery}
  * @constructor
  */
 z.common.EntityEmptyQuery = function () {

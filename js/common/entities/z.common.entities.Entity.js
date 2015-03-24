@@ -13,7 +13,7 @@ z.common.entities.Entity = function(services) {
   /**
    * @type {!z.common.data.EntityData}
    */
-  var entityData = /** @type {!z.common.data.EntityData} */ services.get('entityData');
+  var entityData = /** @type {!z.common.data.EntityData} */ (services.get('entityData'));
   /**
    *
    * @type {!mugd.utils.guid}
@@ -22,7 +22,7 @@ z.common.entities.Entity = function(services) {
   /**
    * @type {!z.common.rulebook.meta}
    */
-  this.meta = /** @type {!z.common.rulebook.meta} */ services.get('meta');
+  this.meta = /** @type {!z.common.rulebook.meta} */ (services.get('meta'));
 
   /**
    * {goog.math.Coordinate}
@@ -32,19 +32,20 @@ z.common.entities.Entity = function(services) {
   /**
    * @type {!z.common.entities.Actor}
    */
-  var owner = /** {!z.common.entities.Actor} */ services.get('owner');
+  var owner = /** @type{!z.common.entities.Actor} */ (services.get('owner'));
   /**
    * @type {?mugd.utils.guid}
    */
   this.owner = owner ? owner.guid : null;
 
+  if (!entityData.state) {
+    throw 'No state set on entity';
+  }
+
   /**
    * @private
    * @type {!z.common.protocol.state}
    */
-  if (!entityData.state) {
-    throw {};
-  }
   this._state = entityData.state;
 };
 
@@ -85,9 +86,9 @@ z.common.entities.Entity.prototype.entityKilled = function(guid) {
 };
 
 /**
- * @param {z.common.data.EntityData} entityData
+ * @param {!z.common.data.EntityData} entityData
  * @param {z.common.rulebook.meta} meta
- * @param {z.common.entities.Actor} owner
+ * @param {mugd.utils.guid} owner
  * @return {boolean}
  */
 z.common.entities.Entity.prototype.update = function(entityData, meta, owner) {
@@ -101,8 +102,8 @@ z.common.entities.Entity.prototype.update = function(entityData, meta, owner) {
     }
   }
 
-  if (owner && owner.guid !== this.owner) {
-    this.owner = owner.guid;
+  if (owner && owner !== this.owner) {
+    this.owner = owner;
     updated = true;
   }
 
@@ -137,7 +138,7 @@ z.common.entities.Entity.prototype._setModified = function() {
  *
  * @param {!z.common.data.EntityData} entityData
  * @param {!z.common.rulebook.meta} meta
- * @param {z.common.entities.Actor} owner
+ * @param {mugd.utils.guid} owner
  * @return {boolean}
  * @protected
  */

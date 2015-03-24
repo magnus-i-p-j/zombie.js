@@ -30,17 +30,17 @@ z.service.world.World = function(services) {
    * @type {!z.common.EntityRepository}
    * @private
    */
-  this._entityRepository = /** @type {!z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
+  this._entityRepository = /** @type {!z.common.EntityRepository} */ (services.get(z.common.Resources.REPOSITORY));
   /**
    * @type {!z.common.rulebook.Rulebook}
    * @private
    */
-  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ (services.get(z.common.Resources.RULEBOOK));
   /**
    * @type {!z.service.world.ITerrainGenerator}
    * @private
    */
-  this._terrainGenerator = /** @type {!z.service.world.ITerrainGenerator} */services.get(z.service.Resources.TERRAIN_GENERATOR);
+  this._terrainGenerator = /** @type {!z.service.world.ITerrainGenerator} */ (services.get(z.service.Resources.TERRAIN_GENERATOR));
 
   /**
    * @type {number}
@@ -49,7 +49,7 @@ z.service.world.World = function(services) {
   this._turn = 0;
 
   /**
-   * @type {string}
+   * @type {?string}
    * @private
    */
   this._season = null;
@@ -70,12 +70,12 @@ z.service.world.World = function(services) {
    * @type {!z.common.entities.Actor}
    * @private
    */
-  this._worldActor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(worldActorData);
+  this._worldActor = /** @type {!z.common.entities.Actor} */ (this._entityRepository.put(worldActorData));
 
   /**
    * @type {!z.service.world.CharacterGenerator}
    */
-  var characterGenerator = /** @type {!z.service.world.CharacterGenerator} */services.get(z.service.Resources.CHARACTER_GENERATOR);
+  var characterGenerator = /** @type {!z.service.world.CharacterGenerator} */ (services.get(z.service.Resources.CHARACTER_GENERATOR));
   this._createCharacters(this._rulebook, characterGenerator, this._worldActor);
 
   /**
@@ -84,14 +84,14 @@ z.service.world.World = function(services) {
    */
   this._actorCallbacks = {};
 
-  this._gameEnder = /** @type {!z.service.world.GameEnder} */ services.get(z.service.Resources.GAME_ENDER);
+  this._gameEnder = /** @type {!z.service.world.GameEnder} */ (services.get(z.service.Resources.GAME_ENDER));
 };
 
 /**
  * @type {!goog.debug.Logger}
  * @protected
  */
-z.service.world.World.prototype._logger = goog.debug.Logger.getLogger('z.service.world.World');
+z.service.world.World.prototype._logger = goog.debug.LogManager.getLogger('z.service.world.World');
 
 /**
  *
@@ -114,7 +114,7 @@ z.service.world.World.prototype._createCharacters = function(rulebook, character
  */
 z.service.world.World.prototype.createPlayerActor = function(actorCallback) {
   var actorData = new z.common.data.ActorData(null, z.common.protocol.state.MODIFIED, 'actor_player', this._rulebook.gameStartingData.startingResources, 0);
-  var actor = /** @type {!z.common.entities.Actor} */ this._entityRepository.put(actorData);
+  var actor = /** @type {!z.common.entities.Actor} */ (this._entityRepository.put(actorData));
   this._playerActors[actor.guid] = actor;
   this._actorCallbacks[actor.guid] = actorCallback;
   return z.common.data.ActorData.fromEntity(actor);
@@ -124,13 +124,15 @@ z.service.world.World.prototype.createPlayerActor = function(actorCallback) {
  * @param {z.common.data.ClientEndTurn} endTurnData
  */
 z.service.world.World.prototype.actorEndTurn = function(endTurnData) {
-  var actor = /** @type {!z.common.entities.Actor} */ this._entityRepository.get(endTurnData.actorId);
+  var actor = /** @type {!z.common.entities.Actor} */ (this._entityRepository.get(endTurnData.actorId));
   goog.array.forEach(endTurnData.entities,
     function(entityData) {
       if (entityData instanceof z.common.data.ProjectData) {
-        this.updateProject(/** @type {!z.common.data.ProjectData} */ entityData, actor);
+        var projectData = /** @type {!z.common.data.ProjectData} */ (entityData);
+        this.updateProject(projectData, actor);
       } else if (entityData instanceof z.common.data.CharacterData) {
-        this.updateCharacter(/** @type {!z.common.data.CharacterData} */ entityData, actor);
+        var characterData = /** @type {!z.common.data.CharacterData} */ (entityData);
+        this.updateCharacter(characterData, actor);
       }
     }, this
   );
@@ -249,7 +251,7 @@ z.service.world.World.prototype.createStartTurnData = function(actorGuid, killed
 z.service.world.World.prototype.getVisibleTiles = function() {
   var tiles = this._entityRepository.map(
     function(entity) {
-      var tile = /** @type {!z.common.entities.Tile} */ entity;
+      var tile = /** @type {!z.common.entities.Tile} */ (entity);
       return z.common.data.TileData.fromEntity(tile);
     },
     function(entity) {
@@ -265,7 +267,7 @@ z.service.world.World.prototype.getVisibleTiles = function() {
 z.service.world.World.prototype.getVisibleProjects = function() {
   var visibleProjects = this._entityRepository.map(
     function(item) {
-      var project = /** @type {!z.common.entities.Project} */ item;
+      var project = /** @type {!z.common.entities.Project} */ (item);
       return z.common.data.ProjectData.fromEntity(project);
     },
     function(entity) {
@@ -283,7 +285,7 @@ z.service.world.World.prototype.getVisibleProjects = function() {
 z.service.world.World.prototype.getVisibleCharacters = function() {
   var characters = this._entityRepository.map(
     function(item) {
-      var character = /** @type {!z.common.entities.Character} */ item;
+      var character = /** @type {!z.common.entities.Character} */ (item);
       return z.common.data.CharacterData.fromEntity(character);
     },
     function(entity) {
@@ -388,7 +390,14 @@ z.service.world.World.prototype._endProjects = function() {
 z.service.world.World.prototype._consumeUpkeep = function() {
   var self = this;
   self._entityRepository.map(function(entity) {
-    var owner = self._entityRepository.get(entity.owner);
+
+    //TODO: Should all entities always have an owner?
+    /**
+     * @type {mugd.utils.guid}
+     */
+    var entityOwnerGuid = /** @type {mugd.utils.guid} */ (entity.owner);
+
+    var owner = self._entityRepository.get(entityOwnerGuid);
     var stockpile = owner.stockpile;
     goog.object.forEach(entity.meta.upkeep, function(value, name) {
       var taken = stockpile.take(name, value);
@@ -422,9 +431,15 @@ z.service.world.World.prototype._advanceProjects = function() {
   var globalWork = {};
   var messages = goog.array.map(projects, function(project) {
     if (!globalWork[project.owner]) {
+      //TODO: Should all entities always have an owner?
+      /**
+       * @type {mugd.utils.guid}
+       */
+      var projectOwnerGuid = /** @type {mugd.utils.guid} */ (project.owner);
+
       globalWork[project.owner] = z.service.world.WorkCalculator.calculateWithRepository(
         this._entityRepository,
-        z.common.queries.getUnassignedQuery(project.owner)
+        z.common.queries.getUnassignedQuery(projectOwnerGuid)
       );
     }
 
@@ -447,11 +462,20 @@ z.service.world.World.prototype._advanceProjects = function() {
  */
 z.service.world.World.prototype._advanceProject = function(project, message, globalWork) {
 
+  //TODO: Should all entities always have an owner?
+  /**
+   * @type {mugd.utils.guid}
+   */
+  var projectOwnerGuid = /** @type {mugd.utils.guid} */ (project.owner);
   /**
    * @type {!z.common.entities.Actor}
    */
-  var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
-  var tile = /** @type {!z.common.entities.Tile}*/ this._entityRepository.get(project.tile);
+  var owner = /** @type {!z.common.entities.Actor}*/ (this._entityRepository.get(projectOwnerGuid));
+  /**
+   * @type {mugd.utils.guid}
+   */
+  var tileGuid = /** @type {mugd.utils.guid} */ (project.tile);
+  var tile = /** @type {!z.common.entities.Tile}*/ (this._entityRepository.get(tileGuid));
   var stockpile = owner.stockpile;
 
   var cost = project.getRemainingCost();
@@ -459,7 +483,7 @@ z.service.world.World.prototype._advanceProject = function(project, message, glo
 
   var isAssignedTo = function(entity) {
     if (entity instanceof z.common.entities.Character) {
-      var character = /** @type {!z.common.entities.Character} */ entity;
+      var character = /** @type {!z.common.entities.Character} */ (entity);
       return character.assignedTo === project.guid;
     }
     return false;
@@ -510,7 +534,12 @@ z.service.world.World.prototype._applyEffects = function(effects, entity, messag
  * @param {z.common.messages.MessageBuilder} message
  */
 z.service.world.World.prototype['_apply_effect_stockpile'] = function(effect, project, message) {
-  var owner = /** @type {!z.common.entities.Actor}*/ this._entityRepository.get(project.owner);
+  //TODO: Should all entities always have an owner?
+  /**
+   * @type {mugd.utils.guid}
+   */
+  var projectOwnerGuid = /** @type {mugd.utils.guid} */ (project.owner);
+  var owner = /** @type {!z.common.entities.Actor}*/ (this._entityRepository.get(projectOwnerGuid));
   goog.array.forEach(effect, function(resource) {
     owner.stockpile.add(resource['type'], resource['magnitude']);
     message.addStockpileMessage(owner, resource['type'], resource['magnitude']);
@@ -523,10 +552,14 @@ z.service.world.World.prototype['_apply_effect_stockpile'] = function(effect, pr
  * @param {z.common.messages.MessageBuilder} message
  */
 z.service.world.World.prototype['_apply_effect_terrain'] = function(effect, project, message) {
-  var tile = /** @type {!z.common.entities.Tile}*/ this._entityRepository.get(project.tile);
+  /**
+   * @type {mugd.utils.guid}
+   */
+  var tileGuid = /** @type {mugd.utils.guid} */ (project.tile);
+  var tile = /** @type {!z.common.entities.Tile}*/ (this._entityRepository.get(tileGuid));
   var tileData = z.common.data.TileData.fromEntity(tile);
   var terrainMeta = this._rulebook.getMetaClass(effect);
-  tileData.terrain = /** @type {z.common.terrain} */ goog.object.unsafeClone(tileData.terrain);
+  tileData.terrain = /** @type {z.common.terrain} */ (goog.object.unsafeClone(tileData.terrain));
   tileData.terrain[terrainMeta.zone] = effect;
   this._entityRepository.put(tileData);
   message.addTerrainMessage(tile, effect);
@@ -538,10 +571,14 @@ z.service.world.World.prototype['_apply_effect_terrain'] = function(effect, proj
  * @param {z.common.messages.MessageBuilder} message
  */
 z.service.world.World.prototype['_apply_effect_cull_zombies'] = function(effect, project, message) {
-  var tile = /** @type {!z.common.entities.Tile} */ this._entityRepository.get(project.tile);
+  /**
+   * @type {mugd.utils.guid}
+   */
+  var tileGuid = /** @type {mugd.utils.guid} */ (project.tile);
+  var tile = /** @type {!z.common.entities.Tile} */ (this._entityRepository.get(tileGuid));
   var isAssignedTo = function(entity) {
     if (entity instanceof z.common.entities.Character) {
-      var character = /** @type {!z.common.entities.Character} */ entity;
+      var character = /** @type {!z.common.entities.Character} */ (entity);
       return character.assignedTo === project.guid;
     }
     return false;
@@ -604,7 +641,12 @@ z.service.world.World.prototype['_apply_effect_message'] = function(effect, acto
  * @param {z.common.messages.MessageBuilder} message
  */
 z.service.world.World.prototype['_apply_effect_points'] = function(effect, entity, message) {
-  var actor = this._entityRepository.get(entity.owner);
+  //TODO: Should all entities always have an owner?
+  /**
+   * @type {mugd.utils.guid}
+   */
+  var ownerGuid = /** @type {mugd.utils.guid} */ (entity.owner);
+  var actor = this._entityRepository.get(ownerGuid);
   actor.addPoints(effect);
   message.addPointsMessage(actor, effect);
 };

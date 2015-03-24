@@ -17,12 +17,12 @@ z.common.entities.Project = function(services) {
   /**
    * @type {!z.common.data.ProjectData}
    */
-  var projectData = /** @type {!z.common.data.ProjectData} */ services.get('entityData');
+  var projectData = /** @type {!z.common.data.ProjectData} */ (services.get('entityData'));
 
   /**
    * @type {!z.common.EntityRepository}
    */
-  var entityRepository = /** @type {!z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
+  var entityRepository = /** @type {!z.common.EntityRepository} */ (services.get(z.common.Resources.REPOSITORY));
 
   /**
    * @type {z.common.rulebook.category}
@@ -42,7 +42,7 @@ z.common.entities.Project = function(services) {
 
 
   /**
-   * @type {mugd.utils.guid}
+   * @type {?mugd.utils.guid}
    */
   this.tile = projectData.tileId;
 
@@ -77,9 +77,10 @@ z.common.entities.Project.prototype.invest = function(investment) {
 };
 
 /**
+ * @param {Object.<string, number>} investment
  * @return {boolean}
  */
-z.common.entities.Project.prototype.advance = function(investment, season) {
+z.common.entities.Project.prototype.advance = function(investment) {
   var shouldTriggerComplete;
   var wasDone = !goog.object.some(this.getRemainingCost(), goog.functions.identity);
   this.invest(investment);
@@ -126,7 +127,7 @@ z.common.entities.Project.prototype._update = function(entityData, meta, owner) 
     };
   }
 
-  var projectData = /** @type {!z.common.data.ProjectData} */ entityData;
+  var projectData = /** @type {!z.common.data.ProjectData} */ (entityData);
 
   var updated = false;
 

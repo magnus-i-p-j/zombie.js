@@ -20,7 +20,7 @@ z.client.ui.widget.ContextMenuWidget = function (services) {
    * @type {!z.client.facet.ContextMenuFacet}
    * @private
    */
-  this._contextMenuFacet = /** @type {!z.client.facet.ContextMenuFacet} */ services.get(z.client.Resources.CONTEXT_MENU_FACET);
+  this._contextMenuFacet = /** @type {!z.client.facet.ContextMenuFacet} */ (services.get(z.client.Resources.CONTEXT_MENU_FACET));
   /**
    * @protected
    * @type {goog.events.EventHandler}
@@ -44,6 +44,9 @@ z.client.ui.widget.ContextMenuWidget.prototype.doMouseOverParent = function (e) 
   }
 };
 
+/**
+ * @inheritDoc
+ */
 z.client.ui.widget.ContextMenuWidget.prototype.disposeInternal = function () {
   this.eventHandler.dispose();
 };

@@ -14,13 +14,13 @@ z.common.entities.Tile = function(services) {
   /**
    * @type {!z.common.data.TileData}
    */
-  var tileData = /** @type {!z.common.data.TileData} */ services.get('entityData');
+  var tileData = /** @type {!z.common.data.TileData} */ (services.get('entityData'));
 
   /**
    * @type {!z.common.rulebook.Rulebook}
    * @private
    */
-  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
+  this._rulebook = /** @type {!z.common.rulebook.Rulebook} */ (services.get(z.common.Resources.RULEBOOK));
 
   /**
    * @type {z.common.terrain}
@@ -51,7 +51,7 @@ z.common.entities.Tile.prototype._update = function(data, meta) {
   /**
    * @type {!z.common.data.TileData}
    */
-  var tileData = /** @type {!z.common.data.TileData} */ data;
+  var tileData = /** @type {!z.common.data.TileData} */ (data);
   if (this.position.x !== tileData.x || this.position.y !== tileData.y || this.guid !== tileData.guid) {
     throw {
       'name': 'InvalidDataException',
@@ -94,8 +94,7 @@ z.common.entities.Tile.prototype._update = function(data, meta) {
 };
 
 /**
- * @param {!Object<string,?string>} data
- * @return {!Object<string,string>}
+ * @param {!Object<string,?string>} inTerrain
  */
 z.common.entities.Tile.prototype._setTerrain = function(inTerrain) {
   var terrain = {};
@@ -124,7 +123,7 @@ z.common.entities.Tile.prototype.setZombieData = function(data) {
  */
 z.common.entities.Tile.prototype.addZombieActivity = function(magnitude) {
   if (magnitude) {
-    var zombieData = goog.object.unsafeClone(this.zombieData);
+    var zombieData = /** @type {!z.common.zombiedata} */ (goog.object.unsafeClone(this.zombieData));
     zombieData.activity = zombieData.activity + magnitude;
     this.zombieData = zombieData;
     this._dispatchModified();
@@ -136,7 +135,7 @@ z.common.entities.Tile.prototype.addZombieActivity = function(magnitude) {
  */
 z.common.entities.Tile.prototype.addZombieDensity = function(magnitude) {
   if (magnitude) {
-    var zombieData = goog.object.unsafeClone(this.zombieData);
+    var zombieData = /** @type {!z.common.zombiedata} */ (goog.object.unsafeClone(this.zombieData));
     zombieData.density = Math.max(zombieData.density + magnitude, 0);
     this.zombieData = zombieData;
     this._dispatchModified();
@@ -161,7 +160,7 @@ z.common.entities.Tile.prototype._calculateZombieData = function(data) {
     /**
      * @type {!z.common.rulebook.Terrain}
      */
-    var metaClass = /** @type {!z.common.rulebook.Terrain} */ this._rulebook.getMetaClass(terrain);
+    var metaClass = /** @type {!z.common.rulebook.Terrain} */ (this._rulebook.getMetaClass(terrain));
     totalDefence += metaClass.defence;
     totalActivity += metaClass.activity;
   }, this);

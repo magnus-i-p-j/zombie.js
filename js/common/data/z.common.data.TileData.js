@@ -67,35 +67,3 @@ z.common.data.TileData.fromEntity = function (tile) {
       tile.zombieData
   );
 };
-
-/**
- * @param {!z.common.protocol.tile} protocol
- * @return {!z.common.data.TileData}
- */
-z.common.data.TileData.fromProtocol = function (protocol) {
-  return new z.common.data.TileData(
-      protocol['tileId'],
-      protocol['state'],
-      protocol['ownerId'],
-      protocol['x'],
-      protocol['y'],
-      protocol['terrain'],
-      protocol['type']
-  );
-};
-
-/**
- * @param {!z.common.entities.Tile} tile
- * @return {!z.common.protocol.tile}
- */
-z.common.data.TileData.toProtocol = function (tile) {
-  return {
-      'tileId': tile.guid,
-      'state': tile.getState(),
-      'ownerId': tile.owner,
-      'x': tile.position.x,
-      'y': tile.position.y,
-      'terrain': tile.terrain,
-      'type': tile.meta.type
-  };
-};

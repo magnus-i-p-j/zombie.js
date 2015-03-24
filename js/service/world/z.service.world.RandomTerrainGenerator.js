@@ -18,12 +18,12 @@ z.service.world.RandomTerrainGenerator = function(services) {
    * @type {string}
    * @private
    */
-  this._seed = /** @type {string} */ services.get(z.service.Resources.TERRAIN_SEED);
+  this._seed = /** @type {string} */ (services.get(z.service.Resources.TERRAIN_SEED));
 
   /**
    * @type {!z.common.rulebook.Rulebook}
    */
-  var rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
+  var rulebook = /** @type {!z.common.rulebook.Rulebook} */ (services.get(z.common.Resources.RULEBOOK));
 
   this._baseTerrains = [];
 

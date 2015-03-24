@@ -41,3 +41,10 @@ IMap.prototype.onTileFocused = function(callback) {};
  * @param {function(mapEvent)} callback
  */
 IMap.prototype.onTileContext = function(callback) {};
+
+/**
+ * @param {number} x
+ * @param {number} y
+ * @param {Array.<string>} text
+ */
+IMap.prototype.drawText = function (x, y, text) {};

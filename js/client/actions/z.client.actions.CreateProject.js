@@ -10,20 +10,20 @@ goog.require('z.common');
  * @constructor
  */
 z.client.actions.CreateProject = function (services) {
-  this.project = /** @type {!z.common.rulebook.Project} */  services.get('current_project');
+  this.project = /** @type {!z.common.rulebook.Project} */  (services.get('current_project'));
   goog.base(this, this.project.name);
 
   /**
    * @type{!z.common.EntityRepository}
    * @private
    */
-  this._repository = /** @type{!z.common.EntityRepository} */ services.get(z.common.Resources.REPOSITORY);
+  this._repository = /** @type{!z.common.EntityRepository} */ (services.get(z.common.Resources.REPOSITORY));
 
   /**
    * @type {!z.client.facet.ActorFacet}
    * @private
    */
-  this._playerFacet = /** @type {!z.client.facet.ActorFacet} */ services.get(z.client.Resources.PLAYER_FACET);
+  this._playerFacet = /** @type {!z.client.facet.ActorFacet} */ (services.get(z.client.Resources.PLAYER_FACET));
 
   this.meta = {
     type: 'action_create_project' + this.project.type,
@@ -39,7 +39,7 @@ goog.inherits(z.client.actions.CreateProject, z.client.action.Action);
  * @type {!goog.debug.Logger}
  * @protected
  */
-z.client.actions.CreateProject.prototype._logger = goog.debug.Logger.getLogger('z.client.actions.CreateProject');
+z.client.actions.CreateProject.prototype._logger = goog.debug.LogManager.getLogger('z.client.actions.CreateProject');
 
 /**
  * @override
@@ -60,7 +60,7 @@ z.client.actions.CreateProject.prototype._executeInternal = function (args) {
   /**
    * @type {!z.client.facet.TileFacet}
    */
-  var target = /** @type {!z.client.facet.TileFacet} */ args[z.client.action.ArgsType.TARGET];
+  var target = /** @type {!z.client.facet.TileFacet} */ (args[z.client.action.ArgsType.TARGET]);
   var projectData = this.project.createNewProjectData();
   projectData.tileId = target['guid'];
   projectData.ownerId = this._playerFacet['guid'];

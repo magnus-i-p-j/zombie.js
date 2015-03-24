@@ -10,12 +10,12 @@ z.common.messages.level = {
 };
 
 /**
- * @enum {{
+ * @typedef {{
  *   stockpile: Object.<string, number>,
  *   terrain: ?string,
  *   culled: ?number,
  *   text: ?string,
- *   level: z.common.messages.level,
+ *   level: ?z.common.messages.level,
  *   points: ?number,
  *   template: string
  * }}

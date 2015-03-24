@@ -13,7 +13,7 @@ z.service.world.GameEnder = function(services) {
    * @type {!z.common.rulebook.Rulebook}
    * @private
    */
-  var rulebook = /** @type {!z.common.rulebook.Rulebook} */ services.get(z.common.Resources.RULEBOOK);
+  var rulebook = /** @type {!z.common.rulebook.Rulebook} */ (services.get(z.common.Resources.RULEBOOK));
 
   /**
    * @type {Array.<!z.common.rulebook.Trigger>}

@@ -75,7 +75,7 @@ z.client.facet.EntityFacet.prototype._update = function () {
 };
 
 /**
- * @returns {z.common.rulebook.meta}
+ * @returns {?z.common.rulebook.meta}
  * @private
  */
 z.client.facet.EntityFacet.prototype._getMeta = function () {
@@ -83,6 +83,6 @@ z.client.facet.EntityFacet.prototype._getMeta = function () {
   if (entity) {
     return entity.meta;
   } else {
-    return undefined;
+    return null;
   }
 };

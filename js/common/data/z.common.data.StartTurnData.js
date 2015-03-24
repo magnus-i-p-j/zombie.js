@@ -19,19 +19,3 @@ z.common.data.StartTurnData= function (actorId, entities, killed, messages, turn
   this.killed = killed;
   this.messages = messages;
 };
-
-/**
- * @param {!z.common.protocol.startTurn} protocol
- * @return {!z.common.data.StartTurnData}
- */
-z.common.data.StartTurnData.fromProtocol = function (protocol) {
-  throw 'NotImplementedException';
-};
-
-/**
- * @return {z.common.protocol.startTurn}
- */
-//z.common.data.StartTurnData.toProtocol = function () {
-//  TODO: finish z.common.data.StartTurnData.toProtocol
-//  return {};
-//};

@@ -16,7 +16,7 @@ z.common.entities.Character = function (services) {
   /**
    * @type {!z.common.data.CharacterData}
    */
-  var characterData = /** @type {!z.common.data.CharacterData} */ services.get('entityData');
+  var characterData = /** @type {!z.common.data.CharacterData} */ (services.get('entityData'));
 
   this.name = characterData.name;
   this.gender = characterData.gender;
@@ -44,7 +44,7 @@ z.common.entities.Character.prototype._update = function (entityData, meta, owne
     /**
      * @type {!z.common.data.CharacterData}
      */
-    var characterData = /** @type {!z.common.data.CharacterData} */ entityData;
+    var characterData = /** @type {!z.common.data.CharacterData} */ (entityData);
     if (this.name !== characterData.name) {
       this.name = characterData.name;
       updated = true;
@@ -73,11 +73,11 @@ z.common.entities.Character.prototype._update = function (entityData, meta, owne
 
     var newTraits = this._parseTraits(characterData);
     var hasNewTraits = !goog.object.every(newTraits, function (element) {
-      var trait = /** @type{z.common.rulebook.Trait} */ element;
+      var trait = /** @type{z.common.rulebook.Trait} */ (element);
       return this.hasTrait(trait);
     }, this);
     var hasLostTraits = !goog.object.every(this.traits, function (element) {
-      var trait = /** @type{z.common.rulebook.Trait} */ element;
+      var trait = /** @type{z.common.rulebook.Trait} */ (element);
       return newTraits[trait.type];
     }, this);
     if (hasNewTraits || hasLostTraits) {
@@ -93,7 +93,7 @@ z.common.entities.Character.prototype._parseTraits = function (characterData) {
   var traits = {};
 
   goog.array.forEach(characterData.traits, function (element) {
-    var trait = /** @type{z.common.rulebook.Trait} */ element;
+    var trait = /** @type{z.common.rulebook.Trait} */ (element);
     traits[trait.type] = trait;
   }, this);
   return traits;

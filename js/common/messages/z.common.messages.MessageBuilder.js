@@ -5,7 +5,7 @@ goog.require('goog.object');
 goog.require('z.common.messages');
 
 /**
- * @param {mugd.entities.entity} cause
+ * @param {z.common.entities.Entity} cause
  * @constructor
  */
 z.common.messages.MessageBuilder = function(cause) {
@@ -90,7 +90,7 @@ z.common.messages.MessageBuilder.prototype.build = function() {
   }
   message.template = this.getTemplate();
 
-  return /** @type {z.common.messages.message} */ message;
+  return /** @type {z.common.messages.message} */ (message);
 };
 
 /**

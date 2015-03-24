@@ -51,7 +51,10 @@ z.client.facet.TileFacet.prototype.getTerrainMeta = function () {
   return metas;
 };
 
+/**
+ * @inheritDoc
+ */
 z.client.facet.TileFacet.prototype._update = function () {
-  var tile = /** @type {z.common.entities.Tile} */ this.entity();
+  var tile = /** @type {z.common.entities.Tile} */ (this.entity());
   this['terrain'](tile.terrain);
 };

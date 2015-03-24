@@ -16,7 +16,7 @@ z.common.entities.Actor = function (services) {
   /**
    * @type {!z.common.data.ActorData}
    */
-  var actorData = /** @type {!z.common.data.ActorData} */ services.get('entityData');
+  var actorData = /** @type {!z.common.data.ActorData} */ (services.get('entityData'));
 
   /**
    * @type {!z.common.Stockpile}
@@ -48,7 +48,7 @@ z.common.entities.Actor.prototype._update = function (entityData, meta, owner) {
       /**
        * @type {!z.common.data.ActorData}
        */
-      var actorData = /** @type {!z.common.data.ActorData} */ entityData;
+      var actorData = /** @type {!z.common.data.ActorData} */ (entityData);
       this.stockpile.purgeAll();
       this.stockpile.addAll(actorData.stockpile);
       this._points = actorData.points;

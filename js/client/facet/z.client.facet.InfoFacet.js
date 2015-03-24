@@ -25,7 +25,7 @@ z.client.facet.InfoFacet = function (services) {
   /**
    * @type {!z.client.facet.ActorFacet}
    */
-  var player = /** @type {!z.client.facet.ActorFacet}*/ services.get(z.client.Resources.PLAYER_FACET);
+  var player = /** @type {!z.client.facet.ActorFacet}*/ (services.get(z.client.Resources.PLAYER_FACET));
   this['resources'] = player['resources'];
   this['unassignedCharacters'] = player['unassignedCharactersListFacet'];
   this['points'] = player['points'];

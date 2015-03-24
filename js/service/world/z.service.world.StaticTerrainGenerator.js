@@ -17,13 +17,13 @@ z.service.world.StaticTerrainGenerator = function(services) {
   /**
    * @type {*}
    */
-  var map = /** @type {*} */ services.get(z.service.Resources.TERRAIN_MAP);
+  var map = /** @type {*} */ (services.get(z.service.Resources.TERRAIN_MAP));
 
   /**
    * @type {!z.service.world.ITerrainGenerator}
    * @private
    */
-  this._randomTerrain = /** @type {!z.service.world.ITerrainGenerator} */services.get(z.service.Resources.TERRAIN_RANDOM_GENERATOR);
+  this._randomTerrain = /** @type {!z.service.world.ITerrainGenerator} */ (services.get(z.service.Resources.TERRAIN_RANDOM_GENERATOR));
 
   /**
    * @type {Array}

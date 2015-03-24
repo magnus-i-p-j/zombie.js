@@ -17,7 +17,7 @@ z.client.ui.widget.MessageLogWidget = function (services) {
    * @type {z.client.facet.MessageLogFacet}
    * @private
    */
-  this._messageLogFacet = /** @type {z.client.facet.MessageLogFacet} */ services.get(z.client.Resources.MESSAGE_LOG_FACET);
+  this._messageLogFacet = /** @type {z.client.facet.MessageLogFacet} */ (services.get(z.client.Resources.MESSAGE_LOG_FACET));
   /**
    * @type {goog.debug.HtmlFormatter}
    * @private
@@ -31,7 +31,7 @@ z.client.ui.widget.MessageLogWidget = function (services) {
    */
   this._capturing = true;
 
-  var rootLogger = goog.debug.Logger.getLogger('');
+  var rootLogger = goog.debug.LogManager.getLogger('');
   rootLogger.addHandler(goog.bind(this.addLogRecord, this));
 };
 
@@ -68,7 +68,7 @@ z.client.ui.widget.MessageLogWidget.prototype.addLogRecord = function (logRecord
     if (!goog.isNull(level)) {
       tags.push(level[0]);
     }
-    this._messageLogFacet.addMessage(html, tags);
+    this._messageLogFacet.addMessage(html, tags, /**  @type{z.common.messages.message} */ ({}));
   }
 };
 

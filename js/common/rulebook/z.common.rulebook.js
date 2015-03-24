@@ -8,11 +8,15 @@ goog.require('z.common.messages');
  *   type: string,
  *   category: z.common.rulebook.category,
  *   name: string,
- *   description: string,
- *   upkeep: z.common.rulebook.upkeep_stockpile
+ *   description: string
  * }}
  */
 z.common.rulebook.meta;
+
+/**
+ * @typedef{Object.<string, number>}
+ */
+z.common.rulebook.upkeep_stockpile;
 
 /**
  * @typedef {{
@@ -67,7 +71,7 @@ z.common.rulebook.cost;
  *   upkeep: z.common.rulebook.upkeep_stockpile,
  *   frequency: number,
  *   stats : z.common.rulebook.stats,
- *   traits: Array.<string>
+ *   traits: Array.<z.common.rulebook.possible_trait>
  * }}
  */
 z.common.rulebook.archetype;
@@ -113,7 +117,7 @@ z.common.rulebook.upkeep;
 z.common.rulebook.effect_terrain;
 
 /**
- * @typedef {bool}
+ * @typedef {boolean}
  */
 z.common.rulebook.effect_end;
 

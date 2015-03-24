@@ -16,14 +16,14 @@ z.client.facet.ActorFacet = function (services) {
   this['points'] = ko.observable(0);
 
   /** @type {!mugd.injector.Injector} */
-  var injector = /** @type {!mugd.injector.Injector} */ services.get(z.common.Resources.INJECTOR);
+  var injector = /** @type {!mugd.injector.Injector} */ (services.get(z.common.Resources.INJECTOR));
 
   this._entityQueryObservable = ko.observable(z.common.EntityQuery.empty());
   /**
    * @type {function(z.client.facet.CharacterListFacet=):z.client.facet.CharacterListFacet}
    */
-  this['unassignedCharactersListFacet'] = /** @type {function(z.client.facet.CharacterListFacet=):z.client.facet.CharacterListFacet} */ injector.Compose(z.client.facet.CharacterListFacet)
-    .With({'entityQueryObservable': this._entityQueryObservable}).New();
+  this['unassignedCharactersListFacet'] = /** @type {function(z.client.facet.CharacterListFacet=):z.client.facet.CharacterListFacet} */ (injector.Compose(z.client.facet.CharacterListFacet)
+    .With({'entityQueryObservable': this._entityQueryObservable}).New());
 };
 
 goog.inherits(z.client.facet.ActorFacet, z.client.facet.EntityFacet);
@@ -33,8 +33,11 @@ z.client.facet.ActorFacet.prototype.setParentEventTarget = function (parent) {
   this['unassignedCharactersListFacet'].setParentEventTarget(parent);
 };
 
+/**
+ * @inheritDoc
+ */
 z.client.facet.ActorFacet.prototype._update = function () {
-  var actor = /** @type {z.common.entities.Actor} */ this.entity();
+  var actor = /** @type {z.common.entities.Actor} */ (this.entity());
   this['resources'].update(actor.stockpile);
   this['points'](actor.getPoints());
   var entityQuery = z.common.queries.getUnassignedQuery(actor.guid);

@@ -23,7 +23,7 @@ goog.inherits(z.client.facet.CharacterFacet, z.client.facet.EntityFacet);
 
 
 z.client.facet.CharacterFacet.prototype._getName = function () {
-  var character = /** @type {z.common.entities.Character} */ this.entity();
+  var character = /** @type {z.common.entities.Character} */ (this.entity());
   if (character) {
     return character.name;
   }
@@ -31,7 +31,7 @@ z.client.facet.CharacterFacet.prototype._getName = function () {
 };
 
 z.client.facet.CharacterFacet.prototype._getHealth = function () {
-  var character = /** @type {z.common.entities.Character} */ this.entity();
+  var character = /** @type {z.common.entities.Character} */ (this.entity());
   if (character) {
     return character.health;
   }
@@ -39,7 +39,7 @@ z.client.facet.CharacterFacet.prototype._getHealth = function () {
 };
 
 z.client.facet.CharacterFacet.prototype._getCombat = function () {
-  var character = /** @type {z.common.entities.Character} */ this.entity();
+  var character = /** @type {z.common.entities.Character} */ (this.entity());
   if (character) {
     return character.combat;
   }
@@ -47,7 +47,7 @@ z.client.facet.CharacterFacet.prototype._getCombat = function () {
 };
 
 z.client.facet.CharacterFacet.prototype._getLabour = function () {
-  var character = /** @type {z.common.entities.Character} */ this.entity();
+  var character = /** @type {z.common.entities.Character} */ (this.entity());
   if (character) {
     return character.labour;
   }
@@ -55,7 +55,7 @@ z.client.facet.CharacterFacet.prototype._getLabour = function () {
 };
 
 z.client.facet.CharacterFacet.prototype._getKnowledge = function () {
-  var character = /** @type {z.common.entities.Character} */ this.entity();
+  var character = /** @type {z.common.entities.Character} */ (this.entity());
   if (character) {
     return character.knowledge;
   }
@@ -63,7 +63,7 @@ z.client.facet.CharacterFacet.prototype._getKnowledge = function () {
 };
 
 z.client.facet.CharacterFacet.prototype._getGender = function () {
-  var character = /** @type {z.common.entities.Character} */ this.entity();
+  var character = /** @type {z.common.entities.Character} */ (this.entity());
   if (character) {
     return character.gender;
   }
@@ -71,13 +71,16 @@ z.client.facet.CharacterFacet.prototype._getGender = function () {
 };
 
 z.client.facet.CharacterFacet.prototype._getAssignedTo = function () {
-  var character = /** @type {z.common.entities.Character} */ this.entity();
+  var character = /** @type {z.common.entities.Character} */ (this.entity());
   if (character) {
     return character.assignedTo;
   }
   return null;
 };
 
+/**
+ * @inheritDoc
+ */
 z.client.facet.CharacterFacet.prototype._update = function () {
-  var character = /** @type {z.common.entities.Character} */ this.entity();
+  var character = /** @type {z.common.entities.Character} */ (this.entity());
 };

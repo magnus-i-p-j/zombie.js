@@ -26,3 +26,10 @@ IsogenicMap.prototype.onTileFocused = function(callback) {};
  * @param {function(mapEvent)} callback
  */
 IsogenicMap.prototype.onTileContext = function(callback) {};
+
+/**
+ * @param {number} x
+ * @param {number} y
+ * @param {Array.<string>} text
+ */
+IsogenicMap.prototype.drawText = function (x, y, text) {};
