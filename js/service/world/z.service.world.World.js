@@ -177,7 +177,7 @@ z.service.world.World.prototype._doBeforeFirstTurn = function() {
     query.owner = this._worldActor.guid;
     var characters = this._entityRepository.choose(startingNumberOfCharacters, query);
     goog.array.forEach(characters, function(character) {
-      character.update(null, null, actor);
+      character.update(null, null, actor.guid);
     })
   }, this);
 
@@ -398,7 +398,11 @@ z.service.world.World.prototype._consumeUpkeep = function() {
     var entityOwnerGuid = /** @type {mugd.utils.guid} */ (entity.owner);
 
     var owner = self._entityRepository.get(entityOwnerGuid);
+   if (!owner){
+     debugger;
+   }
     var stockpile = owner.stockpile;
+
     goog.object.forEach(entity.meta.upkeep, function(value, name) {
       var taken = stockpile.take(name, value);
       if (taken !== value) {
