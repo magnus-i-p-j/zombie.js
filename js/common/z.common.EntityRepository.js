@@ -116,7 +116,6 @@ z.common.EntityRepository.prototype.map = function (action, filter) {
        * @type {!z.common.entities.Entity}
        */
       var entity = this._repo[i];
-      debugger;
       if (filter(entity)) {
         result.push(action(entity));
       }

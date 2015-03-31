@@ -176,9 +176,7 @@ z.service.world.World.prototype._doBeforeFirstTurn = function() {
     var query = new z.common.EntityQuery();
     query.owner = this._worldActor.guid;
     query.category = z.common.rulebook.category.CHARACTER_TYPE;
-    console.log('_doBeforeFirstTurn - before choose');
     var characters = this._entityRepository.choose(startingNumberOfCharacters, query);
-    console.log('_doBeforeFirstTurn - chosen characters: ' + characters.length);
     goog.array.forEach(characters, function(character) {
       character.update(null, null, actor.guid);
     })

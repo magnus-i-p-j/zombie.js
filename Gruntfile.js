@@ -40,11 +40,11 @@ module.exports = function (grunt) {
             externs:[
               "libs/externs/knockout-externs.js",
               "libs/externs/jquery-externs.js",
-              "libs/externs/console-externs.js",
               "libs/externs/templates-externs.js",
-              "libs/externs/knockout-external_template-externs.js",
               "libs/externs/IMap-externs.js",
-              "libs/externs/isogenic_map-externs.js"
+              "libs/externs/isogenic_map-externs.js",
+              "libs/externs/markdown-externs.js",
+              "libs/externs/interact-externs.js"
             ]
           },
           execOpts: {

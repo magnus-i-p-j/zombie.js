@@ -43,7 +43,7 @@ z.client.facet.CharacterListFacet.prototype.setParentEventTarget = function(pare
 z.client.facet.CharacterListFacet.prototype._getCharacterList = function() {
   var entityQuery = this._entityQuery();
   entityQuery.category = z.common.rulebook.category.CHARACTER_TYPE;
-  var entities = this._repo.filter(entityQuery.match.bind(entityQuery));
+  var entities = this._repo.filter(entityQuery);
   var facets = goog.array.map(entities, function(character) {
     var facet = new z.client.facet.CharacterFacet();
     facet.setEntity(character);
