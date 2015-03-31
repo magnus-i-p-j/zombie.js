@@ -3,6 +3,7 @@ goog.require('z.common.entities.Entity');
 goog.require('goog.math.Coordinate');
 goog.require('goog.object');
 goog.require('z.common');
+goog.require('z.common.rulebook.Rulebook');
 
 /**
  * @param {!mugd.injector.MicroFactory} services
@@ -170,6 +171,7 @@ z.common.entities.Tile.prototype._calculateZombieData = function(data) {
   zombieData.attraction = data.attraction;
   zombieData.activity = totalActivity;
   zombieData.danger = Math.max(data.density - totalDefence, 0);
+
   return zombieData;
 };
 

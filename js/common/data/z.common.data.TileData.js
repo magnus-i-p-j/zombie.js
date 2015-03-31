@@ -15,7 +15,7 @@ goog.require('z.common.data.EntityData');
  * @constructor
  * @implements {z.common.data.EntityData}
  */
-z.common.data.TileData = function (guid, state,ownerId, x, y, terrain, type, zombieData) {
+z.common.data.TileData = function (guid, state, ownerId, x, y, terrain, type, zombieData) {
   /**
    * @type {?mugd.utils.guid}
    */

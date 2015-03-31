@@ -43,12 +43,12 @@ z.common.rulebook.Project = function(project) {
   /**
    * @type {number}
    */
-  this.activity = this._project.activity;
+  this.activity = this._project['activity'];
 
   /**
    * @type {number}
    */
-  this.defence = this._project.defence;
+  this.defence = this._project['defence'];
 
   this.cost = {};
   var stockpile = this._project['cost']['stockpile'];
@@ -82,7 +82,7 @@ z.common.rulebook.Project = function(project) {
   /**
    * @type {Array.<!z.common.rulebook.Trigger>}
    */
-  this.triggers = goog.array.map(this._project.triggers, function(trigger) {
+  this.triggers = goog.array.map(this._project['triggers'], function(trigger) {
     return new z.common.rulebook.Trigger(trigger);
   });
 

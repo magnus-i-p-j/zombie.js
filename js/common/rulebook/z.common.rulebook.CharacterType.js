@@ -1,6 +1,7 @@
 goog.provide('z.common.rulebook.CharacterType');
 
 goog.require('z.common.rulebook');
+goog.require('goog.object');
 
 /**
  * @param {z.common.rulebook.meta} meta
@@ -34,7 +35,7 @@ z.common.rulebook.CharacterType = function(meta) {
    */
   this.upkeep = {};
 
-  goog.array.forEach(this._meta.upkeep, function(resourceDesc) {
+  goog.object.forEach(this._meta['upkeep'], function(resourceDesc) {
     this.upkeep[resourceDesc['type']] = resourceDesc['amount'];
   }, this);
 

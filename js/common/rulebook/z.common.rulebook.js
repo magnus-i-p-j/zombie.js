@@ -28,7 +28,8 @@ z.common.rulebook.upkeep_stockpile;
  *   prerequisites: z.common.rulebook.prerequisites,
  *   cost: z.common.rulebook.cost,
  *   activity: number,
- *   defence: number
+ *   defence: number,
+ *   triggers: Array.<!z.common.rulebook.trigger>
  * }}
  */
 z.common.rulebook.project;

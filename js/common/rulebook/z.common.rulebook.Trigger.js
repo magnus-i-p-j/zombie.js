@@ -5,7 +5,7 @@ goog.provide('z.common.rulebook.Trigger');
  * @constructor
  */
 z.common.rulebook.Trigger = function(trigger) {
-  this._effects = trigger.effects;
+  this._effects = trigger['effects'];
   var triggerType = trigger['predicate']['type'];
   this._predicateConfig = trigger['predicate'];
   this._predicate = z.common.rulebook.logic.predicates[triggerType];

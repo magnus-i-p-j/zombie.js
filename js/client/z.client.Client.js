@@ -145,7 +145,7 @@ z.client.Client.prototype.startNewGame = function(ruleset, textures, map) {
     var noise = new mugd.utils.SimplexNoise(twister);
     var ret = function(x, y) {
       return Math.abs((noise.noise(x, y) * 1000000) | 0);
-    }
+    };
     return ret;
   })(34567893657824);
   injector.addResource(z.client.Resources.TILE_VARIATION_STRATEGY, tileVariationStrategy);

@@ -1,4 +1,6 @@
 <span class="time" data-bind="time: time"></span>
+<!-- ko if: message.text -->
 <span data-bind="markdown: message.text"></span>
-<div>TODO: descibe changes</div>
+<div>TODO: describe changes</div>
+<!-- /ko -->
 <pre data-bind="text: ko.toJSON($data);"></pre>

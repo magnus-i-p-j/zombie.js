@@ -32,24 +32,24 @@ z.common.rulebook.Archetype = function (meta) {
   /**
    * @type {number}
    */
-  this.frequency = this._meta.frequency;
+  this.frequency = this._meta['frequency'];
 
   /**
    *
    * @type {Array.<z.common.rulebook.possible_trait>}
    */
-  this.traits = this._meta.traits;
+  this.traits = this._meta['traits'];
 
   /**
    * @type {number}
    */
-  this.combat = this._meta.stats['combat'];
+  this.combat = this._meta['stats']['combat'];
   /**
    * @type {number}
    */
-  this.knowledge = this._meta.stats['knowledge'];
+  this.knowledge = this._meta['stats']['knowledge'];
   /**
    * @type {number}
    */
-  this.labour = this._meta.stats['labour'];
+  this.labour = this._meta['stats']['labour'];
 };

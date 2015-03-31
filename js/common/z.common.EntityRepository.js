@@ -56,7 +56,7 @@ z.common.EntityRepository.prototype.put = function (entityData) {
     var event = new z.common.events.EntityCreated(entity);
     this.dispatchEvent(event);
   } else {
-    entity.update(entityData, meta, owner.guid);
+    entity.update(entityData, meta, entityData.ownerId);
   }
   return entity;
 };
@@ -116,6 +116,7 @@ z.common.EntityRepository.prototype.map = function (action, filter) {
        * @type {!z.common.entities.Entity}
        */
       var entity = this._repo[i];
+      debugger;
       if (filter(entity)) {
         result.push(action(entity));
       }

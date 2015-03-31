@@ -37,11 +37,11 @@ z.common.rulebook.Terrain = function(terrain){
   /**
    * @type {number}
    */
-  this.activity = this._terrain.activity;
+  this.activity = this._terrain['activity'];
 
   /**
    * @type {number}
    */
-  this.defence = this._terrain.defence;
+  this.defence = this._terrain['defence'];
 
 };
