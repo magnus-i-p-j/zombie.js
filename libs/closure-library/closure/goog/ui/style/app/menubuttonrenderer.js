@@ -17,16 +17,15 @@
  * subclasses.
  *
  * @author attila@google.com (Attila Bodis)
- * @author gveen@google.com (Greg Veen)
  */
 
 goog.provide('goog.ui.style.app.MenuButtonRenderer');
 
+goog.require('goog.a11y.aria.Role');
 goog.require('goog.array');
 goog.require('goog.dom');
-goog.require('goog.dom.a11y.Role');
+goog.require('goog.dom.TagName');
 goog.require('goog.style');
-goog.require('goog.ui.ControlContent');
 goog.require('goog.ui.Menu');
 goog.require('goog.ui.MenuRenderer');
 goog.require('goog.ui.style.app.ButtonRenderer');
@@ -39,6 +38,7 @@ goog.require('goog.ui.style.app.ButtonRenderer');
  * dropdown element into the content element after the specified content.
  * @constructor
  * @extends {goog.ui.style.app.ButtonRenderer}
+ * @final
  */
 goog.ui.style.app.MenuButtonRenderer = function() {
   goog.ui.style.app.ButtonRenderer.call(this);
@@ -61,7 +61,7 @@ goog.ui.style.app.MenuButtonRenderer.CSS_CLASS =
  * Array of arrays of CSS classes that we want composite classes added and
  * removed for in IE6 and lower as a workaround for lack of multi-class CSS
  * selector support.
- * @type {Array.<Array.<string>>}
+ * @type {Array<Array<string>>}
  */
 goog.ui.style.app.MenuButtonRenderer.IE6_CLASS_COMBINATIONS = [
   [goog.getCssName('goog-button-base-rtl'),
@@ -91,7 +91,7 @@ goog.ui.style.app.MenuButtonRenderer.IE6_CLASS_COMBINATIONS = [
 /**
  * Returns the ARIA role to be applied to menu buttons, which
  * have a menu attached to them.
- * @return {goog.dom.a11y.Role} ARIA role.
+ * @return {goog.a11y.aria.Role} ARIA role.
  * @override
  */
 goog.ui.style.app.MenuButtonRenderer.prototype.getAriaRole = function() {
@@ -99,7 +99,7 @@ goog.ui.style.app.MenuButtonRenderer.prototype.getAriaRole = function() {
   // screen reader keeps referring to menus as buttons, which
   // might be misleading for the users. Hence the ARIA role
   // 'menu' is assigned.
-  return goog.dom.a11y.Role.MENU;
+  return goog.a11y.aria.Role.MENU;
 };
 
 
@@ -110,6 +110,7 @@ goog.ui.style.app.MenuButtonRenderer.prototype.getAriaRole = function() {
  * @param {Element} element Root element of the button whose content element
  *     is to be returned.
  * @return {Element} The button's content element.
+ * @override
  */
 goog.ui.style.app.MenuButtonRenderer.prototype.getContentElement =
     function(element) {
@@ -137,7 +138,7 @@ goog.ui.style.app.MenuButtonRenderer.prototype.decorate =
   if (menuElem) {
     // Move the menu element directly under the body (but hide it first to
     // prevent flicker; see bug 1089244).
-    goog.style.showElement(menuElem, false);
+    goog.style.setElementShown(menuElem, false);
     goog.dom.appendChild(goog.dom.getOwnerDocument(menuElem).body, menuElem);
 
     // Decorate the menu and attach it to the button.
@@ -171,6 +172,7 @@ goog.ui.style.app.MenuButtonRenderer.prototype.decorate =
  *     in a box.
  * @param {goog.dom.DomHelper} dom DOM helper, used for document interaction.
  * @return {Element} Pseudo-rounded-corner box containing the content.
+ * @override
  */
 goog.ui.style.app.MenuButtonRenderer.prototype.createButton = function(content,
     dom) {
@@ -193,11 +195,12 @@ goog.ui.style.app.MenuButtonRenderer.prototype.setContent = function(element,
  * Inserts dropdown element as last child of existing content.
  * @param {goog.ui.ControlContent} content Text caption or DOM structure.
  * @param {goog.dom.DomHelper} dom DOM helper, used for document ineraction.
- * @return {Array.<Node>} DOM structure to be set as the button's content.
+ * @return {Array<Node>} DOM structure to be set as the button's content.
  */
 goog.ui.style.app.MenuButtonRenderer.prototype.createContentWithDropdown =
     function(content, dom) {
-  var caption = dom.createDom('div', null, content, this.createDropdown(dom));
+  var caption = dom.createDom(goog.dom.TagName.DIV, null, content,
+                              this.createDropdown(dom));
   return goog.array.toArray(caption.childNodes);
 };
 
@@ -210,7 +213,8 @@ goog.ui.style.app.MenuButtonRenderer.prototype.createContentWithDropdown =
  * @return {Element} Dropdown element.
  */
 goog.ui.style.app.MenuButtonRenderer.prototype.createDropdown = function(dom) {
-  return dom.createDom('div', goog.getCssName(this.getCssClass(), 'dropdown'));
+  return dom.createDom(goog.dom.TagName.DIV,
+                       goog.getCssName(this.getCssClass(), 'dropdown'));
 };
 
 
@@ -218,6 +222,7 @@ goog.ui.style.app.MenuButtonRenderer.prototype.createDropdown = function(dom) {
  * Returns the CSS class to be applied to the root element of components
  * rendered using this renderer.
  * @return {string} Renderer-specific CSS class.
+ * @override
  */
 goog.ui.style.app.MenuButtonRenderer.prototype.getCssClass = function() {
   return goog.ui.style.app.MenuButtonRenderer.CSS_CLASS;

@@ -65,12 +65,13 @@
 goog.provide('goog.ui.media.PicasaAlbum');
 goog.provide('goog.ui.media.PicasaAlbumModel');
 
-goog.require('goog.object');
+goog.require('goog.html.TrustedResourceUrl');
+goog.require('goog.string.Const');
 goog.require('goog.ui.media.FlashObject');
 goog.require('goog.ui.media.Media');
 goog.require('goog.ui.media.MediaModel');
-goog.require('goog.ui.media.MediaModel.Player');
 goog.require('goog.ui.media.MediaRenderer');
+
 
 
 /**
@@ -97,9 +98,10 @@ goog.require('goog.ui.media.MediaRenderer');
  *
  * @constructor
  * @extends {goog.ui.media.MediaRenderer}
+ * @final
  */
-goog.ui.media.PicasaAlbum = function () {
-    goog.ui.media.MediaRenderer.call(this);
+goog.ui.media.PicasaAlbum = function() {
+  goog.ui.media.MediaRenderer.call(this);
 };
 goog.inherits(goog.ui.media.PicasaAlbum, goog.ui.media.MediaRenderer);
 goog.addSingletonGetter(goog.ui.media.PicasaAlbum);
@@ -125,16 +127,16 @@ goog.ui.media.PicasaAlbum.CSS_CLASS = goog.getCssName('goog-ui-media-picasa');
  * @param {goog.ui.media.PicasaAlbumModel} dataModel A picasa album data model.
  * @param {goog.dom.DomHelper=} opt_domHelper Optional DOM helper, used for
  *     document interaction.
- * @return {goog.ui.media.Media} A Control instance binded to the Picasa
+ * @return {!goog.ui.media.Media} A Control instance binded to the Picasa
  *     renderer.
  */
-goog.ui.media.PicasaAlbum.newControl = function (dataModel, opt_domHelper) {
-    var control = new goog.ui.media.Media(
-        dataModel,
-        goog.ui.media.PicasaAlbum.getInstance(),
-        opt_domHelper);
-    control.setSelected(true);
-    return control;
+goog.ui.media.PicasaAlbum.newControl = function(dataModel, opt_domHelper) {
+  var control = new goog.ui.media.Media(
+      dataModel,
+      goog.ui.media.PicasaAlbum.getInstance(),
+      opt_domHelper);
+  control.setSelected(true);
+  return control;
 };
 
 
@@ -143,24 +145,24 @@ goog.ui.media.PicasaAlbum.newControl = function (dataModel, opt_domHelper) {
  * the flash object pointing to a flash picasa album player.
  *
  * @param {goog.ui.Control} c The media control.
- * @return {Element} The DOM structure that represents the control.
+ * @return {!Element} The DOM structure that represents the control.
  * @override
  */
-goog.ui.media.PicasaAlbum.prototype.createDom = function (c) {
-    var control = /** @type {goog.ui.media.Media} */ (c);
-    var div = goog.ui.media.PicasaAlbum.superClass_.createDom.call(this, control);
+goog.ui.media.PicasaAlbum.prototype.createDom = function(c) {
+  var control = /** @type {goog.ui.media.Media} */ (c);
+  var div = goog.ui.media.PicasaAlbum.superClass_.createDom.call(this, control);
 
-    var picasaAlbum =
-    /** @type {goog.ui.media.PicasaAlbumModel} */ (control.getDataModel());
-    var authParam =
-        picasaAlbum.getAuthKey() ? ('&authkey=' + picasaAlbum.getAuthKey()) : '';
-    var flash = new goog.ui.media.FlashObject(
-        picasaAlbum.getPlayer().getUrl() || '',
-        control.getDomHelper());
-    flash.addFlashVars(picasaAlbum.getPlayer().getVars());
-    flash.render(div);
+  var picasaAlbum =
+      /** @type {goog.ui.media.PicasaAlbumModel} */ (control.getDataModel());
+  var authParam =
+      picasaAlbum.getAuthKey() ? ('&authkey=' + picasaAlbum.getAuthKey()) : '';
+  var flash = new goog.ui.media.FlashObject(
+      picasaAlbum.getPlayer().getTrustedResourceUrl(),
+      control.getDomHelper());
+  flash.addFlashVars(picasaAlbum.getPlayer().getVars());
+  flash.render(div);
 
-    return div;
+  return div;
 };
 
 
@@ -170,9 +172,10 @@ goog.ui.media.PicasaAlbum.prototype.createDom = function (c) {
  * @return {string} Renderer-specific CSS class.
  * @override
  */
-goog.ui.media.PicasaAlbum.prototype.getCssClass = function () {
-    return goog.ui.media.PicasaAlbum.CSS_CLASS;
+goog.ui.media.PicasaAlbum.prototype.getCssClass = function() {
+  return goog.ui.media.PicasaAlbum.CSS_CLASS;
 };
+
 
 
 /**
@@ -189,50 +192,58 @@ goog.ui.media.PicasaAlbum.prototype.getCssClass = function () {
  * @param {boolean=} opt_autoplay Whether to autoplay the slideshow.
  * @constructor
  * @extends {goog.ui.media.MediaModel}
+ * @final
  */
-goog.ui.media.PicasaAlbumModel = function (userId, albumId, opt_authKey, opt_caption, opt_description, opt_autoplay) {
-    goog.ui.media.MediaModel.call(
-        this,
-        goog.ui.media.PicasaAlbumModel.buildUrl(userId, albumId),
-        opt_caption,
-        opt_description,
-        goog.ui.media.MediaModel.MimeType.FLASH);
+goog.ui.media.PicasaAlbumModel = function(userId,
+                                          albumId,
+                                          opt_authKey,
+                                          opt_caption,
+                                          opt_description,
+                                          opt_autoplay) {
+  goog.ui.media.MediaModel.call(
+      this,
+      goog.ui.media.PicasaAlbumModel.buildUrl(userId, albumId),
+      opt_caption,
+      opt_description,
+      goog.ui.media.MediaModel.MimeType.FLASH);
 
-    /**
-     * The Picasa user id.
-     * @type {string}
-     * @private
-     */
-    this.userId_ = userId;
+  /**
+   * The Picasa user id.
+   * @type {string}
+   * @private
+   */
+  this.userId_ = userId;
 
-    /**
-     * The Picasa album id.
-     * @type {string}
-     * @private
-     */
-    this.albumId_ = albumId;
+  /**
+   * The Picasa album id.
+   * @type {string}
+   * @private
+   */
+  this.albumId_ = albumId;
 
-    /**
-     * The Picasa authentication key, used on private albums.
-     * @type {?string}
-     * @private
-     */
-    this.authKey_ = opt_authKey || null;
+  /**
+   * The Picasa authentication key, used on private albums.
+   * @type {?string}
+   * @private
+   */
+  this.authKey_ = opt_authKey || null;
 
-    var authParam = opt_authKey ? ('&authkey=' + opt_authKey) : '';
+  var authParam = opt_authKey ? ('&authkey=' + opt_authKey) : '';
 
-    var flashVars = {
-        'host':'picasaweb.google.com',
-        'RGB':'0x000000',
-        'feed':'http://picasaweb.google.com/data/feed/api/user/' +
-            userId + '/album/' + albumId + '?kind=photo&alt=rss' + authParam
-    };
-    flashVars[opt_autoplay ? 'autoplay' : 'noautoplay'] = '1';
+  var flashVars = {
+    'host': 'picasaweb.google.com',
+    'RGB': '0x000000',
+    'feed': 'http://picasaweb.google.com/data/feed/api/user/' +
+        userId + '/album/' + albumId + '?kind=photo&alt=rss' + authParam
+  };
+  flashVars[opt_autoplay ? 'autoplay' : 'noautoplay'] = '1';
 
-    var player = new goog.ui.media.MediaModel.Player(
-        'http://picasaweb.google.com/s/c/bin/slideshow.swf', flashVars);
+  var flashUrl = goog.html.TrustedResourceUrl.fromConstant(
+      goog.string.Const.from(
+          'http://picasaweb.google.com/s/c/bin/slideshow.swf'));
+  var player = new goog.ui.media.MediaModel.Player(flashUrl, flashVars);
 
-    this.setPlayer(player);
+  this.setPlayer(player);
 };
 goog.inherits(goog.ui.media.PicasaAlbumModel, goog.ui.media.MediaModel);
 
@@ -259,17 +270,20 @@ goog.ui.media.PicasaAlbumModel.MATCHER_ =
  * @param {string=} opt_caption An optional caption of the picasa album.
  * @param {string=} opt_description An optional description of the picasa album.
  * @param {boolean=} opt_autoplay Whether to autoplay the slideshow.
- * @return {goog.ui.media.PicasaAlbumModel} The picasa album data model that
+ * @return {!goog.ui.media.PicasaAlbumModel} The picasa album data model that
  *     represents the picasa URL.
  * @throws exception in case the parsing fails
  */
-goog.ui.media.PicasaAlbumModel.newInstance = function (picasaUrl, opt_caption, opt_description, opt_autoplay) {
-    if (goog.ui.media.PicasaAlbumModel.MATCHER_.test(picasaUrl)) {
-        var data = goog.ui.media.PicasaAlbumModel.MATCHER_.exec(picasaUrl);
-        return new goog.ui.media.PicasaAlbumModel(
-            data[1], data[2], data[3], opt_caption, opt_description, opt_autoplay);
-    }
-    throw Error('failed to parse user and album from picasa url: ' + picasaUrl);
+goog.ui.media.PicasaAlbumModel.newInstance = function(picasaUrl,
+                                                      opt_caption,
+                                                      opt_description,
+                                                      opt_autoplay) {
+  if (goog.ui.media.PicasaAlbumModel.MATCHER_.test(picasaUrl)) {
+    var data = goog.ui.media.PicasaAlbumModel.MATCHER_.exec(picasaUrl);
+    return new goog.ui.media.PicasaAlbumModel(
+        data[1], data[2], data[3], opt_caption, opt_description, opt_autoplay);
+  }
+  throw Error('failed to parse user and album from picasa url: ' + picasaUrl);
 };
 
 
@@ -281,8 +295,8 @@ goog.ui.media.PicasaAlbumModel.newInstance = function (picasaUrl, opt_caption, o
  * @param {string} albumId The album id.
  * @return {string} The URL of the album.
  */
-goog.ui.media.PicasaAlbumModel.buildUrl = function (userId, albumId) {
-    return 'http://picasaweb.google.com/' + userId + '/' + albumId;
+goog.ui.media.PicasaAlbumModel.buildUrl = function(userId, albumId) {
+  return 'http://picasaweb.google.com/' + userId + '/' + albumId;
 };
 
 
@@ -290,8 +304,8 @@ goog.ui.media.PicasaAlbumModel.buildUrl = function (userId, albumId) {
  * Gets the Picasa user id.
  * @return {string} The Picasa user id.
  */
-goog.ui.media.PicasaAlbumModel.prototype.getUserId = function () {
-    return this.userId_;
+goog.ui.media.PicasaAlbumModel.prototype.getUserId = function() {
+  return this.userId_;
 };
 
 
@@ -299,8 +313,8 @@ goog.ui.media.PicasaAlbumModel.prototype.getUserId = function () {
  * Gets the Picasa album id.
  * @return {string} The Picasa album id.
  */
-goog.ui.media.PicasaAlbumModel.prototype.getAlbumId = function () {
-    return this.albumId_;
+goog.ui.media.PicasaAlbumModel.prototype.getAlbumId = function() {
+  return this.albumId_;
 };
 
 
@@ -308,6 +322,6 @@ goog.ui.media.PicasaAlbumModel.prototype.getAlbumId = function () {
  * Gets the Picasa album authentication key.
  * @return {?string} The Picasa album authentication key.
  */
-goog.ui.media.PicasaAlbumModel.prototype.getAuthKey = function () {
-    return this.authKey_;
+goog.ui.media.PicasaAlbumModel.prototype.getAuthKey = function() {
+  return this.authKey_;
 };

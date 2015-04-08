@@ -62,9 +62,9 @@ goog.require('goog.string.html.HtmlSaxHandler');
  * Strips unsafe tags and attributes from HTML.
  *
  * @param {string} htmlText The HTML text to sanitize.
- * @param {function(string) : string} opt_urlPolicy A transform to apply to URL
+ * @param {function(string): string=} opt_urlPolicy A transform to apply to URL
  *     attribute values.
- * @param {function(string) : string} opt_nmTokenPolicy A transform to apply to
+ * @param {function(string): string=} opt_nmTokenPolicy A transform to apply to
  *     names, IDs, and classes.
  * @return {string} A sanitized HTML, safe to be embedded on the page.
  */
@@ -85,9 +85,9 @@ goog.string.html.htmlSanitize = function(
  *
  * @param {goog.string.StringBuffer} stringBuffer A string buffer, used to
  *     output the html as we sanitize it.
- * @param {?function(string):string} opt_urlPolicy An optional function to be
+ * @param {function(string):string=} opt_urlPolicy An optional function to be
  *     applied in URLs.
- * @param {?function(string):string} opt_nmTokenPolicy An optional function to
+ * @param {function(string):string=} opt_nmTokenPolicy An optional function to
  *     be applied in names.
  * @constructor
  * @extends {goog.string.html.HtmlSaxHandler}
@@ -120,14 +120,14 @@ goog.string.html.HtmlSanitizer = function(
 
   /**
    * A function to be applied to urls found on the parsing process.
-   * @type {?function(string):string}
+   * @type {function(string):string|undefined}
    * @private
    */
   this.urlPolicy_ = opt_urlPolicy;
 
   /**
    * A function to be applied to names fround on the parsing process.
-   * @type {?function(string):string}
+   * @type {function(string):string|undefined}
    * @private
    */
   this.nmTokenPolicy_ = opt_nmTokenPolicy;
@@ -390,7 +390,7 @@ goog.string.html.HtmlSanitizer.Attributes = {
 
 
 /**
- * @inheritDoc
+ * @override
  */
 goog.string.html.HtmlSanitizer.prototype.startTag =
     function(tagName, attribs) {
@@ -428,7 +428,7 @@ goog.string.html.HtmlSanitizer.prototype.startTag =
 
 
 /**
- * @inheritDoc
+ * @override
  */
 goog.string.html.HtmlSanitizer.prototype.endTag = function(tagName) {
   if (this.ignoring_) {
@@ -477,7 +477,7 @@ goog.string.html.HtmlSanitizer.prototype.endTag = function(tagName) {
 
 
 /**
- * @inheritDoc
+ * @override
  */
 goog.string.html.HtmlSanitizer.prototype.pcdata = function(text) {
   if (!this.ignoring_) {
@@ -487,7 +487,7 @@ goog.string.html.HtmlSanitizer.prototype.pcdata = function(text) {
 
 
 /**
- * @inheritDoc
+ * @override
  */
 goog.string.html.HtmlSanitizer.prototype.rcdata = function(text) {
   if (!this.ignoring_) {
@@ -497,7 +497,7 @@ goog.string.html.HtmlSanitizer.prototype.rcdata = function(text) {
 
 
 /**
- * @inheritDoc
+ * @override
  */
 goog.string.html.HtmlSanitizer.prototype.cdata = function(text) {
   if (!this.ignoring_) {
@@ -507,7 +507,7 @@ goog.string.html.HtmlSanitizer.prototype.cdata = function(text) {
 
 
 /**
- * @inheritDoc
+ * @override
  */
 goog.string.html.HtmlSanitizer.prototype.startDoc = function() {
   this.stack_ = [];
@@ -516,7 +516,7 @@ goog.string.html.HtmlSanitizer.prototype.startDoc = function() {
 
 
 /**
- * @inheritDoc
+ * @override
  */
 goog.string.html.HtmlSanitizer.prototype.endDoc = function() {
   for (var i = this.stack_.length; --i >= 0;) {
@@ -548,7 +548,7 @@ goog.string.html.HtmlSanitizer.prototype.escapeAttrib_ = function(s) {
  * Sanitizes attributes found on html entities.
  * @param {string} tagName The name of the tag in which the {@code attribs} were
  *     found.
- * @param {Array.<?string>} attribs An array of attributes.
+ * @param {Array.<(?string|undefined)>} attribs An array of attributes.
  * @return {Array.<?string>} A sanitized version of the {@code attribs}.
  * @private
  */

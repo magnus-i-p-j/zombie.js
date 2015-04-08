@@ -20,11 +20,8 @@
 
 goog.provide('goog.positioning.AnchoredViewportPosition');
 
-goog.require('goog.functions');
-goog.require('goog.math.Box');
 goog.require('goog.positioning');
 goog.require('goog.positioning.AnchoredPosition');
-goog.require('goog.positioning.Corner');
 goog.require('goog.positioning.Overflow');
 goog.require('goog.positioning.OverflowStatus');
 
@@ -87,6 +84,26 @@ goog.inherits(goog.positioning.AnchoredViewportPosition,
 
 
 /**
+ * @return {goog.math.Box|undefined} The box object describing the
+ *     dimensions in which the movable element will be shown.
+ */
+goog.positioning.AnchoredViewportPosition.prototype.getOverflowConstraint =
+    function() {
+  return this.overflowConstraint_;
+};
+
+
+/**
+ * @param {goog.math.Box|undefined} overflowConstraint Box object describing the
+ *     dimensions in which the movable element could be shown.
+ */
+goog.positioning.AnchoredViewportPosition.prototype.setOverflowConstraint =
+    function(overflowConstraint) {
+  this.overflowConstraint_ = overflowConstraint;
+};
+
+
+/**
  * @return {number} A bitmask for the "last resort" overflow.
  */
 goog.positioning.AnchoredViewportPosition.prototype.getLastResortOverflow =
@@ -126,8 +143,8 @@ goog.positioning.AnchoredViewportPosition.prototype.reposition = function(
   // If the desired position is outside the viewport try mirroring the corners
   // horizontally or vertically.
   if (status & goog.positioning.OverflowStatus.FAILED) {
-    var cornerFallback = this.correctCorner_(status, this.corner);
-    var movableCornerFallback = this.correctCorner_(status, movableCorner);
+    var cornerFallback = this.adjustCorner(status, this.corner);
+    var movableCornerFallback = this.adjustCorner(status, movableCorner);
 
     status = goog.positioning.positionAtAnchor(this.element, cornerFallback,
         movableElement, movableCornerFallback, null, opt_margin,
@@ -137,8 +154,8 @@ goog.positioning.AnchoredViewportPosition.prototype.reposition = function(
     if (status & goog.positioning.OverflowStatus.FAILED) {
       // If that also fails, pick the best corner from the two tries,
       // and adjust the position until it fits.
-      cornerFallback = this.correctCorner_(status, cornerFallback);
-      movableCornerFallback = this.correctCorner_(
+      cornerFallback = this.adjustCorner(status, cornerFallback);
+      movableCornerFallback = this.adjustCorner(
           status, movableCornerFallback);
 
       goog.positioning.positionAtAnchor(this.element, cornerFallback,
@@ -151,13 +168,13 @@ goog.positioning.AnchoredViewportPosition.prototype.reposition = function(
 
 
 /**
- * Flip the given corner if X or Y positioning failed.
+ * Adjusts the corner if X or Y positioning failed.
  * @param {number} status The status of the last positionAtAnchor call.
- * @param {goog.positioning.Corner} corner The corner to correct.
- * @return {goog.positioning.Corner} The new corner.
- * @private
+ * @param {goog.positioning.Corner} corner The corner to adjust.
+ * @return {goog.positioning.Corner} The adjusted corner.
+ * @protected
  */
-goog.positioning.AnchoredViewportPosition.prototype.correctCorner_ = function(
+goog.positioning.AnchoredViewportPosition.prototype.adjustCorner = function(
     status, corner) {
   if (status & goog.positioning.OverflowStatus.FAILED_HORIZONTAL) {
     corner = goog.positioning.flipCornerHorizontal(corner);

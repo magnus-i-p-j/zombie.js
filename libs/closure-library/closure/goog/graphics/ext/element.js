@@ -21,10 +21,8 @@
 
 goog.provide('goog.graphics.ext.Element');
 
-goog.require('goog.events');
 goog.require('goog.events.EventTarget');
 goog.require('goog.functions');
-goog.require('goog.graphics');
 goog.require('goog.graphics.ext.coordinates');
 
 
@@ -119,10 +117,7 @@ goog.graphics.ext.Element.prototype.xPosition_;
 goog.graphics.ext.Element.prototype.yPosition_;
 
 
-/**
- * @return {goog.graphics.Element} The underlying thin wrapper.
- * @protected
- */
+/** @return {goog.graphics.Element} The underlying thin wrapper. */
 goog.graphics.ext.Element.prototype.getWrapper = function() {
   return this.wrapper_;
 };
@@ -281,7 +276,7 @@ goog.graphics.ext.Element.prototype.setRight = function(right, opt_chain) {
  * @return {number} The center coordinate of the element, in units of the
  * parent's coordinate system.
  */
-goog.graphics.ext.Element.prototype.getClientCenter = function() {
+goog.graphics.ext.Element.prototype.getCenter = function() {
   return this.xPosition_.getMiddle();
 };
 
@@ -725,7 +720,7 @@ goog.graphics.ext.Element.Position_ = function(element, horizontal) {
 
 
 /**
- * @return {Object} The coordinate value computation cache.
+ * @return {!Object} The coordinate value computation cache.
  * @private
  */
 goog.graphics.ext.Element.Position_.prototype.getCoordinateCache_ = function() {

@@ -21,11 +21,13 @@
 
 goog.provide('goog.ui.CustomButtonRenderer');
 
-goog.require('goog.dom');
-goog.require('goog.dom.classes');
+goog.require('goog.a11y.aria.Role');
+goog.require('goog.asserts');
+goog.require('goog.dom.NodeType');
+goog.require('goog.dom.TagName');
+goog.require('goog.dom.classlist');
 goog.require('goog.string');
 goog.require('goog.ui.ButtonRenderer');
-goog.require('goog.ui.ControlContent');
 goog.require('goog.ui.INLINE_BLOCK_CLASSNAME');
 
 
@@ -64,20 +66,20 @@ goog.ui.CustomButtonRenderer.CSS_CLASS = goog.getCssName('goog-custom-button');
  *    </div>
  * Overrides {@link goog.ui.ButtonRenderer#createDom}.
  * @param {goog.ui.Control} control goog.ui.Button to render.
- * @return {Element} Root element for the button.
+ * @return {!Element} Root element for the button.
  * @override
  */
 goog.ui.CustomButtonRenderer.prototype.createDom = function(control) {
   var button = /** @type {goog.ui.Button} */ (control);
   var classNames = this.getClassNames(button);
   var attributes = {
-    'class': goog.ui.INLINE_BLOCK_CLASSNAME + ' ' + classNames.join(' '),
-    'title': button.getTooltip() || ''
+    'class': goog.ui.INLINE_BLOCK_CLASSNAME + ' ' + classNames.join(' ')
   };
-  var buttonElement = button.getDomHelper().createDom('div', attributes,
+  var buttonElement = button.getDomHelper().createDom(
+      goog.dom.TagName.DIV, attributes,
       this.createButton(button.getContent(), button.getDomHelper()));
-
-  this.setAriaStates(button, buttonElement);
+  this.setTooltip(
+      buttonElement, /** @type {!string}*/ (button.getTooltip()));
 
   return buttonElement;
 };
@@ -85,40 +87,11 @@ goog.ui.CustomButtonRenderer.prototype.createDom = function(control) {
 
 /**
  * Returns the ARIA role to be applied to custom buttons.
- * @return {goog.dom.a11y.Role|undefined} ARIA role.
+ * @return {goog.a11y.aria.Role|undefined} ARIA role.
  * @override
  */
 goog.ui.CustomButtonRenderer.prototype.getAriaRole = function() {
-  return goog.dom.a11y.Role.BUTTON;
-};
-
-
-/**
- * Sets the button's ARIA states.
- * @param {!goog.ui.Control} button Button whose ARIA state will be updated.
- * @param {!Element} element Element whose ARIA state is to be updated.
- * @override
- */
-goog.ui.CustomButtonRenderer.prototype.setAriaStates = function(button,
-    element) {
-  goog.asserts.assert(button);
-  goog.asserts.assert(element);
-  if (!button.isEnabled()) {
-    this.updateAriaState(element, goog.ui.Component.State.DISABLED,
-                         true);
-  }
-  if (button.isSelected()) {
-    this.updateAriaState(element, goog.ui.Component.State.SELECTED,
-                         true);
-  }
-  if (button.isSupportedState(goog.ui.Component.State.CHECKED)) {
-    this.updateAriaState(element, goog.ui.Component.State.CHECKED,
-                         true);
-  }
-  if (button.isOpen()) {
-    this.updateAriaState(element, goog.ui.Component.State.OPENED,
-                         true);
-  }
+  return goog.a11y.aria.Role.BUTTON;
 };
 
 
@@ -132,7 +105,8 @@ goog.ui.CustomButtonRenderer.prototype.setAriaStates = function(button,
  * @override
  */
 goog.ui.CustomButtonRenderer.prototype.getContentElement = function(element) {
-  return element && /** @type {Element} */ (element.firstChild.firstChild);
+  return element && element.firstChild &&
+      /** @type {Element} */ (element.firstChild.firstChild);
 };
 
 
@@ -152,10 +126,10 @@ goog.ui.CustomButtonRenderer.prototype.getContentElement = function(element) {
  * @return {Element} Pseudo-rounded-corner box containing the content.
  */
 goog.ui.CustomButtonRenderer.prototype.createButton = function(content, dom) {
-  return dom.createDom('div',
+  return dom.createDom(goog.dom.TagName.DIV,
       goog.ui.INLINE_BLOCK_CLASSNAME + ' ' +
       goog.getCssName(this.getCssClass(), 'outer-box'),
-      dom.createDom('div',
+      dom.createDom(goog.dom.TagName.DIV,
           goog.ui.INLINE_BLOCK_CLASSNAME + ' ' +
           goog.getCssName(this.getCssClass(), 'inner-box'), content));
 };
@@ -170,7 +144,7 @@ goog.ui.CustomButtonRenderer.prototype.createButton = function(content, dom) {
  * @override
  */
 goog.ui.CustomButtonRenderer.prototype.canDecorate = function(element) {
-  return element.tagName == 'DIV';
+  return element.tagName == goog.dom.TagName.DIV;
 };
 
 
@@ -186,11 +160,11 @@ goog.ui.CustomButtonRenderer.prototype.hasBoxStructure = function(
     button, element) {
   var outer = button.getDomHelper().getFirstElementChild(element);
   var outerClassName = goog.getCssName(this.getCssClass(), 'outer-box');
-  if (outer && goog.dom.classes.has(outer, outerClassName)) {
+  if (outer && goog.dom.classlist.contains(outer, outerClassName)) {
 
     var inner = button.getDomHelper().getFirstElementChild(outer);
     var innerClassName = goog.getCssName(this.getCssClass(), 'inner-box');
-    if (inner && goog.dom.classes.has(inner, innerClassName)) {
+    if (inner && goog.dom.classlist.contains(inner, innerClassName)) {
       // We have a proper box structure.
       return true;
     }
@@ -210,6 +184,8 @@ goog.ui.CustomButtonRenderer.prototype.hasBoxStructure = function(
  * @override
  */
 goog.ui.CustomButtonRenderer.prototype.decorate = function(control, element) {
+  goog.asserts.assert(element);
+
   var button = /** @type {goog.ui.Button} */ (control);
   // Trim text nodes in the element's child node list; otherwise madness
   // ensues (i.e. on Gecko, buttons will flicker and shift when moused over).
@@ -222,8 +198,8 @@ goog.ui.CustomButtonRenderer.prototype.decorate = function(control, element) {
         this.createButton(element.childNodes, button.getDomHelper()));
   }
 
-  goog.dom.classes.add(element,
-      goog.ui.INLINE_BLOCK_CLASSNAME, this.getCssClass());
+  goog.dom.classlist.addAll(element,
+      [goog.ui.INLINE_BLOCK_CLASSNAME, this.getCssClass()]);
   return goog.ui.CustomButtonRenderer.superClass_.decorate.call(this, button,
       element);
 };

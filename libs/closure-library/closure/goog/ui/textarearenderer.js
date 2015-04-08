@@ -18,8 +18,10 @@
 
 goog.provide('goog.ui.TextareaRenderer');
 
-goog.require('goog.ui.Component.State');
+goog.require('goog.dom.TagName');
+goog.require('goog.ui.Component');
 goog.require('goog.ui.ControlRenderer');
+
 
 
 /**
@@ -29,9 +31,10 @@ goog.require('goog.ui.ControlRenderer');
  * be no-ops.
  * @constructor
  * @extends {goog.ui.ControlRenderer}
+ * @final
  */
-goog.ui.TextareaRenderer = function () {
-    goog.ui.ControlRenderer.call(this);
+goog.ui.TextareaRenderer = function() {
+  goog.ui.ControlRenderer.call(this);
 };
 goog.inherits(goog.ui.TextareaRenderer, goog.ui.ControlRenderer);
 goog.addSingletonGetter(goog.ui.TextareaRenderer);
@@ -46,19 +49,19 @@ goog.ui.TextareaRenderer.CSS_CLASS = goog.getCssName('goog-textarea');
 
 
 /** @override */
-goog.ui.TextareaRenderer.prototype.getAriaRole = function () {
-    // textareas don't need ARIA roles to be recognized by screen readers.
-    return undefined;
+goog.ui.TextareaRenderer.prototype.getAriaRole = function() {
+  // textareas don't need ARIA roles to be recognized by screen readers.
+  return undefined;
 };
 
 
 /** @override */
-goog.ui.TextareaRenderer.prototype.decorate = function (control, element) {
-    this.setUpTextarea_(control);
-    goog.ui.TextareaRenderer.superClass_.decorate.call(this, control,
-        element);
-    control.setContent(element.value);
-    return element;
+goog.ui.TextareaRenderer.prototype.decorate = function(control, element) {
+  this.setUpTextarea_(control);
+  goog.ui.TextareaRenderer.superClass_.decorate.call(this, control,
+      element);
+  control.setContent(element.value);
+  return element;
 };
 
 
@@ -66,17 +69,17 @@ goog.ui.TextareaRenderer.prototype.decorate = function (control, element) {
  * Returns the textarea's contents wrapped in an HTML textarea element.  Sets
  * the textarea's disabled attribute as needed.
  * @param {goog.ui.Control} textarea Textarea to render.
- * @return {Element} Root element for the Textarea control (an HTML textarea
+ * @return {!Element} Root element for the Textarea control (an HTML textarea
  *     element).
  * @override
  */
-goog.ui.TextareaRenderer.prototype.createDom = function (textarea) {
-    this.setUpTextarea_(textarea);
-    var element = textarea.getDomHelper().createDom('textarea', {
-        'class':this.getClassNames(textarea).join(' '),
-        'disabled':!textarea.isEnabled()
-    }, textarea.getContent() || '');
-    return element;
+goog.ui.TextareaRenderer.prototype.createDom = function(textarea) {
+  this.setUpTextarea_(textarea);
+  var element = textarea.getDomHelper().createDom(goog.dom.TagName.TEXTAREA, {
+    'class': this.getClassNames(textarea).join(' '),
+    'disabled': !textarea.isEnabled()
+  }, textarea.getContent() || '');
+  return element;
 };
 
 
@@ -87,8 +90,8 @@ goog.ui.TextareaRenderer.prototype.createDom = function (textarea) {
  * @return {boolean} Whether the renderer can decorate the element.
  * @override
  */
-goog.ui.TextareaRenderer.prototype.canDecorate = function (element) {
-    return element.tagName == goog.dom.TagName.TEXTAREA;
+goog.ui.TextareaRenderer.prototype.canDecorate = function(element) {
+  return element.tagName == goog.dom.TagName.TEXTAREA;
 };
 
 
@@ -103,8 +106,8 @@ goog.ui.TextareaRenderer.prototype.setRightToLeft = goog.nullFunction;
  * Textareas are always focusable as long as they are enabled.
  * @override
  */
-goog.ui.TextareaRenderer.prototype.isFocusable = function (textarea) {
-    return textarea.isEnabled();
+goog.ui.TextareaRenderer.prototype.isFocusable = function(textarea) {
+  return textarea.isEnabled();
 };
 
 
@@ -120,13 +123,14 @@ goog.ui.TextareaRenderer.prototype.setFocusable = goog.nullFunction;
  * {@code disabled} attribute.
  * @override
  */
-goog.ui.TextareaRenderer.prototype.setState = function (textarea, state, enable) {
-    goog.ui.TextareaRenderer.superClass_.setState.call(this, textarea, state,
-        enable);
-    var element = textarea.getElement();
-    if (element && state == goog.ui.Component.State.DISABLED) {
-        element.disabled = enable;
-    }
+goog.ui.TextareaRenderer.prototype.setState = function(textarea, state,
+    enable) {
+  goog.ui.TextareaRenderer.superClass_.setState.call(this, textarea, state,
+      enable);
+  var element = textarea.getElement();
+  if (element && state == goog.ui.Component.State.DISABLED) {
+    element.disabled = enable;
+  }
 };
 
 
@@ -145,22 +149,22 @@ goog.ui.TextareaRenderer.prototype.updateAriaState = goog.nullFunction;
  * @param {goog.ui.Control} textarea Textarea control to configure.
  * @private
  */
-goog.ui.TextareaRenderer.prototype.setUpTextarea_ = function (textarea) {
-    textarea.setHandleMouseEvents(false);
-    textarea.setAutoStates(goog.ui.Component.State.ALL, false);
-    textarea.setSupportedState(goog.ui.Component.State.FOCUSED, false);
+goog.ui.TextareaRenderer.prototype.setUpTextarea_ = function(textarea) {
+  textarea.setHandleMouseEvents(false);
+  textarea.setAutoStates(goog.ui.Component.State.ALL, false);
+  textarea.setSupportedState(goog.ui.Component.State.FOCUSED, false);
 };
 
 
 /** @override **/
-goog.ui.TextareaRenderer.prototype.setContent = function (element, value) {
-    if (element) {
-        element.value = value;
-    }
+goog.ui.TextareaRenderer.prototype.setContent = function(element, value) {
+  if (element) {
+    element.value = value;
+  }
 };
 
 
 /** @override **/
-goog.ui.TextareaRenderer.prototype.getCssClass = function () {
-    return goog.ui.TextareaRenderer.CSS_CLASS;
+goog.ui.TextareaRenderer.prototype.getCssClass = function() {
+  return goog.ui.TextareaRenderer.CSS_CLASS;
 };

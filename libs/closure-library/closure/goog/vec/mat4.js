@@ -36,7 +36,7 @@ goog.require('goog.vec.Vec4');
 /** @typedef {goog.vec.AnyType} */ goog.vec.Mat4.AnyType;
 
 // The following two types are deprecated - use the above types instead.
-/** @typedef {Float32Array} */ goog.vec.Mat4.Type;
+/** @typedef {!Float32Array} */ goog.vec.Mat4.Type;
 /** @typedef {goog.vec.ArrayType} */ goog.vec.Mat4.Mat4Like;
 
 
@@ -1776,7 +1776,24 @@ goog.vec.Mat4.rotateZ = function(mat, angle) {
 
 
 /**
- * @type {Array.<goog.vec.Vec3.Type>}
+ * Retrieves the translation component of the transformation matrix.
+ *
+ * @param {goog.vec.Mat4.AnyType} mat The transformation matrix.
+ * @param {goog.vec.Vec3.AnyType} translation The vector for storing the
+ *     result.
+ * @return {goog.vec.Mat4.AnyType} return mat so that operations can be
+ *     chained.
+ */
+goog.vec.Mat4.getTranslation = function(mat, translation) {
+  translation[0] = mat[12];
+  translation[1] = mat[13];
+  translation[2] = mat[14];
+  return translation;
+};
+
+
+/**
+ * @type {!Array<!goog.vec.Vec3.Type>}
  * @private
  */
 goog.vec.Mat4.tmpVec3_ = [
@@ -1786,7 +1803,7 @@ goog.vec.Mat4.tmpVec3_ = [
 
 
 /**
- * @type {Array.<goog.vec.Vec4.Type>}
+ * @type {!Array<!goog.vec.Vec4.Type>}
  * @private
  */
 goog.vec.Mat4.tmpVec4_ = [
@@ -1797,7 +1814,7 @@ goog.vec.Mat4.tmpVec4_ = [
 
 
 /**
- * @type {Array.<goog.vec.Mat4.Type>}
+ * @type {!Array<!goog.vec.Mat4.Type>}
  * @private
  */
 goog.vec.Mat4.tmpMat4_ = [

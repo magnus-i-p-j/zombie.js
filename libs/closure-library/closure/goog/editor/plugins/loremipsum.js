@@ -17,6 +17,7 @@
  * empty and does not have the focus. Applies to both editable and uneditable
  * fields.
  *
+ * @author nicksantos@google.com (Nick Santos)
  */
 
 goog.provide('goog.editor.plugins.LoremIpsum');
@@ -24,9 +25,11 @@ goog.provide('goog.editor.plugins.LoremIpsum');
 goog.require('goog.asserts');
 goog.require('goog.dom');
 goog.require('goog.editor.Command');
+goog.require('goog.editor.Field');
 goog.require('goog.editor.Plugin');
 goog.require('goog.editor.node');
 goog.require('goog.functions');
+goog.require('goog.userAgent');
 
 
 
@@ -35,6 +38,7 @@ goog.require('goog.functions');
  * @param {string} message The lorem ipsum message.
  * @constructor
  * @extends {goog.editor.Plugin}
+ * @final
  */
 goog.editor.plugins.LoremIpsum = function(message) {
   goog.editor.Plugin.call(this);
@@ -117,7 +121,7 @@ goog.editor.plugins.LoremIpsum.prototype.updateLorem_ = function() {
   //    on dialog close (since the DOM nodes would get clobbered in FF)
   // 3) We're not using lorem already
   // 4) The field is not currently active (doesn't have focus).
-  var fieldObj = this.fieldObject;
+  var fieldObj = this.getFieldObject();
   if (!this.usingLorem_ &&
       !fieldObj.inModalMode() &&
       goog.editor.Field.getActiveFieldId() != fieldObj.id) {
@@ -158,7 +162,7 @@ goog.editor.plugins.LoremIpsum.prototype.clearLorem_ = function(
   // Don't mess with lorem state when a dialog is open as that screws
   // with the dialog's ability to properly restore the selection
   // on dialog close (since the DOM nodes would get clobbered)
-  var fieldObj = this.fieldObject;
+  var fieldObj = this.getFieldObject();
   if (this.usingLorem_ && !fieldObj.inModalMode()) {
     var field = fieldObj.getElement();
     if (!field) {

@@ -42,12 +42,14 @@ goog.require('goog.math.Range');
  * New ranges added to the set which overlap the values in one or more existing
  * ranges will be merged.
  *
+ * @struct
  * @constructor
+ * @final
  */
 goog.math.RangeSet = function() {
   /**
    * A sorted list of ranges that represent the values in the set.
-   * @type {!Array.<!goog.math.Range>}
+   * @type {!Array<!goog.math.Range>}
    * @private
    */
   this.ranges_ = [];
@@ -166,7 +168,7 @@ goog.math.RangeSet.prototype.remove = function(a) {
     b.end = a.start;
   }
 
-  for (i = insertionPoint, b; b = this.ranges_[i]; i++) {
+  for (i = insertionPoint; b = this.ranges_[i]; i++) {
     b.start = Math.max(a.end, b.start);
     if (a.end < b.end) {
       break;

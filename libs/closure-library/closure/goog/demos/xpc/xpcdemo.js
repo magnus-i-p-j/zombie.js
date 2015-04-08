@@ -19,11 +19,14 @@
  */
 
 goog.require('goog.Uri');
-goog.require('goog.debug.Logger');
 goog.require('goog.dom');
+goog.require('goog.dom.TagName');
 goog.require('goog.events');
 goog.require('goog.events.EventType');
 goog.require('goog.json');
+goog.require('goog.log');
+goog.require('goog.log.Level');
+goog.require('goog.net.xpc.CfgFields');
 goog.require('goog.net.xpc.CrossPageChannel');
 
 
@@ -135,12 +138,12 @@ xpcdemo.initInner = function() {
  * @private
  */
 xpcdemo.initCommon_ = function() {
-  var xpcLogger = goog.debug.Logger.getLogger('goog.net.xpc');
-  xpcLogger.addHandler(function(logRecord) {
+  var xpcLogger = goog.log.getLogger('goog.net.xpc');
+  goog.log.addHandler(xpcLogger, function(logRecord) {
     xpcdemo.log('[XPC] ' + logRecord.getMessage());
   });
   xpcLogger.setLevel(window.location.href.match(/verbose/) ?
-      goog.debug.Logger.Level.ALL : goog.debug.Logger.Level.INFO);
+      goog.log.Level.ALL : goog.log.Level.INFO);
 
   // Register services.
   xpcdemo.channel.registerService('log', xpcdemo.log);
@@ -180,7 +183,7 @@ xpcdemo.teardown = function() {
  */
 xpcdemo.log = function(msgString) {
   xpcdemo.consoleElm || (xpcdemo.consoleElm = goog.dom.getElement('console'));
-  var msgElm = goog.dom.createDom('div');
+  var msgElm = goog.dom.createDom(goog.dom.TagName.DIV);
   msgElm.innerHTML = msgString;
   xpcdemo.consoleElm.insertBefore(msgElm, xpcdemo.consoleElm.firstChild);
 };
@@ -193,6 +196,7 @@ xpcdemo.ping = function() {
   // send current time
   xpcdemo.channel.send('ping', goog.now() + '');
 };
+
 
 /**
  * The handler function for incoming pings (messages sent to the service
@@ -258,7 +262,7 @@ xpcdemo.stopMousemoveForwarding = function() {
  */
 xpcdemo.mouseEventHandler_ = function(e) {
   xpcdemo.channel.send('events',
-                   [e.type, e.clientX, e.clientY, goog.now()].join(','));
+      [e.type, e.clientX, e.clientY, goog.now()].join(','));
 };
 
 

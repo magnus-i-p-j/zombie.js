@@ -44,26 +44,28 @@ goog.require('goog.events.KeyCodes');
 goog.require('goog.userAgent');
 
 
+
 /**
  * A wrapper around an element that you want to listen to ACTION events on.
  * @param {Element|Document} element The element or document to listen on.
  * @constructor
  * @extends {goog.events.EventTarget}
+ * @final
  */
-goog.events.ActionHandler = function (element) {
-    goog.events.EventTarget.call(this);
+goog.events.ActionHandler = function(element) {
+  goog.events.EventTarget.call(this);
 
-    /**
-     * This is the element that we will listen to events on.
-     * @type {Element|Document}
-     * @private
-     */
-    this.element_ = element;
+  /**
+   * This is the element that we will listen to events on.
+   * @type {Element|Document}
+   * @private
+   */
+  this.element_ = element;
 
-    goog.events.listen(element, goog.events.ActionHandler.KEY_EVENT_TYPE_,
-        this.handleKeyDown_, false, this);
-    goog.events.listen(element, goog.events.EventType.CLICK,
-        this.handleClick_, false, this);
+  goog.events.listen(element, goog.events.ActionHandler.KEY_EVENT_TYPE_,
+      this.handleKeyDown_, false, this);
+  goog.events.listen(element, goog.events.EventType.CLICK,
+      this.handleClick_, false, this);
 };
 goog.inherits(goog.events.ActionHandler, goog.events.EventTarget);
 
@@ -73,8 +75,8 @@ goog.inherits(goog.events.ActionHandler, goog.events.EventTarget);
  * @enum {string}
  */
 goog.events.ActionHandler.EventType = {
-    ACTION:'action',
-    BEFOREACTION:'beforeaction'
+  ACTION: 'action',
+  BEFOREACTION: 'beforeaction'
 };
 
 
@@ -93,11 +95,11 @@ goog.events.ActionHandler.KEY_EVENT_TYPE_ = goog.userAgent.GECKO ?
  * @param {!goog.events.BrowserEvent} e The key press event.
  * @private
  */
-goog.events.ActionHandler.prototype.handleKeyDown_ = function (e) {
-    if (e.keyCode == goog.events.KeyCodes.ENTER ||
-        goog.userAgent.WEBKIT && e.keyCode == goog.events.KeyCodes.MAC_ENTER) {
-        this.dispatchEvents_(e);
-    }
+goog.events.ActionHandler.prototype.handleKeyDown_ = function(e) {
+  if (e.keyCode == goog.events.KeyCodes.ENTER ||
+      goog.userAgent.WEBKIT && e.keyCode == goog.events.KeyCodes.MAC_ENTER) {
+    this.dispatchEvents_(e);
+  }
 };
 
 
@@ -106,8 +108,8 @@ goog.events.ActionHandler.prototype.handleKeyDown_ = function (e) {
  * @param {!goog.events.BrowserEvent} e The click event.
  * @private
  */
-goog.events.ActionHandler.prototype.handleClick_ = function (e) {
-    this.dispatchEvents_(e);
+goog.events.ActionHandler.prototype.handleClick_ = function(e) {
+  this.dispatchEvents_(e);
 };
 
 
@@ -116,44 +118,39 @@ goog.events.ActionHandler.prototype.handleClick_ = function (e) {
  * @param {!goog.events.BrowserEvent} e The event causing dispatches.
  * @private
  */
-goog.events.ActionHandler.prototype.dispatchEvents_ = function (e) {
-    var beforeActionEvent = new goog.events.BeforeActionEvent(e);
+goog.events.ActionHandler.prototype.dispatchEvents_ = function(e) {
+  var beforeActionEvent = new goog.events.BeforeActionEvent(e);
 
-    try {
-        // Allow application specific logic here before the ACTION event.
-        // For example, Gmail uses this event to restore keyboard focus
-        if (!this.dispatchEvent(beforeActionEvent)) {
-            // If the listener swallowed the BEFOREACTION event, don't dispatch the
-            // ACTION event.
-            return;
-        }
-    } finally {
-        beforeActionEvent.dispose();
-    }
+  // Allow application specific logic here before the ACTION event.
+  // For example, Gmail uses this event to restore keyboard focus
+  if (!this.dispatchEvent(beforeActionEvent)) {
+    // If the listener swallowed the BEFOREACTION event, don't dispatch the
+    // ACTION event.
+    return;
+  }
 
 
-    // Wrap up original event and send it off
-    var actionEvent = new goog.events.ActionEvent(e);
-    try {
-        this.dispatchEvent(actionEvent);
-    } finally {
-        actionEvent.dispose();
-
-        // Stop propagating the event
-        e.stopPropagation();
-    }
+  // Wrap up original event and send it off
+  var actionEvent = new goog.events.ActionEvent(e);
+  try {
+    this.dispatchEvent(actionEvent);
+  } finally {
+    // Stop propagating the event
+    e.stopPropagation();
+  }
 };
 
 
 /** @override */
-goog.events.ActionHandler.prototype.disposeInternal = function () {
-    goog.events.ActionHandler.superClass_.disposeInternal.call(this);
-    goog.events.unlisten(this.element_, goog.events.ActionHandler.KEY_EVENT_TYPE_,
-        this.handleKeyDown_, false, this);
-    goog.events.unlisten(this.element_, goog.events.EventType.CLICK,
-        this.handleClick_, false, this);
-    delete this.element_;
+goog.events.ActionHandler.prototype.disposeInternal = function() {
+  goog.events.ActionHandler.superClass_.disposeInternal.call(this);
+  goog.events.unlisten(this.element_, goog.events.ActionHandler.KEY_EVENT_TYPE_,
+      this.handleKeyDown_, false, this);
+  goog.events.unlisten(this.element_, goog.events.EventType.CLICK,
+      this.handleClick_, false, this);
+  delete this.element_;
 };
+
 
 
 /**
@@ -161,12 +158,14 @@ goog.events.ActionHandler.prototype.disposeInternal = function () {
  * @param {!goog.events.BrowserEvent} browserEvent Browser event object.
  * @constructor
  * @extends {goog.events.BrowserEvent}
+ * @final
  */
-goog.events.ActionEvent = function (browserEvent) {
-    goog.events.BrowserEvent.call(this, browserEvent.getBrowserEvent());
-    this.type = goog.events.ActionHandler.EventType.ACTION;
+goog.events.ActionEvent = function(browserEvent) {
+  goog.events.BrowserEvent.call(this, browserEvent.getBrowserEvent());
+  this.type = goog.events.ActionHandler.EventType.ACTION;
 };
 goog.inherits(goog.events.ActionEvent, goog.events.BrowserEvent);
+
 
 
 /**
@@ -176,9 +175,10 @@ goog.inherits(goog.events.ActionEvent, goog.events.BrowserEvent);
  * @param {!goog.events.BrowserEvent} browserEvent Browser event object.
  * @constructor
  * @extends {goog.events.BrowserEvent}
+ * @final
  */
-goog.events.BeforeActionEvent = function (browserEvent) {
-    goog.events.BrowserEvent.call(this, browserEvent.getBrowserEvent());
-    this.type = goog.events.ActionHandler.EventType.BEFOREACTION;
+goog.events.BeforeActionEvent = function(browserEvent) {
+  goog.events.BrowserEvent.call(this, browserEvent.getBrowserEvent());
+  this.type = goog.events.ActionHandler.EventType.BEFOREACTION;
 };
 goog.inherits(goog.events.BeforeActionEvent, goog.events.BrowserEvent);

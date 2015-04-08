@@ -22,14 +22,13 @@
 goog.provide('goog.net.Cookies');
 goog.provide('goog.net.cookies');
 
-goog.require('goog.userAgent');
-
 
 
 /**
  * A class for handling browser cookies.
  * @param {Document} context The context document to get/set cookies on.
  * @constructor
+ * @final
  */
 goog.net.Cookies = function(context) {
   /**
@@ -158,9 +157,9 @@ goog.net.Cookies.prototype.set = function(
   if (opt_maxAge < 0) {
     expiresStr = '';
 
-  // Case 2: Expire the cookie.
+  // Case 2: Remove the cookie.
   // Note: We don't tell people about this option in the function doc because
-  // we prefer people to use ExpireCookie() to expire cookies.
+  // we prefer people to use remove() to remove cookies.
   } else if (opt_maxAge == 0) {
     // Note: Don't use Jan 1, 1970 for date because NS 4.76 will try to convert
     // it to local time, and if the local time is before Jan 1, 1970, then the
@@ -190,7 +189,8 @@ goog.net.Cookies.prototype.get = function(name, opt_default) {
   var nameEq = name + '=';
   var parts = this.getParts_();
   for (var i = 0, part; part = parts[i]; i++) {
-    if (part.indexOf(nameEq) == 0) {
+    // startsWith
+    if (part.lastIndexOf(nameEq, 0) == 0) {
       return part.substr(nameEq.length);
     }
     if (part == name) {
@@ -221,7 +221,7 @@ goog.net.Cookies.prototype.remove = function(name, opt_path, opt_domain) {
 
 /**
  * Gets the names for all the cookies.
- * @return {Array.<string>} An array with the names of the cookies.
+ * @return {Array<string>} An array with the names of the cookies.
  */
 goog.net.Cookies.prototype.getKeys = function() {
   return this.getKeyValues_().keys;
@@ -230,7 +230,7 @@ goog.net.Cookies.prototype.getKeys = function() {
 
 /**
  * Gets the values for all the cookies.
- * @return {Array.<string>} An array with the values of the cookies.
+ * @return {Array<string>} An array with the values of the cookies.
  */
 goog.net.Cookies.prototype.getValues = function() {
   return this.getKeyValues_().values;
@@ -314,7 +314,7 @@ goog.net.Cookies.prototype.setCookie_ = function(s) {
 /**
  * Private helper function to allow testing cookies without depending on the
  * browser. IE6 can return null here.
- * @return {?string} Returns the {@code document.cookie}.
+ * @return {string} Returns the {@code document.cookie}.
  * @private
  */
 goog.net.Cookies.prototype.getCookie_ = function() {
@@ -323,7 +323,7 @@ goog.net.Cookies.prototype.getCookie_ = function() {
 
 
 /**
- * @return {!Array.<string>} The cookie split on semi colons.
+ * @return {!Array<string>} The cookie split on semi colons.
  * @private
  */
 goog.net.Cookies.prototype.getParts_ = function() {
@@ -334,7 +334,7 @@ goog.net.Cookies.prototype.getParts_ = function() {
 
 /**
  * Gets the names and values for all the cookies.
- * @return {Object} An object with keys and values.
+ * @return {!Object} An object with keys and values.
  * @private
  */
 goog.net.Cookies.prototype.getKeyValues_ = function() {

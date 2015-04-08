@@ -113,8 +113,8 @@ module.exports = function (grunt) {
           expand: true
         },
         libs:{
-          cwd: 'libs',
-          src:['jquery-1.7.2.js', 'knockout-2.1.0.debug.js'],
+          cwd: 'bower_components/knockout/dist',
+          src:['knockout.js'],
           dest: 'build/deploy/libs',
           filter: 'isFile',
           expand: true

@@ -14,7 +14,8 @@
 
 /**
  * @fileoverview Provides data persistence using HTML5 session storage
- * mechanism.
+ * mechanism. Session storage must be available under window.sessionStorage,
+ * see: http://www.w3.org/TR/webstorage/#the-sessionstorage-attribute.
  *
  */
 
@@ -39,7 +40,7 @@ goog.storage.mechanism.HTML5SessionStorage = function() {
     // in local mode in Firefox throws 'Operation is not supported' exception.
     storage = window.sessionStorage || null;
   } catch (e) {}
-  goog.base(this, storage);
+  goog.storage.mechanism.HTML5SessionStorage.base(this, 'constructor', storage);
 };
 goog.inherits(goog.storage.mechanism.HTML5SessionStorage,
               goog.storage.mechanism.HTML5WebStorage);
