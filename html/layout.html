@@ -1,0 +1,26 @@
+<noscript>You might not have script enabled in your browser.</noscript>
+
+<article id="z_client"
+         class="game-container" style="display: none;" data-bind="visible: true">
+  <section id="map" class="layout"></section>
+  <div id="message-bar" class="layout">
+    <section id="info-bar"
+             data-bind="template: {name: 'info_bar_widget', data: infoFacet}">info_bar
+    </section>
+    <section id="message-log"
+             data-bind="template: {name: 'message_log_widget', data: messageLogFacet}">
+      message-log
+    </section>
+  </div>
+  <section id="toolbar"
+           class="toolbar layout"
+           data-bind="template: {name: 'toolbar_widget', data: toolbarFacet}"></section>
+  <section id="context_menu"
+           class="context_menu"
+           data-bind="template: {name: 'context_menu_widget', data: contextMenuFacet}"></section>
+  <!-- ko template: {name: 'modal_widget', data: modalFacet} -->
+  <!-- /ko -->
+</article>
+
+
+

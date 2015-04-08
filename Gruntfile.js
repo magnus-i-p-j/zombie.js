@@ -37,6 +37,8 @@ module.exports = function (grunt) {
             //debug: true,
             //formatting:'PRETTY_PRINT',
             compilation_level: 'ADVANCED_OPTIMIZATIONS',
+            //compilation_level: SIMPLE_OPTIMIZATIONS
+            //compilation_level: 'WHITESPACE_ONLY',
             externs:[
               "libs/externs/knockout-externs.js",
               "libs/externs/jquery-externs.js",
