@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
-
+  //TODO: split clean
   grunt.initConfig({
-      clean: [ 'build/tmp', 'build/deploy' ],
+      clean: [ 'build/tmp', 'build/deploy', 'tmp/gh_pages' ],
       mkdir: {
         tmp: {
           options:{
@@ -132,6 +132,45 @@ module.exports = function (grunt) {
           dest: 'build/deploy/',
           filter: 'isFile',
           expand: true
+        },
+        deploy: {
+          cwd: 'build/deploy/',
+          src: '**',
+          dest: 'build/tmp/gh_pages/eota/',
+          filter: 'isFile',
+          expand: true
+        }
+      },
+      gitclone: {
+        gh_pages: {
+          options: {
+            branch: "gh-pages",
+            directory: "build/tmp/gh_pages",
+            repository: "git@github.com:magnus-i-p-j/zombie.js.git"
+          }
+        }
+      },
+      gitadd: {
+        gh_pages: {
+          options: {
+            all: true,
+            cwd: 'build/tmp/gh_pages'
+          }
+        }
+      },
+      gitcommit: {
+        gh_pages: {
+          options: {
+            cwd: 'build/tmp/gh_pages',
+            message: 'Automatic build/deploy'
+          }
+        }
+      },
+      gitpush: {
+        gh_pages: {
+          options: {
+            cwd: 'build/tmp/gh_pages'
+          }
         }
       }
     }
@@ -147,11 +186,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-copy');
-
+  grunt.loadNpmTasks('grunt-git');
 
 // Define your tasks here
   grunt.registerTask('isogenic', ['clean', 'shell:isogenic', 'rename:isogenic']);
-  grunt.registerTask('default', ['clean', 'isogenic', 'mkdir', 'closureBuilder:z', 'less', 'concat', 'copy']);
+  grunt.registerTask('copy-default', ['copy:index', 'copy:tmp', 'copy:libs', 'copy:img', 'copy:ruleset']);
+  grunt.registerTask('default', ['clean', 'isogenic', 'mkdir', 'closureBuilder:z', 'less', 'concat', 'copy-default', 'gitclone']);
+  grunt.registerTask('deploy', ['gitclone', 'copy:deploy', 'gitadd', 'gitcommit', 'gitpush']);
 
   grunt.registerTask('test', ['closureBuilder:z']);
 }
