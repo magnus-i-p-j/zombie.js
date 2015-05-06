@@ -1,0 +1,46 @@
+{
+  "terrains": {
+    "g": "grass",
+    "w": "water",
+    "h": "house",
+    "v": "well",
+    "i": "field",
+    "j": "wheat_field",
+    "k": "wheat_field_ripe",
+    "f": "fence"
+  },
+  "map": {
+    "base": [
+      "wwwwwwwwwwwww",
+      "wwwwwggggwwww",
+      "wwwwggggggwww",
+      "wggggggggggww",
+      "wwwgggggggwgw",
+      "wwwwggggggggw",
+      "wwwwwgggggggw",
+      "wwwwwwwwwwwww"
+    ],
+    "content": [
+      "             ",
+      "             ",
+      "     hhi     ",
+      "     hhj     ",
+      "    vhhk     ",
+      "       h  h  ",
+      "        hh   ",
+      "             "
+    ],
+    "perimeter": [
+      "             ",
+      "             ",
+      "     ff      ",
+      "     fff     ",
+      "             ",
+      "             ",
+      "             ",
+      "             "
+    ]
+  },
+  "left": -6,
+  "top": 6
+}
